@@ -63,7 +63,7 @@ function updateTheme(isDark,save){
   button.setAttribute("aria-pressed",String(isDark));
   button.setAttribute("aria-label",isDark?"Use light appearance":"Use dark appearance");
   button.title=isDark?"Use light appearance":"Use dark appearance";
-  button.textContent=isDark?"☀ Light mode":"☾ Dark mode";
+  button.innerHTML='<span class="theme-glyph" aria-hidden="true">'+(isDark?"☀":"☾")+'</span><span class="theme-text">'+(isDark?"Light mode":"Dark mode")+'</span>';
  }
  if(save){try{localStorage.setItem(themeStorageKey,isDark?"dark":"light")}catch(e){}}
 }
