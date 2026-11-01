@@ -29,6 +29,11 @@
   ok($("countyInspector").textContent.includes("not 2026 win odds"),"Tiny-sample historic rate not presented as calibrated probability");
   ok($("rankHeading").textContent.includes("counties"),"Michigan counties correctly labeled");
   ok($("officialLink").href.startsWith("https://"),"Official election link available");
+  ok(d.querySelectorAll("#sourceDesk .source-desk-card").length===3,"Three live-results public source routes shown");
+  ok($("sourceDesk").textContent.includes("Decision Desk HQ")&&$("sourceDesk").textContent.includes("Associated Press"),"Verified independent DDHQ and AP fallback desks are identified");
+  ok(d.querySelectorAll("#sourceDesk a[href^='https://']").length===3,"Every public results resource opens a verified HTTPS destination");
+  ok($("sourceDesk").textContent.includes("not")&&$("sourceDesk").textContent.includes("automatically"),"Outbound news links explicitly do not imply automated result ingestion");
+  ok(d.querySelectorAll(".jump-nav a[href^='#']").length>=5,"Page quick navigation offers direct section jumps");
   ok($("feedMessage").textContent.includes("No verified"),"Empty vote snapshot does not invent election results");
   let first=$("countyRows").querySelector("tr[data-fips]");
   first.dispatchEvent(new w.KeyboardEvent("keydown",{key:"Enter",bubbles:true}));
@@ -45,6 +50,7 @@
   $("stateSelect").value="AK";$("stateSelect").dispatchEvent(new w.Event("change",{bubbles:true}));
   ok(d.querySelectorAll("#countyRows tr[data-fips]").length===10,"Alaska shows ten watch districts");
   ok($("rankHeading").textContent.includes("districts"),"Alaska is not misrepresented as counties");
+  ok($("sourceDesk").textContent.includes("Alaska"),"Public election source desk follows state changes");
   ok($("countyInspector").textContent.includes("Not available"),"Alaska historical correlation not fabricated");
   ok(w.location.search.includes("state=AK"),"State picker creates shareable URL");
   $("stateSelect").value="NH";$("stateSelect").dispatchEvent(new w.Event("change",{bubbles:true}));
