@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Counties to Watch | Ervin Model 2026</title>
+<meta name="theme-color" content="#09111e"><meta name="description" content="170 counties and Alaska voting districts to watch in 17 competitive 2026 Senate races: historical election results, statewide victory benchmarks, limited historical alignment rates and verified election-night county returns.">
+<link rel="stylesheet" href="../site-chrome.css"><link rel="stylesheet" href="./watch.css"></head>
+<body>
+<header class="site-header"><div class="site-header-inner"><a class="site-brand" href="../" aria-label="Ervin Model home"><span class="site-emblem" aria-hidden="true">E</span><span>ERVIN <b>MODEL</b></span></a><button type="button" class="site-mobile-toggle" aria-controls="siteNavigation" aria-expanded="false" aria-label="Toggle site navigation">☰ Menu</button><nav id="siteNavigation" class="site-nav" aria-label="Main navigation"><a href="../">NATIONAL FORECAST</a><a href="./" aria-current="page">COUNTIES TO WATCH</a><a href="../michigan/">MICHIGAN · 83 COUNTIES</a><a href="../michigan/election-night/">ELECTION NIGHT</a><a href="../#researchLab">RESEARCH LAB</a></nav></div></header>
+<main class="wrap">
+ <section class="hero"><div class="eyebrow">2026 U.S. SENATE · ELECTION-NIGHT INTELLIGENCE</div><h1>Counties <span>to Watch</span></h1><p class="intro">The ten most strategically consequential voting units in each of the 17 tracked races: historical returns, statewide-tie thresholds, trends and source-attributed returns as they become available.</p>
+ <div class="hero-pills"><span>17 states</span><span>170 watch units</span><span>2016 · 2020 · 2024 history</span><span>Verified returns only</span></div>
+ </section>
+ <div class="notice"><strong>How to interpret the numbers</strong> Watch scores rank counties using vote volume, recent swing leverage, closeness and net vote contribution. Historical alignment is a small-sample descriptive percentage—not an election forecast or a calibrated chance of statewide victory. All benchmark votes are hypothetical, and a county leading in early returns does not imply its full vote has been counted.</div>
+ <section class="toolbar" aria-label="Choose your state and view">
+ <label>STATE TO ANALYZE<select id="stateSelect" aria-label="Choose Senate state"></select></label>
+ <label>RANK COUNTIES BY<select id="sortMode" aria-label="Rank selected counties"><option value="importance">Strategic importance</option><option value="volume">2024 ballots cast</option><option value="swing">2020–24 two-party swing</option><option value="close">Closest 2024 margin</option><option value="alignment">Historical alignment rate</option></select></label>
+ <label>BENCHMARK TURNOUT<select id="turnoutMode" aria-label="Illustrative turnout relative to 2024 presidential"><option value="0.65">65% of 2024 major-party vote</option><option value="0.8" selected>80% of 2024 major-party vote</option><option value="1">100% of 2024 major-party vote</option></select></label>
+ <button id="copyLink" class="action" type="button">Copy state link</button>
+ </section>
+ <div class="stat-grid" id="stateStats" aria-live="polite"></div>
+ <section class="two-col">
+  <article class="panel state-overview"><div class="section-head"><div><div class="eyebrow">STATEWIDE PATH TO 50%</div><h2 id="stateTitle">Loading state comparison</h2></div><span class="status-tag" id="stateFeedStatus">Awaiting results</span></div>
+   <div id="stateMeter"></div>
+   <p class="description" id="stateContext"></p>
+   <div class="source-bar"><a id="officialLink" href="#" target="_blank" rel="noopener noreferrer">Official state election results ↗</a><a href="../" target="_blank" rel="noopener noreferrer">Ervin forecast ↗</a></div>
+  </article>
+  <aside class="panel county-inspector" id="countyInspector" aria-live="polite"><div class="eyebrow">COUNTY / DISTRICT DEEP DIVE</div><h2>Select a county below</h2></aside>
+ </section>
+ <section class="panel rankings"><div class="section-head"><div><div class="eyebrow">HIGH-LEVERAGE VOTING UNITS</div><h2 id="rankHeading">Top 10 counties</h2><p class="description">Click any row to inspect the exact historical votes, benchmark and reporting source. Rank is an analytical heuristic, not a prediction of which county declares first.</p></div><div class="right-actions"><input type="search" id="countySearch" placeholder="Find county…" aria-label="Filter top ten counties"><button class="action" id="reloadResults" type="button">Check results</button></div></div>
+ <div class="table-scroll"><table><thead><tr><th>Rank / County</th><th>2024 two-party margin</th><th>2020→24 swing</th><th>2024 votes</th><th>2026 tie benchmark (D or independent share)</th><th>Historical agreement</th><th>2026 verified local returns</th></tr></thead><tbody id="countyRows"><tr><td colspan="7">Loading county history…</td></tr></tbody></table></div>
+ <p class="footnote" id="coverageText"></p>
+ </section>
+ <section class="grid-lower">
+ <article class="panel"><div class="eyebrow">HISTORICAL PERSPECTIVE</div><h2>Statewide presidential baseline</h2><div id="historicalState"></div><p class="footnote">The historical comparison uses presidential returns, not Senate results. Independent Senate candidacies, incumbency, and ranked-choice voting can produce materially different patterns.</p></article>
+ <article class="panel"><div class="eyebrow">LIVE COVERAGE AND STATUS</div><h2>County reporting tracker</h2><div class="feed-status" id="feedMessage">No 2026 Senate county results published to this page yet.</div><p class="description">The page checks the validated Ervin county snapshot at most once per minute while open. Sources are timestamped. A missing county is shown as <strong>unavailable</strong>, not zero or a projection.</p><p class="footnote">Not all states publish a uniform, openly accessible county-level feed. For breaking results before they are ingested here, use the state's official election portal above.</p></article>
+ </section>
+ <details class="method panel" id="method"><summary>Methodology, statistical caveats, source provenance and data feed contract</summary>
+ <div class="method-body"><h3>County selection</h3><p>Each state's ten units are selected mechanically from 2024 presidential returns using a within-state normalized weighted score: <b>50% ballots cast, 25% absolute 2020–2024 swing multiplied by votes, 15% 2024 two-party competitiveness, and 10% absolute 2024 net vote contribution.</b> These are descriptive priorities, not measured causal importance or a proprietary validated forecast.</p>
+ <h3>Agreement statistic</h3><p>For comparable 2016, 2020 and 2024 presidential cycles, count times the county plurality party matched its statewide plurality party. The displayed percentage is the Jeffreys-smoothed historical frequency <code>100 × (matches + 0.5) / (cycles + 1)</code> with the actual count shown. The tiny sample and selection bias prevent interpreting it as the probability of winning a 2026 Senate race conditional on the county; it is <b>not</b> a calibrated chance.</p>
+ <h3>Benchmarks and vote targets</h3><p>To illustrate a hypothetical statewide 50–50 major-party contest, shift each county's 2024 two-party Democratic presidential share by the points needed to bring the 2024 statewide two-party share to 50%. Scale its 2024 major-party vote by the selected turnout multiplier and apply the resulting share. These thresholds are <b>scenarios, not the 2026 Senate vote projection</b>. Other parties are excluded from this threshold; independents are not interchangeable with Democratic presidential candidates.</p>
+ <h3>Alaska</h3><p>Alaska uses 2024 state House districts, not counties, and no pre-2024 geographic alignment percentage because redistricting makes the historical district boundaries noncomparable. The 2024 presidential first-choice pattern does not model ranked-choice rounds or the 2026 independent-versus-Republican contest.</p>
+ <h3>Historical sources and election-night verification</h3><p>2016, 2020 and 2024 county-level presidential results are from Tony McGovern's <a target="_blank" rel="noopener noreferrer" href="https://github.com/tonmcg/US_County_Level_Election_Results_08-24">public compilation</a> (Fox News, Politico and other public returns). This is a secondary dataset, not a separate certified state audit. Current results are accepted only in the site's normalized <a href="./results.json">2026 Senate county snapshot</a> with an attributed HTTPS source, timestamp, valid county identifier, election/office match, and post-closing reporting time. No simulated votes enter the live table.</p>
+ </div></details>
+ <footer>Ervin Model · <a href="../">National forecast</a> · <a href="../michigan/election-night/">Michigan election night</a> · County historical estimates are not statewide win calls.</footer>
+</main>
+<script defer src="./watch.js"></script><script defer src="../site-chrome.js"></script>
+</body></html>
