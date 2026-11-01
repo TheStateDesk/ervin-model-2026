@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-01T06:03:31.323727+00:00",
+  "asOf": "2026-11-01T06:03:31.323Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -14,21 +14,23 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "MI": {
       "state": "Michigan",
       "nonR": "Abdul El-Sayed",
       "rep": "Mike Rogers",
       "party": "D",
-      "pollMargin": 2.47,
-      "adjustedMargin": -0.76,
+      "pollMargin": 4.31,
+      "adjustedMargin": 1.08,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "OH": {
       "state": "Ohio",
@@ -40,8 +42,9 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "TX": {
       "state": "Texas",
@@ -53,8 +56,9 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "IA": {
       "state": "Iowa",
@@ -66,8 +70,9 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "KS": {
       "state": "Kansas",
@@ -79,8 +84,9 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "MN": {
       "state": "Minnesota",
@@ -92,8 +98,9 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "AK": {
       "state": "Alaska",
@@ -105,21 +112,23 @@
       "mode": "Original Ervin",
       "publisherInputs": 3,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "GA": {
       "state": "Georgia",
       "nonR": "Jon Ossoff",
       "rep": "Mike Collins",
       "party": "D",
-      "pollMargin": 8.35,
-      "adjustedMargin": 8.03,
+      "pollMargin": 9.92,
+      "adjustedMargin": 9.6,
       "mode": "Original Ervin",
-      "publisherInputs": 4,
+      "publisherInputs": 2,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "NC": {
       "state": "North Carolina",
@@ -131,21 +140,23 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "NH": {
       "state": "New Hampshire",
       "nonR": "Chris Pappas",
       "rep": "John E. Sununu",
       "party": "D",
-      "pollMargin": 6.9,
-      "adjustedMargin": 8.24,
+      "pollMargin": 7.3,
+      "adjustedMargin": 8.64,
       "mode": "Original Ervin",
-      "publisherInputs": 4,
-      "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "publisherInputs": 1,
+      "proxyOrSingleInput": true,
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "NE": {
       "state": "Nebraska",
@@ -157,8 +168,9 @@
       "mode": "Original Ervin",
       "publisherInputs": 3,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "SC": {
       "state": "South Carolina",
@@ -170,21 +182,23 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "MS": {
       "state": "Mississippi",
       "nonR": "Scott Colom",
       "rep": "Cindy Hyde-Smith",
       "party": "D",
-      "pollMargin": -4.4,
-      "adjustedMargin": -10.81,
+      "pollMargin": -5,
+      "adjustedMargin": -11.41,
       "mode": "Original Ervin",
       "publisherInputs": 0,
       "proxyOrSingleInput": true,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "OLDER REFERENCE · no recent qualifying publisher average",
+      "stale": true,
+      "note": "Model-based statewide non-R minus R margin. Historic proxy, not current polling."
     },
     "FL": {
       "state": "Florida",
@@ -196,34 +210,37 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "SD": {
       "state": "South Dakota",
       "nonR": "Brian Bengs",
       "rep": "Mike Rounds",
       "party": "I",
-      "pollMargin": -11.76,
-      "adjustedMargin": -30.26,
+      "pollMargin": -10.33,
+      "adjustedMargin": -28.83,
       "mode": "Original Ervin",
-      "publisherInputs": 3,
+      "publisherInputs": 2,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     },
     "MT": {
       "state": "Montana",
       "nonR": "Seth Bodnar",
       "rep": "Kurt Alme",
       "party": "I",
-      "pollMargin": -10.71,
-      "adjustedMargin": -10.71,
+      "pollMargin": -6.76,
+      "adjustedMargin": -6.76,
       "mode": "Original Ervin",
-      "publisherInputs": 4,
+      "publisherInputs": 2,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · four-publisher weighted blend",
-      "note": "Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."
+      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "stale": false,
+      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     }
   }
 }
