@@ -1,0 +1,183 @@
+/* Accessible dark mode — loaded LAST on every page.
+   Scope every override to html:not(.light) so the default light appearance
+   and printed reading style remain untouched. Avoid translucent backgrounds
+   over data, and preserve party colors and live-vs-projected distinctions. */
+html:not(.light){
+ color-scheme:dark!important;
+ --bg:#0c1826;--bg2:#102236;--surface:#14283b;--surface2:#1d3449;
+ --panel:#14283b;--panel2:#1d3449;--edge:#3b576d;--line:#3b576d;
+ --border:#3b576d;--text:#eff6fc;--muted:#c6d5e1;--subtle:#b2c5d4;
+ --accent:#f1ca88;--gold:#f1ca88;--blue:#8cc9f6;--red:#f2a0a9;
+ --blue-soft:#223f57;--red-soft:#50323d;--shadow:0 12px 30px #0003;
+}
+html:not(.light) body{background:#0c1826!important;color:#edf5fb!important}
+html:not(.light) body :is(h1,h2,h3,h4,h5,h6){color:#f1f7fc!important}
+html:not(.light) body :is(p,li,dd,dt){color:#d0dfe9!important}
+html:not(.light) body :is(a){color:#a7d9fa!important}
+html:not(.light) body :is(a:hover){color:#d0efff!important}
+html:not(.light) body :is(.micro,.fine,.description,.footnote,.tiny,.muted,.lede,.note,.insight-note,.poll-intro,
+ .source-status,.source-date,.survey-meta,.survey-kind,.mode-explainer-foot,.method-grid p,.refresh-strip span,
+ .hero-caveat,.hero .intro,.hero .lede,.hero p,.source-desk-footnote,.editorial-dateline small){
+ color:#c8d9e6!important}
+html:not(.light) body :is(.section-label,.section-title,.eyebrow,.kicker,.guide-number){color:#f1ca88!important}
+html:not(.light) body :is(.panel,.stat,.card,.insight-stat,.mode-explainer,.probability-guide,.model-settings-help,
+ .method,.control-method,.note,.notice,.banner,.refresh-strip,.hero-right,.polling-options,.guide-link,
+ .global-site-menu,.source-desk,.source-desk-card,.state-overview,.county-inspector,.win-benchmarks,
+ .turnout-sensitivity,.state-live,.feed-status,.source-readiness,.clerk-watch,.county-map-panel,
+ .interpretation-note,.source-health-details,.homepage-shortcuts,.jump-nav,.panelnav){
+ background:#14283b!important;background-image:none!important;
+ border-color:#3c576c!important;color:#edf5fa!important;box-shadow:0 8px 26px #0002!important}
+html:not(.light) body :is(.stat,.panel,.guide-link,.source-desk-card,.source-desk){border-color:#3c576c!important}
+html:not(.light) body :is(.stat span,.stat small,.stat .name,.stat .foot,
+ .benchmark-item small,.benchmark-item span,.county-indicator span,.county-indicator small,
+ .county-metrics small,.county-simple-card small,.source-desk-status,.county-pace-summary small){
+ color:#c6d6e3!important}
+html:not(.light) body :is(.stat strong,.stat b,.stat .num,.countystats strong,.county-metrics strong,
+ .benchmark-item strong,.county-indicator b,.county-inspector .big-number,
+ .insight-stat strong,.source-margin,.poll-input-row .source-margin){color:#a7d7fa!important}
+html:not(.light) body :is(.numred,.red){color:#f4a4ae!important}
+html:not(.light) body :is(.numblue,.blue){color:#9bd3fb!important}
+html:not(.light) body :is(.numgold,.gold){color:#f1ce91!important}
+/* Header, global directory and navigation: never dark text on dark surfaces. */
+html:not(.light) body :is(.topbar,.site-header){background:#0f2234!important;border-color:#46647a!important;
+ color:#eaf4fb!important;box-shadow:0 3px 15px #0004!important}
+html:not(.light) body :is(.logo,.site-brand){color:#f2f8fc!important}
+html:not(.light) body :is(.logo b,.site-brand b){color:#f2c984!important}
+html:not(.light) body :is(.logo-symbol,.site-emblem){background:#244965!important;border-color:#6a8da8!important;color:#fff!important}
+html:not(.light) body :is(.topbar .navend a,.site-header .site-nav a,.global-menu-group a,.homepage-shortcuts a,
+ .jump-nav a,.panelnav a,.source-bar a){color:#e0edf7!important}
+html:not(.light) body :is(.topbar .navend a:hover,.site-header .site-nav a:hover,.global-menu-group a:hover,
+ .homepage-shortcuts a:hover,.jump-nav a:hover,.panelnav a:hover){background:#2b506c!important;color:#fff!important}
+html:not(.light) body .site-header .site-nav a[aria-current="page"]{background:#305574!important;color:#fff!important}
+html:not(.light) body :is(.global-menu-group h3,.homepage-shortcuts span,.jump-nav span){color:#f2cd90!important}
+html:not(.light) body :is(.top-nav-toggle,.site-mobile-toggle,.site-theme-toggle,.reading-toggle,.global-theme-button,
+ .topbar .nav-utilities .top-nav-toggle){
+ color:#f1f7fd!important;background:#24465f!important;border:1px solid #64829b!important}
+html:not(.light) body :is(.top-nav-toggle,.site-mobile-toggle,.site-theme-toggle,.reading-toggle,.global-theme-button):hover{
+ color:#fff!important;background:#305877!important}
+html:not(.light) body :is(.topbar .nav-utilities .top-nav-toggle){background:#326184!important}
+html:not(.light) body :is(.global-menu-group){border-color:#3c576d!important}
+html:not(.light) body :is(.refresh-strip .homepage-data-status,.status-tag,.chip,.badge,.site-status){
+ background:#1e3e3d!important;color:#b9e9d6!important;border-color:#4b766b!important}
+html:not(.light) body :is(.refresh-strip #refreshDetails,.source-health-details p){color:#d2dfeb!important}
+html:not(.light) body :is(.source-health-details summary,.probability-guide summary,
+ .model-settings-help summary,.method summary,.model-details summary,.control-method summary){
+ color:#b7deff!important}
+html:not(.light) body :is(.source-health-details[open] summary,.county-advanced-table,
+ .mode-explainer-grid>div){border-color:#46667c!important}
+/* Inputs, buttons, dropdowns and selected states. */
+html:not(.light) body :is(input,select,textarea){
+ color:#eef6fc!important;background:#102439!important;border:1px solid #69849a!important;
+ box-shadow:none!important}
+html:not(.light) body :is(input::placeholder,textarea::placeholder){color:#b4c8d7!important}
+html:not(.light) body :is(select option){color:#eef6fc!important;background:#102439!important}
+html:not(.light) body :is(button,.button,.action,.tab,.map-inline,.refresh-now,.reading-toggle,.site-theme-toggle){
+ color:#edf6fc!important;background:#24445d!important;border-color:#64829b!important}
+html:not(.light) body :is(button,.button,.action,.tab,.map-inline,.refresh-now):hover{
+ color:#fff!important;background:#315c7b!important}
+html:not(.light) body :is(.button.primary,.hero-primary-action,.topbar .nav-utilities .top-nav-toggle){
+ background:#356f99!important;color:#fff!important;border-color:#6ca0c1!important}
+html:not(.light) body :is(.hero-secondary-action){background:#1e3a50!important;color:#e6f4fe!important;border-color:#64839b!important}
+html:not(.light) body :is(.polling-options .tab[aria-selected="true"],.tab[aria-selected="true"]){
+ background:#4681ab!important;color:#fff!important;border-color:#94c4e3!important}
+html:not(.light) body :is(.toolbar,.polling-options .toolbar){background:#14283b!important;border-color:#3d576c!important}
+html:not(.light) body :is(.toolbar label,.controls label,.control-select-label,.survey-name,
+ .poll-input-row .source-status,.poll-input-row .source-date){color:#c9dbe8!important}
+html:not(.light) body :is(.subbar,.source-brand,.source-description,.source-coverage){color:#d0dfe9!important}
+html:not(.light) body :is(.reading-toggle[aria-pressed="true"],.site-theme-toggle[aria-pressed="true"]){
+ background:#396b89!important;color:#fff!important;border-color:#8cb5cb!important}
+/* First-impression cards and forecast area */
+html:not(.light) body .editorial-hero h1{color:#f3f8fb!important}
+html:not(.light) body .editorial-hero h1 em{color:#f1cc89!important}
+html:not(.light) body :is(.readers-guide-heading h2,.guide-link strong,.guide-link b,
+ .editorial-dateline-heading,.hero-right strong){color:#d9eeff!important}
+html:not(.light) body :is(.guide-link>span,.guide-link span:not(.guide-number)){color:#c6d9e6!important}
+html:not(.light) body :is(.guide-link:hover,.county-simple-card:hover){background:#203e55!important}
+html:not(.light) body :is(.polling-options-heading p,.polling-options-heading h2,.control-heading p,
+ .control-party,.control-majority,.control-mid .micro,.control-summary small){color:#d0dfe9!important}
+html:not(.light) body :is(.senate-control .control-side,.senate-control .control-mid,
+ .control-summary .control-side,.control-summary .control-mid){
+ background:#1d354b!important;border:1px solid #446278!important;color:#edf6fc!important}
+html:not(.light) body :is(.senate-control .control-side strong,.control-point-seats,
+ .controlDemChance,.controlRepChance){color:#b1dfff!important}
+html:not(.light) body :is(.control-win-bar,.state-meter,.progress){background:#34516a!important}
+html:not(.light) body :is(.race-win-chance,.poll-input-row,.survey-item,.insight-stat,
+ .insight-note,.county-metrics>div,.countystats>div,.benchmark-item,.county-indicator,
+ .statewide-candidate,.source-desk-card,.county-target-detail,.live-pace,
+ .county-pace-mini .benchmark-item,.stat-grid .stat){
+ background:#1c3449!important;color:#eff7fb!important;border-color:#4a687e!important}
+html:not(.light) body :is(.race-win-chance strong,.county-metrics strong,.benchmark-item strong,
+ .county-indicator b,.countystats strong,.stat-grid .stat strong){color:#b5dfff!important}
+html:not(.light) body :is(.race-win-chance small,.poll-input-row .source-status,.survey-meta,
+ .county-indicator span,.county-indicator small,.benchmark-item span,.benchmark-item small){
+ color:#c6d9e8!important}
+html:not(.light) body :is(.race-freshness-note){background:#483b24!important;color:#f7dda8!important;border-color:#92794f!important}
+html:not(.light) body :is(.source-aged){opacity:1!important;border-left:3px solid #e6ad69!important}
+/* Data tables: dark backgrounds and legible cells, including sticky headings. */
+html:not(.light) body :is(.table-scroll,.scroll){background:#14283b!important;border-color:#3f5e75!important}
+html:not(.light) body :is(table,td){color:#eaf4fc!important}
+html:not(.light) body :is(th,.table-scroll th,.rankings thead th,#countyTable thead,#precinctTable thead){
+ background:#244056!important;color:#e4eff9!important;border-color:#4b697e!important}
+html:not(.light) body :is(td,th){border-color:#3a5267!important}
+html:not(.light) body tbody tr:nth-child(even){background:#1b3246!important}
+html:not(.light) body tbody tr:hover{background:#2a4c67!important}
+html:not(.light) body .rankings tbody tr.active{background:#315876!important;outline:2px solid #9ec7e0!important}
+html:not(.light) body :is(.history-state-row,.county-history .history-row){border-color:#405c72!important}
+html:not(.light) body :is(.history-state-row span,.history-state-row strong,
+ .ranking td small,.rankings tbody td small){color:#c5d9e6!important}
+/* Maps: keep categorical color intact; improve surroundings, path outlines and labels. */
+html:not(.light) body :is(#map-area .geo-map-wrap,.geo-map-wrap,.mapbox,.geo-viewport,#countyMapPanel,
+ .county-map-panel,#countyBoundaryMap){background:#183044!important;border-color:#49697e!important}
+html:not(.light) body #map-area .geo-region:not(.tracked) .geo-shape{fill:#456075!important}
+html:not(.light) body #map-area .geo-region.tracked.dem .geo-shape{fill:#4487b9!important}
+html:not(.light) body #map-area .geo-region.tracked.rep .geo-shape{fill:#bb6976!important}
+html:not(.light) body #map-area .geo-region.tracked.close .geo-shape{fill:#97839c!important}
+html:not(.light) body :is(#map-area .geo-shape,.mapbox path,.county-shape){stroke:#163045!important;stroke-width:1.25!important}
+html:not(.light) body #map-area .geo-label{fill:#e7f3fb!important}
+html:not(.light) body #map-area .geo-region.tracked .geo-label{fill:#fff!important}
+html:not(.light) body :is(.geo-map-caption,.legend,.geo-map-legend){color:#c6d9e6!important}
+html:not(.light) body :is(.county-shape):not(.reported-d):not(.reported-r):not(.reported-tie):not(.selected){fill:#35556e!important}
+html:not(.light) body .county-shape.selected{stroke:#ffcf87!important;stroke-width:3!important}
+html:not(.light) body :is(.track,.county-history .track){background:#38566c!important}
+/* County cards and historical detail. */
+html:not(.light) body :is(.county-simple-card){background:#1c354b!important;color:#edf6fc!important;border-color:#4d6d83!important}
+html:not(.light) body .county-simple-card.is-selected{background:#254d67!important;border-color:#91c1e0!important}
+html:not(.light) body :is(.simple-rank,.simple-card-metrics b,.simple-card-action){color:#b4defa!important}
+html:not(.light) body :is(.simple-card-metrics small,.simple-status){color:#cfdeea!important}
+html:not(.light) body .simple-status{background:#28455a!important;border-color:#57738a!important}
+html:not(.light) body :is(.county-simple-head strong,.county-simple-head p,
+ .county-advanced-table summary,.county-target-detail){color:#e4f1fa!important}
+html:not(.light) body .county-advanced-table{border-color:#49677a!important}
+html:not(.light) body :is(.state-live p,.live-pace p,.statewide-candidate small,
+ .county-benchmarks .footnote){color:#cadbe8!important}
+html:not(.light) body :is(.source-desk-link,.source-shortcuts a){
+ background:#2a526c!important;color:#e7f5ff!important;border-color:#688aa4!important}
+html:not(.light) body .source-desk-kind{color:#f1cc90!important}
+html:not(.light) body :is(.source-desk-card h3,.source-desk-card p,.source-desk-heading p){color:#e0edf6!important}
+html:not(.light) body .source-desk-status{background:#264c44!important;color:#b6e9d1!important;border-color:#487669!important}
+html:not(.light) body :is(.notice.interpretation-note,.live-pace.partial,.live-pace.complete){background:#1f3547!important;color:#e2eff7!important}
+html:not(.light) body .interpretation-note summary{color:#c6e5fc!important}
+html:not(.light) body :is(.status-tag,.feed-status,.chip){background:#24475a!important;color:#d2eaf7!important;border-color:#5b7d91!important}
+/* Michigan live reporting, status, hover details and source readiness. */
+html:not(.light) body :is(.geo-head h2,.geo-head p,.source-readiness h2,.clerk-watch h2,
+ .county-feed-explainer h2,.county-feed-explainer p){color:#e4f0f8!important}
+html:not(.light) body :is(.county-shape.reported-d){fill:#4889b9!important}
+html:not(.light) body :is(.county-shape.reported-r){fill:#bd6c78!important}
+html:not(.light) body :is(.county-shape.reported-tie){fill:#9f8daa!important}
+html:not(.light) body :is(.county-hover-tip,.county-card,.county-candidates,.hover-candidates,.county-candidate,
+ .tooltip,.map-tooltip){background:#203a50!important;color:#eef7fc!important;border-color:#6b879d!important}
+html:not(.light) body :is(.county-hover-tip strong,.hover-candidates b,.county-card strong,
+ .county-candidate b){color:#d8edfc!important}
+html:not(.light) body :is(.county-hover-tip small,.county-hover-tip span,.hover-eyebrow){
+ color:#d1e3ef!important}
+html:not(.light) body :is(.banner[data-mode="demo"]){background:#46382e!important;border-color:#a2765e!important}
+html:not(.light) body :is(.banner[data-mode="live"]){background:#21463d!important;border-color:#5c997a!important}
+html:not(.light) body :is(.source-readiness,.clerk-watch,.clerk-watch .panel){background:#14283b!important}
+/* Footer / focus, text preferences */
+html:not(.light) body :is(footer,.foot,.footnote){border-color:#39566d!important;color:#beccdc!important}
+html:not(.light) body .skip-to-content{background:#316b95!important;color:#fff!important}
+html:not(.light) body :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible{
+ outline:3px solid #f1ca88!important;outline-offset:3px!important}
+html:not(.light) body .site-back-top{background:#315c7f!important;color:#fff!important;border-color:#81a8c1!important}
+@media(prefers-reduced-motion:reduce){html:not(.light) *,html:not(.light) *::before,
+ html:not(.light) *::after{transition-duration:0.01ms!important}}
