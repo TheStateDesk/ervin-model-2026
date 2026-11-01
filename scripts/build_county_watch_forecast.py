@@ -44,10 +44,11 @@ def build(data):
    if publisher in seen:continue
    seen.add(publisher)
    date=parse_date(p.get("date"),now)
-   age=max(0,(now-date).total_seconds()/86400) if date else 21
+   age=max(0,(now-date).total_seconds()/86400) if date else 999
+   if age>7:continue  # synchronized with the main-page recent-publisher cutoff
    vals.append((value,weight*max(.5,math.exp(-age/35))))
   if not vals:
-   fallback=race["sources"].get("rcp") or race["sources"].get("average")
+   fallback=race["sources"].get("average") or race["sources"].get("rcp")
    margin=float(fallback["value"])
   else:
    margin=round(sum(v*w for v,w in vals)/sum(w for _,w in vals),2)
@@ -56,8 +57,9 @@ def build(data):
   out[race["code"]]={"state":race["state"],"nonR":race["dem"],"rep":race["rep"],
       "party":race["party"],"pollMargin":round(margin,2),"adjustedMargin":adjusted,
       "mode":"Original Ervin","publisherInputs":len(vals),"proxyOrSingleInput":len(vals)<2,
-      "source":"Ervin's Take · four-publisher weighted blend",
-      "note":"Model-based statewide non-R minus R margin. This is not a county-specific poll or measured 2026 turnout."}
+      "source":"Ervin's Take · recent publisher blend (7-day limit)" if vals else "OLDER REFERENCE · no recent qualifying publisher average",
+      "stale":not bool(vals),
+      "note":"Model-based statewide non-R minus R margin. Historic proxy, not current polling." if not vals else "Model-based statewide margin from recent attributed publisher averages, not a county poll."}
  return {"version":1,"asOf":now.isoformat(),"source":"National 2026 Ervin polling dashboard; Original Ervin default",
          "method":"Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
          "states":out}
