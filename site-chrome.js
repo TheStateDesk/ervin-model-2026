@@ -41,6 +41,35 @@ if(mainToggle&&mainPanel){
   if(desktopTheme){desktopTheme.click()}else document.documentElement.classList.toggle("light");
  });
 }
+/* Larger-text reading preference for visitors who prefer comfortable type.
+ * Defensive storage: preferences work for this session even with blocked storage.
+ */
+const largeTextKey="ervin-2026-large-text";
+const savedLargeText=(()=>{
+ try{return window.localStorage.getItem(largeTextKey)==="yes"}
+ catch{return false}
+})();
+if(savedLargeText)document.documentElement.classList.add("large-text");
+const readingButton=document.createElement("button");
+readingButton.type="button";
+readingButton.id="readingToggle";
+readingButton.className="reading-toggle";
+readingButton.textContent="A+ Text size";
+readingButton.setAttribute("aria-pressed",String(savedLargeText));
+readingButton.setAttribute("aria-label","Switch larger text on or off");
+readingButton.title="Make text and controls larger";
+const mainUtility=document.querySelector(".nav-utilities");
+const interiorNav=document.querySelector(".site-header .site-nav");
+if(mainUtility)mainUtility.insertBefore(readingButton,mainUtility.firstChild);
+else if(interiorNav)interiorNav.appendChild(readingButton);
+readingButton.addEventListener("click",()=>{
+ const on=document.documentElement.classList.toggle("large-text");
+ readingButton.setAttribute("aria-pressed",String(on));
+ readingButton.textContent=on?"A− Normal text":"A+ Text size";
+ try{window.localStorage.setItem(largeTextKey,on?"yes":"no")}catch{}
+});
+if(savedLargeText)readingButton.textContent="A− Normal text";
+
 const back=document.createElement("button");
 back.type="button";back.className="site-back-top";back.textContent="↑ Top";back.setAttribute("aria-label","Back to top");
 back.hidden=true;document.body.append(back);
