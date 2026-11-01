@@ -13,6 +13,10 @@
   ok($("stateSelect").options.length===17,"17 state choices loaded");
   ok($("stateSelect").value==="MI","Michigan URL selection restored");
   ok(d.querySelectorAll("#countyRows tr[data-fips]").length===10,"Ten ranked counties visible");
+  ok(d.querySelectorAll("#countyCards button[data-fips]").length===10,"Simplified county cards show all ten units");
+  ok(!d.getElementById("countyAdvancedTable").open,"Advanced nine-column county table is optional by default");
+  ok(!!d.querySelector("a.skip-to-content")&&!!d.getElementById("mainContent"),"County page includes keyboard skip navigation");
+  ok(d.documentElement.classList.contains("light"),"County dashboard shares the clear light editorial theme");
   ok($("stateTitle").textContent.includes("El-Sayed"),"2026 named Senate candidates loaded");
   ok($("stateStats").querySelectorAll(".stat").length===4,"Statewide benchmark metrics rendered");
   ok($("stateMeter").querySelector(".state-meter .d")!==null,"2016-2024 statewide graphic renders");
