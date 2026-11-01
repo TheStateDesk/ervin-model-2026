@@ -208,7 +208,18 @@ async function init(){
   $("sortMode").addEventListener("change",e=>{sort=e.target.value;renderTable();renderCards()});
   $("turnoutMode").addEventListener("change",e=>{turnout=Number(e.target.value)||.8;render()});
   $("countySearch").addEventListener("input",e=>{search=e.target.value;renderTable();renderCards()});
-  $("countyCards").addEventListener("click",e=>{const button=e.target.closest("button[data-fips]");if(button)selectUnit(button.dataset.fips)});
+  $("countyCards").addEventListener("click",e=>{
+   const button=e.target.closest("button[data-fips]");
+   if(!button)return;
+   selectUnit(button.dataset.fips);
+   // The detailed county panel is above the ten cards; make the result
+   // immediately visible to touch-screen and first-time readers.
+   const details=$("countyInspector");
+   if(details){
+    const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    details.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
+   }
+  });
   $("countyRows").addEventListener("click",e=>{const tr=e.target.closest("tr[data-fips]");if(tr)selectUnit(tr.dataset.fips)});
   $("countyRows").addEventListener("keydown",e=>{if(!["Enter"," "].includes(e.key))return;const tr=e.target.closest("tr[data-fips]");if(tr){e.preventDefault();selectUnit(tr.dataset.fips)}});
   $("reloadResults").addEventListener("click",()=>loadResults(true));
