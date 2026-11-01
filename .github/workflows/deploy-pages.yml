@@ -42,6 +42,14 @@ jobs:
           node --check scripts/backtest_calibration.js
           node scripts/validate_calibration.js
           node scripts/backtest_calibration.js
+      - name: Validate Counties to Watch datasets and JavaScript
+        run: |
+          node --check counties-watch/watch.js
+          python3 -m json.tool counties-watch/history.json >/dev/null
+          python3 -m json.tool counties-watch/results.json >/dev/null
+          python3 -m json.tool counties-watch/sources.json >/dev/null
+          python3 -m py_compile scripts/refresh_counties_watch.py
+          python3 -m unittest discover -s tests -p test_counties_watch.py -v
       - name: Validate Michigan county baselines and frontend script
         run: |
           node --check michigan/dashboard.js
@@ -73,6 +81,16 @@ jobs:
           python3 -c 'from pathlib import Path; import re,sys; html=Path("/tmp/michigan-smoke.html").read_text(); m=re.search(r"<pre[^>]*data-status=\"(PASS|FAIL)\"[^>]*>(.*?)</pre>",html,re.S); print((re.sub(r"<[^>]+>","",m.group(2)) if m else "Missing Michigan browser result")[:4000]); sys.exit(0 if m and m.group(1)=="PASS" else 1)'
           timeout 55s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=11000 --dump-dom http://127.0.0.1:8765/tests/michigan_election_night_smoke.html > /tmp/mi-night-smoke.html 2>/tmp/mi-night-chrome.err
           python3 -c 'from pathlib import Path; import re,sys; html=Path("/tmp/mi-night-smoke.html").read_text(); m=re.search(r"<pre[^>]*data-status=\"(PASS|FAIL)\"[^>]*>(.*?)</pre>",html,re.S); print((re.sub(r"<[^>]+>","",m.group(2)) if m else "Missing Michigan election-night result")[:4000]); sys.exit(0 if m and m.group(1)=="PASS" else 1)'
+      - name: Counties to Watch browser smoke (Chromium)
+        run: |
+          set -euo pipefail
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/ervin-county-http.log 2>&1 &
+          PID=$!
+          trap 'kill "$PID" 2>/dev/null || true' EXIT
+          sleep 1
+          timeout 50s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=9000 --dump-dom http://127.0.0.1:8765/tests/counties_watch_smoke.html >/tmp/ervin-county-smoke.html 2>/tmp/ervin-county-chrome.err
+          python3 -c 'from pathlib import Path;import re,sys;html=Path("/tmp/ervin-county-smoke.html").read_text();m=re.search(r"<pre[^>]*data-status="+"chr(34)+"(PASS|FAIL)"+"chr(34)"+r"[^>]*>(.*?)</pre>",html,re.S);print(re.sub(r"<[^>]*>","",m.group(2))[:4500] if m else "No county-watch browser result");sys.exit(0 if m and m.group(1)=="PASS" else 1)'
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
