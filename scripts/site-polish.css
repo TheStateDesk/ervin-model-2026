@@ -1,0 +1,46 @@
+/* Website-wide readability polish for national dashboard and shared probability guide */
+.topbar .logo{text-decoration:none;color:var(--text);flex-shrink:0}
+.topbar .logo:hover .logo-symbol{background:#d7a95b18}
+.top-nav-toggle{display:none;align-items:center;justify-content:center;color:var(--text);background:var(--surface2);border:1px solid var(--edge);border-radius:9px;font-size:12px;font-weight:800;padding:10px 13px;min-height:42px}
+.top-nav-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.topbar .navend{gap:4px}.topbar .navend a{line-height:1.5;font-size:11px;padding:10px 8px}
+.topbar .navend a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.probability-guide{margin:18px 0;border:1px solid #49647c;border-left:3px solid var(--accent);border-radius:11px;background:var(--surface);box-shadow:0 7px 19px #03091222}
+.probability-guide summary{padding:14px 17px;cursor:pointer;color:var(--text);font-size:13px;font-weight:800;line-height:1.5}
+.probability-guide summary:hover{color:var(--accent);background:var(--surface2)}
+.probability-guide summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.probability-guide-content{border-top:1px solid var(--edge);padding:13px 18px 17px;color:var(--muted);font-size:12px;line-height:1.75}
+.probability-guide-content p{margin:0 0 10px}.probability-guide-content p:last-child{margin-bottom:0}
+.probability-guide-content strong{color:var(--text)}
+.probability-guide-content a{font-weight:800}
+.chance-disclaimer{font-size:11px;line-height:1.7}
+.hero .lede{font-size:14px;line-height:1.75}
+.mode-explainer-grid p{line-height:1.7}
+.panel h2{line-height:1.35}
+.panel .micro{line-height:1.65}
+.table-scroll{overscroll-behavior-inline:contain}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:where(.methodology-compact,.table-panel,.analysis-row,.stat-grid,section[id]){scroll-margin-top:92px}
+@media(max-width:1240px){
+ .topbar .navinner{position:relative;justify-content:space-between}
+ .top-nav-toggle{display:inline-flex;margin-left:auto}
+ .topbar .navend{display:none;flex-direction:column;align-items:stretch;gap:3px;position:absolute;right:0;top:calc(100% - 3px);width:min(380px,calc(100vw - 24px));padding:11px;background:#0e2234;border:1px solid #516c83;border-radius:0 0 13px 13px;box-shadow:0 20px 38px #0009;max-height:calc(100vh - 90px);overflow-y:auto;z-index:700}
+ .topbar .navend.is-open{display:flex}
+ .topbar .navend a{font-size:13px;padding:12px}
+ .topbar .navend .badge{align-self:flex-start;margin:5px 7px}
+ .topbar .navend button{align-self:flex-start;margin:4px 8px}
+ .topbar{z-index:1000}
+}
+@media(max-width:720px){
+ .topbar .shell{width:calc(100% - 28px)}
+ .topbar .logo{font-size:16px;letter-spacing:.09em}
+ .topbar .navend{width:calc(100vw - 22px);right:-3px}
+ .shell{width:calc(100% - 26px)}
+ .hero-right{align-items:flex-start}
+ .hero h1{font-size:clamp(29px,7.7vw,43px)}
+ .panel{padding:16px}
+ .probability-guide summary{padding:12px;font-size:12px}
+ .probability-guide-content{padding:13px}
+ .chance-row .barname{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.topbar .logo,.probability-guide summary{transition:none}}
