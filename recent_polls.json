@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-31T19:17:04.835997+00:00",
+  "checkedAt": "2026-11-01T00:07:38.487393+00:00",
   "source": "Original releases, RCP individual poll listings, and candidate-matched Wikipedia general-election survey tables; source type disclosed per row",
   "polls": {
     "ME": [
@@ -417,7 +417,7 @@
         "sourceKind": "Pollster release or directly linked news reporting"
       },
       {
-        "pollster": "KStrat",
+        "pollster": "Kreate Strategies",
         "dates": "October 27–30, 2026",
         "fieldEnd": "2026-10-30",
         "sample": "900 (LV)",
@@ -1802,6 +1802,39 @@
     ],
     "FL": [
       {
+        "pollster": "Big Data Poll",
+        "dates": "October 26–30, 2026",
+        "fieldEnd": "2026-10-30",
+        "sample": "1,129 (LV)",
+        "dem": 44.0,
+        "rep": 47.0,
+        "margin": -3.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "Stetson University",
+        "dates": "October 26–30, 2026",
+        "fieldEnd": "2026-10-30",
+        "sample": "852 (RV)",
+        "dem": 45.0,
+        "rep": 49.0,
+        "margin": -4.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "InsiderAdvantage (R)",
+        "dates": "October 28–29, 2026",
+        "fieldEnd": "2026-10-29",
+        "sample": "1,200 (LV)",
+        "dem": 43.0,
+        "rep": 49.0,
+        "margin": -6.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
         "pollster": "New York Times / Siena",
         "publishedAt": "2026-10-28",
         "dates": "Published 2026-10-28 (field dates not verified)",
@@ -1822,6 +1855,17 @@
         "margin": -4,
         "url": "https://www.realclearpolling.com/latest-polls/senate",
         "sourceKind": "RealClearPolling individual-poll listing (not original release)"
+      },
+      {
+        "pollster": "Political Matrix/The Listener Group",
+        "dates": "October 26–28, 2026",
+        "fieldEnd": "2026-10-28",
+        "sample": "500 (LV)",
+        "dem": 36.0,
+        "rep": 42.0,
+        "margin": -6.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       },
       {
         "pollster": "St. Pete Polls",
@@ -1886,50 +1930,6 @@
         "dem": 47.0,
         "rep": 49.0,
         "margin": -2.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "University of North Florida",
-        "publishedAt": "2026-10-21",
-        "dates": "Published 2026-10-21 (field dates not verified)",
-        "sample": "Sample not independently verified",
-        "dem": 45,
-        "rep": 49,
-        "margin": -4,
-        "url": "https://www.realclearpolling.com/latest-polls/senate",
-        "sourceKind": "RealClearPolling individual-poll listing (not original release)"
-      },
-      {
-        "pollster": "co/efficient (R)",
-        "dates": "October 18–20, 2026",
-        "fieldEnd": "2026-10-20",
-        "sample": "1,014 (LV)",
-        "dem": 40.0,
-        "rep": 48.0,
-        "margin": -8.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "University of North Florida",
-        "dates": "October 12–19, 2026",
-        "fieldEnd": "2026-10-19",
-        "sample": "1,471 (LV)",
-        "dem": 45.0,
-        "rep": 49.0,
-        "margin": -4.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Univision / YouGov",
-        "dates": "October 2–15, 2026",
-        "fieldEnd": "2026-10-15",
-        "sample": "825 (RV)",
-        "dem": 42.0,
-        "rep": 51.0,
-        "margin": -9.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }

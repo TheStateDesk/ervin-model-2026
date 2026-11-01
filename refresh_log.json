@@ -1,21 +1,81 @@
 {
-  "checkedAt": "2026-10-31T19:17:04.835997+00:00",
+  "checkedAt": "2026-11-01T00:07:38.487393+00:00",
   "pagesParsed": 15,
   "checkedRaceCount": 17,
-  "changes": 2,
+  "changes": 12,
   "observationsFound": 56,
   "errors": [],
   "updated": [
     {
-      "state": "NE",
+      "state": "OH",
+      "source": "ddhq",
+      "margin": 2.4,
+      "published": "Oct 31"
+    },
+    {
+      "state": "OH",
+      "source": "rcp",
+      "margin": 2.6,
+      "published": "Oct 31"
+    },
+    {
+      "state": "OH",
+      "source": "silver",
+      "margin": 3.0,
+      "published": "Oct 31"
+    },
+    {
+      "state": "TX",
       "source": "win270",
-      "margin": -2.6,
+      "margin": 3.3,
+      "published": "Oct 31"
+    },
+    {
+      "state": "TX",
+      "source": "ddhq",
+      "margin": 3.4,
+      "published": "Oct 31"
+    },
+    {
+      "state": "TX",
+      "source": "rcp",
+      "margin": 1.4,
+      "published": "Oct 31"
+    },
+    {
+      "state": "TX",
+      "source": "silver",
+      "margin": 2.9,
       "published": "Oct 31"
     },
     {
       "state": "NE",
+      "source": "silver",
+      "margin": -0.9,
+      "published": "Oct 31"
+    },
+    {
+      "state": "FL",
+      "source": "win270",
+      "margin": -6.0,
+      "published": "Oct 31"
+    },
+    {
+      "state": "FL",
       "source": "ddhq",
-      "margin": -2.0,
+      "margin": -5.7,
+      "published": "Oct 31"
+    },
+    {
+      "state": "FL",
+      "source": "rcp",
+      "margin": -6.3,
+      "published": "Oct 31"
+    },
+    {
+      "state": "FL",
+      "source": "silver",
+      "margin": -5.9,
       "published": "Oct 31"
     }
   ],
@@ -109,17 +169,17 @@
   "stalePublisherRaces": [
     {
       "state": "MI",
-      "daysOld": 10,
+      "daysOld": 11,
       "latestDate": "2026-10-21"
     },
     {
       "state": "GA",
-      "daysOld": 10,
+      "daysOld": 11,
       "latestDate": "2026-10-21"
     },
     {
       "state": "NH",
-      "daysOld": 9,
+      "daysOld": 10,
       "latestDate": "2026-10-22"
     },
     {
