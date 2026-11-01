@@ -3488,7 +3488,7 @@ $('copyControlForecast').onclick=async()=>{
  catch{snack('Copy unavailable in this browser')}
 };
 $('confidenceLevel').onchange=e=>{state.level=Number(e.target.value);render()};$('biasMode').onchange=e=>{state.biasMode=e.target.value;render()};$('raceFilter').onchange=e=>{state.filter=e.target.value;renderTable()};$('sort').onchange=e=>{state.sort=e.target.value;renderTable()};$('search').oninput=e=>{state.search=e.target.value;renderTable()};$('exportCSV').onclick=exportCSV;
-$('themeToggle').onclick=()=>{document.documentElement.classList.toggle('light');snack(document.documentElement.classList.contains('light')?'Light theme':'Dark theme')};
+// Theme switches are handled by the shared site-chrome.js appearance controller.
 function setFreshness(){
  const m=CONFIG.liveMeta||null;
  const badge=$('freshnessLabel'), details=$('refreshDetails'), foot=$('footerFreshness'), link=$('refreshAuditLink'), coverage=$('refreshCoverageNote');
