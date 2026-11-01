@@ -27,11 +27,14 @@
   check(el('biasMode').value==='original','Original Ervin is the default bias mode');
 
   check(!!el('probabilityGuide')&&el('probabilityGuide').textContent.includes("70%"),'Plain-English probability calibration explainer available');
-  check(!!el('mainMenuToggle')&&!!el('topNavigation'),'Homepage has responsive navigation menu');
+  check(!!el('mainMenuToggle')&&!!el('globalMenuPanel'),'Homepage has complete site navigation directory');
   el('mainMenuToggle').click();
-  check(el('mainMenuToggle').getAttribute('aria-expanded')==='true'&&el('topNavigation').classList.contains('is-open'),'Home menu opens and announces expanded state');
+  check(el('mainMenuToggle').getAttribute('aria-expanded')==='true'&&!el('globalMenuPanel').hidden,'Home menu expands with visible model directory');
+  check(doc.querySelectorAll('#globalMenuPanel .global-menu-group').length===3,'Main menu groups forecast, polling sources and election night');
+  check(doc.querySelectorAll('#globalMenuPanel a[href*="source="]').length===6,'Six polling tabs are directly accessible from main menu');
+  check(doc.querySelector('#globalMenuPanel a[href="counties-watch/"]')&&doc.querySelector('#globalMenuPanel a[href="michigan/election-night/"]'),'County watch and election-night links in main menu');
   el('mainMenuToggle').click();
-  check(el('mainMenuToggle').getAttribute('aria-expanded')==='false','Home menu closes predictably');
+  check(el('mainMenuToggle').getAttribute('aria-expanded')==='false'&&el('globalMenuPanel').hidden,'Home directory closes predictably');
   check(!!el('senate-control')&&el('controlDemChance').textContent.endsWith('%')&&el('controlRepChance').textContent.endsWith('%'),
     'Senate-control probability dashboard renders both parties');
   check(!!el('copyControlForecast')&&el('copyControlForecast').textContent.includes('Copy forecast'),
@@ -48,7 +51,7 @@
   check(doc.querySelectorAll('#rows tr[data-id] td').length===170,'Race table exposes a publisher date column for every watched state');
   const ds=win.ERVIN_DATA.states.find(r=>r.code==='MI');
   const shares={rcp:.40,ddhq:.29,win270:.21,silver:.10};
-  const considered=Object.entries(shares).filter(([k])=>!ds.sources[k].proxy);
+  const considered=Object.entries(shares).filter(([k])=>{let p=ds.sources[k];let t=Date.parse(p.date+', 2026');return !p.proxy&&Number.isFinite(t)&&(Date.now()-t)<=7*86400000});
   const weigh=([k,w])=>{
    let d=ds.sources[k].date;
    let parsed=Date.parse(/\b20\d{2}\b/.test(d)?d:d+', 2026');
@@ -59,7 +62,10 @@
   const expected=considered.reduce((sum,[k,w])=>sum+weigh([k,w])*ds.sources[k].value,0)/total;
   const displayed=el('detail').querySelector('.mini strong').textContent;
   const actual=Number((displayed.match(/\d+\.\d+/)||[])[0]);
-  check(considered.length===4&&Math.abs(expected-ds.sources.rcp.value)>.15,'Four distinct publisher averages contribute despite shared Wikipedia URL');
+  check(considered.length===4&&Math.abs(expected-ds.sources.rcp.value)>.15,'Four current Michigan publisher inputs contribute despite shared source pages');
+  check(win.ERVIN_DATA.states.find(r=>r.code==='MS').freshnessStatus.includes('No independent'),'Mississippi is clearly marked as lacking independent fresh polling');
+  check(win.ERVIN_DATA.states.find(r=>r.code==='GA').sources.ddhq.date==='Oct 27','Georgia updated DDHQ polls are represented with actual October 27 polling date');
+  check(el('pollEvidence').textContent.includes('effective weight'),'Recent-only inputs show traceable model weights');
   check(Math.abs(actual-expected)<.061,'Visible blended MI input matches weighted four-source average');
   check(doc.querySelectorAll('#bars .chance-row').length===17,'Win chance panel displays 17 race scenarios');
   check(doc.querySelector('#bars .chance-row .chance-value')?.textContent.includes('%'),'Scenario bars show explicit percentage chance');
