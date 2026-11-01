@@ -54,6 +54,14 @@
   const actual=Number((displayed.match(/\d+\.\d+/)||[])[0]);
   check(considered.length===4&&Math.abs(expected-ds.sources.rcp.value)>.15,'Four distinct publisher averages contribute despite shared Wikipedia URL');
   check(Math.abs(actual-expected)<.061,'Visible blended MI input matches weighted four-source average');
+  check(doc.querySelectorAll('#bars .chance-row').length===17,'Win chance panel displays 17 race scenarios');
+  check(doc.querySelector('#bars .chance-row .chance-value')?.textContent.includes('%'),'Scenario bars show explicit percentage chance');
+  check(el('detail').querySelector('.race-win-chance')?.textContent.includes('%'),'State detail includes modeled win chance');
+  const oldChance=el('detail').querySelector('.race-win-chance strong')?.textContent;
+  el('controlUncertainty').value='1.3';dispatch(el('controlUncertainty'));
+  check(doc.querySelectorAll('#bars .chance-row').length===17,'Increasing forecast uncertainty recalculates chance board');
+  el('controlUncertainty').value='1';dispatch(el('controlUncertainty'));
+  check(el('detail').querySelector('.race-win-chance strong')?.textContent===oldChance,'Win chance returns to baseline under original uncertainty');
   check(doc.querySelectorAll('#map g.geo-region').length===50,'All 50 geographic U.S. state outlines rendered');
   check(doc.querySelectorAll('#map g.geo-region.tracked').length===17,'All 17 tracked states are interactive');
   check(doc.querySelectorAll('#pollEvidence .poll-input-row').length===5,'Selected state displays five named publisher inputs with dates');
