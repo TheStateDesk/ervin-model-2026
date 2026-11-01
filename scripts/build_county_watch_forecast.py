@@ -55,12 +55,12 @@ def build(data):
   bias=float(race.get("correction") or 0) if race.get("history_mode")!="not_comparable" else 0
   adjusted=round(margin-bias,2)
   out[race["code"]]={"state":race["state"],"nonR":race["dem"],"rep":race["rep"],
-      "party":race["party"],"pollMargin":round(margin,2),"adjustedMargin":adjusted,
+      "party":race["party"],"pollMargin":int(margin) if float(margin).is_integer() else round(margin,2),"adjustedMargin":adjusted,
       "mode":"Original Ervin","publisherInputs":len(vals),"proxyOrSingleInput":len(vals)<2,
       "source":"Ervin's Take · recent publisher blend (7-day limit)" if vals else "OLDER REFERENCE · no recent qualifying publisher average",
       "stale":not bool(vals),
       "note":"Model-based statewide non-R minus R margin. Historic proxy, not current polling." if not vals else "Model-based statewide margin from recent attributed publisher averages, not a county poll."}
- return {"version":1,"asOf":now.isoformat(),"source":"National 2026 Ervin polling dashboard; Original Ervin default",
+ return {"version":1,"asOf":now.isoformat(timespec="milliseconds").replace("+00:00","Z"),"source":"National 2026 Ervin polling dashboard; Original Ervin default",
          "method":"Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
          "states":out}
 def main():
