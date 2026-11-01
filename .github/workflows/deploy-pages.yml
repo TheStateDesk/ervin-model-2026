@@ -90,7 +90,7 @@ jobs:
           trap 'kill "$PID" 2>/dev/null || true' EXIT
           sleep 1
           timeout 50s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=9000 --dump-dom http://127.0.0.1:8765/tests/counties_watch_smoke.html >/tmp/ervin-county-smoke.html 2>/tmp/ervin-county-chrome.err
-          python3 -c 'from pathlib import Path;import re,sys;html=Path("/tmp/ervin-county-smoke.html").read_text();m=re.search(r"<pre[^>]*data-status="+"chr(34)+"(PASS|FAIL)"+"chr(34)"+r"[^>]*>(.*?)</pre>",html,re.S);print(re.sub(r"<[^>]*>","",m.group(2))[:4500] if m else "No county-watch browser result");sys.exit(0 if m and m.group(1)=="PASS" else 1)'
+          python3 -c 'from pathlib import Path;import re,sys;html=Path("/tmp/ervin-county-smoke.html").read_text();m=re.search(r"<pre[^>]*data-status=.(PASS|FAIL).[^>]*>(.*?)</pre>",html,re.S);print(re.sub(r"<[^>]*>","",m.group(2))[:4500] if m else "No county-watch browser result");sys.exit(0 if m and m.group(1)=="PASS" else 1)'
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
