@@ -182,3 +182,12 @@ html:not(.light) body :where(td){color:#e5eff6!important}
 html:not(.light) body :where(tbody tr:nth-child(even)){background:#ffffff07!important}
 html:not(.light) body :where(tbody tr:hover){background:#32506a!important}
 html:not(.light) body :where(a){color:#a6d3f7}
+
+/* Source freshness: concise by default, full audit on request. */
+.source-health-details{margin:0 0 16px;border:1px solid #d5e2e9;border-radius:10px;background:#fff;padding:0 15px}
+.source-health-details summary{padding:12px 5px;min-height:44px;font-size:14px;font-weight:800;color:#235575}
+.source-health-details[open] summary{border-bottom:1px solid #e0e7ed}
+.source-health-details p{font-size:14px!important;line-height:1.65!important;color:#526b7d!important;margin:12px 4px 15px!important}
+html:not(.light) .source-health-details{background:#192b3d!important;border-color:#445e74!important}
+html:not(.light) .source-health-details summary{color:#b2d7f2!important}
+html:not(.light) .source-health-details p{color:#c2d1e0!important}
