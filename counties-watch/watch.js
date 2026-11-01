@@ -97,6 +97,7 @@ function renderSummary(){
  $("stateTitle").textContent=s.state+" · "+s.dem+" vs "+s.rep;
  const official=sources?.sources?.[code];
  if(official){$("officialLink").href=official.url;$("officialLink").textContent=official.name+" ↗";}
+ if(window.ERVIN_SOURCE_DESK)window.ERVIN_SOURCE_DESK.render(sources,code);
  const b=s.stateBaselineTwoPartyDShare;
  const stateRows=liveRows(),count=stateRows.length;
  let known=stateRows.reduce((total,row)=>total+row.dem+row.rep+row.other,0);
