@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "purpose": "Official agency results page links. Clicking is not an assertion of live machine-readable 2026 county rows.",
+  "sources": {
+    "ME": {
+      "name": "Maine Secretary of State",
+      "url": "https://www.maine.gov/sos/cec/elec/results/"
+    },
+    "MI": {
+      "name": "Michigan Secretary of State county directory",
+      "url": "https://www.michigan.gov/sos/elections/election-results-and-data/candidate-listings-and-election-results-by-county"
+    },
+    "OH": {
+      "name": "Ohio Secretary of State live reporting",
+      "url": "https://liveresults.ohiosos.gov/"
+    },
+    "TX": {
+      "name": "Texas Secretary of State Election Night Returns",
+      "url": "https://results.texas-election.com/"
+    },
+    "IA": {
+      "name": "Iowa Secretary of State election results",
+      "url": "https://sos.iowa.gov/iowans/election-results-statistics"
+    },
+    "KS": {
+      "name": "Kansas Secretary of State election results",
+      "url": "https://www.sos.ks.gov/elections/election-results.html"
+    },
+    "MN": {
+      "name": "Minnesota Secretary of State election results",
+      "url": "https://electionresults.sos.mn.gov/"
+    },
+    "AK": {
+      "name": "Alaska Division of Elections",
+      "url": "https://www.elections.alaska.gov/election-results/"
+    },
+    "GA": {
+      "name": "Georgia Secretary of State election results",
+      "url": "https://results.enr.clarityelections.com/GA/"
+    },
+    "NC": {
+      "name": "North Carolina State Board of Elections",
+      "url": "https://www.ncsbe.gov/results-data/election-results"
+    },
+    "NH": {
+      "name": "New Hampshire Secretary of State 2026",
+      "url": "https://www.sos.nh.gov/2026-general-election-results"
+    },
+    "NE": {
+      "name": "Nebraska Secretary of State",
+      "url": "https://electionresults.nebraska.gov/"
+    },
+    "SC": {
+      "name": "South Carolina Election Commission",
+      "url": "https://scvotes.gov/elections-statistics/election-results/"
+    },
+    "MS": {
+      "name": "Mississippi Secretary of State election results",
+      "url": "https://www.sos.ms.gov/elections-voting/election-results"
+    },
+    "FL": {
+      "name": "Florida Election Watch",
+      "url": "https://floridaelectionwatch.gov/Downloads"
+    },
+    "SD": {
+      "name": "South Dakota Secretary of State election results",
+      "url": "https://electionresults.sd.gov/"
+    },
+    "MT": {
+      "name": "Montana Secretary of State",
+      "url": "https://sosmt.gov/ELECTIONS/Results/"
+    }
+  }
+}
