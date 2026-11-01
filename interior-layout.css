@@ -1,0 +1,134 @@
+/* Publication interior pages: consistent, legible reading and results hierarchy. */
+.site-header .site-nav{gap:3px}
+.site-header .site-nav a{font-size:14px!important;min-height:44px;display:inline-flex;align-items:center}
+.site-header .site-header-inner{width:min(1340px,calc(100% - 48px))}
+body :where(main.wrap,main.shell){width:min(1320px,calc(100% - 48px));margin-inline:auto}
+body :where(main .hero){padding:42px 0 28px!important;border-bottom:0!important}
+body :where(main .hero h1){font-weight:750;color:#153d5a!important;line-height:1.13}
+body :where(main .hero p){font-size:17px!important;line-height:1.67!important;max-width:940px!important;color:#4c6578!important}
+.hero-pills{gap:8px!important}
+.hero-pills span{background:#e9f1f7!important;color:#325a75!important;border:1px solid #d5e2ea!important;padding:7px 11px!important;font-size:12px!important}
+.notice.interpretation-note{background:#edf4f8!important;border:1px solid #d2e0e9!important;padding:0!important;color:#334e63!important}
+.interpretation-note summary{padding:15px 19px;font-size:15px!important;font-weight:800;color:#265575!important}
+.interpretation-note div{border-top:1px solid #d3e1e9;padding:13px 19px 18px;font-size:14px;line-height:1.7}
+#sourceDesk .source-desk-card{box-shadow:none!important}
+#sourceDesk .source-desk-link{display:inline-flex;min-height:44px;align-items:center;padding:9px 13px}
+#sourceDesk .source-desk-card h3{font-size:18px!important}
+#sourceDesk .source-desk-card p{font-size:14px!important}
+#sourceDesk .source-desk-heading p{font-size:14px!important}
+#sourceDesk .source-desk-footnote{font-size:13px!important}
+#sourceDesk .source-desk-status{font-size:13px!important}
+.county-inspector :where(.county-metrics,.county-targets){gap:12px}
+.county-inspector :where(.county-metrics>div,.benchmark-item,.county-indicator){background:#f3f7fa!important;border:1px solid #d6e1e9!important;color:#29485c!important}
+.county-inspector .county-metrics strong,.county-inspector .benchmark-item strong{color:#1c4f73!important}
+.county-inspector :where(.county-metrics small,.benchmark-item span,.benchmark-item small,.county-indicator small,.county-indicator span){color:#526b7c!important;font-size:12px!important}
+.county-inspector :where(.county-metrics strong,.county-indicator b){font-size:20px!important}
+.county-inspector .big-number{color:#1b5880!important;font-size:31px}
+.county-inspector .track{background:#dce8f0!important}
+.county-inspector .track i{background:#337daf!important}
+.county-inspector .track i.r{background:#b85c68!important}
+.county-target-detail{background:#eff5f9;border:1px solid #d4e1e9;padding:12px;border-radius:9px;font-size:14px!important;color:#36566b!important}
+.county-benchmarks h3{color:#264e6e!important}
+.live-pace{background:#eef4f8!important;color:#36576e!important;border-color:#d7e2e9!important}
+.live-pace b{color:#275170!important}
+.live-pace p{color:#476578!important;font-size:13px!important}
+.win-benchmarks,.turnout-sensitivity,.state-live,.feed-status{
+ background:#fff!important;color:#294b63!important;border:1px solid #d7e1e8!important;border-radius:12px
+}
+.win-benchmarks .eyebrow{font-size:12px!important}
+.benchmark-grid .benchmark-item,.county-pace-mini .benchmark-item{
+ background:#f4f8fa!important;color:#20445e!important;border:1px solid #d3e0e8!important
+}
+.benchmark-item strong,.benchmark-item b{color:#1d506f!important}
+.benchmark-item span,.benchmark-item small{color:#4e6677!important}
+.state-live strong,.feed-status{color:#234d6a!important}
+.statewide-candidate{background:#edf5fa!important;color:#1d425e!important;border-color:#d2dfe8!important}
+.statewide-candidate small{color:#587085!important}
+.state-meter{background:#dce8ef!important}
+.state-meter .d{background:#337eae!important}
+.state-meter .r{background:#b95a66!important}
+.state-overview .source-bar{border-top-color:#d5e1ea}
+.source-desk-card{background:#fff!important}
+.source-bar a,.source-desk-link{font-size:14px!important}
+.stat-grid .stat{background:#fff!important}
+.stat-grid .stat strong,.stat-grid .stat b{color:#204e70!important}
+.toolbar{padding:17px!important}
+.toolbar label{letter-spacing:.025em!important;text-transform:none;font-size:14px!important}
+.toolbar select{min-width:0}
+.table-scroll{max-width:100%;overflow:auto}
+.rankings thead th{background:#ebf1f5!important}
+.rankings tbody tr.active{background:#dfeff9!important;outline:2px solid #7ca8c5!important}
+.rankings tbody tr{cursor:pointer}
+.rankings tbody td strong{font-size:14px!important}
+.rankings tbody td small{font-size:12px!important;color:#536f81!important}
+.county-pace-mini .benchmark-item strong{font-size:20px!important}
+.history-state-row{border-color:#d7e2ea!important}
+.history-state-row span{font-size:14px!important}
+.history-state-row strong{color:#244963!important}
+.grid-lower .panel{margin-top:0}
+.method summary{font-size:15px}
+.method .method-body{color:#415f75!important;font-size:15px!important}
+.method .method-body p{line-height:1.75}
+.method .method-body h3{color:#1d5277!important}
+main .panelnav a{font-size:14px!important;padding:11px 15px!important}
+main :where(.model-grid,.main-grid,.stat-grid){gap:16px}
+main .legend{font-size:13px!important;color:#4c687a!important}
+main .legend span{font-size:13px!important}
+main .note{color:#435e71!important;font-size:14px!important}
+main .county-head input{min-width:0}
+main .countystats>div{background:#f1f6fa!important;border:1px solid #d5e2ea}
+main .countystats strong{color:#225879!important}
+main .countystats small{font-size:12px!important;color:#526a7b!important}
+main .trend-row{font-size:14px!important}
+main .track{background:#e1ebf2!important}
+main .mapbox{background:#eef5f9!important;border:1px solid #d5e1ea}
+main .mapbox path{stroke:#fff!important;stroke-width:1.2!important}
+main .mapbox path:hover,main .mapbox path.active{stroke:#a97a35!important}
+main :where(.scroll,.table-scroll){border:1px solid #dce6ec;border-radius:9px}
+main .panelnav{border:none!important;padding:8px 0!important}
+main .section-title{color:#865a24!important}
+main .updated{font-size:14px!important;color:#526a7b!important}
+main .status-tag.live,.chip.blue{background:#e7f3f8!important;color:#1d5c7f!important}
+main .banner[data-mode="demo"]{background:#fff2eb!important;border-left-color:#ba7c4c!important}
+main .banner[data-mode="live"]{background:#e7f5ed!important;border-left-color:#417d60!important}
+main .geo-viewport,#countyBoundaryMap{background:#edf4f8!important}
+main .geo-status,main #countyMapStatus{color:#496477!important;font-size:13px!important}
+main #countyMapPanel{background:#fff!important;border-color:#d5e0e8!important}
+main #countyMapPanel .geo-head h2{color:#1c3f59!important}
+main #countyMapPanel .county-card{border-top-color:#dbe6ec!important}
+main #countyMapPanel .county-candidate{background:#f1f6fa!important;color:#29475e!important}
+main #countyMapPanel .county-candidates b{color:#1f4d6e!important}
+main .county-shape{fill:#d7e2e9!important;stroke:#fff!important;stroke-width:1.2!important}
+main .county-shape.reported-d{fill:#417fac!important}
+main .county-shape.reported-r{fill:#b95c69!important}
+main .county-shape.reported-tie{fill:#837c94!important}
+main .county-shape:hover,main .county-shape:focus-visible{stroke:#a57428!important;stroke-width:2.8!important}
+main .county-shape.selected{stroke:#975f15!important;stroke-width:3!important}
+main .county-feed-explainer{border-left:4px solid #c39a56!important}
+main .county-feed-explainer p{color:#496578!important;font-size:14px!important}
+main .clerk-watch,.source-readiness{background:#fff!important}
+main :where(.source-shortcuts a){background:#edf4f8!important;color:#285470!important;border-color:#d0dfe9!important;font-size:14px!important;min-height:43px;display:inline-flex;align-items:center}
+main .chip.gold{color:#8b5c1f!important}
+main .footnote{font-size:13px!important}
+main :where(.refresh-now,.map-inline){min-height:44px!important}
+main :where(#countyTable tbody td,#precinctTable tbody td){font-size:14px!important}
+main :where(.refresh-countdown,.refresh-status){font-size:14px!important}
+.skip-to-content{position:fixed;top:-80px;left:15px;z-index:9999;display:block;background:#154c71;color:#fff!important;padding:12px 17px;border-radius:0 0 9px 9px;text-decoration:none;font-size:15px;font-weight:800}
+.skip-to-content:focus{top:0}
+#mainContent{scroll-margin-top:90px}
+@media(max-width:800px){
+ body :where(main.wrap,main.shell){width:calc(100% - 28px)}
+ body :where(.hero h1){font-size:clamp(31px,7.5vw,47px)}
+ main .main-grid,.two,.grid-lower{grid-template-columns:1fr!important}
+ main .stat-grid,.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ main :where(.panelnav){gap:7px}
+ main .panelnav a{padding:9px 12px!important}
+}
+@media(max-width:500px){
+ body :where(.panel){padding:15px!important}
+ main :where(.stat-grid){gap:9px}
+ main .hero{padding:28px 0 17px!important}
+ main .toolbar{padding:12px!important}
+ main :where(.county-metrics,.county-indicators){grid-template-columns:repeat(2,minmax(0,1fr))}
+ main .source-desk-heading{flex-direction:column}
+}
