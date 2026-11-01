@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Ervin Model appearance regression</title>
+<style>body{font:14px/1.55 system-ui;margin:22px;background:#fff;color:#142637}pre{white-space:pre-wrap;border:1px solid #ccd5dd;padding:15px}iframe{border:1px solid #ddd;width:840px;height:450px;display:block;margin-top:20px}</style></head>
+<body><h1>Appearance regression check</h1><pre id="result" data-status="RUNNING">Testing light, dark, contrast and cross-page preferences…</pre>
+<script>
+(async()=>{
+ const checks=[],errors=[],result=document.getElementById('result');
+ const assert=(ok,description)=>{if(!ok)throw Error(description);checks.push(description)};
+ const frame=document.createElement('iframe');frame.setAttribute('title','Appearance test frame');document.body.append(frame);
+ function readRgb(raw){
+  let m=/rgba?\(\s*(\d+)[, ]+\s*(\d+)[, ]+\s*(\d+)/.exec(raw);
+  return m?[+m[1],+m[2],+m[3]]:null;
+ }
+ function relativeLuminance(rgb){
+  if(!rgb)return 0;
+  const a=rgb.map(v=>{let c=v/255;return c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4)});
+  return a[0]*.2126+a[1]*.7152+a[2]*.0722;
+ }
+ function contrast(a,b){
+  const x=relativeLuminance(readRgb(a)),y=relativeLuminance(readRgb(b));
+  return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);
+ }
+ async function load(file){
+  const p=new Promise((resolve,reject)=>{
+   frame.onload=()=>resolve();
+   frame.onerror=()=>reject(Error('Could not load '+file));
+  });
+  frame.src='../'+file;
+  await p;
+  const d=frame.contentDocument;
+  for(let i=0;i<75&&!d.getElementById('readingToggle');i++)await new Promise(r=>setTimeout(r,60));
+  assert(!!d.getElementById('readingToggle'),file+': shared UI scripts initialized');
+  return d;
+ }
+ function assertDark(d,file){
+  const w=frame.contentWindow,html=d.documentElement;
+  const bs=w.getComputedStyle(d.body);
+  assert(!html.classList.contains('light'),file+': dark root active');
+  assert(relativeLuminance(readRgb(bs.backgroundColor))<.04,file+': body uses a genuinely dark background');
+  assert(contrast(bs.color,bs.backgroundColor)>=8,file+': body text exceeds 8:1 contrast ratio');
+  assert(d.querySelector('meta[name="theme-color"]').content==='#0c1826',file+': dark browser UI color set');
+  let panel=d.querySelector('main .panel');
+  if(panel){
+   let st=w.getComputedStyle(panel);
+   assert(relativeLuminance(readRgb(st.backgroundColor))<.08,file+': panels are dark rather than bright white');
+   assert(contrast(st.color,st.backgroundColor)>=6,file+': panel text is readable');
+  }
+  let custom=d.querySelector('.county-simple-card,.guide-link,.source-desk-card,.stat');
+  if(custom){
+   let st=w.getComputedStyle(custom);
+   assert(relativeLuminance(readRgb(st.backgroundColor))<.085,file+': key data cards switch to dark backgrounds');
+  }
+  let head=d.querySelector('main th');
+  if(head){
+   let st=w.getComputedStyle(head);
+   assert(relativeLuminance(readRgb(st.backgroundColor))<.11,file+': table headings have dark backgrounds');
+   assert(contrast(st.color,st.backgroundColor)>=5,file+': table labels are legible');
+  }
+ }
+ try{
+  localStorage.removeItem('ervin-2026-appearance');
+  let d=await load('index.html');
+  assert(d.documentElement.classList.contains('light'),'Main page defaults to light mode when no preference exists');
+  const mainToggle=d.getElementById('themeToggle');
+  assert(!!mainToggle,'Main appearance switch exists');
+  mainToggle.click();assertDark(d,'National forecast');
+  assert(mainToggle.getAttribute('aria-pressed')==='true','Main switch announces dark selection');
+  assert(localStorage.getItem('ervin-2026-appearance')==='dark','Dark selection saved for subsequent pages');
+  d.getElementById('themeToggleMenu').click();
+  assert(d.documentElement.classList.contains('light'),'All pages menu appearance control switches back to light');
+  mainToggle.click();assertDark(d,'National forecast (restored)');
+  for(const file of ['counties-watch/index.html','michigan/index.html','michigan/election-night/index.html']){
+   d=await load(file);
+   assertDark(d,file);
+   const toggle=d.getElementById('themeToggleInterior');
+   assert(!!toggle&&toggle.getAttribute('aria-pressed')==='true',file+': visible interior appearance button shows active dark mode');
+   assert(toggle.getAttribute('aria-label')==='Use light appearance',file+': accessible action describes light switch');
+  }
+  d.getElementById('themeToggleInterior').click();
+  assert(d.documentElement.classList.contains('light'),'Interior appearance control can restore light mode');
+  assert(localStorage.getItem('ervin-2026-appearance')==='light','Light selection persists');
+  d=await load('counties-watch/index.html');
+  assert(d.documentElement.classList.contains('light'),'A subsequent page respects restored light appearance');
+  assert(relativeLuminance(readRgb(frame.contentWindow.getComputedStyle(d.body).backgroundColor))>.75,'Light appearance remains clean and bright');
+  result.dataset.status='PASS';result.textContent='PASS '+checks.length+' checks\n'+checks.map(x=>'✓ '+x).join('\n');
+ }catch(err){
+  errors.push(err.stack||String(err));
+  result.dataset.status='FAIL';result.textContent='FAIL '+errors.join('\n');
+ }
+})();
+</script></body></html>
