@@ -255,8 +255,9 @@ window.ERVIN_DATA = {
           "date": "Oct 31",
           "url": "https://www.270towin.com/2026-senate-polls/michigan",
           "proxy": false,
-          "note": "270toWin average 49.8 minus 44.3; latest underlying fieldwork Oct 29. Date is checked snapshot, NOT the field date.",
-          "updatedFrom": "manual-public-source-verification"
+          "note": "270toWin average 49.8 minus 44.3; latest underlying fieldwork Oct 29. Date is checked snapshot, NOT the field date. Most recent included survey field date is used for freshness, because a separately labeled aggregate publish date was not displayed.",
+          "updatedFrom": "manual-public-source-verification",
+          "dateBasis": "latest-poll"
         },
         "average": {
           "value": 4.5,
@@ -942,8 +943,9 @@ window.ERVIN_DATA = {
           "date": "Oct 27",
           "url": "https://www.270towin.com/2026-senate-polls/georgia",
           "proxy": false,
-          "note": "270toWin rolling 4-poll average 53.3 minus 43.5; newest underlying poll shown Oct 27.",
-          "updatedFrom": "manual-public-source-verification"
+          "note": "270toWin rolling 4-poll average 53.3 minus 43.5; newest underlying poll shown Oct 27. Most recent included survey field date is used for freshness, because a separately labeled aggregate publish date was not displayed.",
+          "updatedFrom": "manual-public-source-verification",
+          "dateBasis": "latest-poll"
         },
         "average": {
           "value": 8.5,
@@ -1135,8 +1137,9 @@ window.ERVIN_DATA = {
           "date": "Oct 29",
           "url": "https://www.270towin.com/2026-senate-polls/new-hampshire",
           "proxy": false,
-          "note": "270toWin rolling 4-poll average 49.8 minus 42.5; latest UMass poll Oct 29. Date is latest underlying poll, not confirmed aggregator publication.",
-          "updatedFrom": "manual-public-source-verification"
+          "note": "270toWin rolling 4-poll average 49.8 minus 42.5; latest UMass poll Oct 29. Date is latest underlying poll, not confirmed aggregator publication. Most recent included survey field date is used for freshness, because a separately labeled aggregate publish date was not displayed.",
+          "updatedFrom": "manual-public-source-verification",
+          "dateBasis": "latest-poll"
         },
         "average": {
           "value": 6.7,
@@ -1490,7 +1493,8 @@ window.ERVIN_DATA = {
           "date": "Oct 20, 2026",
           "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
         }
-      }
+      },
+      "freshnessStatus": "No independent post-Oct22 Senate polling found; stale polling fallback is provided as historical reference only."
     },
     {
       "state": "Florida",
@@ -1930,28 +1934,14 @@ window.ERVIN_DATA = {
     ],
     "stalePublisherRaces": [
       {
-        "state": "MI",
-        "daysOld": 11,
-        "latestDate": "2026-10-21"
-      },
-      {
-        "state": "GA",
-        "daysOld": 11,
-        "latestDate": "2026-10-21"
-      },
-      {
-        "state": "NH",
-        "daysOld": 10,
-        "latestDate": "2026-10-22"
-      },
-      {
         "state": "MS",
         "daysOld": null,
         "latestDate": null,
-        "reason": "No independently attributed publisher averages"
+        "reason": "No independent source"
       }
     ],
-    "sources": "Wikipedia 2026 general-election aggregate tables; matching candidate pair required"
+    "sources": "Wikipedia 2026 general-election aggregate tables; matching candidate pair required",
+    "manualReviewAt": "2026-11-01T11:00:00.000Z"
   },
   "calibrationEvents": [
     {
