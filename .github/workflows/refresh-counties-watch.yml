@@ -7,6 +7,8 @@ on:
       - 'michigan/election-night/county_totals.json'
       - 'michigan/election-night/county_auto.json'
       - 'scripts/refresh_counties_watch.py'
+      - 'tests/test_counties_watch.py'
+      - 'counties-watch/history.json'
       - '.github/workflows/refresh-counties-watch.yml'
   schedule:
     # Sources are imported only on election days or when new validated CSVs arrive.
