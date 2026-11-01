@@ -1,0 +1,14 @@
+/* Probability display uses the same simulated race frequencies as Senate-control.
+   Illustrative win frequency, not calibrated predictive odds. */
+.chance-legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 15px;color:var(--muted);font-size:10px;font-weight:700;margin:0 0 14px}
+.chance-legend span{display:inline-flex;align-items:center;gap:7px}.chance-legend b{display:inline-block;width:10px;height:10px;border-radius:2px}.chance-legend .r{background:#a14a56}.chance-legend .d{background:#3277aa}
+.chance-row{grid-template-columns:minmax(70px,105px) minmax(80px,1fr) minmax(75px,96px)!important;gap:10px!important;padding:9px 8px!important;border-radius:8px;min-height:45px;transition:background .1s}
+.chance-row:hover,.chance-row:focus-visible{background:var(--surface2)}.chance-row.active{box-shadow:inset 3px 0 var(--accent);background:var(--surface2)}
+.chance-meter{position:relative;display:flex;height:16px;width:100%;border-radius:5px;overflow:hidden;background:var(--edge);box-shadow:inset 0 0 0 1px #ffffff16}
+.chance-meter .chance-rep{background:#934756}.chance-meter .chance-dem{background:#326d9e}.chance-midline{position:absolute;top:0;bottom:0;left:50%;width:1px;background:#ffffffa6}
+.chance-value{text-align:right;color:var(--blue);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}.chance-value.republican{color:var(--red)}.chance-value small{font-size:9px;font-weight:700;color:var(--muted)}
+.chance-disclaimer{font-size:11px;line-height:1.65;border-top:1px solid var(--edge);padding-top:12px;margin:12px 0 0}
+.race-win-chance{background:linear-gradient(105deg,#143e5b,#172e44);border:1px solid #3f6c8d;border-radius:10px;padding:12px 13px;display:flex;align-items:center;gap:5px 13px;flex-wrap:wrap;margin:14px 0 12px}
+.race-win-chance span{font-size:12px;font-weight:850}.race-win-chance strong{font:800 26px/1.2 'Space Grotesk',system-ui;color:#9ed6ff;letter-spacing:-.025em}
+.race-win-chance small{display:block;flex-basis:100%;font-size:10px;color:#d0dce5;line-height:1.5}
+@media(max-width:680px){.chance-row{grid-template-columns:68px minmax(90px,1fr) 80px!important;gap:5px!important}.chance-value{font-size:12px}.chance-legend{font-size:9px}}
