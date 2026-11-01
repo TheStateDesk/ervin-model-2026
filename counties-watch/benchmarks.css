@@ -1,0 +1,46 @@
+/* Turnout and winning-pace benchmark dashboard */
+.win-benchmarks{margin:18px 0 12px;padding:16px;background:linear-gradient(145deg,#183a50,#12293a);border:1px solid #57738a;border-radius:12px}
+.benchmark-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.benchmark-item{min-width:0;padding:12px 13px;border:1px solid #47627b;background:#10263a;border-radius:9px}
+.benchmark-item span{display:block;font-size:10px;color:#c6d3df;line-height:1.45;font-weight:750}
+.benchmark-item strong{display:block;font-size:clamp(17px,2.2vw,24px);color:#f6f8fa;line-height:1.25;margin:5px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.benchmark-item small{display:block;font-size:10px;color:#b2c5d3;line-height:1.5}
+.win-benchmarks .eyebrow{font-size:10px}
+.turnout-sensitivity{background:#0f263a;border:1px solid #455c72;border-radius:11px;margin-top:22px;padding:17px 19px}
+.turnout-sensitivity h3{font-size:17px;margin-bottom:7px}
+.turnout-sensitivity table{min-width:675px;width:100%}
+.turnout-sensitivity th{font-size:10px}
+.turnout-sensitivity tr.chosen{background:#1d425e}
+.outstanding{border-top:1px solid #476078;padding-top:13px;margin-top:12px}
+.outstanding:empty{display:none}
+.outstanding .footnote{margin:2px 0}
+.outstanding-detail{padding:12px 14px;background:#132e44;border:1px solid #43627b;border-radius:8px}
+.outstanding-detail strong{display:block;font-size:13px;color:#bcdcf6}
+.outstanding-detail p{font-size:12px;color:#d8e2ec;margin:8px 0;line-height:1.6}
+.outstanding-detail small{font-size:10px;color:#b1c3d2;line-height:1.5}
+.county-pace-summary{margin:11px 0}
+.county-pace-mini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.county-pace-mini .benchmark-item{padding:11px}
+.county-pace-mini .benchmark-item strong{font-size:19px}
+.county-benchmarks{border-top:1px solid #557087;margin-top:18px;padding-top:17px}
+.county-benchmarks h3{font-size:16px;color:#f0d3a2;margin:0 0 12px}
+.county-targets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.county-targets .benchmark-item{padding:11px 10px}
+.county-targets .benchmark-item strong{font-size:17px}
+.county-indicators{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.county-indicator{border:1px solid #39566d;background:#0e2438;padding:9px;border-radius:8px;min-width:0}
+.county-indicator small,.county-indicator span{display:block;font-size:9px;line-height:1.45;color:#b8cbd7}
+.county-indicator b{display:block;margin:4px 0;font-size:14px;color:#edf4f9;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.county-target-detail{font-size:11px;line-height:1.65;margin:13px 0;color:#c9d8e4}
+.live-pace{background:#203047;padding:12px;border:1px solid #506780;border-radius:9px;font-size:11px;line-height:1.65}
+.live-pace.complete{border-left:3px solid #72bda2}.live-pace.partial{border-left:3px solid #e7bd79}
+.live-pace b{color:#f0d49c}.live-pace p{font-size:11px;color:#d7e2ec;margin:6px 0 0}
+.county-benchmarks .footnote{margin-top:12px}
+@media(max-width:700px){
+ .benchmark-grid,.county-targets,.county-pace-mini{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .county-indicators{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .benchmark-item strong{font-size:18px}
+ .county-pace-mini .benchmark-item strong{font-size:16px}
+ .turnout-sensitivity{padding:13px}
+}
+@media(max-width:390px){.county-indicators{grid-template-columns:1fr 1fr}.benchmark-grid .benchmark-item{padding:9px}.benchmark-item strong{font-size:15px}}
