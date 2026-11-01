@@ -107,7 +107,7 @@
   <button class="button primary" id="exportCSV" type="button">Download forecast data ↓</button>
  </aside>
 </section>
-<div class="refresh-strip" role="status" aria-live="polite"><span class="refresh-symbol" aria-hidden="true">↻</span><span class="badge homepage-data-status"><span class="dot-live"></span><span id="freshnessLabel">Checking polling sources</span></span><span id="refreshDetails">This downloaded edition is a dated polling snapshot. An authorized GitHub Pages deployment enables scheduled checks every three hours.</span><a href="refresh_log.json" id="refreshAuditLink" hidden target="_blank" rel="noopener noreferrer">Refresh audit ↗</a></div><nav class="homepage-shortcuts" aria-label="Browse Ervin Model dashboards"><span>EXPLORE THE MODEL</span><a href="./#senate-control">Senate control</a><a href="./#races">17 race forecasts</a><a href="counties-watch/">Counties to Watch</a><a href="michigan/">Michigan counties</a><a href="michigan/election-night/">Election night</a><a href="./#researchLab">Research lab</a></nav><div class="divider"></div>
+<div class="refresh-strip" role="status" aria-live="polite"><span class="refresh-symbol" aria-hidden="true">↻</span><span class="badge homepage-data-status"><span class="dot-live"></span><span id="freshnessLabel">Checking polling sources</span></span><span id="refreshDetails">This downloaded edition is a dated polling snapshot. An authorized GitHub Pages deployment enables scheduled checks every three hours.</span><a href="refresh_log.json" id="refreshAuditLink" hidden target="_blank" rel="noopener noreferrer">Refresh audit ↗</a></div><details class="source-health-details" id="sourceHealthInfo"><summary>How current is the polling?</summary><p id="refreshCoverageNote">The website reports published polling dates separately from the time sources were checked.</p></details><nav class="homepage-shortcuts" aria-label="Browse Ervin Model dashboards"><span>EXPLORE THE MODEL</span><a href="./#senate-control">Senate control</a><a href="./#races">17 race forecasts</a><a href="counties-watch/">Counties to Watch</a><a href="michigan/">Michigan counties</a><a href="michigan/election-night/">Election night</a><a href="./#researchLab">Research lab</a></nav><div class="divider"></div>
 
 <section class="readers-guide" aria-label="Choose how to explore the forecast">
  <div class="readers-guide-heading"><div class="section-label">START HERE</div><h2>What would you like to see?</h2><p>Choose a view. You can explore the forecast without changing any settings.</p></div>
@@ -3489,7 +3489,7 @@ $('confidenceLevel').onchange=e=>{state.level=Number(e.target.value);render()};$
 $('themeToggle').onclick=()=>{document.documentElement.classList.toggle('light');snack(document.documentElement.classList.contains('light')?'Light theme':'Dark theme')};
 function setFreshness(){
  const m=CONFIG.liveMeta||null;
- const badge=$('freshnessLabel'), details=$('refreshDetails'), foot=$('footerFreshness'), link=$('refreshAuditLink');
+ const badge=$('freshnessLabel'), details=$('refreshDetails'), foot=$('footerFreshness'), link=$('refreshAuditLink'), coverage=$('refreshCoverageNote');
  const election=new Date('2026-11-03T23:59:59-05:00');
  const now=new Date();
  const days=Math.max(0,Math.ceil((new Date('2026-11-03T00:00:00-05:00')-now)/86400000));
@@ -3503,12 +3503,14 @@ function setFreshness(){
   const partial=pages<states.length;
   const stale=(!Number.isFinite(ageHours)||ageHours>24);
   const sourceAge=(m.stalePublisherRaces||[]).map(r=>r.state+(r.daysOld==null?' no independent publisher average':' '+r.daysOld+'d old')).join(', ');
-  badge.textContent=stale?'AUDIT OVERDUE':partial?'PARTIAL POLL COVERAGE':'POLL AUDIT CURRENT';
-  details.textContent=`Last source audit: ${show(checked)} · ${pages}/${states.length} tracked states had matching general-election aggregate tables · ${m.changes||0} publisher inputs changed. ${partial?'Other states retain their previous data. ':''}${stale?'Automated audit is overdue by more than 24 hours. ':''}${sourceAge?'Older or proxy-only inputs: '+sourceAge+'. ':''}Publisher dates—not audit times—determine freshness.`;
+  badge.textContent=stale?'SOURCE CHECK OVERDUE':partial?'SOURCES PARTIALLY MATCHED':'POLLING SOURCES CHECKED';
+  details.textContent='Last checked '+show(checked)+' · '+pages+' of '+states.length+' races have matching published averages. '+(stale?'The scheduled source check is overdue. ':'')+'Older polling is identified separately.';
+  if(coverage)coverage.textContent='Publisher check: '+show(checked)+'. Matched '+pages+' of '+states.length+' general-election aggregation tables and changed '+(m.changes||0)+' source inputs. '+(partial?'The other races retain their last independently dated observations. ':'')+(sourceAge?'Older or proxy-only sources: '+sourceAge+'. ':'')+'A check of the website does not reset the original polling date. View the audit for full details.';
   foot.textContent=`Source audit ${show(checked)} · ${pages}/${states.length} state aggregate tables matched · ${sourceAge?sourceAge+' need fresher poll inputs':'Publisher dates shown per race'}`;
   link.hidden=false;
  }else{
-  badge.textContent='OCT 23 RESEARCH SNAPSHOT';
+  if(coverage)coverage.textContent='This is a dated polling snapshot; check the audit for the most recent verified publisher observations.';
+  badge.textContent='RESEARCH SNAPSHOT';
   details.textContent='Dated October 23, 2026. Automated polling checks are configured for every three hours once this repository is published with GitHub Pages; no host is connected in this local copy.';
   foot.textContent='Source snapshot October 23, 2026 · Automatic refreshing requires published GitHub Pages site';
   link.hidden=true;
