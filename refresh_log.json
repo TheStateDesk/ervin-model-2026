@@ -1,11 +1,18 @@
 {
-  "checkedAt": "2026-11-01T13:23:57.477580+00:00",
+  "checkedAt": "2026-11-01T19:39:22.790597+00:00",
   "pagesParsed": 15,
   "checkedRaceCount": 17,
-  "changes": 0,
+  "changes": 1,
   "observationsFound": 56,
   "errors": [],
-  "updated": [],
+  "updated": [
+    {
+      "state": "OH",
+      "source": "ddhq",
+      "margin": 2.2,
+      "published": "Nov 01"
+    }
+  ],
   "sourceCoverage": [
     {
       "state": "ME",

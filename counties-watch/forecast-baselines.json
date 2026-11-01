@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-01T13:23:57.477Z",
+  "asOf": "2026-11-01T19:39:22.790Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -37,8 +37,8 @@
       "nonR": "Sherrod Brown",
       "rep": "Jon Husted",
       "party": "D",
-      "pollMargin": 2.46,
-      "adjustedMargin": 0.3,
+      "pollMargin": 2.4,
+      "adjustedMargin": 0.24,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
