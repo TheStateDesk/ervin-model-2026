@@ -15,7 +15,7 @@ function statePanels(state,forecast,turnout){
  const has=modelInfo(forecast),margin=has?forecast.adjustedMargin:null;
  const label=state.party==="I"?"named non-Republican independent":"Democratic candidate";
  const target=s.modelShare;
- const top='<div class="eyebrow">2026 WINNING-PACE WORKSHEET · NOT REPORTED VOTES</div><div class="benchmark-grid">'+
+ const top='<div class="eyebrow">2026 TURNOUT & VICTORY THRESHOLDS · NOT REPORTED VOTES</div><div class="benchmark-grid">'+
  card("Modeled statewide non-R margin",has?sign(margin)+" pts":"No comparable forecast","Ervin’s Take · Original Ervin; non-R minus Republican")+
  card("Assumed statewide D+R turnout",fmt(s.total),"2024 presidential major-party turnout × "+pct(turnout,0))+
  card("Votes for outright 2-party lead",fmt(Math.floor(s.total/2)+1),"Either side needs at least this many under a two-candidate assumption")+
@@ -53,7 +53,7 @@ function countyPanel(unit,state,forecast,reported,turnout){
  }else live='<div class="live-pace"><b>Awaiting verified local returns</b><p>Benchmarks are pre-election scenarios. No November 2026 ballots have been counted in this unit on this page.</p></div>';
  return '<section class="county-benchmarks"><h3>Election-night numbers to watch</h3><div class="county-targets">'+
  card("Tie-state county benchmark",pct(m.tie.share),fmt(m.tie.nonRVotes)+" non-R of "+fmt(m.total)+" two-party ballots")+
- card("Original Ervin winning pace",b?pct(b.share):"Unavailable",b?fmt(b.nonRVotes)+" non-R and "+fmt(b.repVotes)+" Republican":"No eligible model margin")+
+ card("Ervin modeled county pace",b?pct(b.share):"Unavailable",b?fmt(b.nonRVotes)+" non-R and "+fmt(b.repVotes)+" Republican":"No eligible model margin")+
  card("Illustrative local turnout",fmt(m.total),pct(turnout,0)+" × 2024 major-party turnout")+
  card("Required margin at model pace",b?(b.nonRMargin>=0?"non-R +":"R +")+fmt(Math.abs(b.nonRMargin)):"Unavailable","Votes at scenario turnout; not a live result")+
  '</div>'+indicators+
