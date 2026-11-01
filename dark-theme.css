@@ -181,3 +181,225 @@ html:not(.light) body :is(a,button,input,select,textarea,summary,[tabindex]):foc
 html:not(.light) body .site-back-top{background:#315c7f!important;color:#fff!important;border-color:#81a8c1!important}
 @media(prefers-reduced-motion:reduce){html:not(.light) *,html:not(.light) *::before,
  html:not(.light) *::after{transition-duration:0.01ms!important}}
+
+/* Premium finish — November 2026. Shared across forecast and interior pages.
+   Consistent elevation, crisp typography, accessible contrast and restrained polish.
+   This is intentionally appended after base/dark overrides; no forecast behavior changes. */
+html:not(.light){
+ --bg:#0b1826;--bg2:#112439;--surface:#183247;--surface2:#223e55;
+ --edge:#4d6b82;--text:#f3f8fc;--muted:#d1deea;--subtle:#b7cbdc;
+ --accent:#eecb91;--shadow:0 18px 44px rgba(0,7,17,.27);
+}
+html:not(.light) body{
+ background:radial-gradient(ellipse 65% 30% at 48% -12%,rgba(54,110,145,.21),transparent 75%),#0b1826!important;
+ color:#f3f8fc!important;
+}
+html:not(.light) body :is(.panel,.stat,.card,.mode-explainer,.probability-guide,.model-settings-help,
+ .guide-link,.editorial-dateline,.polling-options,.source-desk,.source-desk-card,.county-inspector,
+ .county-simple-card,.source-readiness,.clerk-watch,.county-map-panel,.state-live,.homepage-shortcuts){
+ border-radius:17px!important;
+}
+html:not(.light) body :is(.panel,.card,.mode-explainer,.probability-guide,.model-settings-help,
+ .polling-options,.source-desk,.county-inspector,.county-map-panel,.state-live,.source-readiness,.clerk-watch){
+ background:linear-gradient(156deg,#1a354c 0%,#142a3e 92%)!important;
+ border:1px solid #47677d!important;
+ box-shadow:0 15px 34px rgba(0,8,19,.19),inset 0 1px rgba(241,248,255,.075)!important;
+}
+html:not(.light) body :is(.guide-link,.source-desk-card,.county-simple-card,.insight-stat){
+ background:linear-gradient(145deg,#23435b,#1b354a)!important;
+ border:1px solid #52718a!important;
+ box-shadow:0 10px 24px rgba(1,10,19,.17),inset 0 1px rgba(246,250,255,.08)!important;
+}
+html:not(.light) body :is(.stat-grid .stat,#stats .stat){
+ background:linear-gradient(145deg,#294960 0%,#203b52 100%)!important;
+ border:1px solid #648197!important;
+ box-shadow:0 11px 27px rgba(0,5,14,.24),inset 0 1px rgba(255,255,255,.11)!important;
+ overflow:hidden;
+}
+html:not(.light) body #stats .stat::after{
+ background:linear-gradient(90deg,#f1cc90,#75b4dd,transparent)!important;
+ opacity:.9!important;height:3px;
+}
+html:not(.light) body #stats .stat::before{
+ border-color:rgba(205,233,249,.12)!important;opacity:.8!important;
+}
+html:not(.light) body #stats .stat :is(.num,strong,b){
+ color:#cdeafd!important;opacity:1!important;
+ text-shadow:0 1px 0 rgba(0,0,0,.16);
+}
+html:not(.light) body #stats .stat .num.red{color:#ffc0ca!important}
+html:not(.light) body #stats .stat .num.gold{color:#f5d59e!important}
+html:not(.light) body #stats .stat p{
+ color:#f0f6fb!important;font-weight:750!important;opacity:1!important;
+}
+html:not(.light) body #stats .stat :is(small,span,.foot){
+ color:#cfdfeb!important;opacity:1!important;
+}
+html:not(.light) body :is(.panel h2,.panel h3,.guide-link strong,.guide-link b,
+ .editorial-dateline-heading,.county-simple-head strong){color:#f3f9ff!important}
+html:not(.light) body :is(.detail .candidate,.panel .micro,.poll-input-row .source-status,
+ .poll-input-row .source-date,.survey-meta,.guide-link>span,.guide-link span:not(.guide-number)){
+ color:#d3e1ec!important;
+}
+html:not(.light) body :is(.editorial-hero h1,.hero h1){
+ color:#f5f9fd!important;text-wrap:balance;
+}
+html:not(.light) body :is(.editorial-hero h1 em,.hero h1 em){color:#f1cf9b!important}
+html:not(.light) body :is(.topbar,.site-header){
+ background:rgba(12,28,43,.96)!important;
+ border-bottom:1px solid #51718a!important;
+ box-shadow:0 8px 30px rgba(0,7,17,.28)!important;
+}
+html:not(.light) body :is(.logo-symbol,.site-header .site-emblem){
+ background:linear-gradient(150deg,#355e78,#18384f)!important;
+ border-color:#85a7bb!important;
+ color:#fff1d6!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.15),0 3px 11px rgba(0,0,0,.17)!important;
+}
+html:not(.light) body :is(.button,.action,.map-inline,.refresh-now,.global-theme-button,
+ .reading-toggle,.site-theme-toggle,.top-nav-toggle,.site-mobile-toggle){
+ border:1px solid #7292a8!important;background:linear-gradient(180deg,#2a536f,#21435d)!important;
+ color:#f4f9fc!important;border-radius:11px!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.13),0 3px 10px rgba(0,0,0,.12)!important;
+ transition:background-color .16s,filter .16s,border-color .16s,transform .16s;
+}
+html:not(.light) body :is(.button,.action,.map-inline,.refresh-now,.global-theme-button,
+ .reading-toggle,.site-theme-toggle,.top-nav-toggle,.site-mobile-toggle):hover{
+ filter:brightness(1.16);border-color:#a3bed0!important;
+}
+html:not(.light) body :is(.button.primary,.hero-primary-action){
+ background:linear-gradient(180deg,#edce9a,#d9af73)!important;
+ color:#192d3b!important;border-color:#f3dfbd!important;
+ font-weight:800!important;
+}
+html:not(.light) body :is(.button.primary,.hero-primary-action):hover{filter:brightness(1.07)}
+html:not(.light) body :is(input,select,textarea){
+ background:#10283d!important;border-color:#7893a8!important;color:#f7fbff!important;
+ border-radius:11px!important;
+}
+html:not(.light) body :is(input,select,textarea):focus-visible{border-color:#eeca8b!important}
+html:not(.light) body :is(.tab[aria-selected="true"],.polling-options .tab[aria-selected="true"]){
+ background:#39739a!important;border-color:#b4d2e6!important;color:white!important;
+ box-shadow:0 3px 12px rgba(4,17,32,.25)!important;
+}
+html:not(.light) body :is(.poll-input-row,.survey-item,.race-win-chance,
+ .mini,.benchmark-item,.county-metrics>div,.countystats>div){
+ background:#24435a!important;
+ border-color:#55768e!important;border-radius:11px!important;
+}
+html:not(.light) body :is(.poll-input-row:hover,.survey-item:hover){border-color:#88a9c1!important}
+html:not(.light) body :is(.table-scroll,.scroll){border-radius:13px!important;border-color:#557389!important}
+html:not(.light) body :is(th,.table-scroll th,#countyTable thead,#precinctTable thead){
+ background:#2a4961!important;color:#f0f7fd!important;
+}
+html:not(.light) body tbody tr:nth-child(even){background:#203b50!important}
+html:not(.light) body tbody tr:hover{background:#2e526c!important}
+html:not(.light) body :is(.refresh-strip,.notice.interpretation-note){
+ background:linear-gradient(120deg,#203e52,#183044)!important;
+ border-color:#54748c!important;
+}
+html:not(.light) body :is(.global-site-menu){background:#183247!important;border-color:#66859a!important}
+html:not(.light) body :is(.site-back-top){
+ border-radius:13px!important;background:#376c8e!important;
+ box-shadow:0 8px 24px rgba(0,7,15,.36)!important;
+}
+
+/* Light appearance gets the same measured elevation and editorial rhythm,
+   without borrowing dark-mode colors or altering map party shading. */
+html.light body{
+ background:radial-gradient(ellipse 70% 25% at 50% -10%,#e7f0f7,transparent 82%),#f4f7f9!important;
+}
+html.light body :is(.panel,.card,.polling-options,.mode-explainer,.model-settings-help,
+ .county-map-panel,.county-inspector,.source-desk,.source-readiness,.clerk-watch){
+ border:1px solid #cfdee8!important;
+ background:linear-gradient(155deg,#fff 70%,#f8fbfd)!important;
+ box-shadow:0 13px 32px rgba(29,58,76,.075),inset 0 1px rgba(255,255,255,.9)!important;
+ border-radius:17px!important;
+}
+html.light body :is(.guide-link,.source-desk-card,.county-simple-card,.insight-stat){
+ background:linear-gradient(150deg,#fff,#f5f9fc)!important;
+ border-color:#cedee8!important;border-radius:15px!important;
+ box-shadow:0 8px 24px rgba(22,58,78,.075)!important;
+}
+html.light body #stats .stat{
+ background:linear-gradient(145deg,#fff,#eaf2f7)!important;
+ border:1px solid #ccdce7!important;border-radius:15px!important;
+ box-shadow:0 8px 24px rgba(24,56,75,.075)!important;
+}
+html.light body #stats .stat .num{color:#215d84!important}
+html.light body #stats .stat .num.red{color:#ae4c5c!important}
+html.light body #stats .stat .num.gold{color:#926524!important}
+html.light body #stats .stat p{color:#28465b!important;font-weight:750!important}
+html.light body :is(.topbar,.site-header){
+ background:rgba(251,253,254,.97)!important;
+ border-bottom:1px solid #ccdce7!important;
+ box-shadow:0 5px 22px rgba(33,60,77,.08)!important;
+}
+html.light body :is(.button,.action,.map-inline,.refresh-now,.reading-toggle,
+ .site-theme-toggle,.top-nav-toggle,.site-mobile-toggle){
+ border-radius:11px!important;box-shadow:0 2px 8px rgba(27,60,78,.055)!important;
+}
+html.light body :is(.button.primary,.hero-primary-action){
+ background:#245d80!important;color:#fff!important;border-color:#245d80!important;
+}
+html.light body :is(.global-site-menu){border-radius:0 0 17px 17px!important}
+html.light body :is(.poll-input-row,.survey-item,.mini,.race-win-chance){
+ border-radius:11px!important;background:#f5f9fc!important;
+}
+html.light body :is(.table-scroll,.scroll){border-radius:13px!important}
+html.light body :is(.editorial-hero h1,.hero h1){text-wrap:balance}
+
+/* Across all views: stable spacing, quiet movement, and tap-friendly controls. */
+body :is(.panel,.guide-link,.stat,.source-desk-card,.county-simple-card){
+ transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+body .guide-link:hover,body .county-simple-card:hover{
+ transform:translateY(-2px);
+}
+body :is(.panel,.card,.stat,.polling-options,.guide-link){overflow-wrap:break-word}
+body :is(.panel-title,.detail-title,.insight-head){gap:15px}
+body .tab{border-radius:10px!important}
+body :is(.table-scroll,.scroll){scrollbar-width:thin}
+body :is(.table-scroll, .scroll){-webkit-overflow-scrolling:touch}
+body .site-back-top{border-radius:12px}
+body :is(.site-back-top,.top-nav-toggle,.site-mobile-toggle){font-weight:800}
+body :is(.topbar .nav-utilities,.site-header .site-header-inner){align-items:center}
+body :is(.reading-toggle,.top-nav-toggle,.site-theme-toggle){white-space:nowrap}
+.reading-short{display:none}
+@media(max-width:900px){
+ body .site-header .site-header-inner{gap:10px}
+ body .site-header .site-nav.is-open{border-radius:0 0 13px 13px}
+ body .topbar .navinner{gap:10px}
+}
+@media(max-width:650px){
+ .reading-long{display:none!important}
+ .reading-short{display:inline!important;font-size:15px;letter-spacing:.01em}
+ .topbar .nav-utilities{gap:6px!important;flex-shrink:0;min-width:0}
+ .topbar .logo{font-size:14px!important;gap:7px!important;letter-spacing:.04em!important;min-width:0}
+ .topbar .logo-symbol{width:34px!important;height:34px!important;flex-shrink:0}
+ .topbar .navinner{min-height:67px!important;height:auto!important}
+ .topbar .nav-utilities :is(.reading-toggle,.button,.top-nav-toggle){
+  min-height:43px!important;height:43px!important;padding:8px 9px!important;
+ }
+ .topbar .reading-toggle{min-width:43px!important}
+ .topbar #themeToggle{min-width:43px!important}
+ .topbar .top-nav-toggle{padding-inline:10px!important}
+ body :is(.panel,.polling-options){padding:17px!important}
+ body #stats .stat{padding:15px!important;min-height:115px}
+ body #stats .stat .num{font-size:clamp(27px,8vw,36px)!important}
+ body .detail .mini-grid{gap:8px}
+ .site-header .site-brand{font-size:15px!important;letter-spacing:.035em!important}
+ .site-header .site-header-inner{width:calc(100% - 26px)!important}
+}
+@media(max-width:390px){
+ .topbar .logo{font-size:12px!important}
+ .topbar #mainMenuToggle{font-size:0!important;min-width:44px!important;padding:8px!important}
+ .topbar #mainMenuToggle span{font-size:20px!important;line-height:1}
+ .topbar .nav-utilities{gap:5px!important}
+ .topbar .navinner{gap:6px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body :is(.panel,.guide-link,.stat,.source-desk-card,.county-simple-card,
+ .reading-toggle,.top-nav-toggle,.site-theme-toggle){transition:none!important}
+ body :is(.guide-link,.county-simple-card):hover{transform:none!important}
+}
