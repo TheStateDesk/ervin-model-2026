@@ -30,7 +30,7 @@ function county(unit,state,forecast,turnout=.8){
   tie:targets(tieShare),model:targets(modelTarget),
   adjustmentPts:modelTarget==null?null:100*(modelTarget-historical),
   baselineStateShare:stateShare,baselineCountyShare:historical,
-  statewideTarget:hasModel?.5+margin/200:null};
+  statewideTarget:hasModel?(.5+margin/200):null};
 }
 function state(state,forecast,turnout=.8){
  const p=state?.stateCycles?.["2024"];
@@ -67,7 +67,7 @@ function countyPace(unit,report,state,forecast,turnout=.8){
 }
 function turnoutScenarios(unit,state,forecast,levels=[.65,.8,1]){
  return levels.map(fraction=>{
-  const c=county(unit,state,forecast,fraction),s=state?null:null;
+  const c=county(unit,state,forecast,fraction);
   return {fraction,county:c};
  });
 }
