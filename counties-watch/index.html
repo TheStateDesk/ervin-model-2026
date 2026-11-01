@@ -31,7 +31,10 @@
  </section>
  <section class="panel source-desk" id="sourceDesk" aria-label="Election-night source desk"><div class="source-desk-loading">Loading public source directory…</div></section>
  <section class="panel rankings" id="rankings"><div class="section-head"><div><div class="eyebrow">COUNTIES TO WATCH</div><h2 id="rankHeading">Top 10 counties</h2><p class="description">Click any row to inspect the exact historical votes, benchmark and reporting source. Rank is an analytical heuristic, not a prediction of which county declares first.</p></div><div class="right-actions"><input type="search" id="countySearch" placeholder="Find county…" aria-label="Filter top ten counties"><button class="action" id="reloadResults" type="button">Check results</button></div></div>
- <div class="table-scroll"><table><thead><tr><th>Rank / County</th><th>2024 two-party margin</th><th>2020→24 swing</th><th>2024 votes</th><th>Statewide tie target</th><th>2026 model forecast share</th><th>Historical agreement</th><th>Turnout change 2020→24</th><th>2026 verified local returns</th></tr></thead><tbody id="countyRows"><tr><td colspan="9">Loading county history…</td></tr></tbody></table></div>
+ <div class="county-simple-head"><div><strong>At-a-glance county guide</strong><p>Choose a county to see its vote history and the forecast benchmarks.</p></div><span>10 counties per state</span></div>
+ <div class="county-simple-grid" id="countyCards" aria-label="Simple county forecast cards"></div>
+ <details class="county-advanced-table" id="countyAdvancedTable"><summary>Show detailed county comparison table</summary>
+ <div class="table-scroll"><table><thead><tr><th>Rank / County</th><th>2024 two-party margin</th><th>2020→24 swing</th><th>2024 votes</th><th>Statewide tie target</th><th>2026 model forecast share</th><th>Historical agreement</th><th>Turnout change 2020→24</th><th>2026 verified local returns</th></tr></thead><tbody id="countyRows"><tr><td colspan="9">Loading county history…</td></tr></tbody></table></div></details>
  <p class="footnote" id="coverageText"></p>
  <section id="turnoutSensitivity" class="turnout-sensitivity" aria-label="Turnout sensitivity and statewide victory thresholds"></section>
  </section>
