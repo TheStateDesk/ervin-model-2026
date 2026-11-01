@@ -1,74 +1,214 @@
 {
-  "version": 1,
-  "purpose": "Official agency results page links. Clicking is not an assertion of live machine-readable 2026 county rows.",
+  "version": 2,
+  "purpose": "Official results portal plus verified public news desk fallback. Public viewer links do NOT constitute an API feed, automatic import or guaranteed county coverage.",
   "sources": {
     "ME": {
       "name": "Maine Secretary of State",
-      "url": "https://www.maine.gov/sos/cec/elec/results/"
+      "url": "https://www.maine.gov/sos/cec/elec/results/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "MI": {
       "name": "Michigan Secretary of State county directory",
-      "url": "https://www.michigan.gov/sos/elections/election-results-and-data/candidate-listings-and-election-results-by-county"
+      "url": "https://www.michigan.gov/sos/elections/election-results-and-data/candidate-listings-and-election-results-by-county",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "OH": {
       "name": "Ohio Secretary of State live reporting",
-      "url": "https://liveresults.ohiosos.gov/"
+      "url": "https://liveresults.ohiosos.gov/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "TX": {
       "name": "Texas Secretary of State Election Night Returns",
-      "url": "https://results.texas-election.com/"
+      "url": "https://results.texas-election.com/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "IA": {
       "name": "Iowa Secretary of State election results",
-      "url": "https://sos.iowa.gov/iowans/election-results-statistics"
+      "url": "https://sos.iowa.gov/iowans/election-results-statistics",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "KS": {
       "name": "Kansas Secretary of State election results",
-      "url": "https://www.sos.ks.gov/elections/election-results.html"
+      "url": "https://www.sos.ks.gov/elections/election-results.html",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "MN": {
       "name": "Minnesota Secretary of State election results",
-      "url": "https://electionresults.sos.mn.gov/"
+      "url": "https://electionresults.sos.mn.gov/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "AK": {
       "name": "Alaska Division of Elections",
-      "url": "https://www.elections.alaska.gov/election-results/"
+      "url": "https://www.elections.alaska.gov/election-results/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "GA": {
       "name": "Georgia Secretary of State election results",
-      "url": "https://results.enr.clarityelections.com/GA/"
+      "url": "https://results.enr.clarityelections.com/GA/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "NC": {
       "name": "North Carolina State Board of Elections",
-      "url": "https://www.ncsbe.gov/results-data/election-results"
+      "url": "https://www.ncsbe.gov/results-data/election-results",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "NH": {
       "name": "New Hampshire Secretary of State 2026",
-      "url": "https://www.sos.nh.gov/2026-general-election-results"
+      "url": "https://www.sos.nh.gov/2026-general-election-results",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "NE": {
       "name": "Nebraska Secretary of State",
-      "url": "https://electionresults.nebraska.gov/"
+      "url": "https://electionresults.nebraska.gov/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "SC": {
       "name": "South Carolina Election Commission",
-      "url": "https://scvotes.gov/elections-statistics/election-results/"
+      "url": "https://scvotes.gov/elections-statistics/election-results/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "MS": {
       "name": "Mississippi Secretary of State election results",
-      "url": "https://www.sos.ms.gov/elections-voting/election-results"
+      "url": "https://www.sos.ms.gov/elections-voting/election-results",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "FL": {
       "name": "Florida Election Watch",
-      "url": "https://floridaelectionwatch.gov/Downloads"
+      "url": "https://floridaelectionwatch.gov/Downloads",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "SD": {
       "name": "South Dakota Secretary of State election results",
-      "url": "https://electionresults.sd.gov/"
+      "url": "https://electionresults.sd.gov/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
     },
     "MT": {
       "name": "Montana Secretary of State",
-      "url": "https://sosmt.gov/ELECTIONS/Results/"
+      "url": "https://sosmt.gov/ELECTIONS/Results/",
+      "verification": "Official election office or county source directory. This link may not display November 2026 returns until polling closes.",
+      "fallback": [
+        "ddhq",
+        "ap"
+      ],
+      "autoCountyFeed": false,
+      "status": "Official website link verified as category; not a verified machine-readable county-by-county Senate API."
+    }
+  },
+  "checkedAt": "2026-10-31",
+  "reporters": {
+    "ddhq": {
+      "name": "Decision Desk HQ · Votes",
+      "url": "https://votes.decisiondeskhq.com/",
+      "coverage": "50 states, public live-results viewer; county-level results depending on availability",
+      "role": "Fastest practical independent news desk",
+      "access": "Public browser; premium features and API separate",
+      "confidence": "Verified provider public election-night offering",
+      "evidence": "https://ddhq.io/press/decision-desk-hq-brings-live-election-results-and-race-projections-to-x-for-the-2026-midterms"
+    },
+    "ap": {
+      "name": "Associated Press · Election Coverage",
+      "url": "https://apnews.com/",
+      "coverage": "Nationwide vote-count and race calls; county detail availability varies by public page",
+      "role": "Independent reporting cross-check",
+      "access": "Public stories/results where offered; AP Elections API requires authorization",
+      "confidence": "Verified 2026 election coverage",
+      "evidence": "https://www.ap.org/media-center/press-releases/2026/ap-announces-2026-midterm-election-plans/"
     }
   }
 }
