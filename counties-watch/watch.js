@@ -127,6 +127,23 @@ function renderSummary(){
  $("countyPaceSummary").innerHTML=widgets.paceSummary(s,forecast?.states?.[code],stateRows,turnout);
  $("stateOutstanding").innerHTML=widgets.extraStatePath(s,forecast?.states?.[code],statewide,turnout);
 }
+function renderCards(){
+ const rows=watchList(),s=hist.states[code];
+ const label=s.party==="I"?"Independent":"Democratic";
+ const pct=(n,d=1)=>Number.isFinite(n)?n.toFixed(d)+"%":"—";
+ $("countyCards").innerHTML=rows.length?rows.map(u=>{
+  const m=metrics.county(u,s,forecast?.states?.[code],turnout),liveEntry=liveFor(u),
+    live=metrics.countyPace(u,liveEntry,s,forecast?.states?.[code],turnout);
+  const margin=u.m24>=0?"D +"+Math.abs(u.m24).toFixed(1):"R +"+Math.abs(u.m24).toFixed(1);
+  const model=m?.model?pct(m.model.share*100):"Not available";
+  const reporting=live.status==="complete"?"Results complete":live.status==="partial"?"Partial results":"Awaiting returns";
+  return '<button type="button" class="county-simple-card'+(selected===u.fips?' is-selected':'')+'" data-fips="'+esc(u.fips)+'" aria-pressed="'+(selected===u.fips?'true':'false')+'"><span class="simple-card-top"><span class="simple-rank">#'+u.rank+' · '+esc(u.name)+'</span><span class="simple-status">'+esc(reporting)+'</span></span>'+
+  '<span class="simple-card-metrics"><span><small>2024 presidential vote</small><b>'+esc(margin)+'</b></span>'+
+  '<span><small>Model '+esc(label)+' share</small><b>'+esc(model)+'</b></span>'+
+  '<span><small>2024 total votes</small><b>'+money(u.v24.total)+'</b></span></span>'+
+  '<span class="simple-card-action">View county details →</span></button>';
+ }).join(""):'<p>No counties match your search.</p>';
+}
 function renderTable(){
  const rows=watchList(),s=hist.states[code];
  $("countyRows").innerHTML=rows.length?rows.map(u=>{
@@ -160,11 +177,11 @@ function render(){
  if(!hist?.states[code])code="MI";
  if(!hist.states[code].units.some(x=>x.fips===selected))selected=hist.states[code].units[0].fips;
  $("stateSelect").value=code;
- renderSummary();renderTable();renderCounty();
+ renderSummary();renderTable();renderCards();renderCounty();
 }
 function selectUnit(fips){
  if(!hist.states[code].units.some(x=>x.fips===fips))return;
- selected=fips;renderTable();renderCounty();
+ selected=fips;renderTable();renderCards();renderCounty();
 }
 async function loadResults(force=false){
  if(requestBusy||document.hidden||!hist)return;
@@ -188,9 +205,10 @@ async function init(){
   const order=Object.values(hist.states).sort((a,b)=>a.state.localeCompare(b.state));
   $("stateSelect").innerHTML=order.map(x=>'<option value="'+x.code+'">'+esc(x.state)+' ('+x.code+')</option>').join("");
   $("stateSelect").addEventListener("change",e=>{code=e.target.value;selected=null;search="";$("countySearch").value="";const u=new URL(location.href);u.searchParams.set("state",code);history.replaceState(null,"",u);render()});
-  $("sortMode").addEventListener("change",e=>{sort=e.target.value;renderTable()});
+  $("sortMode").addEventListener("change",e=>{sort=e.target.value;renderTable();renderCards()});
   $("turnoutMode").addEventListener("change",e=>{turnout=Number(e.target.value)||.8;render()});
-  $("countySearch").addEventListener("input",e=>{search=e.target.value;renderTable()});
+  $("countySearch").addEventListener("input",e=>{search=e.target.value;renderTable();renderCards()});
+  $("countyCards").addEventListener("click",e=>{const button=e.target.closest("button[data-fips]");if(button)selectUnit(button.dataset.fips)});
   $("countyRows").addEventListener("click",e=>{const tr=e.target.closest("tr[data-fips]");if(tr)selectUnit(tr.dataset.fips)});
   $("countyRows").addEventListener("keydown",e=>{if(!["Enter"," "].includes(e.key))return;const tr=e.target.closest("tr[data-fips]");if(tr){e.preventDefault();selectUnit(tr.dataset.fips)}});
   $("reloadResults").addEventListener("click",()=>loadResults(true));
