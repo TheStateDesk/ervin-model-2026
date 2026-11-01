@@ -16,6 +16,14 @@
   ok($("stateTitle").textContent.includes("El-Sayed"),"2026 named Senate candidates loaded");
   ok($("stateStats").querySelectorAll(".stat").length===4,"Statewide benchmark metrics rendered");
   ok($("stateMeter").querySelector(".state-meter .d")!==null,"2016-2024 statewide graphic renders");
+  ok($("winningBenchmarks").textContent.includes("Original Ervin")||$("winningBenchmarks").textContent.includes("Ervin’s Take"),"Forecast win-pace worksheet shows current national model source");
+  ok($("winningBenchmarks").textContent.includes("Votes for outright 2-party lead"),"Statewide 50%-plus-one vote threshold visible");
+  ok($("turnoutSensitivity").querySelectorAll("tbody tr").length>=5,"Turnout benchmark grid spans five or more scenarios");
+  ok(d.querySelectorAll("#countyRows tr[data-fips] td").length===90,"Nine statistical markers per watched county across ten rows");
+  ok($("countyInspector").textContent.includes("Election-night numbers to watch"),"Selected county has advanced turnout and win-pace markers");
+  ok($("countyInspector").textContent.includes("2024 vs 2020 turnout change"),"Historical turnout movement shown");
+  ok($("countyInspector").textContent.includes("Model swing vs 2024 county"),"Uniform-swing model assumption labeled");
+  ok($("countyPaceSummary").textContent.includes("Fully reported watch units"),"Completion-only reporting pace summary visible");
   ok($("countyInspector").textContent.includes("Election history"),"Selected county has historic return detail");
   ok($("countyInspector").textContent.includes("Statewide-tie benchmark"),"County hypothetical statewide win threshold displayed");
   ok($("countyInspector").textContent.includes("not 2026 win odds"),"Tiny-sample historic rate not presented as calibrated probability");
@@ -27,6 +35,7 @@
   ok(first.classList.contains("active"),"Keyboard county selection highlights row");
   let value=$("countyInspector").textContent;
   $("turnoutMode").value="0.65";$("turnoutMode").dispatchEvent(new w.Event("change",{bubbles:true}));
+  ok($("winningBenchmarks").textContent.includes("65%"),"Win-pace turnout targets recalculate with selected scenario");
   ok($("coverageText").textContent.includes("65%"),"Turnout sensitivity selector updates benchmark coverage");
   $("sortMode").value="volume";$("sortMode").dispatchEvent(new w.Event("change",{bubbles:true}));
   ok(d.querySelectorAll("#countyRows tr[data-fips]").length===10,"Volume sort keeps full watch list");
