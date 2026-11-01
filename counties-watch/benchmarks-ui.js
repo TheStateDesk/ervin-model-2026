@@ -3,7 +3,7 @@
  */
 (function(root){"use strict";
 const M=root.ERVIN_WATCH_METRICS;
-const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;":"&quot;","'":"&#39;"}[c]));
+const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt=x=>Number(x).toLocaleString("en-US");
 const pct=(x,d=1)=>Number.isFinite(x)?(100*x).toFixed(d)+"%":"—";
 const pt=(x,d=1)=>Number.isFinite(x)?x.toFixed(d)+" pts":"—";
