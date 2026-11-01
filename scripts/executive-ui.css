@@ -138,3 +138,47 @@
  .refresh-strip #refreshDetails{order:1;flex-basis:100%}
  .refresh-strip #refreshAuditLink{order:2}
 }
+
+/* User-selected dark appearance. The default for first-time visitors is light. */
+html:not(.light){color-scheme:dark;
+ --bg:#101b29;--bg2:#142335;--surface:#192a3c;--surface2:#20364a;
+ --edge:#41586d;--line:#41586d;--border:#41586d;
+ --text:#e8f0f7;--muted:#b9cbd9;--accent:#efd09a;--blue:#95cafa;--red:#ffa3a9;
+}
+html:not(.light) body{background:#111d2b!important;color:#e7f0f8!important}
+html:not(.light) body :where(.panel,.stat,.card,.insight-stat,.mode-explainer,.refresh-strip,.notice,.banner,.hero-right,.polling-options,.guide-link,.global-site-menu,.probability-guide){
+ background:#192b3d!important;border-color:#40566a!important;color:#e9f0f7!important;box-shadow:0 7px 23px #0002!important}
+html:not(.light) body :where(h1,h2,h3,h4,.guide-link strong,.guide-link,.readers-guide-heading h2){color:#ecf3fa!important}
+html:not(.light) .editorial-hero h1{color:#f0f5fa!important}
+html:not(.light) .editorial-hero h1 em{color:#e7c78f!important}
+html:not(.light) body :where(p,.lede,.micro,.fine,.description,.footnote,.tiny,.readers-guide-heading p,.hero-caveat,.guide-link span,.mode-explainer-grid p){color:#c0d0dd!important}
+html:not(.light) .topbar{background:#112235!important;border-color:#466073!important}
+html:not(.light) .topbar .logo{color:#f1f6fa!important}
+html:not(.light) .topbar .navend a{color:#e2edf5!important}
+html:not(.light) .topbar .navend a:hover{background:#284559!important;color:#fff!important}
+html:not(.light) .global-menu-group a{color:#e0eaf3!important}
+html:not(.light) .global-menu-group a:hover{background:#304c61!important;color:#fff!important}
+html:not(.light) body :where(input,select,textarea){background:#193247!important;border-color:#557086!important;color:#ecf5fa!important}
+html:not(.light) body :where(button,.button,.action,.tab){color:#e7f0f7!important;background:#234259!important;border-color:#4b6a81!important}
+html:not(.light) body .hero-primary-action{background:#447da8!important;border-color:#447da8!important;color:#fff!important}
+html:not(.light) body .hero-secondary-action{background:#263e51!important;border-color:#57748a!important;color:#f1f5fb!important}
+html:not(.light) body .polling-options .tab[aria-selected=true]{background:#3f779e!important;border-color:#3f779e!important;color:#fff!important}
+html:not(.light) body :where(.guide-number,.section-label,.section-title,.kicker){color:#e5c78d!important}
+html:not(.light) body .guide-link b{color:#a5d3f4!important}
+html:not(.light) body :where(.mode-explainer,.model-settings-help,.probability-guide){border-color:#466173!important}
+html:not(.light) body .editorial-dateline-heading{color:#e5eff6!important}
+html:not(.light) body .editorial-dateline strong{color:#9dd3f6!important}
+html:not(.light) body .homepage-shortcuts{background:#192b3d!important;border-color:#405a70!important}
+html:not(.light) body .homepage-shortcuts a{color:#dceaf4!important}
+html:not(.light) body #map-area .geo-map-wrap{background:#1b3043!important}
+html:not(.light) body .senate-control .control-side,html:not(.light) body .senate-control .control-mid{background:#22374a!important;border-color:#4b6275!important}
+html:not(.light) body .senate-control .control-side strong{color:#acd9f4!important}
+html:not(.light) body .poll-input-row,html:not(.light) body .survey-item{background:#24384b!important;border-color:#40566b!important}
+html:not(.light) body .race-win-chance{background:#254156!important;border-color:#446880!important}
+html:not(.light) body .race-win-chance strong{color:#b7ddf8!important}
+html:not(.light) body :where(.stat .num,.stat strong,.poll-input-row .source-margin){color:#b2d8f2!important}
+html:not(.light) body :where(th){background:#283f51!important;color:#dbe9f4!important}
+html:not(.light) body :where(td){color:#e5eff6!important}
+html:not(.light) body :where(tbody tr:nth-child(even)){background:#ffffff07!important}
+html:not(.light) body :where(tbody tr:hover){background:#32506a!important}
+html:not(.light) body :where(a){color:#a6d3f7}
