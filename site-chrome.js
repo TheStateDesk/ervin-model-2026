@@ -35,12 +35,45 @@ if(mainToggle&&mainPanel){
   if(!mainPanel.hidden&&!e.target.closest(".topbar"))closeMain();
  });
  window.addEventListener("resize",()=>{if(window.innerWidth>1240)closeMain()},{passive:true});
- const mobileTheme=mainPanel.querySelector("#themeToggleMenu");
- mobileTheme?.addEventListener("click",()=>{
-  const desktopTheme=document.getElementById("themeToggle");
-  if(desktopTheme){desktopTheme.click()}else document.documentElement.classList.toggle("light");
- });
 }
+/* One accessible, persistent appearance control across all four pages. */
+const themeStorageKey="ervin-2026-appearance";
+const htmlRoot=document.documentElement;
+const siteHeader=document.querySelector(".site-header .site-header-inner");
+let interiorThemeButton=null;
+if(siteHeader){
+ interiorThemeButton=document.createElement("button");
+ interiorThemeButton.type="button";
+ interiorThemeButton.className="site-theme-toggle";
+ interiorThemeButton.id="themeToggleInterior";
+ const mobileMenu=siteHeader.querySelector(".site-mobile-toggle");
+ if(mobileMenu)siteHeader.insertBefore(interiorThemeButton,mobileMenu);
+ else siteHeader.appendChild(interiorThemeButton);
+}
+const themeButtons=[
+ document.getElementById("themeToggle"),
+ document.getElementById("themeToggleMenu"),
+ interiorThemeButton
+].filter(Boolean);
+function updateTheme(isDark,save){
+ htmlRoot.classList.toggle("light",!isDark);
+ const themeColor=document.querySelector('meta[name="theme-color"]');
+ if(themeColor)themeColor.setAttribute("content",isDark?"#0c1826":"#f4f6f8");
+ for(const button of themeButtons){
+  button.setAttribute("aria-pressed",String(isDark));
+  button.setAttribute("aria-label",isDark?"Use light appearance":"Use dark appearance");
+  button.title=isDark?"Use light appearance":"Use dark appearance";
+  button.textContent=isDark?"☀ Light mode":"☾ Dark mode";
+ }
+ if(save){try{localStorage.setItem(themeStorageKey,isDark?"dark":"light")}catch(e){}}
+}
+updateTheme(!htmlRoot.classList.contains("light"),false);
+themeButtons.forEach(button=>button.addEventListener("click",()=>{
+ const dark=htmlRoot.classList.contains("light");
+ updateTheme(dark,true);
+}));
+/* Dark appearance is user-selected; system preference does not silently
+   override a user's selected theme in another page. */
 /* Larger-text reading preference for visitors who prefer comfortable type.
  * Defensive storage: preferences work for this session even with blocked storage.
  */
