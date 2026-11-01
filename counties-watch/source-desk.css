@@ -1,0 +1,30 @@
+/* Professional source desk, clearer reading hierarchy and anchored navigation */
+.jump-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-5px 0 22px;padding:9px 12px;background:#12293d;border:1px solid #38516a;border-radius:11px}
+.jump-nav span{font-size:10px;color:#efc98d;font-weight:850;letter-spacing:.1em;margin-right:4px}
+.jump-nav a{display:inline-flex;align-items:center;text-decoration:none;color:#c4d8e7;font-size:12px;font-weight:750;padding:7px 11px;border-radius:8px}
+.jump-nav a:hover,.jump-nav a:focus-visible{background:#304d64;color:#fff}
+#sourceDesk,#stateOverview,#rankings,#turnoutSensitivity,#method{scroll-margin-top:95px}
+.source-desk{margin:0 0 17px;padding:21px}
+.source-desk-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:15px}
+.source-desk-heading h2{margin:5px 0 7px}
+.source-desk-heading .description{margin:0}
+.source-desk-status{flex-shrink:0;display:inline-flex;align-items:center;border-radius:99px;border:1px solid #4b685f;color:#bce6cb;background:#16362e;padding:5px 9px;font-size:10px;font-weight:750}
+.source-desk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.source-desk-card{display:flex;flex-direction:column;min-width:0;border:1px solid #405e77;background:linear-gradient(165deg,#182e43,#102438);padding:15px 15px 13px;border-radius:10px}
+.source-desk-kind{font-size:10px;color:#edc783;font-weight:800;letter-spacing:.065em}
+.source-desk-card h3{font-size:17px;color:#f0f6fa;margin:9px 0 6px}
+.source-desk-card p{color:#baccd9;font-size:12px;line-height:1.65;flex:1;margin:0 0 13px}
+.source-desk-link{display:inline-flex;align-self:flex-start;align-items:center;text-decoration:none;font-size:12px;font-weight:750;background:#294b65;border:1px solid #64829b;color:#e8f4fc;padding:8px 11px;border-radius:8px}
+.source-desk-link:hover{background:#386887;color:#fff}
+.source-desk-footnote{border-top:1px solid #3b576f;padding-top:13px;margin:16px 0 0;color:#bdcedb;font-size:11px;line-height:1.65}
+.source-desk-loading{font-size:13px;color:#baccd9;padding:12px}
+body{scroll-behavior:smooth}
+.panel{box-shadow:0 6px 20px #020b172b}
+.stat-grid .stat strong{font-variant-numeric:tabular-nums}
+.rankings .table-scroll{border:1px solid #365268;border-radius:9px}
+.rankings tr:focus-visible{outline:3px solid #f1c47a;outline-offset:-2px}
+.description,.footnote{overflow-wrap:break-word}
+.site-header .site-nav a{min-height:40px;display:inline-flex;align-items:center}
+@media(max-width:1000px){.source-desk-grid{grid-template-columns:1fr}.source-desk-card{padding:13px 14px}.source-desk-heading{flex-direction:column}.source-desk-card h3{font-size:15px}}
+@media(max-width:680px){.jump-nav{gap:4px;padding:9px}.jump-nav a{font-size:11px;padding:7px 8px}.source-desk{padding:14px}}
+@media(prefers-reduced-motion:reduce){body{scroll-behavior:auto}}
