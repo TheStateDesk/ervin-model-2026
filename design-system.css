@@ -170,3 +170,15 @@ html.large-text body :where(.stat small,.stat span,.stat .name,.stat .foot,.sour
 html.large-text body :where(.guide-link span,.hero p,.intro){font-size:18px!important}
 html.large-text body .reading-toggle{font-size:16px!important}
 @media(max-width:680px){.reading-toggle{padding:8px 10px!important;min-height:43px!important;font-size:12px!important}html.large-text .reading-toggle{font-size:13px!important}}
+
+/* Accessible theme controls (high-contrast dark override lives in dark-theme.css). */
+.site-theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;
+ border:1px solid #a6bece;background:#eef4f8;color:#244b68;border-radius:9px;
+ min-height:46px;padding:10px 13px;font:800 14px/1.3 "Segoe UI",Arial,sans-serif;cursor:pointer}
+.site-theme-toggle:hover{background:#dbeaf4}
+.theme-glyph{display:inline-block;font-size:19px;line-height:1}
+.theme-text{display:inline-block;white-space:nowrap}
+.site-theme-toggle[aria-pressed="true"]{border-color:#6ca2be}
+.topbar .nav-utilities .button:has(.theme-glyph){display:inline-flex;align-items:center;gap:7px;padding:10px 12px!important}
+@media(max-width:650px){.theme-text{display:none}.site-theme-toggle{min-width:45px;padding:10px!important}
+ .topbar .nav-utilities .button:has(.theme-glyph){min-width:44px!important;padding:10px!important}}
