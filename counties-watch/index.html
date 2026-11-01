@@ -2,13 +2,14 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Counties to Watch | Ervin Model 2026</title>
 <meta name="theme-color" content="#09111e"><meta name="description" content="170 counties and Alaska voting districts to watch in 17 competitive 2026 Senate races: historical election results, statewide victory benchmarks, limited historical alignment rates and verified election-night county returns.">
-<link rel="stylesheet" href="../site-chrome.css"><link rel="stylesheet" href="./watch.css"><link rel="stylesheet" href="./benchmarks.css"></head>
+<link rel="stylesheet" href="../site-chrome.css"><link rel="stylesheet" href="./watch.css"><link rel="stylesheet" href="./benchmarks.css"><link rel="stylesheet" href="./source-desk.css"></head>
 <body>
 <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="../" aria-label="Ervin Model home"><span class="site-emblem" aria-hidden="true">E</span><span>ERVIN <b>MODEL</b></span></a><button type="button" class="site-mobile-toggle" aria-controls="siteNavigation" aria-expanded="false" aria-label="Toggle site navigation">☰ Menu</button><nav id="siteNavigation" class="site-nav" aria-label="Main navigation"><a href="../">NATIONAL FORECAST</a><a href="./" aria-current="page">COUNTIES TO WATCH</a><a href="../michigan/">MICHIGAN · 83 COUNTIES</a><a href="../michigan/election-night/">ELECTION NIGHT</a><a href="../#researchLab">RESEARCH LAB</a></nav></div></header>
 <main class="wrap">
  <section class="hero"><div class="eyebrow">2026 U.S. SENATE · ELECTION-NIGHT INTELLIGENCE</div><h1>Counties <span>to Watch</span></h1><p class="intro">The ten most strategically consequential voting units in each of the 17 tracked races: historical returns, statewide-tie thresholds, trends and source-attributed returns as they become available.</p>
  <div class="hero-pills"><span>17 states</span><span>170 watch units</span><span>2016 · 2020 · 2024 history</span><span>Verified returns only</span></div>
  </section>
+ <nav class="jump-nav" aria-label="Page quick navigation"><span>JUMP TO</span><a href="#stateOverview">State overview</a><a href="#rankings">Top 10 counties</a><a href="#sourceDesk">Where to get results</a><a href="#turnoutSensitivity">Turnout scenarios</a><a href="#method">Methodology</a></nav>
  <div class="notice"><strong>How to interpret the numbers</strong> Watch scores rank counties using vote volume, recent swing leverage, closeness and net vote contribution. Historical alignment is a small-sample descriptive percentage—not an election forecast or a calibrated chance of statewide victory. All benchmark votes are hypothetical, and a county leading in early returns does not imply its full vote has been counted.</div>
  <section class="toolbar" aria-label="Choose your state and view">
  <label>STATE TO ANALYZE<select id="stateSelect" aria-label="Choose Senate state"></select></label>
@@ -17,7 +18,7 @@
  <button id="copyLink" class="action" type="button">Copy state link</button>
  </section>
  <div class="stat-grid" id="stateStats" aria-live="polite"></div>
- <section class="two-col">
+ <section class="two-col" id="stateOverview">
   <article class="panel state-overview"><div class="section-head"><div><div class="eyebrow">STATEWIDE PATH TO 50%</div><h2 id="stateTitle">Loading state comparison</h2></div><span class="status-tag" id="stateFeedStatus">Awaiting results</span></div>
    <div id="stateMeter"></div>
    <div class="win-benchmarks" id="winningBenchmarks" aria-live="polite">Calculating statewide vote paths…</div>
@@ -28,7 +29,8 @@
   </article>
   <aside class="panel county-inspector" id="countyInspector" aria-live="polite"><div class="eyebrow">COUNTY / DISTRICT DEEP DIVE</div><h2>Select a county below</h2></aside>
  </section>
- <section class="panel rankings"><div class="section-head"><div><div class="eyebrow">HIGH-LEVERAGE VOTING UNITS</div><h2 id="rankHeading">Top 10 counties</h2><p class="description">Click any row to inspect the exact historical votes, benchmark and reporting source. Rank is an analytical heuristic, not a prediction of which county declares first.</p></div><div class="right-actions"><input type="search" id="countySearch" placeholder="Find county…" aria-label="Filter top ten counties"><button class="action" id="reloadResults" type="button">Check results</button></div></div>
+ <section class="panel source-desk" id="sourceDesk" aria-label="Election-night source desk"><div class="source-desk-loading">Loading public source directory…</div></section>
+ <section class="panel rankings" id="rankings"><div class="section-head"><div><div class="eyebrow">HIGH-LEVERAGE VOTING UNITS</div><h2 id="rankHeading">Top 10 counties</h2><p class="description">Click any row to inspect the exact historical votes, benchmark and reporting source. Rank is an analytical heuristic, not a prediction of which county declares first.</p></div><div class="right-actions"><input type="search" id="countySearch" placeholder="Find county…" aria-label="Filter top ten counties"><button class="action" id="reloadResults" type="button">Check results</button></div></div>
  <div class="table-scroll"><table><thead><tr><th>Rank / County</th><th>2024 two-party margin</th><th>2020→24 swing</th><th>2024 votes</th><th>Statewide tie target</th><th>2026 model forecast share</th><th>Historical agreement</th><th>Turnout change 2020→24</th><th>2026 verified local returns</th></tr></thead><tbody id="countyRows"><tr><td colspan="9">Loading county history…</td></tr></tbody></table></div>
  <p class="footnote" id="coverageText"></p>
  <section id="turnoutSensitivity" class="turnout-sensitivity" aria-label="Turnout sensitivity and statewide victory thresholds"></section>
@@ -49,5 +51,5 @@
  </div></details>
  <footer>Ervin Model · <a href="../">National forecast</a> · <a href="../michigan/election-night/">Michigan election night</a> · County historical estimates are not statewide win calls.</footer>
 </main>
-<script defer src="./metrics.js"></script><script defer src="./benchmarks-ui.js"></script><script defer src="./watch.js"></script><script defer src="../site-chrome.js"></script>
+<script defer src="./metrics.js"></script><script defer src="./benchmarks-ui.js"></script><script defer src="./source-desk.js"></script><script defer src="./watch.js"></script><script defer src="../site-chrome.js"></script>
 </body></html>
