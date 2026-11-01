@@ -1,0 +1,154 @@
+/* ERVIN MODEL 2026 — editorial design system, November 2026.
+ * A restrained, high-contrast light interface with large controls, generous
+ * spacing, and consistent navigation across all public dashboards.
+ * All original IDs and data bindings remain unchanged.
+ */
+:root,html.light{
+ color-scheme:light;
+ --bg:#f4f6f8;--bg2:#edf1f5;--surface:#ffffff;--surface2:#f1f5f8;
+ --panel:#ffffff;--panel2:#f2f6f9;--edge:#d3dfe7;--line:#d3dfe7;--border:#d3dfe7;
+ --text:#1a3043;--muted:#516778;--subtle:#677b89;
+ --accent:#97661e;--gold:#99691f;--blue:#185e8c;--red:#a9444b;
+ --blue-soft:#e3eff8;--red-soft:#fae9ea;
+ --shadow:0 8px 32px rgba(23,48,68,.07);
+ font-family:Inter,"Segoe UI",Arial,system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;scroll-padding-top:96px;font-size:16px}
+html:focus-within{scroll-behavior:smooth}
+body,html.light body{background:#f4f6f8!important;color:#1a3043!important;
+ font-family:Inter,"Segoe UI",Arial,system-ui,sans-serif!important;font-size:16px!important;line-height:1.65!important}
+body :where(p,li,td,dd){line-height:1.65}
+body :where(a){color:#185e8c}
+body :where(a:hover){color:#104667}
+body :where(h1,h2,h3,h4){color:#19334a;letter-spacing:-.02em;line-height:1.23;font-family:"Segoe UI",Arial,system-ui,sans-serif}
+body :where(h1){font-size:clamp(36px,4.2vw,61px)}
+body :where(h2){font-size:clamp(21px,2.1vw,28px)}
+body :where(h3){font-size:18px}
+body :where(button,select,input,textarea){font-size:15px;min-height:46px;touch-action:manipulation}
+body :where(input,select,textarea){color:#1a3043!important;background:#ffffff!important;border:1px solid #a5bac9!important;border-radius:9px!important}
+body :where(input::placeholder){color:#687c8a}
+body :where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{
+ outline:3px solid #ba7929!important;outline-offset:3px!important}
+body :where(button,a){-webkit-tap-highlight-color:transparent}
+body :where(.panel,.stat,.card,.insight-stat,.mode-explainer,.note,.banner){
+ background:#ffffff!important;border-color:#d3dfe7!important;box-shadow:0 7px 26px rgba(20,49,70,.045)!important;
+ color:#213b51}
+body :where(.stat)::after{background:#ab7f3b}
+body :where(.micro,.fine,.description,.footnote,.tiny,.muted,.lede,.note){color:#4c6375!important;font-size:14px!important;line-height:1.67!important}
+body :where(.section-label,.section-title,.eyebrow,.kicker){color:#80591f!important;font-size:11px;letter-spacing:.10em;font-weight:800}
+body :where(.panel){border-radius:13px;padding:clamp(18px,2vw,28px)}
+body :where(.stat){border-radius:11px}
+body :where(.panel h2){font-size:clamp(21px,2.2vw,27px);line-height:1.28}
+body :where(.panel h3){font-size:18px}
+body :where(.panel p){line-height:1.68}
+body :where(.stat small,.stat span,.stat .name,.stat .foot){font-size:13px!important;line-height:1.5!important;color:#52697b!important}
+body :where(.stat strong,.stat b,.stat .num){font-variant-numeric:tabular-nums}
+body :where(summary){cursor:pointer;font-size:15px;min-height:35px;line-height:1.5;color:#21435c}
+body :where(summary)::marker{color:#9a702d}
+body :where(.select,.search,.filter,.action,.button,.tab){min-height:46px}
+body :where(.button,.action,.map-inline,.refresh-now,.global-theme-button){
+ border:1px solid #9cb4c5!important;background:#e8f1f7!important;color:#1a4c6f!important;
+ border-radius:9px!important;font-size:14px!important;font-weight:750!important}
+body :where(.button,.action,.map-inline,.refresh-now,.global-theme-button):hover{
+ background:#dcebf5!important;color:#143b5a!important}
+body :where(.button.primary){background:#194b70!important;color:#fff!important;border-color:#194b70!important}
+body :where(.button.primary:hover){background:#123c5c!important}
+body :where(table){border-collapse:collapse;color:#203d53}
+body :where(th){font-size:12px!important;color:#435d70!important;background:#ebf1f5!important;font-weight:750!important;
+ line-height:1.5!important;letter-spacing:.025em;padding:14px 13px!important}
+body :where(td){font-size:14px!important;color:#223e52!important;line-height:1.55!important;padding:14px 13px!important}
+body :where(th,td){border-color:#dce5ea!important}
+body :where(tbody tr:nth-child(even)){background:#f8fafb!important}
+body :where(tbody tr:hover){background:#e9f3fa!important}
+body :where(.table-scroll,.scroll){overflow-x:auto;max-width:100%;overscroll-behavior-inline:contain}
+body :where(.table-scroll){border:1px solid #d4e0e8;border-radius:10px}
+body :where(.blue,.numblue){color:#185e8c!important}
+body :where(.red,.numred){color:#a9444b!important}
+body :where(.gold,.numgold){color:#95641b!important}
+/* Common branded header across all dashboard families. */
+.site-header,.topbar,html.light .topbar{
+ background:#fff!important;border-bottom:1px solid #d5e0e7!important;backdrop-filter:none!important;
+ box-shadow:0 2px 10px rgba(27,57,80,.06)!important;min-height:76px;color:#19334a!important}
+.site-header .site-header-inner,.topbar .navinner{min-height:76px}
+.site-header .site-brand,.topbar .logo{color:#19334a!important;letter-spacing:.055em!important;font-size:18px!important}
+.site-header .site-brand b,.topbar .logo b{color:#8e6325!important}
+.site-header .site-emblem,.topbar .logo-symbol{background:#153c59!important;color:#fff!important;border:1px solid #153c59!important;border-radius:8px!important}
+.site-header .site-nav a,.topbar .navend a{color:#29475f!important;font-size:14px!important;font-weight:700!important}
+.site-header .site-nav a:hover,.site-header .site-nav a[aria-current="page"],.topbar .navend a:hover{
+ background:#e7f0f7!important;color:#174d72!important}
+.site-header .site-mobile-toggle,.top-nav-toggle{
+ background:#eef3f7!important;color:#1c4562!important;border:1px solid #a4bbc9!important;
+ padding:10px 16px!important;font-size:15px!important;font-weight:800!important;min-height:46px!important}
+.site-back-top{background:#194d72!important;color:#fff!important;font-size:14px!important;padding:12px 16px}
+.global-site-menu{background:#fff!important;border:1px solid #cbd8e2!important;box-shadow:0 20px 45px #18354b25!important}
+.global-menu-group{border-color:#d3e0e9!important}
+.global-menu-group h3{color:#80591f!important;font-size:12px!important}
+.global-menu-group a{color:#244760!important;font-size:15px!important;line-height:1.45!important;padding:12px!important}
+.global-menu-group a:hover,.global-menu-group a:focus-visible{background:#e7f1f8!important;color:#174767!important}
+.global-theme-button{font-size:14px!important}
+/* Friendly global page intro */
+.hero,.hero:not(.other){background:transparent!important;color:#19354b}
+.hero h1{font-weight:750;letter-spacing:-.045em}
+.hero p,.hero .lede,.hero .intro{font-size:17px!important;line-height:1.69!important;color:#4e6576!important}
+.hero-right{background:#ffffff!important;border:1px solid #d3e0e9!important;border-radius:12px!important;color:#233e52!important}
+.hero-right strong{color:#193f60!important}
+.refresh-strip,.notice,.banner{background:#eef4f8!important;border:1px solid #d4e1e9!important;color:#435d70!important}
+.refresh-strip{font-size:14px!important;line-height:1.55!important}
+.refresh-strip a{color:#185e8c!important}
+.homepage-shortcuts,.jump-nav,.panelnav{background:#fff!important;border-color:#d5e0e8!important;border-radius:11px!important}
+.homepage-shortcuts a,.jump-nav a,.panelnav a{color:#27506e!important;font-size:14px!important;
+ min-height:42px;display:inline-flex;align-items:center}
+.homepage-shortcuts a:hover,.jump-nav a:hover,.panelnav a:hover{background:#e8f2f8!important;color:#184e76!important}
+.homepage-shortcuts span,.jump-nav span{color:#865d26!important}
+/* Clear selected state/row and source data hierarchy. */
+.site-header .site-nav .site-status,.status-tag,.chip{border:1px solid #d4e0e8!important;color:#38576c!important;background:#f1f5f8!important}
+.site-header .site-nav .site-status{font-size:12px!important}
+.mode-explainer,.probability-guide,.method,.control-method{background:#fff!important;color:#385468!important;border:1px solid #d3e0e9!important}
+.mode-explainer-heading strong{color:#203e56!important}
+.mode-explainer-grid p,.mode-explainer-foot,.probability-guide-content{font-size:14px!important;color:#526c7e!important;line-height:1.65!important}
+.probability-guide summary{color:#1e4969!important;font-size:15px!important}
+.probability-guide-content strong{color:#1c3e56!important}
+.detail,.county-inspector,.county-inspector.panel{background:#fff!important}
+.source-desk,.source-desk-card,.source-desk .source-desk-card{background:#fff!important;color:#23435a!important;border-color:#d4e1e9!important}
+.source-desk-kind{color:#8e6026!important}
+.source-desk-card h3{color:#203d54!important}
+.source-desk-card p,.source-desk-footnote{color:#4b6476!important;font-size:14px!important}
+.source-desk-link{background:#e4eff7!important;border-color:#b7ccdb!important;color:#19567f!important;font-size:14px!important}
+.source-desk-status{background:#eaf5ef!important;color:#225c46!important}
+.notice{font-size:14px!important}
+.notice strong{color:#78501a!important}
+.toolbar,.controls{color:#27475b}
+.toolbar{background:#fff!important;border-color:#d5e0e8!important}
+.toolbar label{color:#496173!important;font-size:12px!important}
+.stat-grid{gap:16px}
+.tagline,.badge,.flag{font-size:12px!important}
+.foot,footer{color:#536c7d!important}
+footer a{color:#195780!important}
+@media(max-width:1040px){
+ body :where(.two-col,.main-grid,.grid-lower){grid-template-columns:1fr!important}
+ .site-header .site-header-inner{flex-wrap:wrap}
+ .site-header .site-mobile-toggle{display:inline-flex}
+ .site-header .site-nav{width:100%;flex-basis:100%;display:none;flex-direction:column;align-items:stretch;background:#fff!important;border-color:#d5e0e8!important}
+ .site-header .site-nav.is-open{display:flex}
+ .site-header .site-nav a{padding:14px!important;min-height:46px}
+}
+@media(max-width:700px){
+ html{scroll-padding-top:84px}
+ body{font-size:16px!important}
+ body :where(.shell,.wrap,main){max-width:100%;min-width:0}
+ body :where(.panel){padding:18px}
+ body :where(.stat-grid){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ body :where(th){font-size:12px!important}
+ body :where(td){font-size:14px!important}
+ .hero{padding-top:28px!important}
+ .hero h1{font-size:clamp(32px,9vw,46px)!important}
+ .source-desk-grid{grid-template-columns:1fr!important}
+ .global-menu-content{grid-template-columns:1fr!important}
+ .topbar .logo{font-size:16px!important}
+ .topbar .shell{width:calc(100% - 26px)!important}
+ .site-header .site-header-inner{width:calc(100% - 28px)}
+}
+@media(prefers-reduced-motion:reduce){
+ html,html:focus-within{scroll-behavior:auto}
+ *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
