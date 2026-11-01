@@ -68,10 +68,15 @@ function updateTheme(isDark,save){
  if(save){try{localStorage.setItem(themeStorageKey,isDark?"dark":"light")}catch(e){}}
 }
 updateTheme(!htmlRoot.classList.contains("light"),false);
-themeButtons.forEach(button=>button.addEventListener("click",()=>{
+themeButtons.forEach(button=>{
+ // The original dashboard attached a legacy onclick toggle; use one shared
+ // handler so a click never toggles dark mode twice.
+ button.onclick=null;
+ button.addEventListener("click",()=>{
  const dark=htmlRoot.classList.contains("light");
  updateTheme(dark,true);
-}));
+ });
+});
 /* Dark appearance is user-selected; system preference does not silently
    override a user's selected theme in another page. */
 /* Larger-text reading preference for visitors who prefer comfortable type.
@@ -87,10 +92,11 @@ const readingButton=document.createElement("button");
 readingButton.type="button";
 readingButton.id="readingToggle";
 readingButton.className="reading-toggle";
-readingButton.textContent="A+ Text size";
+function readingLabel(on){return '<span class="reading-short" aria-hidden="true">'+(on?'A−':'A+')+'</span><span class="reading-long" aria-hidden="true">'+(on?'A− Normal text':'A+ Text size')+'</span>'}
+readingButton.innerHTML=readingLabel(savedLargeText);
 readingButton.setAttribute("aria-pressed",String(savedLargeText));
-readingButton.setAttribute("aria-label","Switch larger text on or off");
-readingButton.title="Make text and controls larger";
+readingButton.setAttribute("aria-label",savedLargeText?"Use normal text size":"Use larger text size");
+readingButton.title="Toggle comfortable reading text size";
 const mainUtility=document.querySelector(".nav-utilities");
 const interiorNav=document.querySelector(".site-header .site-nav");
 if(mainUtility)mainUtility.insertBefore(readingButton,mainUtility.firstChild);
@@ -98,10 +104,11 @@ else if(interiorNav)interiorNav.appendChild(readingButton);
 readingButton.addEventListener("click",()=>{
  const on=document.documentElement.classList.toggle("large-text");
  readingButton.setAttribute("aria-pressed",String(on));
- readingButton.textContent=on?"A− Normal text":"A+ Text size";
+ readingButton.setAttribute("aria-label",on?"Use normal text size":"Use larger text size");
+ readingButton.innerHTML=readingLabel(on);
  try{window.localStorage.setItem(largeTextKey,on?"yes":"no")}catch{}
 });
-if(savedLargeText)readingButton.textContent="A− Normal text";
+
 
 const back=document.createElement("button");
 back.type="button";back.className="site-back-top";back.textContent="↑ Top";back.setAttribute("aria-label","Back to top");
