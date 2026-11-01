@@ -45,6 +45,8 @@ jobs:
       - name: Validate Counties to Watch datasets and JavaScript
         run: |
           node --check counties-watch/watch.js
+          node --check counties-watch/source-desk.js
+          python3 -m json.tool counties-watch/sources.json >/dev/null
           node --check counties-watch/metrics.js
           node --check counties-watch/benchmarks-ui.js
           node tests/test_watch_metrics.js
