@@ -47,10 +47,36 @@
 
 </style><link rel="stylesheet" href="site-chrome.css"><link rel="stylesheet" href="senate-control.css"><link rel="stylesheet" href="scripts/us-map.css"><link rel="stylesheet" href="scripts/dashboard-readability.css"><link rel="stylesheet" href="scripts/chance-board.css"><link rel="stylesheet" href="scripts/site-polish.css"></head>
 <body>
-<header class="topbar"><div class="shell navinner"><a href="./" class="logo" aria-label="Ervin Model home"><span class="logo-symbol" aria-hidden="true">E</span><span>ERVIN <b>MODEL</b></span></a><button class="top-nav-toggle" id="mainMenuToggle" type="button" aria-controls="topNavigation" aria-expanded="false">☰ Menu</button><nav class="navend" id="topNavigation" aria-label="Page sections"><a href="#senate-control">SENATE CONTROL</a><a href="#map-area">THE MAP</a><a href="#races">17 RACES</a><a href="counties-watch/" title="Watch ten decisive voting areas per 2026 Senate state">COUNTIES TO WATCH</a><a href="michigan/" title="Michigan county-by-county Senate projection">MICHIGAN · 83 COUNTIES</a><a href="michigan/election-night/" title="Michigan 2026 county-first election-night reporting">MI ELECTION NIGHT</a><a href="#methodology">METHODOLOGY</a><span class="badge"><span class="dot-live"></span><span id="freshnessLabel">OCT 23 RESEARCH SNAPSHOT</span></span><button class="button ghost" id="themeToggle" aria-label="Toggle light or dark appearance">☀ / ☾</button></nav></div></header>
+<header class="topbar"><div class="shell navinner"><a href="./" class="logo" aria-label="Ervin Model home"><span class="logo-symbol" aria-hidden="true">E</span><span>ERVIN <b>MODEL</b></span></a><button class="top-nav-toggle" id="mainMenuToggle" type="button" aria-controls="globalMenuPanel" aria-expanded="false">☰ Menu</button><nav class="navend" id="topNavigation" aria-label="Page sections"><a href="#senate-control">SENATE CONTROL</a><a href="#map-area">THE MAP</a><a href="#races">17 RACES</a><a href="counties-watch/" title="Watch ten decisive voting areas per 2026 Senate state">COUNTIES TO WATCH</a><a href="michigan/" title="Michigan county-by-county Senate projection">MICHIGAN · 83 COUNTIES</a><a href="michigan/election-night/" title="Michigan 2026 county-first election-night reporting">MI ELECTION NIGHT</a><a href="#methodology">METHODOLOGY</a><span class="badge"><span class="dot-live"></span><span id="freshnessLabel">OCT 23 RESEARCH SNAPSHOT</span></span><button class="button ghost" id="themeToggle" aria-label="Toggle light or dark appearance">☀ / ☾</button></nav></div>
+<div id="globalMenuPanel" class="global-site-menu" aria-label="Explore Ervin Model" hidden>
+ <div class="global-menu-content">
+ <div class="global-menu-group"><h3>Forecast</h3>
+ <a href="./">National forecast overview</a>
+ <a href="./#senate-control">Senate control odds and seats</a>
+ <a href="./#map-area">Interactive U.S. map</a>
+ <a href="./#races">All 17 Senate races</a>
+ <a href="./#researchLab">Polling research lab</a>
+ <a href="./#methodology">Methodology and backtests</a></div>
+ <div class="global-menu-group"><h3>Polling source tabs</h3>
+ <a href="./?source=take#tabs">Ervin’s Take · all sources</a>
+ <a href="./?source=rcp#tabs">RCP benchmark</a>
+ <a href="./?source=ddhq#tabs">Decision Desk HQ</a>
+ <a href="./?source=win270#tabs">270toWin</a>
+ <a href="./?source=average#tabs">Average of averages</a>
+ <a href="./?source=silver#tabs">Silver Bulletin</a>
+ <a href="./?bias=weighted#tabs">Ervin + historical adjustment</a></div>
+ <div class="global-menu-group"><h3>States and election night</h3>
+ <a href="counties-watch/">Counties to Watch · 170 units</a>
+ <a href="michigan/">Michigan county forecast</a>
+ <a href="michigan/election-night/">Michigan election-night results</a>
+ <a href="./#probabilityGuide">What the win chances mean</a>
+ <a href="research/PROBABILITY_CALIBRATION_STATUS.md">Probability calibration status</a>
+ <button type="button" class="global-theme-button" id="themeToggleMenu">☀ / ☾ Switch appearance</button></div>
+ </div>
+</div></header>
 <main class="shell">
 <section class="hero"><div><div class="kicker">2026 U.S. Senate • Election intelligence dashboard</div><h1>Past polling errors.<br><em>Present predictions.</em></h1><p class="lede">The Ervin Model adjusts today's Senate poll averages by each state's historical polling error. Compare five source views, examine the evidence behind each correction, and explore uncertainty rather than guess at certainty.</p></div><div class="hero-right"><div class="eyebrow">Countdown to Election Day</div><strong id="countdown">11 days</strong><small id="countdownFoot">Tuesday, November 3, 2026 · Archived research snapshot</small><button class="button primary" id="exportCSV">↓ Export current calculations</button></div></section>
-<div class="refresh-strip" role="status" aria-live="polite"><span class="refresh-symbol" aria-hidden="true">↻</span><span id="refreshDetails">This downloaded edition is a dated polling snapshot. An authorized GitHub Pages deployment enables scheduled checks every three hours.</span><a href="refresh_log.json" id="refreshAuditLink" hidden target="_blank" rel="noopener noreferrer">Refresh audit ↗</a></div><div class="divider"></div>
+<div class="refresh-strip" role="status" aria-live="polite"><span class="refresh-symbol" aria-hidden="true">↻</span><span id="refreshDetails">This downloaded edition is a dated polling snapshot. An authorized GitHub Pages deployment enables scheduled checks every three hours.</span><a href="refresh_log.json" id="refreshAuditLink" hidden target="_blank" rel="noopener noreferrer">Refresh audit ↗</a></div><nav class="homepage-shortcuts" aria-label="Browse Ervin Model dashboards"><span>EXPLORE THE MODEL</span><a href="./#senate-control">Senate control</a><a href="./#races">17 race forecasts</a><a href="counties-watch/">Counties to Watch</a><a href="michigan/">Michigan counties</a><a href="michigan/election-night/">Election night</a><a href="./#researchLab">Research lab</a></nav><div class="divider"></div>
 <section aria-label="Polling data sources"><div class="section-label">01 &nbsp; SELECT THE POLLING SOURCE</div><div class="toolbar"><div class="tabs" id="tabs" role="tablist" aria-label="Polling source"></div><div class="controls"><label class="fine" for="confidenceLevel">Uncertainty band</label><select class="select" id="confidenceLevel" aria-label="Choose uncertainty level"><option value="80">80% scenario</option><option value="90">90% scenario</option></select><label class="fine" for="biasMode">Bias</label><select class="select" id="biasMode" aria-label="Choose historical bias mode"><option value="original">Original Ervin</option><option value="shrink">Shrink small samples</option><option value="weighted">Ervin +</option></select></div></div><div class="subbar"><span><span class="source-brand" id="sourceName">Average of averages</span> <span id="sourceDescription">Wikipedia aggregator consensus, not extra individual polls.</span></span><span id="verifiedCount">17 races • Source provenance shown per race</span></div></section>
 <aside class="mode-explainer" aria-label="How to read the forecasting controls">
  <div class="mode-explainer-heading"><span class="mode-explainer-mark">?</span><div><strong>How to read this model</strong><span>What the uncertainty and adjustment settings mean</span></div></div>
