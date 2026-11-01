@@ -25,6 +25,13 @@
   check(doc.querySelectorAll('#tabs button').length===6,'All six polling tabs rendered');
   check(source('take')?.getAttribute('aria-selected')==='true','Ervin Take default selected');
   check(el('biasMode').value==='original','Original Ervin is the default bias mode');
+
+  check(!!el('probabilityGuide')&&el('probabilityGuide').textContent.includes("70%"),'Plain-English probability calibration explainer available');
+  check(!!el('mainMenuToggle')&&!!el('topNavigation'),'Homepage has responsive navigation menu');
+  el('mainMenuToggle').click();
+  check(el('mainMenuToggle').getAttribute('aria-expanded')==='true'&&el('topNavigation').classList.contains('is-open'),'Home menu opens and announces expanded state');
+  el('mainMenuToggle').click();
+  check(el('mainMenuToggle').getAttribute('aria-expanded')==='false','Home menu closes predictably');
   check(!!el('senate-control')&&el('controlDemChance').textContent.endsWith('%')&&el('controlRepChance').textContent.endsWith('%'),
     'Senate-control probability dashboard renders both parties');
   check(!!el('copyControlForecast')&&el('copyControlForecast').textContent.includes('Copy forecast'),
