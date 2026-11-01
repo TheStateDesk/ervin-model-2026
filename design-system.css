@@ -152,3 +152,21 @@ footer a{color:#195780!important}
  html,html:focus-within{scroll-behavior:auto}
  *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* Optional comfortable-reading mode. Persisted by the shared navigation script. */
+.reading-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:46px;gap:6px;white-space:nowrap;
+ padding:10px 13px!important;border:1px solid #b4c9d6!important;background:#f1f6f9!important;color:#214e70!important;
+ border-radius:9px!important;font-size:14px!important;font-weight:800!important;cursor:pointer}
+.reading-toggle:hover,.reading-toggle[aria-pressed="true"]{background:#ddeef8!important;border-color:#82abc6!important}
+.reading-toggle:focus-visible{outline:3px solid #a97632!important;outline-offset:3px}
+html.large-text body{font-size:18px!important;line-height:1.72!important}
+html.large-text body :where(p,td,li,dd,.description,.micro,.fine,.tiny,.footnote,.note,.lede){font-size:16px!important;line-height:1.72!important}
+html.large-text body :where(input,select,button,.button,.action,.tab,summary,.site-nav a){font-size:17px!important;min-height:49px!important}
+html.large-text body :where(th){font-size:14px!important}
+html.large-text body :where(h1){font-size:clamp(38px,5vw,68px)!important}
+html.large-text body :where(h2,.panel h2){font-size:clamp(24px,2.6vw,34px)!important}
+html.large-text body :where(h3){font-size:21px!important}
+html.large-text body :where(.stat small,.stat span,.stat .name,.stat .foot,.source-desk-card p,.survey-meta){font-size:15px!important}
+html.large-text body :where(.guide-link span,.hero p,.intro){font-size:18px!important}
+html.large-text body .reading-toggle{font-size:16px!important}
+@media(max-width:680px){.reading-toggle{padding:8px 10px!important;min-height:43px!important;font-size:12px!important}html.large-text .reading-toggle{font-size:13px!important}}
