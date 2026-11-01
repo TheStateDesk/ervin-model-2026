@@ -12,22 +12,34 @@ if(head){
  document.addEventListener("keydown",e=>{if(e.key==="Escape")collapse()});
  document.addEventListener("pointerdown",e=>{if(!head.contains(e.target))collapse()});
 }
-/* Homepage uses the same compact mobile navigation as the interior pages. */
+/* The full main-page directory is independent of the compact desktop links. */
 const mainToggle=document.getElementById("mainMenuToggle");
-const mainNav=document.getElementById("topNavigation");
-if(mainToggle&&mainNav){
+const mainPanel=document.getElementById("globalMenuPanel");
+if(mainToggle&&mainPanel){
  function closeMain(){
-  mainNav.classList.remove("is-open");
+  mainPanel.hidden=true;
   mainToggle.setAttribute("aria-expanded","false");
  }
  mainToggle.addEventListener("click",()=>{
-  const opened=mainNav.classList.toggle("is-open");
-  mainToggle.setAttribute("aria-expanded",String(opened));
+  const next=mainPanel.hidden;
+  mainPanel.hidden=!next;
+  mainToggle.setAttribute("aria-expanded",String(next));
  });
- mainNav.addEventListener("click",e=>{if(e.target.closest("a"))closeMain()});
- document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMain()});
- document.addEventListener("pointerdown",e=>{if(!e.target.closest(".topbar"))closeMain()});
+ mainPanel.addEventListener("click",e=>{
+  if(e.target.closest("a"))closeMain();
+ });
+ document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&!mainPanel.hidden){closeMain();mainToggle.focus()}
+ });
+ document.addEventListener("pointerdown",e=>{
+  if(!mainPanel.hidden&&!e.target.closest(".topbar"))closeMain();
+ });
  window.addEventListener("resize",()=>{if(window.innerWidth>1240)closeMain()},{passive:true});
+ const mobileTheme=mainPanel.querySelector("#themeToggleMenu");
+ mobileTheme?.addEventListener("click",()=>{
+  const desktopTheme=document.getElementById("themeToggle");
+  if(desktopTheme){desktopTheme.click()}else document.documentElement.classList.toggle("light");
+ });
 }
 const back=document.createElement("button");
 back.type="button";back.className="site-back-top";back.textContent="↑ Top";back.setAttribute("aria-label","Back to top");
