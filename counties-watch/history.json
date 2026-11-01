@@ -1,0 +1,6321 @@
+{
+  "version": 1,
+  "asOf": "2026-10-31",
+  "election": "2026-11-03",
+  "office": "US Senate",
+  "methodology": "Three-cycle 2016, 2020, 2024 presidential county vote counts; top ten by 50% vote volume, 25% raw swing vote leverage, 15% 2024 competitiveness, 10% net partisan vote contribution. Alaska uses 2024 state House districts only; 2020 boundaries differ. Alignment is a descriptive Jeffreys-smoothed observed co-winner frequency (matches+0.5)/(n+1), not a calibrated predictive probability. Benchmarks use a uniform two-party swing to a hypothetical 50-50 statewide vote at 2024 county two-party turnout; not a 2026 forecast.",
+  "sources": {
+    "president2016": "https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-24/master/2016_US_County_Level_Presidential_Results.csv",
+    "president2020": "https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-24/master/2020_US_County_Level_Presidential_Results.csv",
+    "president2024": "https://raw.githubusercontent.com/tonmcg/US_County_Level_Election_Results_08-24/master/2024_US_County_Level_Presidential_Results.csv",
+    "provenance": "https://github.com/tonmcg/US_County_Level_Election_Results_08-24",
+    "notes": "Fox News/Politico/NYT/other public compilations; not independent state certified canvasses. 2016 Alaska rows duplicate statewide totals and 2020 districts are not comparable with redrawn 2024 districts, so Alaska uses 2024 only. Party labels for 2026 independents differ from historical presidential D/R."
+  },
+  "states": {
+    "ME": {
+      "code": "ME",
+      "state": "Maine",
+      "dem": "Troy Jackson",
+      "rep": "Susan Collins",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 16,
+      "stateCycles": {
+        "2016": {
+          "d": 354873,
+          "r": 334838,
+          "share": 0.5145241992660694,
+          "margin": 0.029048398532138822,
+          "total": 741550
+        },
+        "2020": {
+          "d": 430473,
+          "r": 359899,
+          "share": 0.5446460653970535,
+          "margin": 0.08929213079410708,
+          "total": 813740
+        },
+        "2024": {
+          "d": 435652,
+          "r": 377977,
+          "share": 0.5354430581997446,
+          "margin": 0.0708861163994892,
+          "total": 831375
+        }
+      },
+      "selectedBallotShare": 85.51,
+      "stateBaselineTwoPartyDShare": 53.54,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "23005",
+          "name": "Cumberland",
+          "kind": "County",
+          "score": 72,
+          "v24": {
+            "d": 133281,
+            "r": 60950,
+            "total": 199225
+          },
+          "v20": {
+            "d": 128759,
+            "r": 59584,
+            "total": 193765
+          },
+          "v16": {
+            "d": 102935,
+            "r": 57697,
+            "total": 171249
+          },
+          "m24": 37.24,
+          "m20": 36.73,
+          "m16": 28.16,
+          "swing": 0.51,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 65.08,
+          "voteShare": 23.96
+        },
+        {
+          "rank": 2,
+          "fips": "23031",
+          "name": "York",
+          "kind": "County",
+          "score": 72,
+          "v24": {
+            "d": 72114,
+            "r": 58194,
+            "total": 132838
+          },
+          "v20": {
+            "d": 71189,
+            "r": 54817,
+            "total": 129659
+          },
+          "v16": {
+            "d": 55828,
+            "r": 50388,
+            "total": 113962
+          },
+          "m24": 10.68,
+          "m20": 12.99,
+          "m16": 5.12,
+          "swing": -2.31,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.8,
+          "voteShare": 15.98
+        },
+        {
+          "rank": 3,
+          "fips": "23019",
+          "name": "Penobscot",
+          "kind": "County",
+          "score": 53,
+          "v24": {
+            "d": 37945,
+            "r": 47438,
+            "total": 87073
+          },
+          "v20": {
+            "d": 37713,
+            "r": 44825,
+            "total": 85269
+          },
+          "v16": {
+            "d": 32832,
+            "r": 41601,
+            "total": 80228
+          },
+          "m24": -11.12,
+          "m20": -8.62,
+          "m16": -11.78,
+          "swing": -2.5,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 40.9,
+          "voteShare": 10.47
+        },
+        {
+          "rank": 4,
+          "fips": "23011",
+          "name": "Kennebec",
+          "kind": "County",
+          "score": 51,
+          "v24": {
+            "d": 34585,
+            "r": 36589,
+            "total": 72886
+          },
+          "v20": {
+            "d": 34902,
+            "r": 34721,
+            "total": 71858
+          },
+          "v16": {
+            "d": 29296,
+            "r": 31753,
+            "total": 65999
+          },
+          "m24": -2.82,
+          "m20": 0.26,
+          "m16": -4.02,
+          "swing": -3.08,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 45.05,
+          "voteShare": 8.77
+        },
+        {
+          "rank": 5,
+          "fips": "23001",
+          "name": "Androscoggin",
+          "kind": "County",
+          "score": 44,
+          "v24": {
+            "d": 27019,
+            "r": 30605,
+            "total": 58847
+          },
+          "v20": {
+            "d": 27617,
+            "r": 29268,
+            "total": 58707
+          },
+          "v16": {
+            "d": 22975,
+            "r": 28189,
+            "total": 55340
+          },
+          "m24": -6.22,
+          "m20": -2.9,
+          "m16": -10.19,
+          "swing": -3.32,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 43.34,
+          "voteShare": 7.08
+        },
+        {
+          "rank": 6,
+          "fips": "23003",
+          "name": "Aroostook",
+          "kind": "County",
+          "score": 35,
+          "v24": {
+            "d": 12900,
+            "r": 22246,
+            "total": 35653
+          },
+          "v20": {
+            "d": 13956,
+            "r": 21080,
+            "total": 35746
+          },
+          "v16": {
+            "d": 13377,
+            "r": 19419,
+            "total": 34963
+          },
+          "m24": -26.59,
+          "m20": -20.33,
+          "m16": -18.42,
+          "swing": -6.26,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 33.16,
+          "voteShare": 4.29
+        },
+        {
+          "rank": 7,
+          "fips": "23017",
+          "name": "Oxford",
+          "kind": "County",
+          "score": 32,
+          "v24": {
+            "d": 14765,
+            "r": 19228,
+            "total": 34590
+          },
+          "v20": {
+            "d": 14755,
+            "r": 17698,
+            "total": 33492
+          },
+          "v16": {
+            "d": 12172,
+            "r": 16214,
+            "total": 31094
+          },
+          "m24": -13.13,
+          "m20": -9.07,
+          "m16": -14.24,
+          "swing": -4.06,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 39.89,
+          "voteShare": 4.16
+        },
+        {
+          "rank": 8,
+          "fips": "23009",
+          "name": "Hancock",
+          "kind": "County",
+          "score": 23,
+          "v24": {
+            "d": 19817,
+            "r": 15549,
+            "total": 36251
+          },
+          "v20": {
+            "d": 19369,
+            "r": 14982,
+            "total": 35325
+          },
+          "v16": {
+            "d": 16107,
+            "r": 13682,
+            "total": 31983
+          },
+          "m24": 12.07,
+          "m20": 12.77,
+          "m16": 8.14,
+          "swing": -0.7,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 52.49,
+          "voteShare": 4.36
+        },
+        {
+          "rank": 9,
+          "fips": "23025",
+          "name": "Somerset",
+          "kind": "County",
+          "score": 23,
+          "v24": {
+            "d": 10134,
+            "r": 17826,
+            "total": 28441
+          },
+          "v20": {
+            "d": 10199,
+            "r": 16644,
+            "total": 27578
+          },
+          "v16": {
+            "d": 9092,
+            "r": 14998,
+            "total": 25968
+          },
+          "m24": -27.51,
+          "m20": -24.01,
+          "m16": -24.52,
+          "swing": -3.5,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 32.7,
+          "voteShare": 3.42
+        },
+        {
+          "rank": 10,
+          "fips": "23027",
+          "name": "Waldo",
+          "kind": "County",
+          "score": 23,
+          "v24": {
+            "d": 12661,
+            "r": 11815,
+            "total": 25130
+          },
+          "v20": {
+            "d": 12345,
+            "r": 11196,
+            "total": 24320
+          },
+          "v16": {
+            "d": 10442,
+            "r": 10378,
+            "total": 22630
+          },
+          "m24": 3.46,
+          "m20": 4.88,
+          "m16": 0.31,
+          "swing": -1.42,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 48.18,
+          "voteShare": 3.02
+        }
+      ]
+    },
+    "MI": {
+      "code": "MI",
+      "state": "Michigan",
+      "dem": "Abdul El-Sayed",
+      "rep": "Mike Rogers",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 83,
+      "stateCycles": {
+        "2016": {
+          "d": 2268193,
+          "r": 2279805,
+          "share": 0.49872339433746454,
+          "margin": -0.0025532113250709434,
+          "total": 4790917
+        },
+        "2020": {
+          "d": 2804040,
+          "r": 2649852,
+          "share": 0.5141355934440947,
+          "margin": 0.028271186888189206,
+          "total": 5539302
+        },
+        "2024": {
+          "d": 2736533,
+          "r": 2816636,
+          "share": 0.49278763171083034,
+          "margin": -0.014424736578339323,
+          "total": 5662504
+        }
+      },
+      "selectedBallotShare": 61.4,
+      "stateBaselineTwoPartyDShare": 49.28,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "26163",
+          "name": "Wayne",
+          "kind": "County",
+          "score": 91,
+          "v24": {
+            "d": 537032,
+            "r": 288860,
+            "total": 856511
+          },
+          "v20": {
+            "d": 597170,
+            "r": 264553,
+            "total": 872469
+          },
+          "v16": {
+            "d": 517842,
+            "r": 228908,
+            "total": 775450
+          },
+          "m24": 30.05,
+          "m20": 38.6,
+          "m16": 38.69,
+          "swing": -8.55,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 65.75,
+          "voteShare": 15.13
+        },
+        {
+          "rank": 2,
+          "fips": "26125",
+          "name": "Oakland",
+          "kind": "County",
+          "score": 69,
+          "v24": {
+            "d": 419519,
+            "r": 337791,
+            "total": 771939
+          },
+          "v20": {
+            "d": 434148,
+            "r": 325971,
+            "total": 770351
+          },
+          "v16": {
+            "d": 342976,
+            "r": 289127,
+            "total": 663255
+          },
+          "m24": 10.79,
+          "m20": 14.23,
+          "m16": 8.52,
+          "swing": -3.44,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 56.12,
+          "voteShare": 13.63
+        },
+        {
+          "rank": 3,
+          "fips": "26099",
+          "name": "Macomb",
+          "kind": "County",
+          "score": 53,
+          "v24": {
+            "d": 214977,
+            "r": 284660,
+            "total": 509056
+          },
+          "v20": {
+            "d": 223952,
+            "r": 263863,
+            "total": 494256
+          },
+          "v16": {
+            "d": 176238,
+            "r": 224589,
+            "total": 418773
+          },
+          "m24": -13.95,
+          "m20": -8.18,
+          "m16": -12.06,
+          "swing": -5.77,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 43.75,
+          "voteShare": 8.99
+        },
+        {
+          "rank": 4,
+          "fips": "26081",
+          "name": "Kent",
+          "kind": "County",
+          "score": 37,
+          "v24": {
+            "d": 192668,
+            "r": 172720,
+            "total": 371722
+          },
+          "v20": {
+            "d": 187915,
+            "r": 165741,
+            "total": 361048
+          },
+          "v16": {
+            "d": 138567,
+            "r": 147959,
+            "total": 306270
+          },
+          "m24": 5.46,
+          "m20": 6.27,
+          "m16": -3.28,
+          "swing": -0.81,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 53.45,
+          "voteShare": 6.56
+        },
+        {
+          "rank": 5,
+          "fips": "26049",
+          "name": "Genesee",
+          "kind": "County",
+          "score": 31,
+          "v24": {
+            "d": 114670,
+            "r": 105303,
+            "total": 223203
+          },
+          "v20": {
+            "d": 119390,
+            "r": 98714,
+            "total": 221360
+          },
+          "v16": {
+            "d": 102744,
+            "r": 84174,
+            "total": 196135
+          },
+          "m24": 4.26,
+          "m20": 9.48,
+          "m16": 9.93,
+          "swing": -5.22,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 52.85,
+          "voteShare": 3.94
+        },
+        {
+          "rank": 6,
+          "fips": "26139",
+          "name": "Ottawa",
+          "kind": "County",
+          "score": 21,
+          "v24": {
+            "d": 69653,
+            "r": 106133,
+            "total": 178402
+          },
+          "v20": {
+            "d": 64705,
+            "r": 100913,
+            "total": 168713
+          },
+          "v16": {
+            "d": 46276,
+            "r": 90456,
+            "total": 145405
+          },
+          "m24": -20.75,
+          "m20": -21.86,
+          "m16": -32.31,
+          "swing": 1.11,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 40.34,
+          "voteShare": 3.15
+        },
+        {
+          "rank": 7,
+          "fips": "26145",
+          "name": "Saginaw",
+          "kind": "County",
+          "score": 21,
+          "v24": {
+            "d": 49515,
+            "r": 52912,
+            "total": 103838
+          },
+          "v20": {
+            "d": 51088,
+            "r": 50785,
+            "total": 103349
+          },
+          "v16": {
+            "d": 44395,
+            "r": 45469,
+            "total": 94198
+          },
+          "m24": -3.32,
+          "m20": 0.3,
+          "m16": -1.2,
+          "swing": -3.61,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 49.06,
+          "voteShare": 1.83
+        },
+        {
+          "rank": 8,
+          "fips": "26121",
+          "name": "Muskegon",
+          "kind": "County",
+          "score": 21,
+          "v24": {
+            "d": 46028,
+            "r": 47733,
+            "total": 95160
+          },
+          "v20": {
+            "d": 45643,
+            "r": 45133,
+            "total": 92444
+          },
+          "v16": {
+            "d": 36640,
+            "r": 35962,
+            "total": 77114
+          },
+          "m24": -1.82,
+          "m20": 0.56,
+          "m16": 0.93,
+          "swing": -2.38,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 49.81,
+          "voteShare": 1.68
+        },
+        {
+          "rank": 9,
+          "fips": "26161",
+          "name": "Washtenaw",
+          "kind": "County",
+          "score": 20,
+          "v24": {
+            "d": 157152,
+            "r": 58844,
+            "total": 221304
+          },
+          "v20": {
+            "d": 157136,
+            "r": 56241,
+            "total": 216418
+          },
+          "v16": {
+            "d": 128025,
+            "r": 50335,
+            "total": 187201
+          },
+          "m24": 45.51,
+          "m20": 47.28,
+          "m16": 43.56,
+          "swing": -1.77,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 73.48,
+          "voteShare": 3.91
+        },
+        {
+          "rank": 10,
+          "fips": "26077",
+          "name": "Kalamazoo",
+          "kind": "County",
+          "score": 20,
+          "v24": {
+            "d": 84501,
+            "r": 58671,
+            "total": 145646
+          },
+          "v20": {
+            "d": 83686,
+            "r": 56823,
+            "total": 143414
+          },
+          "v16": {
+            "d": 67142,
+            "r": 51031,
+            "total": 125966
+          },
+          "m24": 18.04,
+          "m20": 19.12,
+          "m16": 13.63,
+          "swing": -1.08,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 59.74,
+          "voteShare": 2.57
+        }
+      ]
+    },
+    "OH": {
+      "code": "OH",
+      "state": "Ohio",
+      "dem": "Sherrod Brown",
+      "rep": "Jon Husted",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 88,
+      "stateCycles": {
+        "2016": {
+          "d": 2317001,
+          "r": 2771984,
+          "share": 0.455297274407372,
+          "margin": -0.089405451185256,
+          "total": 5325395
+        },
+        "2020": {
+          "d": 2679165,
+          "r": 3154834,
+          "share": 0.45923302352297285,
+          "margin": -0.08153395295405433,
+          "total": 5922202
+        },
+        "2024": {
+          "d": 2533699,
+          "r": 3180116,
+          "share": 0.44343385286362963,
+          "margin": -0.11313229427274071,
+          "total": 5765017
+        }
+      },
+      "selectedBallotShare": 51.01,
+      "stateBaselineTwoPartyDShare": 44.34,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "39049",
+          "name": "Franklin",
+          "kind": "County",
+          "score": 91,
+          "v24": {
+            "d": 380518,
+            "r": 210830,
+            "total": 597530
+          },
+          "v20": {
+            "d": 409144,
+            "r": 211237,
+            "total": 630577
+          },
+          "v16": {
+            "d": 335961,
+            "r": 192328,
+            "total": 554711
+          },
+          "m24": 28.7,
+          "m20": 31.9,
+          "m16": 27.19,
+          "swing": -3.21,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 70,
+          "voteShare": 10.36
+        },
+        {
+          "rank": 2,
+          "fips": "39035",
+          "name": "Cuyahoga",
+          "kind": "County",
+          "score": 85,
+          "v24": {
+            "d": 376384,
+            "r": 195164,
+            "total": 575890
+          },
+          "v20": {
+            "d": 416176,
+            "r": 202699,
+            "total": 625670
+          },
+          "v16": {
+            "d": 383974,
+            "r": 179894,
+            "total": 583230
+          },
+          "m24": 31.71,
+          "m20": 34.49,
+          "m16": 36.19,
+          "swing": -2.79,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 71.51,
+          "voteShare": 9.99
+        },
+        {
+          "rank": 3,
+          "fips": "39061",
+          "name": "Hamilton",
+          "kind": "County",
+          "score": 54,
+          "v24": {
+            "d": 233360,
+            "r": 172365,
+            "total": 409753
+          },
+          "v20": {
+            "d": 246266,
+            "r": 177886,
+            "total": 430929
+          },
+          "v16": {
+            "d": 207587,
+            "r": 169972,
+            "total": 395000
+          },
+          "m24": 15.03,
+          "m20": 16.12,
+          "m16": 9.96,
+          "swing": -1.09,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 63.17,
+          "voteShare": 7.11
+        },
+        {
+          "rank": 4,
+          "fips": "39153",
+          "name": "Summit",
+          "kind": "County",
+          "score": 46,
+          "v24": {
+            "d": 145005,
+            "r": 125910,
+            "total": 273413
+          },
+          "v20": {
+            "d": 151668,
+            "r": 124833,
+            "total": 280473
+          },
+          "v16": {
+            "d": 129922,
+            "r": 109531,
+            "total": 249937
+          },
+          "m24": 7.05,
+          "m20": 9.71,
+          "m16": 8.52,
+          "swing": -2.66,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 59.18,
+          "voteShare": 4.74
+        },
+        {
+          "rank": 5,
+          "fips": "39113",
+          "name": "Montgomery",
+          "kind": "County",
+          "score": 42,
+          "v24": {
+            "d": 126767,
+            "r": 125566,
+            "total": 254715
+          },
+          "v20": {
+            "d": 135064,
+            "r": 129034,
+            "total": 268505
+          },
+          "v16": {
+            "d": 117661,
+            "r": 120766,
+            "total": 249560
+          },
+          "m24": 0.48,
+          "m20": 2.28,
+          "m16": -1.3,
+          "swing": -1.81,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 55.89,
+          "voteShare": 4.42
+        },
+        {
+          "rank": 6,
+          "fips": "39095",
+          "name": "Lucas",
+          "kind": "County",
+          "score": 39,
+          "v24": {
+            "d": 106320,
+            "r": 82398,
+            "total": 190525
+          },
+          "v20": {
+            "d": 115411,
+            "r": 81763,
+            "total": 200623
+          },
+          "v16": {
+            "d": 107363,
+            "r": 74102,
+            "total": 191684
+          },
+          "m24": 12.68,
+          "m20": 17.07,
+          "m16": 18.33,
+          "swing": -4.39,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 61.99,
+          "voteShare": 3.3
+        },
+        {
+          "rank": 7,
+          "fips": "39151",
+          "name": "Stark",
+          "kind": "County",
+          "score": 34,
+          "v24": {
+            "d": 71090,
+            "r": 111478,
+            "total": 184158
+          },
+          "v20": {
+            "d": 75904,
+            "r": 111097,
+            "total": 189879
+          },
+          "v16": {
+            "d": 66581,
+            "r": 96345,
+            "total": 170868
+          },
+          "m24": -22.12,
+          "m20": -18.82,
+          "m16": -18.27,
+          "swing": -3.3,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 44.6,
+          "voteShare": 3.19
+        },
+        {
+          "rank": 8,
+          "fips": "39093",
+          "name": "Lorain",
+          "kind": "County",
+          "score": 34,
+          "v24": {
+            "d": 74207,
+            "r": 83297,
+            "total": 158959
+          },
+          "v20": {
+            "d": 75667,
+            "r": 79520,
+            "total": 157437
+          },
+          "v16": {
+            "d": 64958,
+            "r": 65346,
+            "total": 136654
+          },
+          "m24": -5.77,
+          "m20": -2.48,
+          "m16": -0.3,
+          "swing": -3.29,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 52.77,
+          "voteShare": 2.76
+        },
+        {
+          "rank": 9,
+          "fips": "39099",
+          "name": "Mahoning",
+          "kind": "County",
+          "score": 33,
+          "v24": {
+            "d": 50636,
+            "r": 61249,
+            "total": 112678
+          },
+          "v20": {
+            "d": 57641,
+            "r": 59903,
+            "total": 118966
+          },
+          "v16": {
+            "d": 56188,
+            "r": 52808,
+            "total": 112827
+          },
+          "m24": -9.49,
+          "m20": -1.92,
+          "m16": 3.1,
+          "swing": -7.56,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.91,
+          "voteShare": 1.95
+        },
+        {
+          "rank": 10,
+          "fips": "39017",
+          "name": "Butler",
+          "kind": "County",
+          "score": 30,
+          "v24": {
+            "d": 66713,
+            "r": 114831,
+            "total": 183142
+          },
+          "v20": {
+            "d": 69613,
+            "r": 114392,
+            "total": 186737
+          },
+          "v16": {
+            "d": 56700,
+            "r": 104441,
+            "total": 168422
+          },
+          "m24": -26.5,
+          "m20": -24.34,
+          "m16": -29.63,
+          "swing": -2.17,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 42.4,
+          "voteShare": 3.18
+        }
+      ]
+    },
+    "TX": {
+      "code": "TX",
+      "state": "Texas",
+      "dem": "James Talarico",
+      "rep": "Ken Paxton",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 253,
+      "stateCycles": {
+        "2016": {
+          "d": 3867812,
+          "r": 4681533,
+          "share": 0.4524103308499072,
+          "margin": -0.09517933830018557,
+          "total": 8903173
+        },
+        "2020": {
+          "d": 5259122,
+          "r": 5890287,
+          "share": 0.4716951364866066,
+          "margin": -0.0566097270267868,
+          "total": 11317845
+        },
+        "2024": {
+          "d": 4835240,
+          "r": 6393511,
+          "share": 0.43061245191027925,
+          "margin": -0.1387750961794415,
+          "total": 11380008
+        }
+      },
+      "selectedBallotShare": 55.89,
+      "stateBaselineTwoPartyDShare": 43.06,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "48201",
+          "name": "Harris",
+          "kind": "County",
+          "score": 92,
+          "v24": {
+            "d": 808771,
+            "r": 722695,
+            "total": 1556310
+          },
+          "v20": {
+            "d": 918193,
+            "r": 700630,
+            "total": 1640818
+          },
+          "v16": {
+            "d": 706471,
+            "r": 544960,
+            "total": 1302887
+          },
+          "m24": 5.62,
+          "m20": 13.44,
+          "m16": 12.91,
+          "swing": -7.82,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 59.75,
+          "voteShare": 13.68
+        },
+        {
+          "rank": 2,
+          "fips": "48113",
+          "name": "Dallas",
+          "kind": "County",
+          "score": 60,
+          "v24": {
+            "d": 511118,
+            "r": 322569,
+            "total": 848948
+          },
+          "v20": {
+            "d": 598576,
+            "r": 307076,
+            "total": 921638
+          },
+          "v16": {
+            "d": 458845,
+            "r": 261865,
+            "total": 750649
+          },
+          "m24": 22.62,
+          "m20": 32.19,
+          "m16": 27.33,
+          "swing": -9.57,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 68.25,
+          "voteShare": 7.46
+        },
+        {
+          "rank": 3,
+          "fips": "48029",
+          "name": "Bexar",
+          "kind": "County",
+          "score": 53,
+          "v24": {
+            "d": 411389,
+            "r": 337545,
+            "total": 757547
+          },
+          "v20": {
+            "d": 448452,
+            "r": 308618,
+            "total": 768952
+          },
+          "v16": {
+            "d": 319191,
+            "r": 240161,
+            "total": 586038
+          },
+          "m24": 9.86,
+          "m20": 18.47,
+          "m16": 14.13,
+          "swing": -8.61,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 61.87,
+          "voteShare": 6.66
+        },
+        {
+          "rank": 4,
+          "fips": "48439",
+          "name": "Tarrant",
+          "kind": "County",
+          "score": 51,
+          "v24": {
+            "d": 384501,
+            "r": 426626,
+            "total": 822680
+          },
+          "v20": {
+            "d": 411567,
+            "r": 409741,
+            "total": 834697
+          },
+          "v16": {
+            "d": 288001,
+            "r": 345683,
+            "total": 662832
+          },
+          "m24": -5.19,
+          "m20": 0.22,
+          "m16": -9.1,
+          "swing": -5.42,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.34,
+          "voteShare": 7.23
+        },
+        {
+          "rank": 5,
+          "fips": "48453",
+          "name": "Travis",
+          "kind": "County",
+          "score": 39,
+          "v24": {
+            "d": 398981,
+            "r": 170787,
+            "total": 580285
+          },
+          "v20": {
+            "d": 435860,
+            "r": 161337,
+            "total": 610349
+          },
+          "v16": {
+            "d": 306475,
+            "r": 126750,
+            "total": 462511
+          },
+          "m24": 40.05,
+          "m20": 45.97,
+          "m16": 41.49,
+          "swing": -5.92,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 76.96,
+          "voteShare": 5.1
+        },
+        {
+          "rank": 6,
+          "fips": "48085",
+          "name": "Collin",
+          "kind": "County",
+          "score": 38,
+          "v24": {
+            "d": 222115,
+            "r": 279534,
+            "total": 515167
+          },
+          "v20": {
+            "d": 230945,
+            "r": 252318,
+            "total": 492216
+          },
+          "v16": {
+            "d": 139837,
+            "r": 200395,
+            "total": 356545
+          },
+          "m24": -11.45,
+          "m20": -4.42,
+          "m16": -17.8,
+          "swing": -7.02,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.22,
+          "voteShare": 4.53
+        },
+        {
+          "rank": 7,
+          "fips": "48121",
+          "name": "Denton",
+          "kind": "County",
+          "score": 33,
+          "v24": {
+            "d": 191503,
+            "r": 250521,
+            "total": 448729
+          },
+          "v20": {
+            "d": 188695,
+            "r": 222480,
+            "total": 417964
+          },
+          "v16": {
+            "d": 110000,
+            "r": 169175,
+            "total": 293287
+          },
+          "m24": -13.35,
+          "m20": -8.22,
+          "m16": -21.2,
+          "swing": -5.14,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.26,
+          "voteShare": 3.94
+        },
+        {
+          "rank": 8,
+          "fips": "48157",
+          "name": "Fort Bend",
+          "kind": "County",
+          "score": 33,
+          "v24": {
+            "d": 179310,
+            "r": 173592,
+            "total": 362259
+          },
+          "v20": {
+            "d": 195552,
+            "r": 157718,
+            "total": 357514
+          },
+          "v16": {
+            "d": 134475,
+            "r": 117212,
+            "total": 260367
+          },
+          "m24": 1.62,
+          "m20": 10.71,
+          "m16": 6.86,
+          "swing": -9.09,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 57.75,
+          "voteShare": 3.18
+        },
+        {
+          "rank": 9,
+          "fips": "48141",
+          "name": "El Paso",
+          "kind": "County",
+          "score": 31,
+          "v24": {
+            "d": 143156,
+            "r": 105124,
+            "total": 251371
+          },
+          "v20": {
+            "d": 178126,
+            "r": 84331,
+            "total": 267215
+          },
+          "v16": {
+            "d": 145509,
+            "r": 54567,
+            "total": 210458
+          },
+          "m24": 15.32,
+          "m20": 35.74,
+          "m16": 45.45,
+          "swing": -20.42,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 64.6,
+          "voteShare": 2.21
+        },
+        {
+          "rank": 10,
+          "fips": "48215",
+          "name": "Hidalgo",
+          "kind": "County",
+          "score": 30,
+          "v24": {
+            "d": 104517,
+            "r": 110760,
+            "total": 217194
+          },
+          "v20": {
+            "d": 128199,
+            "r": 90527,
+            "total": 220884
+          },
+          "v16": {
+            "d": 118739,
+            "r": 48608,
+            "total": 172990
+          },
+          "m24": -2.9,
+          "m20": 17.22,
+          "m16": 41.91,
+          "swing": -20.12,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 55.49,
+          "voteShare": 1.91
+        }
+      ]
+    },
+    "IA": {
+      "code": "IA",
+      "state": "Iowa",
+      "dem": "Josh Turek",
+      "rep": "Ashley Hinson",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 99,
+      "stateCycles": {
+        "2016": {
+          "d": 650790,
+          "r": 798923,
+          "share": 0.4489095427853651,
+          "margin": -0.1021809144292698,
+          "total": 1542880
+        },
+        "2020": {
+          "d": 759061,
+          "r": 897672,
+          "share": 0.4581673691536295,
+          "margin": -0.08366526169274108,
+          "total": 1690871
+        },
+        "2024": {
+          "d": 707278,
+          "r": 927019,
+          "share": 0.4327720114520188,
+          "margin": -0.13445597709596235,
+          "total": 1656849
+        }
+      },
+      "selectedBallotShare": 52.38,
+      "stateBaselineTwoPartyDShare": 43.28,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "19153",
+          "name": "Polk",
+          "kind": "County",
+          "score": 95,
+          "v24": {
+            "d": 140075,
+            "r": 112240,
+            "total": 255563
+          },
+          "v20": {
+            "d": 146250,
+            "r": 106800,
+            "total": 258755
+          },
+          "v16": {
+            "d": 119671,
+            "r": 93421,
+            "total": 228420
+          },
+          "m24": 11.03,
+          "m20": 15.59,
+          "m16": 12.32,
+          "swing": -4.56,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 62.24,
+          "voteShare": 15.42
+        },
+        {
+          "rank": 2,
+          "fips": "19113",
+          "name": "Linn",
+          "kind": "County",
+          "score": 50,
+          "v24": {
+            "d": 66358,
+            "r": 54237,
+            "total": 122369
+          },
+          "v20": {
+            "d": 70874,
+            "r": 53364,
+            "total": 127458
+          },
+          "v16": {
+            "d": 58481,
+            "r": 48183,
+            "total": 114664
+          },
+          "m24": 10.05,
+          "m20": 14.09,
+          "m16": 9.65,
+          "swing": -4.04,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 61.75,
+          "voteShare": 7.39
+        },
+        {
+          "rank": 3,
+          "fips": "19163",
+          "name": "Scott",
+          "kind": "County",
+          "score": 47,
+          "v24": {
+            "d": 42479,
+            "r": 45976,
+            "total": 89743
+          },
+          "v20": {
+            "d": 46926,
+            "r": 43683,
+            "total": 92599
+          },
+          "v16": {
+            "d": 40302,
+            "r": 39083,
+            "total": 84878
+          },
+          "m24": -3.95,
+          "m20": 3.58,
+          "m16": 1.54,
+          "swing": -7.53,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.75,
+          "voteShare": 5.42
+        },
+        {
+          "rank": 4,
+          "fips": "19103",
+          "name": "Johnson",
+          "kind": "County",
+          "score": 41,
+          "v24": {
+            "d": 58846,
+            "r": 26087,
+            "total": 86068
+          },
+          "v20": {
+            "d": 59177,
+            "r": 22925,
+            "total": 83851
+          },
+          "v16": {
+            "d": 49942,
+            "r": 20993,
+            "total": 75637
+          },
+          "m24": 38.57,
+          "m20": 44.15,
+          "m16": 40.81,
+          "swing": -5.58,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 76.01,
+          "voteShare": 5.19
+        },
+        {
+          "rank": 5,
+          "fips": "19013",
+          "name": "Black Hawk",
+          "kind": "County",
+          "score": 38,
+          "v24": {
+            "d": 31299,
+            "r": 30572,
+            "total": 62653
+          },
+          "v20": {
+            "d": 35647,
+            "r": 29640,
+            "total": 66593
+          },
+          "v16": {
+            "d": 32006,
+            "r": 27382,
+            "total": 63221
+          },
+          "m24": 1.18,
+          "m20": 9.2,
+          "m16": 7.79,
+          "swing": -8.03,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 57.31,
+          "voteShare": 3.78
+        },
+        {
+          "rank": 6,
+          "fips": "19061",
+          "name": "Dubuque",
+          "kind": "County",
+          "score": 31,
+          "v24": {
+            "d": 23705,
+            "r": 28224,
+            "total": 52566
+          },
+          "v20": {
+            "d": 25657,
+            "r": 27214,
+            "total": 53926
+          },
+          "v16": {
+            "d": 22774,
+            "r": 23384,
+            "total": 49037
+          },
+          "m24": -8.7,
+          "m20": -2.94,
+          "m16": -1.32,
+          "swing": -5.76,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 52.37,
+          "voteShare": 3.17
+        },
+        {
+          "rank": 7,
+          "fips": "19169",
+          "name": "Story",
+          "kind": "County",
+          "score": 31,
+          "v24": {
+            "d": 26765,
+            "r": 21665,
+            "total": 49200
+          },
+          "v20": {
+            "d": 29175,
+            "r": 20340,
+            "total": 51038
+          },
+          "v16": {
+            "d": 25085,
+            "r": 19111,
+            "total": 48910
+          },
+          "m24": 10.53,
+          "m20": 17.84,
+          "m16": 13.52,
+          "swing": -7.31,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 61.99,
+          "voteShare": 2.97
+        },
+        {
+          "rank": 8,
+          "fips": "19049",
+          "name": "Dallas",
+          "kind": "County",
+          "score": 30,
+          "v24": {
+            "d": 29402,
+            "r": 32374,
+            "total": 62633
+          },
+          "v20": {
+            "d": 26879,
+            "r": 27987,
+            "total": 56022
+          },
+          "v16": {
+            "d": 15662,
+            "r": 19288,
+            "total": 37617
+          },
+          "m24": -4.81,
+          "m20": -2.02,
+          "m16": -10.37,
+          "swing": -2.79,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.32,
+          "voteShare": 3.78
+        },
+        {
+          "rank": 9,
+          "fips": "19193",
+          "name": "Woodbury",
+          "kind": "County",
+          "score": 26,
+          "v24": {
+            "d": 16145,
+            "r": 25969,
+            "total": 42674
+          },
+          "v20": {
+            "d": 18704,
+            "r": 25736,
+            "total": 45362
+          },
+          "v16": {
+            "d": 16102,
+            "r": 24627,
+            "total": 42933
+          },
+          "m24": -23.33,
+          "m20": -15.82,
+          "m16": -20.93,
+          "swing": -7.5,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 45.06,
+          "voteShare": 2.58
+        },
+        {
+          "rank": 10,
+          "fips": "19155",
+          "name": "Pottawattamie",
+          "kind": "County",
+          "score": 23,
+          "v24": {
+            "d": 17468,
+            "r": 26335,
+            "total": 44411
+          },
+          "v20": {
+            "d": 18575,
+            "r": 26247,
+            "total": 45744
+          },
+          "v16": {
+            "d": 15341,
+            "r": 24441,
+            "total": 42226
+          },
+          "m24": -20.24,
+          "m20": -17.12,
+          "m16": -22.87,
+          "swing": -3.13,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 46.6,
+          "voteShare": 2.68
+        }
+      ]
+    },
+    "KS": {
+      "code": "KS",
+      "state": "Kansas",
+      "dem": "Adam Hamilton",
+      "rep": "Roger Marshall",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 105,
+      "stateCycles": {
+        "2016": {
+          "d": 414788,
+          "r": 656009,
+          "share": 0.38736380471742077,
+          "margin": -0.22527239056515846,
+          "total": 1147143
+        },
+        "2020": {
+          "d": 558669,
+          "r": 758100,
+          "share": 0.42427259450974314,
+          "margin": -0.15145481098051367,
+          "total": 1349567
+        },
+        "2024": {
+          "d": 544853,
+          "r": 758802,
+          "share": 0.4179426305272484,
+          "margin": -0.1641147389455032,
+          "total": 1327591
+        }
+      },
+      "selectedBallotShare": 64.52,
+      "stateBaselineTwoPartyDShare": 41.79,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "20091",
+          "name": "Johnson",
+          "kind": "County",
+          "score": 78,
+          "v24": {
+            "d": 183451,
+            "r": 154247,
+            "total": 343780
+          },
+          "v20": {
+            "d": 184259,
+            "r": 155631,
+            "total": 349386
+          },
+          "v16": {
+            "d": 126324,
+            "r": 133907,
+            "total": 279753
+          },
+          "m24": 8.65,
+          "m20": 8.42,
+          "m16": -2.91,
+          "swing": 0.23,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 62.53,
+          "voteShare": 25.9
+        },
+        {
+          "rank": 2,
+          "fips": "20173",
+          "name": "Sedgwick",
+          "kind": "County",
+          "score": 69,
+          "v24": {
+            "d": 90506,
+            "r": 120118,
+            "total": 214152
+          },
+          "v20": {
+            "d": 90820,
+            "r": 117653,
+            "total": 213552
+          },
+          "v16": {
+            "d": 66716,
+            "r": 101319,
+            "total": 180750
+          },
+          "m24": -14.06,
+          "m20": -12.87,
+          "m16": -20.59,
+          "swing": -1.19,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.18,
+          "voteShare": 16.13
+        },
+        {
+          "rank": 3,
+          "fips": "20209",
+          "name": "Wyandotte",
+          "kind": "County",
+          "score": 44,
+          "v24": {
+            "d": 30938,
+            "r": 18867,
+            "total": 50602
+          },
+          "v20": {
+            "d": 35566,
+            "r": 18512,
+            "total": 55107
+          },
+          "v16": {
+            "d": 29346,
+            "r": 15520,
+            "total": 47467
+          },
+          "m24": 24.24,
+          "m20": 31.54,
+          "m16": 30.82,
+          "swing": -7.3,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 70.32,
+          "voteShare": 3.81
+        },
+        {
+          "rank": 4,
+          "fips": "20177",
+          "name": "Shawnee",
+          "kind": "County",
+          "score": 41,
+          "v24": {
+            "d": 40308,
+            "r": 39901,
+            "total": 81819
+          },
+          "v20": {
+            "d": 43015,
+            "r": 40443,
+            "total": 86122
+          },
+          "v16": {
+            "d": 33270,
+            "r": 35349,
+            "total": 73648
+          },
+          "m24": 0.51,
+          "m20": 3.08,
+          "m16": -3.03,
+          "swing": -2.57,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 58.46,
+          "voteShare": 6.16
+        },
+        {
+          "rank": 5,
+          "fips": "20045",
+          "name": "Douglas",
+          "kind": "County",
+          "score": 26,
+          "v24": {
+            "d": 39582,
+            "r": 17523,
+            "total": 58041
+          },
+          "v20": {
+            "d": 39436,
+            "r": 16737,
+            "total": 57540
+          },
+          "v16": {
+            "d": 30089,
+            "r": 14308,
+            "total": 48231
+          },
+          "m24": 38.63,
+          "m20": 40.41,
+          "m16": 35.55,
+          "swing": -1.78,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 77.52,
+          "voteShare": 4.37
+        },
+        {
+          "rank": 6,
+          "fips": "20161",
+          "name": "Riley",
+          "kind": "County",
+          "score": 21,
+          "v24": {
+            "d": 12063,
+            "r": 11630,
+            "total": 24313
+          },
+          "v20": {
+            "d": 11940,
+            "r": 11174,
+            "total": 23855
+          },
+          "v16": {
+            "d": 8892,
+            "r": 9817,
+            "total": 20475
+          },
+          "m24": 1.83,
+          "m20": 3.31,
+          "m16": -4.94,
+          "swing": -1.49,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 59.12,
+          "voteShare": 1.83
+        },
+        {
+          "rank": 7,
+          "fips": "20103",
+          "name": "Leavenworth",
+          "kind": "County",
+          "score": 20,
+          "v24": {
+            "d": 13732,
+            "r": 22055,
+            "total": 36547
+          },
+          "v20": {
+            "d": 13753,
+            "r": 21378,
+            "total": 36115
+          },
+          "v16": {
+            "d": 10064,
+            "r": 17387,
+            "total": 29676
+          },
+          "m24": -23.26,
+          "m20": -21.7,
+          "m16": -26.68,
+          "swing": -1.55,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 46.58,
+          "voteShare": 2.75
+        },
+        {
+          "rank": 8,
+          "fips": "20111",
+          "name": "Lyon",
+          "kind": "County",
+          "score": 16,
+          "v24": {
+            "d": 5515,
+            "r": 7462,
+            "total": 13256
+          },
+          "v20": {
+            "d": 5878,
+            "r": 7381,
+            "total": 13622
+          },
+          "v16": {
+            "d": 4456,
+            "r": 6354,
+            "total": 11745
+          },
+          "m24": -15,
+          "m20": -11.34,
+          "m16": -17.56,
+          "swing": -3.67,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.7,
+          "voteShare": 1
+        },
+        {
+          "rank": 9,
+          "fips": "20055",
+          "name": "Finney",
+          "kind": "County",
+          "score": 14,
+          "v24": {
+            "d": 3425,
+            "r": 7166,
+            "total": 10782
+          },
+          "v20": {
+            "d": 4155,
+            "r": 7079,
+            "total": 11466
+          },
+          "v16": {
+            "d": 3006,
+            "r": 6155,
+            "total": 9731
+          },
+          "m24": -35.32,
+          "m20": -26.03,
+          "m16": -34.37,
+          "swing": -9.29,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 40.54,
+          "voteShare": 0.81
+        },
+        {
+          "rank": 10,
+          "fips": "20169",
+          "name": "Saline",
+          "kind": "County",
+          "score": 13,
+          "v24": {
+            "d": 7734,
+            "r": 15069,
+            "total": 23226
+          },
+          "v20": {
+            "d": 8022,
+            "r": 15313,
+            "total": 23911
+          },
+          "v16": {
+            "d": 6084,
+            "r": 13367,
+            "total": 21206
+          },
+          "m24": -32.17,
+          "m20": -31.24,
+          "m16": -37.44,
+          "swing": -0.92,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 42.12,
+          "voteShare": 1.75
+        }
+      ]
+    },
+    "MN": {
+      "code": "MN",
+      "state": "Minnesota",
+      "dem": "Peggy Flanagan",
+      "rep": "Michele Tafoya",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 87,
+      "stateCycles": {
+        "2016": {
+          "d": 1366676,
+          "r": 1322891,
+          "share": 0.5081397860696536,
+          "margin": 0.016279572139307183,
+          "total": 2916404
+        },
+        "2020": {
+          "d": 1717077,
+          "r": 1484065,
+          "share": 0.5363951364856667,
+          "margin": 0.07279027297133335,
+          "total": 3277171
+        },
+        "2024": {
+          "d": 1656979,
+          "r": 1519032,
+          "share": 0.5217170217609448,
+          "margin": 0.043434043521889565,
+          "total": 3240916
+        }
+      },
+      "selectedBallotShare": 61.53,
+      "stateBaselineTwoPartyDShare": 52.17,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "27053",
+          "name": "Hennepin",
+          "kind": "County",
+          "score": 80,
+          "v24": {
+            "d": 502710,
+            "r": 197244,
+            "total": 716591
+          },
+          "v20": {
+            "d": 532623,
+            "r": 205973,
+            "total": 755969
+          },
+          "v16": {
+            "d": 429283,
+            "r": 191768,
+            "total": 672644
+          },
+          "m24": 43.64,
+          "m20": 44.23,
+          "m16": 38.24,
+          "swing": -0.58,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 69.65,
+          "voteShare": 22.11
+        },
+        {
+          "rank": 2,
+          "fips": "27003",
+          "name": "Anoka",
+          "kind": "County",
+          "score": 52,
+          "v24": {
+            "d": 97667,
+            "r": 106974,
+            "total": 209656
+          },
+          "v20": {
+            "d": 100893,
+            "r": 104902,
+            "total": 211132
+          },
+          "v16": {
+            "d": 75499,
+            "r": 93341,
+            "total": 184084
+          },
+          "m24": -4.55,
+          "m20": -1.95,
+          "m16": -10.57,
+          "swing": -2.6,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 45.55,
+          "voteShare": 6.47
+        },
+        {
+          "rank": 3,
+          "fips": "27123",
+          "name": "Ramsey",
+          "kind": "County",
+          "score": 50,
+          "v24": {
+            "d": 195168,
+            "r": 75284,
+            "total": 276736
+          },
+          "v20": {
+            "d": 211620,
+            "r": 77376,
+            "total": 295977
+          },
+          "v16": {
+            "d": 176929,
+            "r": 70778,
+            "total": 269161
+          },
+          "m24": 44.33,
+          "m20": 46.45,
+          "m16": 42.85,
+          "swing": -2.12,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 69.99,
+          "voteShare": 8.54
+        },
+        {
+          "rank": 4,
+          "fips": "27037",
+          "name": "Dakota",
+          "kind": "County",
+          "score": 43,
+          "v24": {
+            "d": 143267,
+            "r": 109995,
+            "total": 258590
+          },
+          "v20": {
+            "d": 146155,
+            "r": 109638,
+            "total": 262259
+          },
+          "v16": {
+            "d": 110251,
+            "r": 99624,
+            "total": 228659
+          },
+          "m24": 13.14,
+          "m20": 14.28,
+          "m16": 5.06,
+          "swing": -1.14,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.4,
+          "voteShare": 7.98
+        },
+        {
+          "rank": 5,
+          "fips": "27137",
+          "name": "St. Louis",
+          "kind": "County",
+          "score": 30,
+          "v24": {
+            "d": 66335,
+            "r": 50065,
+            "total": 118587
+          },
+          "v20": {
+            "d": 67704,
+            "r": 49017,
+            "total": 119531
+          },
+          "v16": {
+            "d": 57769,
+            "r": 44631,
+            "total": 111260
+          },
+          "m24": 13.98,
+          "m20": 16.01,
+          "m16": 12.83,
+          "swing": -2.03,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.82,
+          "voteShare": 3.66
+        },
+        {
+          "rank": 6,
+          "fips": "27145",
+          "name": "Stearns",
+          "kind": "County",
+          "score": 29,
+          "v24": {
+            "d": 30829,
+            "r": 53932,
+            "total": 86361
+          },
+          "v20": {
+            "d": 31879,
+            "r": 50959,
+            "total": 84835
+          },
+          "v16": {
+            "d": 25575,
+            "r": 47618,
+            "total": 78985
+          },
+          "m24": -27.26,
+          "m20": -23.03,
+          "m16": -30.12,
+          "swing": -4.22,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 34.2,
+          "voteShare": 2.66
+        },
+        {
+          "rank": 7,
+          "fips": "27163",
+          "name": "Washington",
+          "kind": "County",
+          "score": 27,
+          "v24": {
+            "d": 90324,
+            "r": 75271,
+            "total": 168743
+          },
+          "v20": {
+            "d": 89165,
+            "r": 73764,
+            "total": 166786
+          },
+          "v16": {
+            "d": 67086,
+            "r": 64429,
+            "total": 142843
+          },
+          "m24": 9.09,
+          "m20": 9.45,
+          "m16": 2.02,
+          "swing": -0.36,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 52.37,
+          "voteShare": 5.21
+        },
+        {
+          "rank": 8,
+          "fips": "27139",
+          "name": "Scott",
+          "kind": "County",
+          "score": 26,
+          "v24": {
+            "d": 40214,
+            "r": 47837,
+            "total": 89806
+          },
+          "v20": {
+            "d": 40040,
+            "r": 45872,
+            "total": 87965
+          },
+          "v16": {
+            "d": 28502,
+            "r": 39948,
+            "total": 74390
+          },
+          "m24": -8.66,
+          "m20": -6.79,
+          "m16": -16.72,
+          "swing": -1.87,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 43.5,
+          "voteShare": 2.77
+        },
+        {
+          "rank": 9,
+          "fips": "27013",
+          "name": "Blue Earth",
+          "kind": "County",
+          "score": 26,
+          "v24": {
+            "d": 17558,
+            "r": 18001,
+            "total": 36326
+          },
+          "v20": {
+            "d": 18330,
+            "r": 16731,
+            "total": 36051
+          },
+          "v16": {
+            "d": 14428,
+            "r": 15667,
+            "total": 33256
+          },
+          "m24": -1.25,
+          "m20": 4.56,
+          "m16": -4.12,
+          "swing": -5.81,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 47.21,
+          "voteShare": 1.12
+        },
+        {
+          "rank": 10,
+          "fips": "27027",
+          "name": "Clay",
+          "kind": "County",
+          "score": 22,
+          "v24": {
+            "d": 16121,
+            "r": 15965,
+            "total": 32734
+          },
+          "v20": {
+            "d": 16357,
+            "r": 15043,
+            "total": 32239
+          },
+          "v16": {
+            "d": 12974,
+            "r": 13549,
+            "total": 29108
+          },
+          "m24": 0.49,
+          "m20": 4.18,
+          "m16": -2.17,
+          "swing": -3.7,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 48.07,
+          "voteShare": 1.01
+        }
+      ]
+    },
+    "AK": {
+      "code": "AK",
+      "state": "Alaska",
+      "dem": "Mary Peltola",
+      "rep": "Dan Sullivan",
+      "party": "D",
+      "unitType": "State House districts",
+      "totalUnits": 40,
+      "stateCycles": {
+        "2020": {
+          "d": 153405,
+          "r": 189892,
+          "share": 0.44685796846462394,
+          "margin": -0.10628406307075215,
+          "total": 391346
+        },
+        "2024": {
+          "d": 139690,
+          "r": 184407,
+          "share": 0.4310129374847654,
+          "margin": -0.13797412503046927,
+          "total": 324097
+        }
+      },
+      "selectedBallotShare": 31.58,
+      "stateBaselineTwoPartyDShare": 43.1,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "02009",
+          "name": "State House District 9",
+          "kind": "Alaska House district",
+          "score": 65,
+          "v24": {
+            "d": 5849,
+            "r": 5581,
+            "total": 11430
+          },
+          "v20": null,
+          "v16": null,
+          "m24": 2.34,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 0,
+            "cycles": 1,
+            "rate": 25
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 58.07,
+          "voteShare": 3.53
+        },
+        {
+          "rank": 2,
+          "fips": "02006",
+          "name": "State House District 6",
+          "kind": "Alaska House district",
+          "score": 64,
+          "v24": {
+            "d": 4773,
+            "r": 6705,
+            "total": 11478
+          },
+          "v20": null,
+          "v16": null,
+          "m24": -16.83,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 1,
+            "cycles": 1,
+            "rate": 75
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 48.48,
+          "voteShare": 3.54
+        },
+        {
+          "rank": 3,
+          "fips": "02003",
+          "name": "State House District 3",
+          "kind": "Alaska House district",
+          "score": 60,
+          "v24": {
+            "d": 6130,
+            "r": 4496,
+            "total": 10626
+          },
+          "v20": null,
+          "v16": null,
+          "m24": 15.38,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 0,
+            "cycles": 1,
+            "rate": 25
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 64.59,
+          "voteShare": 3.28
+        },
+        {
+          "rank": 4,
+          "fips": "02023",
+          "name": "State House District 23",
+          "kind": "Alaska House district",
+          "score": 57,
+          "v24": {
+            "d": 4116,
+            "r": 6101,
+            "total": 10217
+          },
+          "v20": null,
+          "v16": null,
+          "m24": -19.43,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 1,
+            "cycles": 1,
+            "rate": 75
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 47.18,
+          "voteShare": 3.15
+        },
+        {
+          "rank": 5,
+          "fips": "02008",
+          "name": "State House District 8",
+          "kind": "Alaska House district",
+          "score": 56,
+          "v24": {
+            "d": 2576,
+            "r": 7950,
+            "total": 10526
+          },
+          "v20": null,
+          "v16": null,
+          "m24": -51.05,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 1,
+            "cycles": 1,
+            "rate": 75
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 31.37,
+          "voteShare": 3.25
+        },
+        {
+          "rank": 6,
+          "fips": "02011",
+          "name": "State House District 11",
+          "kind": "Alaska House district",
+          "score": 56,
+          "v24": {
+            "d": 4633,
+            "r": 4864,
+            "total": 9497
+          },
+          "v20": null,
+          "v16": null,
+          "m24": -2.43,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 1,
+            "cycles": 1,
+            "rate": 75
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 55.68,
+          "voteShare": 2.93
+        },
+        {
+          "rank": 7,
+          "fips": "02025",
+          "name": "State House District 25",
+          "kind": "Alaska House district",
+          "score": 55,
+          "v24": {
+            "d": 3172,
+            "r": 6891,
+            "total": 10063
+          },
+          "v20": null,
+          "v16": null,
+          "m24": -36.96,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 1,
+            "cycles": 1,
+            "rate": 75
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 38.42,
+          "voteShare": 3.1
+        },
+        {
+          "rank": 8,
+          "fips": "02035",
+          "name": "State House District 35",
+          "kind": "Alaska House district",
+          "score": 55,
+          "v24": {
+            "d": 4885,
+            "r": 4395,
+            "total": 9280
+          },
+          "v20": null,
+          "v16": null,
+          "m24": 5.28,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 0,
+            "cycles": 1,
+            "rate": 25
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 59.54,
+          "voteShare": 2.86
+        },
+        {
+          "rank": 9,
+          "fips": "02002",
+          "name": "State House District 2",
+          "kind": "Alaska House district",
+          "score": 55,
+          "v24": {
+            "d": 4571,
+            "r": 4534,
+            "total": 9105
+          },
+          "v20": null,
+          "v16": null,
+          "m24": 0.41,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 0,
+            "cycles": 1,
+            "rate": 25
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 57.1,
+          "voteShare": 2.81
+        },
+        {
+          "rank": 10,
+          "fips": "02029",
+          "name": "State House District 29",
+          "kind": "Alaska House district",
+          "score": 54,
+          "v24": {
+            "d": 2708,
+            "r": 7418,
+            "total": 10126
+          },
+          "v20": null,
+          "v16": null,
+          "m24": -46.51,
+          "m20": null,
+          "m16": null,
+          "swing": null,
+          "alignment": {
+            "matches": 1,
+            "cycles": 1,
+            "rate": 75
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 33.64,
+          "voteShare": 3.12
+        }
+      ]
+    },
+    "GA": {
+      "code": "GA",
+      "state": "Georgia",
+      "dem": "Jon Ossoff",
+      "rep": "Mike Collins",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 159,
+      "stateCycles": {
+        "2016": {
+          "d": 1837300,
+          "r": 2068623,
+          "share": 0.47038817713508435,
+          "margin": -0.05922364572983133,
+          "total": 4029564
+        },
+        "2020": {
+          "d": 2473633,
+          "r": 2461854,
+          "share": 0.5011932966290864,
+          "margin": 0.0023865932581729017,
+          "total": 4997716
+        },
+        "2024": {
+          "d": 2548017,
+          "r": 2663117,
+          "share": 0.4889563384860186,
+          "margin": -0.02208732302796282,
+          "total": 5250047
+        }
+      },
+      "selectedBallotShare": 45.85,
+      "stateBaselineTwoPartyDShare": 48.9,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "13121",
+          "name": "Fulton",
+          "kind": "County",
+          "score": 80,
+          "v24": {
+            "d": 384752,
+            "r": 144655,
+            "total": 535238
+          },
+          "v20": {
+            "d": 380212,
+            "r": 137247,
+            "total": 523779
+          },
+          "v16": {
+            "d": 281875,
+            "r": 110372,
+            "total": 407173
+          },
+          "m24": 45.35,
+          "m20": 46.95,
+          "m16": 43.72,
+          "swing": -1.6,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 73.78,
+          "voteShare": 10.19
+        },
+        {
+          "rank": 2,
+          "fips": "13135",
+          "name": "Gwinnett",
+          "kind": "County",
+          "score": 68,
+          "v24": {
+            "d": 242507,
+            "r": 173041,
+            "total": 420681
+          },
+          "v20": {
+            "d": 241994,
+            "r": 166400,
+            "total": 414023
+          },
+          "v16": {
+            "d": 165063,
+            "r": 146463,
+            "total": 323931
+          },
+          "m24": 16.72,
+          "m20": 18.51,
+          "m16": 5.97,
+          "swing": -1.79,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 59.46,
+          "voteShare": 8.01
+        },
+        {
+          "rank": 3,
+          "fips": "13089",
+          "name": "DeKalb",
+          "kind": "County",
+          "score": 65,
+          "v24": {
+            "d": 299630,
+            "r": 62622,
+            "total": 366008
+          },
+          "v20": {
+            "d": 308162,
+            "r": 58377,
+            "total": 370746
+          },
+          "v16": {
+            "d": 239131,
+            "r": 47531,
+            "total": 295871
+          },
+          "m24": 65.43,
+          "m20": 68.15,
+          "m16": 66.84,
+          "swing": -2.72,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 83.82,
+          "voteShare": 6.97
+        },
+        {
+          "rank": 4,
+          "fips": "13067",
+          "name": "Cobb",
+          "kind": "County",
+          "score": 55,
+          "v24": {
+            "d": 228404,
+            "r": 168679,
+            "total": 401369
+          },
+          "v20": {
+            "d": 221847,
+            "r": 165436,
+            "total": 393728
+          },
+          "v16": {
+            "d": 159416,
+            "r": 152602,
+            "total": 326424
+          },
+          "m24": 15.04,
+          "m20": 14.57,
+          "m16": 2.18,
+          "swing": 0.48,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 58.62,
+          "voteShare": 7.65
+        },
+        {
+          "rank": 5,
+          "fips": "13151",
+          "name": "Henry",
+          "kind": "County",
+          "score": 45,
+          "v24": {
+            "d": 83253,
+            "r": 44982,
+            "total": 129034
+          },
+          "v20": {
+            "d": 73443,
+            "r": 48259,
+            "total": 122998
+          },
+          "v16": {
+            "d": 49902,
+            "r": 45641,
+            "total": 98037
+          },
+          "m24": 29.84,
+          "m20": 20.69,
+          "m16": 4.46,
+          "swing": 9.15,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 66.03,
+          "voteShare": 2.46
+        },
+        {
+          "rank": 6,
+          "fips": "13223",
+          "name": "Paulding",
+          "kind": "County",
+          "score": 28,
+          "v24": {
+            "d": 35802,
+            "r": 58769,
+            "total": 95196
+          },
+          "v20": {
+            "d": 29695,
+            "r": 54517,
+            "total": 85372
+          },
+          "v16": {
+            "d": 18004,
+            "r": 44646,
+            "total": 64601
+          },
+          "m24": -24.29,
+          "m20": -29.48,
+          "m16": -42.53,
+          "swing": 5.19,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 38.96,
+          "voteShare": 1.81
+        },
+        {
+          "rank": 7,
+          "fips": "13113",
+          "name": "Fayette",
+          "kind": "County",
+          "score": 27,
+          "v24": {
+            "d": 35822,
+            "r": 38177,
+            "total": 74633
+          },
+          "v20": {
+            "d": 33062,
+            "r": 37956,
+            "total": 71994
+          },
+          "v16": {
+            "d": 23255,
+            "r": 35034,
+            "total": 60387
+          },
+          "m24": -3.18,
+          "m20": -6.89,
+          "m16": -20.21,
+          "swing": 3.71,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 49.51,
+          "voteShare": 1.42
+        },
+        {
+          "rank": 8,
+          "fips": "13051",
+          "name": "Chatham",
+          "kind": "County",
+          "score": 26,
+          "v24": {
+            "d": 82758,
+            "r": 57336,
+            "total": 141109
+          },
+          "v20": {
+            "d": 78247,
+            "r": 53232,
+            "total": 133408
+          },
+          "v16": {
+            "d": 58998,
+            "r": 43649,
+            "total": 106013
+          },
+          "m24": 18.15,
+          "m20": 19.03,
+          "m16": 14.95,
+          "swing": -0.88,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 60.18,
+          "voteShare": 2.69
+        },
+        {
+          "rank": 9,
+          "fips": "13057",
+          "name": "Cherokee",
+          "kind": "County",
+          "score": 23,
+          "v24": {
+            "d": 48838,
+            "r": 112142,
+            "total": 162281
+          },
+          "v20": {
+            "d": 42779,
+            "r": 99585,
+            "total": 144815
+          },
+          "v16": {
+            "d": 25203,
+            "r": 80611,
+            "total": 110825
+          },
+          "m24": -39.32,
+          "m20": -39.9,
+          "m16": -52.36,
+          "swing": 0.58,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 31.44,
+          "voteShare": 3.09
+        },
+        {
+          "rank": 10,
+          "fips": "13153",
+          "name": "Houston",
+          "kind": "County",
+          "score": 22,
+          "v24": {
+            "d": 35907,
+            "r": 45090,
+            "total": 81514
+          },
+          "v20": {
+            "d": 32239,
+            "r": 41540,
+            "total": 74838
+          },
+          "v16": {
+            "d": 22460,
+            "r": 35351,
+            "total": 59559
+          },
+          "m24": -11.34,
+          "m20": -12.61,
+          "m16": -22.3,
+          "swing": 1.27,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 45.44,
+          "voteShare": 1.55
+        }
+      ]
+    },
+    "NC": {
+      "code": "NC",
+      "state": "North Carolina",
+      "dem": "Roy Cooper",
+      "rep": "Michael Whatley",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 100,
+      "stateCycles": {
+        "2016": {
+          "d": 2162074,
+          "r": 2339603,
+          "share": 0.48028190383272723,
+          "margin": -0.039436192334545546,
+          "total": 4629471
+        },
+        "2020": {
+          "d": 2684292,
+          "r": 2758773,
+          "share": 0.4931581746681328,
+          "margin": -0.013683650663734495,
+          "total": 5524801
+        },
+        "2024": {
+          "d": 2715375,
+          "r": 2898423,
+          "share": 0.48369659898699596,
+          "margin": -0.03260680202600806,
+          "total": 5679647
+        }
+      },
+      "selectedBallotShare": 43.7,
+      "stateBaselineTwoPartyDShare": 48.37,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "37119",
+          "name": "Mecklenburg",
+          "kind": "County",
+          "score": 84,
+          "v24": {
+            "d": 376454,
+            "r": 187770,
+            "total": 573679
+          },
+          "v20": {
+            "d": 378107,
+            "r": 179211,
+            "total": 567053
+          },
+          "v16": {
+            "d": 292258,
+            "r": 154303,
+            "total": 461834
+          },
+          "m24": 33.44,
+          "m20": 35.69,
+          "m16": 30.89,
+          "swing": -2.25,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 68.35,
+          "voteShare": 10.1
+        },
+        {
+          "rank": 2,
+          "fips": "37183",
+          "name": "Wake",
+          "kind": "County",
+          "score": 79,
+          "v24": {
+            "d": 402984,
+            "r": 236735,
+            "total": 650796
+          },
+          "v20": {
+            "d": 393336,
+            "r": 226197,
+            "total": 631830
+          },
+          "v16": {
+            "d": 298353,
+            "r": 193607,
+            "total": 510940
+          },
+          "m24": 25.99,
+          "m20": 26.98,
+          "m16": 21.29,
+          "swing": -0.99,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 64.62,
+          "voteShare": 11.46
+        },
+        {
+          "rank": 3,
+          "fips": "37081",
+          "name": "Guilford",
+          "kind": "County",
+          "score": 41,
+          "v24": {
+            "d": 171118,
+            "r": 109077,
+            "total": 284114
+          },
+          "v20": {
+            "d": 173086,
+            "r": 107294,
+            "total": 284486
+          },
+          "v16": {
+            "d": 147949,
+            "r": 97461,
+            "total": 252087
+          },
+          "m24": 22.14,
+          "m20": 23.47,
+          "m16": 20.57,
+          "swing": -1.32,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 62.7,
+          "voteShare": 5
+        },
+        {
+          "rank": 4,
+          "fips": "37021",
+          "name": "Buncombe",
+          "kind": "County",
+          "score": 33,
+          "v24": {
+            "d": 98662,
+            "r": 59016,
+            "total": 159885
+          },
+          "v20": {
+            "d": 96515,
+            "r": 62412,
+            "total": 161569
+          },
+          "v16": {
+            "d": 74937,
+            "r": 55339,
+            "total": 134507
+          },
+          "m24": 25.14,
+          "m20": 21.46,
+          "m16": 15.04,
+          "swing": 3.69,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 64.2,
+          "voteShare": 2.82
+        },
+        {
+          "rank": 5,
+          "fips": "37051",
+          "name": "Cumberland",
+          "kind": "County",
+          "score": 32,
+          "v24": {
+            "d": 78631,
+            "r": 59840,
+            "total": 140175
+          },
+          "v20": {
+            "d": 84469,
+            "r": 60032,
+            "total": 147150
+          },
+          "v16": {
+            "d": 70523,
+            "r": 50593,
+            "total": 124402
+          },
+          "m24": 13.57,
+          "m20": 16.91,
+          "m16": 16.46,
+          "swing": -3.34,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 58.42,
+          "voteShare": 2.47
+        },
+        {
+          "rank": 6,
+          "fips": "37067",
+          "name": "Forsyth",
+          "kind": "County",
+          "score": 31,
+          "v24": {
+            "d": 114145,
+            "r": 87292,
+            "total": 203928
+          },
+          "v20": {
+            "d": 113033,
+            "r": 85064,
+            "total": 201270
+          },
+          "v16": {
+            "d": 92488,
+            "r": 74793,
+            "total": 172509
+          },
+          "m24": 13.33,
+          "m20": 14.12,
+          "m16": 10.58,
+          "swing": -0.79,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 58.3,
+          "voteShare": 3.59
+        },
+        {
+          "rank": 7,
+          "fips": "37129",
+          "name": "New Hanover",
+          "kind": "County",
+          "score": 30,
+          "v24": {
+            "d": 68814,
+            "r": 67949,
+            "total": 138243
+          },
+          "v20": {
+            "d": 66138,
+            "r": 63331,
+            "total": 131830
+          },
+          "v16": {
+            "d": 50219,
+            "r": 54665,
+            "total": 108737
+          },
+          "m24": 0.63,
+          "m20": 2.17,
+          "m16": -4.24,
+          "swing": -1.54,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.95,
+          "voteShare": 2.43
+        },
+        {
+          "rank": 8,
+          "fips": "37101",
+          "name": "Johnston",
+          "kind": "County",
+          "score": 27,
+          "v24": {
+            "d": 48116,
+            "r": 74878,
+            "total": 124360
+          },
+          "v20": {
+            "d": 41257,
+            "r": 68353,
+            "total": 111357
+          },
+          "v16": {
+            "d": 28153,
+            "r": 54082,
+            "total": 84553
+          },
+          "m24": -21.76,
+          "m20": -24.72,
+          "m16": -31.53,
+          "swing": 2.96,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 40.75,
+          "voteShare": 2.19
+        },
+        {
+          "rank": 9,
+          "fips": "37025",
+          "name": "Cabarrus",
+          "kind": "County",
+          "score": 26,
+          "v24": {
+            "d": 54494,
+            "r": 63746,
+            "total": 119820
+          },
+          "v20": {
+            "d": 52162,
+            "r": 63237,
+            "total": 117227
+          },
+          "v16": {
+            "d": 35048,
+            "r": 53224,
+            "total": 91002
+          },
+          "m24": -7.82,
+          "m20": -9.6,
+          "m16": -20.59,
+          "swing": 1.77,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 47.72,
+          "voteShare": 2.11
+        },
+        {
+          "rank": 10,
+          "fips": "37147",
+          "name": "Pitt",
+          "kind": "County",
+          "score": 26,
+          "v24": {
+            "d": 45595,
+            "r": 40403,
+            "total": 86924
+          },
+          "v20": {
+            "d": 47252,
+            "r": 38982,
+            "total": 87573
+          },
+          "v16": {
+            "d": 40967,
+            "r": 35191,
+            "total": 78264
+          },
+          "m24": 6.04,
+          "m20": 9.59,
+          "m16": 7.58,
+          "swing": -3.55,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.65,
+          "voteShare": 1.53
+        }
+      ]
+    },
+    "NH": {
+      "code": "NH",
+      "state": "New Hampshire",
+      "dem": "Chris Pappas",
+      "rep": "John E. Sununu",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 10,
+      "stateCycles": {
+        "2016": {
+          "d": 348521,
+          "r": 345789,
+          "share": 0.5019674208926849,
+          "margin": 0.0039348417853696475,
+          "total": 731553
+        },
+        "2020": {
+          "d": 424921,
+          "r": 365654,
+          "share": 0.5374834772159505,
+          "margin": 0.07496695443190084,
+          "total": 804430
+        },
+        "2024": {
+          "d": 418496,
+          "r": 395578,
+          "share": 0.5140761159304928,
+          "margin": 0.02815223186098561,
+          "total": 822153
+        }
+      },
+      "selectedBallotShare": 100,
+      "stateBaselineTwoPartyDShare": 51.41,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "33011",
+          "name": "Hillsborough",
+          "kind": "County",
+          "score": 95,
+          "v24": {
+            "d": 118780,
+            "r": 112068,
+            "total": 233234
+          },
+          "v20": {
+            "d": 122344,
+            "r": 104625,
+            "total": 231040
+          },
+          "v16": {
+            "d": 99589,
+            "r": 100013,
+            "total": 210622
+          },
+          "m24": 2.91,
+          "m20": 7.81,
+          "m16": -0.21,
+          "swing": -4.9,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.05,
+          "voteShare": 28.37
+        },
+        {
+          "rank": 2,
+          "fips": "33015",
+          "name": "Rockingham",
+          "kind": "County",
+          "score": 82,
+          "v24": {
+            "d": 97616,
+            "r": 102542,
+            "total": 201949
+          },
+          "v20": {
+            "d": 100064,
+            "r": 95858,
+            "total": 198943
+          },
+          "v16": {
+            "d": 79994,
+            "r": 90447,
+            "total": 179005
+          },
+          "m24": -2.46,
+          "m20": 2.15,
+          "m16": -6.13,
+          "swing": -4.61,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 47.36,
+          "voteShare": 24.56
+        },
+        {
+          "rank": 3,
+          "fips": "33013",
+          "name": "Merrimack",
+          "kind": "County",
+          "score": 47,
+          "v24": {
+            "d": 48181,
+            "r": 43365,
+            "total": 92475
+          },
+          "v20": {
+            "d": 48533,
+            "r": 39711,
+            "total": 89887
+          },
+          "v16": {
+            "d": 40198,
+            "r": 37674,
+            "total": 81982
+          },
+          "m24": 5.26,
+          "m20": 10,
+          "m16": 3.24,
+          "swing": -4.74,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.22,
+          "voteShare": 11.25
+        },
+        {
+          "rank": 4,
+          "fips": "33017",
+          "name": "Strafford",
+          "kind": "County",
+          "score": 42,
+          "v24": {
+            "d": 42374,
+            "r": 33163,
+            "total": 76323
+          },
+          "v20": {
+            "d": 41721,
+            "r": 30489,
+            "total": 73729
+          },
+          "v16": {
+            "d": 34894,
+            "r": 29072,
+            "total": 67918
+          },
+          "m24": 12.19,
+          "m20": 15.55,
+          "m16": 9.1,
+          "swing": -3.36,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.69,
+          "voteShare": 9.28
+        },
+        {
+          "rank": 5,
+          "fips": "33009",
+          "name": "Grafton",
+          "kind": "County",
+          "score": 37,
+          "v24": {
+            "d": 32998,
+            "r": 21911,
+            "total": 55603
+          },
+          "v20": {
+            "d": 33180,
+            "r": 19905,
+            "total": 53989
+          },
+          "v16": {
+            "d": 28510,
+            "r": 19010,
+            "total": 50065
+          },
+          "m24": 20.19,
+          "m20": 25.01,
+          "m16": 19.99,
+          "swing": -4.82,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 58.69,
+          "voteShare": 6.76
+        },
+        {
+          "rank": 6,
+          "fips": "33005",
+          "name": "Cheshire",
+          "kind": "County",
+          "score": 33,
+          "v24": {
+            "d": 24579,
+            "r": 20142,
+            "total": 45200
+          },
+          "v20": {
+            "d": 25506,
+            "r": 17892,
+            "total": 44206
+          },
+          "v16": {
+            "d": 22064,
+            "r": 16876,
+            "total": 41080
+          },
+          "m24": 9.92,
+          "m20": 17.54,
+          "m16": 13.32,
+          "swing": -7.62,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 53.55,
+          "voteShare": 5.5
+        },
+        {
+          "rank": 7,
+          "fips": "33001",
+          "name": "Belknap",
+          "kind": "County",
+          "score": 27,
+          "v24": {
+            "d": 17469,
+            "r": 22765,
+            "total": 40550
+          },
+          "v20": {
+            "d": 16894,
+            "r": 20899,
+            "total": 38453
+          },
+          "v16": {
+            "d": 13517,
+            "r": 19315,
+            "total": 34462
+          },
+          "m24": -13.16,
+          "m20": -10.6,
+          "m16": -17.66,
+          "swing": -2.57,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 42.01,
+          "voteShare": 4.93
+        },
+        {
+          "rank": 8,
+          "fips": "33003",
+          "name": "Carroll",
+          "kind": "County",
+          "score": 25,
+          "v24": {
+            "d": 16827,
+            "r": 17407,
+            "total": 34498
+          },
+          "v20": {
+            "d": 16649,
+            "r": 16150,
+            "total": 33272
+          },
+          "v16": {
+            "d": 12987,
+            "r": 14635,
+            "total": 29063
+          },
+          "m24": -1.69,
+          "m20": 1.52,
+          "m16": -5.97,
+          "swing": -3.22,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 47.75,
+          "voteShare": 4.2
+        },
+        {
+          "rank": 9,
+          "fips": "33019",
+          "name": "Sullivan",
+          "kind": "County",
+          "score": 23,
+          "v24": {
+            "d": 12317,
+            "r": 12484,
+            "total": 25091
+          },
+          "v20": {
+            "d": 12390,
+            "r": 11508,
+            "total": 24383
+          },
+          "v16": {
+            "d": 10210,
+            "r": 10796,
+            "total": 22101
+          },
+          "m24": -0.67,
+          "m20": 3.69,
+          "m16": -2.79,
+          "swing": -4.36,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 48.26,
+          "voteShare": 3.05
+        },
+        {
+          "rank": 10,
+          "fips": "33007",
+          "name": "Coos",
+          "kind": "County",
+          "score": 20,
+          "v24": {
+            "d": 7355,
+            "r": 9731,
+            "total": 17230
+          },
+          "v20": {
+            "d": 7640,
+            "r": 8617,
+            "total": 16528
+          },
+          "v16": {
+            "d": 6558,
+            "r": 7951,
+            "total": 15255
+          },
+          "m24": -13.91,
+          "m20": -6.01,
+          "m16": -9.6,
+          "swing": -7.9,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 41.64,
+          "voteShare": 2.1
+        }
+      ]
+    },
+    "NE": {
+      "code": "NE",
+      "state": "Nebraska",
+      "dem": "Dan Osborn",
+      "rep": "Pete Ricketts",
+      "party": "I",
+      "unitType": "Counties",
+      "totalUnits": 93,
+      "stateCycles": {
+        "2016": {
+          "d": 273858,
+          "r": 485819,
+          "share": 0.3604926830745172,
+          "margin": -0.2790146338509656,
+          "total": 805638
+        },
+        "2020": {
+          "d": 374583,
+          "r": 556846,
+          "share": 0.40215947753398273,
+          "margin": -0.19568104493203453,
+          "total": 956379
+        },
+        "2024": {
+          "d": 369995,
+          "r": 564816,
+          "share": 0.39579658348051105,
+          "margin": -0.20840683303897795,
+          "total": 947159
+        }
+      },
+      "selectedBallotShare": 66.92,
+      "stateBaselineTwoPartyDShare": 39.58,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "31055",
+          "name": "Douglas",
+          "kind": "County",
+          "score": 87,
+          "v24": {
+            "d": 148733,
+            "r": 120919,
+            "total": 273403
+          },
+          "v20": {
+            "d": 150350,
+            "r": 119159,
+            "total": 276540
+          },
+          "v16": {
+            "d": 105207,
+            "r": 102151,
+            "total": 219531
+          },
+          "m24": 10.31,
+          "m20": 11.57,
+          "m16": 1.47,
+          "swing": -1.26,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 65.58,
+          "voteShare": 28.87
+        },
+        {
+          "rank": 2,
+          "fips": "31109",
+          "name": "Lancaster",
+          "kind": "County",
+          "score": 70,
+          "v24": {
+            "d": 81012,
+            "r": 74215,
+            "total": 157633
+          },
+          "v20": {
+            "d": 82293,
+            "r": 70092,
+            "total": 157215
+          },
+          "v16": {
+            "d": 60533,
+            "r": 60456,
+            "total": 129803
+          },
+          "m24": 4.38,
+          "m20": 8.01,
+          "m16": 0.06,
+          "swing": -3.63,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 62.61,
+          "voteShare": 16.64
+        },
+        {
+          "rank": 3,
+          "fips": "31153",
+          "name": "Sarpy",
+          "kind": "County",
+          "score": 35,
+          "v24": {
+            "d": 43825,
+            "r": 55567,
+            "total": 100735
+          },
+          "v20": {
+            "d": 41206,
+            "r": 51979,
+            "total": 96193
+          },
+          "v16": {
+            "d": 27704,
+            "r": 44649,
+            "total": 77781
+          },
+          "m24": -11.81,
+          "m20": -11.56,
+          "m16": -23.42,
+          "swing": -0.25,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 54.51,
+          "voteShare": 10.64
+        },
+        {
+          "rank": 4,
+          "fips": "31173",
+          "name": "Thurston",
+          "kind": "County",
+          "score": 14,
+          "v24": {
+            "d": 978,
+            "r": 1125,
+            "total": 2123
+          },
+          "v20": {
+            "d": 1122,
+            "r": 1180,
+            "total": 2379
+          },
+          "v16": {
+            "d": 911,
+            "r": 1013,
+            "total": 2029
+          },
+          "m24": -6.99,
+          "m20": -2.52,
+          "m16": -5.3,
+          "swing": -4.47,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 56.93,
+          "voteShare": 0.22
+        },
+        {
+          "rank": 5,
+          "fips": "31079",
+          "name": "Hall",
+          "kind": "County",
+          "score": 13,
+          "v24": {
+            "d": 6956,
+            "r": 15566,
+            "total": 22804
+          },
+          "v20": {
+            "d": 7681,
+            "r": 16189,
+            "total": 24450
+          },
+          "v16": {
+            "d": 6142,
+            "r": 14139,
+            "total": 21331
+          },
+          "m24": -38.23,
+          "m20": -35.64,
+          "m16": -39.43,
+          "swing": -2.59,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 41.31,
+          "voteShare": 2.41
+        },
+        {
+          "rank": 6,
+          "fips": "31043",
+          "name": "Dakota",
+          "kind": "County",
+          "score": 11,
+          "v24": {
+            "d": 2109,
+            "r": 3934,
+            "total": 6120
+          },
+          "v20": {
+            "d": 2744,
+            "r": 3926,
+            "total": 6817
+          },
+          "v16": {
+            "d": 2904,
+            "r": 4028,
+            "total": 7259
+          },
+          "m24": -30.2,
+          "m20": -17.72,
+          "m16": -16.21,
+          "swing": -12.48,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 45.32,
+          "voteShare": 0.65
+        },
+        {
+          "rank": 7,
+          "fips": "31019",
+          "name": "Buffalo",
+          "kind": "County",
+          "score": 10,
+          "v24": {
+            "d": 6386,
+            "r": 17064,
+            "total": 23759
+          },
+          "v20": {
+            "d": 6350,
+            "r": 16640,
+            "total": 23711
+          },
+          "v16": {
+            "d": 4690,
+            "r": 14424,
+            "total": 20477
+          },
+          "m24": -45.54,
+          "m20": -44.76,
+          "m16": -50.93,
+          "swing": -0.78,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 37.65,
+          "voteShare": 2.51
+        },
+        {
+          "rank": 8,
+          "fips": "31053",
+          "name": "Dodge",
+          "kind": "County",
+          "score": 10,
+          "v24": {
+            "d": 5434,
+            "r": 10795,
+            "total": 16443
+          },
+          "v20": {
+            "d": 5544,
+            "r": 10984,
+            "total": 16938
+          },
+          "v16": {
+            "d": 4451,
+            "r": 9736,
+            "total": 14959
+          },
+          "m24": -33.03,
+          "m20": -32.91,
+          "m16": -37.25,
+          "swing": -0.12,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 43.9,
+          "voteShare": 1.74
+        },
+        {
+          "rank": 9,
+          "fips": "31025",
+          "name": "Cass",
+          "kind": "County",
+          "score": 10,
+          "v24": {
+            "d": 4824,
+            "r": 10685,
+            "total": 15755
+          },
+          "v20": {
+            "d": 4737,
+            "r": 10121,
+            "total": 15326
+          },
+          "v16": {
+            "d": 3461,
+            "r": 8388,
+            "total": 12609
+          },
+          "m24": -37.79,
+          "m20": -36.24,
+          "m16": -41.58,
+          "swing": -1.55,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 41.52,
+          "voteShare": 1.66
+        },
+        {
+          "rank": 10,
+          "fips": "31157",
+          "name": "Scotts Bluff",
+          "kind": "County",
+          "score": 8,
+          "v24": {
+            "d": 3856,
+            "r": 11033,
+            "total": 15040
+          },
+          "v20": {
+            "d": 4196,
+            "r": 10952,
+            "total": 15524
+          },
+          "v16": {
+            "d": 3151,
+            "r": 9952,
+            "total": 13895
+          },
+          "m24": -48.2,
+          "m20": -44.6,
+          "m16": -51.9,
+          "swing": -3.6,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 36.32,
+          "voteShare": 1.59
+        }
+      ]
+    },
+    "SC": {
+      "code": "SC",
+      "state": "South Carolina",
+      "dem": "Annie Andrews",
+      "rep": "Darline Graham",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 46,
+      "stateCycles": {
+        "2016": {
+          "d": 849469,
+          "r": 1143611,
+          "share": 0.4262091837758645,
+          "margin": -0.14758163244827102,
+          "total": 2084444
+        },
+        "2020": {
+          "d": 1091541,
+          "r": 1385103,
+          "share": 0.44073391250417904,
+          "margin": -0.11853217499164191,
+          "total": 2513329
+        },
+        "2024": {
+          "d": 1028452,
+          "r": 1483747,
+          "share": 0.40938317386480927,
+          "margin": -0.18123365227038143,
+          "total": 2548140
+        }
+      },
+      "selectedBallotShare": 64.14,
+      "stateBaselineTwoPartyDShare": 40.94,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "45045",
+          "name": "Greenville",
+          "kind": "County",
+          "score": 82,
+          "v24": {
+            "d": 100074,
+            "r": 158541,
+            "total": 263316
+          },
+          "v20": {
+            "d": 103030,
+            "r": 150021,
+            "total": 258155
+          },
+          "v16": {
+            "d": 73338,
+            "r": 125595,
+            "total": 211572
+          },
+          "m24": -22.61,
+          "m20": -18.57,
+          "m16": -26.27,
+          "swing": -4.04,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 47.76,
+          "voteShare": 10.33
+        },
+        {
+          "rank": 2,
+          "fips": "45019",
+          "name": "Charleston",
+          "kind": "County",
+          "score": 81,
+          "v24": {
+            "d": 111427,
+            "r": 99265,
+            "total": 214521
+          },
+          "v20": {
+            "d": 121485,
+            "r": 93297,
+            "total": 218857
+          },
+          "v16": {
+            "d": 89048,
+            "r": 75233,
+            "total": 175850
+          },
+          "m24": 5.77,
+          "m20": 13.12,
+          "m16": 8.41,
+          "swing": -7.35,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 61.95,
+          "voteShare": 8.42
+        },
+        {
+          "rank": 3,
+          "fips": "45051",
+          "name": "Horry",
+          "kind": "County",
+          "score": 70,
+          "v24": {
+            "d": 62325,
+            "r": 141719,
+            "total": 205954
+          },
+          "v20": {
+            "d": 59180,
+            "r": 118821,
+            "total": 179744
+          },
+          "v16": {
+            "d": 36731,
+            "r": 83819,
+            "total": 124503
+          },
+          "m24": -38.91,
+          "m20": -33.51,
+          "m16": -39.06,
+          "swing": -5.4,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 39.61,
+          "voteShare": 8.08
+        },
+        {
+          "rank": 4,
+          "fips": "45079",
+          "name": "Richland",
+          "kind": "County",
+          "score": 58,
+          "v24": {
+            "d": 121110,
+            "r": 58019,
+            "total": 182411
+          },
+          "v20": {
+            "d": 132570,
+            "r": 58313,
+            "total": 193822
+          },
+          "v16": {
+            "d": 108401,
+            "r": 52753,
+            "total": 169400
+          },
+          "m24": 35.22,
+          "m20": 38.9,
+          "m16": 34.53,
+          "swing": -3.68,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 76.67,
+          "voteShare": 7.16
+        },
+        {
+          "rank": 5,
+          "fips": "45083",
+          "name": "Spartanburg",
+          "kind": "County",
+          "score": 56,
+          "v24": {
+            "d": 50710,
+            "r": 103032,
+            "total": 155597
+          },
+          "v20": {
+            "d": 52926,
+            "r": 93560,
+            "total": 148655
+          },
+          "v16": {
+            "d": 39888,
+            "r": 76101,
+            "total": 120793
+          },
+          "m24": -34.03,
+          "m20": -27.74,
+          "m16": -31.22,
+          "swing": -6.29,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 42.05,
+          "voteShare": 6.11
+        },
+        {
+          "rank": 6,
+          "fips": "45091",
+          "name": "York",
+          "kind": "County",
+          "score": 48,
+          "v24": {
+            "d": 59600,
+            "r": 88239,
+            "total": 150059
+          },
+          "v20": {
+            "d": 59008,
+            "r": 82727,
+            "total": 144050
+          },
+          "v16": {
+            "d": 41230,
+            "r": 66245,
+            "total": 113425
+          },
+          "m24": -19.37,
+          "m20": -16.73,
+          "m16": -23.28,
+          "swing": -2.64,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 49.38,
+          "voteShare": 5.89
+        },
+        {
+          "rank": 7,
+          "fips": "45063",
+          "name": "Lexington",
+          "kind": "County",
+          "score": 47,
+          "v24": {
+            "d": 47815,
+            "r": 96965,
+            "total": 146903
+          },
+          "v20": {
+            "d": 49301,
+            "r": 92817,
+            "total": 144568
+          },
+          "v16": {
+            "d": 35143,
+            "r": 79866,
+            "total": 121829
+          },
+          "m24": -33.95,
+          "m20": -30.62,
+          "m16": -38.89,
+          "swing": -3.33,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 42.09,
+          "voteShare": 5.77
+        },
+        {
+          "rank": 8,
+          "fips": "45015",
+          "name": "Berkeley",
+          "kind": "County",
+          "score": 42,
+          "v24": {
+            "d": 46416,
+            "r": 64777,
+            "total": 112834
+          },
+          "v20": {
+            "d": 45223,
+            "r": 57397,
+            "total": 104458
+          },
+          "v16": {
+            "d": 30492,
+            "r": 44223,
+            "total": 78919
+          },
+          "m24": -16.51,
+          "m20": -11.86,
+          "m16": -18.38,
+          "swing": -4.65,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.81,
+          "voteShare": 4.43
+        },
+        {
+          "rank": 9,
+          "fips": "45013",
+          "name": "Beaufort",
+          "kind": "County",
+          "score": 40,
+          "v24": {
+            "d": 44002,
+            "r": 59123,
+            "total": 104403
+          },
+          "v20": {
+            "d": 43419,
+            "r": 53194,
+            "total": 97835
+          },
+          "v16": {
+            "d": 29577,
+            "r": 39986,
+            "total": 72770
+          },
+          "m24": -14.66,
+          "m20": -10.12,
+          "m16": -14.96,
+          "swing": -4.55,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.73,
+          "voteShare": 4.1
+        },
+        {
+          "rank": 10,
+          "fips": "45007",
+          "name": "Anderson",
+          "kind": "County",
+          "score": 33,
+          "v24": {
+            "d": 25281,
+            "r": 71828,
+            "total": 98296
+          },
+          "v20": {
+            "d": 27169,
+            "r": 67565,
+            "total": 96093
+          },
+          "v16": {
+            "d": 21040,
+            "r": 56109,
+            "total": 80296
+          },
+          "m24": -47.93,
+          "m20": -42.64,
+          "m16": -45.46,
+          "swing": -5.29,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 35.1,
+          "voteShare": 3.86
+        }
+      ]
+    },
+    "MS": {
+      "code": "MS",
+      "state": "Mississippi",
+      "dem": "Scott Colom",
+      "rep": "Cindy Hyde-Smith",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 82,
+      "stateCycles": {
+        "2016": {
+          "d": 462001,
+          "r": 678457,
+          "share": 0.4051012838701644,
+          "margin": -0.1897974322596711,
+          "total": 1162987
+        },
+        "2020": {
+          "d": 539398,
+          "r": 756764,
+          "share": 0.4161501417261114,
+          "margin": -0.1676997165477772,
+          "total": 1315178
+        },
+        "2024": {
+          "d": 466668,
+          "r": 747744,
+          "share": 0.3842748589440816,
+          "margin": -0.23145028211183685,
+          "total": 1228008
+        }
+      },
+      "selectedBallotShare": 43.26,
+      "stateBaselineTwoPartyDShare": 38.43,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "28047",
+          "name": "Harrison",
+          "kind": "County",
+          "score": 78,
+          "v24": {
+            "d": 26555,
+            "r": 48497,
+            "total": 75923
+          },
+          "v20": {
+            "d": 27728,
+            "r": 46822,
+            "total": 75865
+          },
+          "v16": {
+            "d": 20679,
+            "r": 39710,
+            "total": 62076
+          },
+          "m24": -29.24,
+          "m20": -25.61,
+          "m16": -31.51,
+          "swing": -3.62,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 46.95,
+          "voteShare": 6.18
+        },
+        {
+          "rank": 2,
+          "fips": "28049",
+          "name": "Hinds",
+          "kind": "County",
+          "score": 77,
+          "v24": {
+            "d": 62840,
+            "r": 22816,
+            "total": 86830
+          },
+          "v20": {
+            "d": 73550,
+            "r": 25141,
+            "total": 100191
+          },
+          "v16": {
+            "d": 64922,
+            "r": 24919,
+            "total": 91536
+          },
+          "m24": 46.73,
+          "m20": 49.05,
+          "m16": 44.53,
+          "swing": -2.32,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 84.94,
+          "voteShare": 7.07
+        },
+        {
+          "rank": 3,
+          "fips": "28089",
+          "name": "Madison",
+          "kind": "County",
+          "score": 69,
+          "v24": {
+            "d": 22700,
+            "r": 32333,
+            "total": 55710
+          },
+          "v20": {
+            "d": 24440,
+            "r": 31091,
+            "total": 56335
+          },
+          "v16": {
+            "d": 18358,
+            "r": 25607,
+            "total": 45048
+          },
+          "m24": -17.5,
+          "m20": -11.98,
+          "m16": -16.49,
+          "swing": -5.53,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 52.82,
+          "voteShare": 4.54
+        },
+        {
+          "rank": 4,
+          "fips": "28033",
+          "name": "DeSoto",
+          "kind": "County",
+          "score": 60,
+          "v24": {
+            "d": 29023,
+            "r": 48064,
+            "total": 79082
+          },
+          "v20": {
+            "d": 28265,
+            "r": 46462,
+            "total": 76248
+          },
+          "v16": {
+            "d": 19892,
+            "r": 42155,
+            "total": 64022
+          },
+          "m24": -24.7,
+          "m20": -24.35,
+          "m16": -35.88,
+          "swing": -0.35,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 49.22,
+          "voteShare": 6.44
+        },
+        {
+          "rank": 5,
+          "fips": "28059",
+          "name": "Jackson",
+          "kind": "County",
+          "score": 60,
+          "v24": {
+            "d": 15469,
+            "r": 36376,
+            "total": 52410
+          },
+          "v20": {
+            "d": 17375,
+            "r": 36295,
+            "total": 54623
+          },
+          "v16": {
+            "d": 13087,
+            "r": 31204,
+            "total": 45465
+          },
+          "m24": -40.33,
+          "m20": -35.25,
+          "m16": -40.9,
+          "swing": -5.07,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 41.41,
+          "voteShare": 4.27
+        },
+        {
+          "rank": 6,
+          "fips": "28121",
+          "name": "Rankin",
+          "kind": "County",
+          "score": 58,
+          "v24": {
+            "d": 18060,
+            "r": 50896,
+            "total": 69678
+          },
+          "v20": {
+            "d": 18847,
+            "r": 50895,
+            "total": 70655
+          },
+          "v16": {
+            "d": 13741,
+            "r": 46168,
+            "total": 61356
+          },
+          "m24": -47.62,
+          "m20": -45.95,
+          "m16": -54.13,
+          "swing": -1.67,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 37.76,
+          "voteShare": 5.67
+        },
+        {
+          "rank": 7,
+          "fips": "28081",
+          "name": "Lee",
+          "kind": "County",
+          "score": 45,
+          "v24": {
+            "d": 10616,
+            "r": 24339,
+            "total": 35338
+          },
+          "v20": {
+            "d": 12189,
+            "r": 24207,
+            "total": 37003
+          },
+          "v16": {
+            "d": 9635,
+            "r": 21695,
+            "total": 31974
+          },
+          "m24": -39.26,
+          "m20": -33.02,
+          "m16": -38.49,
+          "swing": -6.24,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 41.94,
+          "voteShare": 2.88
+        },
+        {
+          "rank": 8,
+          "fips": "28035",
+          "name": "Forrest",
+          "kind": "County",
+          "score": 43,
+          "v24": {
+            "d": 11475,
+            "r": 16579,
+            "total": 28466
+          },
+          "v20": {
+            "d": 13755,
+            "r": 17290,
+            "total": 31725
+          },
+          "v16": {
+            "d": 11271,
+            "r": 15149,
+            "total": 27284
+          },
+          "m24": -18.19,
+          "m20": -11.39,
+          "m16": -14.68,
+          "swing": -6.81,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 52.48,
+          "voteShare": 2.32
+        },
+        {
+          "rank": 9,
+          "fips": "28071",
+          "name": "Lafayette",
+          "kind": "County",
+          "score": 41,
+          "v24": {
+            "d": 8956,
+            "r": 14050,
+            "total": 23409
+          },
+          "v20": {
+            "d": 10070,
+            "r": 12949,
+            "total": 23481
+          },
+          "v16": {
+            "d": 7968,
+            "r": 10872,
+            "total": 19642
+          },
+          "m24": -22.14,
+          "m20": -12.51,
+          "m16": -15.41,
+          "swing": -9.63,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.5,
+          "voteShare": 1.91
+        },
+        {
+          "rank": 10,
+          "fips": "28087",
+          "name": "Lowndes",
+          "kind": "County",
+          "score": 38,
+          "v24": {
+            "d": 11096,
+            "r": 13087,
+            "total": 24426
+          },
+          "v20": {
+            "d": 13087,
+            "r": 13800,
+            "total": 27273
+          },
+          "v16": {
+            "d": 11545,
+            "r": 13124,
+            "total": 25139
+          },
+          "m24": -8.23,
+          "m20": -2.65,
+          "m16": -6.4,
+          "swing": -5.58,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 57.46,
+          "voteShare": 1.99
+        }
+      ]
+    },
+    "FL": {
+      "code": "FL",
+      "state": "Florida",
+      "dem": "Angie Nixon",
+      "rep": "Ashley Moody",
+      "party": "D",
+      "unitType": "Counties",
+      "totalUnits": 67,
+      "stateCycles": {
+        "2016": {
+          "d": 4485745,
+          "r": 4605515,
+          "share": 0.4934129042618955,
+          "margin": -0.013174191476209018,
+          "total": 9386750
+        },
+        "2020": {
+          "d": 5297045,
+          "r": 5668731,
+          "share": 0.48305245337858443,
+          "margin": -0.03389509324283115,
+          "total": 11067456
+        },
+        "2024": {
+          "d": 4683038,
+          "r": 6110125,
+          "share": 0.43388930566507705,
+          "margin": -0.1322213886698459,
+          "total": 10893547
+        }
+      },
+      "selectedBallotShare": 55.86,
+      "stateBaselineTwoPartyDShare": 43.39,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "12086",
+          "name": "Miami-Dade",
+          "kind": "County",
+          "score": 95,
+          "v24": {
+            "d": 480355,
+            "r": 605590,
+            "total": 1094093
+          },
+          "v20": {
+            "d": 617864,
+            "r": 532833,
+            "total": 1156816
+          },
+          "v16": {
+            "d": 623006,
+            "r": 333666,
+            "total": 978670
+          },
+          "m24": -11.53,
+          "m20": 7.39,
+          "m16": 30.24,
+          "swing": -18.92,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.84,
+          "voteShare": 10.04
+        },
+        {
+          "rank": 2,
+          "fips": "12011",
+          "name": "Broward",
+          "kind": "County",
+          "score": 73,
+          "v24": {
+            "d": 507328,
+            "r": 358952,
+            "total": 874526
+          },
+          "v20": {
+            "d": 618752,
+            "r": 333409,
+            "total": 957672
+          },
+          "v16": {
+            "d": 546956,
+            "r": 258521,
+            "total": 822837
+          },
+          "m24": 17.13,
+          "m20": 29.97,
+          "m16": 35.81,
+          "swing": -12.84,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 65.18,
+          "voteShare": 8.03
+        },
+        {
+          "rank": 3,
+          "fips": "12099",
+          "name": "Palm Beach",
+          "kind": "County",
+          "score": 60,
+          "v24": {
+            "d": 372512,
+            "r": 366836,
+            "total": 745697
+          },
+          "v20": {
+            "d": 433572,
+            "r": 334711,
+            "total": 773158
+          },
+          "v16": {
+            "d": 371411,
+            "r": 270762,
+            "total": 657235
+          },
+          "m24": 0.77,
+          "m20": 12.87,
+          "m16": 15.67,
+          "swing": -12.1,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 56.99,
+          "voteShare": 6.85
+        },
+        {
+          "rank": 4,
+          "fips": "12057",
+          "name": "Hillsborough",
+          "kind": "County",
+          "score": 54,
+          "v24": {
+            "d": 321455,
+            "r": 342017,
+            "total": 671981
+          },
+          "v20": {
+            "d": 376367,
+            "r": 327398,
+            "total": 712063
+          },
+          "v16": {
+            "d": 306422,
+            "r": 265928,
+            "total": 595072
+          },
+          "m24": -3.1,
+          "m20": 6.96,
+          "m16": 7.08,
+          "swing": -10.06,
+          "alignment": {
+            "matches": 1,
+            "cycles": 3,
+            "rate": 38
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 55.06,
+          "voteShare": 6.17
+        },
+        {
+          "rank": 5,
+          "fips": "12095",
+          "name": "Orange",
+          "kind": "County",
+          "score": 51,
+          "v24": {
+            "d": 340807,
+            "r": 258279,
+            "total": 607191
+          },
+          "v20": {
+            "d": 395014,
+            "r": 245398,
+            "total": 647403
+          },
+          "v16": {
+            "d": 329579,
+            "r": 195091,
+            "total": 545800
+          },
+          "m24": 13.78,
+          "m20": 23.36,
+          "m16": 25.63,
+          "swing": -9.59,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 63.5,
+          "voteShare": 5.57
+        },
+        {
+          "rank": 6,
+          "fips": "12103",
+          "name": "Pinellas",
+          "kind": "County",
+          "score": 42,
+          "v24": {
+            "d": 242452,
+            "r": 269472,
+            "total": 517058
+          },
+          "v20": {
+            "d": 277450,
+            "r": 276209,
+            "total": 559715
+          },
+          "v16": {
+            "d": 233327,
+            "r": 238746,
+            "total": 491520
+          },
+          "m24": -5.28,
+          "m20": 0.22,
+          "m16": -1.15,
+          "swing": -5.5,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 53.97,
+          "voteShare": 4.75
+        },
+        {
+          "rank": 7,
+          "fips": "12031",
+          "name": "Duval",
+          "kind": "County",
+          "score": 40,
+          "v24": {
+            "d": 229365,
+            "r": 236285,
+            "total": 471268
+          },
+          "v20": {
+            "d": 252556,
+            "r": 233762,
+            "total": 492820
+          },
+          "v16": {
+            "d": 203627,
+            "r": 210061,
+            "total": 428734
+          },
+          "m24": -1.49,
+          "m20": 3.86,
+          "m16": -1.56,
+          "swing": -5.35,
+          "alignment": {
+            "matches": 2,
+            "cycles": 3,
+            "rate": 63
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 55.87,
+          "voteShare": 4.33
+        },
+        {
+          "rank": 8,
+          "fips": "12071",
+          "name": "Lee",
+          "kind": "County",
+          "score": 36,
+          "v24": {
+            "d": 139240,
+            "r": 250661,
+            "total": 392519
+          },
+          "v20": {
+            "d": 157695,
+            "r": 233247,
+            "total": 393899
+          },
+          "v16": {
+            "d": 124725,
+            "r": 191141,
+            "total": 325797
+          },
+          "m24": -28.58,
+          "m20": -19.33,
+          "m16": -21.03,
+          "swing": -9.25,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 42.32,
+          "voteShare": 3.6
+        },
+        {
+          "rank": 9,
+          "fips": "12009",
+          "name": "Brevard",
+          "kind": "County",
+          "score": 32,
+          "v24": {
+            "d": 141233,
+            "r": 216533,
+            "total": 361449
+          },
+          "v20": {
+            "d": 148549,
+            "r": 207883,
+            "total": 360764
+          },
+          "v16": {
+            "d": 119525,
+            "r": 181620,
+            "total": 314337
+          },
+          "m24": -21.05,
+          "m20": -16.65,
+          "m16": -20.62,
+          "swing": -4.4,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 46.09,
+          "voteShare": 3.32
+        },
+        {
+          "rank": 10,
+          "fips": "12105",
+          "name": "Polk",
+          "kind": "County",
+          "score": 32,
+          "v24": {
+            "d": 136879,
+            "r": 209044,
+            "total": 348922
+          },
+          "v20": {
+            "d": 145049,
+            "r": 194586,
+            "total": 343256
+          },
+          "v16": {
+            "d": 117182,
+            "r": 157216,
+            "total": 283828
+          },
+          "m24": -20.86,
+          "m20": -14.59,
+          "m16": -14.59,
+          "swing": -6.28,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 46.18,
+          "voteShare": 3.2
+        }
+      ]
+    },
+    "SD": {
+      "code": "SD",
+      "state": "South Dakota",
+      "dem": "Brian Bengs",
+      "rep": "Mike Rounds",
+      "party": "I",
+      "unitType": "Counties",
+      "totalUnits": 66,
+      "stateCycles": {
+        "2016": {
+          "d": 117442,
+          "r": 227701,
+          "share": 0.3402705545237771,
+          "margin": -0.3194588909524458,
+          "total": 370047
+        },
+        "2020": {
+          "d": 150471,
+          "r": 261043,
+          "share": 0.365652201383185,
+          "margin": -0.26869559723362996,
+          "total": 422609
+        },
+        "2024": {
+          "d": 146859,
+          "r": 272081,
+          "share": 0.3505490046307347,
+          "margin": -0.2989019907385306,
+          "total": 428922
+        }
+      },
+      "selectedBallotShare": 65.05,
+      "stateBaselineTwoPartyDShare": 35.05,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "46099",
+          "name": "Minnehaha",
+          "kind": "County",
+          "score": 94,
+          "v24": {
+            "d": 39923,
+            "r": 51842,
+            "total": 93986
+          },
+          "v20": {
+            "d": 40482,
+            "r": 49249,
+            "total": 92326
+          },
+          "v16": {
+            "d": 30610,
+            "r": 42043,
+            "total": 78263
+          },
+          "m24": -12.99,
+          "m20": -9.77,
+          "m16": -15.74,
+          "swing": -3.22,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 58.45,
+          "voteShare": 21.91
+        },
+        {
+          "rank": 2,
+          "fips": "46103",
+          "name": "Pennington",
+          "kind": "County",
+          "score": 53,
+          "v24": {
+            "d": 20051,
+            "r": 35009,
+            "total": 56580
+          },
+          "v20": {
+            "d": 20606,
+            "r": 35063,
+            "total": 57518
+          },
+          "v16": {
+            "d": 14074,
+            "r": 29804,
+            "total": 47741
+          },
+          "m24": -27.17,
+          "m20": -25.97,
+          "m16": -35.85,
+          "swing": -1.2,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.36,
+          "voteShare": 13.19
+        },
+        {
+          "rank": 3,
+          "fips": "46083",
+          "name": "Lincoln",
+          "kind": "County",
+          "score": 41,
+          "v24": {
+            "d": 12981,
+            "r": 22621,
+            "total": 36393
+          },
+          "v20": {
+            "d": 11981,
+            "r": 19617,
+            "total": 32396
+          },
+          "v16": {
+            "d": 8076,
+            "r": 15499,
+            "total": 25231
+          },
+          "m24": -27.08,
+          "m20": -24.17,
+          "m16": -31.49,
+          "swing": -2.91,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.41,
+          "voteShare": 8.48
+        },
+        {
+          "rank": 4,
+          "fips": "46011",
+          "name": "Brookings",
+          "kind": "County",
+          "score": 25,
+          "v24": {
+            "d": 5978,
+            "r": 8575,
+            "total": 14939
+          },
+          "v20": {
+            "d": 6110,
+            "r": 8000,
+            "total": 14567
+          },
+          "v16": {
+            "d": 4879,
+            "r": 6748,
+            "total": 12680
+          },
+          "m24": -17.85,
+          "m20": -13.39,
+          "m16": -16.07,
+          "swing": -4.45,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 56.02,
+          "voteShare": 3.48
+        },
+        {
+          "rank": 5,
+          "fips": "46013",
+          "name": "Brown",
+          "kind": "County",
+          "score": 24,
+          "v24": {
+            "d": 6075,
+            "r": 10645,
+            "total": 17043
+          },
+          "v20": {
+            "d": 6538,
+            "r": 10580,
+            "total": 17547
+          },
+          "v16": {
+            "d": 5452,
+            "r": 9613,
+            "total": 16113
+          },
+          "m24": -27.33,
+          "m20": -23.61,
+          "m16": -27.62,
+          "swing": -3.72,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.28,
+          "voteShare": 3.97
+        },
+        {
+          "rank": 6,
+          "fips": "46027",
+          "name": "Clay",
+          "kind": "County",
+          "score": 18,
+          "v24": {
+            "d": 2944,
+            "r": 2574,
+            "total": 5657
+          },
+          "v20": {
+            "d": 3083,
+            "r": 2456,
+            "total": 5698
+          },
+          "v16": {
+            "d": 2608,
+            "r": 2109,
+            "total": 5069
+          },
+          "m24": 6.71,
+          "m20": 11.32,
+          "m16": 10.58,
+          "swing": -4.61,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 68.3,
+          "voteShare": 1.32
+        },
+        {
+          "rank": 7,
+          "fips": "46081",
+          "name": "Lawrence",
+          "kind": "County",
+          "score": 17,
+          "v24": {
+            "d": 5074,
+            "r": 9904,
+            "total": 15409
+          },
+          "v20": {
+            "d": 4537,
+            "r": 8753,
+            "total": 13828
+          },
+          "v16": {
+            "d": 3356,
+            "r": 7411,
+            "total": 11842
+          },
+          "m24": -32.25,
+          "m20": -31.72,
+          "m16": -37.66,
+          "swing": -0.52,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 48.82,
+          "voteShare": 3.59
+        },
+        {
+          "rank": 8,
+          "fips": "46135",
+          "name": "Yankton",
+          "kind": "County",
+          "score": 17,
+          "v24": {
+            "d": 3883,
+            "r": 6650,
+            "total": 10832
+          },
+          "v20": {
+            "d": 4016,
+            "r": 6581,
+            "total": 10900
+          },
+          "v16": {
+            "d": 3301,
+            "r": 5654,
+            "total": 9616
+          },
+          "m24": -26.27,
+          "m20": -24.2,
+          "m16": -26.28,
+          "swing": -2.06,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 51.81,
+          "voteShare": 2.53
+        },
+        {
+          "rank": 9,
+          "fips": "46093",
+          "name": "Meade",
+          "kind": "County",
+          "score": 15,
+          "v24": {
+            "d": 3421,
+            "r": 10887,
+            "total": 14672
+          },
+          "v20": {
+            "d": 3285,
+            "r": 9875,
+            "total": 13670
+          },
+          "v16": {
+            "d": 2223,
+            "r": 8441,
+            "total": 11621
+          },
+          "m24": -52.18,
+          "m20": -50.08,
+          "m16": -58.31,
+          "swing": -2.1,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 38.85,
+          "voteShare": 3.42
+        },
+        {
+          "rank": 10,
+          "fips": "46029",
+          "name": "Codington",
+          "kind": "County",
+          "score": 15,
+          "v24": {
+            "d": 3840,
+            "r": 9349,
+            "total": 13510
+          },
+          "v20": {
+            "d": 3837,
+            "r": 8958,
+            "total": 13161
+          },
+          "v16": {
+            "d": 3174,
+            "r": 7764,
+            "total": 11669
+          },
+          "m24": -41.77,
+          "m20": -40.02,
+          "m16": -41.96,
+          "swing": -1.75,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 44.06,
+          "voteShare": 3.15
+        }
+      ]
+    },
+    "MT": {
+      "code": "MT",
+      "state": "Montana",
+      "dem": "Seth Bodnar",
+      "rep": "Kurt Alme",
+      "party": "I",
+      "unitType": "Counties",
+      "totalUnits": 56,
+      "stateCycles": {
+        "2016": {
+          "d": 174521,
+          "r": 274120,
+          "share": 0.38899922209517185,
+          "margin": -0.22200155580965628,
+          "total": 483574
+        },
+        "2020": {
+          "d": 244786,
+          "r": 343602,
+          "share": 0.41602819907951893,
+          "margin": -0.16794360184096208,
+          "total": 605750
+        },
+        "2024": {
+          "d": 231906,
+          "r": 352079,
+          "share": 0.3971095147991815,
+          "margin": -0.20578097040163704,
+          "total": 602963
+        }
+      },
+      "selectedBallotShare": 73.56,
+      "stateBaselineTwoPartyDShare": 39.71,
+      "units": [
+        {
+          "rank": 1,
+          "fips": "30111",
+          "name": "Yellowstone",
+          "kind": "County",
+          "score": 88,
+          "v24": {
+            "d": 28392,
+            "r": 50460,
+            "total": 81391
+          },
+          "v20": {
+            "d": 30679,
+            "r": 50772,
+            "total": 83821
+          },
+          "v16": {
+            "d": 21117,
+            "r": 38675,
+            "total": 64675
+          },
+          "m24": -27.99,
+          "m20": -24.67,
+          "m16": -29.37,
+          "swing": -3.32,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 46.3,
+          "voteShare": 13.5
+        },
+        {
+          "rank": 2,
+          "fips": "30031",
+          "name": "Gallatin",
+          "kind": "County",
+          "score": 83,
+          "v24": {
+            "d": 34938,
+            "r": 32695,
+            "total": 69897
+          },
+          "v20": {
+            "d": 37044,
+            "r": 31696,
+            "total": 71507
+          },
+          "v16": {
+            "d": 23879,
+            "r": 23360,
+            "total": 52169
+          },
+          "m24": 3.32,
+          "m20": 7.78,
+          "m16": 1.1,
+          "swing": -4.46,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 61.95,
+          "voteShare": 11.59
+        },
+        {
+          "rank": 3,
+          "fips": "30063",
+          "name": "Missoula",
+          "kind": "County",
+          "score": 73,
+          "v24": {
+            "d": 42903,
+            "r": 27306,
+            "total": 72773
+          },
+          "v20": {
+            "d": 43357,
+            "r": 26347,
+            "total": 71986
+          },
+          "v16": {
+            "d": 30740,
+            "r": 21699,
+            "total": 57271
+          },
+          "m24": 22.22,
+          "m20": 24.4,
+          "m16": 17.24,
+          "swing": -2.19,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 71.4,
+          "voteShare": 12.07
+        },
+        {
+          "rank": 4,
+          "fips": "30029",
+          "name": "Flathead",
+          "kind": "County",
+          "score": 73,
+          "v24": {
+            "d": 20062,
+            "r": 41390,
+            "total": 63140
+          },
+          "v20": {
+            "d": 20274,
+            "r": 38321,
+            "total": 60258
+          },
+          "v16": {
+            "d": 13233,
+            "r": 30079,
+            "total": 46144
+          },
+          "m24": -34.71,
+          "m20": -30.8,
+          "m16": -38.89,
+          "swing": -3.91,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 42.94,
+          "voteShare": 10.47
+        },
+        {
+          "rank": 5,
+          "fips": "30049",
+          "name": "Lewis and Clark",
+          "kind": "County",
+          "score": 46,
+          "v24": {
+            "d": 19085,
+            "r": 21479,
+            "total": 42023
+          },
+          "v20": {
+            "d": 19743,
+            "r": 21409,
+            "total": 42485
+          },
+          "v16": {
+            "d": 14331,
+            "r": 16665,
+            "total": 33697
+          },
+          "m24": -5.9,
+          "m20": -4.05,
+          "m16": -7.53,
+          "swing": -1.85,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 57.34,
+          "voteShare": 6.97
+        },
+        {
+          "rank": 6,
+          "fips": "30013",
+          "name": "Cascade",
+          "kind": "County",
+          "score": 43,
+          "v24": {
+            "d": 14021,
+            "r": 22419,
+            "total": 37583
+          },
+          "v20": {
+            "d": 15456,
+            "r": 23315,
+            "total": 39885
+          },
+          "v16": {
+            "d": 12053,
+            "r": 19343,
+            "total": 33791
+          },
+          "m24": -23.05,
+          "m20": -20.27,
+          "m16": -23.22,
+          "swing": -2.78,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 48.77,
+          "voteShare": 6.23
+        },
+        {
+          "rank": 7,
+          "fips": "30081",
+          "name": "Ravalli",
+          "kind": "County",
+          "score": 37,
+          "v24": {
+            "d": 8485,
+            "r": 20617,
+            "total": 29904
+          },
+          "v20": {
+            "d": 8763,
+            "r": 19114,
+            "total": 28507
+          },
+          "v16": {
+            "d": 6166,
+            "r": 14673,
+            "total": 22063
+          },
+          "m24": -41.69,
+          "m20": -37.13,
+          "m16": -40.82,
+          "swing": -4.56,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 39.45,
+          "voteShare": 4.96
+        },
+        {
+          "rank": 8,
+          "fips": "30093",
+          "name": "Silver Bow",
+          "kind": "County",
+          "score": 35,
+          "v24": {
+            "d": 9386,
+            "r": 8110,
+            "total": 18226
+          },
+          "v20": {
+            "d": 10392,
+            "r": 7745,
+            "total": 18827
+          },
+          "v16": {
+            "d": 8545,
+            "r": 6252,
+            "total": 16122
+          },
+          "m24": 7.29,
+          "m20": 14.59,
+          "m16": 15.5,
+          "swing": -7.3,
+          "alignment": {
+            "matches": 0,
+            "cycles": 3,
+            "rate": 13
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 63.94,
+          "voteShare": 3.02
+        },
+        {
+          "rank": 9,
+          "fips": "30047",
+          "name": "Lake",
+          "kind": "County",
+          "score": 29,
+          "v24": {
+            "d": 6510,
+            "r": 9880,
+            "total": 16910
+          },
+          "v20": {
+            "d": 6916,
+            "r": 9322,
+            "total": 16626
+          },
+          "v16": {
+            "d": 4703,
+            "r": 7453,
+            "total": 12898
+          },
+          "m24": -20.56,
+          "m20": -14.82,
+          "m16": -22.62,
+          "swing": -5.74,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 50.01,
+          "voteShare": 2.8
+        },
+        {
+          "rank": 10,
+          "fips": "30067",
+          "name": "Park",
+          "kind": "County",
+          "score": 22,
+          "v24": {
+            "d": 5224,
+            "r": 6128,
+            "total": 11717
+          },
+          "v20": {
+            "d": 5280,
+            "r": 6025,
+            "total": 11618
+          },
+          "v16": {
+            "d": 3521,
+            "r": 4872,
+            "total": 9056
+          },
+          "m24": -7.96,
+          "m20": -6.59,
+          "m16": -16.1,
+          "swing": -1.37,
+          "alignment": {
+            "matches": 3,
+            "cycles": 3,
+            "rate": 88
+          },
+          "benchmarkD": null,
+          "benchmarkShare": 56.31,
+          "voteShare": 1.94
+        }
+      ]
+    }
+  }
+}
