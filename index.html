@@ -3215,6 +3215,7 @@ function pollingPicture(r){
  if(pollingCache.has(r.code))return pollingCache.get(r.code);
  const weights={rcp:.40,ddhq:.29,win270:.21,silver:.10};
  const seen=new Set(),inputs=[];
+ const MAX_FRESH_DAYS=7;
  for(const [key,weight] of Object.entries(weights)){
   const q=r.sources[key];if(!q||q.proxy||!Number.isFinite(Number(q.value)))continue;
   // Wikipedia can cite four *different* publisher-average rows from one
@@ -3224,14 +3225,17 @@ function pollingPicture(r){
   if(seen.has(identity))continue;seen.add(identity);
   const rawDate=String(q.date||'').trim();
   const parsed=Date.parse(/\b20\d{2}\b/.test(rawDate)?rawDate:rawDate+', 2026');
-  const age=Number.isFinite(parsed)?Math.max(0,(Date.now()-parsed)/86400000):21;
+  const age=Number.isFinite(parsed)?Math.max(0,(Date.now()-parsed)/86400000):999;
+  // Do not pretend an old publisher's average is new simply because our
+  // website checked it today. At most seven days of field/source age qualify.
+  if(age>MAX_FRESH_DAYS)continue;
   const freshness=Math.max(.50,Math.exp(-age/35));
   inputs.push({key,value:Number(q.value),weight:weight*freshness,source:q.origin,date:q.date,parsed});
  }
  const total=inputs.reduce((sum,x)=>sum+x.weight,0);
  if(!total){
-  const fallback=r.sources.rcp||r.sources.average;
-  const result={...fallback,proxy:true,origin:'Polling-reference fallback — no independently attributed blend',nInputs:0,note:'No eligible publisher averages found; fallback is not a four-way composite.'};
+  const fallback=r.sources.average||r.sources.rcp;
+  const result={...fallback,proxy:true,stale:true,origin:'OLDER REFERENCE — no fresh publisher average',nInputs:0,note:'No independently attributed publisher average within the last 7 days. Historical reference only, NOT current polling. This race needs a new survey.'};
   pollingCache.set(r.code,result);
   return result;
  }
@@ -3239,7 +3243,7 @@ function pollingPicture(r){
  // No source is counted twice, and the Wikipedia average-of-averages
  // is not blended with its possible constituent publishers.
  const mostRecent=[...inputs].filter(x=>Number.isFinite(x.parsed)).sort((a,b)=>b.parsed-a.parsed)[0];
- const result={value:Math.round(mean*100)/100,origin:'Ervin’s Take · multi-publisher blend',date:mostRecent?.date||'unavailable',url:r.sourceUrl,proxy:inputs.length<2,nInputs:inputs.length,note:inputs.map(x=>x.key).join(', ')+(inputs.length<2?' · Single-source fallback':' · Publisher averages may share underlying polls')};
+ const result={value:Math.round(mean*100)/100,origin:inputs.length>=2?'Ervin’s Take · recent multi-publisher blend':'Ervin’s Take · one recent publisher',date:mostRecent?.date||'unavailable',url:r.sourceUrl,proxy:inputs.length<2,stale:false,nInputs:inputs.length,note:'Recent qualified publisher inputs (≤7 days): '+inputs.map(x=>x.key).join(', ')+(inputs.length<2?' · Single recent source; caution':' · Underlying surveys across aggregators may overlap')};
  pollingCache.set(r.code,result);
  return result;
 }
@@ -3329,8 +3333,9 @@ function publisherContributions(r){
  for(const [key,weight] of Object.entries(SOURCE_WEIGHTS)){
   const p=r.sources[key];if(!p||p.proxy||!Number.isFinite(Number(p.value)))continue;
   const identity=String(p.publisherId||p.origin||key).trim().toLowerCase();
+  const parsed=pollDate(p);const age=parsed?Math.max(0,(Date.now()-parsed)/86400000):999;
+  if(age>7)continue;
   if(seen.has(identity))continue;seen.add(identity);
-  const parsed=pollDate(p);const age=parsed?Math.max(0,(Date.now()-parsed)/86400000):21;
   eligible.push({key,weight:weight*Math.max(.5,Math.exp(-age/35))});
  }
  const sum=eligible.reduce((total,x)=>total+x.weight,0);
@@ -3342,9 +3347,11 @@ function pollEvidence(r){
  const rows=['rcp','ddhq','win270','silver','average'].map(key=>{
   const p=r.sources[key];if(!p)return '';
   const isInput=selectedSource==='take'?weights.has(key):selectedSource===key;
-  const status=selectedSource==='take'?(weights.has(key)?'Included in Ervin’s Take · '+Math.round(weights.get(key)*100)+'% effective weight':p.proxy?'Proxy · excluded':'Comparison only'):(isInput?'Current selected input':p.proxy?'Reference proxy':'Comparison only');
+  const age=pollDate(p)?Math.max(0,Math.floor((Date.now()-pollDate(p))/86400000)):999;
+  const freshness=age>7?'OLDER than 7d · not in recent blend':age>3?'Recent · '+age+'d old':'Recent · '+age+'d old';
+  const status=selectedSource==='take'?(weights.has(key)?'Included in Ervin’s Take · '+Math.round(weights.get(key)*100)+'% effective weight':p.proxy?'Proxy · excluded':freshness):(isInput?'Selected tab · '+freshness:p.proxy?'Proxy reference':'Comparison · '+freshness);
   const date=String(p.date||'Not dated');const formatted=/\b20\d{2}\b/.test(date)?date:date+' 2026';
-  return '<div class="poll-input-row'+(isInput?' included':'')+'"><div><a target="_blank" rel="noopener noreferrer" href="'+esc(p.url||r.sourceUrl)+'">'+esc(names[key])+' ↗</a><span class="source-status">'+esc(status)+'</span></div><span class="source-margin">'+esc(fmt(p.value,r,1))+'</span><span class="source-date">'+esc(formatted)+(p.proxy?'<b>Proxy / estimate</b>':'')+'</span></div>';
+  return '<div class="poll-input-row'+(isInput?' included':'')+(age>7?' source-aged':'')+'"><div><a target="_blank" rel="noopener noreferrer" href="'+esc(p.url||r.sourceUrl)+'">'+esc(names[key])+' ↗</a><span class="source-status">'+esc(status)+'</span></div><span class="source-margin">'+esc(fmt(p.value,r,1))+'</span><span class="source-date">'+esc(formatted)+(p.proxy?'<b>Proxy / estimate</b>':'')+(p.dateBasis==='latest-poll'?'<b>Latest underlying poll date, not publisher update</b>':'')+'</span></div>';
  }).join('');
  const archived=pollArchive?.polls?.[r.code];
  const surveys=Array.isArray(archived)?[...archived].sort((a,b)=>String(b.fieldEnd||b.publishedAt||'').localeCompare(String(a.fieldEnd||a.publishedAt||''))):[];
@@ -3371,7 +3378,7 @@ async function loadRecentSurveys(){
 }
 function detail(){if(state.untracked){const geo=window.ERVIN_US_GEOGRAPHY?.states.find(g=>g.code===state.untracked);$('detail').innerHTML='<div class="section-label">STATE INTELLIGENCE / '+esc(state.untracked)+'</div><h3 style="font-size:25px;margin-top:15px">'+esc(geo?.name||state.untracked)+'</h3><p class="micro">This state is shown geographically but is not one of the 17 Senate contests currently modeled. No forecast or individual-poll inputs have been calculated here; click a colored state for its race, source averages and recent surveys.</p>';return;}const r=selected(),v=evaluate(r),p=v.poll,baseline=r.sources.rcp;
  const difference=(p.value-baseline.value),errMode=r.history_mode==='not_comparable',chance=currentWinFrequency(r.code);
- $('detail').innerHTML=`<div class="panel-title"><div class="section-label">RACE INTELLIGENCE / ${r.code}</div><span class="flag">${esc(p.proxy?'REFERENCE PROXY':'PUBLISHED AVERAGE')}</span></div><div class="detail-title"><div><h3>${esc(r.state)}</h3><div class="candidate">${esc(r.dem)} (${r.party}) <span style="color:var(--subtle)">vs</span> ${esc(r.rep)} (R)${r.special?' · Special election':''}</div></div><span class="grade ${v.grade}" title="Historical evidence grade">${v.grade}</span></div><div class="lead ${gradient(v.adjusted)==='close'?(v.adjusted>=0?'dem':'rep'):gradient(v.adjusted)}">${esc(judge(v.adjusted,r))}</div><div class="micro" style="margin-top:4px">${esc(v.support)} · ${Math.abs(v.adjusted)>5?'Magnitude suppressed by ±5 rule':'Numerical margin prediction'}</div><div class="race-win-chance" aria-label="Experimental win scenario frequency"><span>Chance ${esc(r.dem)} wins</span><strong>${esc(winPct(chance))}</strong><small>Republican ${esc(winPct(chance==null?null:1-chance))} · 14,000 model scenarios · validation pending</small></div><div class="mini-grid"><div class="mini"><small>Polling input</small><strong>${esc(fmt(p.value,r,1))}</strong></div><div class="mini"><small>${errMode?'Historical shift (not applied)':'Applied R shift'}</small><strong>${errMode?'0.00':v.correction.toFixed(2)} pts</strong></div><div class="mini"><small>Historical MAE</small><strong>${v.h.mae.toFixed(1)} pts</strong></div></div>${displayRange(v)}<div class="detail-note"><div class="grade-row"><span>Published source / proxy</span><strong>${esc(p.origin)}</strong></div><div class="grade-row"><span>Source date</span><strong>${esc(p.date)}${/\b20\d{2}\b/.test(String(p.date))?'':' 2026'}</strong></div><div class="grade-row"><span>RCP benchmark</span><strong>${esc(fmt(baseline.value,r,1))}${baseline.proxy?' · proxy':''}</strong></div><div class="grade-row"><span>Input difference vs. benchmark</span><strong>${difference>=0?'+':''}${difference.toFixed(2)} pts</strong></div><div class="grade-row"><span>Historical polling comparisons</span><strong>${v.h.n} · ${esc(v.grade)} grade</strong></div>${errMode?`<p class="micro" style="color:var(--accent)">Independent matchup: historic D–R shift of ${r.correction.toFixed(2)} points is <b>not transferred</b> to this race.</p>`:''}${p.proxy?`<p class="micro" style="color:var(--accent)">Fallback detail: ${esc(p.note)}</p>`:''}${r.notes?`<p class="micro">${esc(r.notes)}</p>`:''}</div>${pollEvidence(r)}<div class="detail-refs"><a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">↗ Polling source</a><a href="${esc(r.sourceUrl)}" target="_blank" rel="noopener noreferrer">↗ Source table</a><button class="button ghost" type="button" id="historyJump">Audit historical years ↓</button></div>`;
+ $('detail').innerHTML=`<div class="panel-title"><div class="section-label">RACE INTELLIGENCE / ${r.code}</div><span class="flag">${esc(p.proxy?'REFERENCE PROXY':'PUBLISHED AVERAGE')}</span></div><div class="detail-title"><div><h3>${esc(r.state)}</h3><div class="candidate">${esc(r.dem)} (${r.party}) <span style="color:var(--subtle)">vs</span> ${esc(r.rep)} (R)${r.special?' · Special election':''}</div></div><span class="grade ${v.grade}" title="Historical evidence grade">${v.grade}</span></div><div class="lead ${gradient(v.adjusted)==='close'?(v.adjusted>=0?'dem':'rep'):gradient(v.adjusted)}">${esc(judge(v.adjusted,r))}</div><div class="micro" style="margin-top:4px">${esc(v.support)} · ${Math.abs(v.adjusted)>5?'Magnitude suppressed by ±5 rule':'Numerical margin prediction'}</div><div class="race-freshness-note" aria-live="polite">${esc(p.stale?'NO CURRENT AVERAGE — forecast uses historical reference only':p.proxy?'LIMITED CURRENT EVIDENCE — one recent publisher or reference proxy':'RECENT PUBLISHER INPUTS')}${p.stale?' · The published poll has not been relabeled fresh.':''}</div><div class="race-win-chance" aria-label="Experimental win scenario frequency"><span>Chance ${esc(r.dem)} wins</span><strong>${esc(winPct(chance))}</strong><small>Republican ${esc(winPct(chance==null?null:1-chance))} · 14,000 model scenarios · validation pending</small></div><div class="mini-grid"><div class="mini"><small>Polling input</small><strong>${esc(fmt(p.value,r,1))}</strong></div><div class="mini"><small>${errMode?'Historical shift (not applied)':'Applied R shift'}</small><strong>${errMode?'0.00':v.correction.toFixed(2)} pts</strong></div><div class="mini"><small>Historical MAE</small><strong>${v.h.mae.toFixed(1)} pts</strong></div></div>${displayRange(v)}<div class="detail-note"><div class="grade-row"><span>Published source / proxy</span><strong>${esc(p.origin)}</strong></div><div class="grade-row"><span>Source date</span><strong>${esc(p.date)}${/\b20\d{2}\b/.test(String(p.date))?'':' 2026'}</strong></div><div class="grade-row"><span>RCP benchmark</span><strong>${esc(fmt(baseline.value,r,1))}${baseline.proxy?' · proxy':''}</strong></div><div class="grade-row"><span>Input difference vs. benchmark</span><strong>${difference>=0?'+':''}${difference.toFixed(2)} pts</strong></div><div class="grade-row"><span>Historical polling comparisons</span><strong>${v.h.n} · ${esc(v.grade)} grade</strong></div>${errMode?`<p class="micro" style="color:var(--accent)">Independent matchup: historic D–R shift of ${r.correction.toFixed(2)} points is <b>not transferred</b> to this race.</p>`:''}${p.proxy?`<p class="micro" style="color:var(--accent)">Fallback detail: ${esc(p.note)}</p>`:''}${r.notes?`<p class="micro">${esc(r.notes)}</p>`:''}</div>${pollEvidence(r)}<div class="detail-refs"><a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">↗ Polling source</a><a href="${esc(r.sourceUrl)}" target="_blank" rel="noopener noreferrer">↗ Source table</a><button class="button ghost" type="button" id="historyJump">Audit historical years ↓</button></div>`;
  $('historyJump').onclick=()=>{$('historyHeading').scrollIntoView({behavior:'smooth',block:'center'})};
  $('historyHeading').textContent=`${r.state} · historical polling errors`;
  $('histBars').innerHTML=r.historical.map(h=>{const ht=Math.min(92,Math.max(8,Math.abs(h.err)*6));return `<div class="hist-column"><b style="color:var(--text)">${h.err>=0?'R':'D'} +${Math.abs(h.err).toFixed(1)}</b><div class="vbar ${h.err<0?'neg':''}" style="height:${ht}px"></div><a href="${esc(h.url)}" target="_blank" rel="noopener noreferrer">${h.year} ${h.office==='President'?'PRES':h.office==='House'?'HOUSE':'SEN'} ↗</a></div>`}).join('');
