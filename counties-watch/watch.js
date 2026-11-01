@@ -10,7 +10,7 @@ const signed=(n,d=1)=>(n>=0?"D +":"R +")+Math.abs(n).toFixed(d);
 const num=(n,d=1)=>(n>0?"+":"")+Number(n).toFixed(d);
 const formatTime=s=>{if(!s)return"Unreported";let t=new Date(s);return Number.isFinite(+t)?t.toLocaleString("en-US",{timeZone:"America/New_York",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",timeZoneName:"short"}):"Unreported"};
 const fromURL=new URLSearchParams(location.search);
-let hist=null,sources=null,live=null,code=fromURL.get("state")?.toUpperCase()||"MI",selected=null,sort="importance",turnout=.8,search="",lastStatus="Loading county result snapshot";
+let hist=null,sources=null,live=null,statewide=null,code=fromURL.get("state")?.toUpperCase()||"MI",selected=null,sort="importance",turnout=.8,search="",lastStatus="Loading county result snapshot";
 let requestBusy=false,lastChecked=0;
 function winMargin(c){return 100*(c.d-c.r)/Math.max(1,c.d+c.r)}
 function histories(u){
@@ -44,6 +44,40 @@ function validLiveSnapshot(value){
  }
  return {...value,states:acceptable};
 }
+const STATEWIDE_API="https://openamerica.io/elections/results.json?year=2026&office=Senate";
+let lastStatewideCheck=0,statewideLoading=false,statewideCheckedAt=null;
+function renderStatewide(){
+ const box=$("statewideLive");if(!box||!hist)return;
+ const race=statewide?.races?.[code],valid=race&&Array.isArray(race.cands)&&race.cands.length>=2;
+ if(!valid){
+  box.innerHTML='<strong>Statewide 2026 U.S. Senate count</strong><p>No verified statewide count available in the public supported-state feed for '+esc(hist.states[code].state)+'. The official state election portal is linked below. No vote is inferred.</p>';
+  return;
+ }
+ const cands=race.cands.filter(c=>c&&typeof c.n==="string"&&/^[A-ZILGCWDR]$/.test(c.p||"")&&Number.isSafeInteger(c.v)&&c.v>=0).sort((a,b)=>b.v-a.v);
+ if(cands.length<2){box.innerHTML='<strong>Statewide reporting</strong><p>Provider candidate counts unavailable.</p>';return;}
+ const count=cands.reduce((n,c)=>n+c.v,0);
+ if(!count){box.innerHTML='<strong>Statewide reporting</strong><p>Awaiting verified candidate votes.</p>';return;}
+ const timestamp=statewideCheckedAt||statewide.as_of;
+ box.innerHTML='<div class="section-head"><div><strong>Statewide Senate count · verified state-feed transcription</strong><small>Not a race call, projection or sum of the watched counties</small></div><span class="status-tag live">'+esc(race.pct_in==null?"Reporting share unavailable":pct(race.pct_in)+" precincts")+'</span></div>'+
+ '<div class="statewide-candidates">'+cands.slice(0,5).map(c=>'<div class="statewide-candidate"><span>'+esc(c.n)+' <small>('+esc(c.p)+')</small></span><b>'+money(c.v)+' <small>'+pct(100*c.v/count)+'</small></b></div>').join("")+'</div>'+
+ '<p class="footnote">State-level reported totals from <a href="https://openamerica.io/elections/api/" target="_blank" rel="noopener noreferrer">Open America’s state-results transcription</a> · Provider updated: '+esc(formatTime(timestamp))+'. The original election agency remains authoritative.</p>';
+}
+async function refreshStatewide(force=false){
+ if(statewideLoading||document.hidden||!hist)return;
+ if(Date.now()<Date.parse("2026-11-04T00:00:00Z"))return;
+ if(!force&&Date.now()-lastStatewideCheck<58000)return;
+ statewideLoading=true;lastStatewideCheck=Date.now();
+ try{
+  const ctrl=new AbortController(),clock=setTimeout(()=>ctrl.abort(),10500);
+  let response;try{response=await fetch(STATEWIDE_API,{cache:"no-store",signal:ctrl.signal})}finally{clearTimeout(clock)}
+  if(!response.ok)throw Error("Statewide endpoint "+response.status);
+  const raw=await response.json();
+  if(raw.year!==2026||String(raw.office).toLowerCase()!=="senate"||raw.source!=="state"||typeof raw.races!=="object")throw Error("Wrong election or office");
+  if(raw.as_of){const asOf=Date.parse(raw.as_of);if(!Number.isFinite(asOf)||asOf>Date.now()+300000||asOf<Date.parse("2026-11-04T00:00:00Z"))throw Error("Statewide result timestamp not for the 2026 count");}
+  statewide=raw;statewideCheckedAt=raw.as_of||null;
+ }catch(err){if(!statewide)statewide={races:{}}}
+ statewideLoading=false;renderStatewide();
+}
 function watchList(){
  const units=[...hist.states[code].units];
  const score=(u)=>sort==="volume"?u.v24.total:sort==="swing"?Math.abs(u.swing||0):sort==="close"?-Math.abs(u.m24):sort==="alignment"?(u.alignment.cycles>=2?u.alignment.rate:-1):u.score;
@@ -74,6 +108,7 @@ function renderSummary(){
  ].map(([lab,value,note])=>'<div class="stat"><span>'+esc(lab)+'</span><strong>'+esc(value)+'</strong><small>'+esc(note)+'</small></div>').join("");
  $("stateMeter").innerHTML='<div class="state-meter"><div class="d" style="width:'+b+'%"></div><div class="r" style="width:'+(100-b)+'%"></div></div><div class="legend"><span><strong>D '+pct(b)+'</strong> · 2024 presidential two-party share</span><span><strong>R '+pct(100-b)+'</strong></span></div>';
  $("stateContext").textContent="The 2024 presidential two-party result provides the starting point—not a Senate vote forecast. The highlighted counties accounted for "+pct(s.selectedBallotShare)+" of all 2024 ballots. A statewide tie would require a "+Math.abs(50-b).toFixed(1)+"-point "+(b<50?"Democratic":"Republican")+" shift in the two-party share under a uniform-swing illustration. "+(s.party==="I"?"This Senate challenger is an independent, and these D/R presidential benchmarks are especially limited.":"");
+ renderStatewide();
  $("rankHeading").textContent="Top 10 "+(code==="AK"?"Alaska state House districts":"counties")+" to watch";
  $("coverageText").textContent=code==="AK"?"Alaska: 2024 state House district results are first-choice presidential votes; boundaries and vote methods differ from past elections. Historical county/state agreement is unavailable.":"The ten selected counties together represented "+pct(s.selectedBallotShare)+" of 2024 presidential votes in "+s.state+". Benchmark votes are scaled to "+pct(turnout*100,0)+" of the county's 2024 D+R turnout, not a 2026 turnout prediction.";
  const years=[2016,2020,2024];
@@ -150,9 +185,9 @@ async function init(){
   $("countyRows").addEventListener("keydown",e=>{if(!["Enter"," "].includes(e.key))return;const tr=e.target.closest("tr[data-fips]");if(tr){e.preventDefault();selectUnit(tr.dataset.fips)}});
   $("reloadResults").addEventListener("click",()=>loadResults(true));
   $("copyLink").addEventListener("click",async()=>{const u=new URL(location.href);u.searchParams.set("state",code);try{await navigator.clipboard.writeText(u.toString());$("copyLink").textContent="Link copied ✓"}catch{$("copyLink").textContent="Copy unavailable"}});
-  render();await loadResults(true);
-  setInterval(()=>{if(document.visibilityState==="visible"&&Date.now()>=Date.parse("2026-11-04T00:00:00Z"))loadResults()},60000);
-  document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadResults()});
+  render();await Promise.all([loadResults(true),refreshStatewide(true)]);
+  setInterval(()=>{if(document.visibilityState==="visible"&&Date.now()>=Date.parse("2026-11-04T00:00:00Z")){loadResults();refreshStatewide()}},60000);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadResults();refreshStatewide()}});
  }catch(err){$("countyRows").innerHTML='<tr><td colspan="7">Unable to load the verified history dataset: '+esc(err.message)+'</td></tr>';$("feedMessage").textContent="History load failed."}
 }
 document.addEventListener("DOMContentLoaded",init,{once:true});
