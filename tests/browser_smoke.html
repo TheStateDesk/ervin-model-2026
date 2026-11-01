@@ -28,7 +28,7 @@
   check(doc.documentElement.classList.contains('large-text')&&el('readingToggle').getAttribute('aria-pressed')==='true','Larger text setting functions');
   el('readingToggle').click();
   check(!doc.documentElement.classList.contains('large-text'),'Standard text size can be restored');
-  check(!!doc.querySelector('.editorial-hero .hero-primary-action')&&!!doc.querySelectorAll('.readers-guide .guide-link').length===3,'New visitors get a clear overview and three guided entry points');
+  check(!!doc.querySelector('.editorial-hero .hero-primary-action')&&doc.querySelectorAll('.readers-guide .guide-link').length===3,'New visitors get a clear overview and three guided entry points');
   check(!!doc.querySelector('#forecast-settings')&&!!doc.querySelector('.model-settings-help summary'),'Forecast source choices remain available with progressive explanations');
   check(doc.querySelectorAll('#topNavigation a').length===5,'Desktop primary navigation exposes the five major page destinations');
   check(!!el('mainContent')&&!!doc.querySelector('a.skip-to-content'),'Keyboard users can skip navigation and reach the main content');
