@@ -22,6 +22,11 @@
   const source=k=>doc.querySelector('#tabs button[data-source="'+k+'"]');
   const clickSVG=node=>node.dispatchEvent(new win.MouseEvent('click',{bubbles:true}));
   check(!!el('map')&&!!el('bars')&&!!el('rows'),'Map, bars and table rendered; title='+doc.title+'; state='+doc.readyState);
+  check(doc.documentElement.classList.contains('light'),'Professional high-contrast light theme is the default');
+  check(!!doc.querySelector('.editorial-hero .hero-primary-action')&&!!doc.querySelectorAll('.readers-guide .guide-link').length===3,'New visitors get a clear overview and three guided entry points');
+  check(!!doc.querySelector('#forecast-settings')&&!!doc.querySelector('.model-settings-help summary'),'Forecast source choices remain available with progressive explanations');
+  check(doc.querySelectorAll('#topNavigation a').length===5,'Desktop primary navigation exposes the five major page destinations');
+  check(!!el('mainContent')&&!!doc.querySelector('a.skip-to-content'),'Keyboard users can skip navigation and reach the main content');
   check(doc.querySelectorAll('#tabs button').length===6,'All six polling tabs rendered');
   check(source('take')?.getAttribute('aria-selected')==='true','Ervin Take default selected');
   check(el('biasMode').value==='original','Original Ervin is the default bias mode');
@@ -113,7 +118,9 @@
   row.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
   check(doc.querySelector('#map g.geo-region.active')?.dataset.code==='TX','Keyboard Enter selects a race');
   el('themeToggle').click();
-  check(doc.documentElement.classList.contains('light'),'Light theme toggle works');
+  check(!doc.documentElement.classList.contains('light'),'Appearance control switches to dark mode');
+  el('themeToggle').click();
+  check(doc.documentElement.classList.contains('light'),'Appearance control restores the default light mode');
   let start=performance.now();
   for(const code of ['MI','OH','TX','ME','AK','GA','NC','MI','FL','NH']){
    clickSVG(doc.querySelector('#map [data-code="'+code+'"]'));
