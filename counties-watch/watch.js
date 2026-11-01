@@ -3,6 +3,7 @@
  */
 (()=>{"use strict";
 const $=id=>document.getElementById(id);
+const metrics=window.ERVIN_WATCH_METRICS,widgets=window.ERVIN_WATCH_WIDGETS;
 const money=n=>Number(n||0).toLocaleString("en-US");
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pct=(n,d=1)=>Number.isFinite(Number(n))?Number(n).toFixed(d)+"%":"—";
@@ -10,7 +11,7 @@ const signed=(n,d=1)=>(n>=0?"D +":"R +")+Math.abs(n).toFixed(d);
 const num=(n,d=1)=>(n>0?"+":"")+Number(n).toFixed(d);
 const formatTime=s=>{if(!s)return"Unreported";let t=new Date(s);return Number.isFinite(+t)?t.toLocaleString("en-US",{timeZone:"America/New_York",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",timeZoneName:"short"}):"Unreported"};
 const fromURL=new URLSearchParams(location.search);
-let hist=null,sources=null,live=null,statewide=null,code=fromURL.get("state")?.toUpperCase()||"MI",selected=null,sort="importance",turnout=.8,search="",lastStatus="Loading county result snapshot";
+let hist=null,sources=null,forecast=null,live=null,statewide=null,code=fromURL.get("state")?.toUpperCase()||"MI",selected=null,sort="importance",turnout=.8,search="",lastStatus="Loading county result snapshot";
 let requestBusy=false,lastChecked=0;
 function winMargin(c){return 100*(c.d-c.r)/Math.max(1,c.d+c.r)}
 function histories(u){
@@ -77,6 +78,7 @@ async function refreshStatewide(force=false){
   statewide=raw;statewideCheckedAt=raw.as_of||null;
  }catch(err){if(!statewide)statewide={races:{}}}
  statewideLoading=false;renderStatewide();
+ if(hist?.states?.[code])$("stateOutstanding").innerHTML=widgets.extraStatePath(hist.states[code],forecast?.states?.[code],statewide,turnout);
 }
 function watchList(){
  const units=[...hist.states[code].units];
@@ -118,16 +120,21 @@ function renderSummary(){
  }).join("");
  const msg=count?count+" of ten chosen units have verified 2026 returns recorded; "+money(known)+" total votes shown. These are not a statewide call.":"No verified November 3, 2026 Senate county returns in this site's feed. The official source link is available for independent checking.";
  $("feedMessage").textContent=msg;
+ const pace=widgets.statePanels(s,forecast?.states?.[code],turnout);
+ $("winningBenchmarks").innerHTML=pace.top;
+ $("turnoutSensitivity").innerHTML=pace.table;
+ $("countyPaceSummary").innerHTML=widgets.paceSummary(s,forecast?.states?.[code],stateRows,turnout);
+ $("stateOutstanding").innerHTML=widgets.extraStatePath(s,forecast?.states?.[code],statewide,turnout);
 }
 function renderTable(){
  const rows=watchList(),s=hist.states[code];
  $("countyRows").innerHTML=rows.length?rows.map(u=>{
-  const b=benchmarks(u),votes=liveFor(u),cor=u.alignment;
+  const b=benchmarks(u),votes=liveFor(u),cor=u.alignment,m=metrics.county(u,s,forecast?.states?.[code],turnout);
   const agreement=cor.cycles>=2?pct(cor.rate,0):"N/A";
   const move=u.swing==null?"Different boundaries":num(u.swing)+" pts D";
   const liveCell=votes?'<strong class="'+(votes.dem>=votes.rep?"numblue":"numred")+'">'+signed(winMargin(votes),1)+'</strong><small>'+money(votes.dem)+" / "+money(votes.rep)+" votes · "+esc(votes.reportingStatus)+'</small>':'<small>Awaiting attributed returns</small>';
-  return '<tr tabindex="0" role="button" aria-label="Inspect '+esc(u.name)+'" data-fips="'+esc(u.fips)+'" class="'+(selected===u.fips?"active":"")+'"><td><strong><span class="numgold">#'+u.rank+'</span> '+esc(u.name)+'</strong><small>Importance '+u.score+' / 100</small></td><td class="'+(u.m24>=0?"numblue":"numred")+'">'+signed(u.m24,1)+'</td><td>'+esc(move)+'</td><td>'+money(u.v24.total)+'</td><td><strong>'+pct(u.benchmarkShare)+'</strong><small>'+money(b.d)+' / '+money(b.votes)+' D+R ballots</small></td><td><span class="aligned">'+agreement+'</span><small>'+(cor.cycles>=2?cor.matches+'/'+cor.cycles+' years aligned':'Insufficient comparable years')+'</small></td><td>'+liveCell+'</td></tr>';
- }).join(""):'<tr><td colspan="7">No watched counties match the search.</td></tr>';
+  return '<tr tabindex="0" role="button" aria-label="Inspect '+esc(u.name)+'" data-fips="'+esc(u.fips)+'" class="'+(selected===u.fips?"active":"")+'"><td><strong><span class="numgold">#'+u.rank+'</span> '+esc(u.name)+'</strong><small>Importance '+u.score+' / 100</small></td><td class="'+(u.m24>=0?"numblue":"numred")+'">'+signed(u.m24,1)+'</td><td>'+esc(move)+'</td><td>'+money(u.v24.total)+'</td><td><strong>'+pct(u.benchmarkShare)+'</strong><small>'+money(b.d)+' / '+money(b.votes)+' D+R ballots</small></td><td><strong class="numgold">'+(m?.model?pct(m.model.share*100):"Unavailable")+'</strong><small>'+(m?.model?money(m.model.nonRVotes)+" non-R of "+money(m.total):"No modeled benchmark")+'</small></td><td><span class="aligned">'+agreement+'</span><small>'+(cor.cycles>=2?cor.matches+'/'+cor.cycles+' years aligned':'Insufficient comparable years')+'</small></td><td>'+(m?.ballotsChange20==null?"Not comparable":(m.ballotsChange20>=0?"+":"")+m.ballotsChange20.toFixed(1)+"%")+'</td><td>'+liveCell+'</td></tr>';
+ }).join(""):'<tr><td colspan="9">No watched counties match the search.</td></tr>';
 }
 function renderCounty(){
  const s=hist.states[code],u=s.units.find(x=>x.fips===selected)||s.units[0];if(!u)return;selected=u.fips;
@@ -146,6 +153,7 @@ function renderCounty(){
  '<h3>2026 verified returns</h3>'+
  (liveVotes?'<p><b>'+money(liveVotes.dem)+' '+esc(s.party==="I"?"non-R":"D")+' / '+money(liveVotes.rep)+' R</b> · '+esc(liveVotes.reportingStatus)+' as of '+esc(formatTime(liveVotes.asOf))+' · <a target="_blank" rel="noopener noreferrer" href="'+esc(liveVotes.sourceUrl)+'">Original result source ↗</a></p>':'<p class="description">Not yet reported to the verified county snapshot. <a href="'+esc(sources?.sources?.[code]?.url||'#')+'" target="_blank" rel="noopener noreferrer">Check official state results ↗</a></p>')+
  '<p class="footnote">Benchmark at '+pct(turnout*100,0)+' of 2024 major-party turnout: '+money(b.d)+' non-R and '+money(b.r)+' R votes to match the illustrative 50–50 statewide uniform-swing scenario. This is not the Ervin Senate forecast.</p>';
+ $("countyInspector").insertAdjacentHTML("beforeend",widgets.countyPanel(u,s,forecast?.states?.[code],liveVotes,turnout));
 }
 function render(){
  if(!hist?.states[code])code="MI";
@@ -171,10 +179,11 @@ async function loadResults(force=false){
 }
 async function init(){
  try{
-  const [h,s]=await Promise.all([fetch("./history.json").then(r=>{if(!r.ok)throw Error("History HTTP "+r.status);return r.json()}),
-   fetch("./sources.json").then(r=>r.json())]);
+  const [h,s,fore]=await Promise.all([fetch("./history.json").then(r=>{if(!r.ok)throw Error("History HTTP "+r.status);return r.json()}),
+   fetch("./sources.json").then(r=>r.json()),fetch("./forecast-baselines.json").then(r=>{if(!r.ok)throw Error("Forecast snapshot unavailable");return r.json()})]);
   if(h.version!==1||Object.keys(h.states||{}).length!==17||Object.values(h.states).some(x=>x.units.length!==10))throw Error("Historical county dataset incomplete");
   hist=h;sources=s;
+  forecast=fore?.version===1&&Object.keys(fore.states||{}).length===17?fore:null;
   const order=Object.values(hist.states).sort((a,b)=>a.state.localeCompare(b.state));
   $("stateSelect").innerHTML=order.map(x=>'<option value="'+x.code+'">'+esc(x.state)+' ('+x.code+')</option>').join("");
   $("stateSelect").addEventListener("change",e=>{code=e.target.value;selected=null;search="";$("countySearch").value="";const u=new URL(location.href);u.searchParams.set("state",code);history.replaceState(null,"",u);render()});
