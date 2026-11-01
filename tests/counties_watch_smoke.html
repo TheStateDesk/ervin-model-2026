@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Counties to Watch browser smoke</title></head>
+<body><pre id="report" data-status="RUNNING">Testing county state dashboard…</pre><script>
+(async()=>{
+ const out=document.getElementById("report"),checks=[],errors=[],ok=(v,m)=>{if(!v)throw Error(m);checks.push(m)};
+ try{
+  const iframe=document.createElement("iframe");iframe.style.cssText="width:1120px;height:920px;border:0";
+  const ready=new Promise((resolve,reject)=>{iframe.onload=resolve;iframe.onerror=()=>reject(Error("Iframe failed"))});
+  iframe.src="../counties-watch/?state=MI";
+  document.body.append(iframe);await ready;
+  const w=iframe.contentWindow,d=iframe.contentDocument,$=id=>d.getElementById(id);
+  w.addEventListener("error",e=>errors.push(e.message));
+  for(let i=0;i<150&&d.querySelectorAll("#countyRows tr[data-fips]").length!==10;i++)await new Promise(r=>setTimeout(r,75));
+  ok($("stateSelect").options.length===17,"17 state choices loaded");
+  ok($("stateSelect").value==="MI","Michigan URL selection restored");
+  ok(d.querySelectorAll("#countyRows tr[data-fips]").length===10,"Ten ranked counties visible");
+  ok($("stateTitle").textContent.includes("El-Sayed"),"2026 named Senate candidates loaded");
+  ok($("stateStats").querySelectorAll(".stat").length===4,"Statewide benchmark metrics rendered");
+  ok($("stateMeter").querySelector(".state-meter .d")!==null,"2016-2024 statewide graphic renders");
+  ok($("countyInspector").textContent.includes("Election history"),"Selected county has historic return detail");
+  ok($("countyInspector").textContent.includes("Statewide-tie benchmark"),"County hypothetical statewide win threshold displayed");
+  ok($("countyInspector").textContent.includes("not 2026 win odds"),"Tiny-sample historic rate not presented as calibrated probability");
+  ok($("rankHeading").textContent.includes("counties"),"Michigan counties correctly labeled");
+  ok($("officialLink").href.startsWith("https://"),"Official election link available");
+  ok($("feedMessage").textContent.includes("No verified"),"Empty vote snapshot does not invent election results");
+  let first=$("countyRows").querySelector("tr[data-fips]");
+  first.dispatchEvent(new w.KeyboardEvent("keydown",{key:"Enter",bubbles:true}));
+  ok(first.classList.contains("active"),"Keyboard county selection highlights row");
+  let value=$("countyInspector").textContent;
+  $("turnoutMode").value="0.65";$("turnoutMode").dispatchEvent(new w.Event("change",{bubbles:true}));
+  ok($("coverageText").textContent.includes("65%"),"Turnout sensitivity selector updates benchmark coverage");
+  $("sortMode").value="volume";$("sortMode").dispatchEvent(new w.Event("change",{bubbles:true}));
+  ok(d.querySelectorAll("#countyRows tr[data-fips]").length===10,"Volume sort keeps full watch list");
+  $("countySearch").value="Wayne";$("countySearch").dispatchEvent(new w.Event("input",{bubbles:true}));
+  ok(d.querySelectorAll("#countyRows tr[data-fips]").length===1,"County search filters");
+  $("countySearch").value="";$("countySearch").dispatchEvent(new w.Event("input",{bubbles:true}));
+  $("stateSelect").value="AK";$("stateSelect").dispatchEvent(new w.Event("change",{bubbles:true}));
+  ok(d.querySelectorAll("#countyRows tr[data-fips]").length===10,"Alaska shows ten watch districts");
+  ok($("rankHeading").textContent.includes("districts"),"Alaska is not misrepresented as counties");
+  ok($("countyInspector").textContent.includes("Not available"),"Alaska historical correlation not fabricated");
+  ok(w.location.search.includes("state=AK"),"State picker creates shareable URL");
+  $("stateSelect").value="NH";$("stateSelect").dispatchEvent(new w.Event("change",{bubbles:true}));
+  ok($("coverageText").textContent.includes("100.0%"),"New Hampshire ten counties cover complete state");
+  ok(d.querySelectorAll("#countyRows tr[data-fips]").length===10,"New Hampshire complete ten-county coverage");
+  iframe.style.width="390px";
+  await new Promise(resolve=>w.requestAnimationFrame(resolve));
+  ok(w.innerWidth<=400,"Mobile breakpoint active");
+  ok(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,"No page-wide horizontal overflow on small screen");
+  ok(errors.length===0,"No browser runtime errors");
+  out.dataset.status="PASS";out.textContent="PASS "+checks.length+" checks\n"+checks.map(c=>"✓ "+c).join("\n");
+ }catch(e){out.dataset.status="FAIL";out.textContent="FAIL "+e.stack+"\n"+errors.join("\n");}
+})();
+</script></body></html>
