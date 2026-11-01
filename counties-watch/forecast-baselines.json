@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-01T11:19:14.951073+00:00",
+  "asOf": "2026-11-01T11:20:47.953Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -191,7 +191,7 @@
       "nonR": "Scott Colom",
       "rep": "Cindy Hyde-Smith",
       "party": "D",
-      "pollMargin": -5.0,
+      "pollMargin": -5,
       "adjustedMargin": -11.41,
       "mode": "Original Ervin",
       "publisherInputs": 0,
