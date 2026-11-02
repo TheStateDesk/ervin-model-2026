@@ -128,6 +128,7 @@ def main():
     status[key]["state"]="id_unavailable";continue
    detail=read(BASE+"/race/"+str(identifier))
    # Show schema keys, not personal information, to validate the public 2026 payload contract.
+   status[key]["searchRecord"]={k:str(v)[:100] for k,v in row.items() if k in ("id","name","title","election_name","election_type","election_scope","date","election_date","province","district","country","type","office")}
    status[key]["detailKeys"]=list(detail)[:35] if isinstance(detail,dict) else []
    status[key]["detailType"]=type(detail).__name__
    if isinstance(detail,dict):
@@ -136,7 +137,7 @@ def main():
       status[key][field+"Keys"]=list(detail[field])[:25]
     if isinstance(detail.get("candidates"),list):
      status[key]["candidateFields"]=list(detail["candidates"][0])[:22] if detail["candidates"] and isinstance(detail["candidates"][0],dict) else []
-    for field in ("date","updated_at","updatedAt","total_votes","total","type","election_type"):
+    for field in ("election_date","last_updated","test_data","polls_close","percent_reporting","country","province","district","election_scope","date","updated_at","updatedAt","total_votes","total","type","election_type"):
      if field in detail:status[key]["field_"+field]=str(detail[field])[:80]
    verified=normalize(key,row,detail,current)
    status[key]["raceId"]=str(identifier)
