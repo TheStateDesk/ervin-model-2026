@@ -177,8 +177,26 @@ function renderEvidence(){
  }).join('');
  if(note)note.textContent='All figures are empirical summaries from saved backtests, not confidence intervals. State-adjusted Senate error was higher than raw polling error in this sample ('+fmt(adjusted.mae)+' vs '+fmt(senate.mae)+' points). The House comparison excludes 203 noncomparable districts, and neither sample measures early precinct reporting reliability.';
 }
+function renderTransfer(){
+ const tbody=$('transferRows');if(!tbody||!draws.length)return;
+ tbody.innerHTML=specs.map(spec=>{
+  const columns=['TX','KS','IA'].map(target=>signalStrength(spec,target).toFixed(2));
+  return '<tr><td><strong>'+esc(spec.title)+'</strong><small>'+esc(spec.id)+'</small></td>'+
+   columns.map(n=>'<td class="nerd-matrix-num">'+n+'</td>').join('')+
+   '<td>'+ (spec.id.endsWith('-SENATE')?'Requires independent geography/mode audit':'House: manual scenario only') +'</td></tr>';
+ }).join('');
+}
+function exportTransferCSV(){
+ if(!draws.length)return;
+ const header=['Early signal','Race ID','TX sensitivity','KS sensitivity','IA sensitivity','Auto use'];
+ const csv=[header,...specs.map(s=>[s.title,s.id,...['TX','KS','IA'].map(t=>signalStrength(s,t).toFixed(4)),s.id.endsWith('-SENATE')?'Only after independent audit':'Not permitted'])].map(row=>row.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\r\n');
+ const blob=new Blob([csv+'\r\n'],{type:'text/csv;charset=utf-8'});
+ const uri=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=uri;link.download='ervin-early-signal-assumptions-2026.csv';link.hidden=true;
+ document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(uri),500);
+}
 function render(){
- renderEvidence();
+ renderEvidence();renderTransfer();
  const data=compute(),{results,active,ess}=data;
  $('targetCards').innerHTML=['TX','KS','IA'].map(id=>targetHTML(id,results[id])).join('');
  $('numApproved').textContent=Object.values(signalMeta).filter(x=>x.state==='approved').length;
@@ -273,6 +291,7 @@ async function init(){
  $('refreshSignals').addEventListener('click',()=>refresh(true));
  $('watchFilter')?.addEventListener('change',render);
  $('watchSort')?.addEventListener('change',render);
+ $('downloadTransfer')?.addEventListener('click',exportTransferCSV);
  $('includeManual').onchange=e=>{includeManual=e.target.checked;render()};
  $('clearManual').onclick=()=>{manual=[];render()};
  $('whatifForm').addEventListener('submit',e=>{
