@@ -3,7 +3,7 @@ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 let house=[],governors=[],senate=[],baseline={},countyHistory={},audit=null,all=[],fav=new Set();
 try{fav=new Set(JSON.parse(localStorage.getItem('ervin-model-watchlist-v2')||'[]'))}catch{}
 const id=r=>r.office==='House'?r.id:r.office.toLowerCase()+':'+r.code;
-const route=r=>r.office==='House'?'../../elections/?office=house&state='+r.code+'&district='+r.district:'../../elections/?office='+r.office.toLowerCase()+'&state='+r.code;
+const route=r=>'../../state/?state='+encodeURIComponent(r.code)+(r.office==='House'?'#house-'+encodeURIComponent(r.district):'#stateOverview');
 const labels=r=>r.office==='House'?r.id:r.state+' '+r.office;
 const status=r=>r.office==='House'?(r.rating||'Rating not entered'):r.office==='Governor'?(r.poll?'Published aggregate '+(r.poll.margin>=0?'D':'R')+' +'+Math.abs(r.poll.margin).toFixed(1):'No published average'):(baseline[r.code]&&Number.isFinite(baseline[r.code].adjustedMargin)?'Ervin adj. '+(baseline[r.code].adjustedMargin>=0?'D':'R')+' +'+Math.abs(baseline[r.code].adjustedMargin).toFixed(1):'No current model estimate');
 const quality=r=>r.office==='House'?r.rating==='Tossup'?0:r.rating?.startsWith('Lean')?1:r.rating?.startsWith('Likely')?2:5:r.office==='Senate'?3:4;
@@ -28,6 +28,8 @@ $('centerUSMap').querySelectorAll('path').forEach(p=>{p.addEventListener('click'
 }
 const layerChoice=()=>$('centerMapLayer').value;
 function chooseState(code){
+ // The State Desk is now the canonical one-stop state edition.
+ location.href='../../state/?state='+encodeURIComponent(code);return;
 const state=window.ERVIN_US_GEOGRAPHY?.states?.find(g=>g.code===code)?.name||code;
 const s=senate.find(r=>r.code===code),g=governors.find(r=>r.code===code),h=house.filter(r=>r.code===code);
 const historic=countyHistory[code]?.stateCycles?.['2024'];
