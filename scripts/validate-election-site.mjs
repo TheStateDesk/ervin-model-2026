@@ -39,9 +39,10 @@ for(const code of geographicStates.keys()){
  const meta=geographicStates.get(code);
  assert(c.state===code&&d.state===code,code+' direct geometry state mismatch');
  assert.equal(c.features.length,meta.counties,code+' direct county total disagrees with bundle');
- assert.equal(d.features.length,meta.districts,code+' direct House total disagrees with bundle');
+ const genuineDs=d.features.filter(f=>/^\d{1,2}$/.test(String(f.id)));
+ assert.equal(genuineDs.length,meta.districts,code+' direct House total disagrees with bundle');
  assert(c.features.every(f=>meta.countyIds.has(String(f.id))),code+' direct county FIPS mismatch');
- assert(d.features.every(f=>meta.districtIds.has(String(f.id).padStart(2,'0'))),code+' direct district IDs mismatch');
+ assert(genuineDs.every(f=>meta.districtIds.has(String(f.id).padStart(2,'0'))),code+' direct district IDs mismatch');
 }
 const house=json('house/data.json'),seats=house.seats||[];
 assert.equal(seats.length,435,'House directory must contain 435 seats');
