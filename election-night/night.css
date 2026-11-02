@@ -19,3 +19,13 @@
  .night-head nav a{font-size:11px}
  .night-head #appearance{padding:8px 9px}
 }
+
+/* CivicAPI candidate-level reporting: counted votes, not forecasted shares. */
+.night-counts{display:grid;gap:7px;margin:1px 0 10px;min-width:0}
+.night-counted-candidate{display:grid;grid-template-columns:minmax(80px,1fr) auto 43px;align-items:baseline;gap:9px;font-size:12px;border-left:3px solid #a2b5c5;padding:3px 0 3px 8px;min-width:0}
+.night-counted-candidate.dem{border-color:#4b8fd0}.night-counted-candidate.rep{border-color:#c75666}
+.night-counted-candidate span{font-weight:700;overflow-wrap:anywhere}
+.night-counted-candidate b{font-variant-numeric:tabular-nums;text-align:right}
+.night-counted-candidate small{text-align:right;white-space:nowrap;color:var(--night-muted,#748696);font-variant-numeric:tabular-nums}
+.night-report-progress{display:block;font-size:10px;line-height:1.5}
+@media(max-width:730px){.night-counted-candidate{grid-template-columns:minmax(85px,1fr) auto 42px;gap:5px}}
