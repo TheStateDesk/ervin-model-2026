@@ -33,7 +33,7 @@ for(let i=1;i<=10;i++){
 }
 const alaska=json('geo/districts/AK.json'),akCounties=json('geo/counties/AK.json');
 assert.equal(alaska.state,'AK');assert.equal(akCounties.state,'AK');
-geographicStates.set('AK',{counties:akCounties.features.length,districts:1,districtIds:new Set(['00'])});
+geographicStates.set('AK',{counties:akCounties.features.length,districts:1,districtIds:new Set(['01'])});
 assert.equal(geographicStates.size,expected,'Incomplete 50-state mapping coverage');
 const house=json('house/data.json'),seats=house.seats||[];
 assert.equal(seats.length,435,'House directory must contain 435 seats');
