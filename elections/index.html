@@ -1,0 +1,44 @@
+<!doctype html><html lang="en" class="light"><head>
+<script>try{if(localStorage.getItem("ervin-2026-appearance")==="dark")document.documentElement.classList.remove("light")}catch(e){}</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f6f8">
+<meta name="description" content="Explore a 2026 Senate or governor election: interactive county map, candidate comparison, polling average, recent surveys and verified-results status.">
+<title>Election dossier • Ervin Model</title>
+<link rel="stylesheet" href="../site-chrome.css"><link rel="stylesheet" href="../design-system.css"><link rel="stylesheet" href="../interior-layout.css"><link rel="stylesheet" href="../dark-theme.css"><link rel="stylesheet" href="./style.css">
+</head><body><a class="skip-to-content" href="#mainContent">Skip to content</a>
+<header class="site-header"><div class="site-header-inner"><a class="site-brand" href="../"><span class="site-emblem">E</span><span>ERVIN <b>MODEL</b></span></a>
+<button class="site-mobile-toggle" type="button" aria-controls="siteNavigation" aria-expanded="false">☰ Menu</button>
+<nav id="siteNavigation" class="site-nav" aria-label="Website"><a href="../">Senate forecast</a><a href="../governors/">All governors</a><a href="../counties-watch/">Counties to Watch</a><a href="../michigan/">Michigan</a><a href="../michigan/election-night/">Election night</a></nav></div></header>
+<main id="mainContent" class="race-shell">
+<div class="race-topline"><a id="backLink" href="../governors/" class="race-back">← All elections</a><span class="race-flag"><i></i><span id="edition">2026 · pre-election research edition</span></span></div>
+<div class="race-lede"><div><div class="race-kicker" id="topKicker">2026 election intelligence / state dossier</div><h1 class="race-title" id="raceTitle">Loading election…</h1><p class="race-description" id="raceDeck">Candidate matchup, geographic context, individual polls, forecasting method and verified result status.</p></div><label for="raceJump" class="race-muted">Go to another election<br><select id="raceJump" aria-label="Switch election"><option>Loading races…</option></select></label></div>
+<nav class="race-ribbon" aria-label="Sections"><a href="#mapSection">County map</a><a href="#pollSection">Polls</a><a href="#resultSection">Election results</a><a href="#methodSection">Methods</a></nav>
+<div class="race-dashboard">
+<aside class="race-panel race-left" aria-label="Election navigation"><div class="race-kicker">Explore elections</div><h2 style="margin:5px 0 10px">Race selector</h2><div class="race-list" id="raceList">Loading…</div></aside>
+<div class="race-center">
+<section class="race-panel" id="mapSection"><div class="race-map-head"><div><div class="race-kicker">Geographic election map</div><h2 id="mapTitle">County-level map</h2><p class="race-muted" style="margin:4px 0">County outlines are geographic context, not predicted results.</p></div><span class="race-flag" id="countyCount">Loading map</span></div>
+<div class="race-map-frame"><svg id="countyMap" role="group" aria-label="State map with clickable counties" viewBox="0 0 900 580"><text x="450" y="280" text-anchor="middle" fill="#8298aa">Loading geographic boundaries…</text></svg></div>
+<div class="race-map-legend"><span class="race-key"></span> No verified 2026 county results <span style="margin-left:auto" id="mapDate">2026 pre-election</span></div>
+<div class="race-county-detail" id="countyInspector" aria-live="polite">Select a county to inspect its geographic information and any available verified election returns.</div>
+<p class="race-map-note" id="mapProvenance">Boundaries are for navigation only. A county appearing on this map does not imply any data has been reported.</p>
+</section>
+<section class="race-panel" id="pollSection"><div class="race-kicker">Polling intelligence</div><h2>Recent surveys and polling inputs</h2><p class="race-muted" id="pollIntro">Publisher averages and survey evidence are separated to avoid implying that polling data are election results.</p>
+<div class="race-rows" id="pollRows"><div class="race-note">Loading polls…</div></div>
+<div style="margin:18px 0 8px"><h3>Survey margin comparison</h3><p class="race-muted">Individual poll margins, when independently attributable. They are not a new polling average.</p></div><div id="pollPlot" class="race-graph"><b>Surveys</b></div>
+<div class="race-sources" id="pollLinks"></div></section>
+<section class="race-panel" id="resultSection"><div class="race-kicker">Election night / verification first</div><h2>Verified 2026 returns</h2><div class="race-note" id="resultNotice">No verified statewide or county vote totals are connected to this election dossier. Forecast and polling values above are not live votes.</div>
+<div class="race-meta" style="margin-top:14px"><div><small>Votes reported</small><strong id="votesReported">Not available</strong></div><div><small>Counties reporting</small><strong id="countiesReported">Not verified</strong></div><div><small>Votes outstanding</small><strong id="outstanding">Not estimated</strong></div></div>
+<p class="race-muted" style="margin-top:15px">These fields will show reported totals only after a documented data source and ingestion pipeline are attached. Until then, blank is more informative than an invented zero. Michigan's separate election-night page provides its own source-readiness audit.</p>
+<div class="race-sources" id="resultLinks"></div></section>
+</div>
+<aside class="race-right" aria-label="Race forecast and candidates">
+<section class="race-panel"><div class="race-kicker">The matchup</div><h2 id="matchupTitle">Candidate comparison</h2><div class="race-candidate-grid" id="candidates"></div>
+<div class="race-margin"><small id="leadLabel">Polling indicator</small><strong id="leadValue">—</strong><p class="race-muted" id="leadExplanation" style="margin:5px 0 0"></p><div class="race-halfbar" aria-hidden="true"><span class="left" id="repBar" style="width:50%"></span><span class="right" id="demBar" style="width:50%"></span></div></div>
+<div class="race-meta"><div><small>Individual surveys</small><strong id="pollCount">—</strong></div><div><small>Latest polling input</small><strong id="pollDate">—</strong></div><div><small>Model status</small><strong id="modelStatus">—</strong></div></div>
+<div class="race-sources" id="raceSources"></div></section>
+<section class="race-panel"><div class="race-kicker">How much do we know?</div><h2>Evidence and uncertainty</h2><p class="race-muted" id="certainty">A polling lead is not a win probability. Reliable uncertainty depends on a validated model, known turnout, and matching historical data.</p><div class="race-note" id="qualifiers" style="margin-top:13px">Loading source information…</div></section>
+<section class="race-panel" id="methodSection"><div class="race-kicker">Accountability and methodology</div><h2>What the dashboard measures</h2><p class="race-muted" id="methodology">All sources should be checked for freshness, candidate matching and overlap.</p><div class="race-sources" id="methodLinks"></div></section>
+</aside></div>
+</main>
+<script src="../scripts/us-geography.js"></script>
+<script defer src="./app.js"></script><script defer src="../site-chrome.js"></script>
+</body></html>
