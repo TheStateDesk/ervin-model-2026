@@ -74,10 +74,23 @@ const elapsed=+(performance.now()-since).toFixed(1);
 const all=JSON.parse(fs.readFileSync('house/data.json','utf8')).seats;
 assert.equal(all.length,435);
 for(const r of all)assert(engine.canonical(r.id,'House')===r.id,'House key not canonical: '+r.id);
+const finalTime='2026-11-04T07:05:00Z',finalNow=Date.parse('2026-11-04T08:00:00Z');
+const national={version:1,election:'2026-11-03',races:{}},mirror={api:1,year:2026,office:'House',as_of:finalTime,races:{}};
+for(const district of all){
+ const votes=candidates(140,130);
+ national.races[district.id]={source:'civicAPI',verified:true,election:'2026-11-03',office:'house',asOf:finalTime,sourceUrl:'https://civicapi.org/api/v2/race/12345',total:270,candidates:votes};
+ mirror.races[district.id]={total:270,cands:[{n:'Dem candidate',v:140,p:'D'},{n:'Rep candidate',v:130,p:'R'}]};
+}
+const massiveCivic=engine.civic(national,finalNow),massiveOA=engine.openAmerica(mirror,'House',finalNow);
+assert.equal(Object.keys(massiveCivic).length,435,'Civic must parse 435 simultaneous district reports');
+assert.equal(Object.keys(massiveOA).length,435,'Mirror must parse 435 simultaneous district reports');
+const overlap=engine.reconcile([massiveCivic,massiveOA]);
+assert.equal(Object.keys(overlap.races).length,435,'Overlapping mirrors must not double county or district totals');
+assert.equal(Object.values(overlap.races).reduce((n,x)=>n+x.total,0),435*270,'No vote inflation through same-source duplicates');
 const html=fs.readFileSync('election-night/index.html','utf8'),nightJS=fs.readFileSync('election-night/night.js','utf8'),stateHtml=fs.readFileSync('state/index.html','utf8'),stateJS=fs.readFileSync('state/app.js','utf8');
 assert(html.includes('returns-core.js')&&html.includes('id="nightStateFilter"'));
 assert(html.includes('civicReportingStatus')&&nightJS.includes('core.reconcile'));
 assert(stateHtml.includes('data-election-night-state')&&stateJS.includes("querySelectorAll('[data-election-night-state]')"));
 assert(!stateHtml.includes('href="#stateResults">Election night'),'Old results panel incorrectly labeled live election night');
 assert(!html.includes('href="../state/?state=MI#stateResults"'),'Old panel link reintroduced');
-console.log('ELECTION NIGHT STRESS PASS',JSON.stringify({states:50,districts:435,syntheticProviderUpdates:count,elapsedMs:elapsed,duplicateSourcesAdded:0,rollbacksHeld:true,precloseLeakage:false}));
+console.log('ELECTION NIGHT STRESS PASS',JSON.stringify({states:50,districts:435,syntheticProviderUpdates:count,parallelHouseRaces:435,elapsedMs:elapsed,duplicateSourcesAdded:0,rollbacksHeld:true,precloseLeakage:false}));
