@@ -162,10 +162,12 @@ async function loadRaces(){
  const [gov,house,sen,archive]=await Promise.all([fetchJSON('../governors/data.json'),fetchJSON('../house/data.json'),fetchJSON(forecastURL),fetchJSON('../research/governor-same-office-2014-2024.json')]);
  const report=window.ERVIN_STATEWIDE.apply(archive,gov,sen);
  const houseForecast=await fetchJSON('../house/ervin-forecast-2026-11-02.json');
+ const houseRoster=await fetchJSON('../house/candidates-2026.json').catch(()=>null);
+ const ballotNames=h=>{const a=houseRoster?.races?.[h.id]?.candidates||[];return a.length?a.map(c=>c.name+' ('+c.party+')').join(' · '):'2026 candidate roster not confirmed'};
  senate=sen.states||{};
  const senRaces=report.senate.map(s=>({id:s.code+'-SENATE',code:s.code,state:s.state,office:'Senate',label:(s.nonR||'Independent/Democrat')+' vs. '+s.rep,margin:s.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(s.model.adjustedMargin)}));
  const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:Number.isFinite(g.model.adjustedMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin):Number.isFinite(g.model.pollMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.pollMargin)+' · unadjusted':'No numeric published poll'}));
- const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:h.incumbent?'Historically: '+h.incumbent:'Candidate list not verified',margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
+ const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:ballotNames(h),margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
  races=[...senRaces,...govRaces,...houseRaces];
  $('miForecast').textContent=window.ERVIN_STATEWIDE.formatMargin(sen.states?.MI?.adjustedMargin??null);
  $('nightHorizon').textContent='Source coverage: 17 modeled Senate contests, 36 governor elections, all 435 House districts. The governor calibration uses 2018–2024 same-state governor-only polling errors; county counts below are verified separately.';
