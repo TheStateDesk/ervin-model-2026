@@ -49,7 +49,7 @@ assert.equal(Object.keys(senateForecast.states).length,Object.keys(senateArchive
 for(const [code,row] of Object.entries(senateForecast.states)){
  const h=senateArchive.senateStates[code];
  assert(h&&h.events.length,'No original Senate state-error history for '+code);
- assert(h.events.every(x=>['Senate','President'].includes(x.office)&&String(x.url).startsWith('https://')), 'Missing federal polling source '+code);
+ assert(h.events.every(x=>(['Senate','President'].includes(x.office)||(code==='AK'&&h.historyMode==='candidate_repeat'&&x.office==='House'))&&String(x.url).startsWith('https://')), 'Missing/invalid Original Ervin federal comparison '+code);
 }
 assert.equal(houseRegister.seats.length,435);
 for(const district of houseRegister.seats)assert(house.races[district.id], 'Missing House model source row '+district.id);
