@@ -76,9 +76,11 @@ jobs:
           import json
           r=json.load(open('house/ervin-forecast-2026-11-02.json'))
           assert len(r['races'])==435
-          print('FORECAST VALIDATION',r['summary'])
+          q=json.load(open('house/poll-questions-2026-11-02.json'))
+          assert q['summary']['pollQuestionRows']>=400 and q['summary']['districts']>=100
+          print('FORECAST VALIDATION',r['summary'],'POLL QUESTIONS',q['summary'])
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add house/ervin-forecast-2026-11-02.json
+          git add house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json
           if ! git diff --cached --quiet; then git commit -m 'Generate House forecast inputs'; git fetch origin feature/ervin-house-435-20261102; git rebase origin/feature/ervin-house-435-20261102; git push origin HEAD:feature/ervin-house-435-20261102; fi
