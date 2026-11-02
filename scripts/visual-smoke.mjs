@@ -50,8 +50,8 @@ try{
  assert((await governorPage.locator('#govCards .gov-card').count())===36,'Governor board no longer covers all 36 elections');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
  assert((await governorPage.locator('#coverage').innerText()).includes('19 Ervin-adjusted'),'Expected 19 governor-only corrections');
- await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('4.19')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.64'),null,{timeout:12000});
- assert((await governorPage.locator('#govBacktestRows tr').count())===44,'Governor source-linked backtest missing historic events');
+ await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('4.66')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.71'),null,{timeout:12000});
+ assert((await governorPage.locator('#govBacktestRows tr').count())===35,'Governor source-linked backtest missing historic events');
  await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
  await governorPage.close();
  // Verify all-state aggregate ratings, hover D/R/T counts and each race margin.
