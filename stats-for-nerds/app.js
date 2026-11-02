@@ -137,7 +137,7 @@ function render(){
   const when=Date.now()<close?'Polls not yet closed':r?'Published contest record detected':'No comparable counted-vote feed';
   const status=meta.state==='approved'?'Reviewed input eligible':meta.state==='rejected'?'Rejected by audit':'Research watchlist';
   const cls=meta.state==='approved'?'good':meta.state==='rejected'||r?'warn':'';
-  const latest=r?'<small>Reported total: '+Number(r.total||0).toLocaleString()+' · NOT an eligible adjustment (mode/geography audit missing).</small>':'';
+  const latest=r?'<small>Reported total: '+Number(r.total||0).toLocaleString()+(Number.isFinite(r.marginD)?' · raw D–R '+margin(r.marginD)+' (unadjusted, composition unknown)':'')+' · NOT an eligible adjustment (mode/geography audit missing).</small>':'';
   const relevant=Object.keys(targetParams).map(t=>({t,slope:signalStrength(s,t)})).sort((a,b)=>Math.abs(b.slope)-Math.abs(a.slope));
   const target=relevant.slice(0,2).map(z=>z.t).join(' / ');
   return '<tr><td><strong>'+esc(s.title)+'</strong><small>'+esc(s.close)+' ET · '+esc(s.id)+'</small><small>Original Ervin reference: '+esc(base)+'</small></td>'+
@@ -165,9 +165,14 @@ async function refresh(force=false){
   const v=outcomes[i].value;
   if(v?.api!==1||v.year!==2026||v.office!==names[i-1]||typeof v.races!=='object')continue;
   for(const [id,row] of Object.entries(v.races)){
-   const key=String(id).toUpperCase(),possible=specs.find(s=>s.id===key||(s.id.endsWith('SENATE')&&key===s.id.slice(0,2)+'-SENATE'));
+   const key=String(id).toUpperCase();
+   const possible=specs.find(s=>i===1?s.id===key:(s.id.endsWith('-SENATE')&&s.id.slice(0,2)===key));
    if(!possible||!Number.isSafeInteger(row?.total)||row.total<1||!Array.isArray(row.cands))continue;
-   raw[possible.id]={total:row.total,asOf:v.as_of,provider:'Open America'};
+   const timestamp=Date.parse(v.as_of||'');
+   if(v.source!=='state'||!Number.isFinite(timestamp)||timestamp<Date.parse(closeTimes[possible.id])||timestamp>Date.now()+300000)continue;
+   const parties=Object.fromEntries(['D','R'].map(p=>[p,row.cands.filter(c=>c?.p===p&&Number.isSafeInteger(c?.v)&&c.v>=0).reduce((n,c)=>n+c.v,0)]));
+   const validParties=parties.D>0&&parties.R>0&&parties.D+parties.R<=row.total;
+   raw[possible.id]={total:row.total,asOf:v.as_of,provider:'Open America',marginD:validParties?100*(parties.D-parties.R)/(parties.D+parties.R):null};
   }
  }
  audit();
