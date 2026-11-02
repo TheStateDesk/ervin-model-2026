@@ -112,42 +112,55 @@ async function refreshCounty(){
  if(!succeeded)$('miFeedStatus').textContent='Michigan county feeds unavailable or rejected as invalid. Latest previously validated results (if any) are retained and may be stale.';
  combineCounty();
 }
+let refreshNationalBusy=false;
 async function refreshNational(){
- const core=window.ERVIN_RETURNS;
- if(!core){$('feedStatus').textContent='Results validator unavailable; no unverified votes displayed';return}
- const offices=['Senate','Governor','House'];
- const urls=offices.map(x=>resultAPI+x).concat(['../civicapi/races.json']);
- const results=await Promise.allSettled(urls.map(x=>fetchJSON(x,13000)));
- const incoming=[];
- let working=0;
- for(let i=0;i<offices.length;i++){
-  if(results[i].status!=='fulfilled')continue;
-  const parsed=core.openAmerica(results[i].value,offices[i]);
-  if(Object.keys(parsed).length){working++;incoming.push(parsed)}
- }
- if(results[3].status==='fulfilled'){
-  const parsed=core.civic(results[3].value);
-  if(Object.keys(parsed).length){working++;incoming.push(parsed)}
- }
- const prior={};for(const [office,rows] of Object.entries(live)){
-  for(const [key,row] of Object.entries(rows.races||{}))prior[key]=row;
- }
- const merged=core.reconcile(incoming,prior);
- sourceWarnings=merged.warnings;
- live={House:{races:{}},Senate:{races:{}},Governor:{races:{}}};
- for(const [id,row] of Object.entries(merged.races))if(live[row.office])live[row.office].races[id]=row;
- const count=Object.values(merged.races).length;
- $('countedRaces').textContent=fmt(count);
- $('feedStatus').textContent=count?
-  count+' contests with attributed 2026 returns · '+working+' available provider feeds'+(sourceWarnings.length?' · '+sourceWarnings.length+' source conflicts held':''):
-  Date.now()<Date.parse('2026-11-03T18:00:00-05:00')?'Awaiting polls to close':'No verified 2026 results from available providers';
- const updated=Object.values(merged.races).map(x=>x.asOf).sort().at(-1);
- $('feedAsOf').textContent=updated?date(updated):'Awaiting returns';
- $('lastRefresh').textContent='Checked '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
- const status=$('civicReportingStatus');
- if(status)status.textContent='CivicAPI v2 '+(results[3].status==='fulfilled'?'snapshot retrieved':'snapshot unavailable')+
-   ' · '+sourceWarnings.length+' held conflicts · never combines provider vote totals';
- drawRaces();
+ if(refreshNationalBusy)return;
+ refreshNationalBusy=true;
+ try{
+  const core=window.ERVIN_RETURNS;
+  if(!core){$('feedStatus').textContent='Results validator unavailable; no unverified votes displayed';return}
+  const offices=['Senate','Governor','House'];
+  const urls=['../civicapi/races.json','../civicapi/discovery.json',...offices.map(x=>resultAPI+x)];
+  const responses=await Promise.allSettled(urls.map(x=>fetchJSON(x,13000)));
+  const civic=responses[0].status==='fulfilled'?core.civic(responses[0].value):{};
+  const metadata=responses[1].status==='fulfilled'?responses[1].value:null;
+  const fallback={};
+  let fallbackSources=0;
+  for(let i=0;i<offices.length;i++){
+   if(responses[i+2].status!=='fulfilled')continue;
+   const parsed=core.openAmerica(responses[i+2].value,offices[i]);
+   if(Object.keys(parsed).length){Object.assign(fallback,parsed);fallbackSources++}
+  }
+  const chosen=core.preferCivic(civic,fallback);
+  const prior={};
+  for(const row of Object.values(live))Object.assign(prior,row.races||{});
+  const merged=core.reconcile([chosen.races],prior);
+  sourceWarnings=[...chosen.warnings,...merged.warnings];
+  live={House:{races:{}},Senate:{races:{}},Governor:{races:{}}};
+  for(const [id,row] of Object.entries(merged.races))if(live[row.office])live[row.office].races[id]=row;
+  const acceptedCivic=Object.values(merged.races).filter(r=>r.source?.includes('CivicAPI')).length;
+  const acceptedFallback=Object.values(merged.races).filter(r=>!r.source?.includes('CivicAPI')).length;
+  const count=acceptedCivic+acceptedFallback;
+  $('countedRaces').textContent=fmt(count);
+  $('feedStatus').textContent=count?
+    acceptedCivic+' CivicAPI races · '+acceptedFallback+' fallback races'+(sourceWarnings.length?' · '+sourceWarnings.length+' conflicts held':''):
+    Date.now()<Date.parse('2026-11-03T18:00:00-05:00')?'CivicAPI primary feed ready; awaiting poll closings':'No verified 2026 vote totals in connected result feeds';
+  const asOf=Object.values(merged.races).map(x=>x.asOf).sort().at(-1);
+  $('feedAsOf').textContent=asOf?date(asOf):'Awaiting results';
+  $('lastRefresh').textContent='Checked '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
+  const status=$('civicReportingStatus');
+  if(status){
+   const checked=Date.parse(metadata?.checkedAt||'');
+   const age=Number.isFinite(checked)?Math.round((Date.now()-checked)/60000):null;
+   const eligible=Number(metadata?.registeredRaces)||0;
+   status.textContent='PRIMARY: civicAPI v2 · '+eligible+' of 488 indexed races matched to provider IDs'+
+      (age!==null?' · snapshot checked '+Math.max(0,age)+' min ago':' · collector status pending')+
+      ' · '+acceptedCivic+' usable results · '+acceptedFallback+' fallback results'+
+      (age!==null&&age>30?' · WARNING: published collector snapshot is stale':'')+
+      '. County clerk feeds remain independent; never combine provider totals.';
+  }
+  drawRaces();
+ }finally{refreshNationalBusy=false}
 }
 function lead(row){
  if(!row?.candidates?.length)return null;
