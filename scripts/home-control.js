@@ -4,7 +4,8 @@
  */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const read=async path=>{const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw Error(path+' HTTP '+r.status);return r.json()};
+const siteRoot=new URL('../',document.currentScript?.src||new URL('../scripts/home-control.js',location.href));
+const read=async path=>{const r=await fetch(new URL(path,siteRoot),{cache:'no-store'});if(!r.ok)throw Error(path+' HTTP '+r.status);return r.json()};
 const pct=n=>Math.round(n*100)+'%';
 let baseline=null, historical=null, last=null;
 const stateCodes=['ME','MI','OH','TX','IA','KS','MN','AK','GA','NC','NH','NE','SC','MS','FL','SD','MT'];
