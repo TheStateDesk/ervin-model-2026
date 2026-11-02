@@ -149,7 +149,7 @@ function initCountyControls(){
  $('countyRetry').onclick=()=>loadCountyMap(true);
  $('countySearch').oninput=e=>{const input=e.target.value.trim().toLowerCase().replace(/ county$/,'');const hit=cachedCountyRows.find(x=>x.name.toLowerCase()===input);if(hit){selectedCounty=hit.id;drawCounties();const path=$('countyMap').querySelector('path[data-fips="'+hit.id+'"]');if(path){const box=path.getBBox?.();if(box&&box.width>0&&box.height>0){mapZoom=Math.min(6,Math.max(1,Math.min(900/Math.max(box.width*4,15),580/Math.max(box.height*4,15))));mapCenter={x:box.x+box.width/2,y:box.y+box.height/2};updateCountyViewport();}}}};
 }
-function toneRating(r){const t=String(getModel(r)?.modelRating||r?.rating||'').toLowerCase();return t.includes('tossup')?'#b2a080':/\b(?:lean|likely|solid) d\b/.test(t)?'#4b89ac':/\b(?:lean|likely|solid) r\b/.test(t)?'#b25e6e':'#b8c7cd';}
+function toneRating(r){const t=String(getModel(r)?.modelRating||r?.rating||'').toLowerCase();return t.includes('tossup')?'#b2a080':/\b(?:tilt|lean|likely|solid) d\b/.test(t)?'#4b89ac':/\b(?:tilt|lean|likely|solid) r\b/.test(t)?'#b25e6e':'#b8c7cd';}
 function getModel(r){return houseScenario.races?.[r?.id]||null;}
 const modeledMargin=m=>Number.isFinite(m)?(Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)):'Not estimated';
 const formatHouseYear=(v,y)=>!v?'No comparable '+y+' return available':y+' House: D '+fmt(v.D)+' · R '+fmt(v.R)+' · '+modeledMargin(v.margin)+(v.contested?'':' · uncontested/limited');
