@@ -1,0 +1,197 @@
+{
+  "generated": "2026-11-01",
+  "senate": {
+    "n": 61,
+    "rawMAE": 4.085639344262296,
+    "adjMAE": 4.497901639344263,
+    "rawRMSE": 5.181355484401519,
+    "adjRMSE": 5.558338246776079,
+    "rawWinners": "53/61",
+    "adjWinners": "52/61",
+    "byYear": {
+      "2018": {
+        "n": 19,
+        "rawMAE": 3.3262105263157906,
+        "adjMAE": 3.3262105263157906,
+        "rawRMSE": 4.185092138833542,
+        "adjRMSE": 4.185092138833542,
+        "rawWinners": "17/19",
+        "adjWinners": "17/19"
+      },
+      "2020": {
+        "n": 13,
+        "rawMAE": 5.974769230769231,
+        "adjMAE": 6.136384615384615,
+        "rawRMSE": 6.876857623161233,
+        "adjRMSE": 7.029932776787688,
+        "rawWinners": "10/13",
+        "adjWinners": "10/13"
+      },
+      "2022": {
+        "n": 15,
+        "rawMAE": 3.9454,
+        "adjMAE": 4.840733333333333,
+        "rawRMSE": 5.198350321656541,
+        "adjRMSE": 6.0011589602898106,
+        "rawWinners": "13/15",
+        "adjWinners": "13/15"
+      },
+      "2024": {
+        "n": 14,
+        "rawMAE": 3.5123571428571436,
+        "adjMAE": 4.199285714285714,
+        "rawRMSE": 4.5096744022474295,
+        "adjRMSE": 5.134961357484313,
+        "rawWinners": "13/14",
+        "adjWinners": "12/14"
+      }
+    }
+  },
+  "pooled": {
+    "n": 63,
+    "rawMAE": 4.062317460317461,
+    "correctedMAE": 3.2790793650793644,
+    "byOffice": {
+      "Senate": {
+        "n": 35,
+        "rawMAE": 3.7422285714285715,
+        "adjMAE": 3.4723142857142855,
+        "rawRMSE": 4.8427568240768455,
+        "adjRMSE": 4.186954737208008,
+        "rawWinners": "0/0",
+        "adjWinners": "0/0"
+      },
+      "President": {
+        "n": 28,
+        "rawMAE": 4.462428571428572,
+        "adjMAE": 3.037535714285714,
+        "rawRMSE": 5.306737893605503,
+        "adjRMSE": 3.9284918362067214,
+        "rawWinners": "0/0",
+        "adjWinners": "0/0"
+      }
+    }
+  },
+  "publishers": {
+    "rcp": {
+      "n": 4,
+      "rawMAE": 3.7,
+      "adjustedMAE": 3.9478750000000007
+    },
+    "ddhq": {
+      "n": 4,
+      "rawMAE": 3.45,
+      "adjustedMAE": 3.7725250000000004
+    },
+    "win270": {
+      "n": 4,
+      "rawMAE": 4.425000000000001,
+      "adjustedMAE": 4.1228750000000005
+    }
+  },
+  "counties": {
+    "n": 160,
+    "baselineMAE": 4.275875000000001,
+    "trendMAE": 8.656375,
+    "byState": {
+      "ME": {
+        "n": 10,
+        "baselineMAE": 2.7660000000000005,
+        "trendMAE": 7.0779999999999985
+      },
+      "MI": {
+        "n": 10,
+        "baselineMAE": 3.375,
+        "trendMAE": 7.092000000000001
+      },
+      "OH": {
+        "n": 10,
+        "baselineMAE": 3.224000000000001,
+        "trendMAE": 4.246
+      },
+      "TX": {
+        "n": 10,
+        "baselineMAE": 9.912,
+        "trendMAE": 12.76
+      },
+      "IA": {
+        "n": 10,
+        "baselineMAE": 5.621999999999999,
+        "trendMAE": 9.263
+      },
+      "KS": {
+        "n": 10,
+        "baselineMAE": 2.999,
+        "trendMAE": 9.425999999999998
+      },
+      "MN": {
+        "n": 10,
+        "baselineMAE": 2.444,
+        "trendMAE": 9.453
+      },
+      "GA": {
+        "n": 10,
+        "baselineMAE": 2.736,
+        "trendMAE": 8.492000000000003
+      },
+      "NC": {
+        "n": 10,
+        "baselineMAE": 2.2209999999999996,
+        "trendMAE": 5.539000000000001
+      },
+      "NH": {
+        "n": 10,
+        "baselineMAE": 4.808,
+        "trendMAE": 11.145
+      },
+      "NE": {
+        "n": 10,
+        "baselineMAE": 3.073,
+        "trendMAE": 8.885000000000002
+      },
+      "SC": {
+        "n": 10,
+        "baselineMAE": 4.721000000000001,
+        "trendMAE": 10.202000000000002
+      },
+      "MS": {
+        "n": 10,
+        "baselineMAE": 4.681999999999999,
+        "trendMAE": 10.251999999999999
+      },
+      "FL": {
+        "n": 10,
+        "baselineMAE": 9.427,
+        "trendMAE": 8.071
+      },
+      "SD": {
+        "n": 10,
+        "baselineMAE": 2.6570000000000005,
+        "trendMAE": 7.536000000000001
+      },
+      "MT": {
+        "n": 10,
+        "baselineMAE": 3.746999999999999,
+        "trendMAE": 9.061999999999998
+      }
+    }
+  },
+  "provenance": [
+    {
+      "path": "research/senate_2018_2024_walk_forward.csv",
+      "sha": "21a19bab12a1d97256d32615739a6f30bef88d30"
+    },
+    {
+      "path": "research/calibration_walkforward_2016_2024.csv",
+      "sha": "c50a210ce5a18132b9b7b0425c20a6d1465c5a8c"
+    },
+    {
+      "path": "blend_backtest_2024.csv",
+      "sha": "7576b6bb5fbc99ba5c823875e1533305de76fd12"
+    },
+    {
+      "path": "counties-watch/history.json",
+      "sha": "cd0ece23f72657f4ec9d7e1dcbd79f7a696b7be4"
+    }
+  ]
+}
