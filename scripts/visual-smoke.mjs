@@ -61,7 +61,7 @@ try{
  await stateAtlas.locator('#usMap path[data-state="MI"]').hover({force:true});
  await stateAtlas.waitForFunction(()=>document.querySelector('#stateMapTooltip')&&!document.querySelector('#stateMapTooltip').hidden,null,{timeout:8000});
  const tipText=await stateAtlas.locator('#stateMapTooltip').innerText();
- assert(tipText.includes('Michigan')&&tipText.includes('U.S. Senate')&&tipText.includes('MI-07')&&/\\d+D.{1,3}\\d+R.{1,3}\\d+T/.test(tipText),'State hover does not display all race types, margins and aggregate D-R-T totals: '+tipText.slice(0,500));
+ assert(tipText.includes('Michigan')&&tipText.includes('U.S. Senate')&&tipText.includes('MI-07')&&/\d+D.{1,3}\d+R.{1,3}\d+T/.test(tipText),'State hover does not display all race types, margins and aggregate D-R-T totals: '+tipText.slice(0,500));
  assert(atlasErrors.length===0,'State atlas errors: '+atlasErrors.join(', '));
  await stateAtlas.screenshot({path:'visual-checks/States-Aggregate-2026-Michigan-Hover.png',fullPage:false});
  await stateAtlas.close();
