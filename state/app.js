@@ -8,7 +8,7 @@ const margin=v=>Number.isFinite(v)?(v>0?'D +':v<0?'R +':'Even ')+Math.abs(v).toF
 const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:'Northeast',VT:'Northeast',NJ:'Northeast',NY:'Northeast',PA:'Northeast',MI:'Midwest',WI:'Midwest',OH:'Midwest',IN:'Midwest',IL:'Midwest',IA:'Midwest',MN:'Midwest',MO:'Midwest',KS:'Midwest',NE:'Midwest',ND:'Midwest',SD:'Midwest'};
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
-let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={};
+let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
 let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0;
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -43,19 +43,17 @@ function statewideCard(title,sub,candidates,forecast,explain,source,href){
  return '<article class="ed-race"><div class="ed-race-h"><div><div class="ed-kicker">'+esc(sub)+'</div><h3>'+esc(title)+'</h3><p>'+esc(candidates)+'</p></div><div class="ed-race-big">'+esc(forecast)+'</div></div><p>'+esc(explain)+'</p><div class="ed-link-list"><a href="'+safeURL(source)+'" target="_blank" rel="noopener noreferrer">Polling/source reference</a><a href="'+esc(href)+'">Detailed methodology</a></div></article>';
 }
 function renderOverview(){
- const s=getSen(),g=getGov();
- const senate=s?statewideCard('U.S. Senate','Original Ervin adjustment',s.nonR+' vs. '+s.rep,margin(Number(s.adjustedMargin)),'Historical partisan polling adjustment applied to sourced statewide averages. Not a race call or a win probability. '+(s.stale?'Publisher inputs may be outdated.':''),'https://www.realclearpolling.com/elections/senate/2026/toss-ups','../elections/?office=senate&state='+code):'<article class="ed-race"><div class="ed-kicker">U.S. Senate</div><h3>No Ervin-modeled Senate contest</h3><p>This state is not among the 17 modeled Senate races. The absence of a model entry does not imply an uncontested race.</p></article>';
+ const s=getSen(),g=getGov(),indexedSenate=coverage.senate?.states?.[code];
+ const senate=s?statewideCard('U.S. Senate','Original Ervin adjustment',s.nonR+' vs. '+s.rep,margin(Number(s.adjustedMargin)),'Historical partisan polling adjustment applied to sourced statewide averages. Not a race call or a win probability. '+(s.stale?'Publisher inputs may be outdated.':''),'https://www.realclearpolling.com/elections/senate/2026/toss-ups','../elections/?office=senate&state='+code):'<article class="ed-race"><div class="ed-kicker">U.S. Senate</div><h3>'+(indexedSenate?'Senate polling indexed':'No Ervin-modeled Senate contest')+'</h3><p>'+(indexedSenate?'A separate public polling index lists '+fmt(indexedSenate.count)+' published surveys and displays '+esc(indexedSenate.summary)+'. This index is not an Ervin forecast or a verified candidate-matched polling average.':'No model or public survey index available here; this does not imply the election is uncontested.')+'</p>'+(indexedSenate?'<a href="'+safeURL(coverage.senate.source)+'" target="_blank" rel="noopener noreferrer">Review all Senate polls at publisher</a>':'')+'</article>';
  const governor=g?statewideCard('Governor','Published polling average',g.dem+' vs. '+g.rep,g.poll&&Number.isFinite(g.poll.margin)?margin(g.poll.margin):'No published average','Publisher-owned polling aggregation, not historically adjusted by the Senate model. '+(g.otherCandidates||''),g.poll?.url||g.nomineesSource,'../elections/?office=governor&state='+code):'<article class="ed-race"><div class="ed-kicker">Governor</div><h3>No 2026 gubernatorial contest</h3><p>The governorship is not up for election in this registry.</p></article>';
  $('stateRaceCards').innerHTML=senate+governor;
- const withPolls=stateHouse.filter(x=>housePolls[x.id]).length,withRatings=stateHouse.filter(x=>x.rating).length;
+ const withPolls=stateHouse.filter(x=>housePolls[x.id]||coverage.house?.districts?.[x.id]).length,withRatings=stateHouse.filter(x=>x.rating).length;
  $('stateNotebook').innerHTML='<article><strong>State contests</strong><small>'+(s?'Senate model available · ':'No Senate model · ')+(g?'Governor polling indexed':'No governor election')+'</small></article>'+
  '<article><strong>'+withRatings+' of '+stateHouse.length+' House ratings sourced</strong><small>Ratings are qualitative; missing ratings are not Safe D or Safe R predictions.</small></article>'+
  '<article><strong>'+withPolls+' House districts with documented public polling</strong><small>Latest indexed survey only; no House polling average manufactured.</small></article>'+
  '<article><strong>Locally hosted county geography</strong><small>2022 Census reference boundaries and 2020/2024 presidential results, not certified 2026 voting totals.</small></article>';
 }
 function buildScenario(){
- const stateFips=stateHouse[0]?.id?.slice(0,2)||code;
- const sample=stateHouse.length?stateHouse[0].id:null;
  const f=String((countyShape?.features?.[0]?.id)||'').slice(0,2);
  countyScenario.senate=window.ERVIN_SCENARIOS.build(historical,f||'00',Number.isFinite(+getSen()?.adjustedMargin)?Number(getSen().adjustedMargin):null);
  countyScenario.governor=window.ERVIN_SCENARIOS.build(historical,f||'00',Number.isFinite(+getGov()?.poll?.margin)?Number(getGov().poll.margin):null);
@@ -134,11 +132,12 @@ function toneRating(r){const t=String(r?.rating||'').toLowerCase();return t.incl
 function renderDistrictDetail(r){
  if(!r)return;
  selectedDistrict=r;
- const p=housePolls[r.id],rating=r.rating||'No source rating entered';
+ const p=housePolls[r.id],indexed=coverage.house?.districts?.[r.id],rating=r.rating||'No source rating entered';
  $('districtTitle').textContent=r.state+' District '+Number(r.district);
  $('districtDetail').innerHTML='<div class="ed-kicker">2026 HOUSE ELECTION · '+esc(r.id)+'</div><div class="ed-stat" style="margin:14px 0"><small>Published rating</small><strong>'+esc(rating)+'</strong></div>'+
  '<p><strong>Incumbent in source registry:</strong> '+esc(r.incumbent||'Not verified')+'</p>'+
  (p?'<div class="ed-coverage"><div><strong>'+esc(p.pollster)+'</strong><small>Latest indexed survey · '+esc(p.date)+' · '+esc(p.sourceKind)+'</small></div><strong>'+esc(margin(p.margin))+'</strong></div><p class="ed-mini">Survey shares: D '+esc(p.dem)+'%, R '+esc(p.rep)+'%. Latest survey is not a district polling average; sponsorship and field dates vary.</p>':'<p class="ed-notice">No comparable public district survey imported. Missing polling is not evidence that none exists.</p>')+
+ (indexed?'<div class="ed-notice"><strong>Additional polling directory:</strong> '+fmt(indexed.count)+' indexed poll(s); index displays '+esc(indexed.summary)+'. <a href="'+safeURL(coverage.house.source)+'" target="_blank" rel="noopener noreferrer">Review survey records</a>. Directory margin is not a separately verified latest-poll result.</div>':'')+
  '<p class="ed-mini">2022 congressional reference shape; 2026 redistricting status is not independently certified. Counties are statewide context, not a district-level vote forecast.</p>'+
  '<div class="ed-link-list"><a target="_blank" rel="noopener noreferrer" href="'+safeURL(p?.url||r.ratingSource||'https://www.cookpolitical.com/ratings/house-race-ratings')+'">Original polling / rating source</a><a href="../elections/?office=house&state='+code+'&district='+esc(r.district)+'">Technical race dossier</a></div>';
  $('districtButtons').querySelectorAll('button[data-district]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.district===r.district)));
@@ -165,13 +164,20 @@ function listPolls(data,asOf,limit=12){const clean=Array.isArray(data)?data.filt
  return clean.sort((a,b)=>Date.parse(b.fieldEnd||b.publishedAt||b.date||0)-Date.parse(a.fieldEnd||a.publishedAt||a.date||0)).slice(0,limit).map(p=>'<article class="ed-coverage"><div><strong><a href="'+safeURL(p.url)+'" target="_blank" rel="noopener noreferrer">'+esc(p.pollster||'Survey')+'</a></strong><small>'+esc(p.date||p.dates||'Field date unknown')+' · '+esc(p.sample||'Sample details unverified')+'</small></div><strong>'+esc(margin(+p.margin))+'</strong></article>').join('');
 }
 function renderPolls(){
- const s=senatePolls[code]||[],g=govPolls[code]||[],gp=getGov();
- let senateContent=getSen()?'<div class="ed-cap">Senate · individual surveys</div>'+listPolls(s):'';
- let govContent=gp?'<div class="ed-cap" style="margin-top:14px">Governor · publisher average</div><div class="ed-coverage"><div><strong><a href="'+safeURL(gp.poll?.url)+'" target="_blank" rel="noopener noreferrer">Published statewide governor average</a></strong><small>'+esc(gp.poll?.count||'Unknown')+' underlying surveys; methodology belongs to publisher</small></div><strong>'+esc(margin(gp.poll?.margin))+'</strong></div><div class="ed-cap" style="margin-top:14px">Recent individual surveys</div>'+listPolls(g):'';
- $('pollStatewide').innerHTML=senateContent+govContent||'<div class="ed-empty">No comparable statewide polling input is indexed for this state.</div>';
- const h=stateHouse.filter(x=>housePolls[x.id]).map(x=>({seat:x,poll:housePolls[x.id]})).sort((a,b)=>(b.poll.date||'').localeCompare(a.poll.date||''));
- $('pollHouse').innerHTML=h.length?h.map(({seat,poll})=>'<div class="ed-coverage"><div><strong>'+esc(seat.id)+' · '+esc(poll.pollster)+'</strong><small>'+esc(poll.date)+' · latest indexed public poll, not an average</small></div><strong>'+esc(margin(poll.margin))+'</strong></div>').join(''):'<div class="ed-empty">No public House polling entry in the imported 110-district sample for this state.</div>';
- $('pollHouse').innerHTML+='<p class="ed-mini"><a href="https://peoplespoll.com/house" target="_blank" rel="noopener noreferrer">House poll directory</a> · <a href="https://www.realclearpolling.com/latest-polls/governor" target="_blank" rel="noopener noreferrer">Governor poll listings</a>. Survey lists may overlap published averages.</p>';
+ const localSenate=senatePolls[code]||[],localGov=govPolls[code]||[],gov=getGov();
+ const indexedSen=coverage.senate?.states?.[code],indexedGov=coverage.governor?.states?.[code];
+ const sourceNotice=(index,url,type)=>index?'<div class="ed-coverage ed-index"><div><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(type)+' polling index</a></strong><small>'+fmt(index.count)+' published poll(s) indexed by the publisher. Summary: '+esc(index.summary)+' · does not replace individual polls or Ervin forecast.</small></div><span class="ed-pill">Index</span></div>':'';
+ let senateContent=localSenate.length?'<div class="ed-cap">Senate · individual surveys ('+fmt(localSenate.length)+')</div>'+listPolls(localSenate,null,14):'';
+ senateContent+=sourceNotice(indexedSen,coverage.senate?.source,'Senate');
+ let govContent=gov?'<div class="ed-cap" style="margin-top:14px">Governor · published average</div><div class="ed-coverage"><div><strong><a href="'+safeURL(gov.poll?.url)+'" target="_blank" rel="noopener noreferrer">Published statewide governor average</a></strong><small>'+esc(gov.poll?.count||'Unknown')+' underlying surveys; methodology belongs to publisher</small></div><strong>'+esc(margin(gov.poll?.margin))+'</strong></div>':'';
+ if(localGov.length)govContent+='<div class="ed-cap" style="margin-top:14px">Governor · individual surveys ('+fmt(localGov.length)+')</div>'+listPolls(localGov,null,14);
+ govContent+=sourceNotice(indexedGov,coverage.governor?.source,'Governor');
+ $('pollStatewide').innerHTML=senateContent+govContent||'<div class="ed-empty">No comparable statewide polling found in the linked data sources for this state. The race may still have unindexed polls.</div>';
+ const polled=stateHouse.filter(x=>housePolls[x.id]||coverage.house?.districts?.[x.id]);
+ const h=polled.map(x=>({seat:x,poll:housePolls[x.id],index:coverage.house?.districts?.[x.id]})).sort((a,b)=>((b.poll?.date||'').localeCompare(a.poll?.date||'')));
+ $('pollHouse').innerHTML=h.length?h.map(({seat,poll,index})=>'<div class="ed-coverage"><div><strong><button class="ed-inline-race" type="button" data-poll-district="'+esc(seat.district)+'">'+esc(seat.id)+'</button> · '+esc(poll?.pollster||'Poll directory')+'</strong><small>'+(poll?esc(poll.date)+' · latest indexed individual survey':'Published poll index only')+(index?' · '+fmt(index.count)+' indexed polls':'')+'</small></div><strong>'+esc(poll?margin(poll.margin):index?.summary||'Published')+'</strong></div>').join(''):'<div class="ed-empty">No public House polling listed for this state in the connected indexes.</div>';
+ $('pollHouse').innerHTML+='<p class="ed-mini"><a href="'+safeURL(coverage.house?.source||'https://www.poliwave.com/us/fed/polls')+'" target="_blank" rel="noopener noreferrer">Broader House polling index</a> · <a href="https://peoplespoll.com/house" target="_blank" rel="noopener noreferrer">Original/public House poll links</a> · <a href="https://www.realclearpolling.com/latest-polls/house" target="_blank" rel="noopener noreferrer">RCP individual polls</a>. Aggregates and surveys can overlap; partisan sponsors are not independently verified. '+esc(pollingWarning)+'</p>';
+ $('pollHouse').onclick=e=>{const b=e.target.closest('button[data-poll-district]');if(b){const r=getDistrict(b.dataset.pollDistrict);if(r){renderDistrictDetail(r);document.getElementById('stateHouse').scrollIntoView({behavior:'smooth',block:'start'});}}};
 }
 function stateCodeFromResultKey(k){return String(k).slice(0,2).toUpperCase();}
 async function loadReturns(force=false){
@@ -222,10 +228,16 @@ async function display(next){
 async function start(){
  try{
   const fetchJSON=async p=>{const r=await fetch(p);if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json();};
-  const [h,g,b,ch,sp,gp,hp]=await Promise.all([
-   fetchJSON('../house/data.json'),fetchJSON('../governors/data.json'),fetchJSON('../counties-watch/forecast-baselines.json'),
-   window.ERVIN_SCENARIOS.load(),fetchJSON('../recent_polls.json'),fetchJSON('../governors/recent_verified_polls.json'),fetchJSON('../house/research-polls.json')]);
-  house=h.seats||[];governors=g.races||[];baselines=b.states||{};historical=ch;senatePolls=sp.polls||{};govPolls=gp.states||{};housePolls=hp.polls||{};
+  // Keep geography and state navigation operational if *optional* polling files fail.
+  const [h,g,b]=await Promise.all([fetchJSON('../house/data.json'),fetchJSON('../governors/data.json'),fetchJSON('../counties-watch/forecast-baselines.json')]);
+  house=h.seats||[];governors=g.races||[];baselines=b.states||{};
+  const optional=await Promise.allSettled([
+   window.ERVIN_SCENARIOS.load(),fetchJSON('../recent_polls.json'),fetchJSON('../governors/recent_verified_polls.json'),
+   fetchJSON('../house/research-polls.json'),fetchJSON('../polling/coverage-2026-11-02.json')]);
+  const data=optional.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('State Desk optional source unavailable',i,r.reason);return null;});
+  historical=data[0]||{counties:{}};senatePolls=data[1]?.polls||{};govPolls=data[2]?.states||{};housePolls=data[3]?.polls||{};
+  coverage=data[4]||coverage;
+  pollingWarning=optional.some(x=>x.status==='rejected')?'Some polling or historical source files could not be loaded; try refreshing for complete coverage.':'';
   prepareSelection();initCountyControls();$('houseMapReload').onclick=()=>loadHouseMap(true);$('reloadResults').onclick=()=>loadReturns(true);
   $('headerDate').textContent=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   await display(new URLSearchParams(location.search).get('state')||'MI');
