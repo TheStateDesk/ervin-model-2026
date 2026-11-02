@@ -265,7 +265,9 @@ async function start(){
   current=raceList.find(r=>r.code===desiredCode&&r.office.toLowerCase()===desiredOffice&&(r.office!=='House'||r.district===desiredDistrict)) || raceList.find(r=>r.office.toLowerCase()===desiredOffice) || raceList[0];
   const target=current.office==='Senate'?(()=>{const a=senateAggregate(current).raw;return Number.isFinite(a)?a-(current.history_mode==='not_comparable'?0:Number(current.correction)||0):null})():current.office==='Governor'&&Number.isFinite(current.poll?.margin)?current.poll.margin:null;
    scenario=window.ERVIN_SCENARIOS.build(national,FIPS[current.code],target);
-   if(current.office==='House')$('countyMapMode').value='district';else $('countyMapMode').value=target==null?'2024':'expected';
+   // Alaska's 2024 reporting units do not align with most 2022 borough/census-area FIPS; avoid projecting artificial county results.
+   if(current.code==='AK'){scenario.target=null;for(const rec of scenario.map.values())rec.expected=null;}
+   if(current.office==='House')$('countyMapMode').value='district';else $('countyMapMode').value=target==null||current.code==='AK'?'2024':'expected';
    renderHeader(current);renderNav();renderForecast(current);renderPolls(current);$('countyMapMode').onchange=()=>{const districtPaths=$('countyMap').querySelector('path.geo-district');if($('countyMapMode').value==='district'||districtPaths)drawMap(current);else applyCountyLayer()};drawMap(current);
  }catch(error){console.error('Election dossier data error',error);$('raceTitle').textContent='Election data unavailable';$('raceDeck').textContent='The published source files could not be loaded. Return to the race index or try reloading.';$('raceList').textContent='Data request unsuccessful.'}
 }
