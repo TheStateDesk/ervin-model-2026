@@ -5,24 +5,22 @@ const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g
 const root='../', finalAt=Date.parse('2026-11-03T12:00:00-05:00'), read=async(p)=>{const r=await fetch(root+p,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};
 const margin=n=>!Number.isFinite(n)?'No numerical forecast':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
 const states=window.ERVIN_US_GEOGRAPHY?.states||[], stateName=Object.fromEntries(states.map(s=>[s.code,s.name]));
-let model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0;
+let model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null;
 const isValid=n=>typeof n==='number'&&Number.isFinite(n), party=n=>!isValid(n)?'N':n>0?'D':n<0?'R':'T';
 function label(x){return x.state+' · '+x.office+(x.office==='House'?' '+x.id:'')}
 function races(){
- // Show genuinely close forecasts from every chamber instead of allowing
- // hundreds of House districts to crowd out every statewide contest.
- const closest=(rows,n)=>rows.filter(x=>isValid(x.margin)).sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin)).slice(0,n);
- return [...closest(model.senate,10),...closest(model.governor,10),...closest(model.house,16)]
-   .sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin));
+ // Both candidates can be named and photographed on statewide races.
+ const available=[...model.senate,...model.governor].filter(r=>isValid(r.margin)&&r.dem&&r.rep);
+ return available.sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin));
 }
-function photo(name,el){
- if(!name||!el||!/^[\w .'-]{4,90}$/.test(name))return;
- const url='https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&origin=*&prop=pageimages&pithumbsize=110&titles='+encodeURIComponent(name);
- fetch(url).then(x=>x.json()).then(j=>{
-  const p=j.query?.pages?.[0],src=p?.thumbnail?.source;
-  if(p?.title?.toLowerCase()!==name.toLowerCase()||!/^https:\/\/upload\.wikimedia\.org\//.test(src||''))return;
-  const im=document.createElement('img');im.src=src;im.alt=name+' portrait';im.loading='lazy';im.referrerPolicy='no-referrer';el.replaceChildren(im);
- }).catch(()=>{});
+function oddsText(r){
+ if(!r.odds)return '';
+ const d=window.ERVIN_ODDS.pct(r.odds.dem),rep=window.ERVIN_ODDS.pct(r.odds.rep);
+ return '<div class="watch-chance"><div><b>'+d+'</b><small>'+esc(r.dem)+' · D/non-R</small></div><div><b>'+rep+'</b><small>'+esc(r.rep)+' · R</small></div></div>';
+}
+function watchFaces(r){
+ return '<div class="watch-card__people watch-card__people--pair">'+[['D',r.dem],['R',r.rep]].map(([side,name])=>
+ '<div class="watch-person '+side+'"><div class="watch-photo watch-photo--candidate" data-watch-photo="'+esc(r.id)+'-'+side+'">'+esc((name||'?').split(' ').map(w=>w[0]).slice(0,2).join(''))+'</div><span class="watch-candidate-name">'+esc(name||'Candidate not confirmed')+'</span></div>').join('')+'</div>';
 }
 function drawWatch(){
  const panel=$('watchCards');if(!panel)return;
@@ -35,30 +33,41 @@ function drawWatch(){
    '<div class="watch-card__margin">50 states</div>'+
    '<small>Updated published margins · forecast, not certified results</small>'+
    '<a class="watch-card__open" href="#electionDashboard">Open final projection maps</a></article>';
-  const source=r.kind==='poll'?'Published poll, not adjusted':r.office==='House'?'Provisional district scenario':'Historical-error-adjusted forecast';
+  const source=r.kind==='poll'?'Publisher polling only · wider uncertainty assumption':'Governor/Senate historical-error-adjusted forecast';
   const href='../state/?state='+encodeURIComponent(r.code)+(r.office==='House'?'#stateHouse':'#stateOverview');
-  const initials=(r.dem||r.rep||r.state).split(' ').map(x=>x[0]).slice(0,2).join('');
-  return '<article class="watch-card"><div class="watch-card__overline">'+esc(r.office)+' · #'+(position+i+1)+' CLOSEST</div>'+
+    return '<article class="watch-card"><div class="watch-card__overline">'+esc(r.office)+' · #'+(position+i+1)+' CLOSEST</div>'+
   '<a class="watch-card__name" href="'+href+'">'+esc(label(r))+'</a>'+
-  '<div class="watch-card__people"><div class="watch-photo" data-photo="'+esc(r.code)+'-'+esc(r.office)+'">'+esc(initials)+'</div><span>'+esc([r.dem,r.rep].filter(Boolean).join(' / ')||'District forecast')+'</span></div>'+
-  '<div class="watch-card__margin '+party(r.margin)+'">'+esc(margin(r.margin))+'</div><small>'+esc(source)+'</small>'+
+  watchFaces(r)+
+  '<div class="watch-card__margin '+party(r.margin)+'">'+esc(margin(r.margin))+'</div>'+
+  oddsText(r)+'<small>'+esc(source)+' · illustrative, not calibrated odds</small>'+
   '<a class="watch-card__open" href="'+href+'">Open state election desk</a></article>';
  }).join('');
  $('watchPosition').textContent=(position+1)+'–'+(position+visible.length)+' of '+watched.length;
  $('watchPrev').disabled=position===0;$('watchNext').disabled=position+4>=watched.length;
- visible.forEach(r=>{if(r.office==='Senate')photo(r.dem,panel.querySelector('[data-photo="'+r.code+'-'+r.office+'"]'))});
+ visible.forEach(r=>{if(r.id==='final-predictions')return;for(const [side,name] of [['D',r.dem],['R',r.rep]])window.ERVIN_PORTRAITS?.attach(panel.querySelector('[data-watch-photo="'+r.id+'-'+side+'"]'),name)});
 }
 function watchInit(){
+ const panel=$('watchSection');if(!panel)return;
+ const advance=direction=>{if(!watched.length)return;position=(position+direction+watched.length)%watched.length;drawWatch()};
  $('watchPrev')?.addEventListener('click',()=>{position=Math.max(0,position-4);drawWatch()});
- $('watchNext')?.addEventListener('click',()=>{position=Math.min(Math.max(0,watched.length-4),position+4);drawWatch()});
+ $('watchNext')?.addEventListener('click',()=>{position=position+4>=watched.length?0:position+4;drawWatch()});
+ const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+ if(!reduced){
+  let hover=false,focus=false;
+  panel.addEventListener('mouseenter',()=>hover=true);
+  panel.addEventListener('mouseleave',()=>hover=false);
+  panel.addEventListener('focusin',()=>focus=true);
+  panel.addEventListener('focusout',e=>focus=panel.contains(e.relatedTarget));
+  rotateTimer=setInterval(()=>{if(!document.hidden&&!hover&&!focus&&!live&&watched.length>4)advance(1)},7000);
+ }
 }
 async function loadModel(){
  const [sen,gov,house,history]=await Promise.all([read('counties-watch/forecast-baselines.json'),read('governors/data.json'),read('house/ervin-forecast-2026-11-02.json'),read('research/governor-same-office-2014-2024.json')]);
  const applied=window.ERVIN_STATEWIDE.apply(history,gov,sen);
- model.senate=applied.senate.map(x=>({id:x.code+'-SENATE',code:x.code,state:x.state||stateName[x.code],office:'Senate',margin:x.model.adjustedMargin,dem:x.nonR,rep:x.rep,kind:'model'}));
- model.governor=applied.governor.map(x=>({id:x.code+'-GOVERNOR',code:x.code,state:x.state||stateName[x.code],office:'Governor',margin:isValid(x.model.adjustedMargin)?x.model.adjustedMargin:x.model.pollMargin,dem:x.dem,rep:x.rep,kind:isValid(x.model.adjustedMargin)?'model':'poll'}));
+ model.senate=applied.senate.map(x=>({id:x.code+'-SENATE',code:x.code,state:x.state||stateName[x.code],office:'Senate',margin:x.model.adjustedMargin,dem:x.nonR,rep:x.rep,kind:'model',odds:window.ERVIN_ODDS?.estimate(x.model.adjustedMargin,'Senate')}));
+ model.governor=applied.governor.map(x=>{const adjusted=isValid(x.model.adjustedMargin),m=adjusted?x.model.adjustedMargin:x.model.pollMargin;return{id:x.code+'-GOVERNOR',code:x.code,state:x.state||stateName[x.code],office:'Governor',margin:m,dem:x.dem,rep:x.rep,kind:adjusted?'model':'poll',odds:window.ERVIN_ODDS?.estimate(m,'Governor',{cycles:x.model?.calibrationCycles||0})}});
  model.house=Object.values(house.races||{}).map(x=>({id:x.id,code:x.state,state:stateName[x.state]||x.state,office:'House',margin:x.marginD,kind:'model'}));
- watched=races();drawWatch();updatePhase();
+ watched=races();window.ERVIN_HOME_FORECAST=model;window.dispatchEvent(new CustomEvent('ervin:forecast-ready',{detail:{asOf:sen.asOf||gov.asOf}}));drawWatch();updatePhase();
 }
 function byState(code,off){return model[off.toLowerCase()].filter(r=>r.code===code)}
 function raceFor(code,off){return byState(code,off)[0]||null}
