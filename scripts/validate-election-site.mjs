@@ -34,7 +34,7 @@ for(let i=1;i<=10;i++){
 assert.equal(geographicStates.size,expected,'Incomplete 50-state mapping coverage');
 // Every separately hosted state shape must agree with the local regional backup.
 // This includes Alaska, which now has the same redundant pack fallback as other states.
-for(const code of ['AK','AZ','MI','PA','TX']){
+for(const code of geographicStates.keys()){
  const c=json('geo/counties/'+code+'.json'),d=json('geo/districts/'+code+'.json');
  const meta=geographicStates.get(code);
  assert(c.state===code&&d.state===code,code+' direct geometry state mismatch');
@@ -149,6 +149,8 @@ for(const kind of ['counties','districts']){
  assert.equal(backup.features.length,kind==='counties'?30:1,'Alaska fallback bundle failed when direct file is unavailable');
 }
 report.alaskaBundleFallback='PASS';
+report.directStateCountyAssets=50;
+report.directStateDistrictAssets=50;
 
 const chromeCss=file('site-chrome.css');
 assert(chromeCss.includes('html:not(.light) body .site-header .site-nav.is-open'),'Dark mobile menu must override the global light-theme stylesheet');
