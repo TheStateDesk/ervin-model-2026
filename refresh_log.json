@@ -1,165 +1,93 @@
 {
-  "checkedAt": "2026-11-02T00:44:45.050946+00:00",
+  "checkedAt": "2026-11-02T11:05:04.126938+00:00",
   "pagesParsed": 15,
   "checkedRaceCount": 17,
-  "changes": 26,
+  "changes": 14,
   "observationsFound": 56,
   "errors": [],
   "updated": [
     {
       "state": "ME",
-      "source": "win270",
-      "margin": 3.9,
-      "published": "Nov 01"
-    },
-    {
-      "state": "ME",
       "source": "ddhq",
-      "margin": 4.3,
+      "margin": 4.9,
       "published": "Nov 01"
     },
     {
       "state": "ME",
       "source": "rcp",
-      "margin": 2.1,
+      "margin": 3.3,
       "published": "Nov 01"
     },
     {
       "state": "ME",
       "source": "silver",
+      "margin": 3.6,
+      "published": "Nov 01"
+    },
+    {
+      "state": "OH",
+      "source": "ddhq",
       "margin": 2.7,
       "published": "Nov 01"
     },
     {
       "state": "OH",
-      "source": "win270",
-      "margin": 1.6,
-      "published": "Nov 01"
-    },
-    {
-      "state": "OH",
       "source": "rcp",
-      "margin": 2.4,
+      "margin": 2.8,
       "published": "Nov 01"
     },
     {
       "state": "OH",
       "source": "silver",
-      "margin": 2.9,
-      "published": "Nov 01"
-    },
-    {
-      "state": "TX",
-      "source": "win270",
-      "margin": 3.4,
+      "margin": 3.1,
       "published": "Nov 01"
     },
     {
       "state": "TX",
       "source": "ddhq",
-      "margin": 3.5,
+      "margin": 4.1,
       "published": "Nov 01"
     },
     {
       "state": "TX",
       "source": "rcp",
-      "margin": 1.7,
-      "published": "Nov 01"
-    },
-    {
-      "state": "TX",
-      "source": "silver",
-      "margin": 2.9,
-      "published": "Nov 01"
-    },
-    {
-      "state": "IA",
-      "source": "win270",
-      "margin": 0.2,
-      "published": "Nov 01"
-    },
-    {
-      "state": "IA",
-      "source": "ddhq",
-      "margin": -0.5,
-      "published": "Nov 01"
-    },
-    {
-      "state": "IA",
-      "source": "rcp",
-      "margin": -0.5,
-      "published": "Nov 01"
-    },
-    {
-      "state": "IA",
-      "source": "silver",
-      "margin": 0.8,
-      "published": "Nov 01"
-    },
-    {
-      "state": "KS",
-      "source": "win270",
-      "margin": 3.4,
-      "published": "Nov 01"
-    },
-    {
-      "state": "KS",
-      "source": "ddhq",
       "margin": 2.5,
       "published": "Nov 01"
     },
     {
-      "state": "KS",
-      "source": "rcp",
-      "margin": 2.3,
-      "published": "Nov 01"
-    },
-    {
-      "state": "KS",
+      "state": "TX",
       "source": "silver",
-      "margin": 2.7,
+      "margin": 3.3,
       "published": "Nov 01"
     },
     {
-      "state": "NC",
+      "state": "IA",
       "source": "win270",
-      "margin": 11.6,
+      "margin": 0.0,
       "published": "Nov 01"
     },
     {
-      "state": "NC",
-      "source": "ddhq",
-      "margin": 10.1,
-      "published": "Nov 01"
-    },
-    {
-      "state": "NC",
+      "state": "IA",
       "source": "rcp",
-      "margin": 11.0,
+      "margin": -0.3,
+      "published": "Nov 01"
+    },
+    {
+      "state": "IA",
+      "source": "silver",
+      "margin": 0.9,
       "published": "Nov 01"
     },
     {
       "state": "NC",
       "source": "silver",
-      "margin": 10.2,
+      "margin": 10.0,
       "published": "Nov 01"
     },
     {
-      "state": "NE",
-      "source": "win270",
-      "margin": -2.8,
-      "published": "Nov 01"
-    },
-    {
-      "state": "NE",
-      "source": "ddhq",
-      "margin": -1.2,
-      "published": "Nov 01"
-    },
-    {
-      "state": "NE",
+      "state": "SC",
       "source": "silver",
-      "margin": -1.0,
+      "margin": -1.4,
       "published": "Nov 01"
     }
   ],

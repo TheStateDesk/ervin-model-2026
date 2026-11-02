@@ -1,8 +1,30 @@
 {
-  "checkedAt": "2026-11-02T00:44:45.050946+00:00",
+  "checkedAt": "2026-11-02T11:05:04.126938+00:00",
   "source": "Original releases, RCP individual poll listings, and candidate-matched Wikipedia general-election survey tables; source type disclosed per row",
   "polls": {
     "ME": [
+      {
+        "pollster": "New York Times / Siena University",
+        "dates": "October 27 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "714 (LV)",
+        "dem": 51.0,
+        "rep": 45.0,
+        "margin": 6.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "University of New Hampshire",
+        "dates": "October 27–31, 2026",
+        "fieldEnd": "2026-10-31",
+        "sample": "1,654 (LV)",
+        "dem": 54.0,
+        "rep": 45.0,
+        "margin": 9.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "CNN / SSRS",
         "publishedAt": "2026-10-29",
@@ -112,31 +134,31 @@
         "margin": 0.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "InsiderAdvantage (R)",
-        "dates": "October 13–14, 2026",
-        "fieldEnd": "2026-10-14",
-        "sample": "1,200 (LV)",
-        "dem": 49.0,
-        "rep": 47.0,
-        "margin": 2.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Suffolk University",
-        "dates": "October 8–11, 2026",
-        "fieldEnd": "2026-10-11",
-        "sample": "500 (LV)",
-        "dem": 49.0,
-        "rep": 47.0,
-        "margin": 2.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "MI": [
+      {
+        "pollster": "Research Co.",
+        "dates": "October 30 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "450 (LV)",
+        "dem": 48.0,
+        "rep": 46.0,
+        "margin": 2.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "New York Times / Siena University",
+        "dates": "October 23 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,011 (LV)",
+        "dem": 53.0,
+        "rep": 42.0,
+        "margin": 11.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "CNN / SSRS",
         "publishedAt": "2026-10-29",
@@ -246,31 +268,31 @@
         "margin": 4.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "InsiderAdvantage",
-        "publishedAt": "2026-10-23",
-        "dates": "Published 2026-10-23 (field dates not verified)",
-        "sample": "Sample not independently verified",
-        "dem": 47,
-        "rep": 46,
-        "margin": 1,
-        "url": "https://www.realclearpolling.com/latest-polls/senate",
-        "sourceKind": "RealClearPolling individual-poll listing (not original release)"
-      },
-      {
-        "pollster": "RedBox Research (D)",
-        "dates": "October 20–23, 2026",
-        "fieldEnd": "2026-10-23",
-        "sample": "2,696 (LV)",
-        "dem": 49.0,
-        "rep": 44.0,
-        "margin": 5.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "OH": [
+      {
+        "pollster": "Research Co.",
+        "dates": "October 30 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "450 (LV)",
+        "dem": 45.0,
+        "rep": 44.0,
+        "margin": 1.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "New York Times / Siena University",
+        "dates": "October 26 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "717 (LV)",
+        "dem": 49.0,
+        "rep": 44.0,
+        "margin": 5.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "ActiVote",
         "dates": "October 18–31, 2026",
@@ -327,6 +349,17 @@
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       },
       {
+        "pollster": "Concord Public Opinion Partners (D)",
+        "dates": "October 22–24, 2026",
+        "fieldEnd": "2026-10-24",
+        "sample": "496 (LV)",
+        "dem": 46.0,
+        "rep": 42.0,
+        "margin": 4.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
         "pollster": "InsiderAdvantage",
         "publishedAt": "2026-10-23",
         "dates": "Published 2026-10-23 (field dates not verified)",
@@ -369,42 +402,42 @@
         "margin": 5,
         "url": "https://www.realclearpolling.com/latest-polls/senate",
         "sourceKind": "RealClearPolling individual-poll listing (not original release)"
-      },
-      {
-        "pollster": "InsiderAdvantage (R)",
-        "dates": "October 21–22, 2026",
-        "fieldEnd": "2026-10-22",
-        "sample": "1,200 (LV)",
-        "dem": 47.0,
-        "rep": 44.0,
-        "margin": 3.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Marist Poll",
-        "publishedAt": "2026-10-20",
-        "dates": "Published 2026-10-20 (field dates not verified)",
-        "sample": "Sample not independently verified",
-        "dem": 48,
-        "rep": 44,
-        "margin": 4,
-        "url": "https://www.realclearpolling.com/latest-polls/senate",
-        "sourceKind": "RealClearPolling individual-poll listing (not original release)"
-      },
-      {
-        "pollster": "Verasight/VoteHub",
-        "dates": "October 1–20, 2026",
-        "fieldEnd": "2026-10-20",
-        "sample": "531 (LV)",
-        "dem": 48.0,
-        "rep": 44.0,
-        "margin": 4.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "TX": [
+      {
+        "pollster": "Trafalgar Group (R)",
+        "dates": "October 31 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,089 (LV)",
+        "dem": 48.0,
+        "rep": 48.0,
+        "margin": 0.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "AtlasIntel",
+        "dates": "October 28 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,678 (A)",
+        "dem": 51.0,
+        "rep": 45.0,
+        "margin": 6.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "New York Times / Siena University",
+        "dates": "October 27 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,215 (LV)",
+        "dem": 50.0,
+        "rep": 43.0,
+        "margin": 7.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "Quantus Insights",
         "publishedAt": "2026-10-30",
@@ -503,42 +536,20 @@
         "margin": 3.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "SSRS",
-        "dates": "October 20–27, 2026",
-        "fieldEnd": "2026-10-27",
-        "sample": "923 (LV)",
-        "dem": 49.0,
-        "rep": 43.0,
-        "margin": 6.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Data for Progress (D)",
-        "dates": "October 23–26, 2026",
-        "fieldEnd": "2026-10-26",
-        "sample": "712 (LV)",
-        "dem": 49.0,
-        "rep": 45.0,
-        "margin": 4.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "YouGov Blue (D)",
-        "dates": "October 21–26, 2026",
-        "fieldEnd": "2026-10-26",
-        "sample": "1,000 (RV)",
-        "dem": 51.0,
-        "rep": 43.0,
-        "margin": 8.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "IA": [
+      {
+        "pollster": "New York Times / Siena University",
+        "dates": "October 26 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "705 (LV)",
+        "dem": 48.0,
+        "rep": 47.0,
+        "margin": 1.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "YouGov",
         "dates": "October 26–29, 2026",
@@ -660,20 +671,20 @@
         "margin": -3.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "YouGov",
-        "dates": "October 6–12, 2026",
-        "fieldEnd": "2026-10-12",
-        "sample": "2,245 (LV)",
-        "dem": 47.0,
-        "rep": 46.0,
-        "margin": 1.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "KS": [
+      {
+        "pollster": "New York Times / Siena University",
+        "dates": "October 27 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "736 (LV)",
+        "dem": 49.0,
+        "rep": 44.0,
+        "margin": 5.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "Washington Post",
         "publishedAt": "2026-10-30",
@@ -796,20 +807,31 @@
         "margin": 1.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "GBAO (D)",
-        "dates": "September 30 – October 4, 2026",
-        "fieldEnd": "2026-10-04",
-        "sample": "600 (LV)",
-        "dem": 46.0,
-        "rep": 41.0,
-        "margin": 5.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "MN": [
+      {
+        "pollster": "Research Co.",
+        "dates": "October 30 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "450 (LV)",
+        "dem": 48.0,
+        "rep": 43.0,
+        "margin": 5.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "InsiderAdvantage (R)",
+        "dates": "October 29–30, 2026",
+        "fieldEnd": "2026-10-30",
+        "sample": "1,200 (LV)",
+        "dem": 49.0,
+        "rep": 46.0,
+        "margin": 3.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "New York Times / Siena",
         "publishedAt": "2026-10-28",
@@ -919,31 +941,20 @@
         "margin": 4.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Rasmussen Reports (R)",
-        "dates": "October 5–7, 2026",
-        "fieldEnd": "2026-10-07",
-        "sample": "856 (LV)",
-        "dem": 48.0,
-        "rep": 45.0,
-        "margin": 3.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Morning Consult",
-        "dates": "October 2–7, 2026",
-        "fieldEnd": "2026-10-07",
-        "sample": "1,000 (RV)",
-        "dem": 45.0,
-        "rep": 41.0,
-        "margin": 4.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "AK": [
+      {
+        "pollster": "New York Times / Siena University",
+        "dates": "October 23–30, 2026",
+        "fieldEnd": "2026-10-30",
+        "sample": "610 (LV)",
+        "dem": 48.0,
+        "rep": 46.0,
+        "margin": 2.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "Data for Progress (final RCV comparison)",
         "publishedAt": "2026-10-20",
@@ -1063,17 +1074,6 @@
         "dem": 39.0,
         "rep": 39.0,
         "margin": 0.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Alaska Survey Research",
-        "dates": "September 10–12, 2026",
-        "fieldEnd": "2026-09-12",
-        "sample": "1,352 (LV)",
-        "dem": 48.0,
-        "rep": 44.0,
-        "margin": 4.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
@@ -1348,6 +1348,17 @@
     ],
     "NH": [
       {
+        "pollster": "University of New Hampshire",
+        "dates": "October 27–31, 2026",
+        "fieldEnd": "2026-10-31",
+        "sample": "2,040 (LV)",
+        "dem": 54.0,
+        "rep": 42.0,
+        "margin": 12.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
         "pollster": "Rasmussen Reports",
         "publishedAt": "2026-10-26",
         "dates": "Published 2026-10-26 (field dates not verified)",
@@ -1466,17 +1477,6 @@
         "dem": 50.0,
         "rep": 45.0,
         "margin": 5.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "University of New Hampshire",
-        "dates": "September 17–21, 2026",
-        "fieldEnd": "2026-09-21",
-        "sample": "1,418 (LV)",
-        "dem": 50.0,
-        "rep": 42.0,
-        "margin": 8.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
