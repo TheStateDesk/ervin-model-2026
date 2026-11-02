@@ -1,28 +1,28 @@
-/* Ervin statewide method: apply the EXACT same pooled 2016-24 Senate/presidential correction,
- * not a new gubernatorial calibration fitted to unavailable governor history.
- * D-R sign convention, error = polled D-R minus actual D-R. Adjusted = poll - error.
+/* Original Ervin statewide transfer: exact archived Senate per-state original corrections.
+ * NO Ervin+ pooling, recency shrinkage, or region extrapolation. If a governor
+ * state has no original comparable state-history sample, display its raw poll
+ * separately and mark model adjustment unavailable; never invent a correction.
+ * Sign convention: polling D-R minus actual D-R, adjusted=poll-correction.
  */
 (function(root){'use strict';
-function apply(archived,govs,senate){
- if(!root.ERVIN_ENGINE?.calibrate)throw Error('Original Ervin calibration engine missing');
- const events=archived?.events||[];
- const governor=(govs?.races||[]).map(r=>{
-  const calibration=root.ERVIN_ENGINE.calibrate(events,r.code,2026);
-  const pollMargin=Number.isFinite(r.poll?.margin)?r.poll.margin:null;
-  const adjustedMargin=pollMargin===null?null:+(pollMargin-calibration.correction).toFixed(2);
-  const own=events.filter(e=>e.state===r.code&&e.year>=2016&&e.year<2026).sort((a,b)=>a.year-b.year);
-  return {...r,model:{pollMargin,adjustedMargin,correction:+calibration.correction.toFixed(3),
-   years:[...new Set(own.map(e=>e.year))],events:own.map(e=>({year:e.year,office:e.office,poll:e.poll,actual:e.actual,error:e.error,url:e.url,nPollsters:e.nPollsters})),
-   calibrationEvents:calibration.events,calibrationCycles:calibration.cycles,source:own.length?'State history and regional/national partial pooling':'Regional/national fallback only — no comparable local historical polling errors in current archive',
-   asOf:'2026-11-02',method:'Original Ervin 2016–2024 Senate/presidential error correction; Governor transfer is provisional and not governor-backtested',
-   correctionDefinition:'Historical D-minus-R poll margin minus actual margin, attenuated by the existing calibrator; adjusted margin = current poll margin minus expected error.',
-   fallback:!own.length,missingPolling:pollMargin===null}};
+function apply(archive,govs,senate){
+ const entries=archive?.senateStates||{}, governor=(govs?.races||[]).map(r=>{
+  const ref=entries[r.code],raw=Number.isFinite(r.poll?.margin)?r.poll.margin:null;
+  const transferable=!!ref&&ref.historyMode==='standard'&&Number.isFinite(ref.correction);
+  const correction=transferable?ref.correction:null;
+  const adjusted=raw!==null&&correction!==null?Math.round((raw-correction)*100)/100:null;
+  const ev=ref?.events||[];
+  return {...r,model:{pollMargin:raw,adjustedMargin:adjusted,correction,
+   years:[...new Set(ev.map(x=>x.year))],events:ev,
+   calibrationEvents:ev.length,calibrationCycles:new Set(ev.map(x=>x.year)).size,
+   source:transferable?'Same original Senate-state correction, transferred to governor race':'Original state-specific correction not available or not comparable; unadjusted publisher margin shown separately',
+   asOf:'2026-11-02',method:'Original Ervin 2016–2024 state Senate/presidential historical-error correction — exact archived state correction, not Ervin+',
+   correctionDefinition:'Historical D-minus-R poll error = poll − actual. For comparable state history, governor estimate = current publisher margin − the same original Senate-state correction.',
+   fallback:!transferable,missingPolling:raw===null}};
  });
- const currentSenate=Object.entries(senate?.states||{}).map(([code,r])=>({code,...r,office:'Senate',model:{pollMargin:Number.isFinite(r.pollMargin)?r.pollMargin:null,adjustedMargin:Number.isFinite(r.adjustedMargin)?r.adjustedMargin:null,asOf:senate.asOf||'2026-11-02',method:'Original Ervin — existing Senate forecast preserved',source:r.source||'Existing original Senate calibration'}}));
- return {asOf:'2026-11-02',method:'Original Ervin 2016–2024 pooled historical polling-error engine, reused unchanged',historicalSources:archived?.method||'2016–2024 published Senate and presidential poll errors',governor,senate:currentSenate,
- summary:{governorRaces:governor.length,withPublishedPolling:governor.filter(x=>x.model.adjustedMargin!==null).length,stateErrorHistory:governor.filter(x=>!x.model.fallback).length,senateRaces:currentSenate.length}};
+ const currentSenate=Object.entries(senate?.states||{}).map(([code,r])=>({code,...r,office:'Senate',model:{pollMargin:Number.isFinite(r.pollMargin)?r.pollMargin:null,adjustedMargin:Number.isFinite(r.adjustedMargin)?r.adjustedMargin:null,asOf:senate.asOf||'2026-11-02',method:'Original Ervin — existing Senate forecast unchanged',source:r.source||'Existing original Senate calculation'}}));
+ return{asOf:'2026-11-02',method:'Verbatim Original Ervin state error correction where state history comparable; elsewhere no manufactured model adjustment',historicalSources:archive?.method||'Original Senate reference states',governor,senate:currentSenate,summary:{governorRaces:governor.length,withPublishedPolling:governor.filter(r=>r.model.pollMargin!==null).length,adjustedGovernorRaces:governor.filter(r=>r.model.adjustedMargin!==null).length,stateErrorHistory:governor.filter(r=>!r.model.fallback).length,senateRaces:currentSenate.length}};
 }
-const formatMargin=x=>x===null||!Number.isFinite(x)?'No comparable average':Math.abs(x)<0.05?'Even':(x>0?'D +':'R +')+Math.abs(x).toFixed(1);
-const api={apply,formatMargin};if(typeof module!=='undefined'&&module.exports)module.exports=api;
-root.ERVIN_STATEWIDE=api;
+const formatMargin=x=>x===null||!Number.isFinite(x)?'Not estimated':Math.abs(x)<.05?'Even':(x>0?'D +':'R +')+Math.abs(x).toFixed(1);
+const api={apply,formatMargin};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.ERVIN_STATEWIDE=api;
 })(typeof window!=='undefined'?window:globalThis);
