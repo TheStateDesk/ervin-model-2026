@@ -35,6 +35,12 @@ jobs:
           python3 -c 'import json; from pathlib import Path; d=json.loads(Path("governors/data.json").read_text()); assert len(d["races"])==36; assert len({r["code"] for r in d["races"]})==36; assert sum(r["poll"] is not None for r in d["races"])==33; print("PASS: 36 distinct governor races, 33 attributed polling averages")'
           node --check governors/board.js
           node --check elections/app.js
+      - name: Validate House district index and independent historical backtests
+        run: |
+          python3 -c 'import json;h=json.load(open("house/data.json"));seats=h["seats"];assert len(seats)==435 and len({x["id"] for x in seats})==435;assert len([x for x in seats if x["rating"]])==68;print("PASS: 435 House districts / 68 sourced ratings")'
+          python3 scripts/audit_cross_office.py --check
+          node --check house/board.js
+          node --check elections/overview/center.js
       - name: Check dashboard JavaScript syntax
         run: |
           python3 -c 'from pathlib import Path; h=Path("index.html").read_text(); scripts=[x.split("</script>",1)[0] for x in h.split("<script>")[1:]]; Path("/tmp/dashboard-script.js").write_text(chr(10).join(scripts)); assert len(scripts)>=2'
@@ -114,6 +120,17 @@ jobs:
           sleep 1
           timeout 65s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=14000 --dump-dom http://127.0.0.1:8765/tests/election_dossier_smoke.html >/tmp/ervin-election-smoke.html 2>/tmp/ervin-election-chrome.err
           python3 -c 'from pathlib import Path;import re,sys;h=Path("/tmp/ervin-election-smoke.html").read_text();m=re.search(r"<pre[^>]*data-status=.(PASS|FAIL).[^>]*>(.*?)</pre>",h,re.S);print((re.sub(r"<[^>]*>","",m.group(2)) if m else "Missing election smoke result")[:5500]);sys.exit(0 if m and m.group(1)=="PASS" else 1)'
+      - name: National House and Election Center browser regression (Chromium)
+        run: |
+          set -euo pipefail
+          BROWSER="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)"
+          test -n "$BROWSER"
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/ervin-center-http.log 2>&1 &
+          PID=$!
+          trap 'kill "$PID" 2>/dev/null || true' EXIT
+          sleep 1
+          timeout 85s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=24000 --dump-dom http://127.0.0.1:8765/tests/house_election_center_smoke.html >/tmp/ervin-center-smoke.html 2>/tmp/ervin-center-chrome.err
+          python3 -c 'from pathlib import Path;import re,sys;h=Path("/tmp/ervin-center-smoke.html").read_text();m=re.search(r"<pre[^>]*data-status=.(PASS|FAIL).[^>]*>(.*?)</pre>",h,re.S);print((re.sub(r"<[^>]*>","",m.group(2)) if m else "Missing House/center browser result")[:8500]);sys.exit(0 if m and m.group(1)=="PASS" else 1)'
       - name: Appearance, contrast and theme preference browser regression (Chromium)
         run: |
           set -euo pipefail
