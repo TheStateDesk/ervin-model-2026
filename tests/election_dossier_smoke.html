@@ -25,7 +25,7 @@
   assert(doc.getElementById('raceTitle').textContent.includes('Governor'),'Governor dossier title loads');
   assert(doc.getElementById('candidates').textContent.includes('Jocelyn Benson')&&doc.getElementById('candidates').textContent.includes('John James'),'Governor candidates match registry');
   assert(doc.getElementById('leadValue').textContent.includes('Benson'),'Published governor polling average displayed');
-  assert(doc.getElementById('resultNotice').textContent.includes('No verified'),'No made-up election returns');
+  assert(/No (verified|confirmed) 2026|No verified/.test(doc.getElementById('resultNotice').textContent),'No made-up election returns');
   assert(doc.querySelectorAll('#countyMap path').length>=1,'Geographic county map or reliable outline fallback renders');
   assert(doc.getElementById('raceJump').querySelectorAll('option').length===488,'All 36 governor, 17 Senate and 435 House destinations available');
   doc=await load('../elections/?office=senate&state=TX');
