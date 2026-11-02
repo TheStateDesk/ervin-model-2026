@@ -45,12 +45,12 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          h=Path('index.html').read_text()
-          assert 'id="senate-control"' in h
+          h=Path('states/index.html').read_text()
+          assert 'id="senate-control"' in h and 'id="nationMap"' in h
           assert 'id="balanceOfPower"' in h
-          assert h.index('id="senate-control"') < h.index('id="balanceOfPower"')
+          assert h.index('id="senate-control"') < h.index('id="balanceOfPower"') < h.index('id="nationMap"')
           assert 'window.ERVIN_DATA' not in h and 'id="researchLab"' not in h
-          assert 'scripts/home-control.js' in h
+          assert '../scripts/home-control.js' in h
           print('PASS public landing page: retired research UI absent')
           PY
           node --check scripts/home-control.js
