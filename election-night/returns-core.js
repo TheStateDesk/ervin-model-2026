@@ -76,6 +76,21 @@
    if(row)result[id]=row;
   }return result;
  }
+ function preferCivic(primary,secondary){
+  const races={},warnings=[];
+  for(const id of new Set([...Object.keys(secondary||{}),...Object.keys(primary||{})])){
+   const civic=primary?.[id],mirror=secondary?.[id];
+   if(!civic){if(mirror)races[id]=mirror;continue}
+   if(!mirror){races[id]=civic;continue}
+   const st=Date.parse(civic.asOf),mt=Date.parse(mirror.asOf);
+   // Source priority only while the civicAPI record has comparable, timely counts.
+   // A 15-minute stale or smaller civicAPI tally must not hide newer verified totals.
+   if(civic.total<mirror.total||mt-st>15*60000){
+    races[id]=mirror;warnings.push('civic_stale_or_lower:'+id);
+   }else races[id]=civic;
+  }
+  return {races,warnings};
+ }
  const candidatesEqual=(a,b)=>{
   const map=x=>new Map(x.map(c=>[c.name.toLowerCase(),c.votes]));
   const am=map(a),bm=map(b);
@@ -100,5 +115,5 @@
   }
   return {races:out,warnings};
  }
- return Object.freeze({DATE,closeAt,canonical,civic,openAmerica,reconcile,verifiedCandidates,closeByState});
+ return Object.freeze({DATE,closeAt,canonical,civic,openAmerica,reconcile,preferCivic,verifiedCandidates,closeByState});
 });
