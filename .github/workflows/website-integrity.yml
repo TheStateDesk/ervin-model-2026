@@ -1,0 +1,29 @@
+name: Website integrity
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'geo/**'
+      - 'scripts/**'
+      - 'house/**'
+      - 'elections/**'
+      - 'governors/**'
+      - '.github/workflows/website-integrity.yml'
+  pull_request:
+    paths:
+      - 'geo/**'
+      - 'scripts/**'
+      - 'house/**'
+      - 'elections/**'
+      - 'governors/**'
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/validate-election-site.mjs
