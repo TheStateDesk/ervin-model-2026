@@ -4,11 +4,8 @@ import csv
 import json
 
 site = Path(__file__).resolve().parent.parent
-html = (site / "index.html").read_text(encoding="utf-8")
-prefix = "window.ERVIN_DATA = "
-start = html.index(prefix) + len(prefix)
-end = html.index(";\n\n</script><script>", start)
-model = json.loads(html[start:end])
+model = json.loads((site / "research/senate-workbench-data.json").read_text(encoding="utf-8"))
+# Backtests now read preserved model data, never the public-facing landing page.
 states = model["states"]
 assert len(states) == 17, f"Expected 17 races, found {len(states)}"
 total = 0
