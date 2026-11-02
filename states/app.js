@@ -3,7 +3,10 @@
 const $=id=>document.getElementById(id);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const states=(window.ERVIN_US_GEOGRAPHY?.states||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
-const names=Object.fromEntries(states.map(x=>[x.code,x.name])),href=code=>'../state/?state='+encodeURIComponent(code);
+const names=Object.fromEntries(states.map(x=>[x.code,x.name]));
+const selectedOffice=new URLSearchParams(location.search).get('office');
+const focusedOffice=['house','governor'].includes(selectedOffice)?selectedOffice:null;
+const href=code=>'../state/?state='+encodeURIComponent(code)+(focusedOffice==="house"?'#stateHouse':focusedOffice==="governor"?'#stateOverview':'');
 const REGION={Northeast:'CT ME MA NH NJ NY PA RI VT',Midwest:'IL IN IA KS MI MN MO NE ND OH SD WI',South:'AL AR DE FL GA KY LA MD MS NC OK SC TN TX VA WV',West:'AK AZ CA CO HI ID MT NV NM OR UT WA WY'};
 const MARGIN=n=>!Number.isFinite(n)?'No comparable margin':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
 const rank=n=>!Number.isFinite(n)?null:Math.abs(n)<=1.5?'T':n>0?'D':'R';
@@ -86,6 +89,15 @@ async function populate(){
  }catch(e){console.error(e);$('aggregateLegend').textContent='Forecast aggregate unavailable; state links still work.'}
 }
 function init(){
+ if(focusedOffice){
+  const heading=focusedOffice==='house'?'U.S. House districts':'Governor elections';
+  const cta=focusedOffice==='house'?'House candidates, polls and district maps':'Governor candidates, polls and statewide forecasts';
+  const panel=$('officeFocus');
+  if(panel){
+   panel.hidden=false;
+   panel.innerHTML='<strong>'+heading+'</strong><span>Choose any state using the map or search. Its consolidated State Desk edition opens directly to '+cta+'. The map colors remain aggregated across offices.</span><a href="./#nationMap">Show all offices</a>';
+  }
+ }
  drawMap();directory();
  $('quickSelect').innerHTML='<option value="">Choose a state…</option>'+states.map(s=>'<option value="'+s.code+'">'+esc(s.name)+'</option>').join('');
  $('quickSelect').onchange=e=>{if(names[e.target.value])location.href=href(e.target.value)};
