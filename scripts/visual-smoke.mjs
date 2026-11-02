@@ -60,6 +60,10 @@ try{
  await nerdMobile.waitForFunction(()=>document.querySelector('#targetCards')?.textContent.includes('Iowa'),null,{timeout:30000});
  const nerdLayout=await nerdMobile.evaluate(()=>({
   viewport:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,
+  elements:[...document.querySelectorAll('header,main,nav,.ed-head-inner,.ed-utility,.ed-nav-inner,.nerd-shell,.nerd-jump,.nerd-reading-guide,.nerd-section,.nerd-watch-tools,.nerd-table-wrap,.nerd-roster-controls,.nerd-evidence-summary')]
+    .map(e=>({selector:e.id||e.className||e.tagName,offset:e.offsetWidth,scroll:e.scrollWidth,left:Math.round(e.getBoundingClientRect().left),right:Math.round(e.getBoundingClientRect().right),overflow:getComputedStyle(e).overflowX})).filter(e=>e.scroll>e.offset+6||e.right>window.innerWidth+4).slice(0,25),
+  nearEdge:[...document.querySelectorAll('body *')].map(e=>({name:e.tagName,id:e.id,cls:String(e.className||'').slice(0,65),left:Math.round(e.getBoundingClientRect().left),right:Math.round(e.getBoundingClientRect().right)}))
+   .filter(e=>e.right>window.innerWidth+4&&e.right<550).slice(0,30),
   offenders:[...document.querySelectorAll('body *')].map(e=>({name:e.tagName,id:e.id,cls:String(e.className||'').slice(0,80),left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right,width:e.scrollWidth}))
    .filter(e=>e.right>window.innerWidth+4||e.left< -4).sort((x,y)=>y.right-x.right).slice(0,18)
  }));
