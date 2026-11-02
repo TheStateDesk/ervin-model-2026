@@ -42,7 +42,7 @@
   check(el('mainMenuToggle').getAttribute('aria-expanded')==='true'&&!el('globalMenuPanel').hidden,'Home menu expands with visible model directory');
   check(doc.querySelectorAll('#globalMenuPanel .global-menu-group').length===3,'Main menu groups forecast, polling sources and election night');
   check(doc.querySelectorAll('#globalMenuPanel a[href*="source="]').length===6,'Six polling tabs are directly accessible from main menu');
-  check(doc.querySelector('#globalMenuPanel a[href="counties-watch/"]')&&doc.querySelector('#globalMenuPanel a[href="michigan/election-night/"]'),'County watch and election-night links in main menu');
+  check(doc.querySelector('#globalMenuPanel a[href="counties-watch/"]')&&doc.querySelector('#globalMenuPanel a[href="election-night/"]'),'County watch and election-night links in main menu');
   el('mainMenuToggle').click();
   check(el('mainMenuToggle').getAttribute('aria-expanded')==='false'&&el('globalMenuPanel').hidden,'Home directory closes predictably');
   check(!!el('senate-control')&&el('controlDemChance').textContent.endsWith('%')&&el('controlRepChance').textContent.endsWith('%'),
