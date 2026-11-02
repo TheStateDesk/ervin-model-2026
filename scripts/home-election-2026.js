@@ -9,8 +9,11 @@ let model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate
 const isValid=n=>typeof n==='number'&&Number.isFinite(n), party=n=>!isValid(n)?'N':n>0?'D':n<0?'R':'T';
 function label(x){return x.state+' · '+x.office+(x.office==='House'?' '+x.id:'')}
 function races(){
- const all=[...model.senate,...model.governor,...model.house].filter(x=>isValid(x.margin));
- return all.sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin)).slice(0,32);
+ // Show genuinely close forecasts from every chamber instead of allowing
+ // hundreds of House districts to crowd out every statewide contest.
+ const closest=(rows,n)=>rows.filter(x=>isValid(x.margin)).sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin)).slice(0,n);
+ return [...closest(model.senate,10),...closest(model.governor,10),...closest(model.house,16)]
+   .sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin));
 }
 function photo(name,el){
  if(!name||!el||!/^[\w .'-]{4,90}$/.test(name))return;
@@ -25,6 +28,13 @@ function drawWatch(){
  const panel=$('watchCards');if(!panel)return;
  const visible=watched.slice(position,position+4);
  panel.innerHTML=visible.map((r,i)=>{
+  if(r.id==='final-predictions')return '<article class="watch-card watch-card--final">'+
+   '<div class="watch-card__overline">ELECTION DAY / NOVEMBER 3, 2026</div>'+
+   '<a class="watch-card__name" href="#electionDashboard">Final predictions</a>'+
+   '<p class="ed-mini">Full-country Senate, governor and House projections. Color-coded by predicted party leader, including clickable state and district maps.</p>'+
+   '<div class="watch-card__margin">50 states</div>'+
+   '<small>Updated published margins · forecast, not certified results</small>'+
+   '<a class="watch-card__open" href="#electionDashboard">Open final projection maps</a></article>';
   const source=r.kind==='poll'?'Published poll, not adjusted':r.office==='House'?'Provisional district scenario':'Historical-error-adjusted forecast';
   const href='../state/?state='+encodeURIComponent(r.code)+(r.office==='House'?'#stateHouse':'#stateOverview');
   const initials=(r.dem||r.rep||r.state).split(' ').map(x=>x[0]).slice(0,2).join('');
@@ -139,6 +149,16 @@ function updatePhase(){
  $('reportingBanner').textContent=live?'LIVE / VERIFIED RETURNS · '+Object.keys(returns).length+' races reporting · checked '+new Date(lastResults||Date.now()).toLocaleTimeString():'FINAL FORECAST VIEW · NOV 3, 2026 · BASED ON LATEST PUBLISHED POLLING SNAPSHOT';
  $('nationMap').hidden=live;
  $('watchSection').hidden=live;
+ $('balanceOfPower').hidden=live;
+ $('stateDirectory').hidden=live;
+ $('editorialNotes').hidden=live;
+ const headline=document.querySelector('.ed-headline'),standfirst=document.querySelector('.ed-standfirst');
+ if(headline)headline.textContent=live?'Election night 2026':'Every state. One clear picture.';
+ if(standfirst)standfirst.textContent=live?'Verified, unofficial election returns from CivicAPI and attributed state sources. Select a state for statewide totals, county geography and congressional districts. Projections stay separate from counted votes.':'Explore the races shaping 2026 in a single state edition. Senate and governor polling, all House districts, county-level historical patterns, conditional forecasts and reported votes belong in one place.';
+ if(shouldShow&&!live&&!watched.some(r=>r.id==='final-predictions')){
+  watched.unshift({id:'final-predictions',office:'Final',state:'National atlas',code:'US',margin:null,kind:'feature'});
+  position=0;drawWatch();
+ }
  map();drill();
 }
 async function refreshResults(){
