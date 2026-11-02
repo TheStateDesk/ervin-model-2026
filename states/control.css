@@ -1,0 +1,34 @@
+/* State Desk masthead: national Senate control is an editorial lead story. */
+.desk-control{background:var(--ed-white);border:1px solid var(--ed-rule);border-top:4px solid var(--ed-gold);padding:23px 25px 20px;margin:23px 0 23px;scroll-margin-top:12px;box-shadow:0 3px 18px #1c30400a}
+.desk-control__intro{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.desk-control h2{font:700 clamp(25px,3.3vw,39px)/1.08 var(--ed-serif);letter-spacing:-.025em;margin:7px 0 6px;color:var(--ed-ink)}
+.desk-control p{font:14px/1.55 var(--ed-sans);color:var(--ed-muted);margin:0;max-width:850px}
+.desk-control__choice{display:flex;flex-direction:column;gap:6px;min-width:155px;font:800 10px var(--ed-sans);text-transform:uppercase;color:var(--ed-muted);letter-spacing:.07em}
+.desk-control__choice select{background:var(--ed-white);border:1px solid var(--ed-rule);padding:10px 12px;min-height:43px;color:var(--ed-ink);font:650 13px var(--ed-sans);text-transform:none;letter-spacing:0}
+.desk-control__outcomes{display:grid;grid-template-columns:minmax(0,1fr) minmax(135px,.5fr) minmax(0,1fr);gap:17px;align-items:center;margin:20px 0 18px}
+.desk-control__party{border:1px solid var(--ed-rule);padding:13px 17px;min-width:0;background:color-mix(in srgb,var(--ed-white) 88%,var(--ed-paper))}
+.desk-control__party--d{border-left:4px solid var(--ed-blue)}
+.desk-control__party--r{border-left:4px solid var(--ed-red)}
+.desk-control__party-name{display:block;text-transform:uppercase;letter-spacing:.065em;font:800 10px var(--ed-sans);color:var(--ed-muted)}
+.desk-control__chance{display:block;font:750 clamp(35px,4.5vw,59px)/1.04 var(--ed-sans);letter-spacing:-.055em;margin:5px 0 4px;font-variant-numeric:tabular-nums}
+.desk-control__party--d .desk-control__chance{color:var(--ed-blue)}
+.desk-control__party--r .desk-control__chance{color:var(--ed-red)}
+.desk-control__seat{display:block;font:700 13px var(--ed-sans);color:var(--ed-ink)}
+.desk-control__party small{display:block;color:var(--ed-muted);font:11px/1.4 var(--ed-sans);margin-top:5px}
+.desk-control__majority{text-align:center;color:var(--ed-muted);font:12px/1.55 var(--ed-sans)}
+.desk-control__majority strong{display:block;color:var(--ed-ink);font:700 21px var(--ed-serif)}
+.desk-control__bar{display:flex;overflow:hidden;min-height:17px;width:100%;background:var(--ed-rule);margin:10px 0 8px}
+.desk-control__bar >span{display:block;height:17px;transition:width .18s}
+.desk-control__bar--d{background:var(--ed-blue)}
+.desk-control__bar--r{background:var(--ed-red)}
+.desk-control__bar--u{background:#8d979b}
+.desk-control__legend{display:flex;flex-wrap:wrap;gap:14px;color:var(--ed-muted);font:11px var(--ed-sans)}
+.desk-control__legend b{color:var(--ed-ink)}
+.desk-control__legend i{display:inline-block;width:9px;height:9px;margin-right:5px;background:#8d979b}
+.desk-control__legend .d{background:var(--ed-blue)}
+.desk-control__legend .r{background:var(--ed-red)}
+.desk-control__evidence{margin-top:10px!important;font-size:11px!important;line-height:1.5!important}
+.desk-control__evidence a{font-weight:700}
+@media(max-width:740px){.desk-control{padding:18px 16px;margin:18px 0}.desk-control__outcomes{grid-template-columns:1fr 1fr;gap:9px}.desk-control__majority{grid-column:1/-1;grid-row:2;text-align:left}.desk-control__party{padding:11px 12px}.desk-control__choice{width:100%;max-width:none}.desk-control__chance{font-size:clamp(31px,8vw,46px)}}
+@media(max-width:390px){.desk-control__party-name{font-size:9px}.desk-control__seat{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.desk-control__bar>span{transition:none}}
