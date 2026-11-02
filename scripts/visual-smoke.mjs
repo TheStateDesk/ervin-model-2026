@@ -25,6 +25,25 @@ try{
   console.log('RELEASE SMOKE PASS '+file+' '+report.slice(0,100).replaceAll('\\n',' '));
   await test.close();
  }
+ // Verify all 435 House model ratings and a genuinely interactive district-level geographic page.
+ const nationalHouse=await browser.newPage({viewport:{width:1440,height:940}});
+ await nationalHouse.goto(root+'/house/',{waitUntil:'domcontentloaded'});
+ await nationalHouse.waitForFunction(()=>document.querySelector('#houseModelSummary')?.textContent.includes('Every House district, modeled'),null,{timeout:25000});
+ const nationalSummary=await nationalHouse.locator('#houseModelSummary').innerText();
+ assert(nationalSummary.includes('435 / 435'),'House model has incomplete race coverage');
+ assert(nationalSummary.includes('underlying')||nationalSummary.includes('indexed'),'House model fails to attribute polling');
+ await nationalHouse.locator('#houseMapSvg path[data-code="TX"]').click({force:true});
+ await nationalHouse.waitForFunction(()=>document.querySelectorAll('#districtMapSvg path.geo-district').length===38,null,{timeout:25000});
+ await nationalHouse.screenshot({path:'visual-checks/House-435-overview-TX-map.png',fullPage:true});
+ await nationalHouse.close();
+ const houseDistrict=await browser.newPage({viewport:{width:1440,height:940}});
+ await houseDistrict.goto(root+'/state/?state=MI#house-7',{waitUntil:'domcontentloaded'});
+ await houseDistrict.waitForFunction(()=>document.querySelector('#districtDetail')?.textContent.includes('ERVIN HOUSE')&&document.querySelector('#districtDetail')?.textContent.includes('2024 House'),null,{timeout:25000});
+ const districtText=await houseDistrict.locator('#districtDetail').innerText();
+ assert(districtText.includes('Public surveys')&&districtText.includes('poll rows used'),'MI-07 model history or underlying polls missing');
+ await houseDistrict.locator('#stateHouse').scrollIntoViewIfNeeded();
+ await houseDistrict.screenshot({path:'visual-checks/MI-07-ervin-house-sourced-model.png',fullPage:true});
+ await houseDistrict.close();
  for(const code of ['TX','MI','NY','CA','AK']){
   for(const theme of ['light','dark']){
    const page=await browser.newPage({viewport:{width:1440,height:940},deviceScaleFactor:1});
@@ -44,6 +63,7 @@ try{
    assert(details.counties>=3,'Counties missing '+code+' '+theme+': '+JSON.stringify(details));
    assert(details.visible>=Math.max(3,Math.floor(details.counties*.9)),'Invisible county shapes '+code+' '+theme+': '+JSON.stringify(details));
    assert(details.house>0,'House selector blank '+code+' '+theme);
+   await page.waitForFunction(()=>document.querySelector('#districtDetail')?.textContent.includes('ERVIN HOUSE'),null,{timeout:25000});
    assert(details.dark===(theme==='dark'),'Wrong theme '+code+' '+theme);
    assert(!errors.length,'JS errors '+code+': '+errors.join(' | '));
    await page.screenshot({path:'visual-checks/'+code+'-'+theme+'-county.png',fullPage:true});
