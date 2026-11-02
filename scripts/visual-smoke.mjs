@@ -103,6 +103,19 @@ try{
  await homepage.locator('#senate-control').screenshot({path:'visual-checks/State-Desk-Senate-Control-Desktop.png'});
  await homepage.locator('#balanceOfPower').screenshot({path:'visual-checks/State-Desk-National-Balance-Desktop.png'});
  await homepage.close();
+ // Balance links must route to the same 50-state atlas, and from there to
+ // the correct section inside the consolidated state edition.
+ const officeDesk=await browser.newPage({viewport:{width:1100,height:820}});
+ await officeDesk.goto(root+'/states/?office=house#nationMap',{waitUntil:'domcontentloaded'});
+ await officeDesk.waitForSelector('#usMap a[data-state-link="MI"]',{timeout:18000});
+ assert(await officeDesk.locator('#officeFocus').isVisible(),'House balance link did not open focused consolidated state map');
+ assert((await officeDesk.locator('#officeFocus').innerText()).includes('House'),'House selection context missing');
+ assert((await officeDesk.locator('#usMap a[data-state-link="MI"]').getAttribute('href')).includes('#stateHouse'),'House map must jump to House section within Michigan State Desk');
+ await officeDesk.goto(root+'/states/?office=governor#nationMap',{waitUntil:'domcontentloaded'});
+ await officeDesk.waitForSelector('#usMap a[data-state-link="OH"]',{timeout:18000});
+ assert((await officeDesk.locator('#officeFocus').innerText()).includes('Governor'),'Governor state selection context missing');
+ assert((await officeDesk.locator('#usMap a[data-state-link="OH"]').getAttribute('href')).includes('#stateOverview'),'Governor map must jump to statewide races within Ohio State Desk');
+ await officeDesk.close();
  const homeMobile=await browser.newPage({viewport:{width:390,height:844}});
  const mobileErrors=[];homeMobile.on('pageerror',e=>mobileErrors.push(e.message));
  await homeMobile.goto(root+'/states/',{waitUntil:'domcontentloaded'});
