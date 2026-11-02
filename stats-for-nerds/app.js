@@ -220,6 +220,12 @@ async function init(){
   const [a,b,candidates]=await Promise.all([...sources.map(json),json('./candidates-2026.json').catch(()=>null)]);
   baselines=a.states||{};house=b.races||{};
   candidateRoster=(candidates?.version===1&&candidates?.election==='2026-11-03'&&typeof candidates.races==='object')?candidates.races:{};
+  const selected=$('inputRace').value;
+  $('inputRace').innerHTML=specs.map(x=>{
+   const c=candidateRoster[x.id];
+   return '<option value="'+esc(x.id)+'">'+esc(x.id+' · '+(c?c.democrat+' (D) vs. '+c.republican+' (R)':x.title))+'</option>';
+  }).join('');
+  $('inputRace').value=selected;
   if(['TX','KS','IA'].some(x=>!Number.isFinite(baseline(x))))throw Error('Target baseline missing');
   initial();audit();render();
   $('sourceStatus').textContent='Original Ervin polling and district files loaded. Awaiting independent verified early signals.';
