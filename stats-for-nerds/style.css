@@ -16,3 +16,22 @@
 html:not(.light) .nerd-candidate-roster{background:#254358;border-color:#55778e}
 html:not(.light) .nerd-candidate-pair{color:#f2f7fc}
 html:not(.light) .nerd-other-candidates{color:#c1cfda}
+
+/* House nominee atlas — readable 435-race finder */
+.nerd-roster-controls{display:flex;gap:16px;align-items:end;flex-wrap:wrap;margin:18px 0}
+.nerd-roster-controls label{display:grid;gap:5px;font-size:12px;font-weight:750;min-width:min(100%,230px);flex:1}
+.nerd-roster-controls input,.nerd-roster-controls select{padding:11px;min-width:0;width:100%;border:1px solid #b3c6d3;border-radius:8px;background:var(--ed-white,#fff);color:var(--ed-ink,#123)}
+.nerd-house-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.nerd-house-record{border:1px solid #d0dce5;border-radius:9px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.nerd-house-record>div:first-child{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.nerd-house-link{font-weight:850;font-size:14px}
+.nerd-house-record small{font-size:10px;color:var(--ed-muted,#556d7e)}
+.nerd-roster-people{display:grid;gap:6px}
+.nerd-roster-person{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-left:9px;border-left:3px solid #a8b8c6}
+.nerd-roster-person.d{border-color:#397fbc}.nerd-roster-person.r{border-color:#ba515f}
+.nerd-roster-person b{font-size:13px}
+.nerd-house-explore{font-size:11px;font-weight:750}
+.nerd-house-controls{display:flex;justify-content:center;padding:10px 0 18px}
+html:not(.light) .nerd-roster-controls input,html:not(.light) .nerd-roster-controls select{background:#234057;color:#e9f1f8;border-color:#597388}
+html:not(.light) .nerd-house-record{border-color:#455f73}
+@media(max-width:700px){.nerd-house-cards{grid-template-columns:1fr}}
