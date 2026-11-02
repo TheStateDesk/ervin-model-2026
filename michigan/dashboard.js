@@ -257,12 +257,11 @@ function bind(){
  $('themeToggle').addEventListener('click',()=>document.body.classList.toggle('light'));
 }
 async function load(){
- const [histResponse,geoResponse,mainResponse]=await Promise.all([fetch('./county_history.json'),fetch('./counties.geojson'),fetch('../index.html')]);
+ const [histResponse,geoResponse,mainResponse]=await Promise.all([fetch('./county_history.json'),fetch('./counties.geojson'),fetch('../research/senate-workbench-data.json')]);
  for(const [name,response] of [['County history',histResponse],['Geometries',geoResponse],['Model',mainResponse]])if(!response.ok)throw new Error(name+' resource was unavailable (HTTP '+response.status+')');
  const hist=await histResponse.json();geo=await geoResponse.json();
- const html=await mainResponse.text(),tag='window.ERVIN_DATA = ',pos=html.indexOf(tag),end=html.indexOf(';\n\n</script><script>',pos);
- if(pos<0||end<0)throw new Error('Current Ervin Model data could not be read');
- config=JSON.parse(html.slice(pos+tag.length,end));
+ config=await mainResponse.json();
+ if(!Array.isArray(config?.states)||config.states.length!==17)throw new Error('Preserved Senate source data did not validate');
  mi=config.states.find(x=>x.code==='MI');if(!mi)throw new Error('Michigan forecast is not available in the main model');
  countyData=hist.counties;
  if(countyData.length!==83||geo.features.length!==83||!countyData.every(c=>c.senate2024&&c.president2024&&c.governor2022))throw new Error('County history or county map is incomplete');
