@@ -18,7 +18,7 @@ async function start(){
   window.ERVIN_POWER.render(target,results);
   for(const link of target.querySelectorAll('.power-card-head a')){
    const path=link.getAttribute('href');
-   if(path?.endsWith('/'))link.href=new URL(path,siteRoot).href;
+   if(path&&!path.startsWith('#'))link.href=new URL(path,siteRoot).href;
   }
  }catch(error){
   console.error('Homepage balance forecast unavailable:',error);
