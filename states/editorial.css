@@ -158,3 +158,24 @@ html.theme-dark{color-scheme:dark;--ed-paper:#101925;--ed-white:#192736;--ed-ink
 .theme-dark .ed-inline-race:hover{color:#c7eaff}
 .theme-dark .ed-footer{border-color:#5d7787;color:#c1d0d9}
 @media(max-width:600px){.ed-district-tools{gap:6px}.ed-district-tools label{flex:1 1 100%;justify-content:space-between}.ed-district-tools select{flex:1 1 auto}.ed-district-map-surface svg{height:clamp(350px,102vw,540px)}.ed-theme-toggle{padding:8px 10px;min-width:75px}}
+
+/* Ervin House district scenario; neutral grade surfaces work in both appearances. */
+.ed-house-grade{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.ed-house-grade>div{border:1px solid var(--ed-rule);border-radius:12px;padding:15px;background:var(--ed-surface,#fff)}
+.ed-house-grade small,.ed-house-minigrid small{display:block;letter-spacing:.08em;text-transform:uppercase;font-size:10px;color:var(--ed-muted);margin-bottom:5px}
+.ed-house-grade strong{display:block;color:var(--ed-ink);font-size:clamp(21px,2vw,28px);line-height:1.25}
+.ed-house-grade span{display:block;color:var(--ed-muted);font-size:12px;margin-top:5px}
+.ed-house-minigrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.ed-house-minigrid>div{border-top:1px solid var(--ed-rule);padding:10px 4px}
+.ed-house-minigrid strong{font-size:16px;color:var(--ed-ink);overflow-wrap:anywhere}
+.ed-model-math{padding:12px 15px;margin:12px 0;border:1px solid var(--ed-rule);border-radius:10px}
+.ed-model-math summary{cursor:pointer;font-weight:750;color:var(--ed-ink)}
+.ed-model-calculation{color:var(--ed-muted);font-size:13px;line-height:1.6}
+.ed-model-calculation strong{color:var(--ed-ink)}
+.ed-house-surveys{display:grid;gap:6px;margin:10px 0}
+.ed-house-surveys .ed-coverage{align-items:start;gap:12px}
+.ed-house-surveys .ed-coverage>div{min-width:0}
+.ed-house-surveys small{overflow-wrap:anywhere}
+.theme-dark .ed-house-grade>div{background:#203446;border-color:#4b6474}
+.theme-dark .ed-house-minigrid>div,.theme-dark .ed-model-math{border-color:#4b6474}
+@media(max-width:580px){.ed-house-grade{grid-template-columns:1fr}.ed-house-minigrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
