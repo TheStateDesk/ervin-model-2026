@@ -1,0 +1,3086 @@
+{
+  "asof": "November 02, 2026",
+  "election": "November 3, 2026",
+  "sourceList": [
+    {
+      "key": "take",
+      "title": "Ervin’s Take ★",
+      "desc": "Overall picture: provisional blended polling averages (RCP 40%, DDHQ 29%, 270toWin 21%, Silver Bulletin 10%). Silver is intentionally downweighted because its comparable historical Senate-polling backlog is limited. Distinct named publisher averages remain eligible even when the same page cites them; proxy filtering and freshness safeguards remain; Original Ervin correction is the default; Michigan also has a discounted, unvalidated candidate-primary overpolling adjustment in Ervin’s Take; Ervin + remains an option."
+    },
+    {
+      "key": "rcp",
+      "title": "RCP Benchmark",
+      "desc": "RealClearPolling is the benchmark; explicit independently published poll proxies used only where no matching RCP average was verified."
+    },
+    {
+      "key": "ddhq",
+      "title": "DDHQ",
+      "desc": "Decision Desk HQ polling averages; explicit polling proxies where there is no matching DDHQ average."
+    },
+    {
+      "key": "win270",
+      "title": "270toWin",
+      "desc": "270toWin rolling polls; explicit polling proxies where there is no comparable published 270toWin number."
+    },
+    {
+      "key": "average",
+      "title": "Average of averages",
+      "desc": "Wikipedia equal-aggregator consensus where published. Does not de-duplicate overlapping constituent polls. Explicit alternate source for isolated exceptions."
+    },
+    {
+      "key": "silver",
+      "title": "Silver Bulletin",
+      "desc": "Silver Bulletin polling averages, with explicit proxies where unmatched."
+    }
+  ],
+  "states": [
+    {
+      "state": "Maine",
+      "code": "ME",
+      "dem": "Troy Jackson",
+      "rep": "Susan Collins",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 3.3,
+          "origin": "RealClearPolling",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 4.9,
+          "origin": "Decision Desk HQ",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 4.8,
+          "origin": "270toWin",
+          "date": "Nov 02",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": 2.2,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 3.6,
+          "origin": "Silver Bulletin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": 8.6,
+          "actual": 6.9,
+          "err": 1.7,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/maine/",
+          "kind": "270toWin final average",
+          "notes": "Harris–Trump statewide, not the 2nd congressional district.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2020,
+          "poll": 5.15,
+          "actual": -8.6,
+          "err": 13.75,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Maine",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        },
+        {
+          "year": 2020,
+          "poll": 11.6,
+          "actual": 9.1,
+          "err": 2.5,
+          "url": "https://www.270towin.com/2020-polls-biden-trump/maine/",
+          "kind": "270toWin final average",
+          "notes": "Statewide Biden–Trump comparison; separate from the 2020 Senate election.",
+          "office": "President",
+          "weight": 0.52
+        }
+      ],
+      "correction": 6.805,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+      "notes": "",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Toss Up",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Michigan",
+      "code": "MI",
+      "dem": "Abdul El-Sayed",
+      "rep": "Mike Rogers",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 3.5,
+          "origin": "RealClearPolling",
+          "date": "Oct 30",
+          "url": "https://www.realclearpolling.com/elections/senate/2026/michigan",
+          "proxy": false,
+          "note": "RealClearPolling published average ending Oct 29, verified Oct 30.",
+          "updatedFrom": "manual-public-source-verification"
+        },
+        "ddhq": {
+          "value": 4.7,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 31",
+          "url": "https://votes.decisiondeskhq.com/races/2026-11-03/michigan-us-senate-general-election",
+          "proxy": false,
+          "note": "DDHQ 49.2 minus 44.5; actual polling average posted Oct 30 and checked Oct 31.",
+          "updatedFrom": "manual-public-source-verification"
+        },
+        "win270": {
+          "value": 5.5,
+          "origin": "270toWin",
+          "date": "Oct 31",
+          "url": "https://www.270towin.com/2026-senate-polls/michigan",
+          "proxy": false,
+          "note": "270toWin average 49.8 minus 44.3; latest underlying fieldwork Oct 29. Date is checked snapshot, NOT the field date. Most recent included survey field date is used for freshness, because a separately labeled aggregate publish date was not displayed.",
+          "updatedFrom": "manual-public-source-verification",
+          "dateBasis": "latest-poll"
+        },
+        "average": {
+          "value": 4.5,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
+          "proxy": false,
+          "note": "Wikipedia equal-source average of posted publishers, updated Oct 31.",
+          "updatedFrom": "manual-public-source-verification"
+        },
+        "silver": {
+          "value": 3.8,
+          "origin": "Silver Bulletin",
+          "date": "Oct 30",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
+          "proxy": false,
+          "note": "Silver Bulletin reported current 49.4 minus 45.6, updated Oct 30 on Wikipedia aggregator table.",
+          "updatedFrom": "manual-public-source-verification"
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": 3.2,
+          "actual": 0.3,
+          "err": 2.9,
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Michigan",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 1
+        },
+        {
+          "year": 2020,
+          "poll": 6.5,
+          "actual": 1.7,
+          "err": 4.8,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Michigan",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        },
+        {
+          "year": 2018,
+          "poll": 8.3,
+          "actual": 6.4,
+          "err": 1.9,
+          "url": "https://www.realclearpolling.com/polls/senate/general/2018/michigan/stabenow-vs-james",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.7
+        }
+      ],
+      "correction": 3.228,
+      "candidateStrength": {
+        "adjustmentD": -1.84,
+        "source": "https://www.realclearpolling.com/polls/senate/democratic-primary/2026/michigan",
+        "primaryOverpollingD": 9.2,
+        "weight": 0.2,
+        "method": "Ervin’s Take candidate-specific 2026 Michigan Democratic primary polling-to-result shrinkage; NOT a religion-based Bradley parameter"
+      },
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
+      "notes": "",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Toss Up",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Ohio",
+      "code": "OH",
+      "dem": "Sherrod Brown",
+      "rep": "Jon Husted",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 2.8,
+          "origin": "RealClearPolling",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 2.7,
+          "origin": "Decision Desk HQ",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 1.7,
+          "origin": "270toWin",
+          "date": "Nov 02",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": 3.9,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_special_election_in_Ohio",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 3.1,
+          "origin": "Silver Bulletin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -1,
+          "actual": -3.6,
+          "err": 2.6,
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Ohio",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 1
+        },
+        {
+          "year": 2022,
+          "poll": -7.4,
+          "actual": -6.1,
+          "err": -1.3,
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_Ohio",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2020,
+          "poll": -0.9,
+          "actual": -8.2,
+          "err": 7.3,
+          "url": "https://www.270towin.com/2020-polls-biden-trump/ohio/",
+          "kind": "270toWin final average",
+          "notes": "46.7% Biden vs. 47.6% Trump.",
+          "office": "President",
+          "weight": 0.52
+        }
+      ],
+      "correction": 2.16,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_special_election_in_Ohio",
+      "notes": "",
+      "special": true,
+      "externalRatings": {
+        "cook": {
+          "rating": "Toss Up",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Texas",
+      "code": "TX",
+      "dem": "James Talarico",
+      "rep": "Ken Paxton",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 2.5,
+          "origin": "RealClearPolling",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 3.5,
+          "origin": "Decision Desk HQ",
+          "date": "Nov 02",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 3.4,
+          "origin": "270toWin",
+          "date": "Nov 02",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": 2.2,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 3.5,
+          "origin": "Silver Bulletin",
+          "date": "Nov 02",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -4,
+          "actual": -8.5,
+          "err": 4.5,
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Texas",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 1
+        },
+        {
+          "year": 2020,
+          "poll": -5.85,
+          "actual": -9.8,
+          "err": 3.95,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Texas",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        },
+        {
+          "year": 2018,
+          "poll": -6.8,
+          "actual": -2.6,
+          "err": -4.2,
+          "url": "https://www.realclearpolling.com/polls/senate/general/2018/texas/cruz-vs-orourke",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.7
+        }
+      ],
+      "correction": 1.888,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+      "notes": "",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Toss Up",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Iowa",
+      "code": "IA",
+      "dem": "Josh Turek",
+      "rep": "Ashley Hinson",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": -0.3,
+          "origin": "RealClearPolling",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": -0.5,
+          "origin": "Decision Desk HQ",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 0,
+          "origin": "270toWin",
+          "date": "Nov 02",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": 0,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 0.9,
+          "origin": "Silver Bulletin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -4.7,
+          "actual": -13.2,
+          "err": 8.5,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/iowa/",
+          "kind": "270toWin final average",
+          "notes": "Harris–Trump statewide; replaces the older 2014 Senate comparison.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": -9.9,
+          "actual": -12.2,
+          "err": 2.3,
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_Iowa",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2020,
+          "poll": 2,
+          "actual": -6.6,
+          "err": 8.6,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Iowa",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        }
+      ],
+      "correction": 6.16,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa",
+      "notes": "",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Toss Up",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Kansas",
+      "code": "KS",
+      "dem": "Adam Hamilton",
+      "rep": "Roger Marshall",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 3.6,
+          "origin": "RealClearPolling",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 3.4,
+          "origin": "Decision Desk HQ",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 4.6,
+          "origin": "270toWin",
+          "date": "Nov 02",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": 0.8,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 3.2,
+          "origin": "Silver Bulletin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -5,
+          "actual": -16.2,
+          "err": 11.2,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/kansas",
+          "kind": "Single late poll",
+          "notes": "Fort Hays State University (RV); lower confidence than aggregator averages.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": -16.5,
+          "actual": -23.2,
+          "err": 6.7,
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_Kansas",
+          "kind": "Aggregate",
+          "notes": "Two final polls rather than aggregator",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2020,
+          "poll": -3,
+          "actual": -11.4,
+          "err": 8.4,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Kansas",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        }
+      ],
+      "correction": 8.523,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+      "notes": "",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Toss Up",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Minnesota",
+      "code": "MN",
+      "dem": "Peggy Flanagan",
+      "rep": "Michele Tafoya",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 5.1,
+          "origin": "RealClearPolling",
+          "date": "Oct 28",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 6.8,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 28",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 6,
+          "origin": "270toWin",
+          "date": "Oct 28",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": 3.3,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 6.4,
+          "origin": "Silver Bulletin",
+          "date": "Oct 28",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": 13.2,
+          "actual": 15.8,
+          "err": -2.6,
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Minnesota",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 1
+        },
+        {
+          "year": 2020,
+          "poll": 9.6,
+          "actual": 5.3,
+          "err": 4.3,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Minnesota",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        },
+        {
+          "year": 2018,
+          "poll": 9,
+          "actual": 10.6,
+          "err": -1.6,
+          "url": "https://en.wikipedia.org/wiki/2018_United_States_Senate_special_election_in_Minnesota",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.7
+        }
+      ],
+      "correction": -0.112,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+      "notes": "September 30 270toWin estimate is older than the other source estimates; historic R correction provisional.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Lean D",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Alaska",
+      "code": "AK",
+      "dem": "Mary Peltola",
+      "rep": "Dan Sullivan",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 1.2,
+          "origin": "RealClearPolling",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 1.3,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 1.2,
+          "origin": "RCP reference proxy",
+          "date": "Oct 23",
+          "url": "https://www.realclearpolling.com/elections/senate/2026/toss-ups",
+          "proxy": true,
+          "note": "No comparable 270toWin average in checked Wikipedia table; RCP reference used instead."
+        },
+        "average": {
+          "value": 2.4,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 3,
+          "origin": "Silver Bulletin",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -4.2,
+          "actual": -2.44,
+          "err": -1.76,
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_House_of_Representatives_election_in_Alaska",
+          "kind": "GOP campaign-sponsored Cygnal Oct 14–16 final-round RCV poll",
+          "notes": "Candidate-matched 2024 Peltola vs Nick Begich. Poll predicted Peltola 47.9–52.1 (D−4.2); certified final RCV 48.78–51.22 (D−2.44). One Republican-associated poll; both comparisons use final RCV round. Survey commissioned on behalf of Begich and NRCC; downweighted as partisan in evidence-weighted variant.",
+          "office": "House",
+          "weight": 0.8
+        },
+        {
+          "year": 2024,
+          "poll": -8,
+          "actual": -13.1,
+          "err": 5.1,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/alaska",
+          "kind": "Single late presidential poll",
+          "notes": "Context only, not part of Peltola-specific correction: October Alaska Survey Research Harris 43, Trump 51.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": 6,
+          "actual": 9.92,
+          "err": -3.92,
+          "url": "https://alaskawatchman.com/wp-content/uploads/2022/09/aarp-alaska-2022-elections-voter-survey.doi_.10.26419-2Fres.00550.009.pdf",
+          "kind": "AARP Sept 2022 final-round RCV poll",
+          "notes": "Candidate-matched 2022 Peltola vs Sarah Palin November general election: modeled final runoff 53–47 (D+6); certified final RCV 54.96–45.04 (D+9.92). Survey precedes election by several weeks.",
+          "office": "House",
+          "weight": 0.72
+        },
+        {
+          "year": 2020,
+          "poll": -4.7,
+          "actual": -12.7,
+          "err": 8,
+          "url": "https://www.270towin.com/2020-senate-polls/alaska/",
+          "kind": "270toWin Senate average",
+          "notes": "2020 Senate polling of incumbent Dan Sullivan (R) against Al Gross (independent/D-aligned); Sullivan is the same Republican incumbent running against Peltola in 2026. Relevant opponent continuity and office, but 2020 predates ranked-choice general elections in Alaska. Included in evidence-weighted correction with a 0.60 continuity multiplier.",
+          "office": "Senate",
+          "weight": 0.8
+        }
+      ],
+      "correction": -2.783,
+      "history_mode": "candidate_repeat",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Alaska",
+      "notes": "Candidate-specific correction uses Peltola's 2022 general and 2024 House ranked-choice final-round polling errors; older 2020 Senate and 2024 presidential comparisons remain audit context for Original Ervin; they contribute to Ervin +. Both Peltola comparisons involve different Republican opponents and the 2022 survey predates election day by several weeks. 2026 Senate polls reported as 2-candidate or first-round margins may not be comparable to final RCV runoff results; interpret adjusted margins as a sensitivity scenario, not an estimated final-round outcome. Evidence-weighted setting also includes Sullivan's 2020 Senate polling error at 0.60 same-Republican-incumbent multiplier and the 2024 statewide presidential error at 0.35; Peltola's own House comparisons retain 1.35; the 2020 Senate election features incumbent Republican Dan Sullivan, who is again on the ballot in 2026. Same-year entries share weight.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Toss Up",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Georgia",
+      "code": "GA",
+      "dem": "Jon Ossoff",
+      "rep": "Mike Collins",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 8.6,
+          "origin": "RealClearPolling",
+          "date": "Oct 20",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Georgia",
+          "proxy": false,
+          "note": ""
+        },
+        "ddhq": {
+          "value": 10,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 27",
+          "url": "https://votes.decisiondeskhq.com/races/2026-11-03/georgia-us-senate-general-election",
+          "proxy": false,
+          "note": "DDHQ 52.7 minus 42.7; polling data timestamp Oct 27, distinct from Oct 30 forecast timestamp.",
+          "updatedFrom": "manual-public-source-verification"
+        },
+        "win270": {
+          "value": 9.8,
+          "origin": "270toWin",
+          "date": "Oct 27",
+          "url": "https://www.270towin.com/2026-senate-polls/georgia",
+          "proxy": false,
+          "note": "270toWin rolling 4-poll average 53.3 minus 43.5; newest underlying poll shown Oct 27. Most recent included survey field date is used for freshness, because a separately labeled aggregate publish date was not displayed.",
+          "updatedFrom": "manual-public-source-verification",
+          "dateBasis": "latest-poll"
+        },
+        "average": {
+          "value": 8.5,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Georgia",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 8.9,
+          "origin": "Silver Bulletin",
+          "date": "Oct 20",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Georgia",
+          "proxy": false,
+          "note": ""
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -1.2,
+          "actual": -2.2,
+          "err": 1,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/georgia",
+          "kind": "270toWin final average",
+          "notes": "Harris–Trump final statewide average.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": -1.4,
+          "actual": 0.9,
+          "err": -2.3,
+          "url": "https://www.realclearpolitics.com/epolls/2022/senate/Georgia.html",
+          "kind": "Aggregate",
+          "notes": "November general round only; NOT Dec runoff",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2020,
+          "poll": 0.95,
+          "actual": -1.78,
+          "err": 2.73,
+          "url": "https://en.wikipedia.org/wiki/2020%E2%80%9321_United_States_Senate_election_in_Georgia",
+          "kind": "Aggregate",
+          "notes": "November general round only; NOT Jan runoff",
+          "office": "Senate",
+          "weight": 0.8
+        }
+      ],
+      "correction": 0.325,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Georgia",
+      "notes": "Georgia 2020 and 2022 comparisons use November general elections, not the subsequent runoffs.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Likely D",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "North Carolina",
+      "code": "NC",
+      "dem": "Roy Cooper",
+      "rep": "Michael Whatley",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 11,
+          "origin": "RealClearPolling",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_North_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 10.1,
+          "origin": "Decision Desk HQ",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_North_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 11.6,
+          "origin": "270toWin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_North_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": 10.8,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_North_Carolina",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 10,
+          "origin": "Silver Bulletin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_North_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -1.3,
+          "actual": -3.21,
+          "err": 1.91,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/north-carolina",
+          "kind": "270toWin final average",
+          "notes": "2024 statewide election result from North Carolina State Board of Elections.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": -5.1,
+          "actual": -3.23,
+          "err": -1.87,
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_North_Carolina",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2020,
+          "poll": 2.6,
+          "actual": -1.8,
+          "err": 4.4,
+          "url": "https://www.realclearpolling.com/polls/senate/general/2020/north-carolina/tillis-vs-cunningham",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        }
+      ],
+      "correction": 1.31,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_North_Carolina",
+      "notes": "",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Likely D",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "New Hampshire",
+      "code": "NH",
+      "dem": "Chris Pappas",
+      "rep": "John E. Sununu",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": 6.5,
+          "origin": "RealClearPolling",
+          "date": "Oct 22",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": 7.3,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 22",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": 7.3,
+          "origin": "270toWin",
+          "date": "Oct 29",
+          "url": "https://www.270towin.com/2026-senate-polls/new-hampshire",
+          "proxy": false,
+          "note": "270toWin rolling 4-poll average 49.8 minus 42.5; latest UMass poll Oct 29. Date is latest underlying poll, not confirmed aggregator publication. Most recent included survey field date is used for freshness, because a separately labeled aggregate publish date was not displayed.",
+          "updatedFrom": "manual-public-source-verification",
+          "dateBasis": "latest-poll"
+        },
+        "average": {
+          "value": 6.7,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": 7.3,
+          "origin": "Silver Bulletin",
+          "date": "Oct 22",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": 5,
+          "actual": 2.8,
+          "err": 2.2,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/new-hampshire/",
+          "kind": "270toWin final average",
+          "notes": "50.5% Harris vs. 45.5% Trump.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": 2.3,
+          "actual": 9.1,
+          "err": -6.8,
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_New_Hampshire",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2020,
+          "poll": 11,
+          "actual": 7.3,
+          "err": 3.7,
+          "url": "https://www.270towin.com/2020-polls-biden-trump/new-hampshire/",
+          "kind": "270toWin final average",
+          "notes": "53.4% Biden vs. 42.4% Trump.",
+          "office": "President",
+          "weight": 0.52
+        }
+      ],
+      "correction": -1.336,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_New_Hampshire",
+      "notes": "Single historical comparison; 270toWin average predates October polls.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Lean D",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Nebraska",
+      "code": "NE",
+      "dem": "Dan Osborn",
+      "rep": "Pete Ricketts",
+      "party": "I",
+      "sources": {
+        "rcp": {
+          "value": -2.3,
+          "origin": "270toWin reference proxy",
+          "date": "Oct 20",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska",
+          "proxy": true,
+          "note": "No same-matchup RCP poll average verified; uses 270toWin published margin."
+        },
+        "ddhq": {
+          "value": -1.2,
+          "origin": "Decision Desk HQ",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": -2.8,
+          "origin": "270toWin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": -1.8,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": -1,
+          "origin": "Silver Bulletin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -1.6,
+          "actual": -6.67,
+          "err": 5.07,
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Nebraska",
+          "kind": "Aggregate",
+          "notes": "2024 Fischer vs Osborn independent matchup Applied to 2026: candidate-specific polling correction; different Republican opponent.",
+          "office": "Senate",
+          "weight": 1
+        },
+        {
+          "year": 2024,
+          "poll": -15,
+          "actual": -20.5,
+          "err": 5.5,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/nebraska",
+          "kind": "270toWin final average",
+          "notes": "Statewide 40% Harris 55% Trump; independent Senate matchups are not directly comparable.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2020,
+          "poll": -12,
+          "actual": -19.1,
+          "err": 7.1,
+          "url": "https://www.270towin.com/2020-polls-biden-trump/nebraska/",
+          "kind": "Single late poll",
+          "notes": "Axios/SurveyMonkey Nov. 1 STATEWIDE 43% Biden 55% Trump; excludes 2nd district.",
+          "office": "President",
+          "weight": 0.52
+        }
+      ],
+      "correction": 5.07,
+      "history_mode": "candidate_repeat",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska",
+      "notes": "Dan Osborn ran as an independent in 2024 and again in 2026. Apply the candidate-specific 2024 Osborn–Fischer polling error (+5.07 R shift), rather than unrelated statewide Democratic-vs-Republican presidential corrections. Opponent changes from Fischer to Ricketts; inference is based on one comparable election.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Likely R",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "South Carolina",
+      "code": "SC",
+      "dem": "Annie Andrews",
+      "rep": "Darline Graham",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": -2.7,
+          "origin": "RealClearPolling",
+          "date": "Oct 29",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": -0.1,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 30",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": -2.4,
+          "origin": "270toWin",
+          "date": "Oct 29",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": -2,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": -1.4,
+          "origin": "Silver Bulletin",
+          "date": "Nov 01",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -11.7,
+          "actual": -17.87,
+          "err": 6.17,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/south-carolina/",
+          "kind": "270toWin final average",
+          "notes": "2024 statewide Harris–Trump 42.0%–53.7%.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2020,
+          "poll": -3.7,
+          "actual": -10.27,
+          "err": 6.57,
+          "url": "https://www.270towin.com/2020-senate-polls/south-carolina/",
+          "kind": "Aggregate",
+          "notes": "270toWin polling vs certified results",
+          "office": "Senate",
+          "weight": 0.8
+        },
+        {
+          "year": 2020,
+          "poll": -7,
+          "actual": -11.7,
+          "err": 4.7,
+          "url": "https://www.270towin.com/2020-polls-biden-trump/south-carolina/",
+          "kind": "270toWin final average",
+          "notes": "2020 statewide Biden–Trump 43.3%–50.3%.",
+          "office": "President",
+          "weight": 0.52
+        }
+      ],
+      "correction": 5.944,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
+      "notes": "2026 matchup names are from the current Wikipedia general-election aggregation table.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Lean R",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Mississippi",
+      "code": "MS",
+      "dem": "Scott Colom",
+      "rep": "Cindy Hyde-Smith",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": -4.4,
+          "origin": "Track the Vote reference proxy",
+          "date": "Oct 21",
+          "url": "https://www.trackthevote.net/senate/mississippi",
+          "proxy": true,
+          "note": "No published matching RCP race-average identified; independent current polling average substituted."
+        },
+        "ddhq": {
+          "value": -4.4,
+          "origin": "Track the Vote reference proxy",
+          "date": "Oct 21",
+          "url": "https://www.trackthevote.net/senate/mississippi",
+          "proxy": true,
+          "note": "DDHQ publishes a win forecast, not a comparable polling average. Uses independent polling average."
+        },
+        "win270": {
+          "value": -4.4,
+          "origin": "Track the Vote reference proxy",
+          "date": "Oct 21",
+          "url": "https://www.trackthevote.net/senate/mississippi",
+          "proxy": true,
+          "note": "No matching 270toWin poll average identified; reference average substituted."
+        },
+        "average": {
+          "value": -5,
+          "origin": "Hedge recency-weighted poll average",
+          "date": "Oct 22",
+          "url": "https://www.onpointpolitics.us/polls/ms/senate",
+          "proxy": true,
+          "note": "On Point 3-poll historical weighted average Colom 39.0 vs Hyde-Smith 44.0; latest survey Oct 22. This is not fresh on Nov 1 and is not a directly verified RCP/DDHQ/270/Silver average.",
+          "updatedFrom": "manual-public-source-verification"
+        },
+        "silver": {
+          "value": -4.4,
+          "origin": "Track the Vote reference proxy",
+          "date": "Oct 21",
+          "url": "https://www.trackthevote.net/senate/mississippi",
+          "proxy": true,
+          "note": "No comparable Silver Bulletin average found; polling reference substituted."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -13,
+          "actual": -25.62,
+          "err": 12.62,
+          "url": "https://elections2024.thehill.com/mississippi/",
+          "kind": "Single partisan poll",
+          "notes": "Change Research for Pinkins campaign, Sep.29–Oct.3 2024, Wicker 48 Pinkins 35 (R+13); official 2024 certified result R+25.62. Small-sample and partisan-poll limitation.",
+          "office": "Senate",
+          "weight": 1
+        },
+        {
+          "year": 2020,
+          "poll": -5.5,
+          "actual": -9.97,
+          "err": 4.47,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Mississippi",
+          "kind": "Two-poll mean",
+          "notes": "Average of latest DFP R+3 and Civiqs R+8; NOT historical aggregator",
+          "office": "Senate",
+          "weight": 0.8
+        },
+        {
+          "year": 2018,
+          "poll": -7.5,
+          "actual": -7.26,
+          "err": -0.24,
+          "url": "https://en.wikipedia.org/wiki/2018_United_States_Senate_special_election_in_Mississippi",
+          "kind": "Two late polls",
+          "notes": "Hyde-Smith–Espy Nov. 27 runoff: Change Research R+5, JMC Analytics R+10. Mean R+7.5; certified R+7.26.",
+          "office": "Senate",
+          "weight": 0.7
+        }
+      ],
+      "correction": 6.411,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Mississippi",
+      "notes": "Few current polls; the source-specific tabs use explicitly labeled third-party polling proxies, not manufactured DDHQ/270/RCP series.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Likely R",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      },
+      "freshnessStatus": "No independent post-Oct22 Senate polling found; stale polling fallback is provided as historical reference only."
+    },
+    {
+      "state": "Florida",
+      "code": "FL",
+      "dem": "Angie Nixon",
+      "rep": "Ashley Moody",
+      "party": "D",
+      "sources": {
+        "rcp": {
+          "value": -6.3,
+          "origin": "RealClearPolling",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "ddhq": {
+          "value": -5.7,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": -6,
+          "origin": "270toWin",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "average": {
+          "value": -6.4,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_special_election_in_Florida",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": -5.9,
+          "origin": "Silver Bulletin",
+          "date": "Oct 31",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -6.2,
+          "actual": -13.1,
+          "err": 6.9,
+          "url": "https://www.270towin.com/2024-presidential-election-polls/florida",
+          "kind": "270toWin final average",
+          "notes": "2024 statewide presidential average.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": -8.8,
+          "actual": -16.4,
+          "err": 7.6,
+          "url": "https://www.realclearpolling.com/polls/senate/general/2022/florida/rubio-vs-demings",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2018,
+          "poll": 2.4,
+          "actual": -0.2,
+          "err": 2.6,
+          "url": "https://www.realclearpolling.com/polls/senate/general/2018/florida/scott-vs-nelson",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.7
+        }
+      ],
+      "correction": 5.842,
+      "history_mode": "standard",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_special_election_in_Florida",
+      "notes": "",
+      "special": true,
+      "externalRatings": {
+        "cook": {
+          "rating": "Solid R",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "South Dakota",
+      "code": "SD",
+      "dem": "Brian Bengs",
+      "rep": "Mike Rounds",
+      "party": "I",
+      "sources": {
+        "rcp": {
+          "value": -15,
+          "origin": "270toWin reference proxy",
+          "date": "Oct 23",
+          "url": "https://www.270towin.com/2026-senate-polls/south-dakota",
+          "proxy": true,
+          "note": "RCP shows individual polls but no comparable aggregate; 270toWin two-poll average used."
+        },
+        "ddhq": {
+          "value": -10.2,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 30",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Dakota",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": -15,
+          "origin": "270toWin",
+          "date": "Oct 23",
+          "url": "https://www.270towin.com/2026-senate-polls/south-dakota",
+          "proxy": false,
+          "note": ""
+        },
+        "average": {
+          "value": -7.4,
+          "origin": "Silver Bulletin only",
+          "date": "Oct 20",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Dakota",
+          "proxy": true,
+          "note": "Wikipedia contains one aggregator, Silver Bulletin, not a multi-aggregator Average; carried as single aggregator."
+        },
+        "silver": {
+          "value": -10.7,
+          "origin": "Silver Bulletin",
+          "date": "Oct 30",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Dakota",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -27,
+          "actual": -29.19,
+          "err": 2.19,
+          "url": "https://emersoncollegepolling.com/october-2024-south-dakota-poll-trump-62-harris-35/",
+          "kind": "Single late poll",
+          "notes": "October Emerson/KELO/The Hill survey (R+27); result R+29.19.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2022,
+          "poll": -25,
+          "actual": -43.5,
+          "err": 18.5,
+          "url": "https://www.realclearpolling.com/polls/senate/general/2022/south-dakota/thune-vs-bengs",
+          "kind": "Single Senate poll",
+          "notes": "SDSU Oct 2022 poll of Democrat Brian Bengs (2026 independent) vs Thune, R+25 versus result R+43.5; label candidacy change. Applied as a single-observation, candidate-specific 2026 correction; high uncertainty.",
+          "office": "Senate",
+          "weight": 0.9
+        },
+        {
+          "year": 2020,
+          "poll": -17,
+          "actual": -31.48,
+          "err": 14.48,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_South_Dakota",
+          "kind": "Single late poll",
+          "notes": "Nielson Bros poll only; Democrat opponent in 2020, independent in 2026",
+          "office": "Senate",
+          "weight": 0.8
+        }
+      ],
+      "correction": 18.5,
+      "history_mode": "candidate_repeat",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Dakota",
+      "notes": "Brian Bengs was 2022 Democratic Senate nominee versus John Thune and returns in 2026 as an independent versus Mike Rounds. Apply the 2022 Bengs-specific late-poll polling error (+18.50 R points) as a scenario correction. WARNING: single 2022 poll, four years older, party label and Republican opponent changed; very weak calibration.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Solid R",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    },
+    {
+      "state": "Montana",
+      "code": "MT",
+      "dem": "Seth Bodnar",
+      "rep": "Kurt Alme",
+      "party": "I",
+      "sources": {
+        "rcp": {
+          "value": -12,
+          "origin": "RealClearPolling",
+          "date": "Oct 20",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana",
+          "proxy": false,
+          "note": ""
+        },
+        "ddhq": {
+          "value": -6.2,
+          "origin": "Decision Desk HQ",
+          "date": "Oct 30",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        },
+        "win270": {
+          "value": -18,
+          "origin": "270toWin",
+          "date": "Oct 20",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana",
+          "proxy": false,
+          "note": ""
+        },
+        "average": {
+          "value": -13,
+          "origin": "Wikipedia aggregator average",
+          "date": "Oct 23",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana",
+          "proxy": false,
+          "note": ""
+        },
+        "silver": {
+          "value": -8.4,
+          "origin": "Silver Bulletin",
+          "date": "Oct 30",
+          "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana",
+          "proxy": false,
+          "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
+        }
+      },
+      "historical": [
+        {
+          "year": 2024,
+          "poll": -6.9,
+          "actual": -7.1,
+          "err": 0.2,
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Montana",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 1
+        },
+        {
+          "year": 2024,
+          "poll": -18.5,
+          "actual": -19.9,
+          "err": 1.4,
+          "url": "https://www.realclearpolling.com/polls/president/general/2024/montana/trump-vs-harris",
+          "kind": "RCP final average",
+          "notes": "2024 Trump–Harris average, independent 2026 Senate candidate requires separate modeling.",
+          "office": "President",
+          "weight": 0.65
+        },
+        {
+          "year": 2020,
+          "poll": -1.6,
+          "actual": -10,
+          "err": 8.4,
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Montana",
+          "kind": "Aggregate",
+          "notes": "",
+          "office": "Senate",
+          "weight": 0.8
+        }
+      ],
+      "correction": 3.196,
+      "history_mode": "not_comparable",
+      "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana",
+      "notes": "Three-way race: Alme (R), Bodnar (I), Bankhead (D). Polling margin is Bodnar minus Alme (top two), NOT Democrat minus Republican. Past D-R correction is not applied; uncertainty inflated.",
+      "special": false,
+      "externalRatings": {
+        "cook": {
+          "rating": "Solid R",
+          "date": "Oct 20, 2026",
+          "url": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1"
+        }
+      }
+    }
+  ],
+  "benchmark": "https://www.realclearpolling.com/elections/senate/2026/toss-ups",
+  "ratings": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1",
+  "errorResearch": "https://www.pollingforecast.com/research/us-polling-error",
+  "liveMeta": {
+    "checkedAt": "2026-11-02T16:51:19.169071+00:00",
+    "pagesParsed": 15,
+    "checkedRaceCount": 17,
+    "changes": 10,
+    "observationsFound": 56,
+    "errors": [],
+    "updated": [
+      {
+        "state": "ME",
+        "source": "win270",
+        "margin": 4.8,
+        "published": "Nov 02"
+      },
+      {
+        "state": "OH",
+        "source": "win270",
+        "margin": 1.7,
+        "published": "Nov 02"
+      },
+      {
+        "state": "TX",
+        "source": "win270",
+        "margin": 3.4,
+        "published": "Nov 02"
+      },
+      {
+        "state": "TX",
+        "source": "ddhq",
+        "margin": 3.5,
+        "published": "Nov 02"
+      },
+      {
+        "state": "TX",
+        "source": "silver",
+        "margin": 3.5,
+        "published": "Nov 02"
+      },
+      {
+        "state": "IA",
+        "source": "win270",
+        "margin": 0,
+        "published": "Nov 02"
+      },
+      {
+        "state": "KS",
+        "source": "win270",
+        "margin": 4.6,
+        "published": "Nov 02"
+      },
+      {
+        "state": "KS",
+        "source": "ddhq",
+        "margin": 3.4,
+        "published": "Nov 01"
+      },
+      {
+        "state": "KS",
+        "source": "rcp",
+        "margin": 3.6,
+        "published": "Nov 01"
+      },
+      {
+        "state": "KS",
+        "source": "silver",
+        "margin": 3.2,
+        "published": "Nov 01"
+      }
+    ],
+    "sourceCoverage": [
+      {
+        "state": "ME",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "MI",
+        "verifiedPublisherRows": 0,
+        "result": "no matching current-year aggregate"
+      },
+      {
+        "state": "OH",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "TX",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "IA",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "KS",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "MN",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "AK",
+        "verifiedPublisherRows": 3,
+        "result": "matched"
+      },
+      {
+        "state": "GA",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "NC",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "NH",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "NE",
+        "verifiedPublisherRows": 3,
+        "result": "matched"
+      },
+      {
+        "state": "SC",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "MS",
+        "verifiedPublisherRows": 0,
+        "result": "no matching current-year aggregate"
+      },
+      {
+        "state": "FL",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      },
+      {
+        "state": "SD",
+        "verifiedPublisherRows": 2,
+        "result": "matched"
+      },
+      {
+        "state": "MT",
+        "verifiedPublisherRows": 4,
+        "result": "matched"
+      }
+    ],
+    "stalePublisherRaces": [
+      {
+        "state": "MS",
+        "daysOld": null,
+        "latestDate": null,
+        "reason": "No independently attributed publisher averages"
+      }
+    ],
+    "sources": "Wikipedia 2026 general-election aggregate tables; matching candidate pair required"
+  },
+  "calibrationEvents": [
+    {
+      "state": "AK",
+      "year": 2016,
+      "office": "President",
+      "poll": -4.075,
+      "actual": -14.731,
+      "error": 10.656,
+      "nPollsters": 4,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "602"
+    },
+    {
+      "state": "AK",
+      "year": 2020,
+      "office": "President",
+      "poll": -9,
+      "actual": -10.061,
+      "error": 1.061,
+      "nPollsters": 2,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6211"
+    },
+    {
+      "state": "AK",
+      "year": 2024,
+      "office": "President",
+      "poll": -8,
+      "actual": -13.1,
+      "error": 5.1,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "Single late presidential poll",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/alaska",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "FL",
+      "year": 2016,
+      "office": "President",
+      "poll": 1.789,
+      "actual": -1.199,
+      "error": 2.988,
+      "nPollsters": 20,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "611"
+    },
+    {
+      "state": "FL",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -5.144,
+      "actual": -7.666,
+      "error": 2.522,
+      "nPollsters": 18,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "93"
+    },
+    {
+      "state": "FL",
+      "year": 2018,
+      "office": "Senate",
+      "poll": 2.174,
+      "actual": -0.123,
+      "error": 2.297,
+      "nPollsters": 22,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "100"
+    },
+    {
+      "state": "FL",
+      "year": 2020,
+      "office": "President",
+      "poll": 2.385,
+      "actual": -3.358,
+      "error": 5.743,
+      "nPollsters": 32,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6220"
+    },
+    {
+      "state": "FL",
+      "year": 2022,
+      "office": "Senate",
+      "poll": -8.1,
+      "actual": -16.413,
+      "error": 8.313,
+      "nPollsters": 10,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "8924"
+    },
+    {
+      "state": "FL",
+      "year": 2024,
+      "office": "President",
+      "poll": -6.2,
+      "actual": -13.1,
+      "error": 6.9,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/florida",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "FL",
+      "year": 2024,
+      "office": "Senate",
+      "poll": -3.5,
+      "actual": -12.78,
+      "error": 9.28,
+      "nPollsters": 4,
+      "kind": "late-RCP-listed-pollster-average-sponsorship-unverified",
+      "source": "Whitcomb collection of RCP-listed Senate polls",
+      "url": "https://github.com/Jack-Whitcomb/All-US-Senate-polls-2006-2024/blob/main/2006_to_2024_senate_polls_with_actuals.csv",
+      "raceId": "2024-Senate-NA"
+    },
+    {
+      "state": "GA",
+      "year": 2016,
+      "office": "President",
+      "poll": -3.785,
+      "actual": -5.131,
+      "error": 1.346,
+      "nPollsters": 13,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "612"
+    },
+    {
+      "state": "GA",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -9.978,
+      "actual": -13.751,
+      "error": 3.773,
+      "nPollsters": 9,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "88"
+    },
+    {
+      "state": "GA",
+      "year": 2020,
+      "office": "President",
+      "poll": 1.295,
+      "actual": 0.236,
+      "error": 1.059,
+      "nPollsters": 17,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6221"
+    },
+    {
+      "state": "GA",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 1.738,
+      "actual": -1.779,
+      "error": 3.517,
+      "nPollsters": 12,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6271"
+    },
+    {
+      "state": "GA",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 1.7,
+      "actual": 2.08,
+      "error": -0.38,
+      "nPollsters": 10,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "7781"
+    },
+    {
+      "state": "GA",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 1.24,
+      "actual": 1.225,
+      "error": 0.015,
+      "nPollsters": 10,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "8737"
+    },
+    {
+      "state": "GA",
+      "year": 2022,
+      "office": "Senate",
+      "poll": 0.295,
+      "actual": 0.957,
+      "error": -0.662,
+      "nPollsters": 19,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "8925"
+    },
+    {
+      "state": "GA",
+      "year": 2022,
+      "office": "Senate",
+      "poll": 2.645,
+      "actual": 2.806,
+      "error": -0.161,
+      "nPollsters": 11,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "9552"
+    },
+    {
+      "state": "GA",
+      "year": 2024,
+      "office": "President",
+      "poll": -1.2,
+      "actual": -2.2,
+      "error": 1,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/georgia",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "IA",
+      "year": 2016,
+      "office": "President",
+      "poll": -2.2,
+      "actual": -9.41,
+      "error": 7.21,
+      "nPollsters": 8,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "614"
+    },
+    {
+      "state": "IA",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -20.64,
+      "actual": -24.435,
+      "error": 3.795,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "92"
+    },
+    {
+      "state": "IA",
+      "year": 2020,
+      "office": "President",
+      "poll": -0.146,
+      "actual": -8.198,
+      "error": 8.051,
+      "nPollsters": 13,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6223"
+    },
+    {
+      "state": "IA",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 1.208,
+      "actual": -6.588,
+      "error": 7.796,
+      "nPollsters": 12,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6272"
+    },
+    {
+      "state": "IA",
+      "year": 2022,
+      "office": "Senate",
+      "poll": -10,
+      "actual": -12.179,
+      "error": 2.179,
+      "nPollsters": 2,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "8930"
+    },
+    {
+      "state": "IA",
+      "year": 2024,
+      "office": "President",
+      "poll": -4.7,
+      "actual": -13.2,
+      "error": 8.5,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/iowa/",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "KS",
+      "year": 2016,
+      "office": "President",
+      "poll": -16.026,
+      "actual": -20.602,
+      "error": 4.576,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "618"
+    },
+    {
+      "state": "KS",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -23,
+      "actual": -29.937,
+      "error": 6.937,
+      "nPollsters": 2,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "60"
+    },
+    {
+      "state": "KS",
+      "year": 2020,
+      "office": "President",
+      "poll": -10.667,
+      "actual": -14.653,
+      "error": 3.986,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6227"
+    },
+    {
+      "state": "KS",
+      "year": 2020,
+      "office": "Senate",
+      "poll": -4.523,
+      "actual": -11.437,
+      "error": 6.914,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6275"
+    },
+    {
+      "state": "KS",
+      "year": 2024,
+      "office": "President",
+      "poll": -5,
+      "actual": -16.2,
+      "error": 11.2,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "Single late poll",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/kansas",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "ME",
+      "year": 2016,
+      "office": "President",
+      "poll": 6.658,
+      "actual": 2.96,
+      "error": 3.698,
+      "nPollsters": 6,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "623"
+    },
+    {
+      "state": "ME",
+      "year": 2020,
+      "office": "President",
+      "poll": 12.68,
+      "actual": 9.071,
+      "error": 3.609,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6232"
+    },
+    {
+      "state": "ME",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 3.75,
+      "actual": -8.597,
+      "error": 12.347,
+      "nPollsters": 4,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6279"
+    },
+    {
+      "state": "ME",
+      "year": 2024,
+      "office": "President",
+      "poll": 8.6,
+      "actual": 6.9,
+      "error": 1.7,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/maine/",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "MI",
+      "year": 2016,
+      "office": "President",
+      "poll": 4.142,
+      "actual": -0.223,
+      "error": 4.365,
+      "nPollsters": 10,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "624"
+    },
+    {
+      "state": "MI",
+      "year": 2018,
+      "office": "Senate",
+      "poll": 10.01,
+      "actual": 6.506,
+      "error": 3.504,
+      "nPollsters": 10,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "106"
+    },
+    {
+      "state": "MI",
+      "year": 2020,
+      "office": "President",
+      "poll": 7.813,
+      "actual": 2.784,
+      "error": 5.03,
+      "nPollsters": 26,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6233"
+    },
+    {
+      "state": "MI",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 8.108,
+      "actual": 1.685,
+      "error": 6.423,
+      "nPollsters": 19,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6280"
+    },
+    {
+      "state": "MI",
+      "year": 2024,
+      "office": "Senate",
+      "poll": 3.368,
+      "actual": 0.34,
+      "error": 3.028,
+      "nPollsters": 19,
+      "kind": "late-RCP-listed-pollster-average-sponsorship-unverified",
+      "source": "Whitcomb collection of RCP-listed Senate polls",
+      "url": "https://github.com/Jack-Whitcomb/All-US-Senate-polls-2006-2024/blob/main/2006_to_2024_senate_polls_with_actuals.csv",
+      "raceId": "2024-Senate-NA"
+    },
+    {
+      "state": "MN",
+      "year": 2016,
+      "office": "President",
+      "poll": 8.383,
+      "actual": 1.52,
+      "error": 6.863,
+      "nPollsters": 6,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "625"
+    },
+    {
+      "state": "MN",
+      "year": 2018,
+      "office": "Senate",
+      "poll": 21.4,
+      "actual": 24.096,
+      "error": -2.696,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "107"
+    },
+    {
+      "state": "MN",
+      "year": 2018,
+      "office": "Senate",
+      "poll": 9.6,
+      "actual": 10.619,
+      "error": -1.019,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "129"
+    },
+    {
+      "state": "MN",
+      "year": 2020,
+      "office": "President",
+      "poll": 9.967,
+      "actual": 7.11,
+      "error": 2.857,
+      "nPollsters": 12,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6234"
+    },
+    {
+      "state": "MN",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 9.7,
+      "actual": 5.238,
+      "error": 4.462,
+      "nPollsters": 10,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6281"
+    },
+    {
+      "state": "MN",
+      "year": 2024,
+      "office": "Senate",
+      "poll": 13,
+      "actual": 15.7,
+      "error": -2.7,
+      "nPollsters": 4,
+      "kind": "late-RCP-listed-pollster-average-sponsorship-unverified",
+      "source": "Whitcomb collection of RCP-listed Senate polls",
+      "url": "https://github.com/Jack-Whitcomb/All-US-Senate-polls-2006-2024/blob/main/2006_to_2024_senate_polls_with_actuals.csv",
+      "raceId": "2024-Senate-NA"
+    },
+    {
+      "state": "MS",
+      "year": 2016,
+      "office": "President",
+      "poll": -10.387,
+      "actual": -17.826,
+      "error": 7.44,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "627"
+    },
+    {
+      "state": "MS",
+      "year": 2018,
+      "office": "Senate",
+      "poll": -7.5,
+      "actual": -7.267,
+      "error": -0.233,
+      "nPollsters": 2,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6209"
+    },
+    {
+      "state": "MS",
+      "year": 2020,
+      "office": "President",
+      "poll": -17.333,
+      "actual": -16.545,
+      "error": -0.788,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6236"
+    },
+    {
+      "state": "MS",
+      "year": 2020,
+      "office": "Senate",
+      "poll": -5.5,
+      "actual": -9.976,
+      "error": 4.476,
+      "nPollsters": 2,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6282"
+    },
+    {
+      "state": "MT",
+      "year": 2016,
+      "office": "President",
+      "poll": -17.77,
+      "actual": -20.423,
+      "error": 2.653,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "628"
+    },
+    {
+      "state": "MT",
+      "year": 2018,
+      "office": "Senate",
+      "poll": 2.6,
+      "actual": 3.551,
+      "error": -0.951,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "110"
+    },
+    {
+      "state": "MT",
+      "year": 2020,
+      "office": "President",
+      "poll": -6,
+      "actual": -16.369,
+      "error": 10.369,
+      "nPollsters": 6,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6237"
+    },
+    {
+      "state": "MT",
+      "year": 2020,
+      "office": "Senate",
+      "poll": -1.8,
+      "actual": -10.024,
+      "error": 8.224,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6283"
+    },
+    {
+      "state": "MT",
+      "year": 2024,
+      "office": "President",
+      "poll": -18.5,
+      "actual": -19.9,
+      "error": 1.4,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "RCP final average",
+      "url": "https://www.realclearpolling.com/polls/president/general/2024/montana/trump-vs-harris",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "MT",
+      "year": 2024,
+      "office": "Senate",
+      "poll": -7.5,
+      "actual": -7.14,
+      "error": -0.36,
+      "nPollsters": 2,
+      "kind": "late-RCP-listed-pollster-average-sponsorship-unverified",
+      "source": "Whitcomb collection of RCP-listed Senate polls",
+      "url": "https://github.com/Jack-Whitcomb/All-US-Senate-polls-2006-2024/blob/main/2006_to_2024_senate_polls_with_actuals.csv",
+      "raceId": "2024-Senate-NA"
+    },
+    {
+      "state": "NC",
+      "year": 2016,
+      "office": "President",
+      "poll": 1.564,
+      "actual": -3.655,
+      "error": 5.22,
+      "nPollsters": 14,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "629"
+    },
+    {
+      "state": "NC",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -1.3,
+      "actual": -5.696,
+      "error": 4.396,
+      "nPollsters": 12,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "62"
+    },
+    {
+      "state": "NC",
+      "year": 2020,
+      "office": "President",
+      "poll": 1.741,
+      "actual": -1.348,
+      "error": 3.089,
+      "nPollsters": 29,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6238"
+    },
+    {
+      "state": "NC",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 3.87,
+      "actual": -1.747,
+      "error": 5.617,
+      "nPollsters": 23,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6284"
+    },
+    {
+      "state": "NC",
+      "year": 2022,
+      "office": "Senate",
+      "poll": -3.575,
+      "actual": -3.226,
+      "error": -0.349,
+      "nPollsters": 8,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "8940"
+    },
+    {
+      "state": "NC",
+      "year": 2024,
+      "office": "President",
+      "poll": -1.3,
+      "actual": -3.21,
+      "error": 1.91,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/north-carolina",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "NE",
+      "year": 2016,
+      "office": "President",
+      "poll": -17.083,
+      "actual": -25.049,
+      "error": 7.965,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "631"
+    },
+    {
+      "state": "NE",
+      "year": 2024,
+      "office": "President",
+      "poll": -15,
+      "actual": -20.5,
+      "error": 5.5,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/nebraska",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "NH",
+      "year": 2016,
+      "office": "President",
+      "poll": 2.979,
+      "actual": 0.368,
+      "error": 2.612,
+      "nPollsters": 14,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "632"
+    },
+    {
+      "state": "NH",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -0.162,
+      "actual": 0.138,
+      "error": -0.299,
+      "nPollsters": 13,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "85"
+    },
+    {
+      "state": "NH",
+      "year": 2020,
+      "office": "President",
+      "poll": 10.8,
+      "actual": 7.353,
+      "error": 3.447,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6241"
+    },
+    {
+      "state": "NH",
+      "year": 2020,
+      "office": "Senate",
+      "poll": 15.5,
+      "actual": 15.649,
+      "error": -0.149,
+      "nPollsters": 4,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6286"
+    },
+    {
+      "state": "NH",
+      "year": 2022,
+      "office": "Senate",
+      "poll": 2.644,
+      "actual": 9.061,
+      "error": -6.416,
+      "nPollsters": 9,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "8938"
+    },
+    {
+      "state": "NH",
+      "year": 2024,
+      "office": "President",
+      "poll": 5,
+      "actual": 2.8,
+      "error": 2.2,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/new-hampshire/",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "OH",
+      "year": 2016,
+      "office": "President",
+      "poll": -2.06,
+      "actual": -8.13,
+      "error": 6.07,
+      "nPollsters": 11,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "637"
+    },
+    {
+      "state": "OH",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -17.071,
+      "actual": -20.871,
+      "error": 3.8,
+      "nPollsters": 7,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "67"
+    },
+    {
+      "state": "OH",
+      "year": 2018,
+      "office": "Senate",
+      "poll": 11.45,
+      "actual": 6.846,
+      "error": 4.604,
+      "nPollsters": 6,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "117"
+    },
+    {
+      "state": "OH",
+      "year": 2020,
+      "office": "President",
+      "poll": -1.916,
+      "actual": -8.032,
+      "error": 6.116,
+      "nPollsters": 13,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6246"
+    },
+    {
+      "state": "OH",
+      "year": 2022,
+      "office": "Senate",
+      "poll": -5.211,
+      "actual": -6.112,
+      "error": 0.901,
+      "nPollsters": 9,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "8942"
+    },
+    {
+      "state": "OH",
+      "year": 2024,
+      "office": "Senate",
+      "poll": -1,
+      "actual": -3.62,
+      "error": 2.62,
+      "nPollsters": 5,
+      "kind": "late-RCP-listed-pollster-average-sponsorship-unverified",
+      "source": "Whitcomb collection of RCP-listed Senate polls",
+      "url": "https://github.com/Jack-Whitcomb/All-US-Senate-polls-2006-2024/blob/main/2006_to_2024_senate_polls_with_actuals.csv",
+      "raceId": "2024-Senate-NA"
+    },
+    {
+      "state": "SC",
+      "year": 2016,
+      "office": "President",
+      "poll": -7.364,
+      "actual": -14.266,
+      "error": 6.902,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "642"
+    },
+    {
+      "state": "SC",
+      "year": 2020,
+      "office": "President",
+      "poll": -8.276,
+      "actual": -11.68,
+      "error": 3.404,
+      "nPollsters": 7,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6251"
+    },
+    {
+      "state": "SC",
+      "year": 2020,
+      "office": "Senate",
+      "poll": -3.39,
+      "actual": -10.27,
+      "error": 6.88,
+      "nPollsters": 6,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6292"
+    },
+    {
+      "state": "SC",
+      "year": 2024,
+      "office": "President",
+      "poll": -11.7,
+      "actual": -17.87,
+      "error": 6.17,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "270toWin final average",
+      "url": "https://www.270towin.com/2024-presidential-election-polls/south-carolina/",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "SD",
+      "year": 2016,
+      "office": "President",
+      "poll": -15.668,
+      "actual": -29.793,
+      "error": 14.125,
+      "nPollsters": 6,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "643"
+    },
+    {
+      "state": "SD",
+      "year": 2016,
+      "office": "Senate",
+      "poll": -28,
+      "actual": -43.656,
+      "error": 15.656,
+      "nPollsters": 4,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "79"
+    },
+    {
+      "state": "SD",
+      "year": 2020,
+      "office": "President",
+      "poll": -17.667,
+      "actual": -26.164,
+      "error": 8.497,
+      "nPollsters": 3,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6252"
+    },
+    {
+      "state": "SD",
+      "year": 2024,
+      "office": "President",
+      "poll": -27,
+      "actual": -29.19,
+      "error": 2.19,
+      "nPollsters": null,
+      "kind": "published-snapshot",
+      "source": "Single late poll",
+      "url": "https://emersoncollegepolling.com/october-2024-south-dakota-poll-trump-62-harris-35/",
+      "raceId": "2024-President-curated"
+    },
+    {
+      "state": "TX",
+      "year": 2016,
+      "office": "President",
+      "poll": -8.327,
+      "actual": -8.999,
+      "error": 0.672,
+      "nPollsters": 7,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "645"
+    },
+    {
+      "state": "TX",
+      "year": 2018,
+      "office": "Senate",
+      "poll": -5.54,
+      "actual": -2.567,
+      "error": -2.973,
+      "nPollsters": 5,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "121"
+    },
+    {
+      "state": "TX",
+      "year": 2020,
+      "office": "President",
+      "poll": -1.507,
+      "actual": -5.579,
+      "error": 4.072,
+      "nPollsters": 16,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6254"
+    },
+    {
+      "state": "TX",
+      "year": 2020,
+      "office": "Senate",
+      "poll": -5.764,
+      "actual": -9.639,
+      "error": 3.875,
+      "nPollsters": 14,
+      "kind": "nonpartisan-late-pollster-average",
+      "source": "FiveThirtyEight archived raw pollster ratings",
+      "url": "https://github.com/fivethirtyeight/data/blob/master/pollster-ratings/raw_polls.csv",
+      "raceId": "6295"
+    },
+    {
+      "state": "TX",
+      "year": 2024,
+      "office": "Senate",
+      "poll": -3.833,
+      "actual": -8.49,
+      "error": 4.657,
+      "nPollsters": 6,
+      "kind": "late-RCP-listed-pollster-average-sponsorship-unverified",
+      "source": "Whitcomb collection of RCP-listed Senate polls",
+      "url": "https://github.com/Jack-Whitcomb/All-US-Senate-polls-2006-2024/blob/main/2006_to_2024_senate_polls_with_actuals.csv",
+      "raceId": "2024-Senate-NA"
+    }
+  ],
+  "calibrationVersion": "2016–2024 partially pooled pilot · 88 archived observations",
+  "editorialSourceAudit": {
+    "checkedAt": "2026-11-01T11:00:00Z",
+    "updated": [
+      {
+        "code": "MI",
+        "key": "rcp",
+        "value": 3.5,
+        "date": "Oct 30"
+      },
+      {
+        "code": "MI",
+        "key": "ddhq",
+        "value": 4.7,
+        "date": "Oct 31"
+      },
+      {
+        "code": "MI",
+        "key": "win270",
+        "value": 5.5,
+        "date": "Oct 31"
+      },
+      {
+        "code": "MI",
+        "key": "silver",
+        "value": 3.8,
+        "date": "Oct 30"
+      },
+      {
+        "code": "MI",
+        "key": "average",
+        "value": 4.5,
+        "date": "Oct 31"
+      },
+      {
+        "code": "GA",
+        "key": "ddhq",
+        "value": 10,
+        "date": "Oct 27"
+      },
+      {
+        "code": "GA",
+        "key": "win270",
+        "value": 9.8,
+        "date": "Oct 27"
+      },
+      {
+        "code": "NH",
+        "key": "win270",
+        "value": 7.3,
+        "date": "Oct 29"
+      },
+      {
+        "code": "MS",
+        "key": "average",
+        "value": -5,
+        "date": "Oct 22"
+      }
+    ],
+    "caveats": "Date fields identify actual publisher snapshots when published; Georgia DDHQ polling Oct 27 is not the Oct 30 race forecast date. New Hampshire 270 Oct 29 refers to latest underlying survey, not confirmed aggregator publication. Mississippi has no fresh independent publisher aggregate and must be flagged.",
+    "sourceLinks": [
+      "https://www.realclearpolling.com/elections/senate/2026/michigan",
+      "https://votes.decisiondeskhq.com/races/2026-11-03/michigan-us-senate-general-election",
+      "https://www.270towin.com/2026-senate-polls/michigan",
+      "https://votes.decisiondeskhq.com/races/2026-11-03/georgia-us-senate-general-election",
+      "https://www.270towin.com/2026-senate-polls/georgia",
+      "https://www.270towin.com/2026-senate-polls/new-hampshire",
+      "https://www.onpointpolitics.us/polls/ms/senate"
+    ]
+  }
+}
