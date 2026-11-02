@@ -196,3 +196,12 @@ html.theme-dark{color-scheme:dark;--ed-paper:#101925;--ed-white:#192736;--ed-ink
 .ed-night-county .ed-night-results{grid-template-columns:repeat(3,minmax(0,1fr));margin:18px 0}
 .ed-night-county .ed-map-surface svg{height:auto;max-height:575px;min-height:260px}
 @media(max-width:640px){.ed-night-county .ed-night-results{grid-template-columns:repeat(2,minmax(0,1fr))}.ed-night-county .ed-night-results .ed-stat:last-child{grid-column:1/-1}}
+
+/* National atlas tint: use theme-matched map pigments instead of mixing a
+   small percentage of party color into a dark card surface. */
+:root{--ed-map-base:#ecf0ef;--ed-map-blue:#2686be;--ed-map-red:#c24c61;--ed-map-even:#a28b62;--ed-map-neutral:#c7d0d1}
+html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180;--ed-map-even:#bda36c;--ed-map-neutral:#4e6474}
+.theme-dark .ed-map-surface svg path.ed-state{stroke:#0c1d2b;stroke-width:1.65}
+.theme-dark .ed-map-surface svg path.ed-state:hover{stroke:#f0d69b;stroke-width:2.5;filter:brightness(1.13)}
+.theme-dark .ed-map-surface .ed-map-tooltip{background:#20394a;color:#f3f6f7;border:1px solid #7b93a2;box-shadow:0 10px 36px #0009}
+.theme-dark .ed-map-surface .ed-map-race{border-color:#3a5365}
