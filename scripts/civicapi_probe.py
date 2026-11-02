@@ -60,7 +60,8 @@ def normalize(key,search,detail,current):
  if not (isinstance(detail,dict) and match(key,search)): return None
  if not match(key,{**search,**{k:v for k,v in detail.items() if k in ("name","title","race_name","election_name","office","state","district")}}): return None
  dates=[str(x.get(k) or "") for x in (search,detail) for k in ("date","election_date","electionDate")]
- if not any(d.startswith(DATE) for d in dates): return None
+ # Reject any explicit conflicting date, even if another field matches the target.
+ if not any(d.startswith(DATE) for d in dates) or any(d and not d.startswith(DATE) for d in dates): return None
  types=" ".join(str(x.get(k) or "") for x in (search,detail) for k in ("type","election_type")).lower()
  if "general" not in types or any(w in types for w in ("primary","special","runoff")): return None
  stamp=next((parse_date(detail.get(k)) for k in ("updated_at","updatedAt","last_updated","lastUpdated","as_of","asOf") if parse_date(detail.get(k))),None)
