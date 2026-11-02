@@ -284,5 +284,30 @@
     "originalErvinMarginD": 1.08,
     "finalErvinTakeMarginD": -0.76,
     "additionalReligionBasedAdjustment": 0
+  },
+  "scientificValidation": {
+    "hypothesis": "Polls systematically overstate Muslim candidate general-election support beyond Michigan partisan polling error.",
+    "status": "NOT VALIDATED",
+    "pairedPolling": {
+      "n": 9,
+      "largerGovernorMargins": 8,
+      "largerSenateMargins": 1,
+      "medianDifferenceD": 2,
+      "meanDifferenceD": 2.83,
+      "exactTwoSidedSignTestPAssumingIndependentPrespecifiedSamples": 0.0390625,
+      "meanTConfidenceInterval95PercentAssumingIndependence": [
+        0.24,
+        5.43
+      ],
+      "limits": "Matched polls compare different candidates, opponents and offices; nonrandom sample, correlated survey errors, and no known 2026 general-election outcomes. The p value is not evidence of a religion-specific Bradley effect."
+    },
+    "surveyModeValidation": "INSUFFICIENT MODE-SPECIFIC POLL-TO-CERTIFIED-VOTE OBSERVATIONS",
+    "geographicValidation": "NO CAUSAL ESTIMATE; applying local demographic multipliers would be unsupported",
+    "primaryTransferValidation": "The 20% carryover from one same-candidate primary overpoll is not calibrated and can be a subjective Ervin’s Take scenario only.",
+    "futureTest": [
+      "Prerecord complete poll inventory, mode, pollster, dates, turnout frame and relevant comparison candidates.",
+      "Compare poll-versus-certified general-election residuals across multiple independent cases and adjust for state, pollster, timing, party, and candidates.",
+      "Fit mode-specific residuals only with adequate sample size and then backtest out of sample; report confidence intervals and null results."
+    ]
   }
 }
