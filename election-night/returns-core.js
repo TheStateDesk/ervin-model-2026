@@ -48,30 +48,31 @@
   }
   return a;
  };
- const build=(id,office,total,arr,timestamp,source,ref,precincts)=>{
+ const build=(id,office,total,arr,timestamp,source,ref,precincts,nowMs)=>{
   const candidates=verifiedCandidates(arr),time=Date.parse(String(timestamp||''));
-  if(!candidates||!numeric(total)||total===0||!Number.isFinite(time)||time<closeAt(id,office)||time>Date.now()+300000)return null;
+  if(!candidates||!numeric(total)||total===0||!Number.isFinite(time)||time<closeAt(id,office)||time>nowMs+300000)return null;
   const sum=candidates.reduce((n,x)=>n+x.votes,0);
   // Disallow feeds whose total includes unrepresented vote tallies beyond a small rounding tolerance.
   if(Math.abs(sum-total)>Math.max(10,total*.005))return null;
   return {id,office,total,candidates,asOf:new Date(time).toISOString(),source,sourceURL:safeURL(ref),precincts:Number.isFinite(precincts)&&precincts>=0&&precincts<=100?precincts:null};
  };
- function civic(data){
-  if(data?.version!==1||data.election!==DATE||!data.races||typeof data.races!=='object')return {};
+ function civic(data,nowMs=Date.now()){
+  if(data?.version!==1||data.election!==DATE||!data.races||typeof data.races!=='object'||Object.keys(data.races).length>1200)return {};
   const results={};for(const [key,r] of Object.entries(data.races)){
    const office=r?.office==='house'?'House':r?.office==='senate'?'Senate':r?.office==='governor'?'Governor':null;
    if(!office||r.verified!==true||r.source!=='civicAPI'||r.election!==DATE)continue;
    const id=canonical(key,office);if(!id)continue;
-   const normalized=build(id,office,r.total,r.candidates,r.asOf,'CivicAPI (provider-verified schema)',r.sourceUrl,r.precinctsReporting);
+   if(!safeURL(r.sourceUrl))continue;
+   const normalized=build(id,office,r.total,r.candidates,r.asOf,'CivicAPI (provider-verified schema)',r.sourceUrl,r.precinctsReporting,nowMs);
    if(normalized)results[id]=normalized;
   }return results;
  }
- function openAmerica(data,office){
-  if(data?.api!==1||data.year!==2026||data.office!==office||typeof data.races!=='object')return {};
+ function openAmerica(data,office,nowMs=Date.now()){
+  if(data?.api!==1||data.year!==2026||data.office!==office||typeof data.races!=='object'||Object.keys(data.races).length>1200)return {};
   const result={};for(const [key,r] of Object.entries(data.races)){
-   const id=canonical(office==='House'?key:key+'-'+office.toUpperCase(),office);
+   const id=canonical(office==='House'?key:(key.endsWith('-'+office.toUpperCase())?key:key+'-'+office.toUpperCase()),office);
    if(!id)continue;
-   const row=build(id,office,r?.total,r?.cands,data.as_of,'Open America / state reporting mirror',data.source_url||null,r?.pct_in);
+   const row=build(id,office,r?.total,r?.cands,data.as_of,'Open America / state reporting mirror',data.source_url||null,r?.pct_in,nowMs);
    if(row)result[id]=row;
   }return result;
  }
