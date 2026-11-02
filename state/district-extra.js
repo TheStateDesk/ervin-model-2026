@@ -39,7 +39,7 @@ function inspector(){
   html+='<div class="dx-candidate-list">'+candidateCard({name:r.incumbent||'Incumbent not verified',party:'',votes:null},'historical incumbent; not confirmed 2026 nominee')+'</div>';
   html+='<p class="dx-caption">Candidate portraits and 2026 party affiliations appear only when supported by an attributed roster or results feed. Historical incumbency does not establish the 2026 candidate slate.</p>';
  }
- html+='<div class="dx-links"><a href="../elections/?office=house&state='+encodeURIComponent(r.code)+'&district='+encodeURIComponent(r.district)+'#resultSection">Full results and sources</a><a href="https://civicapi.org/results" target="_blank" rel="noopener noreferrer">CivicAPI election coverage</a></div>';
+ html+='<div class="dx-links"><a href="../election-night/?state='+encodeURIComponent(r.code)+'&race='+encodeURIComponent(r.id)+'#nationalBoard">Election Night results and sources</a><a href="https://civicapi.org/results" target="_blank" rel="noopener noreferrer">CivicAPI election coverage</a></div>';
  box.innerHTML=html;
 }
 function updatePaint(){
