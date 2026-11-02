@@ -17,7 +17,7 @@ async function drill(code,kind){
  try{
   const data=await window.ERVIN_GEO.get(code,kind);if(ticket!==mark||!box.isConnected)return;
   const n=window.ERVIN_GEO.draw(box.querySelector('svg'),data,{kind,className:kind==='districts'?'geo-district':'county',onSelect:(el,f)=>{
-   if(kind==='districts'){const n=String(f.id).padStart(2,'0');location.href='../../elections/?office=house&state='+encodeURIComponent(code)+'&district='+encodeURIComponent(n);}
+   if(kind==='districts'){const n=String(f.id).padStart(2,'0');location.href='../../state/?state='+encodeURIComponent(code)+'#house-'+encodeURIComponent(n);}
    else box.querySelector('#erDrillInfo').textContent=String(f.properties?.name||'County')+' · FIPS '+String(f.id)+' · historical geographic boundary only. Open a statewide race dossier for 2020/2024 voting history and a 2026 conditional scenario.';
   }});
   box.querySelector('#erDrillCount').textContent=n+' shapes';
