@@ -13,6 +13,12 @@
  try{
   localStorage.removeItem('ervin-model-watchlist-v2');
   let d=await load('../house/');
+  await until(()=>d.getElementById('houseCount')?.textContent.includes('districts'));
+  // House board intentionally defaults to Michigan in the unified state-first navigation.
+  // Switch to every state before checking the national 435-seat total.
+  const allStates=d.getElementById('houseState');
+  allStates.value='all';
+  allStates.dispatchEvent(new frame.contentWindow.Event('change',{bubbles:true}));
   await until(()=>d.querySelectorAll('#houseCards .gov-card').length===435);
   ok(d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House district cards are indexed');
   ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
