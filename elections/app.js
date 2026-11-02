@@ -10,7 +10,7 @@ const desiredOffice=['senate','governor','house'].includes(params.get('office'))
 const desiredDistrict=String(params.get('district')||'01').replace(/[^0-9]/g,'').padStart(2,'0').slice(-2);
 const desiredCode=(params.get('state')||'MI').toUpperCase().replace(/[^A-Z]/g,'').slice(0,2);
 const href=r=>'?office='+encodeURIComponent(r.office.toLowerCase())+'&state='+encodeURIComponent(r.code)+(r.office==='House'?'&district='+encodeURIComponent(r.district):'');
-let raceList=[],current=null,pollArchive={},countyHistory={},michiganHistory=[];
+let raceList=[],current=null,pollArchive={},countyHistory={},michiganHistory=[],allHistorical={},scenario=null;
 function toDate(value){const d=Date.parse(/\b20\d{2}\b/.test(String(value))?String(value):String(value)+', 2026');return Number.isFinite(d)?d:null}
 function formatMargin(m,dem,rep){if(m==null||!Number.isFinite(m))return 'No comparable average';if(Math.abs(m)<.05)return 'Tied';return (m>0?dem:rep).split(' ').slice(-1)[0]+' +'+Math.abs(m).toFixed(1)}
 function senateAggregate(r){
@@ -36,7 +36,7 @@ function renderNav(){
  }).join('');
  $('raceJump').value=href(selected);
  $('raceJump').onchange=()=>{location.href=$('raceJump').value};
- const same=raceList.filter(r=>r.office===selected.office).sort((a,b)=>a.state.localeCompare(b.state));
+ const same=raceList.filter(r=>r.office===selected.office&&(r.office!=='House'||r.code===selected.code)).sort((a,b)=>a.state.localeCompare(b.state));
  $('raceList').innerHTML=same.map(r=>'<a href="'+href(r)+'" '+(r.code===selected.code&&(r.office!=='House'||r.district===selected.district)?'aria-current="page"':'')+'><span><span class="race-code">'+esc(r.office==='House'?r.id:r.code)+'</span> '+esc(r.office==='House'?r.state+' District '+r.district:r.state)+'</span><b>'+esc(r.office==='Senate'?'SEN':r.office==='House'?'HOUSE':'GOV')+'</b></a>').join('');
 }
 function renderHeader(r){
@@ -47,7 +47,7 @@ function renderHeader(r){
   $('topKicker').textContent='2026 elections / house / '+r.id;
   $('backLink').href='../house/?state='+r.code;
   $('backLink').textContent='← All 435 House districts';
-  $('mapTitle').textContent=r.state+' county context · district boundary not overlaid';
+  $('mapTitle').textContent=r.state+' House district or county reference geography';
   $('matchupTitle').textContent=r.id+' · district intelligence';
   $('candidates').innerHTML='<div class="race-candidate"><small>2024 incumbent / historical context</small><strong>'+esc(r.incumbent||'Not verified')+'</strong><div class="race-party">Not confirmation of the 2026 ballot slate</div></div><div class="race-candidate r"><small>2026 major-party nominees</small><strong>Not independently verified</strong><div class="race-party">Check the state election office for final candidates</div></div>';
   return;
@@ -120,10 +120,10 @@ function renderPolls(r){
   $('pollIntro').textContent='The governing polling figure is a third-party aggregate. Separately identified surveys below are supporting context, not a claim that this model incorporates those surveys independently.';
  }
  const avgHtml=rows.length?rows.map(q=>'<div class="race-row"><div><strong><a href="'+esc(q.url||'#')+'" target="_blank" rel="noopener noreferrer">'+esc(q.name)+'</a></strong><small>'+esc(q.kind||q.source||'')+' · '+esc(q.date||'date unavailable')+'</small></div><div class="race-number">'+esc(formatMargin(q.value,r.dem,r.rep))+'</div></div>').join(''):'<div class="race-note">No verified, comparable publisher-average input is available for this contest.</div>';
- const sorted=[...polls].sort((a,b)=>(toDate(b.fieldEnd||b.publishedAt||b.dates)||0)-(toDate(a.fieldEnd||a.publishedAt||a.dates)||0)).slice(0,14);
+ const sorted=[...polls].sort((a,b)=>(toDate(b.fieldEnd||b.publishedAt||b.dates)||0)-(toDate(a.fieldEnd||a.publishedAt||a.dates)||0)).slice(0,40);
  const surveyHtml=sorted.length?sorted.map(p=>'<div class="race-row"><div><strong><a href="'+esc(p.url||'#')+'" target="_blank" rel="noopener noreferrer">'+esc(p.pollster)+'</a></strong><small>'+esc(p.dates||p.date||'Field date unverified')+' · '+esc(p.sample||'Sample not independently verified')+'</small><small>'+esc(p.sourceKind||'Individual poll; not independent of publisher averages')+'</small></div><div class="race-number">'+esc(formatMargin(+p.margin,r.dem,r.rep))+'</div></div>').join(''):'<div class="race-note">Individual polls are not archived for this race yet. The published source link above leads to any available poll-level information.</div>';
  $('pollRows').innerHTML='<h3 style="margin:8px 0 2px">Published source averages</h3>'+avgHtml+'<h3 style="margin:17px 0 2px">Recent individual surveys ('+sorted.length+' shown)</h3>'+surveyHtml;
- const plotted=sorted.filter(p=>Number.isFinite(+p.margin)).slice(0,10).reverse();
+ const plotted=sorted.filter(p=>Number.isFinite(+p.margin)).slice(0,16).reverse();
  $('pollPlot').innerHTML='<b>Individual polls · non-R minus R</b>'+plotted.map(p=>{const val=+p.margin;return '<div class="bar '+(val<0?'r':'')+'" style="height:'+Math.max(8,Math.min(88,20+Math.abs(val)*3))+'%" title="'+esc(p.pollster+': '+formatMargin(val,r.dem,r.rep))+'"><span>'+esc((p.pollster||'').split(' ')[0].slice(0,6))+'</span></div>'}).join('')+(plotted.length?'':'<div class="race-muted" style="margin:auto">No individual survey chart available</div>');
  $('pollLinks').innerHTML=r.office==='Governor'?'<a href="'+esc(r.poll?.url||'https://www.onpointpolitics.us/polls/governor')+'" target="_blank" rel="noopener noreferrer">See full published polling history ↗</a>':'<a href="../recent_polls.json" target="_blank" rel="noopener noreferrer">Recent survey archive (JSON) ↗</a>';
 }
@@ -144,6 +144,8 @@ function fallbackMap(r,msg){
 function historicCounty(code,name,fips){
  const norm=x=>String(x||'').toLowerCase().trim().replace(/ county$/,'');
  const item=(countyHistory[code]?.units||[]).find(x=>(fips&&String(x.fips)===String(fips))||norm(x.name)===norm(name));
+  const nationwide=allHistorical[String(fips).padStart(5,'0')];
+  if(nationwide){const m=window.ERVIN_SCENARIOS.margin;return {m24:m(nationwide.y24),m20:m(nationwide.y20),source:'2024/2020 county presidential returns'};}
  const mi=code==='MI'?michiganHistory.find(x=>norm(x.name)===norm(name)):null;
  if(mi){
   const margin=e=>e&&(e.d+e.r)>0?100*(e.d-e.r)/(e.d+e.r):null;
@@ -158,13 +160,14 @@ function applyCountyLayer(){
  let n=0;
  for(const p of paths){
   const info=historicCounty(current.code,p.dataset.name,p.dataset.fips);
-  const value=!info||mode==='unreported'?null:mode==='swing'&&Number.isFinite(info.m24)&&Number.isFinite(info.m20)?info.m24-info.m20:mode==='2024'?info.m24:null;
+  const predicted=scenario?.map.get(String(p.dataset.fips).padStart(5,'0'));
+   const value=mode==='expected'?predicted?.expected??null:!info||mode==='unreported'||mode==='district'?null:mode==='swing'&&Number.isFinite(info.m24)&&Number.isFinite(info.m20)?info.m24-info.m20:mode==='2024'?info.m24:null;
   p.style.fill=value==null?'':value>=0?(Math.abs(value)>=15?'#347caf':'#90bedc'):(Math.abs(value)>=15?'#bd6573':'#e2a2a9');
   p.dataset.historical=value==null?'unknown':String(value);
   if(value!=null)n++;
  }
- $('countyMapLegend').textContent=mode==='2024'?'2024 PRESIDENTIAL HISTORICAL margin · blue = D, red = R · '+n+' sourced counties; gray = unavailable':mode==='swing'?'2020→2024 PRESIDENTIAL historical change · blue = D shift, red = R shift · '+n+' sourced counties':'2026 UNREPORTED geography · no verified votes displayed';
- $('mapDate').textContent=mode==='unreported'?'Nov 3, 2026 · no verified returns':'Historical source only · not 2026 votes';
+ $('countyMapLegend').textContent=mode==='expected'?'ILLUSTRATIVE 2026 county scenario · anchored to '+(current.office==='Governor'?'unadjusted publisher polling average':'Original Ervin Senate adjusted margin')+' · '+n+' counties · not a validated forecast':mode==='2024'?'2024 PRESIDENTIAL HISTORICAL margin · blue = D, red = R · '+n+' sourced counties; gray = unavailable':mode==='swing'?'2020→2024 PRESIDENTIAL historical change · blue = D shift, red = R shift · '+n+' sourced counties':'2026 UNREPORTED geography · no verified votes displayed';
+ $('mapDate').textContent=mode==='expected'?'2026 CONDITIONAL SCENARIO · never counted votes':mode==='unreported'?'2026 unreported geography':'Historical source only · not 2026 votes';
 }
 
 function countyInteraction(path,name,fips){
@@ -173,50 +176,51 @@ function countyInteraction(path,name,fips){
  const show=()=>{
   const code=current.code,normal=x=>String(x||'').trim().toLowerCase().replace(/ county$/,'');
   const item=(countyHistory[code]?.units||[]).find(x=>(fips&&String(x.fips)===fips)||normal(x.name)===normal(name));
+   const nationwide=allHistorical[String(fips).padStart(5,'0')];
+   const forecast=scenario?.map.get(String(fips).padStart(5,'0'));
+   const srcM=window.ERVIN_SCENARIOS?.margin;
   const mi=code==='MI'?michiganHistory.find(x=>normal(x.name)===normal(name)):null;
   const pct=(a,b)=>a+b?((a-b)/(a+b)*100).toFixed(1):null;
   let historical='';
   if(item)historical=' · 2024 presidential '+(item.m24>=0?'D +':'R +')+Math.abs(item.m24).toFixed(1)+' points; 2020 '+(item.m20>=0?'D +':'R +')+Math.abs(item.m20).toFixed(1)+' points (county historical archive).';
   else if(mi){const now=mi.president2024,prior=mi.president2020,g=mi.governor2022;historical=' · 2024 presidential D–R '+pct(now.d,now.r)+' points; 2020 D–R '+pct(prior.d,prior.r)+' points; 2022 governor D–R '+pct(g.d,g.r)+' points (historical vote shares).'}
-  $('countyInspector').textContent=name+' County'+(fips?' · FIPS '+fips:'')+historical+' — 2026 '+current.office.toLowerCase()+' returns NOT verified.'+(current.office==='House'?' House district boundaries are not overlaid; a county may lie outside the congressional district.':'');
+  if(!item&&nationwide)historical=' · 2024 presidential D–R '+srcM(nationwide.y24).toFixed(1)+' pts'+(nationwide.y20?' · 2020 D–R '+srcM(nationwide.y20).toFixed(1)+' pts':'')+' (sourced county results)';
+   const expected=forecast?.expected!=null?' · 2026 conditional county scenario '+(forecast.expected>=0?'D +':'R +')+Math.abs(forecast.expected).toFixed(1)+' pts (statewide race adjustment, NOT independent county polling)':' · 2026 numerical county projection not available for this race';
+   $('countyInspector').textContent=name+' County'+(fips?' · FIPS '+fips:'')+historical+expected+' — No verified county return in this dossier.'+(current.office==='House'?' District-level county allocation is not verified; county does not necessarily lie entirely inside this district.':'');
  };
  path.addEventListener('click',show);path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show()}})
 }
 async function drawMap(r){
- fallbackMap(r,'County geometry is being loaded.');
+ const svg=$('countyMap');svg.replaceChildren(svgNode('text',{x:450,y:290,'text-anchor':'middle',fill:'#8ca4b7'}));
+ svg.firstChild.textContent='Loading locally hosted geographic boundaries…';
  try{
-  if(typeof d3==='undefined'||typeof topojson==='undefined')throw Error('County mapping libraries unavailable');
-  const svg=$('countyMap'),features=[];
-  let projection,path;
-  if(r.code==='MI'){
-   const response=await fetch('../michigan/counties.geojson');if(!response.ok)throw Error('Michigan county geometry unavailable');
-   const data=await response.json();features.push(...data.features);
-   projection=d3.geoMercator().fitExtent([[24,20],[876,552]],data);
-   path=d3.geoPath(projection);
-  }else{
-   const response=await fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json');if(!response.ok)throw Error('Nationwide county atlas unavailable');
-   const atlas=await response.json(),fips=FIPS[r.code];if(!fips||!atlas.objects.counties)throw Error('No county atlas layer');
-   const list=topojson.feature(atlas,atlas.objects.counties).features;
-   for(const item of list)if(String(item.id).padStart(5,'0').startsWith(fips))features.push(item);
-   if(!features.length)throw Error('No county boundaries for '+r.code);
-   const geo={type:'FeatureCollection',features};
-   projection=d3.geoAlbersUsa().fitExtent([[25,20],[875,550]],geo);
-   path=d3.geoPath(projection);
-  }
+  if(!window.ERVIN_GEO)throw Error('Local geographic renderer unavailable');
+  const districtMode=r.office==='House'&&$('countyMapMode').value==='district';
+  const kind=districtMode?'districts':'counties';
+  const data=await window.ERVIN_GEO.get(r.code,kind);
   if(current!==r)return;
-  svg.setAttribute('viewBox','0 0 900 580');svg.replaceChildren();
-  for(const feature of features){
-   const d=path(feature);if(!d)continue;
-   const item=svgNode('path',{class:'county',d});
-   const fips=String(feature.id||'');const archiveCounty=(countyHistory[r.code]?.units||[]).find(x=>String(x.fips)===fips);const name=String(feature.properties?.name||archiveCounty?.name||'County '+feature.id);
-   item.dataset.name=name;item.dataset.fips=fips;countyInteraction(item,name,fips);svg.append(item);
+  if(districtMode){
+   const match=data.features.find(f=>String(f.id).padStart(2,'0')===String(r.district).padStart(2,'0'));
+   if(!match)throw Error('Historic district boundary unavailable for '+r.id);
+   window.ERVIN_GEO.draw(svg,{...data,features:[match]},{kind:'districts',onSelect:()=>{$('countyInspector').textContent=r.id+' · 118th Congress (2022 Census) geographic reference, NOT confirmed for 2026 redistricting. Switch map layer to see statewide historical counties.'}});
+   $('countyCount').textContent=r.id+' · reference boundary';
+   $('countyMapLegend').textContent='118th CONGRESS reference district shape · 2026 lines may have changed; historical geometry is not a result, forecast or guaranteed valid ballot boundary';
+   $('mapProvenance').textContent='Census TIGER 2022 congressional district boundaries via Civic Interconnect. Changes since 2022 are not verified. For county context choose 2024 history.';
+   $('countyInspector').textContent='Select the district for reference information. Switch to a county layer to explore historical county results.';
+   return;
   }
-  applyCountyLayer();
- $('countyCount').textContent=features.length+' county outlines';
-  $('mapProvenance').textContent=(r.office==='House'?'County shapes are statewide context, NOT the House district boundary. ': '')+(r.code==='MI'?'Michigan county GeoJSON hosted by the Ervin Model.':'U.S. county boundary geography: us-atlas / U.S. Census cartographic boundaries.')+' Historical colors reflect sourced past elections; 2026 colors require verified local results.';
-  $('countyInspector').textContent='Select any county for available 2016/2020/2024 historical context. 2026 returns are not attached.'+(r.office==='House'?' The congressional district is NOT outlined.':'');
- }catch(err){if(current===r)fallbackMap(r,'County outlines could not be loaded in this browser.');console.warn('County geometry fallback:',err.message)}
+  const n=window.ERVIN_GEO.draw(svg,data,{kind:'counties',onSelect:el=>el.dataset?.name&&countyInteractionSelect(el)});
+  for(const p of svg.querySelectorAll('path.county'))countyInteraction(p,p.dataset.name,p.dataset.fips);
+  if($('countyMapMode').value==='2026live'&&window.ErvinCountyLayer)window.ErvinCountyLayer();else applyCountyLayer();
+  $('countyCount').textContent=n+' county outlines';
+  $('mapProvenance').textContent='Locally hosted Census-derived 2022 county-equivalent boundaries. Historical colors come from attributed 2020/2024 presidential returns; 2026 scenario colors are separate analytical assumptions. House county boundaries are statewide context and NOT clipped to congressional districts.';
+  $('countyInspector').textContent='Select a county to compare historical margins and the conditional 2026 scenario where available; this is not verified 2026 county vote reporting.';
+ }catch(error){
+  console.warn('Local county rendering:',error.message);
+  fallbackMap(r,'Local county data unavailable: '+error.message+'. Try another state; the site must not invent geographic boundaries.');
+ }
 }
+function countyInteractionSelect(el){el.dispatchEvent(new MouseEvent('click',{bubbles:false}));}
 async function loadSenate(){
  const response=await fetch('../index.html');if(!response.ok)throw Error('Senate source file unavailable');
  const html=await response.text(),prefix='window.ERVIN_DATA = ',start=html.indexOf(prefix);
@@ -228,17 +232,21 @@ async function loadSenate(){
 }
 async function start(){
  try{
-  const [governors,senate,archive,house,counties,mi]=await Promise.all([
+  const [governors,senate,archive,house,counties,mi,national]=await Promise.all([
    fetch('../governors/data.json').then(r=>{if(!r.ok)throw Error('Governor registry unavailable');return r.json()}),
    loadSenate(),
    fetch('../recent_polls.json').then(r=>r.ok?r.json():{}).catch(()=>({})),
    fetch('../house/data.json').then(r=>{if(!r.ok)throw Error('House registry unavailable');return r.json()}),
    fetch('../counties-watch/history.json').then(r=>r.ok?r.json():{states:{}}).catch(()=>({states:{}})),
-   fetch('../michigan/county_history.json').then(r=>r.ok?r.json():{counties:[]}).catch(()=>({counties:[]}))
+   fetch('../michigan/county_history.json').then(r=>r.ok?r.json():{counties:[]}).catch(()=>({counties:[]})),
+    window.ERVIN_SCENARIOS.load().catch(()=>({counties:{}}))
   ]);
-  raceList=[...senate,...governors.races,...house.seats];pollArchive=archive.polls||{};countyHistory=counties.states||{};michiganHistory=mi.counties||[];
+  raceList=[...senate,...governors.races,...house.seats];pollArchive=archive.polls||{};countyHistory=counties.states||{};michiganHistory=mi.counties||[];allHistorical=national.counties||{};
   current=raceList.find(r=>r.code===desiredCode&&r.office.toLowerCase()===desiredOffice&&(r.office!=='House'||r.district===desiredDistrict)) || raceList.find(r=>r.office.toLowerCase()===desiredOffice) || raceList[0];
-  renderHeader(current);renderNav();renderForecast(current);renderPolls(current);$('countyMapMode').onchange=applyCountyLayer;drawMap(current);
+  const target=current.office==='Senate'?(()=>{const a=senateAggregate(current).raw;return Number.isFinite(a)?a-(current.history_mode==='not_comparable'?0:Number(current.correction)||0):null})():current.office==='Governor'&&Number.isFinite(current.poll?.margin)?current.poll.margin:null;
+   scenario=window.ERVIN_SCENARIOS.build(national,FIPS[current.code],target);
+   if(current.office==='House')$('countyMapMode').value='district';else $('countyMapMode').value=target==null?'2024':'expected';
+   renderHeader(current);renderNav();renderForecast(current);renderPolls(current);$('countyMapMode').onchange=()=>{const districtPaths=$('countyMap').querySelector('path.geo-district');if($('countyMapMode').value==='district'||districtPaths)drawMap(current);else applyCountyLayer()};drawMap(current);
  }catch(error){console.error('Election dossier data error',error);$('raceTitle').textContent='Election data unavailable';$('raceDeck').textContent='The published source files could not be loaded. Return to the race index or try reloading.';$('raceList').textContent='Data request unsuccessful.'}
 }
 start();
