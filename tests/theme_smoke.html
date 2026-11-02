@@ -28,8 +28,9 @@
   frame.src='../'+file;
   await p;
   const d=frame.contentDocument;
-  for(let i=0;i<75&&!d.getElementById('readingToggle');i++)await new Promise(r=>setTimeout(r,60));
-  assert(!!d.getElementById('readingToggle'),file+': shared UI scripts initialized');
+  const expectedId=file==='states/index.html'?'themeToggle':'readingToggle';
+  for(let i=0;i<75&&!d.getElementById(expectedId);i++)await new Promise(r=>setTimeout(r,60));
+  assert(!!d.getElementById(expectedId),file+': shared appearance controls initialized');
   return d;
  }
  function assertDark(d,file){
