@@ -167,6 +167,15 @@ function lead(row){
  const ranked=row.candidates.slice().sort((a,b)=>b.votes-a.votes);
  const top=ranked[0];return top?.name+' '+fmt(top?.votes)+' · '+fmt(row.total)+' votes total';
 }
+function countedBreakdown(row){
+ if(!row?.candidates?.length||!Number.isSafeInteger(row.total)||row.total<=0)return '';
+ return '<div class="night-counts">'+row.candidates.slice().sort((a,b)=>b.votes-a.votes).slice(0,5).map(c=>{
+  const p=(100*c.votes/row.total).toFixed(1);
+  const cls=c.party==='D'?'dem':c.party==='R'?'rep':'other';
+  return '<div class="night-counted-candidate '+cls+'"><span>'+esc(c.name)+'</span><b>'+fmt(c.votes)+'</b><small>'+p+'%</small></div>';
+ }).join('')+'</div>'+
+ (Number.isFinite(row.precincts)?'<small class="night-report-progress">'+row.precincts.toFixed(1)+'% precincts/batches estimated reported by source — not vote share</small>':'');
+}
 function raceURL(x){return '../state/?state='+encodeURIComponent(x.code)+(x.office==='House'?'#house-'+Number(x.district):'#stateOverview')}
 function liveRaceURL(x){return '?state='+encodeURIComponent(x.code)+'&race='+encodeURIComponent(x.id)+'#nationalBoard'}
 function renderRace(x){
@@ -174,7 +183,7 @@ function renderRace(x){
  const report=live[x.office]?.races?.[id],reportText=report?lead(report):null;
  const source=report?.sourceURL?'<a href="'+esc(report.sourceURL)+'" target="_blank" rel="noopener noreferrer">Original count source</a>':'Source pending';
  return '<article class="race-row" id="race-'+esc(x.id)+'" role="listitem"><div><h3>'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+
- (reportText?'<span class="live-value">'+esc(reportText)+'</span><small>UNOFFICIAL · '+esc(report.source)+' · '+esc(date(report.asOf))+'</small>':'<span class="no-data">No verified returns</span><small>NOT REPORTED TO THIS FEED</small>')+
+ (reportText?countedBreakdown(report)+'<small>UNOFFICIAL · '+esc(report.source)+' · '+esc(date(report.asOf))+'</small>':'<span class="no-data">No verified returns</span><small>NOT REPORTED TO THIS FEED</small>')+
  '</div><div><div class="night-row-links"><a href="'+liveRaceURL(x)+'">Election-night race view</a><a href="'+raceURL(x)+'">State/district context</a></div><small>'+source+'</small></div></article>';
 }
 function drawRaces(){
