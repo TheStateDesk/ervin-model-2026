@@ -46,14 +46,15 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           h=Path('states/index.html').read_text()
-          assert 'id="senate-control"' in h and 'id="nationMap"' in h
+          assert 'id="watchSection"' in h and 'id="electionDashboard"' in h and 'id="nationMap"' in h
           assert 'id="balanceOfPower"' in h
-          assert h.index('id="senate-control"') < h.index('id="balanceOfPower"') < h.index('id="nationMap"')
+          assert h.index('id="watchSection"') < h.index('id="balanceOfPower"') < h.index('id="nationMap"')
           assert 'window.ERVIN_DATA' not in h and 'id="researchLab"' not in h
-          assert '../scripts/home-control.js' in h
+          assert '../scripts/home-election-2026.js' in h
           print('PASS public landing page: retired research UI absent')
           PY
           node --check scripts/home-control.js
+          node --check scripts/home-election-2026.js
           node --check scripts/home-power.js
       - name: Test multi-cycle calibration and past-only backtest
         run: |
