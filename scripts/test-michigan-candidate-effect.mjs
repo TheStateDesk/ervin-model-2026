@@ -40,6 +40,21 @@ assert.equal(a.forecast.candidateStrength.adjustmentD,w.adjustmentD);
 assert(a.forecast.candidateStrength.sourcePolling.startsWith('https://www.realclearpolling.com/'));
 const homepage=fs.readFileSync('index.html','utf8');
 assert(homepage.includes('candidateStrength')&&homepage.includes("state.source==='take'"),'Homepage Ervin’s Take candidate context missing');
+const science=read('research/michigan-candidate-sensitivity-2026-11-02.json');
+assert(science.status.startsWith('NOT VALIDATED'));
+assert.equal(science.primary.errorD,9.2);
+assert.equal(science.comparison.errorD,6.4);
+assert.equal(science.comparableHeldOutTests,0);
+assert.equal(science.finalMarginD,sen.adjustedMargin);
+assert(science.breakEvenWeight>.11&&science.breakEvenWeight<.12);
+for(const x of science.sensitivity){
+ assert.equal(x.rcp,+(1.08-9.2*x.weight).toFixed(2));
+ assert.equal(x.alternative,+(1.08-6.4*x.weight).toFixed(2));
+}
+assert(science.sensitivity.find(x=>x.weight===.1).rcp>0);
+assert(science.sensitivity.find(x=>x.weight===.2).rcp<0);
+assert(fs.readFileSync('research/CANDIDATE_STRENGTH_VALIDATION_2026.md','utf8').includes('not robust'));
+assert(fs.readFileSync('state/mi-candidate-audit.js','utf8').includes('Scientific status: NOT VALIDATED'));
 assert.equal(sen.pollMargin,4.31);
 assert(a.pairs.some(x=>x.mode.includes('Live operator')));
 assert(a.pairs.some(x=>x.mode.includes('Online')));
