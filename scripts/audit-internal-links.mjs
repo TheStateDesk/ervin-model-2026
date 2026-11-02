@@ -22,7 +22,7 @@ for(const file of pages){
  let m;
  while((m=pattern.exec(html))){
   const val=m[2].replace(/&amp;/g,'&').trim();
-  if(!val||val==='#'||/^(https?:|\/\/|mailto:|tel:|data:|blob:|javascript:)/i.test(val)||/[\$\{\}]/.test(val))continue;
+  if(!val||val==='#'||/^(https?:|\/\/|mailto:|tel:|data:|blob:|javascript:)/i.test(val)||/[\$\{\}]/.test(val)||val.includes("'")||val.includes('"'))continue;
   let url;
   try{url=new URL(val,'https://ervin.invalid/'+relative);}catch{issues.push(relative+': invalid URL '+val);continue;}
   if(url.origin!=='https://ervin.invalid')continue;
