@@ -29,6 +29,10 @@ try{
  const homepage=await browser.newPage({viewport:{width:1440,height:940}});
  await homepage.goto(root+'/',{waitUntil:'domcontentloaded'});
  await homepage.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:30000});
+ assert((await homepage.locator('#topNavigation a').count())===4,'Homepage top navigation should have exactly four clear destinations');
+ assert((await homepage.locator('#advancedPollingDrawer').getAttribute('open'))===null,'Research lab unexpectedly open for casual visitors');
+ assert((await homepage.locator('#globalMenuPanel .global-menu-group').count())===3,'Minimal navigation still needs 3 thematic groups');
+
  assert((await homepage.locator('#powerCards .power-card').count())===3,'Homepage must display House Senate Governors bars');
  assert((await homepage.locator('#balanceOfPower').boundingBox()).y<150,'Homepage power bars must be ABOVE the large hero');
  assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='25','Governor balance must include Ohio Democratic projection');
@@ -119,6 +123,9 @@ try{
  const miBiasPage=await browser.newPage({viewport:{width:390,height:844}});
  await miBiasPage.goto(root+'/state/?state=MI#stateSources',{waitUntil:'domcontentloaded'});
  await miBiasPage.waitForFunction(()=>document.querySelector('#miCandidateEffect')?.innerText.includes('median governor-minus-Senate margin'),null,{timeout:30000});
+ assert((await miBiasPage.locator('#stateResearchDrawer').getAttribute('open'))!==null,'A direct citation anchor should open the research drawer');
+ assert((await miBiasPage.locator('#miCandidateEffect').innerText()).includes('p = 0.039'),'Scientific limitation should be visible within deliberate research drawer');
+
  const miBias=await miBiasPage.locator('#miCandidateEffect').innerText();
  assert(miBias.includes('not evidence of a hidden voting preference')||miBias.includes('not evidence of a hidden voting preference.'),'Candidate audit omitted stated-versus-hidden distinction');
  assert(miBias.includes('not applied'),'Unverified Muslim Bradley effect improperly presented as a correction');

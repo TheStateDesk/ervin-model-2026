@@ -22,6 +22,12 @@ assert.equal(differences[0],-2);
 assert.equal(differences.at(-1),9.9);
 assert.equal(a.summary.meanGovernorMinusSenateMargin,2.83);
 assert.equal(a.forecast.automaticAdditionalMuslimPenalty,0);
+assert.equal(a.scientificValidation.status,'NOT VALIDATED');
+assert.equal(a.scientificValidation.pairedPolling.n,9);
+assert.equal(a.scientificValidation.pairedPolling.exactTwoSidedSignTestPAssumingIndependentPrespecifiedSamples,20/512);
+assert(a.scientificValidation.primaryTransferValidation.includes('not calibrated'));
+assert(a.scientificValidation.surveyModeValidation.includes('INSUFFICIENT'));
+
 assert.equal(sen.adjustedMargin,-0.76,'Candidate context must alter the headline Ervin’s Take for Michigan');
 const w=sen.candidateStrength;
 assert.equal(w.pollingMarginD,10.2);assert.equal(w.actualMarginD,1);
