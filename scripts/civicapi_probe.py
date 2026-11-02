@@ -127,6 +127,17 @@ def main():
    if not re.fullmatch(r"\d{1,12}",str(identifier)):
     status[key]["state"]="id_unavailable";continue
    detail=read(BASE+"/race/"+str(identifier))
+   # Show schema keys, not personal information, to validate the public 2026 payload contract.
+   status[key]["detailKeys"]=list(detail)[:35] if isinstance(detail,dict) else []
+   status[key]["detailType"]=type(detail).__name__
+   if isinstance(detail,dict):
+    for field in ("data","results","race","election"):
+     if isinstance(detail.get(field),dict):
+      status[key][field+"Keys"]=list(detail[field])[:25]
+    if isinstance(detail.get("candidates"),list):
+     status[key]["candidateFields"]=list(detail["candidates"][0])[:22] if detail["candidates"] and isinstance(detail["candidates"][0],dict) else []
+    for field in ("date","updated_at","updatedAt","total_votes","total","type","election_type"):
+     if field in detail:status[key]["field_"+field]=str(detail[field])[:80]
    verified=normalize(key,row,detail,current)
    status[key]["raceId"]=str(identifier)
    status[key]["state"]="verified_returns" if verified else "schema_or_votes_unverified"
