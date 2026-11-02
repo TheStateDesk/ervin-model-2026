@@ -12,7 +12,7 @@ CLOSE=dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc)
 # Last applicable polling-place closing time for each piloted race (UTC).
 TARGET_CLOSE={"AL-07":dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc),
  "MI-07":dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc),
- "TX-18":dt.datetime(2026,11,4,2,tzinfo=dt.timezone.utc),
+ "TX-18":dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc),
  "MI-SENATE":dt.datetime(2026,11,4,2,tzinfo=dt.timezone.utc),
  "ME-SENATE":dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc),
  "TX-GOVERNOR":dt.datetime(2026,11,4,2,tzinfo=dt.timezone.utc)}
