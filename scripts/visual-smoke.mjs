@@ -70,6 +70,16 @@ try{
  assert((await homepage.locator('#globalMenuPanel .global-menu-group').count())===3,'Minimal navigation still needs 3 thematic groups');
 
  assert((await homepage.locator('#powerCards .power-card').count())===3,'Homepage must display House Senate Governors bars');
+ assert((await homepage.locator('#topControlDem').innerText()).endsWith('%'),'Top Senate control D chance not implemented');
+ assert((await homepage.locator('#topControlRep').innerText()).endsWith('%'),'Top Senate control R chance not implemented');
+ assert((await homepage.locator('#topControlMeter').getAttribute('aria-label')).includes('Republican'),'Top Senate control bar lacks result labels');
+ await homepage.locator('#topControlUncertainty').selectOption('1.3');
+ assert((await homepage.locator('#controlUncertainty').inputValue())==='1.3','Top uncertainty must synchronize detailed Senate simulator');
+ await homepage.locator('#topControlSource').selectOption('rcp');
+ assert((await homepage.locator('#topControlDescription').innerText()).includes('RCP'),'Top source selector not connected to national model');
+ await homepage.locator('#topControlSource').selectOption('take');
+ await homepage.locator('#topControlUncertainty').selectOption('1');
+
  assert((await homepage.locator('#balanceOfPower').boundingBox()).y<150,'Homepage power bars must be ABOVE the large hero');
  assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='25','Governor balance must include Ohio Democratic projection');
  assert((await homepage.locator('[data-power-office="senate"] [data-power-d]').innerText())==='50','Michigan candidate strength must change Senate balance to 50-50');
