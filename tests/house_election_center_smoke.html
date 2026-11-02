@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>National Election Center and House coverage regression</title></head>
+<body><h1>Ervin election center browser regression</h1><pre id="report" data-status="RUNNING">Loading</pre>
+<script>
+(async()=>{
+ const report=document.getElementById('report'),checks=[];
+ const ok=(cond,desc)=>{if(!cond)throw Error(desc);checks.push(desc)};
+ const frame=document.createElement('iframe');frame.title='Test dashboard';frame.style.cssText='width:980px;height:820px;border:0';document.body.append(frame);
+ const load=async href=>{
+  await new Promise((resolve,reject)=>{frame.onload=resolve;frame.onerror=()=>reject(Error('Could not load '+href));frame.src=href});
+  return frame.contentDocument;
+ };
+ const until=async pred=>{for(let n=0;n<85;n++){if(pred())return;await new Promise(r=>setTimeout(r,85))}throw Error('Timed out waiting for data')};
+ try{
+  localStorage.removeItem('ervin-model-watchlist-v2');
+  let d=await load('../house/');
+  await until(()=>d.querySelectorAll('#houseCards .gov-card').length===435);
+  ok(d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House district cards are indexed');
+  ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
+  ok(d.getElementById('ratingsCount').textContent==='68','68 sourced House ratings are explicitly identified');
+  ok(d.getElementById('houseCards').textContent.includes('Rating not loaded'),'Unverified House districts are not given invented forecasts');
+  const search=d.getElementById('houseSearch');search.value='MI-04';search.dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));
+  ok(d.querySelectorAll('#houseCards .gov-card').length===1&&d.getElementById('houseCards').textContent.includes('Tossup'),'House search and Cook rating work');
+  d=await load('../house/?state=MI');
+  await until(()=>d.getElementById('houseCount').textContent.includes('districts'));
+  ok(d.querySelectorAll('#houseCards .gov-card').length===13,'State links filter Michigan 13 House districts');
+  d=await load('../elections/?office=house&state=MI&district=04');
+  await until(()=>d.getElementById('raceTitle').textContent.includes('District 4'));
+  ok(d.getElementById('raceTitle').textContent.includes('District 4'),'House race dossier resolves district query');
+  ok(d.getElementById('leadValue').textContent==='Tossup','House rating is qualitative');
+  ok(d.getElementById('pollRows').textContent.includes('No verified individual poll'),'House polling is not fabricated');
+  ok(d.getElementById('countyInspector').textContent.includes('House district')||d.getElementById('mapProvenance').textContent.includes('House district'),'Statewide county context clearly disclaims district boundaries');
+  ok(d.getElementById('resultNotice').textContent.includes('No verified'),'House returns are not invented');
+  d=await load('../elections/overview/');
+  await until(()=>d.getElementById('centerCount').textContent.includes('races'));
+  ok(d.getElementById('centerCount').textContent==='488 races','National index has 435 House, 17 Senate, 36 governor records');
+  const tabs=d.querySelectorAll('.center-tabs button[data-tab]');
+  ok(tabs.length===4,'Summary, map, search and backtest panels are available');
+  tabs[1].click();ok(d.querySelectorAll('#centerUSMap path').length>=50,'National geographic map is interactive');
+  const mapSelect=d.getElementById('centerMapLayer');mapSelect.value='house';mapSelect.dispatchEvent(new frame.contentWindow.Event('change',{bubbles:true}));
+  ok(d.getElementById('centerMapLegend').textContent.includes('Purple'),'House map distinguishes reviewed ratings from forecasts');
+  tabs[2].click();ok(d.querySelectorAll('#centerResults .center-result').length===488,'Race finder lists every indexed election');
+  const office=d.getElementById('centerOffice');office.value='House';office.dispatchEvent(new frame.contentWindow.Event('change',{bubbles:true}));
+  ok(d.getElementById('centerCount').textContent==='435 races','House-only filtering works');
+  d.querySelector('#centerResults button[data-favorite]').click();
+  tabs[0].click();
+  ok(d.querySelectorAll('#centerWatchlist .center-watch').length===1,'Watchlist saves selected race locally');
+  tabs[3].click();ok(d.querySelectorAll('#centerBacktestCards>div').length===6,'Six transparently differentiated audit panels load');
+  ok(d.getElementById('centerBacktestCards').textContent.includes('61 races'),'Historical Senate backtest metric displayed');
+  report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.map(x=>'✓ '+x).join('\n');
+ }catch(err){report.dataset.status='FAIL';report.textContent='FAIL '+(err.stack||String(err))}
+})();
+</script></body></html>
