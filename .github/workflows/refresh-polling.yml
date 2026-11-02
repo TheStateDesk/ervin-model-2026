@@ -43,14 +43,14 @@ jobs:
           for attempt in 1 2 3; do
             git fetch origin main
             if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-              # Recreate the audited polling data from the NEWEST state of the
-              # website. Never rebase two generated data snapshots together.
+              # Recreate the audited polling data from the NEWEST archived research snapshot.
+              # The public homepage is deliberately independent of polling refresh. Never rebase two generated data snapshots together.
               git reset --hard origin/main
               python scripts/refresh_polling.py
               python scripts/build_county_watch_forecast.py
               python scripts/validate_data.py
             fi
-            git add index.html source_snapshot.csv refresh_log.json recent_polls.json counties-watch/forecast-baselines.json
+            git add research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json counties-watch/forecast-baselines.json
             if git diff --cached --quiet; then
               echo "No polling audit or source updates to publish"
               break
