@@ -1,0 +1,773 @@
+{
+  "asOf": "2026-11-01",
+  "description": "All 36 2026 U.S. state gubernatorial elections. Historical Ervin polling-error correction has NOT been estimated for governors. A published aggregate is shown where confirmed; it is not an independently validated Ervin forecast.",
+  "pollingSource": "https://www.onpointpolitics.us/polls/governor",
+  "nomineesSource": "https://www.nga.org/governors/elections/",
+  "races": [
+    {
+      "code": "AL",
+      "state": "Alabama",
+      "office": "Governor",
+      "dem": "Doug Jones",
+      "rep": "Tommy Tuberville",
+      "party": "D",
+      "poll": {
+        "margin": -6.8,
+        "count": 4,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/al/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "AK",
+      "state": "Alaska",
+      "office": "Governor",
+      "dem": "Jonathan Kreiss-Tomkins",
+      "rep": "Bernadette Wilson",
+      "party": "D",
+      "poll": {
+        "margin": 6,
+        "count": 8,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ak/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": "Alaska has a multi-candidate general election under ranked-choice voting. Dave Bronson and Treg Taylor are additional Republican candidates. The displayed polling comparison only covers Kreiss-Tomkins and Wilson, not the entire field.",
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "AZ",
+      "state": "Arizona",
+      "office": "Governor",
+      "dem": "Katie Hobbs",
+      "rep": "Andy Biggs",
+      "party": "D",
+      "poll": {
+        "margin": 7.8,
+        "count": 32,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/az/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "AR",
+      "state": "Arkansas",
+      "office": "Governor",
+      "dem": "Fred Love",
+      "rep": "Sarah Huckabee Sanders",
+      "party": "D",
+      "poll": {
+        "margin": -17.4,
+        "count": 3,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ar/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "CA",
+      "state": "California",
+      "office": "Governor",
+      "dem": "Xavier Becerra",
+      "rep": "Steve Hilton",
+      "party": "D",
+      "poll": {
+        "margin": 23.5,
+        "count": 20,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ca/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [
+        {
+          "pollster": "ActiVote",
+          "date": "2026-10-31",
+          "margin": 26.4,
+          "note": "Field dates Oct 17–31",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        }
+      ],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "CO",
+      "state": "Colorado",
+      "office": "Governor",
+      "dem": "Phil Weiser",
+      "rep": "Victor Marx",
+      "party": "D",
+      "poll": null,
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "CT",
+      "state": "Connecticut",
+      "office": "Governor",
+      "dem": "Ned Lamont",
+      "rep": "Ryan Fazio",
+      "party": "D",
+      "poll": {
+        "margin": 19.1,
+        "count": 11,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ct/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "FL",
+      "state": "Florida",
+      "office": "Governor",
+      "dem": "David Jolly",
+      "rep": "Byron Donalds",
+      "party": "D",
+      "poll": {
+        "margin": -3,
+        "count": 43,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/fl/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [
+        {
+          "pollster": "ActiVote",
+          "date": "2026-10-31",
+          "margin": -4.6,
+          "note": "Field dates Oct 20–31",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        },
+        {
+          "pollster": "Big Data Poll / Public Polling Project / 1776 Law Center",
+          "date": "2026-10-30",
+          "margin": -2.9,
+          "note": "Field dates Oct 26–30",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        },
+        {
+          "pollster": "Stetson University Center for Public Opinion Research",
+          "date": "2026-10-30",
+          "margin": -6,
+          "note": "Field dates Oct 26–30",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        }
+      ],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "GA",
+      "state": "Georgia",
+      "office": "Governor",
+      "dem": "Keisha Lance Bottoms",
+      "rep": "Rick Jackson",
+      "party": "D",
+      "poll": {
+        "margin": 2,
+        "count": 17,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ga/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "HI",
+      "state": "Hawaii",
+      "office": "Governor",
+      "dem": "Josh Green",
+      "rep": "Gary Cordery",
+      "party": "D",
+      "poll": null,
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "ID",
+      "state": "Idaho",
+      "office": "Governor",
+      "dem": "Terri Pickens",
+      "rep": "Brad Little",
+      "party": "D",
+      "poll": {
+        "margin": -10.4,
+        "count": 2,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/id/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "IL",
+      "state": "Illinois",
+      "office": "Governor",
+      "dem": "JB Pritzker",
+      "rep": "Darren Bailey",
+      "party": "D",
+      "poll": {
+        "margin": 20,
+        "count": 2,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/il/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "IA",
+      "state": "Iowa",
+      "office": "Governor",
+      "dem": "Rob Sand",
+      "rep": "Zach Lahn",
+      "party": "D",
+      "poll": {
+        "margin": 7.4,
+        "count": 24,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ia/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [
+        {
+          "pollster": "YouGov",
+          "date": "2026-10-29",
+          "margin": 7,
+          "note": "Field dates Oct 26–29",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        }
+      ],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "KS",
+      "state": "Kansas",
+      "office": "Governor",
+      "dem": "Cindy Holscher",
+      "rep": "Ty Masterson",
+      "party": "D",
+      "poll": {
+        "margin": -3.2,
+        "count": 12,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ks/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "ME",
+      "state": "Maine",
+      "office": "Governor",
+      "dem": "Hannah Pingree",
+      "rep": "Bobby Charles",
+      "party": "D",
+      "poll": {
+        "margin": 12,
+        "count": 19,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/me/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": "Rick Bennett is also running as an independent; two-party poll margins exclude his share.",
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "MD",
+      "state": "Maryland",
+      "office": "Governor",
+      "dem": "Wes Moore",
+      "rep": "Dan Cox",
+      "party": "D",
+      "poll": {
+        "margin": 27,
+        "count": 2,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/md/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "MA",
+      "state": "Massachusetts",
+      "office": "Governor",
+      "dem": "Maura Healey",
+      "rep": "Michael Minogue",
+      "party": "D",
+      "poll": {
+        "margin": 23.5,
+        "count": 9,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ma/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "MI",
+      "state": "Michigan",
+      "office": "Governor",
+      "dem": "Jocelyn Benson",
+      "rep": "John James",
+      "party": "D",
+      "poll": {
+        "margin": 7.4,
+        "count": 38,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/mi/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [
+        {
+          "pollster": "Mitchell Research / CBS Detroit",
+          "date": "2026-10-27",
+          "margin": 5,
+          "note": "636 likely voters",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        },
+        {
+          "pollster": "CNN / SSRS",
+          "date": "2026-10-27",
+          "margin": 12,
+          "note": "768 likely voters",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        }
+      ],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "MN",
+      "state": "Minnesota",
+      "office": "Governor",
+      "dem": "Amy Klobuchar",
+      "rep": "Lisa Demuth",
+      "party": "D",
+      "poll": {
+        "margin": 10.7,
+        "count": 11,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/mn/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "NE",
+      "state": "Nebraska",
+      "office": "Governor",
+      "dem": "Lynne Walz",
+      "rep": "Jim Pillen",
+      "party": "D",
+      "poll": {
+        "margin": -3.7,
+        "count": 15,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ne/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "NV",
+      "state": "Nevada",
+      "office": "Governor",
+      "dem": "Aaron Ford",
+      "rep": "Joe Lombardo",
+      "party": "D",
+      "poll": {
+        "margin": 1,
+        "count": 16,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/nv/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "NH",
+      "state": "New Hampshire",
+      "office": "Governor",
+      "dem": "Cinde Warmington",
+      "rep": "Kelly Ayotte",
+      "party": "D",
+      "poll": {
+        "margin": -7.8,
+        "count": 13,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/nh/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "NM",
+      "state": "New Mexico",
+      "office": "Governor",
+      "dem": "Deb Haaland",
+      "rep": "Greggory Hull",
+      "party": "D",
+      "poll": {
+        "margin": 6.9,
+        "count": 6,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/nm/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "NY",
+      "state": "New York",
+      "office": "Governor",
+      "dem": "Kathy Hochul",
+      "rep": "Bruce Blakeman",
+      "party": "D",
+      "poll": {
+        "margin": 12.1,
+        "count": 24,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ny/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "OH",
+      "state": "Ohio",
+      "office": "Governor",
+      "dem": "Amy Acton",
+      "rep": "Vivek Ramaswamy",
+      "party": "D",
+      "poll": {
+        "margin": 3.6,
+        "count": 33,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/oh/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [
+        {
+          "pollster": "ActiVote",
+          "date": "2026-10-31",
+          "margin": 1.6,
+          "note": "Field dates Oct 18–31",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        },
+        {
+          "pollster": "InsiderAdvantage",
+          "date": "2026-10-30",
+          "margin": 2.9,
+          "note": "Field dates Oct 29–30",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        },
+        {
+          "pollster": "YouGov",
+          "date": "2026-10-29",
+          "margin": 6,
+          "note": "Field dates Oct 26–29",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        }
+      ],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "OK",
+      "state": "Oklahoma",
+      "office": "Governor",
+      "dem": "Cyndi Munson",
+      "rep": "Mike Mazzei",
+      "party": "D",
+      "poll": {
+        "margin": -5.6,
+        "count": 1,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ok/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "OR",
+      "state": "Oregon",
+      "office": "Governor",
+      "dem": "Tina Kotek",
+      "rep": "Christine Drazan",
+      "party": "D",
+      "poll": {
+        "margin": -0.7,
+        "count": 5,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/or/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "PA",
+      "state": "Pennsylvania",
+      "office": "Governor",
+      "dem": "Josh Shapiro",
+      "rep": "Stacy Garrity",
+      "party": "D",
+      "poll": {
+        "margin": 24.7,
+        "count": 17,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/pa/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "RI",
+      "state": "Rhode Island",
+      "office": "Governor",
+      "dem": "Helena Foulkes",
+      "rep": "Aaron Guckian",
+      "party": "D",
+      "poll": {
+        "margin": 34,
+        "count": 5,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/ri/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "SC",
+      "state": "South Carolina",
+      "office": "Governor",
+      "dem": "Jermaine Johnson",
+      "rep": "Alan Wilson",
+      "party": "D",
+      "poll": {
+        "margin": -9.8,
+        "count": 10,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/sc/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "SD",
+      "state": "South Dakota",
+      "office": "Governor",
+      "dem": "Dan Ahlers",
+      "rep": "Larry Rhoden",
+      "party": "D",
+      "poll": {
+        "margin": -18,
+        "count": 4,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/sd/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "TN",
+      "state": "Tennessee",
+      "office": "Governor",
+      "dem": "Jerri Green",
+      "rep": "Marsha Blackburn",
+      "party": "D",
+      "poll": {
+        "margin": -8.4,
+        "count": 4,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/tn/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "TX",
+      "state": "Texas",
+      "office": "Governor",
+      "dem": "Gina Hinojosa",
+      "rep": "Greg Abbott",
+      "party": "D",
+      "poll": {
+        "margin": -3.6,
+        "count": 58,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/tx/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [
+        {
+          "pollster": "Kreate Strategies",
+          "date": "2026-10-30",
+          "margin": -2,
+          "note": "Field dates Oct 27–30",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        },
+        {
+          "pollster": "YouGov",
+          "date": "2026-10-29",
+          "margin": -1,
+          "note": "Field dates Oct 26–29",
+          "url": "https://votes.decisiondeskhq.com/polls/office/governor",
+          "source": "DDHQ recent-polls listing; separate from aggregate"
+        }
+      ],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "VT",
+      "state": "Vermont",
+      "office": "Governor",
+      "dem": "Amanda Janoo",
+      "rep": "Phil Scott",
+      "party": "D",
+      "poll": {
+        "margin": -1.1,
+        "count": 7,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/vt/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "WI",
+      "state": "Wisconsin",
+      "office": "Governor",
+      "dem": "David Crowley",
+      "rep": "Tom Tiffany",
+      "party": "D",
+      "poll": {
+        "margin": 5.1,
+        "count": 8,
+        "asOf": "2026-11-01",
+        "source": "On Point Politics (publisher polling average)",
+        "url": "https://www.onpointpolitics.us/polls/wi/governor",
+        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+      },
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    },
+    {
+      "code": "WY",
+      "state": "Wyoming",
+      "office": "Governor",
+      "dem": "Kenneth Casner",
+      "rep": "Eric Barlow",
+      "party": "D",
+      "poll": null,
+      "otherCandidates": null,
+      "recentPolls": [],
+      "nomineesSource": "https://www.nga.org/governors/elections/"
+    }
+  ]
+}
