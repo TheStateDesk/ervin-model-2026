@@ -146,7 +146,7 @@ function lead(row){if(!row?.cands)return null;const ranked=row.cands.slice().sor
 function raceURL(x){return x.office==='House'?'../state/?state='+encodeURIComponent(x.code)+'#house-'+Number(x.district):'../state/?state='+encodeURIComponent(x.code)+'#stateOverview'}
 function renderRace(x){
  const data=live[x.office]?.races||{},key=x.office==='House'?x.id:x.code;
- const report=data[key]||data[x.code+'-'+(x.district||'')],reportText=report?lead(report):null;
+ const report=data[key]||data[x.code+'-'+(x.district||'')]||(x.office==='House'?data[x.code+'-'+Number(x.district)]:null),reportText=report?lead(report):null;
  return '<article class="race-row" role="listitem"><div><h3>'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+(reportText?'<span class="live-value">'+esc(reportText)+'</span><small>COUNTED, UNOFFICIAL · NOT A CALL</small>':'<span class="no-data">No confirmed returns</span><small>NOT REPORTED TO THIS FEED</small>')+'</div><div><a href="'+raceURL(x)+'">State details</a></div></article>';
 }
 function drawRaces(){
