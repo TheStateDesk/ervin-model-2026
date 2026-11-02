@@ -184,6 +184,8 @@ async function loadReturns(force=false){
    if(!response.ok)throw Error(office+' feed unreachable');
    const j=await response.json();if(j.year!==2026||j.office!==office||j.api!==1||!j.races||typeof j.races!=='object')throw Error('Unsupported feed format');return j;
   }));
+  const supported=answers.filter(x=>x.status==='fulfilled').length;
+  if(!supported)throw Error('No official-source results feeds available');
   for(let i=0;i<answers.length;i++){
    const rr=answers[i];if(rr.status!=='fulfilled')continue;
    for(const [key,row] of Object.entries(rr.value.races||{})){
