@@ -1,10 +1,10 @@
 {
   "asOf": "2026-11-02",
-  "revision": "governor-same-office-2018-2024-no-2014",
+  "revision": "governor-same-office-2018-2024-extended-2022",
   "method": "Only gubernatorial races within the same state: D-minus-R final published polling margin vs certified or archived D-minus-R election margin. No Senate or presidential elections contribute. Active calibration window begins in 2018; 2014 and earlier governor errors excluded.",
-  "sourcesScope": "35 source-linked historical gubernatorial poll–result comparisons from 2018, 2020, 2022 and 2024, including biennial governors New Hampshire and Vermont. 2014 gubernatorial errors are excluded from all active calibration and backtesting; no federal elections.",
+  "sourcesScope": "39 source-linked 2018–2024 governor polling-average versus governor-result comparisons, including 4 newly verified 270toWin 2022 multisurvey averages for CO, MA, NM and OR; no 2014, Senate or presidential polling errors.",
   "signConvention": "Democratic share minus Republican share; third parties and undecided are not reassigned. Poll errors = published D–R polling margin minus actual D–R result.",
-  "qualityWarning": "Aggregates and single polls are not equally reliable; single stale surveys excluded from preferred holdout. This archive is not exhaustive; unverified state-years remain unmodeled, never inferred. The filename is retained for backwards compatibility; its active data now start in 2018.",
+  "qualityWarning": "Poll publishers and periods differ; original RCP rows and the added independently published 270toWin averages are not interchangeable. Single stale surveys excluded. First-cycle backtests cannot validate previously unseen-state corrections. Four added 2022 states each have only ONE historical comparable cycle.",
   "races": [
     {
       "state": "FL",
@@ -172,6 +172,17 @@
       "note": "Final published D–R poll margin and general-election result on the same archived page."
     },
     {
+      "state": "CO",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 12,
+      "actualMargin": 19.35,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/colorado/",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?fips=8&off=5&year=2022",
+      "note": "270toWin most-recent-five published polls: Polis 54.0, Ganahl 42.0; state-certified result Polis 58.53 and Ganahl 39.18; comparable D-R plurality margin."
+    },
+    {
       "state": "CT",
       "year": 2022,
       "office": "Governor",
@@ -238,6 +249,17 @@
       "note": "FiveThirtyEight public archived aggregate (D48.6 R43.5)."
     },
     {
+      "state": "MA",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 27,
+      "actualMargin": 29.17,
+      "pollType": "270toWin 4-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/massachusetts/",
+      "resultUrl": "https://en.wikipedia.org/wiki/2022_Massachusetts_gubernatorial_election",
+      "note": "270toWin Healey 57.3 versus Diehl 30.3 four-poll average; certified Healey 63.74, Diehl 34.57."
+    },
+    {
       "state": "ME",
       "year": 2022,
       "office": "Governor",
@@ -282,6 +304,17 @@
       "note": "Final published D–R poll margin and general-election result on the same archived page."
     },
     {
+      "state": "NM",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 5,
+      "actualMargin": 6.38,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/new-mexico",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?elect=0&fips=35&off=5&year=2022",
+      "note": "270toWin five-poll average Lujan Grisham 47.8 Ronchetti 42.8; certified 51.97 versus 45.59."
+    },
+    {
       "state": "NV",
       "year": 2022,
       "office": "Governor",
@@ -313,6 +346,17 @@
       "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/ohio/dewine-vs-whaley",
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/ohio/dewine-vs-whaley",
       "note": "Final published D–R poll margin and general-election result on the same archived page."
+    },
+    {
+      "state": "OR",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 1.4,
+      "actualMargin": 3.42,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/oregon",
+      "resultUrl": "https://sos.oregon.gov/elections/Documents/results/november-general-2022.pdf",
+      "note": "270toWin final 5-poll average Kotek 43.6 Drazan 42.2, separately tracking independent Betsy Johnson; official Oregon results 917,074 Kotek and 850,347 Drazan (D-R about 3.42 points)."
     },
     {
       "state": "PA",
