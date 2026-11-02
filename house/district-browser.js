@@ -1,7 +1,7 @@
 /* House district explorer: accessible map-first selection using locally hosted 118th Congress reference geometry. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id),escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
-const path=r=>'../elections/?office=house&state='+encodeURIComponent(r.code)+'&district='+encodeURIComponent(r.district);
+const path=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
 let seats=[],selectState='MI',generation=0;
 function tone(r){let c=(r?.rating||'').toLowerCase();return c.includes('tossup')?'#bca481':/\b(lean|likely|solid) d\b/.test(c)?'#5194c4':/\b(lean|likely|solid) r\b/.test(c)?'#b96172':'#89a1b4';}
 function fallback(races,msg){
