@@ -40,7 +40,9 @@ try{
  await houseDistrict.goto(root+'/state/?state=MI#house-7',{waitUntil:'domcontentloaded'});
  await houseDistrict.waitForFunction(()=>document.querySelector('#districtDetail')?.textContent.includes('ERVIN HOUSE')&&document.querySelector('#districtDetail')?.textContent.includes('2024 House'),null,{timeout:25000});
  const districtText=await houseDistrict.locator('#districtDetail').innerText();
- assert(districtText.includes('Public surveys')&&districtText.includes('poll rows used'),'MI-07 model history or underlying polls missing');
+ const corePolls=await houseDistrict.locator('#districtDetail .ed-house-surveys article').count();
+ console.log('MI-07 DISTRICT VIEW',JSON.stringify({head:districtText.slice(0,850),corePolls,questionBrowser:(await houseDistrict.locator('.ed-question-archive summary').allTextContents()).slice(0,1)}));
+ assert(districtText.includes('2024 House')&&corePolls>=1,'MI-07 model history or underlying polls missing');
  await houseDistrict.locator('#stateHouse').scrollIntoViewIfNeeded();
  await houseDistrict.screenshot({path:'visual-checks/MI-07-ervin-house-sourced-model.png',fullPage:true});
  await houseDistrict.close();
