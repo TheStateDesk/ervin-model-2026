@@ -17,7 +17,7 @@ function draw(){
  if(!$('stateSourceLedger'))return;
  if(!all){$('sourceLedgerSummary').textContent='Loading source archive…';return;}
  const state=active;
- const {governors,governorHistory,senateHistory,houseModel,houseRegistry,coverage,senateBaseline}=all;
+ const {governors,governorHistory,senateHistory,houseModel,houseRegistry,coverage,senateBaseline,countyHistory}=all;
  const gov=governors.races?.find(x=>x.code===state);
  const governorEvents=(governorHistory.races||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year<2026&&e.pollType!=='single stale poll').sort((a,b)=>b.year-a.year).slice(0,3);
  const senate=senateHistory.senateStates?.[state];
@@ -47,11 +47,16 @@ function draw(){
  house+='<p class="ed-mini">'+link('https://electiondata.dev/datasets/house-results/','MIT Election Data & Science Lab · U.S. House returns')+' · '+link('https://www.cookpolitical.com/ratings/house-race-ratings','Cook Political Report ratings')+' · '+link('https://peoplespoll.com/house','House survey directory')+'. The House 2022→2024 lagged baseline test is NOT a full 2026 House model backtest.</p>';
  house+='<details><summary>Show sources for all '+districts.length+' House districts</summary><div class="ed-table-wrap"><table class="ed-table"><thead><tr><th>District</th><th>Model / history</th><th>Individual polls</th><th>Other sources</th></tr></thead><tbody>';
  house+=districts.map(d=>{
-  const m=houseModel.races?.[d.id],polls=m?.surveys||[],uniq=[...new Set(polls.map(p=>p.url).filter(u=>safe(u)))].slice(0,4);
-  return '<tr><td><a href="#stateHouse" data-ledger-district="'+esc(d.district)+'">'+esc(d.id)+'</a></td><td>'+esc(m?.modelRating||'No model')+' · '+fmt(m?.marginD)+'<div class="ed-mini">'+(m?.changed2026Map?'Redistricting warning · ':'')+'2022/24 House returns</div></td><td>'+ (uniq.length?uniq.map((u,i)=>link(u,'Poll '+(i+1))).join(' · '):'No archived individual survey')+'</td><td>'+link(d.ratingSource||houseRegistry.ratingSource,'Rating')+' · '+link(d.officialBallot||'https://www.usa.gov/election-office','Election office')+'</td></tr>';
+  const m=houseModel.races?.[d.id],polls=m?.surveys||[],uniq=[...new Map(polls.filter(p=>safe(p.url)).map(p=>[p.url,p])).values()].slice(0,4);
+  return '<tr><td><a href="#stateHouse" data-ledger-district="'+esc(d.district)+'">'+esc(d.id)+'</a></td><td>'+esc(m?.modelRating||'No model')+' · '+fmt(m?.marginD)+'<div class="ed-mini">'+(m?.changed2026Map?'Redistricting warning · ':'')+'2022/24 House returns</div></td><td>'+ (uniq.length?uniq.map((p,i)=>link(p.url,(p.pollster||'Survey')+' '+(p.date||'undated')+(p.kind&&/listing|directory|index/i.test(p.kind)?' (index)':''))).join(' · '):'No archived individual survey')+'</td><td>'+link(d.ratingSource||houseRegistry.ratingSource,'Rating')+' · '+link(d.officialBallot||'https://www.usa.gov/election-office','Election office')+'</td></tr>';
  }).join('');
  house+='</tbody></table></div></details>';
  entries.push(card('U.S. House · district-by-district','435-DISTRICT NATIONAL MODEL',house));
+ const source=countyHistory?.source||{};
+ const county='<p>2020 and 2024 county-level presidential baselines are used for the county-map scenarios. These are <strong>not governor election results</strong> and never enter the governor polling-error correction.</p>'+
+ '<p class="ed-mini">'+link(source.president2020,'2020 county returns')+' · '+link(source.president2024,'2024 county returns')+' · <a href="../geo/county-history.json">Locally published baseline and FIPS mapping (JSON)</a> · <a href="../research/ALL_50_STATE_GEOGRAPHY_AUDIT_2026-11-01.md">County geography audit</a></p>'+
+ '<p class="ed-mini">County expectations are conditional allocations of a statewide model margin, not independent county polls, verified 2026 returns or calibrated county forecasts.</p>';
+ entries.push(card('County maps · historical sources','BASELINES / NOT MODEL CALIBRATION',county));
  $('stateSourceLedger').innerHTML=entries.join('');
  $('sourceLedgerSummary').textContent='Race-level bibliography · '+(gov?'governor · ':'')+(baseline||senate?'modeled Senate · ':senIndex?'Senate index · ':'')+districts.length+' House districts';
  $('stateSourceLedger').querySelectorAll('[data-ledger-district]').forEach(a=>a.addEventListener('click',()=>{const b=document.querySelector('#districtButtons button[data-district="'+a.dataset.ledgerDistrict+'"]');if(b)b.click();}));
@@ -62,11 +67,11 @@ async function init(){
  '../governors/data.json','../research/governor-same-office-2014-2024.json',
  '../research/original-ervin-senate-calibration-2026-11-02.json',
  '../house/ervin-forecast-2026-11-02.json','../house/data.json',
- '../polling/coverage-2026-11-02.json','../counties-watch/forecast-baselines.json'
+ '../polling/coverage-2026-11-02.json','../counties-watch/forecast-baselines.json','../geo/county-history.json'
  ];
  try{
   const values=await Promise.all(urls.map(async u=>{const r=await fetch(u);if(!r.ok)throw Error(u+' HTTP '+r.status);return r.json()}));
-  all=Object.fromEntries(['governors','governorHistory','senateHistory','houseModel','houseRegistry','coverage','senateBaseline'].map((k,i)=>[k,values[i]]));
+  all=Object.fromEntries(['governors','governorHistory','senateHistory','houseModel','houseRegistry','coverage','senateBaseline','countyHistory'].map((k,i)=>[k,values[i]]));
   draw();
  }catch(e){root.innerHTML='<p class="ed-notice">Unable to load the linked source archive. See the Senate, House and governor polling pages for their source links.</p>';console.error('Source ledger',e);}
 }
