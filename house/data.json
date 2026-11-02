@@ -5224,5 +5224,17 @@
       "ratingSource": null,
       "officialBallot": "https://www.usa.gov/election-office"
     }
-  ]
+  ],
+  "nationalCookSnapshot": {
+    "asOf": "2026-10-30",
+    "source": "https://www.cookpolitical.com/ratings/house-race-ratings",
+    "solidD": 186,
+    "likelyD": 18,
+    "leanD": 18,
+    "tossup": 18,
+    "leanR": 17,
+    "likelyR": 14,
+    "solidR": 164,
+    "note": "All 435 House Cook rating categories from published October 30, 2026 summary. These are publisher judgments, not Ervin probabilities or seat forecasts."
+  }
 }
