@@ -31,6 +31,17 @@ try{
  await nerd.goto(root+'/stats-for-nerds/',{waitUntil:'domcontentloaded'});
  await nerd.waitForFunction(()=>document.querySelector('#targetCards')?.textContent.includes('Texas')&&document.querySelector('#sampleHealth')?.textContent==='14,000',null,{timeout:30000});
  assert((await nerd.locator('.nerd-target').count())===3,'Stats for Nerds must show TX/KS/IA three-state scenario');
+ await nerd.waitForFunction(()=>document.querySelector('#houseRosterSummary')?.textContent.includes('435 of 435 House districts'),null,{timeout:20000});
+ assert((await nerd.locator('#houseRosterCards .nerd-house-record').count())===24,'Show 24 House districts per page');
+ await nerd.locator('#houseCandidateSearch').fill('MI-10');
+ await nerd.waitForFunction(()=>document.querySelectorAll('#houseRosterCards .nerd-house-record').length===1,null,{timeout:10000});
+ assert((await nerd.locator('#houseRosterCards').innerText()).includes('Christina Bertrand Hines'),'Michigan House 10th candidate missing');
+ assert((await nerd.locator('#houseRosterCards').innerText()).includes('Michael Bouchard'),'Michigan House 10th opponent missing');
+ await nerd.locator('#houseCandidateSearch').fill('CA-11');
+ await nerd.waitForFunction(()=>document.querySelector('#houseRosterCards')?.textContent.includes('Connie Chan'),null,{timeout:10000});
+ const caText=await nerd.locator('#houseRosterCards').innerText();
+ assert(caText.includes('Scott Wiener')&&!caText.includes('Republican'),'California top-two same-party ballot must not invent R nominee');
+ await nerd.locator('#houseCandidateSearch').fill('');
  assert((await nerd.locator('#numApproved').innerText())==='0','Lab must not invent approved early-return signals');
  assert((await nerd.locator('#targetCards').innerText()).includes('50.6%'),'Texas original baseline must be D 50.6%');
  await nerd.locator('#inputRace').selectOption('VA-02');
@@ -45,6 +56,7 @@ try{
  await nerd.close();
  const nerdMobile=await browser.newPage({viewport:{width:390,height:844}});
  await nerdMobile.goto(root+'/stats-for-nerds/',{waitUntil:'domcontentloaded'});
+ await nerdMobile.waitForFunction(()=>document.querySelector('#houseRosterSummary')?.textContent.includes('435 of 435 House districts'),null,{timeout:30000});
  await nerdMobile.waitForFunction(()=>document.querySelector('#targetCards')?.textContent.includes('Iowa'),null,{timeout:30000});
  assert(await nerdMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Stats for Nerds creates mobile horizontal overflow');
  await nerdMobile.screenshot({path:'visual-checks/Stats-For-Nerds-Mobile.png',fullPage:true});
