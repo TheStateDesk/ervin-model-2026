@@ -222,3 +222,5 @@ html.theme-dark body.ed-body.night-page{
  .night-page .seg-tabs button{padding:8px}
 }
 @media(prefers-reduced-motion:reduce){.night-page #miCountyMap path.county{transition:none}}
+
+.night-candidate-photo{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid currentColor;flex:none;vertical-align:middle;margin-inline-end:8px}
