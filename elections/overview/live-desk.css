@@ -1,0 +1,35 @@
+
+/* Ervin Model — national election-night desk; independent typography/layout. */
+.er-live{margin:21px 0 22px;position:relative;overflow:hidden}
+.er-live:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#276fa8 0%,#5296b5 50%,#ae5268 100%)}
+.er-live-head,.er-live-controls{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.er-live-head h2{font-size:clamp(20px,2.9vw,27px)!important;margin:4px 0 7px!important}
+.er-live-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:18px 0}
+.er-live-kpis>div{padding:13px 15px;border-radius:11px;border:1px solid var(--edge);background:var(--surface2)}
+.er-live-kpis small{display:block;color:var(--muted);font-weight:700;font-size:11px}
+.er-live-kpis strong{display:block;margin-top:4px;color:var(--text);font-size:clamp(17px,2.8vw,25px);font-variant-numeric:tabular-nums}
+.er-live-controls{justify-content:flex-start;padding:12px 0}
+.er-live select,.er-live input{max-width:100%;background:var(--surface);color:var(--text);border:1px solid var(--edge);border-radius:9px;padding:10px 12px}
+.er-live input{min-width:min(270px,100%);flex:1}
+.er-live button{border-radius:9px;background:var(--surface2);color:var(--text);border:1px solid var(--edge);padding:10px 12px;cursor:pointer;font-weight:700}
+.er-live button:hover{border-color:#6a94b4}
+.er-live button:disabled{cursor:not-allowed;opacity:.6}
+.er-live-list{display:grid;gap:9px;max-height:530px;overflow:auto;scrollbar-gutter:stable}
+.er-live-race{display:grid;grid-template-columns:minmax(160px,1.25fr) minmax(200px,1.1fr) minmax(100px,.6fr);align-items:center;gap:14px;padding:13px 15px;border:1px solid var(--edge);border-radius:11px;background:var(--surface2)}
+.er-live-race h3{font-size:14px!important;margin:0 0 4px!important}
+.er-live-race h3 a{color:var(--text);text-decoration:none}
+.er-live-race h3 a:hover{text-decoration:underline}
+.er-live-sub{color:var(--muted);font-size:11px}
+.er-live-votes{display:flex;height:8px;overflow:hidden;background:var(--edge);border-radius:99px;margin:7px 0}
+.er-live-votes .d{background:#377eac}.er-live-votes .r{background:#b85567}.er-live-votes .other{background:#9da7ae}
+.er-live-figure{text-align:right;font-variant-numeric:tabular-nums;font-size:13px;font-weight:800}
+.er-live-figure small{display:block;color:var(--muted);font-size:11px;font-weight:600}
+.er-live-footer{margin:13px 0 0;font-size:11px;line-height:1.6;color:var(--muted)}
+.er-live-footer a{color:var(--blue)}
+.er-live-state{font-size:12px;font-weight:750;color:var(--muted)}
+.er-live-pulse{display:inline-block;width:8px;height:8px;margin-right:7px;border-radius:50%;background:#bd974f}
+.er-live-pulse.is-live{background:#398f7c}
+.er-live-pulse.is-late{background:#b85567}
+.er-live-empty{padding:23px 17px;border:1px dashed var(--edge);border-radius:11px;color:var(--muted);font-size:13px}
+@media(max-width:740px){.er-live-kpis{grid-template-columns:1fr 1fr}.er-live-kpis>div:last-child{grid-column:1/-1}.er-live-race{grid-template-columns:1fr 1fr;gap:7px}.er-live-race>div:first-child{grid-column:1/-1}.er-live-list{max-height:610px}}
+@media(prefers-reduced-motion:reduce){.er-live *{transition:none!important;animation:none!important}}
