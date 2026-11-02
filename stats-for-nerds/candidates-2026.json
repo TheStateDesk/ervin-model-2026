@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "election": "2026-11-03",
+  "verifiedAsOf": "2026-11-02",
+  "purpose": "Candidate names and affiliations for 2026 early-signal research; not reporting results or a vote forecast.",
+  "sourceMethod": "General-election roster comparison, largely Ballotpedia November 2026 listings; local election authority is final ballot authority.",
+  "races": {
+    "KY-06": {
+      "democrat": "Zach Dembo",
+      "republican": "Ralph Alvarado",
+      "other": [
+        {
+          "name": "Pete Lynch",
+          "party": "Kentucky Party",
+          "writeIn": false
+        },
+        {
+          "name": "Jay Bowman",
+          "party": "Independent",
+          "writeIn": false
+        },
+        {
+          "name": "Robert Quigley",
+          "party": "Independent",
+          "writeIn": true
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/Kentucky%27s_6th_Congressional_District_election%2C_2026",
+      "note": "Open seat; Andy Barr is not the 2026 House nominee."
+    },
+    "VA-02": {
+      "democrat": "Elaine Luria",
+      "republican": "Jennifer Kiggans",
+      "other": [
+        {
+          "name": "J. Matt Baker",
+          "party": "Independent",
+          "writeIn": false
+        },
+        {
+          "name": "Bishop Staten",
+          "party": "Independent",
+          "writeIn": false
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/Virginia%27s_2nd_Congressional_District_election%2C_2026",
+      "note": "Jennifer Kiggans is the incumbent."
+    },
+    "VA-05": {
+      "democrat": "Tom Perriello",
+      "republican": "John McGuire",
+      "other": [
+        {
+          "name": "Cooke Harvey",
+          "party": "Independent",
+          "writeIn": false
+        },
+        {
+          "name": "Chris Register",
+          "party": "Independent",
+          "writeIn": false
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/Virginia%27s_5th_Congressional_District_election%2C_2026",
+      "note": "John McGuire is the incumbent; verify independent ballot placement locally."
+    },
+    "GA-SENATE": {
+      "democrat": "Jon Ossoff",
+      "republican": "Mike Collins",
+      "other": [
+        {
+          "name": "Christina Loren Clement",
+          "party": "Republican",
+          "writeIn": true
+        },
+        {
+          "name": "Elbert Bartell",
+          "party": "Independent",
+          "writeIn": true
+        },
+        {
+          "name": "Cassandra Easton",
+          "party": "Independent",
+          "writeIn": true
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/United_States_Senate_election_in_Georgia%2C_2026",
+      "note": "Jon Ossoff is the incumbent; write-ins are not additional major-party ballot nominees."
+    },
+    "SC-SENATE": {
+      "democrat": "Annie Andrews",
+      "republican": "Darline Graham",
+      "other": [
+        {
+          "name": "Mark Hackett",
+          "party": "Constitution",
+          "writeIn": false
+        },
+        {
+          "name": "Kasie Whitener",
+          "party": "Libertarian",
+          "writeIn": false
+        },
+        {
+          "name": "Catherine Fleming Bruce",
+          "party": "Democratic",
+          "writeIn": true
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/United_States_Senate_election_in_South_Carolina%2C_2026",
+      "note": "Darline Graham is the Republican nominee following the August 2026 special nomination process; Catherine Fleming Bruce is listed as a write-in."
+    },
+    "FL-27": {
+      "democrat": "Eliott Rodriguez",
+      "republican": "María Elvira Salazar",
+      "other": [],
+      "sourceUrl": "https://ballotpedia.org/Florida%27s_27th_Congressional_District_election%2C_2026",
+      "note": "María Elvira Salazar is the incumbent."
+    },
+    "NC-SENATE": {
+      "democrat": "Roy Cooper",
+      "republican": "Michael Whatley",
+      "other": [
+        {
+          "name": "Michael Dublin",
+          "party": "Green",
+          "writeIn": false
+        },
+        {
+          "name": "Shannon Bray",
+          "party": "Libertarian",
+          "writeIn": false
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/United_States_Senate_election_in_North_Carolina%2C_2026",
+      "note": ""
+    },
+    "OH-SENATE": {
+      "democrat": "Sherrod Brown",
+      "republican": "Jon Husted",
+      "other": [
+        {
+          "name": "Bill Redpath",
+          "party": "Libertarian",
+          "writeIn": false
+        },
+        {
+          "name": "Gregory Levy",
+          "party": "Independent",
+          "writeIn": false
+        },
+        {
+          "name": "Stephen Faris",
+          "party": "Independent",
+          "writeIn": true
+        },
+        {
+          "name": "Anthony Holliman",
+          "party": "Independent",
+          "writeIn": true
+        },
+        {
+          "name": "Timothy Telymonde",
+          "party": "Independent",
+          "writeIn": true
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/United_States_Senate_special_election_in_Ohio%2C_2026",
+      "note": "Jon Husted is the incumbent; this is a special election."
+    },
+    "TX-SENATE": {
+      "democrat": "James Talarico",
+      "republican": "Ken Paxton",
+      "other": [
+        {
+          "name": "Ted Brown",
+          "party": "Libertarian",
+          "writeIn": false
+        },
+        {
+          "name": "Avery Ayers",
+          "party": "Independent",
+          "writeIn": true
+        },
+        {
+          "name": "Bradford Hall",
+          "party": "Independent",
+          "writeIn": true
+        },
+        {
+          "name": "Zul Mohamed",
+          "party": "Independent",
+          "writeIn": true
+        },
+        {
+          "name": "Jade Simmons",
+          "party": "Independent",
+          "writeIn": true
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/U.S._Senate%2C_Texas_election%2C_2026",
+      "note": ""
+    },
+    "KS-SENATE": {
+      "democrat": "Adam Hamilton",
+      "republican": "Roger Marshall",
+      "other": [
+        {
+          "name": "David Graham",
+          "party": "Libertarian",
+          "writeIn": false
+        },
+        {
+          "name": "Mark Baldwin",
+          "party": "Independent",
+          "writeIn": true
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/United_States_Senate_election_in_Kansas%2C_2026",
+      "note": "Roger Marshall is the incumbent."
+    },
+    "IA-SENATE": {
+      "democrat": "Josh Turek",
+      "republican": "Ashley Hinson",
+      "other": [
+        {
+          "name": "Thomas Laehn",
+          "party": "Libertarian",
+          "writeIn": false
+        }
+      ],
+      "sourceUrl": "https://ballotpedia.org/United_States_Senate_election_in_Iowa%2C_2026",
+      "note": "This is an open Senate seat."
+    }
+  }
+}
