@@ -30,6 +30,7 @@ assert(js.includes('countyOfficial')&&js.includes('countyAuto')&&js.includes('pr
 assert(js.includes('last')||js.includes('date('));
 assert(state.includes('governorErvin')&&state.includes('window.ERVIN_STATEWIDE.apply'),'State desk does not use governor method');
 assert(!states.includes('>Model lab</a>')&&!main.includes('>Polling research lab</a>'),'Old model-lab navigation still exposed');
-assert(html.includes('href="../michigan/election-night/"'),'Original Michigan detailed source hub not linked');
+assert(html.includes('href="../state/?state=MI#stateResults"'),'National election desk must link to consolidated Michigan results');
+assert(!html.includes('href="../michigan/election-night/"'),'Legacy Michigan results hub remains in national election desk');
 assert(js.includes('if(upcoming())'),'Premature live vote guard absent');
 console.log('STATEWIDE & NATIONAL ELECTION NIGHT QA PASS',JSON.stringify({governors:out.governor.length,governorWithPoll:out.summary.withPublishedPolling,stateSpecificHistory:out.summary.stateErrorHistory, originalAdjustments:out.summary.adjustedGovernorRaces,senateOriginalUnchanged:out.senate.length,house:435,michiganCounties:geo.features.length,events:historical.events.length}));
