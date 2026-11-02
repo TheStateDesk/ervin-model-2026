@@ -29,7 +29,7 @@ try{
  const homepage=await browser.newPage({viewport:{width:1440,height:940}});
  await homepage.goto(root+'/',{waitUntil:'domcontentloaded'});
  await homepage.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:30000});
- assert((await homepage.locator('#topNavigation a').count())===4,'Homepage top navigation should have exactly four clear destinations');
+ assert((await homepage.locator('#topNavigation a').count())===5,'Homepage top navigation should have exactly four clear destinations');
  assert((await homepage.locator('#advancedPollingDrawer').getAttribute('open'))===null,'Research lab unexpectedly open for casual visitors');
  assert((await homepage.locator('#globalMenuPanel .global-menu-group').count())===3,'Minimal navigation still needs 3 thematic groups');
 
@@ -54,7 +54,7 @@ try{
  const nightErrors=[];nationalNight.on('pageerror',e=>nightErrors.push(e.message));
  await nationalNight.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
  const navTargets=await nationalNight.locator('.night-head nav a').evaluateAll(a=>a.map(x=>x.getAttribute('href')));
- assert(JSON.stringify(navTargets)===JSON.stringify(['../states/','#nationalBoard','#michiganSpotlight']),'Election Night links to retired dedicated pages');
+ assert(JSON.stringify(navTargets)===JSON.stringify(['../states/','#nationalBoard','#michiganSpotlight','../stats-for-nerds/']),'Election Night links to retired dedicated pages');
  assert((await nationalNight.locator('.night-links a[href="../state/?state=MI#stateResults"]').count())===1,'Michigan source card must link into consolidated state page');
 
  await nationalNight.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
@@ -82,7 +82,7 @@ try{
  const themeBox=await nightMobile.locator('#appearance').boundingBox();
  assert(navBox.y>brandBox.y,'Mobile nav must have its own row');
  assert(brandBox.x+brandBox.width<themeBox.x+1,'Brand and theme control must not overlap');
- assert((await nightMobile.locator('.night-head nav a').count())===3,'Mobile nav must contain exactly three destinations');
+ assert((await nightMobile.locator('.night-head nav a').count())===4,'Mobile nav must contain exactly three destinations');
  assert(await nightMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Mobile election-night masthead must not create horizontal scroll');
  await nightMobile.locator('.night-head').screenshot({path:'visual-checks/National-Election-Night-Mobile-Header.png'});
  await nightMobile.close();
