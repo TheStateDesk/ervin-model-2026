@@ -1,148 +1,36 @@
-<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex,follow">
-<meta charset="utf-8"><title>Ervin dashboard browser smoke test</title></head>
-<body><h1>Dashboard browser smoke test</h1><pre id="report" data-status="RUNNING">Running tests…</pre>
+<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex,follow"><meta charset="utf-8"><title>Ervin public homepage smoke test</title></head>
+<body><h1>Public homepage browser smoke</h1><pre id="report" data-status="RUNNING">Checking…</pre>
 <script>
 (async()=>{
- const report=document.getElementById('report'),errors=[],checks=[];
- const check=(condition,message)=>{if(!condition)throw new Error(message);checks.push(message)};
- const iframe=document.createElement('iframe');
- iframe.id='dashboard';iframe.title='Ervin dashboard';
- iframe.style.width='1180px';iframe.style.height='950px';iframe.style.border='0';
- window.addEventListener('error',e=>errors.push(e.message));
- const ready=new Promise((resolve,reject)=>{
-  iframe.onload=()=>resolve();
-  iframe.onerror=()=>reject(new Error('Could not load dashboard iframe'));
- });
- iframe.src='../index.html?race=MI';
- document.body.append(iframe);
+ const report=document.getElementById('report'),checks=[];
+ const check=(v,msg)=>{if(!v)throw Error(msg);checks.push(msg)};
+ const iframe=document.createElement('iframe');iframe.title='Ervin 2026 public homepage';iframe.style.cssText='width:1180px;height:940px;border:0';
+ const wait=new Promise((res,rej)=>{iframe.onload=res;iframe.onerror=()=>rej(Error('Homepage unavailable'))});
+ iframe.src='../index.html';document.body.appendChild(iframe);
  try{
-  await ready;
-  const win=iframe.contentWindow,doc=iframe.contentDocument;
-  const el=id=>doc.getElementById(id);
-  const dispatch=(node,type='change')=>node.dispatchEvent(new win.Event(type,{bubbles:true}));
-  const source=k=>doc.querySelector('#tabs button[data-source="'+k+'"]');
-  const clickSVG=node=>node.dispatchEvent(new win.MouseEvent('click',{bubbles:true}));
-  check(!!el('map')&&!!el('bars')&&!!el('rows'),'Map, bars and table rendered; title='+doc.title+'; state='+doc.readyState);
-  check(doc.documentElement.classList.contains('light'),'Professional high-contrast light theme is the default');
-  check(!!el('readingToggle'),'Every visitor can switch to larger comfortable reading text');
-  el('readingToggle').click();
-  check(doc.documentElement.classList.contains('large-text')&&el('readingToggle').getAttribute('aria-pressed')==='true','Larger text setting functions');
-  el('readingToggle').click();
-  check(!doc.documentElement.classList.contains('large-text'),'Standard text size can be restored');
-  check(!!doc.querySelector('.editorial-hero .hero-primary-action')&&doc.querySelectorAll('.readers-guide .guide-link').length===5,'New visitors get five guided entries including governors and House');
-  check(!!doc.querySelector('#forecast-settings')&&!!doc.querySelector('.model-settings-help summary'),'Forecast source choices remain available with progressive explanations');
-  check(['states/','governors/','house/','election-night/'].every(href=>!!doc.querySelector('#topNavigation a[href="'+href+'"]')),'Primary navigation links to states, Governors, House and Election Night');
-  check(!!el('mainContent')&&!!doc.querySelector('a.skip-to-content'),'Keyboard users can skip navigation and reach the main content');
-  check(doc.querySelectorAll('#tabs button').length===6,'All six polling tabs rendered');
-  check(source('take')?.getAttribute('aria-selected')==='true','Ervin Take default selected');
-  check(el('biasMode').value==='original','Original Ervin is the default bias mode');
-
-  check(!!el('probabilityGuide')&&el('probabilityGuide').textContent.includes("70%"),'Plain-English probability calibration explainer available');
-  check(!!el('mainMenuToggle')&&!!el('globalMenuPanel'),'Homepage has complete site navigation directory');
-  el('mainMenuToggle').click();
-  check(el('mainMenuToggle').getAttribute('aria-expanded')==='true'&&!el('globalMenuPanel').hidden,'Home menu expands with visible model directory');
-  check(doc.querySelectorAll('#globalMenuPanel .global-menu-group').length===3,'Main menu groups forecast, polling sources and election night');
-  check(doc.querySelectorAll('#globalMenuPanel a[href*="source="]').length===6,'Six polling tabs are directly accessible from main menu');
-  check(doc.querySelector('#globalMenuPanel a[href="counties-watch/"]')&&doc.querySelector('#globalMenuPanel a[href="election-night/"]'),'County watch and election-night links in main menu');
-  el('mainMenuToggle').click();
-  check(el('mainMenuToggle').getAttribute('aria-expanded')==='false'&&el('globalMenuPanel').hidden,'Home directory closes predictably');
-  check(!!el('senate-control')&&el('controlDemChance').textContent.endsWith('%')&&el('controlRepChance').textContent.endsWith('%'),
-    'Senate-control probability dashboard renders both parties');
-  check(!!el('copyControlForecast')&&el('copyControlForecast').textContent.includes('Copy forecast'),
-    'Readers can share Senate forecast assumptions via a copied link');
-  check(el('controlDemSeats').textContent.includes('seats')&&el('controlRepSeats').textContent.includes('seats'),
-    'Senate-control dashboard displays rough seat counts');
-  const startControl=el('controlDemChance').textContent,originalSeats=el('controlDemSeats').textContent;
-  el('controlUncertainty').value='1.3';dispatch(el('controlUncertainty'));
-  check(el('controlUncertainty').value==='1.3'&&el('controlRange').textContent.includes('80% seat ranges'),
-    'Senate-control uncertainty selector recalculates and shows ranges');
-  el('controlUncertainty').value='1';dispatch(el('controlUncertainty'));
-  check(el('controlDemChance').textContent===startControl&&el('controlDemSeats').textContent===originalSeats,
-    'Original Senate-control scenario is deterministic when returning to standard uncertainty');
-  check(doc.querySelectorAll('#rows tr[data-id] td').length===170,'Race table exposes a publisher date column for every watched state');
-  const ds=win.ERVIN_DATA.states.find(r=>r.code==='MI');
-  const shares={rcp:.40,ddhq:.29,win270:.21,silver:.10};
-  const considered=Object.entries(shares).filter(([k])=>{let p=ds.sources[k];let t=Date.parse(p.date+', 2026');return !p.proxy&&Number.isFinite(t)&&(Date.now()-t)<=7*86400000});
-  const weigh=([k,w])=>{
-   let d=ds.sources[k].date;
-   let parsed=Date.parse(/\b20\d{2}\b/.test(d)?d:d+', 2026');
-   let age=Number.isFinite(parsed)?Math.max(0,(Date.now()-parsed)/86400000):21;
-   return w*Math.max(.50,Math.exp(-age/35));
-  };
-  const total=considered.reduce((sum,p)=>sum+weigh(p),0);
-  const expected=considered.reduce((sum,[k,w])=>sum+weigh([k,w])*ds.sources[k].value,0)/total;
-  const displayed=el('detail').querySelector('.mini strong').textContent;
-  const actual=Number((displayed.match(/\d+\.\d+/)||[])[0]);
-  check(considered.length===4&&Math.abs(expected-ds.sources.rcp.value)>.15,'Four current Michigan publisher inputs contribute despite shared source pages');
-  check(win.ERVIN_DATA.states.find(r=>r.code==='MS').freshnessStatus.includes('No independent'),'Mississippi is clearly marked as lacking independent fresh polling');
-  check(win.ERVIN_DATA.states.find(r=>r.code==='GA').sources.ddhq.date==='Oct 27','Georgia updated DDHQ polls are represented with actual October 27 polling date');
-  check(el('pollEvidence').textContent.includes('effective weight'),'Recent-only inputs show traceable model weights');
-  check(Math.abs(actual-expected)<.061,'Visible blended MI input matches weighted four-source average');
-  check(doc.querySelectorAll('#bars .chance-row').length===17,'Win chance panel displays 17 race scenarios');
-  check(doc.querySelector('#bars .chance-row .chance-value')?.textContent.includes('%'),'Scenario bars show explicit percentage chance');
-  check(el('detail').querySelector('.race-win-chance')?.textContent.includes('%'),'State detail includes modeled win chance');
-  const oldChance=el('detail').querySelector('.race-win-chance strong')?.textContent;
-  el('controlUncertainty').value='1.3';dispatch(el('controlUncertainty'));
-  check(doc.querySelectorAll('#bars .chance-row').length===17,'Increasing forecast uncertainty recalculates chance board');
-  el('controlUncertainty').value='1';dispatch(el('controlUncertainty'));
-  check(el('detail').querySelector('.race-win-chance strong')?.textContent===oldChance,'Win chance returns to baseline under original uncertainty');
-  check(doc.querySelectorAll('#map g.geo-region').length===50,'All 50 geographic U.S. state outlines rendered');
-  check(doc.querySelectorAll('#map g.geo-region.tracked').length===17,'All 17 tracked states are interactive');
-  check(doc.querySelectorAll('#pollEvidence .poll-input-row').length===5,'Selected state displays five named publisher inputs with dates');
-  check(el('pollEvidence').textContent.includes('effective weight'),'Model inputs show effective blend weights');
-  check(doc.querySelector('#map svg path[data-code]')===null&&doc.querySelectorAll('#map svg path.geo-shape').length===50,
-    'Map uses actual geography paths, not cartogram buttons');
-  const before=el('map').querySelector('[data-code="AK"]');
-  const mapIdentity=before;
-  clickSVG(before);
-  check(doc.querySelector('#map g.geo-region.active')?.dataset.code==='AK','Clicking Alaska highlights Alaska');
-  check(el('insightRace').value==='AK','Clicking a map state syncs Research Lab selector');
-  check(before===mapIdentity&&doc.querySelector('#map [data-code="AK"]')===before,'Race selection does not replace map elements');
-  clickSVG(doc.querySelector('#map [data-code="WA"]'));
-  check(el('detail').textContent.includes('not one of the 17 Senate contests'),'Untracked state shows explanation rather than invented projection');
-  check(doc.querySelector('#map g.geo-region.active')?.dataset.code==='WA','Untracked map selection can be inspected');
-    el('insightRace').value='OH';dispatch(el('insightRace'));
-  check(doc.querySelector('#map g.geo-region.active')?.dataset.code==='OH','Research Lab dropdown changes the active race');
-  el('biasMode').value='weighted';dispatch(el('biasMode'));
-  check(doc.querySelector('#map g.geo-region.active')?.dataset.code==='OH','Switching to Ervin + preserves selected race');
-  el('biasMode').value='original';dispatch(el('biasMode'));
-  check(el('biasMode').value==='original','Can return to Original Ervin mode');
-  el('confidenceLevel').value='90';dispatch(el('confidenceLevel'));
-  check(el('detail').textContent.includes('90% error scenario'),'Uncertainty control redraws selected range');
-  source('ddhq').click();
-  check(source('ddhq').getAttribute('aria-selected')==='true','Polling tab switch works');
-  source('take').click();
-  check(source('take').getAttribute('aria-selected')==='true','Can return to Ervin Take');
-  const filter=el('raceFilter');filter.value='independent';dispatch(filter);
-  check(el('rows').querySelectorAll('tr[data-id]').length>=1,'Independent race filter works');
-  filter.value='all';dispatch(filter);
-  const search=el('search');search.value='Michigan';dispatch(search,'input');
-  check(el('rows').querySelectorAll('tr[data-id]').length===1,'Race search filters without errors');
-  search.value='';dispatch(search,'input');
-  const row=doc.querySelector('#rows tr[data-id="TX"]');
-  check(!!row&&row.tabIndex===0,'Race rows support keyboard focus');
-  row.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
-  check(doc.querySelector('#map g.geo-region.active')?.dataset.code==='TX','Keyboard Enter selects a race');
-  el('themeToggle').click();
-  check(!doc.documentElement.classList.contains('light'),'Appearance control switches to dark mode');
-  el('themeToggle').click();
-  check(doc.documentElement.classList.contains('light'),'Appearance control restores the default light mode');
-  let start=performance.now();
-  for(const code of ['MI','OH','TX','ME','AK','GA','NC','MI','FL','NH']){
-   clickSVG(doc.querySelector('#map [data-code="'+code+'"]'));
-  }
-  const duration=Math.round(performance.now()-start);
-  check(duration<4000,'Ten race selections stay responsive in browser');
-  iframe.style.width='390px';
-  await new Promise(resolve=>win.requestAnimationFrame(resolve));
-  check(win.innerWidth<=400,'Dashboard responds to compact mobile viewport');
-  check(doc.documentElement.scrollWidth<=doc.documentElement.clientWidth+4,'No page-wide horizontal overflow at phone width');
-  check(errors.length===0,'No browser script errors');
-  report.dataset.status='PASS';
-  report.textContent='PASS '+checks.length+' checks; ten selections '+duration+'ms.\n'+checks.map(x=>'✓ '+x).join('\n');
- }catch(error){
-  report.dataset.status='FAIL';
-  report.textContent='FAIL: '+error.stack+'\n'+errors.join('\n');
- }
+  await wait;
+  const d=iframe.contentDocument,w=iframe.contentWindow,$=id=>d.getElementById(id);
+  const until=async fn=>{for(let i=0;i<160;i++){if(fn())return;await new Promise(r=>setTimeout(r,100))}throw Error('Timed out waiting for homepage model')};
+  await until(()=>$('powerCards')?.dataset.powerReady==='true'&&$('controlDemChance')?.textContent.endsWith('%'));
+  check($('frontTitle')?.textContent.includes('national picture'),'New editorial home is visible');
+  check($('senate-control')&&$('balanceOfPower'),'Both core models appear');
+  check($('senate-control').getBoundingClientRect().top<$('balanceOfPower').getBoundingClientRect().top,'Senate control precedes office seat totals');
+  check(Number.parseInt($('controlDemChance').textContent)>=0,'Democratic-aligned control displays scenario frequency');
+  check(Number.parseInt($('controlRepChance').textContent)>=0,'Republican control displays scenario frequency');
+  check(Math.abs([...$('controlBar').children].reduce((a,n)=>a+Number.parseFloat(n.style.width),0)-100)<.03,'Probability bar adds to 100%');
+  check($('powerCards').querySelectorAll('.power-card').length===3,'House Senate Governors seat forecasts render');
+  check(d.querySelectorAll('#topNavigation a').length===4,'Front-facing header has only four core destinations');
+  check(d.querySelectorAll('#globalMenuPanel .global-menu-group').length===3,'Compact 3-group public navigation works');
+  check(!d.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races,#tabs,#map-area'),'Retired public research dashboard is removed');
+  check(!d.querySelector('a[href*="#races"],a[href*="#tabs"],a[href*="researchLab"]'),'No links to retired model UI');
+  $('controlUncertainty').value='1.3';$('controlUncertainty').dispatchEvent(new w.Event('change',{bubbles:true}));
+  check($('controlStatus').textContent.includes('14,000'),'Sensitivity selector recalculates simulation');
+  $('controlUncertainty').value='1';$('controlUncertainty').dispatchEvent(new w.Event('change',{bubbles:true}));
+  check($('controlDemChance').textContent.endsWith('%'),'Reset restores model result');
+  const t=$('themeToggle');if(t){t.click();check(!d.documentElement.classList.contains('light'),'Dark appearance works');t.click();check(d.documentElement.classList.contains('light'),'Light appearance works')}
+  iframe.style.width='390px';await new Promise(r=>w.requestAnimationFrame(r));
+  check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'No horizontal overflow at phone width');
+  report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.join('\n');
+ }catch(e){report.dataset.status='FAIL';report.textContent='FAIL: '+e.stack}
 })();
 </script></body></html>
