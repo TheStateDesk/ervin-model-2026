@@ -16,7 +16,7 @@ try{
  // Preflight the legacy homepage smoke as well; this blocked GitHub Pages despite healthy county maps.
  const homepage=await browser.newPage({viewport:{width:1200,height:950}});
  await homepage.goto(root+'/tests/browser_smoke.html',{waitUntil:'domcontentloaded'});
- await homepage.waitForFunction(()=>['PASS','FAIL'].includes(document.querySelector('#report')?.dataset.status),{timeout:45000});
+ await homepage.waitForFunction(()=>['PASS','FAIL'].includes(document.querySelector('#report')?.dataset.status),null,{timeout:45000});
  const homepageStatus=await homepage.locator('#report').getAttribute('data-status');
  const homepageReport=await homepage.locator('#report').innerText();
  if(homepageStatus!=='PASS')throw Error('Homepage smoke regression: '+homepageReport.slice(0,2400));
