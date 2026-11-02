@@ -8,3 +8,19 @@ html:not(.light) body .center-us path.er-county-path{fill:#44647e;stroke:#273e52
 html:not(.light) body .center-us path.er-county-path:hover{fill:#79a7c3}
 html:not(.light) body .center-us path.er-state-stroke{stroke:#b8d0df}
 @media(prefers-reduced-motion:reduce){.center-us path.er-county-path{transition:none}}
+
+
+/* National state selection and local county/district drilldown; no external atlas. */
+.center-us path.er-national-state{fill:#789bb2;stroke:#f6fbff;stroke-width:1.3;vector-effect:non-scaling-stroke;cursor:pointer}
+.center-us path.er-national-state:hover,.center-us path.er-national-state:focus-visible{fill:#b5cee0;stroke:#edc37c;stroke-width:2.8}
+html:not(.light) .center-us path.er-national-state{fill:#3b627b;stroke:#153a55}
+.er-drilldown{margin:16px 0 5px;padding:14px;border:1px solid var(--edge);border-radius:12px;background:var(--surface2)}
+.er-drill-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.er-drill-head span{font-size:11px;color:var(--muted)}
+.er-drilldown svg{display:block;width:100%;height:clamp(320px,52vw,620px);background:var(--surface);border:1px solid var(--edge);border-radius:10px;margin:12px 0}
+.er-drilldown .county{fill:#94b0c1;stroke:#e0edf3;stroke-width:.8;vector-effect:non-scaling-stroke;cursor:pointer}
+.er-drilldown .county:hover,.er-drilldown .county:focus-visible{fill:#8ab8d8;stroke:#d7ac6d;stroke-width:2.5}
+.er-drilldown .geo-district{fill:#6d93a8;stroke:#f4fbff;stroke-width:1.3;vector-effect:non-scaling-stroke;cursor:pointer}
+.er-drilldown .geo-district:hover,.er-drilldown .geo-district:focus-visible{fill:#4d8ab0;stroke:#f5c780;stroke-width:2.3}
+.er-drilldown .geo-district-label{fill:white;stroke:#1b3b50;stroke-width:3px;paint-order:stroke;font-size:16px;font-weight:800}
+@media(max-width:700px){.er-drilldown{padding:10px}.er-drilldown svg{height:clamp(340px,100vw,520px)}}
