@@ -17,7 +17,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/al/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -36,7 +36,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ak/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": "Alaska has a multi-candidate general election under ranked-choice voting. Dave Bronson and Treg Taylor are additional Republican candidates. The displayed polling comparison only covers Kreiss-Tomkins and Wilson, not the entire field.",
       "recentPolls": [],
@@ -55,7 +55,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/az/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -74,7 +74,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ar/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -93,7 +93,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ca/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [
@@ -133,7 +133,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ct/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -152,7 +152,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/fl/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [
@@ -196,7 +196,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ga/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -227,7 +227,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/id/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -246,7 +246,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/il/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -260,12 +260,12 @@
       "rep": "Zach Lahn",
       "party": "D",
       "poll": {
-        "margin": 7.4,
-        "count": 24,
+        "margin": 7.3,
+        "count": 26,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ia/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [
@@ -288,12 +288,12 @@
       "rep": "Ty Masterson",
       "party": "D",
       "poll": {
-        "margin": -3.2,
-        "count": 12,
+        "margin": -1.2,
+        "count": 14,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ks/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -307,12 +307,12 @@
       "rep": "Bobby Charles",
       "party": "D",
       "poll": {
-        "margin": 12,
-        "count": 19,
+        "margin": 11,
+        "count": 22,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/me/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": "Rick Bennett is also running as an independent; two-party poll margins exclude his share.",
       "recentPolls": [],
@@ -331,7 +331,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/md/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -350,7 +350,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ma/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -364,12 +364,12 @@
       "rep": "John James",
       "party": "D",
       "poll": {
-        "margin": 7.4,
-        "count": 38,
+        "margin": 9.6,
+        "count": 43,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/mi/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [
@@ -400,12 +400,12 @@
       "rep": "Lisa Demuth",
       "party": "D",
       "poll": {
-        "margin": 10.7,
-        "count": 11,
+        "margin": 11.7,
+        "count": 12,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/mn/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -419,12 +419,12 @@
       "rep": "Jim Pillen",
       "party": "D",
       "poll": {
-        "margin": -3.7,
-        "count": 15,
+        "margin": -4.4,
+        "count": 16,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ne/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -443,7 +443,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/nv/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -457,12 +457,12 @@
       "rep": "Kelly Ayotte",
       "party": "D",
       "poll": {
-        "margin": -7.8,
-        "count": 13,
+        "margin": -5.7,
+        "count": 14,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/nh/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -481,7 +481,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/nm/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -495,12 +495,12 @@
       "rep": "Bruce Blakeman",
       "party": "D",
       "poll": {
-        "margin": 12.1,
-        "count": 24,
+        "margin": 11,
+        "count": 25,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ny/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -519,7 +519,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/oh/governor",
-        "method": "On Point weighted 37-poll public average, updated November 1; this is the polling input, not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [
@@ -603,7 +603,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ok/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -622,7 +622,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/or/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -636,12 +636,12 @@
       "rep": "Stacy Garrity",
       "party": "D",
       "poll": {
-        "margin": 24.7,
-        "count": 17,
+        "margin": 24.6,
+        "count": 18,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/pa/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -660,7 +660,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/ri/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -679,7 +679,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/sc/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -698,7 +698,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/sd/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -717,7 +717,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/tn/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -731,12 +731,12 @@
       "rep": "Greg Abbott",
       "party": "D",
       "poll": {
-        "margin": -3.6,
-        "count": 58,
+        "margin": -2,
+        "count": 64,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/tx/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [
@@ -772,7 +772,7 @@
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/vt/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],
@@ -786,12 +786,12 @@
       "rep": "Tom Tiffany",
       "party": "D",
       "poll": {
-        "margin": 5.1,
-        "count": 8,
+        "margin": 5.5,
+        "count": 10,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/wi/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point Politics weighted public governor average as of Nov 1, 2026. Historical governor and candidate-performance adjustments are separate."
       },
       "otherCandidates": null,
       "recentPolls": [],

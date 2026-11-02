@@ -1,0 +1,302 @@
+{
+  "checkedAt": "2026-11-02",
+  "publisherAsOf": "2026-11-01",
+  "source": "https://www.onpointpolitics.us/polls/governor",
+  "sourceKind": "Publisher-curated weighted polling averages, not Ervin calculations",
+  "races": {
+    "OR": {
+      "marginD": -0.7,
+      "polls": 5,
+      "url": "https://www.onpointpolitics.us/polls/or/governor"
+    },
+    "NV": {
+      "marginD": 1,
+      "polls": 16,
+      "url": "https://www.onpointpolitics.us/polls/nv/governor"
+    },
+    "VT": {
+      "marginD": -1.1,
+      "polls": 7,
+      "url": "https://www.onpointpolitics.us/polls/vt/governor"
+    },
+    "KS": {
+      "marginD": -1.2,
+      "polls": 14,
+      "url": "https://www.onpointpolitics.us/polls/ks/governor"
+    },
+    "GA": {
+      "marginD": 2,
+      "polls": 17,
+      "url": "https://www.onpointpolitics.us/polls/ga/governor"
+    },
+    "TX": {
+      "marginD": -2,
+      "polls": 64,
+      "url": "https://www.onpointpolitics.us/polls/tx/governor"
+    },
+    "FL": {
+      "marginD": -3,
+      "polls": 43,
+      "url": "https://www.onpointpolitics.us/polls/fl/governor"
+    },
+    "NE": {
+      "marginD": -4.4,
+      "polls": 16,
+      "url": "https://www.onpointpolitics.us/polls/ne/governor"
+    },
+    "OH": {
+      "marginD": 5.4,
+      "polls": 37,
+      "url": "https://www.onpointpolitics.us/polls/oh/governor"
+    },
+    "WI": {
+      "marginD": 5.5,
+      "polls": 10,
+      "url": "https://www.onpointpolitics.us/polls/wi/governor"
+    },
+    "OK": {
+      "marginD": -5.6,
+      "polls": 1,
+      "url": "https://www.onpointpolitics.us/polls/ok/governor"
+    },
+    "NH": {
+      "marginD": -5.7,
+      "polls": 14,
+      "url": "https://www.onpointpolitics.us/polls/nh/governor"
+    },
+    "AK": {
+      "marginD": 6,
+      "polls": 8,
+      "url": "https://www.onpointpolitics.us/polls/ak/governor"
+    },
+    "AL": {
+      "marginD": -6.8,
+      "polls": 4,
+      "url": "https://www.onpointpolitics.us/polls/al/governor"
+    },
+    "NM": {
+      "marginD": 6.9,
+      "polls": 6,
+      "url": "https://www.onpointpolitics.us/polls/nm/governor"
+    },
+    "IA": {
+      "marginD": 7.3,
+      "polls": 26,
+      "url": "https://www.onpointpolitics.us/polls/ia/governor"
+    },
+    "AZ": {
+      "marginD": 7.8,
+      "polls": 32,
+      "url": "https://www.onpointpolitics.us/polls/az/governor"
+    },
+    "TN": {
+      "marginD": -8.4,
+      "polls": 4,
+      "url": "https://www.onpointpolitics.us/polls/tn/governor"
+    },
+    "MI": {
+      "marginD": 9.6,
+      "polls": 43,
+      "url": "https://www.onpointpolitics.us/polls/mi/governor"
+    },
+    "SC": {
+      "marginD": -9.8,
+      "polls": 10,
+      "url": "https://www.onpointpolitics.us/polls/sc/governor"
+    },
+    "ID": {
+      "marginD": -10.4,
+      "polls": 2,
+      "url": "https://www.onpointpolitics.us/polls/id/governor"
+    },
+    "ME": {
+      "marginD": 11,
+      "polls": 22,
+      "url": "https://www.onpointpolitics.us/polls/me/governor"
+    },
+    "NY": {
+      "marginD": 11,
+      "polls": 25,
+      "url": "https://www.onpointpolitics.us/polls/ny/governor"
+    },
+    "MN": {
+      "marginD": 11.7,
+      "polls": 12,
+      "url": "https://www.onpointpolitics.us/polls/mn/governor"
+    },
+    "AR": {
+      "marginD": -17.4,
+      "polls": 3,
+      "url": "https://www.onpointpolitics.us/polls/ar/governor"
+    },
+    "SD": {
+      "marginD": -18,
+      "polls": 4,
+      "url": "https://www.onpointpolitics.us/polls/sd/governor"
+    },
+    "CT": {
+      "marginD": 19.1,
+      "polls": 11,
+      "url": "https://www.onpointpolitics.us/polls/ct/governor"
+    },
+    "IL": {
+      "marginD": 20,
+      "polls": 2,
+      "url": "https://www.onpointpolitics.us/polls/il/governor"
+    },
+    "CA": {
+      "marginD": 23.5,
+      "polls": 20,
+      "url": "https://www.onpointpolitics.us/polls/ca/governor"
+    },
+    "MA": {
+      "marginD": 23.5,
+      "polls": 9,
+      "url": "https://www.onpointpolitics.us/polls/ma/governor"
+    },
+    "PA": {
+      "marginD": 24.6,
+      "polls": 18,
+      "url": "https://www.onpointpolitics.us/polls/pa/governor"
+    },
+    "MD": {
+      "marginD": 27,
+      "polls": 2,
+      "url": "https://www.onpointpolitics.us/polls/md/governor"
+    },
+    "RI": {
+      "marginD": 34,
+      "polls": 5,
+      "url": "https://www.onpointpolitics.us/polls/ri/governor"
+    }
+  },
+  "unavailable": [
+    "CO",
+    "HI",
+    "WY"
+  ],
+  "changes": [
+    {
+      "state": "IA",
+      "old": [
+        7.4,
+        24
+      ],
+      "new": [
+        7.3,
+        26
+      ]
+    },
+    {
+      "state": "KS",
+      "old": [
+        -3.2,
+        12
+      ],
+      "new": [
+        -1.2,
+        14
+      ]
+    },
+    {
+      "state": "ME",
+      "old": [
+        12,
+        19
+      ],
+      "new": [
+        11,
+        22
+      ]
+    },
+    {
+      "state": "MI",
+      "old": [
+        7.4,
+        38
+      ],
+      "new": [
+        9.6,
+        43
+      ]
+    },
+    {
+      "state": "MN",
+      "old": [
+        10.7,
+        11
+      ],
+      "new": [
+        11.7,
+        12
+      ]
+    },
+    {
+      "state": "NE",
+      "old": [
+        -3.7,
+        15
+      ],
+      "new": [
+        -4.4,
+        16
+      ]
+    },
+    {
+      "state": "NH",
+      "old": [
+        -7.8,
+        13
+      ],
+      "new": [
+        -5.7,
+        14
+      ]
+    },
+    {
+      "state": "NY",
+      "old": [
+        12.1,
+        24
+      ],
+      "new": [
+        11,
+        25
+      ]
+    },
+    {
+      "state": "PA",
+      "old": [
+        24.7,
+        17
+      ],
+      "new": [
+        24.6,
+        18
+      ]
+    },
+    {
+      "state": "TX",
+      "old": [
+        -3.6,
+        58
+      ],
+      "new": [
+        -2,
+        64
+      ]
+    },
+    {
+      "state": "WI",
+      "old": [
+        5.1,
+        8
+      ],
+      "new": [
+        5.5,
+        10
+      ]
+    }
+  ],
+  "note": "Matched all 33 published governor average rows. Senate polling inputs remain independently refreshed by existing candidate-pair-verified scheduled workflow."
+}

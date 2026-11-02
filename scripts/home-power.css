@@ -37,3 +37,6 @@ html:not(.light) .power-numbers .power-r strong{color:var(--red)}
 .race-row .live-value{display:inline-block;border-left:3px solid var(--gold);padding-left:9px}
 @media(max-width:970px){.power-grid{grid-template-columns:1fr}.power-heading{flex-wrap:wrap}.power-card{padding:16px}.power-numbers{justify-content:flex-start;gap:clamp(28px,9vw,95px)}.power-numbers strong{font-size:34px}}
 @media(max-width:660px){.power-grid{grid-template-columns:1fr;gap:10px}.power-numbers{gap:24px}.power-numbers strong{font-size:30px}.power-asof{font-size:9px}.power-bar{height:17px}}
+
+.home-power-panel{margin-top:18px}
+@media(max-width:700px){.home-power-panel{margin-top:10px;padding:14px}.home-power-panel .power-heading h2{font-size:24px}.home-power-panel .power-heading p{font-size:12px}.home-power-panel .power-asof{white-space:normal}.home-power-panel .power-legend{margin:12px 0;gap:9px 14px}.home-power-panel .power-grid{gap:8px}.home-power-panel .power-card{padding:12px}.home-power-panel .power-numbers{margin:9px 0}}
