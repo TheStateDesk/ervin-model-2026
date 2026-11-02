@@ -49,8 +49,8 @@ for(const rel of headers){
  if(/<nav[\s\S]*?href=["'](?:\.\.\/)*michigan\/election-night\//i.test(h))issues.push(rel+': Michigan-only election night linked from header');
 }
 const nightHtml=fs.readFileSync(path.join(root,'election-night/index.html'),'utf8');
-const nightHeader=nightHtml.match(/<header\\b[^>]*>[\\s\\S]*?<\\/header>/i)?.[0]||'';
-const nightNav=nightHeader.match(/<nav\\b[^>]*>[\\s\\S]*?<\\/nav>/i)?.[0]||'';
+const nightHeader=nightHtml.match(/<header\b[^>]*>[\s\S]*?<\/header>/i)?.[0]||'';
+const nightNav=nightHeader.match(/<nav\b[^>]*>[\s\S]*?<\/nav>/i)?.[0]||'';
 const nightLinks=[...nightNav.matchAll(/href=["']([^"']+)["']/g)].map(x=>x[1]);
 const expectedNightLinks=['../states/','#nationalBoard','#michiganSpotlight'];
 if(JSON.stringify(nightLinks)!==JSON.stringify(expectedNightLinks))issues.push('Election Night nav must link only to the consolidated State Desk and on-page sections: '+nightLinks.join(', '));
