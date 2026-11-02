@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 import fs from 'node:fs';import assert from 'node:assert/strict';import {createRequire} from 'node:module';
 const req=createRequire(import.meta.url),json=p=>JSON.parse(fs.readFileSync(p,'utf8')),text=p=>fs.readFileSync(p,'utf8');
-const g=req('./governor-backtest.js'),govData=json('research/governor-historical-verified-2018-2022.json'),
- history=json('research/calibration_events_2016_2024.json'),
- score=json('research/governor-backtest-scorecard-2026-11-02.json');
-const recomputed=g.compute(govData,history);
-assert.equal(govData.races.length,14);
+const g=req('./governor-backtest.js'),govData=json('research/governor-same-office-2014-2022.json'),
+ score=json('research/governor-same-office-backtest-2026-11-02.json');
+const recomputed=g.compute(govData);
+assert.equal(govData.races.length,39);
 assert.equal(recomputed.summary.n,score.summary.n);
 assert.equal(recomputed.summary.adjustedMAE,score.summary.adjustedMAE);
 assert.equal(recomputed.summary.rawMAE,score.summary.rawMAE);
 assert.equal(recomputed.summary.rawWinners,score.summary.rawWinners);
 assert.equal(recomputed.summary.adjustedWinners,score.summary.adjustedWinners);
-assert.equal(recomputed.summary.eligible,13);
-assert(score.summary.adjustedMAE>score.summary.rawMAE,'Do not hide underperformance of governor correction');
+assert.equal(recomputed.summary.eligible,19);
+assert.equal(recomputed.preferredRCP.n,11);
+assert(score.summary.adjustedMAE>score.summary.rawMAE,'Do not hide underperformance of same-office governor correction');
+assert(score.preferredRCP.adjustedMAE>score.preferredRCP.rawMAE,'RCP-only cohort must not be silently reweighted');
 for(let i=0;i<recomputed.records.length;i++){
  const r=recomputed.records[i],b=score.records[i];
  assert.equal(r.correction,b.correction,'Governor correction drift '+r.state+' '+r.year);
