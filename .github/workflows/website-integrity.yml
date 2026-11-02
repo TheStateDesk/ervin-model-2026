@@ -11,6 +11,7 @@ on:
       - 'election-night/**'
       - 'states/**'
       - 'state/**'
+      - 'stats-for-nerds/**'
       - 'index.html'
       - 'site-chrome.js'
       - 'polling/**'
@@ -24,6 +25,7 @@ on:
       - 'governors/**'
       - 'states/**'
       - 'state/**'
+      - 'stats-for-nerds/**'
       - 'index.html'
       - 'site-chrome.js'
 jobs:
@@ -44,6 +46,7 @@ jobs:
       - run: node scripts/validate-statewide-night.mjs
       - run: node scripts/validate-forecast-backtests.mjs
       - run: node scripts/test-election-night-balance.mjs
+      - run: node scripts/test-early-signal-lab.mjs
       - run: node scripts/test-michigan-candidate-effect.mjs
       - name: Install browser for visual verification
         run: |
