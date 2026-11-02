@@ -52,9 +52,9 @@ function compute(house,senate,governors){
 function render(rootEl,projection){
  if(!rootEl)throw Error('Balance-of-power container missing');
  const specs=[
-  {office:'house',label:'U.S. House',data:projection.house,href:'house/',note:'435 districts · 218 seats for a majority · model Tossups remain unassigned'},
+  {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 districts · 218 seats for a majority · model Tossups remain unassigned'},
   {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:'100 seats · 17 races modeled · 18 unmodeled 2026 contests presumed held'},
-  {office:'governors',label:'Governorships',data:projection.governors,href:'governors/',note:'50 states · 36 elections, 14 holdovers · unavailable polling left unprojected'}
+  {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 elections, 14 holdovers · unavailable polling left unprojected'}
  ];
  rootEl.innerHTML=specs.map(({office,label:headline,data,href,note})=>{
   const partyD=office==='senate'?'D-aligned':'Democratic';
@@ -62,7 +62,7 @@ function render(rootEl,projection){
   const hover=partyD+' '+data.D+'; Republican '+data.R+(data.T?'; unresolved '+data.T:'')+(other?'; new independent '+other:'')+' — '+headline;
   const pct=n=>Number((n/data.denom*100).toFixed(4));
   return '<article class="power-card" data-power-office="'+office+'">'+
-   '<div class="power-card-head"><h3>'+headline+'</h3><a href="'+href+'">Explore races</a></div>'+
+   '<div class="power-card-head"><h3>'+headline+'</h3><a href="'+href+'">'+(office==='senate'?'Control outlook':'Choose a state')+'</a></div>'+
    '<div class="power-numbers"><span class="power-d"><strong data-power-d>'+data.D+'</strong><small>'+partyD+'</small></span>'+
    '<span class="power-r"><strong data-power-r>'+data.R+'</strong><small>Republican</small></span>'+
    (data.T?'<span class="power-t"><strong data-power-t>'+data.T+'</strong><small>'+ (office==='house'?'Toss-up':'Unprojected') +'</small></span>':'')+
