@@ -29,3 +29,196 @@
 .night-counted-candidate small{text-align:right;white-space:nowrap;color:var(--night-muted,#748696);font-variant-numeric:tabular-nums}
 .night-report-progress{display:block;font-size:10px;line-height:1.5}
 @media(max-width:730px){.night-counted-candidate{grid-template-columns:minmax(85px,1fr) auto 42px;gap:5px}}
+
+/* The national Election Night desk shares the State Desk's editorial identity.
+   Standalone result-map/counting code and data contracts remain unchanged. */
+html.light{color-scheme:light}
+html.theme-dark{color-scheme:dark}
+body.ed-body.night-page{
+ --bg:var(--ed-paper);--surface:var(--ed-white);--ink:var(--ed-ink);
+ --muted:var(--ed-muted);--line:var(--ed-rule);
+ --blue:var(--ed-blue);--red:var(--ed-red);--gold:var(--ed-gold);
+ --dem-fill:#347db1;--rep-fill:#bf5661;--unknown-fill:#8f9ba3;
+ background:var(--ed-paper)!important;color:var(--ed-ink)!important;
+ font:14px/1.6 var(--ed-sans)!important;
+}
+html.theme-dark body.ed-body.night-page{
+ --navy:#182938;--dem-fill:#478abb;--rep-fill:#d26b76;--unknown-fill:#647989;
+}
+.night-page .night-head.ed-head{
+ display:block;position:relative;top:auto;z-index:30;padding:0;box-shadow:none;
+ background:var(--ed-white);color:var(--ed-ink);border-bottom:1px solid var(--ed-rule);
+}
+.night-page .night-head .ed-head-inner{
+ max-width:1440px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+ align-items:center;gap:18px;padding:16px 23px;margin:auto;
+}
+.night-page .night-head .night-brand.ed-brand{
+ color:var(--ed-ink)!important;display:inline-flex;align-items:center;font:850 13px/1.2 var(--ed-sans);
+ letter-spacing:.09em;white-space:nowrap;gap:0;text-decoration:none;
+}
+.night-page .night-brand b{
+ background:#203d52;border-radius:3px;color:#fff;display:inline-grid;place-items:center;
+ width:33px;height:33px;font:800 19px var(--ed-serif);margin-right:9px;
+}
+.night-page .night-head .ed-mast{text-align:center}
+.night-page .night-head .ed-mast a{font:700 clamp(27px,3.4vw,45px)/1 var(--ed-serif);color:var(--ed-ink)!important;letter-spacing:-.045em;text-decoration:none}
+.night-page .night-head .ed-mast small{font:750 9px var(--ed-sans);letter-spacing:.18em;color:var(--ed-gold);margin-top:5px}
+.night-page .night-head .ed-utility{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0}
+.night-page .night-head #appearance{
+ justify-self:auto;color:var(--ed-ink)!important;background:transparent;border:1px solid var(--ed-rule-dark);
+ border-radius:3px;padding:11px 13px;min-height:43px;font:750 12px var(--ed-sans);
+ white-space:nowrap;
+}
+.night-page .night-head #appearance:hover{background:var(--ed-blue-light)}
+.night-page .night-head nav.ed-nav{
+ display:block;flex:none;position:static;padding:0;margin:0;width:100%;
+ border-top:1px solid var(--ed-rule);border-bottom:0;background:var(--ed-white);
+}
+.night-page .night-head .ed-nav-inner{
+ display:flex;justify-content:center;gap:1px;padding:0 18px;max-width:1440px;
+ flex-wrap:wrap;margin:auto;
+}
+.night-page .night-head nav.ed-nav a{
+ display:block;flex:0 0 auto;min-width:0;white-space:nowrap;
+ color:var(--ed-ink)!important;font:800 11px/1.4 var(--ed-sans);
+ text-transform:uppercase;letter-spacing:.055em;
+ padding:12px 18px;border-radius:0;border-bottom:3px solid transparent;text-decoration:none;
+}
+.night-page .night-head nav.ed-nav a:hover,.night-page .night-head nav.ed-nav a:focus-visible{
+ background:var(--ed-sand);color:var(--ed-ink)!important;border-bottom-color:var(--ed-gold)
+}
+.night-page .night-head nav.ed-nav a[href="#nationalBoard"]{border-bottom-color:var(--ed-gold);background:var(--ed-sand)}
+.night-page .night-shell.ed-shell{max-width:1400px;width:min(1400px,calc(100% - 46px));padding:25px 0 70px}
+.night-page .night-shell .ed-sectionline{margin-top:9px}
+.night-page .night-jump{
+ display:flex;gap:0;overflow-x:auto;border:1px solid var(--ed-rule);
+ background:var(--ed-white);scrollbar-width:thin;margin-bottom:9px;
+}
+.night-page .night-jump a{
+ display:block;flex:1;min-width:190px;padding:13px 18px;
+ border-right:1px solid var(--ed-rule);color:var(--ed-ink);
+ font:800 11px var(--ed-sans);letter-spacing:.02em;text-decoration:none;
+}
+.night-page .night-jump a:hover{background:var(--ed-sand)}
+.night-page .night-jump a:last-child{border-right:0}
+.night-page .eyebrow{font:850 10px/1.4 var(--ed-sans);letter-spacing:.13em;color:var(--ed-gold)}
+.night-page .night-intro{align-items:center;padding:24px 0 26px}
+.night-page .night-intro h1{
+ font:700 clamp(42px,5vw,75px)/1.02 var(--ed-serif);
+ letter-spacing:-.05em;color:var(--ed-ink);margin:8px 0 13px;
+}
+.night-page .night-intro p{
+ font:400 clamp(15px,1.6vw,19px)/1.56 var(--ed-serif);color:var(--ed-muted);max-width:760px;
+}
+.night-page .night-live-state{
+ border:1px solid var(--ed-rule);border-top:3px solid var(--ed-gold);
+ min-width:258px;padding:17px 19px;display:grid;gap:8px;background:var(--ed-white);
+}
+.night-page .night-live-state strong{font:800 14px/1.35 var(--ed-sans)}
+.night-page .night-live-state button{min-height:39px;font-size:12px;border:1px solid var(--ed-rule-dark);border-radius:3px}
+.night-page .night-horizon{
+ border-left:4px solid var(--ed-gold);background:var(--ed-sand);
+ border-top:0;border-bottom:0;margin:0 0 27px;padding:13px 18px;
+ font-size:12px;color:var(--ed-muted);
+}
+.night-page .feature-panel,.night-page .national-panel{
+ border:1px solid var(--ed-rule);border-radius:0;box-shadow:none;
+ background:var(--ed-white);padding:clamp(17px,2.4vw,32px);margin-bottom:25px;
+}
+.night-page .feature-panel{border-top:4px solid var(--ed-gold)}
+.night-page .feature-top h2,.night-page .section-head h2{
+ font:700 clamp(28px,3.4vw,42px)/1.12 var(--ed-serif);
+ color:var(--ed-ink);letter-spacing:-.035em;
+}
+.night-page .michigan-model{
+ border-radius:0;border:1px solid var(--ed-rule);border-top:3px solid var(--ed-blue);
+ padding:15px 19px;background:var(--ed-paper);
+}
+.night-page .michigan-model strong{font:750 28px var(--ed-sans);color:var(--ed-ink)}
+.night-page .michigan-returns{
+ border:1px solid var(--ed-rule);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:0;margin:24px 0;background:var(--ed-paper);
+}
+.night-page .michigan-returns>div{padding:14px 16px}
+.night-page .michigan-returns>div+div{border-color:var(--ed-rule)}
+.night-page .michigan-returns strong{font:750 clamp(19px,2.5vw,30px) var(--ed-sans);color:var(--ed-ink)}
+.night-page .mi-geography{
+ background:color-mix(in srgb,var(--ed-paper) 75%,var(--ed-white));
+ border:1px solid var(--ed-rule);border-radius:0;padding:14px;
+}
+.night-page .county-focused{background:var(--ed-paper);border-radius:0;border-color:var(--ed-rule)}
+.night-page #miCountyMap path.county{stroke:var(--ed-white)}
+.night-page #miCountyMap path.county:focus,.night-page #miCountyMap path.county:hover{stroke:var(--ed-gold)}
+.night-page .county-table-wrap,.night-page .race-list{border-radius:0;border-color:var(--ed-rule)}
+.night-page .county-table-wrap th{background:var(--ed-paper)}
+.night-page .feed-totals{gap:0;border:1px solid var(--ed-rule);background:var(--ed-paper)}
+.night-page .feed-totals>div{padding:11px 16px;min-width:155px}
+.night-page .feed-totals>div+div{border-left:1px solid var(--ed-rule)}
+.night-page .feed-totals strong{font-size:22px;color:var(--ed-ink);font-variant-numeric:tabular-nums}
+.night-page .filters{gap:12px 16px}
+.night-page .filters label span{color:var(--ed-muted);font-weight:800}
+.night-page .filters input,.night-page .filters select,.night-page #miCountySearch{
+ background:var(--ed-white);border:1px solid var(--ed-rule-dark);
+ border-radius:2px;color:var(--ed-ink);min-height:42px;padding:10px 12px;
+}
+.night-page .seg-tabs{gap:0;border:1px solid var(--ed-rule);flex-wrap:wrap}
+.night-page .seg-tabs button{border:0;border-radius:0;padding:11px 15px;color:var(--ed-ink);background:transparent;font-weight:750;font-size:12px}
+.night-page .seg-tabs button+button{border-left:1px solid var(--ed-rule)}
+.night-page .seg-tabs button.is-active{background:#234968;color:#fff}
+.night-page .race-columns{background:var(--ed-paper);border:1px solid var(--ed-rule);border-bottom:0;color:var(--ed-muted)}
+.night-page .race-row{border-color:var(--ed-rule)}
+.night-page .race-row:nth-child(2n){background:color-mix(in srgb,var(--ed-white) 84%,var(--ed-paper))}
+.night-page .race-row h3{font:700 17px/1.25 var(--ed-serif)}
+.night-page .race-row .model-value{font:750 18px var(--ed-sans)}
+.night-page .night-counted-candidate.dem{border-color:var(--dem-fill)}
+.night-page .night-counted-candidate.rep{border-color:var(--rep-fill)}
+.night-page .source-note{font:11px/1.65 var(--ed-sans);color:var(--ed-muted)}
+.night-page .night-links{border-top:1px solid var(--ed-rule);padding-top:13px}
+.night-page .night-footer{justify-content:space-between;align-items:center;border-color:var(--ed-rule);gap:15px}
+.night-page .night-footer>div{display:flex;gap:16px;flex-wrap:wrap}
+.night-page #historicalErrorEvidence>summary{font:700 21px var(--ed-serif);color:var(--ed-ink)}
+.night-page #historicalErrorEvidence>summary:hover{color:var(--ed-blue)}
+@media(max-width:950px){
+ .night-page .night-head .ed-head-inner{grid-template-columns:auto minmax(0,1fr) auto}
+ .night-page .night-head .ed-mast{text-align:left}
+ .night-page .night-head .ed-mast a{font-size:30px}
+ .night-page .night-head .ed-mast small{display:none}
+ .night-page .night-head .ed-date{display:none}
+ .night-page .night-head nav.ed-nav .ed-nav-inner{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+ .night-page .night-intro{align-items:start}
+ .night-page .michigan-returns>div:nth-child(3){border-left:0}
+}
+@media(max-width:660px){
+ .night-page .night-shell.ed-shell{width:calc(100% - 28px);padding:19px 0 60px}
+ .night-page .night-head .ed-head-inner{grid-template-columns:auto minmax(0,1fr);gap:8px 10px;padding:13px 14px}
+ .night-page .night-head .ed-brand{font-size:0}
+ .night-page .night-head .ed-brand b{margin-right:0}
+ .night-page .night-head .ed-mast a{font-size:clamp(24px,6.4vw,30px)}
+ .night-page .night-head .ed-utility{grid-column:1/-1;grid-row:2;justify-content:flex-start;padding-top:7px}
+ .night-page .night-head .ed-utility .ed-btn{min-height:39px;padding:8px 12px;font-size:11px}
+ .night-page .night-head nav.ed-nav .ed-nav-inner{justify-content:flex-start;gap:0;padding:0 9px}
+ .night-page .night-head nav.ed-nav a{padding:12px;font-size:10px}
+ .night-page .night-jump a{flex:none;min-width:170px;font-size:10px}
+ .night-page .night-intro{display:block;padding:17px 0}
+ .night-page .night-live-state{min-width:0;margin-top:16px}
+ .night-page .feature-top,.night-page .section-head{display:block}
+ .night-page .michigan-returns{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .night-page .michigan-returns>div:nth-child(3){border-left:0;border-top:1px solid var(--ed-rule)}
+ .night-page .michigan-returns>div:nth-child(4){border-top:1px solid var(--ed-rule)}
+ .night-page .feed-totals{margin-top:12px}
+ .night-page .feed-totals>div{min-width:0;flex:1}
+ .night-page .seg-tabs button{padding:9px 10px;font-size:11px}
+ .night-page .filters label{min-width:0;max-width:100%}
+ .night-page .filters select,.night-page .filters input{max-width:100%}
+ .night-page .race-columns{display:none}
+ .night-page .race-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .night-page .race-row>div:first-child,.night-page .race-row>div:last-child{grid-column:1/-1}
+}
+@media(max-width:410px){
+ .night-page .night-head .ed-utility{flex-wrap:wrap}
+ .night-page .night-head nav.ed-nav a{padding:11px 9px}
+ .night-page .feed-totals strong{font-size:17px}
+ .night-page .seg-tabs button{padding:8px}
+}
+@media(prefers-reduced-motion:reduce){.night-page #miCountyMap path.county{transition:none}}
