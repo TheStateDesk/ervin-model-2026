@@ -32,7 +32,7 @@ def write(path,obj):
     p=ROOT/path;p.parent.mkdir(exist_ok=True,parents=True)
     p.write_text(json.dumps(obj,ensure_ascii=False,separators=(',',':'))+'\n')
 def district_id(state,district):
-    try: return state.upper()+'-'+str(int(district)).zfill(2) if str(district).strip().upper() not in ('AL','AT LARGE','AT-LARGE') else state.upper()+'-01'
+    try: return state.upper()+'-'+str(max(1,int(district))).zfill(2) if str(district).strip().upper() not in ('AL','AT LARGE','AT-LARGE') else state.upper()+'-01'
     except: return state.upper()+'-01'
 def party(s):
     s=str(s or '').upper()
@@ -163,6 +163,10 @@ def main():
         if newest:
             local.append({'pollster':newest['pollster'],'date':newest['date'],'dem':newest['dem'],'rep':newest['rep'],'url':newest['url'],'kind':'NYT-compiled index latest','source':'PeoplesPoll','note':newest['sourcePublication'],'matchup':newest['matchup'],'otherCandidates':newest['otherCandidates'],'compatible':newest['compatible']})
         local=dedup(local)
+        # Alaska is a multi-candidate ranked-choice contest and CA-06 has an independent.
+        # Do not label Hill (I) as D or count RCV transfer/top-two polls as party ballot tests.
+        if id in ('AK-01','CA-06'):
+            for p in local:p['compatible']=False;p['note']=((p.get('note') or '')+' · Candidate-party mapping not comparable to a D/R general ballot; shown for context only.').strip()
         usable=[]
         for p in local:
             if not p.get('compatible') or not isinstance(p.get('dem'),(int,float)) or not isinstance(p.get('rep'),(int,float)):continue
