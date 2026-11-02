@@ -1,0 +1,427 @@
+{
+  "asOf": "2026-11-02",
+  "source": "https://www.realclearpolling.com/latest-polls/house",
+  "description": "Selected directly listed 2026 general-election House polling matchups on RealClearPolling as of November 2, 2026. The date below is the listing date, not independently checked fieldwork end. Party and sponsorship flags should be checked with the original pollster. These are survey observations, NOT state/Ervin averages, and can overlap with older archives.",
+  "races": {
+    "AK-01": [
+      {
+        "pollster": "NY Times/Siena",
+        "date": "2026-11-02",
+        "dem": 48,
+        "rep": 52,
+        "margin": -4,
+        "demCandidate": "Hill",
+        "repCandidate": "Begich",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": "RCV top-two matchup"
+      },
+      {
+        "pollster": "Data for Progress",
+        "date": "2026-10-20",
+        "dem": 49,
+        "rep": 51,
+        "margin": -2,
+        "demCandidate": "Hill",
+        "repCandidate": "Begich",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": "RCV top-two matchup"
+      }
+    ],
+    "NH-01": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 46,
+        "rep": 42,
+        "margin": 4,
+        "demCandidate": "Shaheen",
+        "repCandidate": "DiLorenzo",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      },
+      {
+        "pollster": "Saint Anselm College",
+        "date": "2026-10-22",
+        "dem": 46,
+        "rep": 42,
+        "margin": 4,
+        "demCandidate": "Shaheen",
+        "repCandidate": "DiLorenzo",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "NH-02": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 56,
+        "rep": 41,
+        "margin": 15,
+        "demCandidate": "Goodlander",
+        "repCandidate": "Tang Williams",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      },
+      {
+        "pollster": "Saint Anselm College",
+        "date": "2026-10-22",
+        "dem": 54,
+        "rep": 38,
+        "margin": 16,
+        "demCandidate": "Goodlander",
+        "repCandidate": "Tang Williams",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "ME-02": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 47,
+        "rep": 52,
+        "margin": -5,
+        "demCandidate": "Dunlap",
+        "repCandidate": "LePage",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "CA-01": [
+      {
+        "pollster": "USC/Dornsife",
+        "date": "2026-10-30",
+        "dem": 56,
+        "rep": 41,
+        "margin": 15,
+        "demCandidate": "McGuire",
+        "repCandidate": "Gallagher",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "CA-06": [
+      {
+        "pollster": "USC/Dornsife",
+        "date": "2026-10-30",
+        "dem": 55,
+        "rep": 43,
+        "margin": 12,
+        "demCandidate": "Pan",
+        "repCandidate": "Kiley",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "CA-22": [
+      {
+        "pollster": "USC/Dornsife",
+        "date": "2026-10-30",
+        "dem": 54,
+        "rep": 44,
+        "margin": 10,
+        "demCandidate": "Villegas",
+        "repCandidate": "Valadao",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "CA-48": [
+      {
+        "pollster": "USC/Dornsife",
+        "date": "2026-10-30",
+        "dem": 52,
+        "rep": 44,
+        "margin": 8,
+        "demCandidate": "von Wilpert",
+        "repCandidate": "Desmond",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "PA-07": [
+      {
+        "pollster": "Muhlenberg College",
+        "date": "2026-10-29",
+        "dem": 49,
+        "rep": 43,
+        "margin": 6,
+        "demCandidate": "Brooks",
+        "repCandidate": "Mackenzie",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      },
+      {
+        "pollster": "NY Times/Siena",
+        "date": "2026-10-25",
+        "dem": 49,
+        "rep": 44,
+        "margin": 5,
+        "demCandidate": "Brooks",
+        "repCandidate": "Mackenzie",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "AL-02": [
+      {
+        "pollster": "Remington Research",
+        "date": "2026-10-29",
+        "dem": 46,
+        "rep": 48,
+        "margin": -2,
+        "demCandidate": "Figures",
+        "repCandidate": "Marques",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "IN-05": [
+      {
+        "pollster": "Quantus Insights",
+        "date": "2026-10-27",
+        "dem": 42,
+        "rep": 45,
+        "margin": -3,
+        "demCandidate": "Ford",
+        "repCandidate": "Spartz",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "PA-01": [
+      {
+        "pollster": "NY Times/Siena",
+        "date": "2026-10-25",
+        "dem": 48,
+        "rep": 46,
+        "margin": 2,
+        "demCandidate": "Harvie",
+        "repCandidate": "Fitzpatrick",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "PA-08": [
+      {
+        "pollster": "NY Times/Siena",
+        "date": "2026-10-25",
+        "dem": 51,
+        "rep": 46,
+        "margin": 5,
+        "demCandidate": "Cognetti",
+        "repCandidate": "Bresnahan",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      },
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 52,
+        "rep": 48,
+        "margin": 4,
+        "demCandidate": "Cognetti",
+        "repCandidate": "Bresnahan",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "PA-10": [
+      {
+        "pollster": "NY Times/Siena",
+        "date": "2026-10-25",
+        "dem": 48,
+        "rep": 48,
+        "margin": 0,
+        "demCandidate": "Stelson",
+        "repCandidate": "Perry",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      },
+      {
+        "pollster": "Susquehanna",
+        "date": "2026-10-16",
+        "dem": 49,
+        "rep": 46,
+        "margin": 3,
+        "demCandidate": "Stelson",
+        "repCandidate": "Perry",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "TX-34": [
+      {
+        "pollster": "Washington Post",
+        "date": "2026-10-23",
+        "dem": 50,
+        "rep": 43,
+        "margin": 7,
+        "demCandidate": "Gonzalez",
+        "repCandidate": "Flores",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "TX-35": [
+      {
+        "pollster": "Washington Post",
+        "date": "2026-10-23",
+        "dem": 47,
+        "rep": 48,
+        "margin": -1,
+        "demCandidate": "Garcia",
+        "repCandidate": "De La Cruz",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      },
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 51,
+        "rep": 49,
+        "margin": 2,
+        "demCandidate": "Garcia",
+        "repCandidate": "De La Cruz",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "MT-01": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 50,
+        "rep": 46,
+        "margin": 4,
+        "demCandidate": "Forstag",
+        "repCandidate": "Flint",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "FL-14": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 48,
+        "rep": 43,
+        "margin": 5,
+        "demCandidate": "Castor",
+        "repCandidate": "Beltran",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "MO-02": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 51,
+        "rep": 46,
+        "margin": 5,
+        "demCandidate": "Wellman",
+        "repCandidate": "Wagner",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "NC-11": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 56,
+        "rep": 43,
+        "margin": 13,
+        "demCandidate": "Ager",
+        "repCandidate": "Balkcom",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "AR-02": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 48,
+        "rep": 52,
+        "margin": -4,
+        "demCandidate": "Jones",
+        "repCandidate": "Hill",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "AZ-02": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 50,
+        "rep": 48,
+        "margin": 2,
+        "demCandidate": "Nez",
+        "repCandidate": "Crane",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "MI-07": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 53,
+        "rep": 45,
+        "margin": 8,
+        "demCandidate": "Lawrence",
+        "repCandidate": "Barrett",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ],
+    "IA-02": [
+      {
+        "pollster": "Poll Vault/Emerson",
+        "date": "2026-10-21",
+        "dem": 50,
+        "rep": 47,
+        "margin": 3,
+        "demCandidate": "James",
+        "repCandidate": "Mitchell",
+        "sourceKind": "RealClearPolling individual-poll listing (not an original release)",
+        "url": "https://www.realclearpolling.com/latest-polls/house",
+        "note": null
+      }
+    ]
+  }
+}
