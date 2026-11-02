@@ -39,7 +39,7 @@ assert.equal(a.forecast.automaticAdditionalMuslimPenalty,0);
 assert.equal(a.forecast.candidateStrength.adjustmentD,w.adjustmentD);
 assert(a.forecast.candidateStrength.sourcePolling.startsWith('https://www.realclearpolling.com/'));
 const homepage=fs.readFileSync('states/index.html','utf8');
-assert(homepage.includes('../scripts/home-control.js')&&!homepage.includes('window.ERVIN_DATA'),'State Desk must use standalone Senate forecasts and never embed legacy research UI');
+assert(homepage.includes('../scripts/home-election-2026.js')&&!homepage.includes('window.ERVIN_DATA'),'State Desk must use standalone Senate forecasts and never embed legacy research UI');
 const current=read('counties-watch/forecast-baselines.json').states.MI;
 assert.equal(current.candidateStrength.adjustmentD,-1.84,'Michigan conditional forecast input should retain candidate audit evidence');
 assert.equal(current.adjustedMargin,sen.adjustedMargin,'Public Senate control and Michigan State Desk must reuse one Ervin margin');
