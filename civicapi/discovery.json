@@ -1,15 +1,9 @@
 {
-  "checkedAt": "2026-11-02T20:03:11.525753Z",
+  "checkedAt": "2026-11-02T20:05:24.025614Z",
   "discovery": {
     "found": 487,
-    "lookups": 5,
+    "lookups": 1,
     "statusSample": {
-      "MA-GOVERNOR": "mapped",
-      "MI-GOVERNOR": "mapped",
-      "NE-GOVERNOR": "mapped",
-      "NM-01": "mapped",
-      "NM-02": "mapped",
-      "NM-03": "mapped",
       "VT-01": "unavailable: "
     },
     "unmapped": 1
