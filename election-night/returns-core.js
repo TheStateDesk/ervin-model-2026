@@ -16,7 +16,7 @@
  TX:'21:00',UT:'22:00',VT:'19:00',VA:'19:00',WA:'23:00',WV:'19:30',WI:'21:00',WY:'21:00'
  };
  // House district may finish earlier than split-zone statewide deadline.
- const districtClose={'KY-06':'18:00','VA-02':'19:00','VA-05':'19:00','FL-27':'20:00','AL-07':'20:00','MI-07':'20:00','TX-18':'21:00'};
+ const districtClose={'KY-06':'18:00','VA-02':'19:00','VA-05':'19:00','FL-27':'19:00','AL-07':'20:00','MI-07':'20:00','TX-18':'20:00'};
  const numeric=n=>typeof n==='number'&&Number.isSafeInteger(n)&&n>=0&&n<=30000000;
  const canonical=(key,office)=>{
   const s=String(key||'').toUpperCase().trim().replace(/_/g,'-');
