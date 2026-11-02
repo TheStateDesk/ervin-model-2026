@@ -201,6 +201,13 @@ body:has(.county-map-panel.is-expanded){overflow:hidden}
  <p class="tiny">Checks <b>every 30 seconds</b> after polls close (statewide provider: at most once a minute). A refresh is not a guarantee that a clerk or this site's repository has published new returns.</p><button type="button" class="refresh-now" id="refreshNow">Check for updates</button>
  </section>
 </div>
+<section class="panel" id="miTurnout" aria-labelledby="miTurnoutTitle" style="margin:18px 0">
+ <div class="split" style="gap:16px;align-items:center;flex-wrap:wrap"><div><div class="eyebrow">ELECTION-NIGHT PARTICIPATION / OFFICIAL MICHIGAN SOURCE</div><h2 id="miTurnoutTitle" style="margin:4px 0">Michigan turnout tracker</h2></div><a class="map-inline" href="https://www.michigan.gov/sos/elections/election-results-and-data/voter-participation-dashboard" rel="noopener noreferrer" target="_blank">Open state turnout dashboard ↗</a></div>
+ <p class="tiny" style="margin:7px 0 14px">Official Michigan Department of State voter-history participation dashboard, updated daily during the election period. Early in-person and absentee participation is <strong>not</strong> a live election-night vote tabulation. Election Day history is entered by clerks after voting; figures may lag. The results above remain separate.</p>
+ <details class="mi-official-turnout"><summary style="cursor:pointer;font-weight:780;padding:12px 14px;border-radius:9px;background:#1d374b">View the official interactive turnout dashboard <span style="font-weight:500;color:#aec5d6">· opens below</span></summary>
+ <div style="margin-top:12px"><iframe title="Michigan Department of State official voter participation dashboard" loading="lazy" style="width:100%;height:min(78vh,680px);min-height:380px;border:1px solid #44647b;border-radius:10px;background:#fff" src="https://app.powerbigov.us/view?r=eyJrIjoiMTk3MjM4ZWQtMTlkZi00N2QxLTk5ZTktODdhYjk3YTVmMzk3IiwidCI6ImQ1ZmI3MDg3LTM3NzctNDJhZC05NjZhLTg5MmVmNDcyMjVkMSJ9" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+ <p class="tiny">If your browser blocks the embedded report, <a href="https://app.powerbigov.us/view?r=eyJrIjoiMTk3MjM4ZWQtMTlkZi00N2QxLTk5ZTktODdhYjk3YTVmMzk3IiwidCI6ImQ1ZmI3MDg3LTM3NzctNDJhZC05NjZhLTg5MmVmNDcyMjVkMSJ9" rel="noopener noreferrer" target="_blank">open the official state-hosted interactive report</a>. The Ervin Model does not infer a final turnout rate from incomplete precinct returns.</p></details>
+</section>
 <section class="panel source-readiness" aria-label="Election-night source readiness" id="sourceReadiness">
  <div class="split"><div><div class="eyebrow">Reporting infrastructure</div><h2>Reporting-source status</h2></div><span class="chip gold">Connectivity ≠ live results</span></div>
  <div class="source-status-grid">
