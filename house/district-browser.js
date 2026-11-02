@@ -3,11 +3,11 @@
 const $=id=>document.getElementById(id),escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const path=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
 let seats=[],selectState='MI',generation=0;
-function tone(r){let c=(r?.rating||'').toLowerCase();return c.includes('tossup')?'#bca481':/\b(lean|likely|solid) d\b/.test(c)?'#5194c4':/\b(lean|likely|solid) r\b/.test(c)?'#b96172':'#89a1b4';}
+function tone(r){let c=(window.ERVIN_HOUSE_DATA?.races?.[r?.id]?.modelRating||r?.rating||'').toLowerCase();return c.includes('tossup')?'#bca481':/\b(lean|likely|solid) d\b/.test(c)?'#5194c4':/\b(lean|likely|solid) r\b/.test(c)?'#b96172':'#89a1b4';}
 function fallback(races,msg){
  $('districtMapSvg').replaceChildren();
  $('districtMapStatus').textContent=msg+' Select any district below to open its election dashboard.';
- $('districtMapPicker').innerHTML='<div class="district-chip-grid">'+races.map(r=>'<a href="'+path(r)+'">'+escape(r.id)+'<small>'+escape(r.rating||'No rating')+'</small></a>').join('')+'</div>';
+ $('districtMapPicker').innerHTML='<div class="district-chip-grid">'+races.map(r=>'<a href="'+path(r)+'">'+escape(r.id)+'<small>'+escape(window.ERVIN_HOUSE_DATA?.races?.[r.id]?.modelRating||r.rating||'No rating')+'</small></a>').join('')+'</div>';
 }
 async function update(){
  const requested=$('houseState')?.value||'all';
@@ -17,7 +17,7 @@ async function update(){
  $('districtMapTitle').textContent=name+' · individual House districts';
  $('districtMapCount').textContent=all.length+' districts';
  $('districtState').textContent=code;
- const jump=$('districtJump');jump.innerHTML='<option value="">Choose a district to open…</option>'+all.map(r=>'<option value="'+path(r)+'">'+escape(r.id)+' · '+escape(r.rating||'Rating unavailable')+'</option>').join('');
+ const jump=$('districtJump');jump.innerHTML='<option value="">Choose a district to open…</option>'+all.map(r=>'<option value="'+path(r)+'">'+escape(r.id)+' · '+escape(window.ERVIN_HOUSE_DATA?.races?.[r.id]?.modelRating||r.rating||'Rating unavailable')+'</option>').join('');
  $('districtMapPicker').textContent='';
  $('districtMapStatus').textContent='Loading local district outlines…';
  try{
@@ -28,12 +28,12 @@ async function update(){
    location.href=path(r);
   }});
   for(const el of $('districtMapSvg').querySelectorAll('path.geo-district')){
-   const r=all.find(x=>x.district===String(el.dataset.district).padStart(2,'0'));el.style.fill=tone(r);el.dataset.rating=r?.rating||'Not rated';
-   el.querySelector('title').textContent=(r?.id||'District')+' · '+(r?.rating||'No publisher rating')+' · click to open race';
-   el.addEventListener('pointerenter',()=>{$('districtMapStatus').textContent=(r?.id||'District')+' · '+(r?.rating||'No published rating entered')+' · click for individual election page';});
+   const r=all.find(x=>x.district===String(el.dataset.district).padStart(2,'0'));el.style.fill=tone(r);el.dataset.rating=window.ERVIN_HOUSE_DATA?.races?.[r?.id]?.modelRating||r?.rating||'Not rated';
+   el.querySelector('title').textContent=(r?.id||'District')+' · '+(window.ERVIN_HOUSE_DATA?.races?.[r?.id]?.modelRating||r?.rating||'No provisional model rating')+' · click to open race';
+   el.addEventListener('pointerenter',()=>{$('districtMapStatus').textContent=(r?.id||'District')+' · '+(window.ERVIN_HOUSE_DATA?.races?.[r?.id]?.modelRating||r?.rating||'No provisional model rating')+' · click for individual election page';});
    el.addEventListener('focus',()=>{$('districtMapStatus').textContent=(r?.id||'District')+' · '+(r?.rating||'No published rating entered')+' · Enter to open';});
   }
-  $('districtMapStatus').textContent=count+' reference shapes loaded · colored by published Cook rating where entered · click any shape to open its race';
+  $('districtMapStatus').textContent=count+' reference shapes loaded · colored by the provisional Ervin House rating (not election results) · click any shape to open its race';
   $('districtMapPicker').textContent='The labeled polygons are 2022 Census (118th Congress) reference geography. If 2026 redistricting changed this state, shapes may be outdated. District links use the 2026 House race index; geographic references are not certified 2026 ballot boundaries.';
  }catch(e){if(gen!==generation)return;fallback(all,'District map unavailable: '+e.message+'.');}
 }
@@ -42,6 +42,8 @@ async function init(){
  try{
   const r=await fetch('./data.json',{cache:'force-cache'});if(!r.ok)throw Error('House race registry unavailable');
   seats=(await r.json()).seats||[];
+  const m=await fetch('./ervin-forecast-2026-11-02.json',{cache:'no-cache'}).catch(()=>null);
+  if(m?.ok)window.ERVIN_HOUSE_DATA=await m.json();
   const requested=(new URLSearchParams(location.search).get('state')||'MI').toUpperCase();
   if(seats.some(x=>x.code===requested))selectState=requested;
   const input=$('houseState');if(input){if(input.value==='all')input.value=selectState;input.addEventListener('change',update);}
