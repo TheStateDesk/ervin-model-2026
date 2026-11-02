@@ -1,21 +1,56 @@
-name: Audit 2026 House nominee source
+name: Refresh 2026 House general-election candidate roster
 on:
   push:
     branches: [main]
     paths:
-      - 'scripts/inspect_house_source.py'
+      - 'scripts/build_house_candidates.py'
       - '.github/workflows/house-candidates.yml'
+  schedule:
+    - cron: '13 8 * * *'
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: house-candidate-roster
+  cancel-in-progress: false
 jobs:
-  audit:
+  publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Check public candidate CSV schema
-        run: python3 scripts/inspect_house_source.py
+      - name: Fetch published nominees and cross-check House registry
+        run: python3 scripts/build_house_candidates.py
+      - name: Validate count and candidates before publishing
+        run: |
+          python3 - <<'PY'
+          import json
+          a=json.load(open('house/candidates-2026.json'))
+          v=json.load(open('research/house-candidate-roster-audit-2026.json'))
+          assert len(a['races'])==435
+          assert a['summary']['districtsWithAtLeastOneCandidate'] >= 400, 'Candidate source coverage unexpectedly low'
+          assert a['summary']['totalCandidates'] >= 700
+          assert all(len(z['candidates'])<=18 for z in a['races'].values())
+          assert all(c['name'] and c['sourceUrl'].startswith('https://') for row in a['races'].values() for c in row['candidates'])
+          print('ROSTER INPUT PASS',a['summary']['districtsWithAtLeastOneCandidate'],a['summary']['totalCandidates'])
+          PY
+      - name: Commit vetted 435-district candidate list
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git reset --hard origin/main
+            python3 scripts/build_house_candidates.py
+          fi
+          git add house/candidates-2026.json research/house-candidate-roster-audit-2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish 2026 House general-election candidate roster with source audit"
+            git pull --rebase origin main
+            git push
+          fi
