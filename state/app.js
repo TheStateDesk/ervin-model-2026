@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0;
+let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
 function sourceItem(text,url,detail=''){return '<article><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(text)+'</a></strong>'+(detail?'<small>'+esc(detail)+'</small>':'')+'</article>';}
@@ -77,12 +77,21 @@ function countyInformation(row){
  '<div>2026 Senate scenario: <strong>'+esc(format(row.senate))+'</strong><div>2026 governor scenario: <strong>'+esc(format(row.governor))+'</strong></div></div></div>'+
  '<p class="ed-mini">Scenario figures allocate a statewide estimated margin using 2020/2024 presidential voting. These are not separate county surveys or reported 2026 returns.</p>';
 }
+function updateCountyViewport(){
+ const w=900/mapZoom,h=580/mapZoom,cx=Math.max(w/2,Math.min(900-w/2,mapCenter.x)),cy=Math.max(h/2,Math.min(580-h/2,mapCenter.y));
+ $('countyMap').setAttribute('viewBox',[(cx-w/2).toFixed(2),(cy-h/2).toFixed(2),w.toFixed(2),h.toFixed(2)].join(' '));
+}
+function countyZoom(factor){mapZoom=Math.max(1,Math.min(7,mapZoom*factor));updateCountyViewport();}
 function drawCounties(){
  const layer=$('countyLayer').value;
  const surface=$('countyMap'),data=countyShape;
- if(!data){surface.textContent='County geography unavailable. Try Reload map.';return;}
+ if(!data){$('countyStatus').textContent='County geography unavailable · Reload map';$('countyStatus').classList.add('is-warning');surface.replaceChildren();return;}
  const byId=new Map(cachedCountyRows.map(r=>[r.id,r]));
  window.ERVIN_GEO.draw(surface,data,{kind:'counties',className:'county',onSelect:(el,f)=>{const id=String(f.id).padStart(5,'0');selectedCounty=id;for(const x of surface.querySelectorAll('path.county'))x.classList.toggle('is-selected',x.dataset.fips===id);$('countyInspector').innerHTML=countyInformation(byId.get(id));}});
+ updateCountyViewport();
+ const visiblePaths=surface.querySelectorAll('path.county').length;
+ $('countyStatus').textContent=visiblePaths+' county outlines · '+stateName(code);
+ $('countyStatus').classList.toggle('is-warning',visiblePaths!==data.features.length);
  let colored=0;
  for(const p of surface.querySelectorAll('path.county')){
   const r=byId.get(String(p.dataset.fips).padStart(5,'0')),v=r?activeCountyMargin(r,layer):null;
@@ -113,20 +122,25 @@ function countyCSV(){
 async function loadCountyMap(reload=false){
  const generation=++countyToken;
  $('countyInspector').textContent='Loading '+stateName(code)+' county geography…';
+ $('countyStatus').textContent='Retrieving '+stateName(code)+' county boundaries…';
+ $('countyStatus').classList.remove('is-warning');
  try{
   const shape=await window.ERVIN_GEO.get(code,'counties',{refresh:reload});
   if(generation!==countyToken)return;
-  countyShape=shape;selectedCounty=null;buildScenario();
+  countyShape=shape;selectedCounty=null;mapZoom=1;mapCenter={x:450,y:290};buildScenario();
   $('countySuggestions').innerHTML=shape.features.map(x=>'<option value="'+esc(x.properties?.name||'')+'"></option>').join('');
   drawCounties();
- }catch(e){if(generation!==countyToken)return;countyShape=null;$('countyInspector').textContent='Map loading problem: '+e.message+'. Use Reload map to retry.';}
+ }catch(e){if(generation!==countyToken)return;countyShape=null;$('countyStatus').textContent='County map failed to load · Try Reload map';$('countyStatus').classList.add('is-warning');$('countyInspector').textContent='Map loading problem: '+e.message+'. Use Reload map to retry.';}
 }
 function initCountyControls(){
+ $('countyZoomIn').onclick=()=>countyZoom(1.65);
+ $('countyZoomOut').onclick=()=>countyZoom(1/1.65);
+ $('countyZoomReset').onclick=()=>{mapZoom=1;mapCenter={x:450,y:290};updateCountyViewport();};
  $('countyLayer').onchange=drawCounties;
  $('countyTableFind').oninput=renderCountyTable;
  $('countyCSV').onclick=countyCSV;
  $('countyRetry').onclick=()=>loadCountyMap(true);
- $('countySearch').oninput=e=>{const input=e.target.value.trim().toLowerCase().replace(/ county$/,'');const hit=cachedCountyRows.find(x=>x.name.toLowerCase()===input);if(hit){selectedCounty=hit.id;drawCounties();const path=$('countyMap').querySelector('path[data-fips="'+hit.id+'"]');path?.scrollIntoView?.({block:'nearest'});}};
+ $('countySearch').oninput=e=>{const input=e.target.value.trim().toLowerCase().replace(/ county$/,'');const hit=cachedCountyRows.find(x=>x.name.toLowerCase()===input);if(hit){selectedCounty=hit.id;drawCounties();const path=$('countyMap').querySelector('path[data-fips="'+hit.id+'"]');if(path){const box=path.getBBox?.();if(box&&box.width>0&&box.height>0){mapZoom=Math.min(6,Math.max(1,Math.min(900/Math.max(box.width*4,15),580/Math.max(box.height*4,15))));mapCenter={x:box.x+box.width/2,y:box.y+box.height/2};updateCountyViewport();}}}};
 }
 function toneRating(r){const t=String(r?.rating||'').toLowerCase();return t.includes('tossup')?'#b2a080':/\b(?:lean|likely|solid) d\b/.test(t)?'#4b89ac':/\b(?:lean|likely|solid) r\b/.test(t)?'#b25e6e':'#b8c7cd';}
 function renderDistrictDetail(r){
@@ -164,12 +178,14 @@ function listPolls(data,asOf,limit=12){const clean=Array.isArray(data)?data.filt
  return clean.sort((a,b)=>Date.parse(b.fieldEnd||b.publishedAt||b.date||0)-Date.parse(a.fieldEnd||a.publishedAt||a.date||0)).slice(0,limit).map(p=>'<article class="ed-coverage"><div><strong><a href="'+safeURL(p.url)+'" target="_blank" rel="noopener noreferrer">'+esc(p.pollster||'Survey')+'</a></strong><small>'+esc(p.date||p.dates||'Field date unknown')+' · '+esc(p.sample||'Sample details unverified')+'</small></div><strong>'+esc(margin(+p.margin))+'</strong></article>').join('');
 }
 function renderPolls(){
- const localSenate=senatePolls[code]||[],localGov=govPolls[code]||[],gov=getGov();
+ const localSenate=senatePolls[code]||[],localGov=govPolls[code]||[],gov=getGov(),verified=siena.races?.[code];
  const indexedSen=coverage.senate?.states?.[code],indexedGov=coverage.governor?.states?.[code];
  const sourceNotice=(index,url,type)=>index?'<div class="ed-coverage ed-index"><div><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(type)+' polling index</a></strong><small>'+fmt(index.count)+' published poll(s) indexed by the publisher. Summary: '+esc(index.summary)+' · does not replace individual polls or Ervin forecast.</small></div><span class="ed-pill">Index</span></div>':'';
- let senateContent=localSenate.length?'<div class="ed-cap">Senate · individual surveys ('+fmt(localSenate.length)+')</div>'+listPolls(localSenate,null,14):'';
+ let senateContent=verified?.senate?'<div class="ed-cap">Newly verified primary-source Senate release · Nov 1</div>'+listPolls([verified.senate],null,1):'';
+ senateContent+=localSenate.length?'<div class="ed-cap">Senate · earlier indexed individual surveys ('+fmt(localSenate.length)+')</div>'+listPolls(localSenate,null,14):'';
  senateContent+=sourceNotice(indexedSen,coverage.senate?.source,'Senate');
- let govContent=gov?'<div class="ed-cap" style="margin-top:14px">Governor · published average</div><div class="ed-coverage"><div><strong><a href="'+safeURL(gov.poll?.url)+'" target="_blank" rel="noopener noreferrer">Published statewide governor average</a></strong><small>'+esc(gov.poll?.count||'Unknown')+' underlying surveys; methodology belongs to publisher</small></div><strong>'+esc(margin(gov.poll?.margin))+'</strong></div>':'';
+ let govContent=verified?.governor?'<div class="ed-cap" style="margin-top:14px">Newly verified primary-source governor release · Nov 1</div>'+listPolls([verified.governor],null,1):'';
+ govContent+=gov?'<div class="ed-cap" style="margin-top:14px">Governor · published average</div><div class="ed-coverage"><div><strong><a href="'+safeURL(gov.poll?.url)+'" target="_blank" rel="noopener noreferrer">Published statewide governor average</a></strong><small>'+esc(gov.poll?.count||'Unknown')+' underlying surveys; methodology belongs to publisher</small></div><strong>'+esc(margin(gov.poll?.margin))+'</strong></div>':'';
  if(localGov.length)govContent+='<div class="ed-cap" style="margin-top:14px">Governor · individual surveys ('+fmt(localGov.length)+')</div>'+listPolls(localGov,null,14);
  govContent+=sourceNotice(indexedGov,coverage.governor?.source,'Governor');
  $('pollStatewide').innerHTML=senateContent+govContent||'<div class="ed-empty">No comparable statewide polling found in the linked data sources for this state. The race may still have unindexed polls.</div>';
@@ -221,28 +237,42 @@ async function display(next){
  renderLead();renderOverview();initDistrictButtons();renderPolls();officialLinks();
  $('countyLayer').value='2024';$('countyTableFind').value='';$('countySearch').value='';
  $('countyMap').replaceChildren();$('districtMap').replaceChildren();
- // Map loaders have independent selection identity, and operate on local vetted data.
- await Promise.allSettled([loadCountyMap(),loadHouseMap()]);
+ // Map and results start independently; slow polling metadata cannot block geographic boundaries.
  loadReturns(true);
+ await Promise.allSettled([loadCountyMap(),loadHouseMap()]);
 }
 async function start(){
  try{
-  const fetchJSON=async p=>{const r=await fetch(p);if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json();};
-  // Keep geography and state navigation operational if *optional* polling files fail.
-  const [h,g,b]=await Promise.all([fetchJSON('../house/data.json'),fetchJSON('../governors/data.json'),fetchJSON('../counties-watch/forecast-baselines.json')]);
-  house=h.seats||[];governors=g.races||[];baselines=b.states||{};
-  const optional=await Promise.allSettled([
-   window.ERVIN_SCENARIOS.load(),fetchJSON('../recent_polls.json'),fetchJSON('../governors/recent_verified_polls.json'),
-   fetchJSON('../house/research-polls.json'),fetchJSON('../polling/coverage-2026-11-02.json')]);
-  const data=optional.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('State Desk optional source unavailable',i,r.reason);return null;});
-  historical=data[0]||{counties:{}};senatePolls=data[1]?.polls||{};govPolls=data[2]?.states||{};housePolls=data[3]?.polls||{};
-  coverage=data[4]||coverage;
-  pollingWarning=optional.some(x=>x.status==='rejected')?'Some polling or historical source files could not be loaded; try refreshing for complete coverage.':'';
+  const fetchJSON=async p=>{const r=await fetch(p,{cache:'no-cache'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json();};
+  // The two small election registries initialize navigation; maps do not
+  // depend on the Senate model, poll archives or historical results being reachable.
+  const [h,g]=await Promise.all([fetchJSON('../house/data.json'),fetchJSON('../governors/data.json')]);
+  house=h.seats||[];governors=g.races||[];
   prepareSelection();initCountyControls();$('houseMapReload').onclick=()=>loadHouseMap(true);$('reloadResults').onclick=()=>loadReturns(true);
   $('headerDate').textContent=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const optionalFiles=[
+   fetchJSON('../counties-watch/forecast-baselines.json'),
+   window.ERVIN_SCENARIOS.load(),
+   fetchJSON('../recent_polls.json'),
+   fetchJSON('../governors/recent_verified_polls.json'),
+   fetchJSON('../house/research-polls.json'),
+   fetchJSON('../polling/coverage-2026-11-02.json'),
+   fetchJSON('../polling/primary-seven-states-2026-11-01.json')];
+  const updated=Promise.allSettled(optionalFiles).then(results=>{
+   const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
+   baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
+   senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
+   coverage=values[5]||coverage;siena=values[6]||siena;
+   pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
+   renderLead();renderOverview();renderPolls();
+   if(countyShape){buildScenario();drawCounties();}
+   if(selectedDistrict)renderDistrictDetail(selectedDistrict);
+  }).catch(e=>{console.warn('State desk optional data refresh',e);});
   await display(new URLSearchParams(location.search).get('state')||'MI');
+  // Optional polling/archive data can finish after map draw, without blocking it.
+  updated.then(()=>{});
   setInterval(()=>{if(!document.hidden)loadReturns(false)},60000);
- }catch(e){console.error('State desk failed',e);$('stateTitle').textContent='State data could not be loaded';$('stateDeck').textContent='An essential source file is temporarily unavailable. Try reloading the page.';}
+ }catch(e){console.error('State desk failed',e);$('stateTitle').textContent='State data could not be loaded';$('stateDeck').textContent='A required election registry could not be retrieved. Reload to try again.';}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
