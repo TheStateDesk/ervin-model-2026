@@ -2,17 +2,18 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let seats=[],scenario=null;
+let seats=[],scenario=null,houseRoster={races:{}};
 const href=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
 const pick=r=>scenario?.races?.[r.id]||null;
 const margin=m=>!Number.isFinite(m)?'No estimate':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1);
+const candidateText=r=>{const people=houseRoster.races?.[r.id]?.candidates||[];return people.length?people.map(c=>c.party+': '+c.name).join(' · '):'2026 roster not confirmed';};
 const rank=r=>{const x=pick(r);return x?Math.abs(x.marginD):100};
 function draw(){
  const q=$('houseSearch').value.trim().toLowerCase(),code=$('houseState').value,cat=$('houseRating').value;
  // Respect existing advanced categories, now filtering the visible model grade.
  let arr=seats.filter(r=>{
   const model=pick(r),rating=model?.modelRating||r.rating||'';
-  const inState=code==='all'||r.code===code,match=!q||[r.id,r.state,r.incumbent,model?.modelRating].join(' ').toLowerCase().includes(q);
+  const inState=code==='all'||r.code===code,match=!q||[r.id,r.state,r.incumbent,model?.modelRating,candidateText(r)].join(' ').toLowerCase().includes(q);
   const type=cat==='all'||(cat==='rated'&&!!r.rating)||(cat==='Tossup'&&/tossup/i.test(rating))||(cat==='Lean'&&/^(?:Lean|Tilt)/.test(rating))||(cat==='Likely'&&rating.startsWith('Likely'));
   return inState&&match&&type;
  });
@@ -20,7 +21,7 @@ function draw(){
  $('houseCount').textContent=arr.length+' districts';
  $('houseCards').innerHTML=arr.map(r=>{
   const x=pick(r);return '<a class="gov-card" href="'+href(r)+'"><div class="gov-heading"><h3 class="house-card-title">'+esc(r.id)+'</h3><span class="race-flag">'+esc(r.code)+'</span></div>'+
-  '<p class="gov-candidates">'+esc(r.state)+(r.incumbent?'<br>Historical incumbent: <strong>'+esc(r.incumbent)+'</strong>':'<br>2026 candidate slate not verified')+'</p>'+
+  '<p class="gov-candidates">'+esc(r.state)+'<br><strong>2026 candidates:</strong> '+esc(candidateText(r))+'</p>'+
   '<div class="gov-lead">'+esc(x?.modelRating||r.rating||'No model loaded')+(x?' · '+esc(margin(x.marginD)):'')+' ↗</div>'+
   '<small>'+(x?'Ervin House · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls'+(x.changed2026Map?' · redrawn geography warning':''):'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
  }).join('')||'<p class="race-muted">No districts match your filters.</p>';
@@ -52,6 +53,9 @@ async function init(){
   seats=(await a.json()).seats||[];
   const b=await fetch('./ervin-forecast-2026-11-02.json',{cache:'no-cache'}).catch(()=>null);scenario=b?.ok?await b.json():null;
   window.ERVIN_HOUSE_DATA=scenario;
+  const roster=await fetch('./candidates-2026.json',{cache:'no-cache'}).catch(()=>null);
+  if(roster?.ok){const d=await roster.json();if(d.election==='2026-11-03'&&d.version===1&&Object.keys(d.races||{}).length===435)houseRoster=d;}
+  window.ERVIN_HOUSE_ROSTER=houseRoster;
   $('ratingsCount').textContent=seats.filter(x=>x.rating).length;
   $('closeCount').textContent=seats.filter(x=>x.rating==='Tossup').length;
   const states=[...new Map(seats.map(x=>[x.code,x.state])).entries()].sort((a,b)=>a[1].localeCompare(b[1]));
