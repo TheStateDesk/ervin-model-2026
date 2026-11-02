@@ -1,0 +1,22 @@
+/* Visual House navigation; district polygons remain sourced geographical references. */
+.district-explorer{margin:22px 0!important;position:relative;overflow:hidden}
+.district-explorer .explorer-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}
+.district-explorer .explorer-head h2{font-size:clamp(22px,3vw,30px)!important}
+.district-explorer .district-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:15px 0}
+.district-controls select{background:var(--surface2);color:var(--text);border:1px solid var(--edge);padding:10px 13px;border-radius:10px;font-size:14px;max-width:100%}
+.district-controls select#districtJump{flex:1;min-width:min(250px,100%)}
+.district-map-frame{border:1px solid var(--edge);border-radius:13px;padding:7px;background:linear-gradient(145deg,#19374b14,#d5e6f023)}
+.district-map-frame svg{display:block;width:100%;height:clamp(330px,54vw,650px)}
+.geo-district{cursor:pointer;stroke:var(--surface);stroke-width:1.4;vector-effect:non-scaling-stroke;fill:#7191a4;transition:filter .12s,stroke-width .12s}
+.geo-district:hover,.geo-district:focus-visible{filter:brightness(1.2);stroke:#e9c27f;stroke-width:3;outline:none}
+.geo-district-label{fill:#fff;font-size:16px;font-weight:800;paint-order:stroke;stroke:#173145;stroke-width:3px;stroke-linejoin:round;letter-spacing:0}
+.district-map-status{margin:12px 0;color:var(--muted);font-size:13px;min-height:22px}
+.district-chip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:7px;margin:10px 0}
+.district-chip-grid a{padding:9px;border:1px solid var(--edge);border-radius:8px;text-decoration:none;color:var(--text);font-weight:750}
+.district-chip-grid a small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.district-map-foot{font-size:12px;color:var(--muted);line-height:1.6}
+#houseDirectoryDetails{margin:25px 0 0;border:1px solid var(--edge);border-radius:15px;padding:14px;background:var(--surface)}
+#houseDirectoryDetails>summary{font-weight:800;cursor:pointer;color:var(--text);padding:6px 8px}
+#houseDirectoryDetails>.district-directory-inner{padding:8px}
+@media(max-width:760px){.district-explorer{padding:15px!important}.district-controls{align-items:stretch}.district-controls select{width:100%}.district-map-frame svg{height:clamp(365px,110vw,540px)}}
+@media(prefers-reduced-motion:reduce){.geo-district{transition:none}}
