@@ -1,28 +1,30 @@
-name: Probe civicAPI v2 for November 2026 results and polling
+name: CivicAPI first-party results collector and deployment
 on:
   push:
     branches: [main]
     paths:
-      - 'scripts/civicapi_probe.py'
-      - 'tests/test_civicapi_probe.py'
+      - 'scripts/civicapi_national.py'
+      - 'tests/test_civicapi_national.py'
       - '.github/workflows/civicapi-probe.yml'
   schedule:
-    - cron: '31 2,8,14,20 * * *'
-    - cron: '*/15 * 3-5 11 *'
+    - cron: '37 2,8,14,20 * * *'
+    - cron: '*/10 0-9 4 11 *'
+    - cron: '*/10 23 3 11 *'
   workflow_dispatch:
 permissions:
   contents: write
   pages: write
   id-token: write
 concurrency:
-  group: civicapi-2026-check
+  group: civicapi-2026-results
   cancel-in-progress: false
 jobs:
-  probe:
+  collect:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-    timeout-minutes: 12
+      url: ${{ steps.deploy.outputs.page_url }}
+    timeout-minutes: 16
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,27 +32,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Test exact November 2026 election matching
-        run: python3 -m unittest discover -s tests -p test_civicapi_probe.py -v
-      - name: Check API discovery and validated vote totals
-        run: python3 scripts/civicapi_probe.py
-      - name: Validate generated JSON and browser script
+      - name: Validate national results parser (offline test fixtures)
+        run: python3 -m unittest discover -s tests -p test_civicapi_national.py -v
+      - name: Discover all races and fetch v2 results after race poll close
+        run: python3 scripts/civicapi_national.py
+      - name: Validate published snapshots and browser parser
         run: |
           python3 -m json.tool civicapi/races.json >/dev/null
+          python3 -m json.tool civicapi/registry.json >/dev/null
           python3 -m json.tool civicapi/discovery.json >/dev/null
-          node --check state/district-extra.js
-      - name: Publish safe source audit to repository
+          node --check election-night/returns-core.js
+          node scripts/test-live-results-stress.mjs
+      - name: Commit validated race roster and reporting snapshots
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin main
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
             git reset --hard origin/main
-            python3 scripts/civicapi_probe.py
+            python3 scripts/civicapi_national.py
           fi
-          git add civicapi/races.json civicapi/discovery.json
+          git add civicapi/registry.json civicapi/races.json civicapi/discovery.json
           if ! git diff --cached --quiet; then
-            git commit -m "Update civicAPI pilot source audit and validated returns"
+            git commit -m "Refresh CivicAPI v2 national race registry and results"
             git pull --rebase origin main
             git push
           fi
@@ -58,5 +62,6 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      - name: Deploy checked snapshot to GitHub Pages
+      - name: Publish validated returns to GitHub Pages
+        id: deploy
         uses: actions/deploy-pages@v4
