@@ -43,6 +43,9 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Render county maps and capture screenshots (desktop/mobile, light/dark)
         run: node scripts/visual-smoke.mjs
+      - name: Audit currently published site and capture live screenshots
+        if: always()
+        run: node scripts/live-site-audit.mjs || true
       - name: Preserve visual screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
