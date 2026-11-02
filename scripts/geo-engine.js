@@ -1,10 +1,10 @@
 /* ERVIN GEOGRAPHY 2.0 — local Census-derived boundaries; no runtime D3 or CDN required. */
 (()=>{"use strict";
-const NS="http://www.w3.org/2000/svg",cache=new Map(),packCache=new Map(),BASE=new URL("../geo/",document.currentScript?.src||location.href).href,REV="20261101-allstate-map-5";
+const NS="http://www.w3.org/2000/svg",cache=new Map(),packCache=new Map(),BASE=new URL("../geo/",document.currentScript?.src||location.href).href,REV="20261102-county-direct-1";
 const STATES="AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY".split(" ");
-// Individual state files are published only for these five states. All others are
-// deliberately served by their local five-state packs: do not issue 90 doomed 404s.
-const DIRECT=new Set("AK AZ MI PA TX".split(" "));
+// Every state now has its own locally hosted county and district files.
+// Regional bundles remain a redundant fallback, not the primary browser download.
+const DIRECT=new Set(STATES);
 async function fromPack(code,kind){
  const index=STATES.indexOf(code);if(index<0)throw Error("Unknown state "+code);
  const pack="packs/p"+String(Math.floor(index/5)+1).padStart(2,"0")+".json";
