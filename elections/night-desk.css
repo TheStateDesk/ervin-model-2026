@@ -45,3 +45,24 @@ body:has(.er-map-expanded){overflow:hidden}
 @media(prefers-reduced-motion:reduce){#countyMap .county{transition:none!important}}
 
 #erPreMarker[hidden],#erLiveMarker[hidden]{display:none!important}
+
+
+/* Local county geometry should remain visible in both appearance modes. */
+#countyMap .geo-district{fill:#6589a3;stroke:#fff;stroke-width:1.8;vector-effect:non-scaling-stroke;cursor:pointer}
+#countyMap .geo-district:hover,#countyMap .geo-district:focus-visible{fill:#75add0;stroke:#eac57f;stroke-width:3}
+html:not(.light) body #countyMap .geo-district{fill:#497898;stroke:#193d59}
+#countyMap .county{stroke-width:.8;stroke:#dce9f0;stroke-linejoin:round}
+.race-map-frame{isolation:isolate}
+.er-margin-card .er-margin-rows{min-width:0}
+.er-margin-card .er-margin-rows strong{overflow-wrap:anywhere}
+@media(max-width:760px){
+ .race-map-head{align-items:stretch}
+ #countyMap{height:clamp(360px,105vw,565px)}
+ .race-map-legend{line-height:1.65}
+ .er-margin-tick{font-size:10px;right:68px}
+ .er-margin-card .er-margin-layout{gap:8px}
+ .er-map-actions{display:grid;grid-template-columns:1fr}
+ .er-map-actions label{flex-wrap:wrap}
+ .er-map-actions input{width:min(100%,320px)!important}
+ .er-map-actions button{justify-self:start}
+}
