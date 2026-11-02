@@ -40,3 +40,23 @@ html:not(.light) .power-numbers .power-r strong{color:var(--red)}
 
 .home-power-panel{margin-top:18px}
 @media(max-width:700px){.home-power-panel{margin-top:10px;padding:14px}.home-power-panel .power-heading h2{font-size:24px}.home-power-panel .power-heading p{font-size:12px}.home-power-panel .power-asof{white-space:normal}.home-power-panel .power-legend{margin:12px 0;gap:9px 14px}.home-power-panel .power-grid{gap:8px}.home-power-panel .power-card{padding:12px}.home-power-panel .power-numbers{margin:9px 0}}
+
+/* Active Senate-control simulation integrated with the homepage power readout. */
+.home-control-live{border-top:1px solid var(--edge,#cad4dc);margin-top:18px;padding:17px 0 4px}
+.home-control-live-head{display:flex;gap:12px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.home-control-live-head strong{font:700 20px/1.3 Georgia,serif;color:var(--text,#192d40)}
+.home-control-live-head small{display:block;margin-top:4px;font-size:11px;color:var(--muted,#61707a)}
+.home-control-live-head a{font-size:12px;font-weight:700;text-decoration:underline}
+.home-control-live-row{display:flex;align-items:center;gap:16px;margin:13px 0;flex-wrap:wrap}
+.home-control-meter{display:flex;min-height:16px;max-width:680px;min-width:min(100%,300px);flex:1;overflow:hidden;border-radius:10px;background:#b8c2cb}
+.home-control-meter span{transition:width .18s ease}
+#topControlDemBar{background:#4189ca}#topControlOtherBar{background:#cbb279}#topControlRepBar{background:#c75061}
+.home-control-outcomes{display:flex;flex-wrap:wrap;gap:15px;font-size:12px;align-items:baseline;color:var(--muted,#6d747d)}
+.home-control-outcomes b{color:var(--text,#1b2a3a);font-size:18px;margin-right:4px}
+.home-control-live-controls{display:flex;align-items:end;gap:13px;flex-wrap:wrap}
+.home-control-live-controls label{display:grid;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;min-width:160px}
+.home-control-live-controls select{border:1px solid var(--edge,#bac5ce);border-radius:8px;padding:9px 10px;background:var(--surface,#fff);color:var(--text,#1a2c40);font-size:12px;min-height:38px}
+.home-control-live-controls select:focus-visible{outline:3px solid #d0a464;outline-offset:2px}
+.home-control-live-note{font-size:11px;line-height:1.45;color:var(--muted,#677680);flex:1;min-width:220px}
+@media(max-width:660px){.home-control-live-row{align-items:stretch}.home-control-meter{min-width:100%;flex:auto}.home-control-live-controls label{flex:1;min-width:128px}.home-control-live-controls select{width:100%}}
+@media(prefers-reduced-motion:reduce){.home-control-meter span{transition:none}}
