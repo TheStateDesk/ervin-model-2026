@@ -16,6 +16,10 @@ async function start(){
   const model=window.ERVIN_STATEWIDE.apply(history,governor,senate);
   const results=window.ERVIN_POWER.compute(house,model.senate,model.governor);
   window.ERVIN_POWER.render(target,results);
+  for(const link of target.querySelectorAll('.power-card-head a')){
+   const path=link.getAttribute('href');
+   if(path?.endsWith('/'))link.href=new URL(path,siteRoot).href;
+  }
  }catch(error){
   console.error('Homepage balance forecast unavailable:',error);
   target.innerHTML='<p class="power-unavailable">The forecast balance could not be loaded. <a href="../states/">Browse the current state forecasts</a>.</p>';
