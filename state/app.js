@@ -300,7 +300,7 @@ function officialLinks(){
  $('officialStateLinks').innerHTML=links;
 }
 async function display(next){
- const c=String(next||'MI').toUpperCase();code=byCode[c]?c:'MI';window.dispatchEvent(new CustomEvent('ervin:state-edition',{detail:{code}}));
+ const c=String(next||'MI').toUpperCase();code=byCode[c]?c:'MI';document.querySelectorAll('[data-election-night-state]').forEach(link=>link.href='../election-night/?state='+encodeURIComponent(code)+'#nationalBoard');window.dispatchEvent(new CustomEvent('ervin:state-edition',{detail:{code}}));
  selectedDistrict=null;countyShape=null;districtShape=null;cachedCountyRows=[];selectedCounty=null;countyToken++;houseToken++;
  stateHouse=house.filter(x=>x.code===code).sort((a,b)=>String(a.district).localeCompare(String(b.district)));
  renderLead();renderOverview();initDistrictButtons();renderPolls();officialLinks();
