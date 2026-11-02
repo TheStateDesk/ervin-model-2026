@@ -20,7 +20,7 @@ const specs=[
 ];
 const targetParams={TX:{w:[.92,.80,.08,.43,.10],noise:3.6},KS:{w:[.98,.10,.83,.21,.46],noise:3.7},IA:{w:[1.03,.03,.94,.25,.36],noise:3.6}};
 let baselines={},house={},candidateRoster={},historicalMOE=null,reviewed=[],raw={},manual=[],includeManual=true,draws=[],lastCheck=0;
-let firstLoad=true,signalMeta={};
+let firstLoad=true,signalMeta={},civicHealth=null,sourceSnapshot={civic:0,fallback:0};
 const sources=['../counties-watch/forecast-baselines.json','../house/ervin-forecast-2026-11-02.json'];
 const pct=v=>Number(v).toFixed(1)+'%';
 const margin=v=>Number.isFinite(v)?(Math.abs(v)<.05?'Even':(v>0?'D +':'R +')+Math.abs(v).toFixed(1)):'Unavailable';
@@ -151,7 +151,34 @@ function targetHTML(id,r){
  (isUpdated?'Scenario shift: '+(change>=0?'+':'')+change.toFixed(2)+' D share points.':'No shift without applicable evidence.')+
  ' Model 10th–90th sensitivity range: '+pct(share(r.lo))+'–'+pct(share(r.hi))+' D share. '+(Number.isFinite(empirical)?'Historical Senate raw polling error, 90th percentile absolute deviation: ±'+empirical.toFixed(2)+' D–R margin points (61 archived elections). ':'Historical error envelope unavailable. ')+'Neither is a statistically validated 2026 prediction interval.</p></article>';
 }
+function renderEvidence(){
+ const data=historicalMOE;
+ const summary=$('errorSummary'),graph=$('errorYearBars'),note=$('errorFootnote');
+ if(!summary||!graph)return;
+ const senate=data?.senate?.raw,adjusted=data?.senate?.originalWalkforwardAdjusted;
+ const houseError=data?.house?.unchangedDistrictHoldout;
+ if(!senate||!adjusted||!houseError){
+  summary.textContent='The saved historical error table is temporarily unavailable. No empirical uncertainty estimate can be displayed.';
+  graph.textContent='Archived data not loaded.';return;
+ }
+ const fmt=n=>Number(n).toFixed(2);
+ summary.innerHTML=[
+  ['SENATE · UNADJUSTED POLLING',fmt(senate.mae)+' pts',senate.n+' historical races · average absolute error'],
+  ['SENATE · STATE-ADJUSTED',fmt(adjusted.mae)+' pts',adjusted.n+' same races · average absolute error'],
+  ['HOUSE · COMPARABLE BASELINE',fmt(houseError.mae)+' pts',houseError.n+' 2022→2024 unchanged-district comparisons'],
+  ['SENATE · 90TH PERCENTILE',fmt(senate.p90Abs)+' pts','Absolute historical D–R margin error, not 2026 prediction MOE']
+ ].map(([name,value,detail])=>'<div><small>'+esc(name)+'</small><strong>'+esc(value)+'</strong><span>'+esc(detail)+'</span></div>').join('');
+ const byYear=Object.entries(data.senate.byYear||{}).sort((a,b)=>Number(a[0])-Number(b[0]));
+ graph.innerHTML=byYear.map(([year,r])=>{
+  const mae=Number(r.mae),width=Math.min(100,Math.max(0,mae/10*100));
+  return '<div class="nerd-year-row"><div><strong>'+esc(year)+'</strong><small>'+r.n+' races</small></div>'+
+   '<div class="nerd-year-track" role="img" aria-label="'+esc(year)+' average absolute error '+fmt(mae)+' margin points"><span style="width:'+width.toFixed(2)+'%"></span></div>'+
+   '<b>'+fmt(mae)+' pts</b></div>';
+ }).join('');
+ if(note)note.textContent='All figures are empirical summaries from saved backtests, not confidence intervals. State-adjusted Senate error was higher than raw polling error in this sample ('+fmt(adjusted.mae)+' vs '+fmt(senate.mae)+' points). The House comparison excludes 203 noncomparable districts, and neither sample measures early precinct reporting reliability.';
+}
 function render(){
+ renderEvidence();
  const data=compute(),{results,active,ess}=data;
  $('targetCards').innerHTML=['TX','KS','IA'].map(id=>targetHTML(id,results[id])).join('');
  $('numApproved').textContent=Object.values(signalMeta).filter(x=>x.state==='approved').length;
@@ -160,14 +187,23 @@ function render(){
  'Applied '+active.length+' independent signal scenario(s); '+active.filter(x=>x.method==='reviewed').length+' audited live, '+active.filter(x=>x.method!=='reviewed').length+' your what-if. Effective draws: '+Math.round(ess).toLocaleString()+' / 14,000.'+
  (ess<500?' LOW effective sample size: this result is unstable and should not be interpreted as a forecast.':' Posterior ranges are heuristic sensitivity only.'):
  'All 14,000 scenarios remain equally weighted. No audited early reported vote is being applied. The baseline remains unchanged.';
- const ranks=specs.map(s=>({...s,relevance:Math.max(...Object.keys(targetParams).map(t=>Math.abs(signalStrength(s,t))))})).sort((a,b)=>b.relevance-a.relevance);
+ const ranks=specs.map(s=>({...s,relevance:Math.max(...Object.keys(targetParams).map(t=>Math.abs(signalStrength(s,t))))}))
+ .filter(s=>{
+  const selection=$('watchFilter')?.value||'all';
+  if(selection==='house')return !s.id.endsWith('-SENATE');
+  if(selection==='senate')return s.id.endsWith('-SENATE');
+  if(selection==='reported')return !!raw[s.id];
+  if(selection==='approved')return signalMeta[s.id]?.state==='approved';
+  return true;
+ }).sort((a,b)=>($('watchSort')?.value==='relevance'?b.relevance-a.relevance:Date.parse(closeTimes[a.id])-Date.parse(closeTimes[b.id])));
+ if($('watchSummary'))$('watchSummary').textContent=ranks.length+' of 8 races shown · '+Object.keys(raw).length+' have attributed 2026 reports · '+Object.values(signalMeta).filter(x=>x.state==='approved').length+' fully audited inputs';
  $('signalRows').innerHTML=ranks.map((s,i)=>{
   const meta=signalMeta[s.id],r=raw[s.id],base=readableBaseline(s.id);
   const close=Date.parse(closeTimes[s.id]);
-  const when=Date.now()<close?'Polls not yet closed':r?'Published contest record detected':'No comparable counted-vote feed';
+  const when=Date.now()<close?'Polls not yet closed':r?'Attributed unofficial returns observed':'No matched post-close candidate totals';
   const status=meta.state==='approved'?'Reviewed input eligible':meta.state==='rejected'?'Rejected by audit':'Research watchlist';
   const cls=meta.state==='approved'?'good':meta.state==='rejected'||r?'warn':'';
-  const latest=r?'<small>Reported total: '+Number(r.total||0).toLocaleString()+(Number.isFinite(r.marginD)?' · raw D–R '+margin(r.marginD)+' (unadjusted, composition unknown)':'')+' · NOT an eligible adjustment (mode/geography audit missing).</small>':'';
+  const latest=r?'<small>'+esc(r.provider)+' · '+Number(r.total||0).toLocaleString()+' total counted'+(Number.isFinite(r.marginD)?' · current D–R '+margin(r.marginD):'')+' · observed '+esc(r.asOf)+'. Not automatically usable: geography and ballot-mode mix unchecked.</small>':'';
   const relevant=Object.keys(targetParams).map(t=>({t,slope:signalStrength(s,t)})).sort((a,b)=>Math.abs(b.slope)-Math.abs(a.slope));
   const target=relevant.slice(0,2).map(z=>z.t).join(' / ');
   const hm=Number(historicalMOE?.house?.unchangedDistrictHoldout?.p90Abs);
@@ -176,7 +212,7 @@ function render(){
    '<td>'+esc(s.why)+'<small>Assumed, not historically estimated covariance: '+esc(target)+' · rank '+(i+1)+'</small>'+houseWarning+'</td>'+
    '<td>'+esc(when)+latest+'</td><td><span class="nerd-flag '+cls+'">'+esc(status)+'</span><small>'+esc(meta.reason)+'</small>'+
    '<small><a href="../election-night/?state='+s.id.slice(0,2)+'&race='+encodeURIComponent(s.id)+'#nationalBoard">Open live election-night race</a></small></td></tr>';
- }).join('');
+ }).join('')||'<tr><td colspan="4">No watched races match this filter. Try another race type or reporting status.</td></tr>';
  $('manualList').innerHTML=manual.map(x=>'<div class="nerd-manual"><div><b>'+esc(x.id)+'</b> · what-if D share '+pct(share(baseline(x.id)+x.delta))+' · assumed '+pct(x.frac*100)+' reported · '+esc(x.mode)+'<br><small>Hypothetical, not official votes; D-R deviation: '+margin(x.delta)+'. '+(x.url?'<a target="_blank" rel="noopener noreferrer" href="'+esc(x.url)+'">Research link</a>':'No source link')+'</small></div><button type="button" class="nerd-button" data-remove="'+esc(x.id)+'">Remove</button></div>').join('');
 }
 async function json(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),11000);try{const r=await fetch(url,{cache:'no-store',signal:c.signal});if(!r.ok)throw Error('HTTP '+r.status);return r.json()}finally{clearTimeout(timer)}}
