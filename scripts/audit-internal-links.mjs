@@ -72,6 +72,10 @@ if(!entry.includes('location.replace')||!entry.includes('states/')||!entry.inclu
 if(!front.includes('id="senate-control"')||!front.includes('id="balanceOfPower"')||!front.includes('id="powerCards"'))issues.push('State Desk homepage missing national Senate control or projected office balance');
 if(front.indexOf('id="senate-control"')>front.indexOf('id="balanceOfPower"')||front.indexOf('id="balanceOfPower"')>front.indexOf('id="nationMap"'))issues.push('The State Desk should show the control and office balance before the geographic atlas');
 if(!front.includes('../scripts/home-control.js')||!front.includes('../scripts/home-power.js'))issues.push('National forecast scripts not loaded on actual homepage');
+for(const rel of ['state/app.js','state/district-extra.js']){
+ const body=fs.readFileSync(path.join(root,rel),'utf8');
+ if(/href=\\?["']\.\.\/elections\//.test(body)||body.includes('Separate technical race dossier'))issues.push(rel+': runtime links to retired standalone district view');
+}
 const balanceEngine=fs.readFileSync(path.join(root,'election-night/power.js'),'utf8');
 if(!balanceEngine.includes('states/?office=house#nationMap')||!balanceEngine.includes('states/?office=governor#nationMap'))issues.push('Home balance cards still link to old House or governor boards');
 if(!front.includes('id="officeFocus"'))issues.push('House / governor focused state chooser missing from State Desk');
