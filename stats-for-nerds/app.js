@@ -19,7 +19,7 @@ const specs=[
  {id:'OH-SENATE',title:'Ohio · Senate',close:'7:30 p.m.',why:'Midwestern industrial and exurban indicator, particularly for Iowa and Kansas.',focus:'IA, KS',w:[1.12,.04,.95,.24,.40]}
 ];
 const targetParams={TX:{w:[.92,.80,.08,.43,.10],noise:3.6},KS:{w:[.98,.10,.83,.21,.46],noise:3.7},IA:{w:[1.03,.03,.94,.25,.36],noise:3.6}};
-let baselines={},house={},reviewed=[],raw={},manual=[],includeManual=true,draws=[],lastCheck=0;
+let baselines={},house={},candidateRoster={},reviewed=[],raw={},manual=[],includeManual=true,draws=[],lastCheck=0;
 let firstLoad=true,signalMeta={};
 const sources=['../counties-watch/forecast-baselines.json','../house/ervin-forecast-2026-11-02.json'];
 const pct=v=>Number(v).toFixed(1)+'%';
@@ -111,10 +111,26 @@ function compute(){
  return {results,active,ess};
 }
 function signalStrength(s,target){const n=N,avg=(key)=>draws.reduce((v,d)=>v+d[key],0)/n;let a=avg(s.id),b=avg(target),cov=0,v=0;for(const d of draws){cov+=(d[s.id]-a)*(d[target]-b);v+=(d[s.id]-a)**2}return cov/v}
+function candidateMarkup(id){
+ const key=id in targetParams?id+'-SENATE':id;
+ const c=candidateRoster[key];
+ const fallback=id in targetParams?{democrat:baselines[id]?.nonR,republican:baselines[id]?.rep,other:[],sourceUrl:''}:null;
+ const x=c||fallback;
+ if(!x?.democrat||!x?.republican)return '<div class="nerd-candidate-unavailable">2026 general-election candidates: roster unavailable.</div>';
+ const primary='<div class="nerd-candidate-pair"><div><span class="nerd-party d">D</span> <strong>'+esc(x.democrat)+'</strong></div>'+
+ '<div><span class="nerd-party r">R</span> <strong>'+esc(x.republican)+'</strong></div></div>';
+ const other=Array.isArray(x.other)?x.other:[];
+ const extras=other.length?'<details class="nerd-other-candidates"><summary>'+other.length+' additional candidate'+(other.length===1?'':'s')+' / write-ins</summary>'+
+ '<ul>'+other.map(z=>'<li>'+esc(z.name)+' — '+esc(z.party)+(z.writeIn?' (write-in)':'')+'</li>').join('')+'</ul></details>':'';
+ const source=x.sourceUrl&&officialUrl(x.sourceUrl)?'<a class="nerd-candidate-source" href="'+esc(x.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Candidate roster source</a>':
+ '<small class="nerd-candidate-source">Names from baseline forecast; check general-election roster.</small>';
+ return '<div class="nerd-candidate-roster">'+primary+extras+source+'</div>';
+}
 function targetHTML(id,r){
  const isUpdated=r.hasEvidence,base=share(r.baseline),conditional=share(r.posterior),change=conditional-base;
  const cls=conditional>=50?'D':'R';
  return '<article class="nerd-target"><small>U.S. SENATE · '+id+'</small><h3>'+({TX:'Texas',KS:'Kansas',IA:'Iowa'}[id])+'</h3>'+
+ candidateMarkup(id)+
  '<div class="nerd-compare"><div><small>Original Ervin D two-party</small><strong>'+pct(base)+'</strong></div><div class="adjusted"><small>'+(isUpdated?'Conditional D two-party':'No eligible signal')+'</small><strong>'+pct(conditional)+'</strong></div></div>'+
  '<div class="nerd-band"><span style="width:'+Math.min(100,Math.max(0,conditional))+'%"></span></div>'+
  '<p>Baseline: '+margin(r.baseline)+'. Conditional: '+margin(r.posterior)+'. '+
@@ -140,7 +156,7 @@ function render(){
   const latest=r?'<small>Reported total: '+Number(r.total||0).toLocaleString()+(Number.isFinite(r.marginD)?' · raw D–R '+margin(r.marginD)+' (unadjusted, composition unknown)':'')+' · NOT an eligible adjustment (mode/geography audit missing).</small>':'';
   const relevant=Object.keys(targetParams).map(t=>({t,slope:signalStrength(s,t)})).sort((a,b)=>Math.abs(b.slope)-Math.abs(a.slope));
   const target=relevant.slice(0,2).map(z=>z.t).join(' / ');
-  return '<tr><td><strong>'+esc(s.title)+'</strong><small>'+esc(s.close)+' ET · '+esc(s.id)+'</small><small>Original Ervin reference: '+esc(base)+'</small></td>'+
+  return '<tr><td><strong>'+esc(s.title)+'</strong><small>'+esc(s.close)+' ET · '+esc(s.id)+'</small>'+candidateMarkup(s.id)+'<small>Original Ervin reference: '+esc(base)+'</small></td>'+
    '<td>'+esc(s.why)+'<small>Strongest provisional transfer: '+esc(target)+' · rank '+(i+1)+'</small></td>'+
    '<td>'+esc(when)+latest+'</td><td><span class="nerd-flag '+cls+'">'+esc(status)+'</span><small>'+esc(meta.reason)+'</small>'+
    '<small><a href="../elections/?office='+(s.id.includes('SENATE')?'senate':'house')+'&state='+s.id.slice(0,2)+(s.id.includes('SENATE')?'':'&district='+s.id.slice(3))+'">Open race dossier</a></small></td></tr>';
@@ -201,8 +217,9 @@ async function init(){
  });
  $('manualList').addEventListener('click',e=>{const key=e.target.closest('button[data-remove]')?.dataset.remove;if(!key)return;manual=manual.filter(x=>x.id!==key);render()});
  try{
-  const [a,b]=await Promise.all(sources.map(json));
+  const [a,b,candidates]=await Promise.all([...sources.map(json),json('./candidates-2026.json').catch(()=>null)]);
   baselines=a.states||{};house=b.races||{};
+  candidateRoster=(candidates?.version===1&&candidates?.election==='2026-11-03'&&typeof candidates.races==='object')?candidates.races:{};
   if(['TX','KS','IA'].some(x=>!Number.isFinite(baseline(x))))throw Error('Target baseline missing');
   initial();audit();render();
   $('sourceStatus').textContent='Original Ervin polling and district files loaded. Awaiting independent verified early signals.';
