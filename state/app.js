@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
+let governorErvin={};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
 let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -47,7 +47,7 @@ function statewideCard(title,sub,candidates,forecast,explain,source,href){
 function renderOverview(){
  const s=getSen(),g=getGov(),indexedSenate=coverage.senate?.states?.[code];
  const senate=s?statewideCard('U.S. Senate','Original Ervin adjustment',s.nonR+' vs. '+s.rep,margin(Number(s.adjustedMargin)),'Historical partisan polling adjustment applied to sourced statewide averages. Not a race call or a win probability. '+(s.stale?'Publisher inputs may be outdated.':''),'https://www.realclearpolling.com/elections/senate/2026/toss-ups','../elections/?office=senate&state='+code):'<article class="ed-race"><div class="ed-kicker">U.S. Senate</div><h3>'+(indexedSenate?'Senate polling indexed':'No Ervin-modeled Senate contest')+'</h3><p>'+(indexedSenate?'A separate public polling index lists '+fmt(indexedSenate.count)+' published surveys and displays '+esc(indexedSenate.summary)+'. This index is not an Ervin forecast or a verified candidate-matched polling average.':'No model or public survey index available here; this does not imply the election is uncontested.')+'</p>'+(indexedSenate?'<a href="'+safeURL(coverage.senate.source)+'" target="_blank" rel="noopener noreferrer">Review all Senate polls at publisher</a>':'')+'</article>';
- const governor=g?statewideCard('Governor','Published polling average',g.dem+' vs. '+g.rep,code==='TX'&&texasGovAverages?.averages?.length?margin(texasGovAverages.averages[0].margin):g.poll&&Number.isFinite(g.poll.margin)?margin(g.poll.margin):'No published average',code==='TX'?'RCP statewide average; see the other tracked averages and the full poll ledger below.':'Publisher-owned polling aggregation, not historically adjusted by the Senate model. '+(g.otherCandidates||''),code==='TX'?'https://www.realclearpolling.com/elections/governor/2026/toss-ups':g.poll?.url||g.nomineesSource,'../elections/?office=governor&state='+code):'<article class="ed-race"><div class="ed-kicker">Governor</div><h3>No 2026 gubernatorial contest</h3><p>The governorship is not up for election in this registry.</p></article>';
+ const govEst=governorErvin[code]?.model;const governor=g?statewideCard('Governor',govEst?'Original Ervin historical error adjustment':'Published polling average',g.dem+' vs. '+g.rep,govEst&&Number.isFinite(govEst.adjustedMargin)?margin(govEst.adjustedMargin):'No comparable public poll average',govEst?'Published poll: '+(Number.isFinite(govEst.pollMargin)?margin(govEst.pollMargin):'unavailable')+'; 2016–24 Senate/presidential error correction '+govEst.correction.toFixed(2)+' points. '+(govEst.fallback?'Only national/regional historical evidence available. ':'State-specific historical evidence included. ')+'Governor transfer is provisional, not governor-backtested.': 'Awaiting historical calibration inputs.',g.poll?.url||g.nomineesSource,'../governors/?state='+code):'<article class="ed-race"><div class="ed-kicker">Governor</div><h3>No 2026 gubernatorial contest</h3><p>The governorship is not up for election in this registry.</p></article>';
  $('stateRaceCards').innerHTML=senate+governor;
  const withPolls=stateHouse.filter(x=>housePolls[x.id]||houseVerified.races?.[x.id]?.length||coverage.house?.districts?.[x.id]).length,withRatings=stateHouse.filter(x=>x.rating).length;
  $('stateNotebook').innerHTML='<article><strong>State contests</strong><small>'+(s?'Senate model available · ':'No Senate model · ')+(g?'Governor polling indexed':'No governor election')+'</small></article>'+
@@ -321,12 +321,14 @@ async function start(){
     fetchJSON('../polling/texas-governor-publisher-averages-2026-11-02.json'),
     fetchJSON('../polling/texas-governor-surveys-2026-11-02.json'),
     fetchJSON('../house/ervin-forecast-2026-11-02.json'),
-    fetchJSON('../house/poll-questions-2026-11-02.json')];
+    fetchJSON('../house/poll-questions-2026-11-02.json'),
+    fetchJSON('../research/calibration_events_2016_2024.json')];
   const updated=Promise.allSettled(optionalFiles).then(results=>{
    const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
    baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
    coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;
+   if(values[13]&&window.ERVIN_STATEWIDE){const cal=window.ERVIN_STATEWIDE.apply(values[13],{races:governors},{states:baselines});governorErvin=Object.fromEntries(cal.governor.map(g=>[g.code,g]));}
    pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
    renderLead();renderOverview();renderPolls();
    if(countyShape){buildScenario();drawCounties();}
