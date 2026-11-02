@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let houseZoom=1,houseCenter={x:450,y:290};
+let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
 let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -36,8 +36,8 @@ function renderLead(){
  const senateIndex=coverage.senate?.states?.[code];
  $('heroSenate').textContent=sen?margin(Number(sen.adjustedMargin)):senateIndex?fmt(senateIndex.count)+' polls indexed':'No modeled race';
  $('heroSenateSub').textContent=sen?'Original Ervin adjustment · '+fmt(sen.publisherInputs)+' publisher inputs':senateIndex?'Public Senate poll index · not an Ervin prediction':'No Senate race in the 17-state model';
- $('heroGovernor').textContent=gov?.poll&&Number.isFinite(gov.poll.margin)?margin(gov.poll.margin):gov?'No average':'No election';
- $('heroGovSub').textContent=gov?'Governor publisher snapshot; not an Ervin projection':'No governor contest in the 2026 registry';
+ $('heroGovernor').textContent=code==='TX'&&texasGovAverages?.averages?.length?margin(texasGovAverages.averages[0].margin):gov?.poll&&Number.isFinite(gov.poll.margin)?margin(gov.poll.margin):gov?'No average':'No election';
+ $('heroGovSub').textContent=code==='TX'&&texasGovAverages?.averages?.length?'RCP publisher average, with comparison of 5 sources below':gov?'Governor publisher snapshot; not an Ervin projection':'No governor contest in the 2026 registry';
  $('houseCoverage').textContent=n(stateHouse.length)+' · '+stateName(code);
  $('editionDate').textContent='Research snapshot · November 2026';
 }
@@ -47,7 +47,7 @@ function statewideCard(title,sub,candidates,forecast,explain,source,href){
 function renderOverview(){
  const s=getSen(),g=getGov(),indexedSenate=coverage.senate?.states?.[code];
  const senate=s?statewideCard('U.S. Senate','Original Ervin adjustment',s.nonR+' vs. '+s.rep,margin(Number(s.adjustedMargin)),'Historical partisan polling adjustment applied to sourced statewide averages. Not a race call or a win probability. '+(s.stale?'Publisher inputs may be outdated.':''),'https://www.realclearpolling.com/elections/senate/2026/toss-ups','../elections/?office=senate&state='+code):'<article class="ed-race"><div class="ed-kicker">U.S. Senate</div><h3>'+(indexedSenate?'Senate polling indexed':'No Ervin-modeled Senate contest')+'</h3><p>'+(indexedSenate?'A separate public polling index lists '+fmt(indexedSenate.count)+' published surveys and displays '+esc(indexedSenate.summary)+'. This index is not an Ervin forecast or a verified candidate-matched polling average.':'No model or public survey index available here; this does not imply the election is uncontested.')+'</p>'+(indexedSenate?'<a href="'+safeURL(coverage.senate.source)+'" target="_blank" rel="noopener noreferrer">Review all Senate polls at publisher</a>':'')+'</article>';
- const governor=g?statewideCard('Governor','Published polling average',g.dem+' vs. '+g.rep,g.poll&&Number.isFinite(g.poll.margin)?margin(g.poll.margin):'No published average','Publisher-owned polling aggregation, not historically adjusted by the Senate model. '+(g.otherCandidates||''),g.poll?.url||g.nomineesSource,'../elections/?office=governor&state='+code):'<article class="ed-race"><div class="ed-kicker">Governor</div><h3>No 2026 gubernatorial contest</h3><p>The governorship is not up for election in this registry.</p></article>';
+ const governor=g?statewideCard('Governor','Published polling average',g.dem+' vs. '+g.rep,code==='TX'&&texasGovAverages?.averages?.length?margin(texasGovAverages.averages[0].margin):g.poll&&Number.isFinite(g.poll.margin)?margin(g.poll.margin):'No published average',code==='TX'?'RCP statewide average; see the other tracked averages and the full poll ledger below.':'Publisher-owned polling aggregation, not historically adjusted by the Senate model. '+(g.otherCandidates||''),code==='TX'?'https://www.realclearpolling.com/elections/governor/2026/toss-ups':g.poll?.url||g.nomineesSource,'../elections/?office=governor&state='+code):'<article class="ed-race"><div class="ed-kicker">Governor</div><h3>No 2026 gubernatorial contest</h3><p>The governorship is not up for election in this registry.</p></article>';
  $('stateRaceCards').innerHTML=senate+governor;
  const withPolls=stateHouse.filter(x=>housePolls[x.id]||houseVerified.races?.[x.id]?.length||coverage.house?.districts?.[x.id]).length,withRatings=stateHouse.filter(x=>x.rating).length;
  $('stateNotebook').innerHTML='<article><strong>State contests</strong><small>'+(s?'Senate model available · ':'No Senate model · ')+(g?'Governor polling indexed':'No governor election')+'</small></article>'+
@@ -201,6 +201,22 @@ async function loadHouseMap(reload=false){
 function listPolls(data,asOf,limit=12){const clean=Array.isArray(data)?data.filter(p=>Number.isFinite(+p.margin)):[];
  return clean.sort((a,b)=>Date.parse(b.fieldEnd||b.publishedAt||b.date||0)-Date.parse(a.fieldEnd||a.publishedAt||a.date||0)).slice(0,limit).map(p=>'<article class="ed-coverage"><div><strong><a href="'+safeURL(p.url)+'" target="_blank" rel="noopener noreferrer">'+esc(p.pollster||'Survey')+'</a></strong><small>'+esc(p.date||p.dates||'Field date unknown')+' · '+esc(p.sample||'Sample details unverified')+'</small></div><strong>'+esc(margin(+p.margin))+'</strong></article>').join('');
 }
+function renderTexasGovernorSources(){
+ if(!texasGovAverages?.averages?.length)return '<p class="ed-mini">Texas governor publisher average comparison is loading. Individual surveys remain available below.</p>';
+ const a=texasGovAverages,rows=(texasGovSurveys.polls||[]).slice().sort((x,y)=>y.fieldEnd.localeCompare(x.fieldEnd));
+ const src='<div class="ed-cap" style="margin-top:19px">Texas Governor · Publisher averages (November 1 snapshot)</div>'+
+ '<div class="ed-poll-detail"><h3>Publisher averages</h3><p class="ed-mini">Greg Abbott (R) vs. Gina Hinojosa (D). Publisher calculations are separate from one another and from the Ervin model. The same individual polls often appear in several averages.</p>'+
+ '<div class="ed-table-wrap"><table class="ed-table ed-tx-source-table"><thead><tr><th>Source</th><th>Hinojosa (D)</th><th>Abbott (R)</th><th>Lead</th><th>Source quality</th></tr></thead><tbody>'+
+ a.averages.map(x=>'<tr><td><a href="'+safeURL(x.url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.publisher)+'</a></td><td>'+esc(x.dem.toFixed(1))+'%</td><td>'+esc(x.rep.toFixed(1))+'%</td><td><strong>'+esc(margin(x.margin))+'</strong></td><td><small>'+esc(x.kind)+'</small></td></tr>').join('')+
+ '</tbody></table></div><p class="ed-mini">Silver Bulletin and FiftyPlusOne values are attributed to a secondary aggregation table, not independently retrieved original feeds. They are labeled separately rather than silently incorporated into the Ervin model.</p>'+
+ '<p class="ed-mini"><a href="'+safeURL(a.aggregateOfAggregates.url)+'" target="_blank" rel="noopener noreferrer">Wikipedia publisher-average comparison</a> · reported comparison reference: '+esc(margin(a.aggregateOfAggregates.margin))+'. This is not counted as another independent polling source.</p></div>';
+ const surveys='<div class="ed-cap" style="margin-top:19px">Individual polling ledger · '+fmt(rows.length)+' verified published matchups</div>'+
+ '<div class="ed-poll-detail"><h3>Recent Texas governor surveys</h3><p class="ed-mini">Selected recent candidate-matched polls (field-end date as reported by linked publisher). Polls from the same firm or sponsor are not automatically independent observations.</p>'+
+ '<div class="ed-table-wrap"><table class="ed-table ed-tx-source-table"><thead><tr><th>Survey</th><th>Field end</th><th>Sample</th><th>Hinojosa (D)</th><th>Abbott (R)</th><th>Lead</th></tr></thead><tbody>'+
+ rows.map(x=>'<tr><td><a href="'+safeURL(x.url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.pollster)+'</a></td><td>'+esc(x.fieldEnd)+'</td><td>'+esc(x.sample)+'</td><td>'+esc(x.dem)+'%</td><td>'+esc(x.rep)+'%</td><td><strong>'+esc(margin(x.margin))+'</strong></td></tr>').join('')+
+ '</tbody></table></div></div>';
+ return src+surveys;
+}
 function renderPolls(){
  const localSenate=senatePolls[code]||[],localGov=govPolls[code]||[],gov=getGov(),verified=siena.races?.[code];
  const indexedSen=coverage.senate?.states?.[code],indexedGov=coverage.governor?.states?.[code];
@@ -214,7 +230,7 @@ function renderPolls(){
  govContent+=gov?'<div class="ed-cap" style="margin-top:14px">Governor · published average</div><div class="ed-coverage"><div><strong><a href="'+safeURL(gov.poll?.url)+'" target="_blank" rel="noopener noreferrer">Published statewide governor average</a></strong><small>'+esc(gov.poll?.count||'Unknown')+' underlying surveys; methodology belongs to publisher</small></div><strong>'+esc(margin(gov.poll?.margin))+'</strong></div>':'';
  if(localGov.length)govContent+='<div class="ed-cap" style="margin-top:14px">Governor · individual surveys ('+fmt(localGov.length)+')</div>'+listPolls(localGov,null,14);
  govContent+=sourceNotice(indexedGov,coverage.governor?.source,'Governor');
- $('pollStatewide').innerHTML=senateContent+govContent||'<div class="ed-empty">No comparable statewide polling found in the linked data sources for this state. The race may still have unindexed polls.</div>';
+ $('pollStatewide').innerHTML=senateContent+(code==='TX'?renderTexasGovernorSources():'')+govContent||'<div class="ed-empty">No comparable statewide polling found in the linked data sources for this state. The race may still have unindexed polls.</div>';
  const polled=stateHouse.filter(x=>housePolls[x.id]||houseVerified.races?.[x.id]?.length||coverage.house?.districts?.[x.id]);
  const h=polled.map(x=>({seat:x,poll:housePolls[x.id],recent:houseVerified.races?.[x.id]?.[0],index:coverage.house?.districts?.[x.id]})).sort((a,b)=>((b.recent?.date||b.poll?.date||'').localeCompare(a.recent?.date||a.poll?.date||'')));
  $('pollHouse').innerHTML=h.length?h.map(({seat,poll,recent,index})=>'<div class="ed-coverage"><div><strong><button class="ed-inline-race" type="button" data-poll-district="'+esc(seat.district)+'">'+esc(seat.id)+'</button> · '+esc(recent?.pollster||poll?.pollster||'Poll directory')+'</strong><small>'+(recent?esc(recent.date)+' · new sourced survey':poll?esc(poll.date)+' · earlier survey':'Published poll index only')+(index?' · '+fmt(index.count)+' indexed polls':'')+'</small></div><strong>'+esc(recent?margin(recent.margin):poll?margin(poll.margin):index?.summary||'Published')+'</strong></div>').join(''):'<div class="ed-empty">No public House polling listed for this state in the connected indexes.</div>';
@@ -285,12 +301,14 @@ async function start(){
    fetchJSON('../polling/coverage-2026-11-02.json'),
    fetchJSON('../polling/primary-seven-states-2026-11-01.json'),
     fetchJSON('../polling/house-verified-2026-11-02.json'),
-    fetchJSON('../polling/latest-statewide-2026-11-02.json')];
+    fetchJSON('../polling/latest-statewide-2026-11-02.json'),
+    fetchJSON('../polling/texas-governor-publisher-averages-2026-11-02.json'),
+    fetchJSON('../polling/texas-governor-surveys-2026-11-02.json')];
   const updated=Promise.allSettled(optionalFiles).then(results=>{
    const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
    baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
-   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;
+   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;
    pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
    renderLead();renderOverview();renderPolls();
    if(countyShape){buildScenario();drawCounties();}

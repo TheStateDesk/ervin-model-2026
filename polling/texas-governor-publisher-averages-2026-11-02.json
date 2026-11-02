@@ -1,0 +1,71 @@
+{
+  "asOf": "2026-11-02",
+  "state": "TX",
+  "office": "Governor",
+  "demCandidate": "Gina Hinojosa",
+  "repCandidate": "Greg Abbott",
+  "purpose": "Comparison of publisher-owned statewide polling averages; do not treat sources as independent polls or combine with individual poll rows.",
+  "averages": [
+    {
+      "publisher": "RealClearPolling",
+      "dem": 47.3,
+      "rep": 49.8,
+      "margin": -2.5,
+      "kind": "Publisher original average",
+      "updated": "2026-11-01",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "notes": "Rolling RCP average, field window Oct 15–Nov 1."
+    },
+    {
+      "publisher": "Decision Desk HQ",
+      "dem": 47.4,
+      "rep": 49.1,
+      "margin": -1.7,
+      "kind": "Publisher original average",
+      "updated": "2026-11-01",
+      "url": "https://votes.decisiondeskhq.com/polls/general-ballot-test/2026-tx-governor/texas",
+      "notes": "DDHQ ballot-test poll average; distinguish from mixed fundamentals/markets forecast."
+    },
+    {
+      "publisher": "270toWin",
+      "dem": 47,
+      "rep": 49.6,
+      "margin": -2.6,
+      "kind": "Publisher original average",
+      "updated": "2026-11-01",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "notes": "Latest average of eight polls, as displayed by publisher."
+    },
+    {
+      "publisher": "Silver Bulletin",
+      "dem": 47.1,
+      "rep": 49.2,
+      "margin": -2.1,
+      "kind": "Secondary aggregator transcription",
+      "updated": "2026-11-01",
+      "url": "https://en.wikipedia.org/wiki/2026_Texas_gubernatorial_election",
+      "notes": "Wikipedia aggregate table cites Silver Bulletin; publisher's primary average not independently accessible. Marked secondary and excluded from model inputs until primary verification."
+    },
+    {
+      "publisher": "FiftyPlusOne",
+      "dem": 47.4,
+      "rep": 48.9,
+      "margin": -1.5,
+      "kind": "Secondary aggregator transcription",
+      "updated": "2026-11-01",
+      "url": "https://en.wikipedia.org/wiki/2026_Texas_gubernatorial_election",
+      "notes": "Wikipedia aggregate table citation; potentially dynamic. Secondary benchmark, not independent polling or validated modeling input."
+    }
+  ],
+  "aggregateOfAggregates": {
+    "dem": 47,
+    "rep": 49.6,
+    "margin": -2.6,
+    "source": "Wikipedia compiled aggregate comparison",
+    "kind": "Secondary aggregate of publisher averages",
+    "updated": "2026-11-01",
+    "url": "https://en.wikipedia.org/wiki/2026_Texas_gubernatorial_election",
+    "notes": "Shown as a reference, not included in the publisher-average comparison inputs a second time."
+  },
+  "method": "Source averages share overlapping individual surveys. No naive averaging or double-counting is used in Ervin model outputs."
+}

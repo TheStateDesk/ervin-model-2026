@@ -1,0 +1,168 @@
+{
+  "asOf": "2026-11-02",
+  "state": "TX",
+  "office": "Governor",
+  "polls": [
+    {
+      "pollster": "NY Times / Siena",
+      "fieldEnd": "2026-11-01",
+      "dem": 48,
+      "rep": 47,
+      "margin": 1,
+      "sample": "1,215 LV",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "AtlasIntel",
+      "fieldEnd": "2026-11-01",
+      "dem": 50,
+      "rep": 49,
+      "margin": 1,
+      "sample": "1,678 adults",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "YouGov",
+      "fieldEnd": "2026-10-29",
+      "dem": 49,
+      "rep": 50,
+      "margin": -1,
+      "sample": "2,141 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Kreate Strategies",
+      "fieldEnd": "2026-10-30",
+      "dem": 47,
+      "rep": 49,
+      "margin": -2,
+      "sample": "900 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Data for Progress",
+      "fieldEnd": "2026-10-26",
+      "dem": 47,
+      "rep": 48,
+      "margin": -1,
+      "sample": "712 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Quantus Insights",
+      "fieldEnd": "2026-10-28",
+      "dem": 46,
+      "rep": 52,
+      "margin": -6,
+      "sample": "1,221 LV",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "ActiVote",
+      "fieldEnd": "2026-10-29",
+      "dem": 48,
+      "rep": 52,
+      "margin": -4,
+      "sample": "400 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "CNN / SSRS",
+      "fieldEnd": "2026-10-27",
+      "dem": 46,
+      "rep": 48,
+      "margin": -2,
+      "sample": "923 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Texas Southern University / YouGov",
+      "fieldEnd": "2026-10-25",
+      "dem": 47,
+      "rep": 50,
+      "margin": -3,
+      "sample": "2,000 LV",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Univision / YouGov",
+      "fieldEnd": "2026-10-21",
+      "dem": 46,
+      "rep": 48,
+      "margin": -2,
+      "sample": "1,000 RV",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Texas Public Opinion Research",
+      "fieldEnd": "2026-10-18",
+      "dem": 48,
+      "rep": 51,
+      "margin": -3,
+      "sample": "969 LV",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Emerson College",
+      "fieldEnd": "2026-10-19",
+      "dem": 45,
+      "rep": 49,
+      "margin": -4,
+      "sample": "1,000 LV",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "Fox News",
+      "fieldEnd": "2026-10-19",
+      "dem": 47,
+      "rep": 52,
+      "margin": -5,
+      "sample": "1,398 LV",
+      "url": "https://www.realclearpolling.com/elections/governor/2026/toss-ups",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "VoteHub / Verasight",
+      "fieldEnd": "2026-10-20",
+      "dem": 46,
+      "rep": 48,
+      "margin": -2,
+      "sample": "601 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "University of Houston Hobby School",
+      "fieldEnd": "2026-10-19",
+      "dem": 46,
+      "rep": 49,
+      "margin": -3,
+      "sample": "2,000 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    },
+    {
+      "pollster": "CBS / YouGov",
+      "fieldEnd": "2026-10-16",
+      "dem": 48,
+      "rep": 52,
+      "margin": -4,
+      "sample": "1,460 LV",
+      "url": "https://www.270towin.com/2026-governor-polls/texas",
+      "sourceKind": "Publisher survey directory; some percentages rounded. Pollster sponsorship, population and field dates vary; verify original linked release."
+    }
+  ],
+  "note": "Curated published general-election Hinojosa/Abbott observations. Entries from overlapping RCP and 270toWin directories are deduplicated by pollster and field end. Publisher averages are separate and must not be interpreted as independent polls."
+}
