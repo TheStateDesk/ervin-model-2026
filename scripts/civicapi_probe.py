@@ -25,7 +25,7 @@ def parse_date(x):
  except (ValueError,TypeError,OverflowError): return None
 def query(target):
  s,o,n=TARGETS[target]
- return f"{s} US House {n} General Election 2026" if o=="house" else f"{s} {o.title()} General Election 2026"
+ return 'House' if o=='house' else o.title()
 def read(url):
  request=urllib.request.Request(url,headers={"User-Agent":"ErvinModel2026-Research/1.0","Accept":"application/json"})
  with urllib.request.urlopen(request,timeout=12) as response:
@@ -79,7 +79,9 @@ def normalize(key,search,detail,current):
   names.add(name.lower())
   p=str(c.get("party") or c.get("party_abbreviation") or "").lower()
   p="D" if p in ("d","dem","democratic") else "R" if p in ("r","rep","republican") else ""
-  result.append({"name":name,"votes":votes,"party":p})
+  photo=str(c.get("photo") or c.get("photo_url") or c.get("image_url") or "")
+  if not re.match(r"^https://[a-z0-9.-]+/",photo,re.I): photo=""
+  result.append({"name":name,"votes":votes,"party":p,"photo":photo})
  total=detail.get("total_votes",detail.get("totalVotes",detail.get("total")))
  if type(total)!=int or total<=0 or abs(total-sum(c["votes"] for c in result))>max(10,total*.005): return None
  pct=detail.get("percent_reporting")
@@ -100,8 +102,14 @@ def main():
  for key in TARGETS:
   q=query(key);status[key]={"query":q,"state":"unchecked"}
   try:
-   results=read(BASE+"/race/search?"+urllib.parse.urlencode({"query":q}))
-   matched=[r for r in elements(results) if match(key,r)]
+   state,office,num=TARGETS[key]
+   params={"query":q,"country":"US","province":key[:2],"start_date":DATE,"end_date":DATE,"limit":200}
+   results=read(BASE+"/race/search?"+urllib.parse.urlencode(params))
+   candidates=elements(results)
+   status[key]["returned"]=len(candidates)
+   status[key]["responseType"]=type(results).__name__
+   status[key]["sampleTitles"]=[title(c)[:105] for c in candidates[:3] if isinstance(c,dict)]
+   matched=[r for r in candidates if match(key,r)]
    status[key]["searchMatches"]=len(matched)
    if len(matched)!=1:
     status[key]["state"]="ambiguous" if matched else "not_found"
