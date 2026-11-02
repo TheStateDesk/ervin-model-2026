@@ -1,0 +1,646 @@
+{
+  "asOf": "2026-11-02",
+  "method": "Verbatim Original Ervin per-state corrections from website's original state registry, including 2016 event(s) when original rule did; NOT the pooled Ervin+ calibration_engine.js",
+  "source": "index.html window.ERVIN_DATA.states[].correction, historical[].err",
+  "senateStates": {
+    "ME": {
+      "state": "Maine",
+      "correction": 6.805,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": 8.6,
+          "actual": 6.9,
+          "error": 1.7,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/maine/"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": 5.15,
+          "actual": -8.6,
+          "error": 13.75,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Maine"
+        },
+        {
+          "year": 2020,
+          "office": "President",
+          "poll": 11.6,
+          "actual": 9.1,
+          "error": 2.5,
+          "weight": 0.52,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2020-polls-biden-trump/maine/"
+        }
+      ]
+    },
+    "MI": {
+      "state": "Michigan",
+      "correction": 3.228,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "Senate",
+          "poll": 3.2,
+          "actual": 0.3,
+          "error": 2.9,
+          "weight": 1,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Michigan"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": 6.5,
+          "actual": 1.7,
+          "error": 4.8,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Michigan"
+        },
+        {
+          "year": 2018,
+          "office": "Senate",
+          "poll": 8.3,
+          "actual": 6.4,
+          "error": 1.9,
+          "weight": 0.7,
+          "kind": "Aggregate",
+          "url": "https://www.realclearpolling.com/polls/senate/general/2018/michigan/stabenow-vs-james"
+        }
+      ]
+    },
+    "OH": {
+      "state": "Ohio",
+      "correction": 2.16,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "Senate",
+          "poll": -1,
+          "actual": -3.6,
+          "error": 2.6,
+          "weight": 1,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Ohio"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": -7.4,
+          "actual": -6.1,
+          "error": -1.3,
+          "weight": 0.9,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_Ohio"
+        },
+        {
+          "year": 2020,
+          "office": "President",
+          "poll": -0.9,
+          "actual": -8.2,
+          "error": 7.3,
+          "weight": 0.52,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2020-polls-biden-trump/ohio/"
+        }
+      ]
+    },
+    "TX": {
+      "state": "Texas",
+      "correction": 1.888,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "Senate",
+          "poll": -4,
+          "actual": -8.5,
+          "error": 4.5,
+          "weight": 1,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Texas"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": -5.85,
+          "actual": -9.8,
+          "error": 3.95,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Texas"
+        },
+        {
+          "year": 2018,
+          "office": "Senate",
+          "poll": -6.8,
+          "actual": -2.6,
+          "error": -4.2,
+          "weight": 0.7,
+          "kind": "Aggregate",
+          "url": "https://www.realclearpolling.com/polls/senate/general/2018/texas/cruz-vs-orourke"
+        }
+      ]
+    },
+    "IA": {
+      "state": "Iowa",
+      "correction": 6.16,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -4.7,
+          "actual": -13.2,
+          "error": 8.5,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/iowa/"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": -9.9,
+          "actual": -12.2,
+          "error": 2.3,
+          "weight": 0.9,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_Iowa"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": 2,
+          "actual": -6.6,
+          "error": 8.6,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Iowa"
+        }
+      ]
+    },
+    "KS": {
+      "state": "Kansas",
+      "correction": 8.523,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -5,
+          "actual": -16.2,
+          "error": 11.2,
+          "weight": 0.65,
+          "kind": "Single late poll",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/kansas"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": -16.5,
+          "actual": -23.2,
+          "error": 6.7,
+          "weight": 0.9,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_Kansas"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": -3,
+          "actual": -11.4,
+          "error": 8.4,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Kansas"
+        }
+      ]
+    },
+    "MN": {
+      "state": "Minnesota",
+      "correction": -0.112,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "Senate",
+          "poll": 13.2,
+          "actual": 15.8,
+          "error": -2.6,
+          "weight": 1,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Minnesota"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": 9.6,
+          "actual": 5.3,
+          "error": 4.3,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Minnesota"
+        },
+        {
+          "year": 2018,
+          "office": "Senate",
+          "poll": 9,
+          "actual": 10.6,
+          "error": -1.6,
+          "weight": 0.7,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2018_United_States_Senate_special_election_in_Minnesota"
+        }
+      ]
+    },
+    "AK": {
+      "state": "Alaska",
+      "correction": -2.783,
+      "historyMode": "candidate_repeat",
+      "events": [
+        {
+          "year": 2024,
+          "office": "House",
+          "poll": -4.2,
+          "actual": -2.44,
+          "error": -1.76,
+          "weight": 0.8,
+          "kind": "GOP campaign-sponsored Cygnal Oct 14–16 final-round RCV poll",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_House_of_Representatives_election_in_Alaska"
+        },
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -8,
+          "actual": -13.1,
+          "error": 5.1,
+          "weight": 0.65,
+          "kind": "Single late presidential poll",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/alaska"
+        },
+        {
+          "year": 2022,
+          "office": "House",
+          "poll": 6,
+          "actual": 9.92,
+          "error": -3.92,
+          "weight": 0.72,
+          "kind": "AARP Sept 2022 final-round RCV poll",
+          "url": "https://alaskawatchman.com/wp-content/uploads/2022/09/aarp-alaska-2022-elections-voter-survey.doi_.10.26419-2Fres.00550.009.pdf"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": -4.7,
+          "actual": -12.7,
+          "error": 8,
+          "weight": 0.8,
+          "kind": "270toWin Senate average",
+          "url": "https://www.270towin.com/2020-senate-polls/alaska/"
+        }
+      ]
+    },
+    "GA": {
+      "state": "Georgia",
+      "correction": 0.325,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -1.2,
+          "actual": -2.2,
+          "error": 1,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/georgia"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": -1.4,
+          "actual": 0.9,
+          "error": -2.3,
+          "weight": 0.9,
+          "kind": "Aggregate",
+          "url": "https://www.realclearpolitics.com/epolls/2022/senate/Georgia.html"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": 0.95,
+          "actual": -1.78,
+          "error": 2.73,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020%E2%80%9321_United_States_Senate_election_in_Georgia"
+        }
+      ]
+    },
+    "NC": {
+      "state": "North Carolina",
+      "correction": 1.31,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -1.3,
+          "actual": -3.21,
+          "error": 1.91,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/north-carolina"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": -5.1,
+          "actual": -3.23,
+          "error": -1.87,
+          "weight": 0.9,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_North_Carolina"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": 2.6,
+          "actual": -1.8,
+          "error": 4.4,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://www.realclearpolling.com/polls/senate/general/2020/north-carolina/tillis-vs-cunningham"
+        }
+      ]
+    },
+    "NH": {
+      "state": "New Hampshire",
+      "correction": -1.336,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": 5,
+          "actual": 2.8,
+          "error": 2.2,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/new-hampshire/"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": 2.3,
+          "actual": 9.1,
+          "error": -6.8,
+          "weight": 0.9,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_New_Hampshire"
+        },
+        {
+          "year": 2020,
+          "office": "President",
+          "poll": 11,
+          "actual": 7.3,
+          "error": 3.7,
+          "weight": 0.52,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2020-polls-biden-trump/new-hampshire/"
+        }
+      ]
+    },
+    "NE": {
+      "state": "Nebraska",
+      "correction": 5.07,
+      "historyMode": "candidate_repeat",
+      "events": [
+        {
+          "year": 2024,
+          "office": "Senate",
+          "poll": -1.6,
+          "actual": -6.67,
+          "error": 5.07,
+          "weight": 1,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Nebraska"
+        },
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -15,
+          "actual": -20.5,
+          "error": 5.5,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/nebraska"
+        },
+        {
+          "year": 2020,
+          "office": "President",
+          "poll": -12,
+          "actual": -19.1,
+          "error": 7.1,
+          "weight": 0.52,
+          "kind": "Single late poll",
+          "url": "https://www.270towin.com/2020-polls-biden-trump/nebraska/"
+        }
+      ]
+    },
+    "SC": {
+      "state": "South Carolina",
+      "correction": 5.944,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -11.7,
+          "actual": -17.87,
+          "error": 6.17,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/south-carolina/"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": -3.7,
+          "actual": -10.27,
+          "error": 6.57,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://www.270towin.com/2020-senate-polls/south-carolina/"
+        },
+        {
+          "year": 2020,
+          "office": "President",
+          "poll": -7,
+          "actual": -11.7,
+          "error": 4.7,
+          "weight": 0.52,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2020-polls-biden-trump/south-carolina/"
+        }
+      ]
+    },
+    "MS": {
+      "state": "Mississippi",
+      "correction": 6.411,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "Senate",
+          "poll": -13,
+          "actual": -25.62,
+          "error": 12.62,
+          "weight": 1,
+          "kind": "Single partisan poll",
+          "url": "https://elections2024.thehill.com/mississippi/"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": -5.5,
+          "actual": -9.97,
+          "error": 4.47,
+          "weight": 0.8,
+          "kind": "Two-poll mean",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Mississippi"
+        },
+        {
+          "year": 2018,
+          "office": "Senate",
+          "poll": -7.5,
+          "actual": -7.26,
+          "error": -0.24,
+          "weight": 0.7,
+          "kind": "Two late polls",
+          "url": "https://en.wikipedia.org/wiki/2018_United_States_Senate_special_election_in_Mississippi"
+        }
+      ]
+    },
+    "FL": {
+      "state": "Florida",
+      "correction": 5.842,
+      "historyMode": "standard",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -6.2,
+          "actual": -13.1,
+          "error": 6.9,
+          "weight": 0.65,
+          "kind": "270toWin final average",
+          "url": "https://www.270towin.com/2024-presidential-election-polls/florida"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": -8.8,
+          "actual": -16.4,
+          "error": 7.6,
+          "weight": 0.9,
+          "kind": "Aggregate",
+          "url": "https://www.realclearpolling.com/polls/senate/general/2022/florida/rubio-vs-demings"
+        },
+        {
+          "year": 2018,
+          "office": "Senate",
+          "poll": 2.4,
+          "actual": -0.2,
+          "error": 2.6,
+          "weight": 0.7,
+          "kind": "Aggregate",
+          "url": "https://www.realclearpolling.com/polls/senate/general/2018/florida/scott-vs-nelson"
+        }
+      ]
+    },
+    "SD": {
+      "state": "South Dakota",
+      "correction": 18.5,
+      "historyMode": "candidate_repeat",
+      "events": [
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -27,
+          "actual": -29.19,
+          "error": 2.19,
+          "weight": 0.65,
+          "kind": "Single late poll",
+          "url": "https://emersoncollegepolling.com/october-2024-south-dakota-poll-trump-62-harris-35/"
+        },
+        {
+          "year": 2022,
+          "office": "Senate",
+          "poll": -25,
+          "actual": -43.5,
+          "error": 18.5,
+          "weight": 0.9,
+          "kind": "Single Senate poll",
+          "url": "https://www.realclearpolling.com/polls/senate/general/2022/south-dakota/thune-vs-bengs"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": -17,
+          "actual": -31.48,
+          "error": 14.48,
+          "weight": 0.8,
+          "kind": "Single late poll",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_South_Dakota"
+        }
+      ]
+    },
+    "MT": {
+      "state": "Montana",
+      "correction": 3.196,
+      "historyMode": "not_comparable",
+      "events": [
+        {
+          "year": 2024,
+          "office": "Senate",
+          "poll": -6.9,
+          "actual": -7.1,
+          "error": 0.2,
+          "weight": 1,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Montana"
+        },
+        {
+          "year": 2024,
+          "office": "President",
+          "poll": -18.5,
+          "actual": -19.9,
+          "error": 1.4,
+          "weight": 0.65,
+          "kind": "RCP final average",
+          "url": "https://www.realclearpolling.com/polls/president/general/2024/montana/trump-vs-harris"
+        },
+        {
+          "year": 2020,
+          "office": "Senate",
+          "poll": -1.6,
+          "actual": -10,
+          "error": 8.4,
+          "weight": 0.8,
+          "kind": "Aggregate",
+          "url": "https://en.wikipedia.org/wiki/2020_United_States_Senate_election_in_Montana"
+        }
+      ]
+    }
+  }
+}
