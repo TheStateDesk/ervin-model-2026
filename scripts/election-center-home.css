@@ -1,0 +1,12 @@
+/* Five-column research entry cards, preserving readability and mobile access. */
+@media(min-width:1280px){
+ .readers-guide-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important}
+ .readers-guide .guide-link{padding:18px!important;min-height:224px!important}
+ .readers-guide .guide-link strong{font-size:clamp(17px,1.5vw,22px)!important}
+ .readers-guide .guide-link span:not(.guide-number){font-size:13px!important}
+ .readers-guide .guide-link b{font-size:13px!important}
+}
+@media(min-width:850px) and (max-width:1279px){.readers-guide-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:849px){.readers-guide-grid{grid-template-columns:1fr!important}}
+@media(max-width:1479px){.topbar .navend{display:none!important}}
+@media(min-width:1480px){.topbar .navend{gap:5px!important}.topbar .navend a{padding:8px 7px!important;font-size:12px!important}}
