@@ -20,13 +20,13 @@ function summarize(){
 }
 function stateTitle(s){const row=byState[s.code];return row?s.name+' — '+row.D+'D-'+row.R+'R-'+row.T+'T':s.name+' — loading forecasts';}
 function tone(r){
- if(!r||!r.races.length)return '#c3cccb';
+ if(!r||!r.races.length)return 'var(--ed-map-neutral)';
  const net=(r.D-r.R)/(r.D+r.R+r.T||1);
- const strength=Math.min(.28,Math.abs(net)*.27+.065);
+ const strength=Math.min(.80,Math.abs(net)*.24+.53);
  // Pale blue = net Democratic; pale red = net Republican; sand = dead even.
- if(net>.025)return 'color-mix(in srgb, #357eaa '+Math.round(strength*100)+'%, var(--ed-white))';
- if(net<-.025)return 'color-mix(in srgb, #b66573 '+Math.round(strength*100)+'%, var(--ed-white))';
- return 'color-mix(in srgb, #c2ae85 15%, var(--ed-white))';
+ if(net>.025)return 'color-mix(in srgb, var(--ed-map-blue) '+Math.round(strength*100)+'%, var(--ed-map-base))';
+ if(net<-.025)return 'color-mix(in srgb, var(--ed-map-red) '+Math.round(strength*100)+'%, var(--ed-map-base))';
+ return 'color-mix(in srgb, var(--ed-map-even) 65%, var(--ed-map-base))';
 }
 function drawMap(){
  const svg=$('usMap'),geo=window.ERVIN_US_GEOGRAPHY;
@@ -41,7 +41,7 @@ function drawMap(){
 function show(code,event){
  const r=byState[code],tooltip=$('stateMapTooltip');if(!r||!tooltip)return;
  const displayed=r.races.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+esc(MARGIN(x.margin))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
- tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+r.D+'D–'+r.R+'R–'+r.T+'T</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div><small>House: provisional Ervin. Governor “poll”: unadjusted publisher average. No race calls.</small>';
+ tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+r.D+'D–'+r.R+'R–'+r.T+'T</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div><small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
  tooltip.hidden=false;locate(event);
 }
 function locate(event){
@@ -80,7 +80,7 @@ async function populate(){
   if(byState[s.code])byState[s.code].races.push({label:'U.S. Senate · '+(s.code==='MI'?'Ervin’s Take':'Original Ervin'),margin:s.model.adjustedMargin,type:'model'});
  }
  for(const g of G.governor){
-  if(byState[g.code])byState[g.code].races.push({label:'Governor · '+(Number.isFinite(g.model.adjustedMargin)?'Ervin’s Take':'unadjusted poll'),margin:Number.isFinite(g.model.adjustedMargin)?g.model.adjustedMargin:g.model.pollMargin,type:Number.isFinite(g.model.adjustedMargin)?'model':'poll'});
+  if(byState[g.code])byState[g.code].races.push({label:'Governor · '+(Number.isFinite(g.model.adjustedMargin)?'Ervin’s Take':'publisher poll · no verified governor history'),margin:Number.isFinite(g.model.adjustedMargin)?g.model.adjustedMargin:g.model.pollMargin,type:Number.isFinite(g.model.adjustedMargin)?'model':'poll'});
  }
  for(const r of Object.values(byState)){for(const x of r.races){const side=rank(x.margin);if(side)r[side]++}r.races.sort((a,b)=>a.label.localeCompare(b.label))}
  const has=[...Object.values(byState)].filter(r=>r.D+r.R+r.T>0).length;
