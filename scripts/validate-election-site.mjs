@@ -28,13 +28,21 @@ for(let i=1;i<=10;i++){
   const validDs=entry.districts.features.filter(f=>/^\d{1,2}$/.test(String(f.id)));
   const uniqueDs=new Set(validDs.map(f=>String(f.id).padStart(2,'0')));
   assert.equal(validDs.length,uniqueDs.size,code+' duplicate congressional district');
-  geographicStates.set(code,{counties:entry.counties.features.length,districts:validDs.length,districtIds:uniqueDs});
+  geographicStates.set(code,{counties:entry.counties.features.length,districts:validDs.length,districtIds:uniqueDs,countyIds:ids});
  }
 }
-const alaska=json('geo/districts/AK.json'),akCounties=json('geo/counties/AK.json');
-assert.equal(alaska.state,'AK');assert.equal(akCounties.state,'AK');
-geographicStates.set('AK',{counties:akCounties.features.length,districts:1,districtIds:new Set(['01'])});
 assert.equal(geographicStates.size,expected,'Incomplete 50-state mapping coverage');
+// Every separately hosted state shape must agree with the local regional backup.
+// This includes Alaska, which now has the same redundant pack fallback as other states.
+for(const code of ['AK','AZ','MI','PA','TX']){
+ const c=json('geo/counties/'+code+'.json'),d=json('geo/districts/'+code+'.json');
+ const meta=geographicStates.get(code);
+ assert(c.state===code&&d.state===code,code+' direct geometry state mismatch');
+ assert.equal(c.features.length,meta.counties,code+' direct county total disagrees with bundle');
+ assert.equal(d.features.length,meta.districts,code+' direct House total disagrees with bundle');
+ assert(c.features.every(f=>meta.countyIds.has(String(f.id))),code+' direct county FIPS mismatch');
+ assert(d.features.every(f=>meta.districtIds.has(String(f.id).padStart(2,'0'))),code+' direct district IDs mismatch');
+}
 const house=json('house/data.json'),seats=house.seats||[];
 assert.equal(seats.length,435,'House directory must contain 435 seats');
 const byState=new Map(),ids=new Set();
@@ -101,8 +109,10 @@ const documentStub={
  createDocumentFragment:()=>new TestElement('fragment')
 };
 const browserWindow={};
+let simulateAlaskaPrimaryOutage=false;
 const fetchStub=async url=>{
  const parsed=new URL(url);
+ if(simulateAlaskaPrimaryOutage&&/\/geo\/(counties|districts)\/AK\.json$/.test(parsed.pathname))return {ok:false,status:503};
  const marker='/ervin-model-2026/';
  assert(parsed.pathname.startsWith(marker),'Geography escaped site base path: '+parsed.pathname);
  const local=path.join(root,parsed.pathname.slice(marker.length));
@@ -133,6 +143,12 @@ for(const [code,meta] of geographicStates){
 }
 assert.equal(projectedCountyShapes,3143,'All-state county geometry total changed; review source');
 assert.equal(projectedDistrictShapes,435,'All-state voting district count changed');
+simulateAlaskaPrimaryOutage=true;
+for(const kind of ['counties','districts']){
+ const backup=await browserWindow.ERVIN_GEO.reload('AK',kind);
+ assert.equal(backup.features.length,kind==='counties'?30:1,'Alaska fallback bundle failed when direct file is unavailable');
+}
+report.alaskaBundleFallback='PASS';
 
 const chromeCss=file('site-chrome.css');
 assert(chromeCss.includes('html:not(.light) body .site-header .site-nav.is-open'),'Dark mobile menu must override the global light-theme stylesheet');
