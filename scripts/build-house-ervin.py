@@ -95,7 +95,7 @@ def poll_directory(seats):
 def dedup(raw):
     found={}
     for p in raw:
-        key=(re.sub(r'[^a-z0-9]','',str(p.get('pollster','')).lower()),str(p.get('date',''))[:10],round(float(p.get('dem',-1)),1),round(float(p.get('rep',-1)),1))
+        key=(re.sub(r'[^a-z0-9]','',str(p.get('pollster','')).lower()),str(p.get('date',''))[:10],round(float(p.get('dem') if p.get('dem') is not None else -1),1),round(float(p.get('rep') if p.get('rep') is not None else -1),1))
         if key not in found:found[key]=p
     return sorted(found.values(),key=lambda p:p.get('date') or '',reverse=True)
 def clamp(x,lo,hi):return min(hi,max(lo,x))
