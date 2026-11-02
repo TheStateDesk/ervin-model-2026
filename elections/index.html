@@ -21,6 +21,13 @@
 <div class="race-county-detail" id="countyInspector" aria-live="polite">Select a county to inspect its geographic information and any available verified election returns.</div>
 <p class="race-map-note" id="mapProvenance">Boundaries are for navigation only. A county appearing on this map does not imply any data has been reported.</p>
 </section>
+<section class="race-panel" id="countyScenarioPanel" aria-label="County-by-county election research">
+<div class="race-kicker">County-level intelligence</div><h2>County expectations &amp; past elections</h2>
+<p class="race-muted" id="countyScenarioExplain">The conditional 2026 model, where available, allocates a statewide margin across historical county results. It is not independent county polling, a certified district forecast, or verified 2026 vote reporting.</p>
+<div class="race-meta" id="countyScenarioStats" style="margin:14px 0"><div><small>Sourced county histories</small><strong id="countyScenarioCount">Loading…</strong></div><div><small>Statewide scenario target</small><strong id="countyScenarioTarget">—</strong></div></div>
+<details id="countyScenarioDetails"><summary style="cursor:pointer;font-weight:750;margin:10px 0">Explore all counties · searchable historical and conditional margins</summary>
+<div class="er-county-table-controls"><input type="search" id="countyScenarioFind" placeholder="Search a county…" aria-label="Find county in margin table"><select id="countyScenarioSort" aria-label="Sort counties"><option value="name">County A–Z</option><option value="expected">2026 scenario (D to R)</option><option value="swing">2020–2024 swing</option></select><button type="button" id="countyScenarioExport">Export sourced county research (CSV)</button></div>
+<div class="er-county-table-scroller"><table class="er-county-table"><thead><tr><th scope="col">County</th><th scope="col">2020 president</th><th scope="col">2024 president</th><th scope="col">Conditional 2026</th></tr></thead><tbody id="countyScenarioRows"><tr><td colspan="4">Loading county research…</td></tr></tbody></table></div><p class="race-map-note" id="countyScenarioFoot">The county figures do not measure certified 2026 vote totals.</p></details></section>
 <section class="race-panel" id="pollSection"><div class="race-kicker">Polling intelligence</div><h2>Recent surveys and polling inputs</h2><p class="race-muted" id="pollIntro">Publisher averages and survey evidence are separated to avoid implying that polling data are election results.</p>
 <div class="race-rows" id="pollRows"><div class="race-note">Loading polls…</div></div>
 <div style="margin:18px 0 8px"><h3>Survey margin comparison</h3><p class="race-muted">Individual poll margins, when independently attributable. They are not a new polling average.</p></div><div id="pollPlot" class="race-graph"><b>Surveys</b></div>
@@ -44,5 +51,5 @@
 </aside></div>
 </main>
 <script src="../scripts/us-geography.js"></script>
-<script defer src="../scripts/geo-engine.js"></script><script defer src="../scripts/county-scenarios.js"></script><script defer src="./app.js"></script><script defer src="./night-desk.js"></script><script defer src="../site-chrome.js"></script>
+<script defer src="../scripts/geo-engine.js"></script><script defer src="../scripts/county-scenarios.js"></script><script defer src="./app.js"></script><script defer src="./county-table.js"></script><script defer src="./night-desk.js"></script><script defer src="../site-chrome.js"></script>
 </body></html>
