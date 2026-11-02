@@ -36,7 +36,7 @@
   ok(d.getElementById('leadValue').textContent==='Tossup','House rating is qualitative');
   ok(d.getElementById('pollIntro').textContent.includes('not an Ervin polling average')&&d.getElementById('pollRows').textContent.includes('GBAO'),'House survey is sourced and not presented as a fabricated average');
   ok(d.getElementById('mapTitle').textContent.includes('district or county reference geography')&&d.getElementById('qualifiers').textContent.includes('outside the district'),'Statewide county context clearly disclaims district boundaries');
-  ok(d.getElementById('resultNotice').textContent.includes('No verified'),'House returns are not invented');
+  ok(/No confirmed|No verified/i.test(d.getElementById('resultNotice').textContent)&&!/^[\\d,]+$/.test(d.getElementById('votesReported').textContent.trim()),'House election-night panel must not show fabricated totals before polls close');
   d=await load('../elections/overview/');
   await until(()=>d.getElementById('centerCount').textContent.includes('races'));
   ok(d.getElementById('centerCount').textContent==='488 races','National index has 435 House, 17 Senate, 36 governor records');
