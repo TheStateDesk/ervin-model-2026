@@ -95,7 +95,9 @@ def type_ok(key,row):
   # e.g. Michigan US House 7, but never Michigan State House 7
   return bool(re.search(r"\bus[\s.]*house\s*(?:district\s*)?0*"+str(int(district))+r"\b",blob))
  if office=="senate":return "us senate" in blob or "u.s. senate" in blob
- return "governor" in blob and "lieutenant" not in blob and "lt. governor" not in blob
+ name=str(row.get("election_name") or row.get("name") or "").lower()
+ if any(x in name for x in ("lieutenant","council","board","college","university","referendum","question","metropolitan")):return False
+ return bool(re.search(r"\bgovernor\b",name)) and not bool(re.search(r"\bgovernors\b",name))
 def race_identity(key,search,detail):
  if not type_ok(key,search) or not isinstance(detail,dict):return False
  # Detail must itself independently identify this exact election and office.
@@ -163,7 +165,10 @@ def discover(code,office):
  q="House" if office=="house" else "Senate" if office=="senate" else "Governor"
  params={"query":q,"country":"US","province":code,"start_date":DAY,"end_date":DAY,"limit":600}
  rows=list_items(request(BASE+"/race/search?"+urllib.parse.urlencode(params)))
- return rows[:600]
+ if office=="house" and not any("us house" in text(r).lower() for r in rows if isinstance(r,dict)):
+  params["query"]="US House"
+  rows+=list_items(request(BASE+"/race/search?"+urllib.parse.urlencode(params)))
+ return rows[:1000]
 def resolve_registry(expected,registry,now,limit_states=50):
  current_items=registry.get("races",{})
  checks={}
