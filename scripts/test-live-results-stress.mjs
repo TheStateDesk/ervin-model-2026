@@ -12,9 +12,9 @@ const make=(key='MI-SENATE',time='2026-11-04T02:04:00Z',d=100,r=90)=>({version:1
  total:d+r,candidates:candidates(d,r),asOf:time,sourceUrl:'https://civicapi.org/api/v2/race/12345'}}});
 assert.equal(Object.keys(engine.closeByState).length,50,'Every state must have a race deadline');
 assert.equal(engine.closeAt('GA-SENATE','Senate'),Date.parse('2026-11-04T00:00:00Z'),'Georgia 7 pm ET');
-assert.equal(engine.closeAt('FL-27','House'),Date.parse('2026-11-04T01:00:00Z'),'Florida 8 pm ET');
+assert.equal(engine.closeAt('FL-27','House'),Date.parse('2026-11-04T00:00:00Z'),'Florida Miami-Dade congressional 7 pm ET');
 assert.equal(engine.closeAt('MI-SENATE','Senate'),Date.parse('2026-11-04T02:00:00Z'),'Michigan last closing at 9 pm ET');
-assert.equal(engine.closeAt('TX-18','House'),Date.parse('2026-11-04T02:00:00Z'),'Texas central 9pm ET');
+assert.equal(engine.closeAt('TX-18','House'),Date.parse('2026-11-04T01:00:00Z'),'Texas Houston 7pm CST = 8pm ET');
 assert.equal(engine.closeAt('KY-06','House'),Date.parse('2026-11-03T23:00:00Z'),'Eastern KY 6pm');
 assert.equal(engine.canonical('AK-AL','House'),'AK-01');
 assert.equal(engine.canonical('CA-11','Senate'),null);
@@ -22,8 +22,8 @@ assert.equal(engine.canonical('AA-06','House'),null);
 const early=make();early.races['MI-SENATE'].asOf='2026-11-04T01:58:00Z';
 assert.equal(Object.keys(engine.civic(early,now)).length,0,'No preclose votes from CivicAPI');
 assert.equal(Object.keys(engine.civic(make(),now)).length,1,'Accept normalized after close result');
-assert.equal(Object.keys(engine.civic(make('FL-27','2026-11-04T00:59:59Z'),now)).length,0,'Reject early Florida source');
-assert.equal(Object.keys(engine.civic(make('FL-27','2026-11-04T01:00:01Z'),now)).length,1,'Florida after 8pm valid');
+assert.equal(Object.keys(engine.civic(make('FL-27','2026-11-03T23:59:59Z'),now)).length,0,'Reject early Florida source');
+assert.equal(Object.keys(engine.civic(make('FL-27','2026-11-04T00:00:01Z'),now)).length,1,'Florida district after 7pm ET valid');
 assert.equal(Object.keys(engine.civic(make('GA-SENATE','2026-11-04T00:03:00Z'),now)).length,1,'Georgia 7pm must not be suppressed by an 8pm nationwide gate');
 for(const [label,mutate] of [
  ['wrong election',r=>r.election='2024-11-05'],
