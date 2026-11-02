@@ -13,6 +13,12 @@
  try{
   localStorage.removeItem('ervin-model-watchlist-v2');
   let d=await load('../house/');
+  await until(()=>d.getElementById('houseCount')?.textContent.includes('districts'));
+  // House board intentionally defaults to Michigan in the unified state-first navigation.
+  // Switch to every state before checking the national 435-seat total.
+  const allStates=d.getElementById('houseState');
+  allStates.value='all';
+  allStates.dispatchEvent(new frame.contentWindow.Event('change',{bubbles:true}));
   await until(()=>d.querySelectorAll('#houseCards .gov-card').length===435);
   ok(d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House district cards are indexed');
   ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
@@ -27,8 +33,8 @@
   await until(()=>d.getElementById('raceTitle').textContent.includes('District 4'));
   ok(d.getElementById('raceTitle').textContent.includes('District 4'),'House race dossier resolves district query');
   ok(d.getElementById('leadValue').textContent==='Tossup','House rating is qualitative');
-  ok(d.getElementById('pollIntro').textContent.includes('No verified individual poll'),'House polling is not fabricated');
-  ok(d.getElementById('mapTitle').textContent.includes('district boundary not overlaid'),'Statewide county context clearly disclaims district boundaries');
+  ok(d.getElementById('pollIntro').textContent.includes('not an Ervin polling average')&&d.getElementById('pollRows').textContent.includes('GBAO'),'House survey is sourced and not presented as a fabricated average');
+  ok(d.getElementById('mapTitle').textContent.includes('district or county reference geography')&&d.getElementById('qualifiers').textContent.includes('outside the district'),'Statewide county context clearly disclaims district boundaries');
   ok(d.getElementById('resultNotice').textContent.includes('No verified'),'House returns are not invented');
   d=await load('../elections/overview/');
   await until(()=>d.getElementById('centerCount').textContent.includes('races'));
