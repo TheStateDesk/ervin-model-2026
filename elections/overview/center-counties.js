@@ -1,39 +1,29 @@
-
-/* Full-country county-boundary exploration using Census-derived TopoJSON. */
+/* Nation-to-county drilldown. Every state uses the locally hosted Census geometry pack. */
 (()=>{'use strict';
-const STATE={'01':'AL','02':'AK','04':'AZ','05':'AR','06':'CA','08':'CO','09':'CT','10':'DE','12':'FL','13':'GA','15':'HI','16':'ID','17':'IL','18':'IN','19':'IA','20':'KS','21':'KY','22':'LA','23':'ME','24':'MD','25':'MA','26':'MI','27':'MN','28':'MS','29':'MO','30':'MT','31':'NE','32':'NV','33':'NH','34':'NJ','35':'NM','36':'NY','37':'NC','38':'ND','39':'OH','40':'OK','41':'OR','42':'PA','44':'RI','45':'SC','46':'SD','47':'TN','48':'TX','49':'UT','50':'VT','51':'VA','53':'WA','54':'WV','55':'WI','56':'WY'};
-let atlasPromise=null,generation=0;
-function ns(tag){return document.createElementNS('http://www.w3.org/2000/svg',tag);}
-async function draw(selectState){
- const ticket=++generation,svg=document.getElementById('centerUSMap'),legend=document.getElementById('centerMapLegend');
- svg.replaceChildren();const status=ns('text');status.setAttribute('x','540');status.setAttribute('y','300');status.setAttribute('text-anchor','middle');status.setAttribute('fill','#8b9aa8');status.textContent='Preparing complete county geography…';svg.append(status);
- if(typeof d3==='undefined'||typeof topojson==='undefined'){status.textContent='County mapping libraries unavailable. Select a state to browse local maps.';return;}
- if(!atlasPromise)atlasPromise=fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json').then(r=>{if(!r.ok)throw Error('County atlas unavailable');return r.json();}).catch(e=>{atlasPromise=null;throw e;});
+const $=id=>document.getElementById(id),esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+let ticket=0;
+function draw(selectState){
+ const svg=$('centerUSMap'),geo=window.ERVIN_US_GEOGRAPHY?.states||[];
+ svg.innerHTML=geo.map(g=>'<path class="er-national-state" data-code="'+esc(g.code)+'" tabindex="0" role="button" aria-label="Open '+esc(g.name)+' county map" d="'+g.d+'"><title>'+esc(g.name)+' · open county map</title></path>').join('');
+ svg.setAttribute('aria-label','Geographic US state map; select a state to display its locally stored county boundaries');
+ svg.querySelectorAll('path').forEach(p=>{const go=()=>selectState(p.dataset.code);p.addEventListener('click',go);p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+ $('centerMapLegend').textContent='Choose a state to see its full local county outlines below. Geography is Census 2022 reference data; no 2026 vote totals are implied by these neutral state colors.';
+}
+async function drill(code,kind){
+ const mark=++ticket,container=$('centerStateInfo');if(!container||!window.ERVIN_GEO)return;
+ const box=document.createElement('section');box.className='er-drilldown';
+ box.innerHTML='<div class="er-drill-head"><strong>'+esc(code)+' · '+(kind==='districts'?'House districts':'County boundaries')+'</strong><span id="erDrillCount">Loading shapes…</span></div><svg id="erDrillMap" viewBox="0 0 900 580" role="group" aria-label="'+esc(code)+' detailed geographic map"></svg><p id="erDrillInfo" class="race-muted">Select a '+(kind==='districts'?'district to open its election page':'county for its geographic record')+'.</p>';
+ container.append(box);
  try{
-  const atlas=await atlasPromise;
-  if(ticket!==generation||document.getElementById('centerMapLayer').value!=='counties')return;
-  if(!atlas.objects?.counties||!atlas.objects?.states)throw Error('Unexpected atlas contents');
-  const counties=topojson.feature(atlas,atlas.objects.counties).features,states=topojson.feature(atlas,atlas.objects.states).features;
-  const projection=d3.geoAlbersUsa().fitExtent([[20,16],[1060,607]],{type:'FeatureCollection',features:states}),path=d3.geoPath(projection);
-  const frag=document.createDocumentFragment(),visible=new Map();
-  for(const c of counties){
-   const code=STATE[String(c.id).padStart(5,'0').slice(0,2)],d=path(c);if(!code||!d)continue;
-   const name=String(c.properties?.name||'Unlabeled county');
-   const p=ns('path');p.setAttribute('d',d);p.setAttribute('class','er-county-path');p.dataset.code=code;p.dataset.name=name;
-   const t=ns('title');t.textContent=name+' County, '+code+' · select state contests';p.append(t);frag.append(p);
-   visible.set(code,(visible.get(code)||0)+1);
-  }
-  for(const s of states){
-   const code=STATE[String(s.id).padStart(2,'0')],d=path(s);if(!code||!d)continue;
-   const p=ns('path');p.setAttribute('d',d);p.classList.add('er-state-stroke');p.dataset.code=code;p.setAttribute('tabindex','0');p.setAttribute('role','button');p.setAttribute('aria-label','Open '+code+' election dashboard');p.setAttribute('fill','none');
-   p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectState(code);}});
-   frag.append(p);
-  }
-  svg.replaceChildren(frag);
-  svg.setAttribute('aria-label','Nationwide county shapes; click a county to open its state election directory. State borders are keyboard-selectable.');
-  svg.onclick=e=>{const p=e.target.closest?.('path[data-code]');if(p?.dataset.code)selectState(p.dataset.code);};
-  legend.textContent=counties.length.toLocaleString('en-US')+' Census-derived county geometries nationwide · outline only · gray does not mean a 2026 result · select a county to browse its state contests. Boundaries are historical atlas cartography, not 2026 district outlines.';
- }catch(e){status.textContent='County atlas could not load. State map layers remain available.';legend.textContent='External county geometry unavailable ('+e.message+'); select another map layer.';svg.replaceChildren(status);}
+  const data=await window.ERVIN_GEO.get(code,kind);if(ticket!==mark||!box.isConnected)return;
+  const n=window.ERVIN_GEO.draw(box.querySelector('svg'),data,{kind,className:kind==='districts'?'geo-district':'county',onSelect:(el,f)=>{
+   if(kind==='districts'){const n=String(f.id).padStart(2,'0');location.href='../../elections/?office=house&state='+encodeURIComponent(code)+'&district='+encodeURIComponent(n);}
+   else box.querySelector('#erDrillInfo').textContent=String(f.properties?.name||'County')+' · FIPS '+String(f.id)+' · historical geographic boundary only. Open a statewide race dossier for 2020/2024 voting history and a 2026 conditional scenario.';
+  }});
+  box.querySelector('#erDrillCount').textContent=n+' shapes';
+  box.querySelector('#erDrillInfo').textContent=(kind==='districts'?'Click a district to open the 2026 election dossier. 118th Congress shapes may differ from new 2026 boundaries.':'Click a county to inspect its historical geography; not verified 2026 results.');
+ }catch(e){if(ticket!==mark)return;box.querySelector('#erDrillCount').textContent='Unavailable';box.querySelector('#erDrillInfo').textContent='Local geography failed to load: '+e.message+'. State election links above remain available.';}
 }
 window.ERVIN_CENTER_COUNTIES=draw;
+window.ERVIN_CENTER_GEO={drill};
 })();
