@@ -67,5 +67,49 @@ for(const html of [indexHTML,stateHTML]){
   assert(fs.existsSync(path.resolve(basedir,uri)),basedir+' missing asset '+uri);
  }
 }
+
+/* 2026-11-02 regression: avoid blank maps, broken dark mode and unlinked House polls. */
+const theme=read('states/theme.js'),css=read('states/editorial.css');
+new vm.Script(theme,{filename:'states/theme.js'});
+assert(theme.includes('ervin-2026-appearance')&&theme.includes('theme-dark'),'Theme does not share saved preference');
+assert(css.includes('html.theme-dark')&&css.includes('.theme-dark .ed-card'),'State Desk lacks full dark theme');
+for(const html of [indexHTML,stateHTML])assert(html.includes('id="themeToggle"')&&html.includes('theme.js'),'Theme control missing on page');
+for(const id of ['districtSelect','districtZoomIn','districtZoomOut','districtZoomReset','districtMapStatus'])assert(stateHTML.includes('id="'+id+'"'),'Missing clickable district-map control '+id);
+assert(stateJS.includes("('districtButtons').hidden=true"),'Large House button grid must be replaced with geographic navigation');
+assert(stateJS.includes('houseVerified.races')&&stateJS.includes('statewideLatest'),'New polling snapshots are not connected to race detail');
+const verifiedHouse=json('polling/house-verified-2026-11-02.json'),verifiedState=json('polling/latest-statewide-2026-11-02.json');
+const verifySurvey=(p,context)=>{
+ assert(Number.isFinite(p.dem)&&Number.isFinite(p.rep)&&Number.isFinite(p.margin)&&Math.abs(p.dem-p.rep-p.margin)<.011,'Bad D/R survey shares: '+context);
+ assert(/^https:\/\//.test(p.url),'Missing survey listing citation: '+context);
+};
+for(const [district,rows] of Object.entries(verifiedHouse.races)){
+ assert(districtSet.has(district)&&rows.length,'Invalid House polling district: '+district);
+ rows.forEach(p=>verifySurvey(p,district));
+}
+for(const office of ['senate','governor'])for(const [st,rows] of Object.entries(verifiedState[office])){
+ assert(codeSet.has(st)&&rows.length,'Invalid statewide polling index: '+st);
+ rows.forEach(p=>verifySurvey(p,office+' '+st));
+}
+let totalCountyShapes=0,totalHouseShapes=0;
+for(const s of states){
+ const counties=json('geo/counties/'+s.code+'.json'),districts=json('geo/districts/'+s.code+'.json');
+ for(const [kind,collection] of [['counties',counties],['districts',districts]]){
+  assert.equal(collection.type,'FeatureCollection',kind+' is not GeoJSON in '+s.code);
+  assert.equal(collection.state,s.code,'Map state mismatch in '+s.code);
+  assert(collection.features.length>0,'Blank '+kind+' map in '+s.code);
+  assert(collection.features.every(f=>['Polygon','MultiPolygon'].includes(f.geometry?.type)),'Invalid geographic polygons in '+s.code);
+ }
+ const countyIds=counties.features.map(f=>f.id);
+ assert.equal(new Set(countyIds).size,countyIds.length,'Duplicate county FIPS '+s.code);
+ const expected=new Set(house.filter(h=>h.code===s.code).map(h=>h.district));
+ const shown=new Set(districts.features.filter(f=>/^\d{1,2}$/.test(f.id)).map(f=>f.id.padStart(2,'0')));
+ assert.equal(shown.size,expected.size,'Congressional district-map coverage mismatch in '+s.code);
+ for(const d of expected)assert(shown.has(d),'Missing clickable district '+s.code+'-'+d);
+ totalCountyShapes+=counties.features.length;
+ totalHouseShapes+=shown.size;
+}
+assert.equal(totalHouseShapes,435,'Only some House districts are drawn');
+console.log('2026-11-02 EDITORIAL MAP/THEME/POLLING REGRESSION PASS',JSON.stringify({countyShapes:totalCountyShapes,houseShapes:totalHouseShapes,verifiedHouseDistricts:Object.keys(verifiedHouse.races).length,verifiedHousePolls:Object.values(verifiedHouse.races).reduce((n,x)=>n+x.length,0),verifiedStatewidePolls:['senate','governor'].reduce((n,o)=>n+Object.values(verifiedState[o]).reduce((a,x)=>a+x.length,0),0)}));
+
 console.log('STATE DESK VALIDATION PASS');
 console.log(JSON.stringify({stateEditions:states.length,houseDistricts:house.length,governorRaces:governors.length,senateModels:Object.keys(senate).length,publicHousePolls:Object.keys(housePolls).length,governorPollStates:Object.keys(govPolls).length,countyHistoryRecords:Object.keys(countyHistory.counties).length,pollingIndex:{senateStates:Object.keys(polled.senate.states).length,governorStates:Object.keys(polled.governor.states).length,houseDistricts:Object.keys(polled.house.districts).length},primarySurveys:Object.keys(original.races).length*2,countyMap:'independent loading and labeled zoom controls',navigation:'state-first'},null,2));
