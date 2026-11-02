@@ -3663,7 +3663,7 @@ $('copyControlForecast').onclick=async()=>{
  catch{snack('Copy unavailable in this browser')}
 };
 $('confidenceLevel').onchange=e=>{state.level=Number(e.target.value);render()};$('biasMode').onchange=e=>{state.biasMode=e.target.value;render()};$('raceFilter').onchange=e=>{state.filter=e.target.value;renderTable()};$('sort').onchange=e=>{state.sort=e.target.value;renderTable()};$('search').oninput=e=>{state.search=e.target.value;renderTable()};$('exportCSV').onclick=exportCSV;
-// Theme switches are handled by the shared site-chrome.js?v=20261101-nav-map-fix4 appearance controller.
+// Theme switches are handled by the shared site-chrome.js?v=20261101-state-desk-1 appearance controller.
 function setFreshness(){
  const m=CONFIG.liveMeta||null;
  const badge=$('freshnessLabel'), details=$('refreshDetails'), foot=$('footerFreshness'), link=$('refreshAuditLink'), coverage=$('refreshCoverageNote');
@@ -3729,4 +3729,4 @@ loadRecentSurveys();
     label.title = 'Visit counter temporarily unavailable';
   }
 })();
-</script><script defer src="site-chrome.js?v=20261101-nav-map-fix4"></script></body></html>
+</script><script defer src="site-chrome.js?v=20261101-state-desk-1"></script></body></html>
