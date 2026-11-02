@@ -242,12 +242,9 @@ async function drawMap(r,forceRefresh=false){
  }
 }
 async function loadSenate(){
- const response=await fetch('../index.html');if(!response.ok)throw Error('Senate source file unavailable');
- const html=await response.text(),prefix='window.ERVIN_DATA = ',start=html.indexOf(prefix);
- if(start<0)throw Error('Senate model embedded data absent');
- const a=start+prefix.length,b=html.indexOf(';\n\n</script><script>',a);
- if(b<0)throw Error('Senate model end marker absent');
- const data=JSON.parse(html.slice(a,b));
+ const response=await fetch('../research/senate-workbench-data.json');if(!response.ok)throw Error('Senate source file unavailable');
+ const data=await response.json();
+ if(!Array.isArray(data.states)||data.states.length!==17)throw Error('Preserved Senate model record invalid');
  return (data.states||[]).map(r=>({...r,office:'Senate'}));
 }
 async function start(){
