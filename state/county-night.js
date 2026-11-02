@@ -3,7 +3,7 @@
  * Michigan Senate: only actual validated clerk county totals / precinct detail.
  */
 (()=>{'use strict';
-const $=id=>document.getElementById(id),esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&gt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id),esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const validVote=x=>Number.isSafeInteger(x)&&x>=0&&x<=12000000;
 const validURL=x=>{try{let u=new URL(x);return u.protocol==='https:'&&!u.username&&!u.password}catch{return false}};
 const election='2026-11-03',north=new Set(['Dickinson','Gogebic','Iron','Menominee']);
