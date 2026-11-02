@@ -1,0 +1,446 @@
+{
+  "asOf": "2026-11-02",
+  "method": "Past-only original-style error replay. Three most recent PREVIOUS state election cycles weighted 0.5/0.3/0.2, Senate errors prioritized within each year; 2016+ Senate/presidential evidence. DO NOT apply 2026 correction to historical years. No governor result appears in training.",
+  "constraints": "A small selected 2018/2022 cohort, not a nationally representative model validation; original 2026 correction is not an exact backtest of this replay. IA/KS/ME use only a last published survey, not an RCP average. Race candidates differ by cycle. No house, county or presidential probabilities are implied.",
+  "summary": {
+    "observed": 14,
+    "eligible": 13,
+    "notBacktestable": 1,
+    "n": 13,
+    "rawMAE": 2.976,
+    "adjustedMAE": 4.69,
+    "rawRMSE": 3.944,
+    "adjustedRMSE": 5.961,
+    "rawWinners": 12,
+    "adjustedWinners": 10
+  },
+  "byYear": {
+    "2018": {
+      "observed": 4,
+      "n": 3,
+      "rawMAE": 2.367,
+      "adjustedMAE": 2.859,
+      "rawRMSE": 2.634,
+      "adjustedRMSE": 3.13,
+      "rawWinners": 2,
+      "adjustedWinners": 2
+    },
+    "2022": {
+      "observed": 10,
+      "n": 10,
+      "rawMAE": 3.159,
+      "adjustedMAE": 5.239,
+      "rawRMSE": 4.259,
+      "adjustedRMSE": 6.577,
+      "rawWinners": 10,
+      "adjustedWinners": 8
+    }
+  },
+  "records": [
+    {
+      "state": "MI",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": 10,
+      "actualMargin": 8.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/Michigan.html",
+      "correction": 4.365,
+      "adjustedMargin": 5.635,
+      "rawError": 1.5,
+      "rawAbsError": 1.5,
+      "adjustedAbsError": 2.865,
+      "evidence": [
+        {
+          "year": 2016,
+          "events": 1,
+          "error": 4.37,
+          "cycleWeight": 0.5
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "FL",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": 3.6,
+      "actualMargin": -0.4,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/Florida.html",
+      "correction": 2.706,
+      "adjustedMargin": 0.894,
+      "rawError": 4,
+      "rawAbsError": 4,
+      "adjustedAbsError": 1.294,
+      "evidence": [
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 2.71,
+          "cycleWeight": 0.5
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "GA",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": -3,
+      "actualMargin": -1.4,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/Georgia.html",
+      "correction": 2.817,
+      "adjustedMargin": -5.817,
+      "rawError": -1.6,
+      "rawAbsError": 1.6,
+      "adjustedAbsError": 4.417,
+      "evidence": [
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 2.82,
+          "cycleWeight": 0.5
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "NY",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": 18,
+      "actualMargin": 22.2,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/NewYork.html",
+      "correction": null,
+      "adjustedMargin": null,
+      "rawError": -4.2,
+      "rawAbsError": 4.2,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "pastOnly": true
+    },
+    {
+      "state": "MI",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 1,
+      "actualMargin": 10.6,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Michigan.html",
+      "correction": 4.861,
+      "adjustedMargin": -3.861,
+      "rawError": -9.6,
+      "rawAbsError": 9.6,
+      "adjustedAbsError": 14.461,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 2,
+          "error": 5.87,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2018,
+          "events": 1,
+          "error": 3.5,
+          "cycleWeight": 0.3
+        },
+        {
+          "year": 2016,
+          "events": 1,
+          "error": 4.37,
+          "cycleWeight": 0.2
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "FL",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -12.2,
+      "actualMargin": -19.4,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/florida/desantis-vs-crist",
+      "correction": 4.102,
+      "adjustedMargin": -16.302,
+      "rawError": 7.2,
+      "rawAbsError": 7.2,
+      "adjustedAbsError": 3.098,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 1,
+          "error": 5.74,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2018,
+          "events": 1,
+          "error": 2.3,
+          "cycleWeight": 0.3
+        },
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 2.71,
+          "cycleWeight": 0.2
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "GA",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -8.3,
+      "actualMargin": -7.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Georgia.html",
+      "correction": 1.714,
+      "adjustedMargin": -10.014,
+      "rawError": -0.8,
+      "rawAbsError": 0.8,
+      "adjustedAbsError": 2.514,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 4,
+          "error": 1.05,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 2.82,
+          "cycleWeight": 0.3
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "MN",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 4.3,
+      "actualMargin": 7.7,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Minnesota.html",
+      "correction": 2.73,
+      "adjustedMargin": 1.57,
+      "rawError": -3.4,
+      "rawAbsError": 3.4,
+      "adjustedAbsError": 6.13,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 2,
+          "error": 3.83,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2018,
+          "events": 2,
+          "error": -1.86,
+          "cycleWeight": 0.3
+        },
+        {
+          "year": 2016,
+          "events": 1,
+          "error": 6.86,
+          "cycleWeight": 0.2
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "NH",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -17,
+      "actualMargin": -15.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/new-hampshire/sununu-vs-sherman",
+      "correction": 1.11,
+      "adjustedMargin": -18.11,
+      "rawError": -1.5,
+      "rawAbsError": 1.5,
+      "adjustedAbsError": 2.61,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 2,
+          "error": 1.27,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 0.85,
+          "cycleWeight": 0.3
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "TX",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -10.4,
+      "actualMargin": -10.9,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Texas.html",
+      "correction": 1.219,
+      "adjustedMargin": -11.619,
+      "rawError": 0.5,
+      "rawAbsError": 0.5,
+      "adjustedAbsError": 0.719,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 2,
+          "error": 3.95,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2018,
+          "events": 1,
+          "error": -2.97,
+          "cycleWeight": 0.3
+        },
+        {
+          "year": 2016,
+          "events": 1,
+          "error": 0.67,
+          "cycleWeight": 0.2
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "OH",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -22.4,
+      "actualMargin": -25.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/ohio/dewine-vs-whaley",
+      "correction": 5.378,
+      "adjustedMargin": -27.778,
+      "rawError": 3.1,
+      "rawAbsError": 3.1,
+      "adjustedAbsError": 2.278,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 1,
+          "error": 6.12,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2018,
+          "events": 1,
+          "error": 4.6,
+          "cycleWeight": 0.3
+        },
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 4.69,
+          "cycleWeight": 0.2
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "IA",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -17,
+      "actualMargin": -18.5,
+      "pollType": "Last Des Moines Register poll; no published RCP average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/iowa/reynolds-vs-dejear",
+      "correction": 6.863,
+      "adjustedMargin": -23.863,
+      "rawError": 1.5,
+      "rawAbsError": 1.5,
+      "adjustedAbsError": 5.363,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 2,
+          "error": 7.9,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 5.14,
+          "cycleWeight": 0.3
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "KS",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 3,
+      "actualMargin": 2.21,
+      "pollType": "Last Emerson poll; no published RCP average",
+      "sourceUrl": "https://ballotpedia.org/Kansas_gubernatorial_election,_2022",
+      "correction": 5.853,
+      "adjustedMargin": -2.853,
+      "rawError": 0.79,
+      "rawAbsError": 0.79,
+      "adjustedAbsError": 5.063,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 2,
+          "error": 5.76,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2016,
+          "events": 2,
+          "error": 6.01,
+          "cycleWeight": 0.3
+        }
+      ],
+      "pastOnly": true
+    },
+    {
+      "state": "ME",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 10,
+      "actualMargin": 13.2,
+      "pollType": "Last Pan Atlantic poll; no published RCP average",
+      "sourceUrl": "https://ballotpedia.org/Maine_gubernatorial_election,_2022",
+      "correction": 6.952,
+      "adjustedMargin": 3.048,
+      "rawError": -3.2,
+      "rawAbsError": 3.2,
+      "adjustedAbsError": 10.152,
+      "evidence": [
+        {
+          "year": 2020,
+          "events": 2,
+          "error": 8.9,
+          "cycleWeight": 0.5
+        },
+        {
+          "year": 2016,
+          "events": 1,
+          "error": 3.7,
+          "cycleWeight": 0.3
+        }
+      ],
+      "pastOnly": true
+    }
+  ]
+}
