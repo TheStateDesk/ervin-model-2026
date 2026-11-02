@@ -1,0 +1,746 @@
+{
+  "asOf": "2026-11-02",
+  "disclaimer": "External election-index references only, not Ervin model inputs, independently verified poll microdata, or race calls. Source pages can use different candidates and methods. Latest survey pages may include third-party polls, primaries, partisan sponsorship or generic candidates; consult original poll.",
+  "senate": {
+    "source": "https://www.poliwave.com/us/fed/polls",
+    "sourceKind": "Public polling race index with displayed lead and survey count, not Ervin calculation",
+    "states": {
+      "AL": {
+        "count": 5,
+        "summary": "Moore +15"
+      },
+      "AK": {
+        "count": 25,
+        "summary": "Peltola +1.8"
+      },
+      "AR": {
+        "count": 6,
+        "summary": "Cotton +9.3"
+      },
+      "CO": {
+        "count": 1,
+        "summary": "Hickenlooper +14"
+      },
+      "FL": {
+        "count": 39,
+        "summary": "Moody +5.8"
+      },
+      "GA": {
+        "count": 22,
+        "summary": "Ossoff +9.5"
+      },
+      "ID": {
+        "count": 8,
+        "summary": "Risch +8.9"
+      },
+      "IL": {
+        "count": 3,
+        "summary": "Stratton +12.3"
+      },
+      "IA": {
+        "count": 38,
+        "summary": "Turek +0.3"
+      },
+      "KS": {
+        "count": 20,
+        "summary": "Hamilton +2.9"
+      },
+      "KY": {
+        "count": 2,
+        "summary": "Barr +9"
+      },
+      "LA": {
+        "count": 3,
+        "summary": "Letlow +0.8"
+      },
+      "ME": {
+        "count": 60,
+        "summary": "Jackson +3.9"
+      },
+      "MA": {
+        "count": 14,
+        "summary": "Markey +24.3"
+      },
+      "MI": {
+        "count": 63,
+        "summary": "El-Sayed +4.5"
+      },
+      "MN": {
+        "count": 22,
+        "summary": "Flanagan +5.3"
+      },
+      "MS": {
+        "count": 4,
+        "summary": "Hyde-Smith +3.3"
+      },
+      "MT": {
+        "count": 18,
+        "summary": "Alme +9.7"
+      },
+      "NE": {
+        "count": 19,
+        "summary": "Ricketts +0.9"
+      },
+      "NH": {
+        "count": 33,
+        "summary": "Pappas +7.1"
+      },
+      "NM": {
+        "count": 3,
+        "summary": "Luján +15"
+      },
+      "NC": {
+        "count": 51,
+        "summary": "Cooper +10.5"
+      },
+      "OH": {
+        "count": 48,
+        "summary": "Brown +2.7"
+      },
+      "OK": {
+        "count": 1,
+        "summary": "Hern +24"
+      },
+      "RI": {
+        "count": 8,
+        "summary": "Reed +29.9"
+      },
+      "SC": {
+        "count": 19,
+        "summary": "Graham +0.8"
+      },
+      "SD": {
+        "count": 15,
+        "summary": "Rounds +8.7"
+      },
+      "TN": {
+        "count": 1,
+        "summary": "Hagerty +20"
+      },
+      "TX": {
+        "count": 79,
+        "summary": "Talarico +3.1"
+      },
+      "VA": {
+        "count": 3,
+        "summary": "Warner +19.4"
+      }
+    }
+  },
+  "governor": {
+    "source": "https://www.onpointpolitics.us/polls/governor",
+    "sourceKind": "On Point publisher polling averages and underlying published survey counts; not separate Ervin model",
+    "states": {
+      "OR": {
+        "count": 5,
+        "summary": "Drazan +0.7"
+      },
+      "NV": {
+        "count": 16,
+        "summary": "Ford +1.0"
+      },
+      "VT": {
+        "count": 7,
+        "summary": "Scott +1.1"
+      },
+      "GA": {
+        "count": 17,
+        "summary": "Bottoms +2.0"
+      },
+      "FL": {
+        "count": 43,
+        "summary": "Donalds +3.0"
+      },
+      "KS": {
+        "count": 12,
+        "summary": "Masterson +3.2"
+      },
+      "OH": {
+        "count": 33,
+        "summary": "Acton +3.6"
+      },
+      "TX": {
+        "count": 58,
+        "summary": "Abbott +3.6"
+      },
+      "NE": {
+        "count": 15,
+        "summary": "Pillen +3.7"
+      },
+      "WI": {
+        "count": 8,
+        "summary": "Crowley +5.1"
+      },
+      "OK": {
+        "count": 1,
+        "summary": "Mazzei +5.6"
+      },
+      "AK": {
+        "count": 8,
+        "summary": "Kreiss-Tomkins +6.0"
+      },
+      "AL": {
+        "count": 4,
+        "summary": "Tuberville +6.8"
+      },
+      "NM": {
+        "count": 6,
+        "summary": "Haaland +6.9"
+      },
+      "IA": {
+        "count": 24,
+        "summary": "Sand +7.4"
+      },
+      "MI": {
+        "count": 38,
+        "summary": "Benson +7.4"
+      },
+      "AZ": {
+        "count": 32,
+        "summary": "Hobbs +7.8"
+      },
+      "NH": {
+        "count": 13,
+        "summary": "Ayotte +7.8"
+      },
+      "TN": {
+        "count": 4,
+        "summary": "Blackburn +8.4"
+      },
+      "SC": {
+        "count": 10,
+        "summary": "Wilson +9.8"
+      },
+      "ID": {
+        "count": 2,
+        "summary": "Little +10.4"
+      },
+      "MN": {
+        "count": 11,
+        "summary": "Klobuchar +10.7"
+      },
+      "ME": {
+        "count": 19,
+        "summary": "Pingree +12.0"
+      },
+      "NY": {
+        "count": 24,
+        "summary": "Hochul +12.1"
+      },
+      "AR": {
+        "count": 3,
+        "summary": "Sanders +17.4"
+      },
+      "SD": {
+        "count": 4,
+        "summary": "Rhoden +18.0"
+      },
+      "CT": {
+        "count": 11,
+        "summary": "Lamont +19.1"
+      },
+      "IL": {
+        "count": 2,
+        "summary": "Pritzker +20.0"
+      },
+      "CA": {
+        "count": 20,
+        "summary": "Becerra +23.5"
+      },
+      "MA": {
+        "count": 9,
+        "summary": "Healey +23.5"
+      },
+      "PA": {
+        "count": 17,
+        "summary": "Shapiro +24.7"
+      },
+      "MD": {
+        "count": 2,
+        "summary": "Moore +27.0"
+      },
+      "RI": {
+        "count": 5,
+        "summary": "Foulkes +34.0"
+      }
+    }
+  },
+  "house": {
+    "source": "https://www.poliwave.com/us/fed/polls",
+    "sourceKind": "Public race polling index with count and reported index lead; not latest independent survey or Ervin model",
+    "districts": {
+      "AK-01": {
+        "count": 5,
+        "summary": "Begich +2"
+      },
+      "AL-02": {
+        "count": 3,
+        "summary": "Tied"
+      },
+      "AR-02": {
+        "count": 3,
+        "summary": "Hill +4"
+      },
+      "AZ-01": {
+        "count": 3,
+        "summary": "Shah +4"
+      },
+      "AZ-02": {
+        "count": 4,
+        "summary": "Nez +2"
+      },
+      "AZ-06": {
+        "count": 4,
+        "summary": "Mendoza +4"
+      },
+      "CA-01": {
+        "count": 1,
+        "summary": "McGuire +15"
+      },
+      "CA-04": {
+        "count": 1,
+        "summary": "Jones +13"
+      },
+      "CA-06": {
+        "count": 3,
+        "summary": "Pan +12"
+      },
+      "CA-07": {
+        "count": 2,
+        "summary": "Tied"
+      },
+      "CA-11": {
+        "count": 4,
+        "summary": "Wiener +8"
+      },
+      "CA-22": {
+        "count": 2,
+        "summary": "Villegas +10"
+      },
+      "CA-34": {
+        "count": 3,
+        "summary": "Torres +6"
+      },
+      "CA-40": {
+        "count": 3,
+        "summary": "Kim +9"
+      },
+      "CA-48": {
+        "count": 6,
+        "summary": "Wilpert +8"
+      },
+      "CO-03": {
+        "count": 3,
+        "summary": "Romero +1"
+      },
+      "CO-04": {
+        "count": 1,
+        "summary": "Boebert +5"
+      },
+      "CO-05": {
+        "count": 4,
+        "summary": "Tied"
+      },
+      "CO-08": {
+        "count": 1,
+        "summary": "Evans +2"
+      },
+      "CT-02": {
+        "count": 1,
+        "summary": "Courtney +19"
+      },
+      "CT-05": {
+        "count": 1,
+        "summary": "Hayes +6"
+      },
+      "FL-07": {
+        "count": 1,
+        "summary": "Tied"
+      },
+      "FL-08": {
+        "count": 2,
+        "summary": "Haridopolos +9"
+      },
+      "FL-09": {
+        "count": 2,
+        "summary": "Tied"
+      },
+      "FL-11": {
+        "count": 1,
+        "summary": "Tied"
+      },
+      "FL-13": {
+        "count": 6,
+        "summary": "Luna +3"
+      },
+      "FL-14": {
+        "count": 3,
+        "summary": "Castor +1"
+      },
+      "FL-16": {
+        "count": 2,
+        "summary": "Gruters +4"
+      },
+      "FL-21": {
+        "count": 1,
+        "summary": "Mast +11"
+      },
+      "FL-22": {
+        "count": 3,
+        "summary": "Tied"
+      },
+      "FL-25": {
+        "count": 5,
+        "summary": "Moskowitz +6"
+      },
+      "FL-27": {
+        "count": 4,
+        "summary": "Salazar +3"
+      },
+      "GA-03": {
+        "count": 1,
+        "summary": "Jack +5"
+      },
+      "GA-07": {
+        "count": 2,
+        "summary": "Kozycki +2"
+      },
+      "GA-11": {
+        "count": 1,
+        "summary": "Harden +2"
+      },
+      "IA-01": {
+        "count": 3,
+        "summary": "Bohannan +16"
+      },
+      "IA-02": {
+        "count": 3,
+        "summary": "James +3"
+      },
+      "IA-03": {
+        "count": 1,
+        "summary": "Nunn +6"
+      },
+      "ID-01": {
+        "count": 3,
+        "summary": "Fulcher +26"
+      },
+      "ID-02": {
+        "count": 1,
+        "summary": "Simpson +15"
+      },
+      "IL-04": {
+        "count": 1,
+        "summary": "Garcia +19"
+      },
+      "IN-05": {
+        "count": 3,
+        "summary": "Spartz +3"
+      },
+      "KS-02": {
+        "count": 1,
+        "summary": "Schmidt +3"
+      },
+      "KY-06": {
+        "count": 9,
+        "summary": "Dembo +6"
+      },
+      "MD-01": {
+        "count": 1,
+        "summary": "Harris +13"
+      },
+      "ME-01": {
+        "count": 1,
+        "summary": "Pingree +22"
+      },
+      "ME-02": {
+        "count": 9,
+        "summary": "Dunlap +4"
+      },
+      "MI-04": {
+        "count": 5,
+        "summary": "Huizenga +3"
+      },
+      "MI-07": {
+        "count": 3,
+        "summary": "Lawrence +8"
+      },
+      "MI-10": {
+        "count": 3,
+        "summary": "Bouchard +5"
+      },
+      "MN-01": {
+        "count": 5,
+        "summary": "Tied"
+      },
+      "MN-02": {
+        "count": 2,
+        "summary": "Little +12"
+      },
+      "MN-08": {
+        "count": 1,
+        "summary": "Stauber +6"
+      },
+      "MO-02": {
+        "count": 4,
+        "summary": "Wellman +1"
+      },
+      "MT-01": {
+        "count": 10,
+        "summary": "Flint +2"
+      },
+      "MT-02": {
+        "count": 2,
+        "summary": "Downing +11"
+      },
+      "NC-01": {
+        "count": 8,
+        "summary": "Davis +1"
+      },
+      "NC-03": {
+        "count": 1,
+        "summary": "Murphy +3"
+      },
+      "NC-07": {
+        "count": 1,
+        "summary": "Rouzer +6"
+      },
+      "NC-09": {
+        "count": 2,
+        "summary": "Hudson +4"
+      },
+      "NC-10": {
+        "count": 1,
+        "summary": "Harrigan +15"
+      },
+      "NC-11": {
+        "count": 4,
+        "summary": "Ager +6"
+      },
+      "NC-14": {
+        "count": 1,
+        "summary": "Moore +8"
+      },
+      "NE-01": {
+        "count": 4,
+        "summary": "Flood +1"
+      },
+      "NE-02": {
+        "count": 2,
+        "summary": "Powell +12"
+      },
+      "NH-01": {
+        "count": 2,
+        "summary": "Shaheen +4"
+      },
+      "NH-02": {
+        "count": 9,
+        "summary": "Goodlander +16"
+      },
+      "NJ-02": {
+        "count": 1,
+        "summary": "Drew +10"
+      },
+      "NJ-07": {
+        "count": 2,
+        "summary": "Bennett +5"
+      },
+      "NM-01": {
+        "count": 1,
+        "summary": "Stansbury +18"
+      },
+      "NM-02": {
+        "count": 3,
+        "summary": "Vasquez +4"
+      },
+      "NM-03": {
+        "count": 1,
+        "summary": "Fernandez +14"
+      },
+      "NV-02": {
+        "count": 3,
+        "summary": "Flippo +2"
+      },
+      "NV-03": {
+        "count": 1,
+        "summary": "Lee +7"
+      },
+      "NY-01": {
+        "count": 1,
+        "summary": "LaLota +3"
+      },
+      "NY-17": {
+        "count": 5,
+        "summary": "Conley +2"
+      },
+      "NY-18": {
+        "count": 2,
+        "summary": "Ryan +17"
+      },
+      "NY-21": {
+        "count": 8,
+        "summary": "Constantino +2"
+      },
+      "NY-23": {
+        "count": 2,
+        "summary": "Langworthy +17"
+      },
+      "OH-01": {
+        "count": 4,
+        "summary": "Landsman +9"
+      },
+      "OH-07": {
+        "count": 6,
+        "summary": "Poindexter +4"
+      },
+      "OH-09": {
+        "count": 3,
+        "summary": "Kaptur +6"
+      },
+      "OH-10": {
+        "count": 3,
+        "summary": "Knickerbocker +3"
+      },
+      "OH-15": {
+        "count": 4,
+        "summary": "Leonard +3"
+      },
+      "OK-05": {
+        "count": 1,
+        "summary": "Bice +5"
+      },
+      "PA-01": {
+        "count": 9,
+        "summary": "Tied"
+      },
+      "PA-07": {
+        "count": 5,
+        "summary": "Brooks +5"
+      },
+      "PA-08": {
+        "count": 6,
+        "summary": "Cognetti +3"
+      },
+      "PA-10": {
+        "count": 7,
+        "summary": "Stelson +3"
+      },
+      "RI-01": {
+        "count": 2,
+        "summary": "Amo +28"
+      },
+      "RI-02": {
+        "count": 2,
+        "summary": "Magaziner +16"
+      },
+      "SC-01": {
+        "count": 5,
+        "summary": "Lacore +2"
+      },
+      "SC-07": {
+        "count": 1,
+        "summary": "Fry +4"
+      },
+      "SD-01": {
+        "count": 2,
+        "summary": "Jackley +28"
+      },
+      "TN-05": {
+        "count": 2,
+        "summary": "Hatcher +5"
+      },
+      "TN-09": {
+        "count": 1,
+        "summary": "Taylor +4"
+      },
+      "TX-02": {
+        "count": 1,
+        "summary": "Toth +9"
+      },
+      "TX-09": {
+        "count": 4,
+        "summary": "Mealer +1"
+      },
+      "TX-10": {
+        "count": 1,
+        "summary": "Gober +7"
+      },
+      "TX-15": {
+        "count": 7,
+        "summary": "Cruz +1"
+      },
+      "TX-23": {
+        "count": 2,
+        "summary": "Tied"
+      },
+      "TX-28": {
+        "count": 3,
+        "summary": "Cuellar +20"
+      },
+      "TX-34": {
+        "count": 4,
+        "summary": "Gonzalez +7"
+      },
+      "TX-35": {
+        "count": 4,
+        "summary": "Cruz +1"
+      },
+      "UT-01": {
+        "count": 1,
+        "summary": "McAdams +42"
+      },
+      "UT-02": {
+        "count": 3,
+        "summary": "Moore +5"
+      },
+      "UT-03": {
+        "count": 1,
+        "summary": "Maloy +19"
+      },
+      "UT-04": {
+        "count": 1,
+        "summary": "Kennedy +9"
+      },
+      "VA-01": {
+        "count": 5,
+        "summary": "Taylor +1"
+      },
+      "VA-02": {
+        "count": 2,
+        "summary": "Luria +3"
+      },
+      "VA-05": {
+        "count": 3,
+        "summary": "McGuire +6"
+      },
+      "VA-06": {
+        "count": 1,
+        "summary": "Cline +30"
+      },
+      "VT-01": {
+        "count": 4,
+        "summary": "Balint +17"
+      },
+      "WA-03": {
+        "count": 4,
+        "summary": "Perez +1"
+      },
+      "WA-05": {
+        "count": 1,
+        "summary": "Baumgartner +6"
+      },
+      "WI-01": {
+        "count": 5,
+        "summary": "Berman +1"
+      },
+      "WI-03": {
+        "count": 4,
+        "summary": "Cooke +4"
+      },
+      "WI-06": {
+        "count": 1,
+        "summary": "Grothman +22"
+      }
+    }
+  }
+}
