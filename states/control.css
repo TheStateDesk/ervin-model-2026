@@ -32,3 +32,24 @@
 @media(max-width:740px){.desk-control{padding:18px 16px;margin:18px 0}.desk-control__outcomes{grid-template-columns:1fr 1fr;gap:9px}.desk-control__majority{grid-column:1/-1;grid-row:2;text-align:left}.desk-control__party{padding:11px 12px}.desk-control__choice{width:100%;max-width:none}.desk-control__chance{font-size:clamp(31px,8vw,46px)}}
 @media(max-width:390px){.desk-control__party-name{font-size:9px}.desk-control__seat{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.desk-control__bar>span{transition:none}}
+
+/* The three office forecast summaries should read as one compact, neutral
+   editorial panel and leave the state map close to the top of the edition. */
+:root{--edge:var(--ed-rule);--surface:var(--ed-white);--bg:var(--ed-paper);
+ --text:var(--ed-ink);--muted:var(--ed-muted);--dem-fill:var(--ed-blue);
+ --rep-fill:var(--ed-red);--unknown-fill:#86949c}
+.ed-body .desk-balance{border:1px solid var(--ed-rule);border-radius:0;background:var(--ed-white);box-shadow:none;padding:20px 24px;margin:0 0 24px}
+.ed-body .desk-balance h2{font:700 clamp(24px,3vw,34px)/1.15 var(--ed-serif);color:var(--ed-ink)}
+.ed-body .desk-balance .power-asof{background:var(--ed-paper);border-color:var(--ed-rule);font-size:10px;color:var(--ed-muted)}
+.ed-body .desk-balance .power-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ed-body .desk-balance .power-card{background:var(--ed-paper);border-color:var(--ed-rule);border-radius:0;padding:13px;box-shadow:none}
+.ed-body .desk-balance .power-card-head h3{font:700 18px/1.2 var(--ed-serif)}
+.ed-body .desk-balance .power-card-head a{font-size:11px}
+.ed-body .desk-balance .power-numbers strong{font-size:clamp(22px,2.5vw,33px)}
+.ed-body .desk-balance .power-card p,.ed-body .desk-balance .power-method{font-size:11px;line-height:1.5}
+.ed-body .desk-balance .power-segment{min-height:12px}
+.ed-body .desk-balance .power-card .power-rail{min-height:12px}
+.ed-body .desk-balance .power-legend{margin:12px 0}
+html.theme-dark .ed-body .desk-balance .power-card{background:#192736;border-color:var(--ed-rule)}
+@media(max-width:930px){.ed-body .desk-balance .power-grid{grid-template-columns:1fr 1fr}.ed-body .desk-balance .power-card:last-child{grid-column:1/-1}}
+@media(max-width:660px){.ed-body .desk-balance{padding:17px 15px}.ed-body .desk-balance .power-grid{grid-template-columns:1fr}.ed-body .desk-balance .power-card:last-child{grid-column:auto}.ed-body .desk-balance .power-heading{display:block}.ed-body .desk-balance .power-asof{display:inline-flex;margin-top:10px}}
