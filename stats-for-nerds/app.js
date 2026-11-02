@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id),SEED=20261103,N=14000;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const closeTimes={'KY-06':'2026-11-03T18:00:00-05:00','VA-02':'2026-11-03T19:00:00-05:00',
  'VA-05':'2026-11-03T19:00:00-05:00','GA-SENATE':'2026-11-03T19:00:00-05:00',
- 'SC-SENATE':'2026-11-03T19:00:00-05:00','FL-27':'2026-11-03T19:00:00-05:00',
+ 'SC-SENATE':'2026-11-03T19:00:00-05:00','FL-27':'2026-11-03T20:00:00-05:00',
  'NC-SENATE':'2026-11-03T19:30:00-05:00','OH-SENATE':'2026-11-03T19:30:00-05:00'};
 const specs=[
  {id:'KY-06',title:'Kentucky 6th · House',close:'6:00 p.m.',why:'Interior / rural-suburban swing; a possible early check on Kansas and Iowa.',focus:'KS, IA',w:[.95,.10,.40,.30,.60]},
@@ -14,12 +14,12 @@ const specs=[
  {id:'VA-05',title:'Virginia 5th · House',close:'7:00 p.m.',why:'Rural and exurban performance; possible signal for nonmetro Kansas/Iowa.',focus:'KS, IA',w:[.90,.15,.25,.10,.65]},
  {id:'GA-SENATE',title:'Georgia · Senate',close:'7:00 p.m.',why:'Statewide coalition test; early vote-heavy counties need mode and geography review.',focus:'TX',w:[1.05,.90,.02,.45,.10]},
  {id:'SC-SENATE',title:'South Carolina · Senate',close:'7:00 p.m.',why:'Southern statewide swing; partial counties alone can mislead.',focus:'TX',w:[.95,.85,.03,.10,.35]},
- {id:'FL-27',title:'Florida 27th · House',close:'7:00 p.m.',why:'Miami-area Hispanic/suburban swing; not a clean proxy for every Texas voter.',focus:'TX',w:[.85,.62,.03,.60,.00]},
+ {id:'FL-27',title:'Florida 27th · House',close:'8:00 p.m.',why:'Miami-area Hispanic/suburban swing; not a clean proxy for every Texas voter.',focus:'TX',w:[.85,.62,.03,.60,.00]},
  {id:'NC-SENATE',title:'North Carolina · Senate',close:'7:30 p.m.',why:'Statewide competitive race; early-vote composition especially important.',focus:'TX, KS',w:[1.00,.70,.15,.45,.15]},
  {id:'OH-SENATE',title:'Ohio · Senate',close:'7:30 p.m.',why:'Midwestern industrial and exurban indicator, particularly for Iowa and Kansas.',focus:'IA, KS',w:[1.12,.04,.95,.24,.40]}
 ];
 const targetParams={TX:{w:[.92,.80,.08,.43,.10],noise:3.6},KS:{w:[.98,.10,.83,.21,.46],noise:3.7},IA:{w:[1.03,.03,.94,.25,.36],noise:3.6}};
-let baselines={},house={},candidateRoster={},reviewed=[],raw={},manual=[],includeManual=true,draws=[],lastCheck=0;
+let baselines={},house={},candidateRoster={},historicalMOE=null,reviewed=[],raw={},manual=[],includeManual=true,draws=[],lastCheck=0;
 let firstLoad=true,signalMeta={};
 const sources=['../counties-watch/forecast-baselines.json','../house/ervin-forecast-2026-11-02.json'];
 const pct=v=>Number(v).toFixed(1)+'%';
@@ -29,12 +29,19 @@ function rand(seed){return function(){seed=(seed+0x6D2B79F5)|0;let t=Math.imul(s
 function gauss(u){let a=Math.max(u(),1e-10),b=u();return Math.sqrt(-2*Math.log(a))*Math.cos(2*Math.PI*b)}
 function factors(u){return [gauss(u)*2.6,gauss(u)*2.15,gauss(u)*2.05,gauss(u)*1.6,gauss(u)*1.45]}
 function dot(a,b){return a.reduce((n,x,i)=>n+x*b[i],0)}
+function targetResidual(id){
+ const t=targetParams[id],v=[2.6,2.15,2.05,1.6,1.45].reduce((sum,sd,i)=>sum+Math.pow(t.w[i]*sd,2),0);
+ const reference=Number(historicalMOE?.senate?.raw?.rmse);
+ // Total scenario volatility anchored to the 61-event historical Senate polling RMSE.
+ // Shared regional covariance remains a hypothesis, never a historically measured correlation.
+ return Number.isFinite(reference)?Math.sqrt(Math.max(1,reference*reference-v)):t.noise;
+}
 function initial(){
  const u=rand(SEED);draws=[];
  for(let i=0;i<N;i++){
   const f=factors(u),out={};
   for(const id of Object.keys(targetParams)){
-   const t=targetParams[id];out[id]=dot(f,t.w)+gauss(u)*t.noise;
+   const t=targetParams[id];out[id]=dot(f,t.w)+gauss(u)*targetResidual(id);
   }
   for(const s of specs)out[s.id]=dot(f,s.w)+gauss(u)*4.4;
   draws.push(out);
@@ -51,6 +58,7 @@ function officialUrl(x){try{const u=new URL(x);return u.protocol==='https:'&&u.h
 function validated(record){
  const key=String(record?.raceId||''),s=specs.find(x=>x.id===key);
  if(!s)return {ok:false,why:'Race outside approved shortlist'};
+ if(!key.endsWith('-SENATE'))return {ok:false,why:'House-to-Senate transfer has no validated historical covariance; review manually only'};
  if(!Number.isFinite(baseline(key)))return {ok:false,why:'No pre-election baseline'};
  if(record?.audit!=='reviewed'||record?.geographyReviewed!==true||record?.modeReviewed!==true)return {ok:false,why:'Human geography and vote-mode audit absent'};
  if(record?.election!=='2026-11-03'||record?.office!==(key.includes('SENATE')?'Senate':'House'))return {ok:false,why:'Election/office mismatch'};
@@ -81,7 +89,7 @@ function audit(){
 }
 function compute(){
  const active=specs.flatMap(s=>{
-  const a=signalMeta[s.id]?.observed?[signalMeta[s.id].observed]:[];
+  const a=s.id.endsWith('-SENATE')&&signalMeta[s.id]?.observed?[signalMeta[s.id].observed]:[];
   const m=includeManual?manual.filter(x=>x.id===s.id):[];
   // A single race cannot provide two independent observations of the same votes.
   return a.length?a:m;
@@ -90,7 +98,12 @@ function compute(){
  let high=-Infinity;
  for(let i=0;i<N;i++){
   let v=0;for(const s of active){
-   const sd=s.method==='reviewed'?Math.max(3.1,4.8/Math.sqrt(Math.max(.35,s.frac)/.5)):Math.max(5.8,9/Math.sqrt(Math.max(.1,s.frac)/.5));
+   const empiric=Number(historicalMOE?.senate?.raw?.rmse)||5.18;
+   const housePrior=Number(historicalMOE?.house?.unchangedDistrictHoldout?.rmse)||7.8;
+   const baseNoise=s.id.endsWith('-SENATE')?empiric:housePrior;
+   // House -> Senate manually entered scenarios are heavily discounted, never used automatically.
+   const sd=s.method==='reviewed'?Math.max(baseNoise,baseNoise/Math.sqrt(Math.max(.35,s.frac)/.5)):
+    Math.max(baseNoise*(s.id.endsWith('-SENATE')?1.4:2.2),baseNoise/Math.sqrt(Math.max(.1,s.frac)/.5));
    const z=(draws[i][s.id]-s.delta)/sd;
    v+=-.5*z*z;
   }
@@ -128,6 +141,7 @@ function candidateMarkup(id){
 }
 function targetHTML(id,r){
  const isUpdated=r.hasEvidence,base=share(r.baseline),conditional=share(r.posterior),change=conditional-base;
+ const empirical=Number(historicalMOE?.senate?.raw?.p90Abs);
  const cls=conditional>=50?'D':'R';
  return '<article class="nerd-target"><small>U.S. SENATE · '+id+'</small><h3>'+({TX:'Texas',KS:'Kansas',IA:'Iowa'}[id])+'</h3>'+
  candidateMarkup(id)+
@@ -135,7 +149,7 @@ function targetHTML(id,r){
  '<div class="nerd-band"><span style="width:'+Math.min(100,Math.max(0,conditional))+'%"></span></div>'+
  '<p>Baseline: '+margin(r.baseline)+'. Conditional: '+margin(r.posterior)+'. '+
  (isUpdated?'Scenario shift: '+(change>=0?'+':'')+change.toFixed(2)+' D share points.':'No shift without applicable evidence.')+
- ' Model 10th–90th sensitivity range: '+pct(share(r.lo))+'–'+pct(share(r.hi))+' D share. Not a validated probability interval.</p></article>';
+ ' Model 10th–90th sensitivity range: '+pct(share(r.lo))+'–'+pct(share(r.hi))+' D share. '+(Number.isFinite(empirical)?'Historical Senate raw polling error, 90th percentile absolute deviation: ±'+empirical.toFixed(2)+' D–R margin points (61 archived elections). ':'Historical error envelope unavailable. ')+'Neither is a statistically validated 2026 prediction interval.</p></article>';
 }
 function render(){
  const data=compute(),{results,active,ess}=data;
@@ -156,10 +170,12 @@ function render(){
   const latest=r?'<small>Reported total: '+Number(r.total||0).toLocaleString()+(Number.isFinite(r.marginD)?' · raw D–R '+margin(r.marginD)+' (unadjusted, composition unknown)':'')+' · NOT an eligible adjustment (mode/geography audit missing).</small>':'';
   const relevant=Object.keys(targetParams).map(t=>({t,slope:signalStrength(s,t)})).sort((a,b)=>Math.abs(b.slope)-Math.abs(a.slope));
   const target=relevant.slice(0,2).map(z=>z.t).join(' / ');
+  const hm=Number(historicalMOE?.house?.unchangedDistrictHoldout?.p90Abs);
+  const houseWarning=s.id.endsWith('-SENATE')?'':'<small>HOUSE CAUTION: No validated cross-office transfer; only a flagged observation. '+(Number.isFinite(hm)?'2022→24 comparable House 90th percentile historical margin error ±'+hm.toFixed(2)+' points (n=232).':'House error archive unavailable.')+'</small>';
   return '<tr><td><strong>'+esc(s.title)+'</strong><small>'+esc(s.close)+' ET · '+esc(s.id)+'</small>'+candidateMarkup(s.id)+'<small>Original Ervin reference: '+esc(base)+'</small></td>'+
-   '<td>'+esc(s.why)+'<small>Strongest provisional transfer: '+esc(target)+' · rank '+(i+1)+'</small></td>'+
+   '<td>'+esc(s.why)+'<small>Assumed, not historically estimated covariance: '+esc(target)+' · rank '+(i+1)+'</small>'+houseWarning+'</td>'+
    '<td>'+esc(when)+latest+'</td><td><span class="nerd-flag '+cls+'">'+esc(status)+'</span><small>'+esc(meta.reason)+'</small>'+
-   '<small><a href="../elections/?office='+(s.id.includes('SENATE')?'senate':'house')+'&state='+s.id.slice(0,2)+(s.id.includes('SENATE')?'':'&district='+s.id.slice(3))+'">Open race dossier</a></small></td></tr>';
+   '<small><a href="../election-night/?state='+s.id.slice(0,2)+'&race='+encodeURIComponent(s.id)+'#nationalBoard">Open live election-night race</a></small></td></tr>';
  }).join('');
  $('manualList').innerHTML=manual.map(x=>'<div class="nerd-manual"><div><b>'+esc(x.id)+'</b> · what-if D share '+pct(share(baseline(x.id)+x.delta))+' · assumed '+pct(x.frac*100)+' reported · '+esc(x.mode)+'<br><small>Hypothetical, not official votes; D-R deviation: '+margin(x.delta)+'. '+(x.url?'<a target="_blank" rel="noopener noreferrer" href="'+esc(x.url)+'">Research link</a>':'No source link')+'</small></div><button type="button" class="nerd-button" data-remove="'+esc(x.id)+'">Remove</button></div>').join('');
 }
@@ -217,8 +233,9 @@ async function init(){
  });
  $('manualList').addEventListener('click',e=>{const key=e.target.closest('button[data-remove]')?.dataset.remove;if(!key)return;manual=manual.filter(x=>x.id!==key);render()});
  try{
-  const [a,b,candidates]=await Promise.all([...sources.map(json),json('./candidates-2026.json').catch(()=>null)]);
+  const [a,b,candidates,moe]=await Promise.all([...sources.map(json),json('./candidates-2026.json').catch(()=>null),json('../research/election-night-historical-moe-2026.json').catch(()=>null)]);
   baselines=a.states||{};house=b.races||{};
+  historicalMOE=moe?.version===1&&moe?.senate?.raw?.n===61?moe:null;
   candidateRoster=(candidates?.version===1&&candidates?.election==='2026-11-03'&&typeof candidates.races==='object')?candidates.races:{};
   const selected=$('inputRace').value;
   $('inputRace').innerHTML=specs.map(x=>{
