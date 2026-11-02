@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-11-02T18:23:20.319773Z",
+  "note": "Six-race pilot. Missing or rejected values do not mean zero votes; source access and Pages publication may lag.",
+  "polling": {
+    "note": "Polling advertised by provider; verified v2 polling endpoint and schema not established. No polls added to Ervin model.",
+    "state": "undocumented"
+  },
+  "provider": "civicAPI v2",
+  "status": {
+    "AL-07": {
+      "query": "Alabama US House 7 General Election 2026",
+      "searchMatches": 0,
+      "state": "not_found"
+    },
+    "ME-SENATE": {
+      "query": "Maine Senate General Election 2026",
+      "searchMatches": 0,
+      "state": "not_found"
+    },
+    "MI-07": {
+      "query": "Michigan US House 7 General Election 2026",
+      "searchMatches": 0,
+      "state": "not_found"
+    },
+    "MI-SENATE": {
+      "query": "Michigan Senate General Election 2026",
+      "searchMatches": 0,
+      "state": "not_found"
+    },
+    "TX-18": {
+      "query": "Texas US House 18 General Election 2026",
+      "searchMatches": 0,
+      "state": "not_found"
+    },
+    "TX-GOVERNOR": {
+      "query": "Texas Governor General Election 2026",
+      "searchMatches": 0,
+      "state": "not_found"
+    }
+  },
+  "version": 1
+}
