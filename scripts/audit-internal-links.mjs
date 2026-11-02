@@ -40,6 +40,8 @@ for(const file of pages){
   }
  }
 }
+const retired=fs.readFileSync(path.join(root,'elections/overview/index.html'),'utf8');
+if(!retired.includes('noindex,nofollow')||!retired.includes('location.replace')||retired.includes('id="siteNavigation"'))issues.push('Retired Election Center must remain redirect-only without a visible header');
 const headers=['index.html','election-night/index.html','elections/index.html','michigan/index.html','counties-watch/index.html','michigan/election-night/index.html'];
 for(const rel of headers){
  const h=fs.readFileSync(path.join(root,rel),'utf8').match(/<header\b[^>]*>[\s\S]*?<\/header>/i)?.[0]||'';
