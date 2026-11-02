@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f3ee">
+<meta name="description" content="The Ervin Model State Desk: open an entire state election picture, with statewide races, every House district, county maps and polling in one place.">
+<title>The State Desk | Ervin Model</title>
+<link rel="stylesheet" href="./editorial.css?v=state-desk-1">
+</head><body class="ed-body">
+<div class="ed-topline"></div>
+<header class="ed-head"><div class="ed-head-inner"><a class="ed-brand" href="../"><b>E</b> ERVIN MODEL</a>
+<div class="ed-mast"><a href="./">The State Desk</a><small>2026 ELECTIONS · AN INDEPENDENT DATA JOURNAL</small></div>
+<div class="ed-utility"><span class="ed-date" id="todayLabel">2026 Midterms</span><a class="ed-btn outline" href="../">Model lab</a></div></div>
+<nav class="ed-nav" aria-label="Election desk sections"><div class="ed-nav-inner"><a href="./" aria-current="page">All States</a><a href="#nationMap">Interactive map</a><a href="#stateDirectory">State directory</a><a href="#editorialNotes">Coverage notes</a><a href="../elections/overview/">Research center</a><a href="../michigan/election-night/">Election night</a></div></nav></header>
+<main class="ed-shell"><div class="ed-sectionline"><span class="ed-kicker">2026 / THE AMERICAN ELECTION ATLAS</span><span>50 states · 435 congressional districts</span></div>
+<h1 class="ed-headline">Every state. One clear picture.</h1>
+<p class="ed-standfirst">Explore the races shaping 2026 in a single state edition. Senate and governor polling, all House districts, county-level historical patterns, conditional forecasts and reported votes belong in one place—not a maze of separate race pages.</p>
+<div class="ed-band"><label for="stateSearch" class="ed-cap">Find your state <input id="stateSearch" class="ed-control" type="search" placeholder="Type Michigan, Texas, Maine…" style="width:min(370px,82vw);margin-left:10px" autocomplete="off"></label><label class="ed-cap" for="quickSelect">or choose <select class="ed-control" id="quickSelect" style="min-width:150px;margin-left:5px"><option value="">Select a state</option></select></label></div>
+<div class="ed-columns" id="nationMap">
+<section class="ed-card"><div class="ed-kicker">NATIONWIDE / TAP ANY STATE TO OPEN</div><h2 style="margin:7px 0 13px">The 50-state election map</h2>
+<div class="ed-map-surface"><svg id="usMap" viewBox="0 0 1080 625" role="group" aria-label="Interactive national election map with fifty selectable states"><text x="540" y="280" text-anchor="middle">Loading geography…</text></svg></div>
+<div class="ed-legend"><span class="ed-pill">A state is a whole election edition</span><span class="ed-mini">Borders are geographic reference data. Color is not a prediction of a winner.</span></div>
+</section>
+<aside class="ed-card"><div class="ed-kicker">EDITOR'S MAP KEY</div><h2>How to explore</h2><div class="ed-small-list">
+<article><strong>1. Select a state</strong><small>Tap a map shape, state name, or search result. Your state edition loads directly.</small></article>
+<article><strong>2. See the whole ballot picture</strong><small>Senate, governor and all House districts appear together on one continuous page.</small></article>
+<article><strong>3. Dig into local geography</strong><small>Explore historical county margins and conditional 2026 scenarios; switch to clickable congressional districts.</small></article>
+<article><strong>4. Compare polling and returns</strong><small>Each source is labeled. Verified reported votes are never combined with predictions.</small></article></div>
+<div style="margin-top:20px" class="ed-notice">Old detailed race pages remain accessible for methodology and source records, but are no longer the primary way to navigate the elections.</div>
+<div id="featuredStates" class="ed-small-list" style="margin-top:16px"></div></aside></div>
+<section id="stateDirectory" style="margin-top:32px">
+<div class="ed-sectionline"><span class="ed-kicker">STATE INDEX / ALPHABETICAL</span><span id="directoryCount">50 state editions</span></div>
+<div id="stateRegions"></div></section>
+<section id="editorialNotes" class="ed-columns" style="margin-top:35px">
+<div class="ed-card"><h2>The Ervin editorial standard</h2><p class="ed-mini">Every state gets geographic coverage even where there is no modeled Senate race or gubernatorial election. Candidate ratings and publisher averages are kept separate from independently calculated models, historical county returns, and actual election results.</p>
+<div class="ed-link-list"><a href="../research/ALL_50_STATE_GEOGRAPHY_AUDIT_2026-11-01.md">All-state geography audit</a><a href="../research/EXPANDED_BACKTEST_2018_2024.md">Historical test record</a><a href="../elections/overview/">Technical election center</a></div></div>
+<div class="ed-card"><h2>What is not inferred</h2><p class="ed-mini">The existence of a House district on a map does not certify the applicable 2026 boundary. A county scenario is not independently collected county polling. No nationwide real-time turnout estimate, calibrated House win probability, or unverified race call is silently manufactured.</p></div>
+</section>
+<footer class="ed-footer"><span>ERVIN MODEL · 2026 independent political analysis</span><div class="ed-link-list"><a href="../">Original Ervin forecast</a><a href="../house/">Legacy House research</a><a href="../governors/">Legacy governor research</a></div></footer></main>
+<script src="../scripts/us-geography.js"></script><script defer src="./app.js?v=state-desk-1"></script></body></html>
