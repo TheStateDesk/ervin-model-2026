@@ -57,14 +57,17 @@ if(JSON.stringify(nightLinks)!==JSON.stringify(expectedNightLinks))issues.push('
 if(nightHtml.includes('href="../michigan/election-night/"'))issues.push('Election Night retains link to retired separate Michigan results page');
 if(!nightHtml.includes('href="../state/?state=MI#stateGeography"'))issues.push('Michigan context must link to consolidated county-history section');
 if(nightHtml.includes('href="../state/?state=MI#stateResults"'))issues.push('Live national desk still points to retired results panel');
-const front=fs.readFileSync(path.join(root,'index.html'),'utf8');
-if(!front.includes('id="senate-control"')||!front.includes('id="balanceOfPower"'))issues.push('Public homepage missing key national forecasts');
-if(front.indexOf('id="senate-control"')>front.indexOf('id="balanceOfPower"'))issues.push('Senate control must precede office seat breakdown on public homepage');
-if(/(?:id="(?:advancedPollingDrawer|researchLab|forecast-settings|races)"|window\.ERVIN_DATA|href=["'][^"']*(?:#researchLab|#races|#tabs|\?source=))/i.test(front))issues.push('Retired research controls still exposed on public homepage');
-if(!front.includes('scripts/home-control.js'))issues.push('Public Senate control model not loaded');
-for(const rel of ['index.html','governors/index.html','states/index.html','state/index.html']){
+const front=fs.readFileSync(path.join(root,'states/index.html'),'utf8');
+const entry=fs.readFileSync(path.join(root,'index.html'),'utf8');
+if(!entry.includes('location.replace')||!entry.includes('states/')||!entry.includes('noindex,follow'))issues.push('Site root must redirect to the canonical State Desk homepage');
+if(!front.includes('id="senate-control"')||!front.includes('id="balanceOfPower"')||!front.includes('id="powerCards"'))issues.push('State Desk homepage missing national Senate control or projected office balance');
+if(front.indexOf('id="senate-control"')>front.indexOf('id="balanceOfPower"')||front.indexOf('id="balanceOfPower"')>front.indexOf('id="nationMap"'))issues.push('The State Desk should show the control and office balance before the geographic atlas');
+if(!front.includes('../scripts/home-control.js')||!front.includes('../scripts/home-power.js'))issues.push('National forecast scripts not loaded on actual homepage');
+if(/(?:id="(?:advancedPollingDrawer|researchLab|forecast-settings|races)"|window\.ERVIN_DATA|href=["'][^"']*(?:#researchLab|#races|#tabs|\?source=))/i.test(front))issues.push('Old research dashboard controls exposed on State Desk homepage');
+if(front.includes('href="../"')||front.includes('Original Ervin forecast'))issues.push('State Desk links back to retired root dashboard');
+for(const rel of ['governors/index.html','states/index.html','state/index.html']){
  const html=fs.readFileSync(path.join(root,rel),'utf8');
- if(!html.includes('statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2')&&! (rel==='index.html'&&html.includes('statewide-ervin.js?v=20261102-public-home-1')))issues.push(rel+': old cached governor model script');
+ if(!html.includes('statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2'))issues.push(rel+': stale governor model script');
 }
 if(issues.length){console.error('INTERNAL LINK AUDIT FAILED:\n'+issues.join('\n'));process.exitCode=1;}
 else console.log('INTERNAL LINK AUDIT PASS',JSON.stringify({htmlPages:pages.length,checkedLocalLinks:links,brokenLinks:0,retiredNavigation:0}));
