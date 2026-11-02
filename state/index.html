@@ -3,12 +3,13 @@
 <meta name="theme-color" content="#f5f3ee">
 <meta name="description" content="Ervin Model State Desk: Senate, governor, all House districts, polling, county election history, state outlook and sourced results in one place.">
 <title>State Election Desk | Ervin Model</title>
-<link rel="stylesheet" href="../states/editorial.css?v=20261102-county-polling-1">
+<script src="../states/theme.js?v=20261102-theme-fix-3"></script>
+<link rel="stylesheet" href="../states/editorial.css?v=20261102-theme-map-fix-3">
 </head><body class="ed-body"><a class="ed-toplink" href="#mainContent" style="position:absolute;left:-2000px;top:5px" onfocus="this.style.left='5px'" onblur="this.style.left='-2000px'">Skip to content</a>
 <div class="ed-topline"></div>
 <header class="ed-head"><div class="ed-head-inner"><a class="ed-brand" href="../states/"><b>E</b> ERVIN MODEL</a>
 <div class="ed-mast"><a href="../states/">The State Desk</a><small>2026 ELECTIONS · INDEPENDENT DATA JOURNAL</small></div>
-<div class="ed-utility"><span class="ed-date" id="headerDate">November 2026</span><a href="../states/" class="ed-btn outline">All states</a></div></div>
+<div class="ed-utility"><button type="button" id="themeToggle" class="ed-btn outline ed-theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">Dark mode</button><span class="ed-date" id="headerDate">November 2026</span><a href="../states/" class="ed-btn outline">All states</a></div></div>
 <nav class="ed-nav" aria-label="Election desk navigation"><div class="ed-nav-inner"><a href="../states/" aria-current="page">States</a><a href="#stateOverview">At a glance</a><a href="#stateGeography">County map</a><a href="#stateHouse">House districts</a><a href="#statePolling">Polls</a><a href="#stateResults">Returns</a><a href="../">Model lab</a></div></nav></header>
 <main class="ed-shell" id="mainContent">
 <div class="ed-sectionline"><span class="ed-kicker">50 state editions / 2026 midterms</span><span id="editionDate">November 1, 2026 · research snapshot</span></div>
@@ -41,7 +42,7 @@
  </div>
 </section>
 <section id="stateHouse" style="margin-top:34px"><div class="ed-sectionline"><span class="ed-kicker">U.S. HOUSE / ONE STATE, EVERY DISTRICT</span><span id="houseCoverage">435 nationwide</span></div>
- <div class="ed-columns"><section class="ed-card"><div class="ed-band" style="margin-top:0"><div><h2 style="margin:0">Choose a House district</h2><p class="ed-mini">Tap the congressional district itself or its number.</p></div><button id="houseMapReload" type="button" class="ed-btn outline">Reload district map</button></div><div class="ed-map-surface"><svg id="districtMap" viewBox="0 0 900 580" role="group" aria-label="Congressional district selector"><text x="450" y="290" text-anchor="middle">Loading House geography…</text></svg></div><p class="ed-mini">Census 2022 / 118th Congress reference shapes. District maps may not represent redistricting completed for 2026. Confirm current boundaries with state election authorities.</p><div id="districtButtons" class="ed-district-grid" style="margin-top:15px"></div></section>
+ <div class="ed-columns"><section class="ed-card"><div class="ed-band" style="margin-top:0"><div><h2 style="margin:0">Choose a House district</h2><p class="ed-mini">Tap the congressional district itself or its number.</p></div><button id="houseMapReload" type="button" class="ed-btn outline">Reload district map</button></div><div class="ed-map-tools ed-district-tools"><label for="districtSelect">Jump to district <select id="districtSelect" class="ed-control" aria-label="Jump to House district"></select></label><button type="button" id="districtZoomIn" class="ed-btn outline">Zoom +</button><button type="button" id="districtZoomOut" class="ed-btn outline">Zoom −</button><button type="button" id="districtZoomReset" class="ed-btn outline">Fit map</button></div><div class="ed-map-surface ed-district-map-surface"><div class="ed-map-status" id="districtMapStatus" role="status">Select a district on the map</div><svg id="districtMap" viewBox="0 0 900 580" role="group" aria-label="Congressional district selector"><text x="450" y="290" text-anchor="middle">Loading House geography…</text></svg></div><p class="ed-mini">Census 2022 / 118th Congress reference shapes. District maps may not represent redistricting completed for 2026. Confirm current boundaries with state election authorities.</p><div id="districtButtons" class="ed-district-grid" style="margin-top:15px"></div></section>
  <aside class="ed-card"><div class="ed-kicker">DISTRICT REPORT</div><h2 id="districtTitle">Select a district</h2><div id="districtDetail" class="ed-empty">Choose a numbered House district to see its incumbent, sourced ratings, any documented public polls and source links—all within this state page.</div></aside></div>
 </section>
 <section id="statePolling" style="margin-top:34px"><div class="ed-sectionline"><span class="ed-kicker">THE POLLING DESK / SOURCE-ATTRIBUTED</span><span>Publisher averages ≠ individual surveys</span></div>
@@ -51,6 +52,6 @@
 <aside class="ed-card"><h2>Official source & participation</h2><p class="ed-mini">A published vote count is not a turnout estimate. Precincts reporting is not the same as votes outstanding. For Michigan, the participation dashboard can update daily rather than live on election night.</p><div class="ed-link-list" id="officialStateLinks"><a href="https://www.nass.org/can-I-vote/state-election-officials" target="_blank" rel="noopener noreferrer">State election offices</a></div><p class="ed-mini" style="margin-top:18px">The election desk shows no invented county vote totals or mathematical win probabilities.</p></aside></div></section>
 <footer class="ed-footer"><span>Ervin Model · Independent election research · 2026</span><div class="ed-link-list"><a href="../states/">All states</a><a href="../elections/overview/">Detailed research center</a><a href="../">Original Ervin model</a></div></footer></main>
 <script src="../scripts/us-geography.js"></script>
-<script defer src="../scripts/geo-engine.js?v=20261102-county-direct-1"></script>
+<script defer src="../scripts/geo-engine.js?v=20261102-map-fix-3"></script>
 <script defer src="../scripts/county-scenarios.js"></script>
-<script defer src="./app.js?v=20261102-county-polling-2"></script></body></html>
+<script defer src="./app.js?v=20261102-house-map-theme-3"></script></body></html>
