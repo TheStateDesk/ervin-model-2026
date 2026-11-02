@@ -8,7 +8,7 @@ const countyDirectory='https://www.michigan.gov/sos/elections/election-results-a
 const here='../michigan/election-night/';
 const resultAPI='https://openamerica.io/elections/results.json?year=2026&office=';
 const forecastURL='../counties-watch/forecast-baselines.json';
-let all=[],races=[],filter='All',live={},geo=null,counties=[],selectedCounty='Wayne',sourceLinks={},history={},senate={},lastUpdated=0;
+let all=[],races=[],filter='All',live={},geo=null,counties=[],selectedCounty='Wayne',sourceLinks={},history={},senate={},lastUpdated=0,selectedState='all',selectedRace='',sourceWarnings=[];
 const countyOfficial=new Map(),countyAuto=new Map(),precinctRows=new Map(),countyResolved=new Map();
 const tabular=n=>Number.isFinite(n)?fmt(n):'—';
 const safeURL=v=>{try{const u=new URL(v,location.href);return u.protocol==='https:'?u.href:'#'}catch{return '#'}};
@@ -112,47 +112,62 @@ async function refreshCounty(){
  if(!succeeded)$('miFeedStatus').textContent='Michigan county feeds unavailable or rejected as invalid. Latest previously validated results (if any) are retained and may be stale.';
  combineCounty();
 }
-function normalizeResults(data,office){
- if(!data||data.api!==1||data.year!==2026||data.office!==office||!data.races||typeof data.races!=='object'||!data.as_of)return null;
- const time=Date.parse(data.as_of);
- if(!Number.isFinite(time)||time<closeEastern||time>Date.now()+300000)return null;
- const valid={};
- for(const [key,r] of Object.entries(data.races)){
-  if(!r||!Number.isSafeInteger(r.total)||r.total<=0||!Array.isArray(r.cands))continue;
-  if(r.cands.some(c=>!isVote(c.v)||typeof c.n!=='string'))continue;
-  if(Math.abs(r.cands.reduce((s,c)=>s+c.v,0)-r.total)>Math.max(10,r.total*.005))continue;
-  valid[key]=r;
- }
- return {asOf:data.as_of,races:valid};
-}
 async function refreshNational(){
- if(upcoming()){$('feedStatus').textContent='Awaiting poll closing';$('countedRaces').textContent='—';return}
+ const core=window.ERVIN_RETURNS;
+ if(!core){$('feedStatus').textContent='Results validator unavailable; no unverified votes displayed';return}
  const offices=['Senate','Governor','House'];
- const results=await Promise.allSettled(offices.map(x=>fetchJSON(resultAPI+x,11000)));
- let good=0;
- for(let i=0;i<results.length;i++){
+ const urls=offices.map(x=>resultAPI+x).concat(['../civicapi/races.json']);
+ const results=await Promise.allSettled(urls.map(x=>fetchJSON(x,13000)));
+ const incoming=[];
+ let working=0;
+ for(let i=0;i<offices.length;i++){
   if(results[i].status!=='fulfilled')continue;
-  const clean=normalizeResults(results[i].value,offices[i]);
-  if(clean){live[offices[i]]=clean;good++}
+  const parsed=core.openAmerica(results[i].value,offices[i]);
+  if(Object.keys(parsed).length){working++;incoming.push(parsed)}
  }
- const count=Object.values(live).reduce((n,x)=>n+Object.keys(x.races).length,0);
- $('countedRaces').textContent=fmt(count);$('feedStatus').textContent=good?count+' races with attributed counts · '+good+' office feeds':'Official results not yet available through this provider';
- const updated=Object.values(live).map(x=>x.asOf).sort().at(-1);
+ if(results[3].status==='fulfilled'){
+  const parsed=core.civic(results[3].value);
+  if(Object.keys(parsed).length){working++;incoming.push(parsed)}
+ }
+ const prior={};for(const [office,rows] of Object.entries(live)){
+  for(const [key,row] of Object.entries(rows.races||{}))prior[key]=row;
+ }
+ const merged=core.reconcile(incoming,prior);
+ sourceWarnings=merged.warnings;
+ live={House:{races:{}},Senate:{races:{}},Governor:{races:{}}};
+ for(const [id,row] of Object.entries(merged.races))if(live[row.office])live[row.office].races[id]=row;
+ const count=Object.values(merged.races).length;
+ $('countedRaces').textContent=fmt(count);
+ $('feedStatus').textContent=count?
+  count+' contests with attributed 2026 returns · '+working+' available provider feeds'+(sourceWarnings.length?' · '+sourceWarnings.length+' source conflicts held':''):
+  Date.now()<Date.parse('2026-11-03T18:00:00-05:00')?'Awaiting polls to close':'No verified 2026 results from available providers';
+ const updated=Object.values(merged.races).map(x=>x.asOf).sort().at(-1);
  $('feedAsOf').textContent=updated?date(updated):'Awaiting returns';
  $('lastRefresh').textContent='Checked '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
+ const status=$('civicReportingStatus');
+ if(status)status.textContent='CivicAPI v2 '+(results[3].status==='fulfilled'?'snapshot retrieved':'snapshot unavailable')+
+   ' · '+sourceWarnings.length+' held conflicts · never combines provider vote totals';
  drawRaces();
 }
-function lead(row){if(!row?.cands)return null;const ranked=row.cands.slice().sort((a,b)=>b.v-a.v);const top=ranked[0];return top?.n+' '+fmt(top?.v)+' · '+fmt(row.total)+' votes total'}
-function raceURL(x){return x.office==='House'?'../state/?state='+encodeURIComponent(x.code)+'#house-'+Number(x.district):'../state/?state='+encodeURIComponent(x.code)+'#stateOverview'}
+function lead(row){
+ if(!row?.candidates?.length)return null;
+ const ranked=row.candidates.slice().sort((a,b)=>b.votes-a.votes);
+ const top=ranked[0];return top?.name+' '+fmt(top?.votes)+' · '+fmt(row.total)+' votes total';
+}
+function raceURL(x){return '../state/?state='+encodeURIComponent(x.code)+(x.office==='House'?'#house-'+Number(x.district):'#stateOverview')}
+function liveRaceURL(x){return '?state='+encodeURIComponent(x.code)+'&race='+encodeURIComponent(x.id)+'#nationalBoard'}
 function renderRace(x){
- const data=live[x.office]?.races||{},key=x.office==='House'?x.id:x.code;
- const report=data[key]||data[x.code+'-'+(x.district||'')]||(x.office==='House'?data[x.code+'-'+Number(x.district)]:null),reportText=report?lead(report):null;
- return '<article class="race-row" role="listitem"><div><h3>'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+(reportText?'<span class="live-value">'+esc(reportText)+'</span><small>COUNTED, UNOFFICIAL · NOT A CALL</small>':'<span class="no-data">No confirmed returns</span><small>NOT REPORTED TO THIS FEED</small>')+'</div><div><a href="'+raceURL(x)+'">State details</a></div></article>';
+ const id=x.office==='House'?x.id:x.code+'-'+x.office.toUpperCase();
+ const report=live[x.office]?.races?.[id],reportText=report?lead(report):null;
+ const source=report?.sourceURL?'<a href="'+esc(report.sourceURL)+'" target="_blank" rel="noopener noreferrer">Original count source</a>':'Source pending';
+ return '<article class="race-row" id="race-'+esc(x.id)+'" role="listitem"><div><h3>'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+
+ (reportText?'<span class="live-value">'+esc(reportText)+'</span><small>UNOFFICIAL · '+esc(report.source)+' · '+esc(date(report.asOf))+'</small>':'<span class="no-data">No verified returns</span><small>NOT REPORTED TO THIS FEED</small>')+
+ '</div><div><div class="night-row-links"><a href="'+liveRaceURL(x)+'">Election-night race view</a><a href="'+raceURL(x)+'">State/district context</a></div><small>'+source+'</small></div></article>';
 }
 function drawRaces(){
  const q=$('raceFind').value.toLowerCase().trim(),kind=$('resultsFilter').value;
- const shown=races.filter(x=>(filter==='All'||x.office===filter)&&(!q||[x.code,x.id,x.state,x.label,x.candidates].join(' ').toLowerCase().includes(q))&&
- (kind!=='reported'||!!(live[x.office]?.races||{})[x.office==='House'?x.id:x.code])&&
+ const shown=races.filter(x=>(selectedState==='all'||x.code===selectedState)&&(filter==='All'||x.office===filter)&&(!selectedRace||x.id===selectedRace)&&(!q||[x.code,x.id,x.state,x.label,x.candidates].join(' ').toLowerCase().includes(q))&&
+ (kind!=='reported'||!!(live[x.office]?.races||{})[x.office==='House'?x.id:x.code+'-'+x.office.toUpperCase()])&&
  (kind!=='closest'||x.margin!==null&&Math.abs(x.margin)<=5));
  const top=shown.filter(x=>x.id==='MI-SENATE');const rest=shown.filter(x=>x.id!=='MI-SENATE').sort((a,b)=>a.office.localeCompare(b.office)||a.state.localeCompare(b.state)||String(a.district||'').localeCompare(String(b.district||'')));
  $('raceList').innerHTML=[...top,...rest].map(renderRace).join('')||'<p class="source-note">No races match the current filters.</p>';
@@ -167,6 +182,11 @@ async function loadRaces(){
  senate=sen.states||{};
  const senRaces=report.senate.map(s=>({id:s.code+'-SENATE',code:s.code,state:s.state,office:'Senate',label:(s.nonR||'Independent/Democrat')+' vs. '+s.rep,margin:s.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(s.model.adjustedMargin)}));
  const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:Number.isFinite(g.model.adjustedMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin):Number.isFinite(g.model.pollMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.pollMargin)+' · unadjusted':'No numeric published poll'}));
+ const region=$('nightStateFilter');
+ if(region){const opts=[...new Map(house.seats.map(x=>[x.code,x.state]))].sort((a,b)=>a[1].localeCompare(b[1]));
+  region.innerHTML='<option value="all">Every state</option>'+opts.map(([c,n])=>'<option value="'+c+'">'+esc(n)+'</option>').join('');
+  if(selectedState!=='all')region.value=selectedState;
+ }
  const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:ballotNames(h),margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
  races=[...senRaces,...govRaces,...houseRaces];
  $('miForecast').textContent=window.ERVIN_STATEWIDE.formatMargin(sen.states?.MI?.adjustedMargin??null);
@@ -179,7 +199,17 @@ async function init(){
  $('miCountySearch').addEventListener('input',drawCounties);
  $('miCountyRows').addEventListener('click',e=>{const b=e.target.closest('button[data-name]');if(b){selectedCounty=b.dataset.name;renderInspector()}});
  for(const button of document.querySelectorAll('[data-office]'))button.addEventListener('click',()=>{filter=button.dataset.office;document.querySelectorAll('[data-office]').forEach(x=>x.classList.toggle('is-active',x===button));drawRaces()});
- $('raceFind').addEventListener('input',drawRaces);$('resultsFilter').addEventListener('change',drawRaces);
+ $('raceFind').addEventListener('input',()=>{selectedRace='';drawRaces()});$('resultsFilter').addEventListener('change',drawRaces);
+ const urlSearch=new URLSearchParams(location.search),requested=(urlSearch.get('state')||'').toUpperCase();
+ if(/^[A-Z]{2}$/.test(requested))selectedState=requested;
+ const race=requested?(urlSearch.get('race')||'').toUpperCase():null;
+ if(race&&/^[A-Z]{2}-(?:\d{1,2}|SENATE|GOVERNOR)$/.test(race))selectedRace=race;
+ $('nightStateFilter')?.addEventListener('change',e=>{
+  selectedState=e.target.value;selectedRace='';const url=new URL(location.href);
+  if(selectedState==='all')url.searchParams.delete('state');else url.searchParams.set('state',selectedState);
+  url.searchParams.delete('race');history.replaceState(null,'',url);drawRaces();
+ });
+ $('clearNightRace')?.addEventListener('click',()=>{selectedRace='';const url=new URL(location.href);url.searchParams.delete('race');history.replaceState(null,'',url);drawRaces()});
  $('refreshResults').onclick=()=>Promise.allSettled([refreshNational(),refreshCounty()]);
  try{await Promise.all([loadRaces(),initCountyMap()]);await Promise.allSettled([refreshNational(),refreshCounty()]);}
  catch(e){console.error(e);$('feedStatus').textContent='Some election sources unavailable';$('miFeedStatus').textContent='County reference or feed initialization failed: '+e.message}
