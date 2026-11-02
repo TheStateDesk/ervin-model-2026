@@ -198,7 +198,7 @@ window.ERVIN_DATA = {
     {
       "key": "take",
       "title": "Ervin’s Take ★",
-      "desc": "Overall picture: provisional blended polling averages (RCP 40%, DDHQ 29%, 270toWin 21%, Silver Bulletin 10%). Silver is intentionally downweighted because its comparable historical Senate-polling backlog is limited. Distinct named publisher averages remain eligible even when the same page cites them; proxy filtering and freshness safeguards remain; Original Ervin correction is the default; Ervin + remains an option."
+      "desc": "Overall picture: provisional blended polling averages (RCP 40%, DDHQ 29%, 270toWin 21%, Silver Bulletin 10%). Silver is intentionally downweighted because its comparable historical Senate-polling backlog is limited. Distinct named publisher averages remain eligible even when the same page cites them; proxy filtering and freshness safeguards remain; Original Ervin correction is the default; Michigan also has a discounted, unvalidated candidate-primary overpolling adjustment in Ervin’s Take; Ervin + remains an option."
     },
     {
       "key": "rcp",
@@ -413,6 +413,7 @@ window.ERVIN_DATA = {
         }
       ],
       "correction": 3.228,
+      "candidateStrength": {"adjustmentD":-1.84,"source":"https://www.realclearpolling.com/polls/senate/democratic-primary/2026/michigan","primaryOverpollingD":9.2,"weight":0.2,"method":"Ervin’s Take candidate-specific 2026 Michigan Democratic primary polling-to-result shrinkage; NOT a religion-based Bradley parameter"},
       "history_mode": "standard",
       "sourceUrl": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Michigan",
       "notes": "",
@@ -3380,7 +3381,10 @@ function evaluate(r){
  const poll=getPoll(r,state.source),orig=Number(r.correction)||0;
  const apply=r.history_mode!=='not_comparable',candidateRepeat=r.history_mode==='candidate_repeat';
  const correction=apply?(state.biasMode==='weighted'?weightedCorrection(r):state.biasMode==='shrink'?orig*(candidateRepeat?(r.code==='AK'?2/5:1/4):h.n/(h.n+3)):orig):0;
- const adjusted=poll.value-correction;
+ // The Ervin's Take blend includes limited, explicitly sourced candidate
+ // strength context. Other publisher tabs remain raw comparable inputs.
+ const candidateShift=state.source==='take'&&Number.isFinite(r.candidateStrength?.adjustmentD)?r.candidateStrength.adjustmentD:0;
+ const adjusted=poll.value-correction+candidateShift;
  const proxyPenalty=poll.proxy?3:0,variant=r.party==='I'?(r.code==='SD'?14:r.code==='NE'?6:4):0;
  const rcv=r.code==='AK'?4:0;
  const sigmaBase=Math.max(4.7,h.sd);

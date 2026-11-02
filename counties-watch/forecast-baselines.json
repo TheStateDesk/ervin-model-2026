@@ -24,13 +24,29 @@
       "rep": "Mike Rogers",
       "party": "D",
       "pollMargin": 4.31,
-      "adjustedMargin": 1.08,
+      "adjustedMargin": -0.76,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · recent publisher blend (7-day limit)",
+      "source": "Ervin's Take · source-blended polls, original Michigan Senate history and discounted candidate strength",
       "stale": false,
-      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
+      "note": "Ervin’s Take: recent attributed publisher-average blend minus Michigan historical Senate polling error, then a discounted candidate-specific primary overpolling comparison (−1.84 D points). Unvalidated qualitative forecast input; no religion or county-demographic adjustment is imposed.",
+      "candidateStrength": {
+        "label": "Ervin's Take candidate-strength marker",
+        "type": "discounted_previous_candidate_primary_poll_error",
+        "candidate": "Abdul El-Sayed",
+        "earlierContest": "Michigan 2026 Democratic U.S. Senate primary, August 4",
+        "pollingMarginD": 10.2,
+        "actualMarginD": 1,
+        "overstatementD": 9.2,
+        "retainedFraction": 0.2,
+        "adjustmentD": -1.84,
+        "referenceMarginD": 1.08,
+        "sourcePolling": "https://www.realclearpolling.com/polls/senate/democratic-primary/2026/michigan",
+        "sourceFinal": "https://ballotpedia.org/United_States_Senate_election_in_Michigan,_2026_(August_4_Democratic_primary)",
+        "rationale": "Transfers only 20% of the primary polling overstatement to the general-election forecast as a judgmental, candidate-specific weakness marker. A primary is not comparable to the general electorate, and the primary included a withdrawn candidate. It is not a validated religion-related Bradley effect and is not historical statewide Senate error.",
+        "transferVerified": false
+      }
     },
     "OH": {
       "state": "Ohio",
@@ -242,5 +258,6 @@
       "stale": false,
       "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     }
-  }
+  },
+  "notes": " Michigan candidate-strength marker is independently documented and does not alter the underlying original federal correction or its backtest."
 }
