@@ -1,6 +1,11 @@
 {
   "version": 1,
-  "asOf": "2026-11-02",
-  "method": "Only name-matched individual Wikipedia article thumbnails; GitHub nightly source check will fill accessible portraits. Missing portraits are displayed as initials, never another person's image.",
-  "portraits": {}
+  "asOf": "2026-11-02T23:55:47.934463+00:00",
+  "method": "Exact or conservatively matching first+last person name on Wikipedia article and Wikimedia thumbnail. Missing remains initials. Third-party and CivicAPI images handled independently.",
+  "portraits": {},
+  "scope": {
+    "trackedNames": 106,
+    "wikiArticlesConfirmedThisRun": 0,
+    "savedPortraits": 0
+  }
 }
