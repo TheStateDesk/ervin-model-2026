@@ -98,3 +98,15 @@ html.theme-dark .nerd-year-track{background:#172c3f}
 .nerd-matrix td:first-child{min-width:195px}
 .nerd-matrix td:last-child{min-width:170px;color:var(--ed-muted)}
 .nerd-matrix-num{text-align:center;min-width:68px;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* The research desk has three mobile utility controls; stack them below the masthead. */
+@media(max-width:680px){
+ .ed-head-inner{grid-template-columns:auto minmax(0,1fr)!important;gap:9px 12px!important}
+ .ed-head-inner .ed-mast{min-width:0}
+ .ed-head-inner .ed-mast a{font-size:clamp(20px,6vw,26px)}
+ .ed-head-inner .ed-utility{grid-column:1/-1;justify-content:flex-start;flex-wrap:wrap;min-width:0}
+ .ed-head-inner .ed-utility .ed-btn{min-height:39px;padding:8px 11px;white-space:normal;font-size:11px}
+ .nerd-shell,.nerd-shell .nerd-section,.nerd-shell .nerd-target{min-width:0}
+ .nerd-shell .nerd-reading-guide,.nerd-shell .nerd-jump{max-width:100%}
+ .nerd-shell .nerd-table-wrap{max-width:100%;overflow-x:auto}
+}
