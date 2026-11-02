@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "asOf": "2026-11-02",
+  "method": "Only name-matched individual Wikipedia article thumbnails; GitHub nightly source check will fill accessible portraits. Missing portraits are displayed as initials, never another person's image.",
+  "portraits": {}
+}
