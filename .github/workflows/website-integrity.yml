@@ -47,6 +47,7 @@ jobs:
       - run: node scripts/validate-forecast-backtests.mjs
       - run: node scripts/test-election-night-balance.mjs
       - run: node scripts/test-early-signal-lab.mjs
+      - run: node scripts/test-435-house-candidates.mjs
       - run: node scripts/test-michigan-candidate-effect.mjs
       - name: Install browser for visual verification
         run: |
