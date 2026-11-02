@@ -1,49 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-02T19:07:06.772476+00:00",
+  "generatedAt": "2026-11-02T19:08:10.516645+00:00",
   "summary": {
     "districts": 435,
-    "districtsWithAtLeastOneCandidate": 429,
-    "missingDistricts": [
-      "AK-01",
-      "DE-01",
-      "ND-01",
-      "SD-01",
-      "VT-01",
-      "WY-01"
-    ],
-    "districtsWithBothSources": 429,
-    "totalCandidates": 1143,
+    "districtsWithAtLeastOneCandidate": 435,
+    "missingDistricts": [],
+    "districtsWithBothSources": 435,
+    "totalCandidates": 1156,
     "multipleMajorPartyCandidates": [
-      {
-        "raceId": "AL-02",
-        "issue": "multiple_same_major_party_listed",
-        "candidates": [
-          {
-            "name": "Shomari Figures",
-            "party": "D",
-            "source": [
-              "Elections in USA",
-              "DeepSyte"
-            ]
-          },
-          {
-            "name": "Hampton Harris",
-            "party": "R",
-            "source": [
-              "Elections in USA"
-            ]
-          },
-          {
-            "name": "Rhett Marques",
-            "party": "R",
-            "source": [
-              "Elections in USA",
-              "DeepSyte"
-            ]
-          }
-        ]
-      },
       {
         "raceId": "CA-04",
         "issue": "multiple_same_major_party_listed",
@@ -380,13 +344,6 @@
         "issue": "multiple_same_major_party_listed",
         "candidates": [
           {
-            "name": "Antonio Wilson",
-            "party": "D",
-            "source": [
-              "Elections in USA"
-            ]
-          },
-          {
             "name": "Dan McKay",
             "party": "D",
             "source": [
@@ -578,86 +535,16 @@
             ]
           }
         ]
-      },
-      {
-        "raceId": "NC-04",
-        "issue": "multiple_same_major_party_listed",
-        "candidates": [
-          {
-            "name": "Valerie P. Foushee",
-            "party": "D",
-            "source": [
-              "Elections in USA",
-              "DeepSyte"
-            ]
-          },
-          {
-            "name": "Mahesh (Max) Ganorkar",
-            "party": "R",
-            "source": [
-              "DeepSyte"
-            ]
-          },
-          {
-            "name": "Max Ganorkar",
-            "party": "R",
-            "source": [
-              "Elections in USA"
-            ]
-          },
-          {
-            "name": "Guy Meilleur",
-            "party": "L",
-            "source": [
-              "DeepSyte"
-            ]
-          }
-        ]
-      },
-      {
-        "raceId": "VA-05",
-        "issue": "multiple_same_major_party_listed",
-        "candidates": [
-          {
-            "name": "Tom Perriello",
-            "party": "D",
-            "source": [
-              "Elections in USA"
-            ]
-          },
-          {
-            "name": "Tom S. P. Perriello",
-            "party": "D",
-            "source": [
-              "DeepSyte"
-            ]
-          },
-          {
-            "name": "John J. McGuire III",
-            "party": "R",
-            "source": [
-              "Elections in USA",
-              "DeepSyte"
-            ]
-          },
-          {
-            "name": "Cooke C. Harvey",
-            "party": "I",
-            "source": [
-              "DeepSyte"
-            ]
-          }
-        ]
       }
     ],
     "sourceRows": {
       "elections_in_usa_source_rows": 2236,
       "deepsyte_source_rows": 1294,
-      "electionsinusa_nominees": 850,
-      "deepsyte_on_ballot": 1134
+      "electionsinusa_nominees": 862,
+      "deepsyte_on_ballot": 1156
     },
     "sourceFailures": {},
-    "candidateRacesWithD": 421,
-    "candidateRacesWithR": 409
+    "candidateRacesWithD": 427,
+    "candidateRacesWithR": 415
   }
 }
