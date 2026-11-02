@@ -77,7 +77,7 @@ async function populate(){
   if(byState[s.code])byState[s.code].races.push({label:'U.S. Senate · Original Ervin',margin:s.model.adjustedMargin,type:'model'});
  }
  for(const g of G.governor){
-  if(byState[g.code])byState[g.code].races.push({label:'Governor · '+(Number.isFinite(g.model.adjustedMargin)?'same-office Ervin':'unadjusted poll'),margin:Number.isFinite(g.model.adjustedMargin)?g.model.adjustedMargin:g.model.pollMargin,type:Number.isFinite(g.model.adjustedMargin)?'model':'poll'});
+  if(byState[g.code])byState[g.code].races.push({label:'Governor · '+(Number.isFinite(g.model.adjustedMargin)?'Ervin’s Take':'unadjusted poll'),margin:Number.isFinite(g.model.adjustedMargin)?g.model.adjustedMargin:g.model.pollMargin,type:Number.isFinite(g.model.adjustedMargin)?'model':'poll'});
  }
  for(const r of Object.values(byState)){for(const x of r.races){const side=rank(x.margin);if(side)r[side]++}r.races.sort((a,b)=>a.label.localeCompare(b.label))}
  const has=[...Object.values(byState)].filter(r=>r.D+r.R+r.T>0).length;

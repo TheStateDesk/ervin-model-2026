@@ -11,13 +11,19 @@ function apply(archive,govs,senate){
    const history=root.ERVIN_GOVERNOR_BACKTEST.correction(old,r.code,2026);
    const pollMargin=Number.isFinite(r.poll?.margin)?r.poll.margin:null;
    const correction=history?.value??null;
-   const adjustedMargin=pollMargin!==null&&correction!==null?+((pollMargin-correction).toFixed(2)):null;
-   return {...r,model:{pollMargin,adjustedMargin,correction,years:history?.years||history?.evidence?.map(e=>e.year)||[],
+   // Historical governor error is like-for-like. A narrowly discounted
+   // within-Ohio candidate-relative results shift is separate from poll errors.
+   const candidateComparisons=r.candidatePerformance?.comparisons||[];
+   if(candidateComparisons.some(x=>!Number.isFinite(x.referenceRepublicanMargin)||!Number.isFinite(x.comparisonRepublicanMargin)||!Number.isFinite(x.weight)||x.weight<0||x.weight>0.2||x.year<2018||x.year>=2026))throw Error('Invalid candidate performance input '+r.code);
+   const candidateShift=+(candidateComparisons.reduce((sum,x)=>sum+(x.referenceRepublicanMargin-x.comparisonRepublicanMargin)*x.weight,0)).toFixed(2);
+   const historicalMargin=pollMargin!==null&&correction!==null?+((pollMargin-correction).toFixed(2)):null;
+   const adjustedMargin=historicalMargin!==null?+(historicalMargin+candidateShift).toFixed(2):null;
+   return {...r,model:{pollMargin,adjustedMargin,historicalMargin,candidateShift,candidateComparisons,correction,years:history?.years||history?.evidence?.map(e=>e.year)||[],
      events:history?.evidence||[],calibrationEvents:history?.evidence?.length||0,
      calibrationCycles:history?.evidence?.length||0,
      source:history?'Prior '+history.evidence.length+' governor election(s) in '+r.state+' only; weighted newest first':'No verified prior governor polling-error comparison in '+r.state+' in the current source archive',
-     method:'Same-state Governor vs Governor: prior most recent three prior governor elections weighted 50%, 30%, 20%, from any verified 2018–2024 contest; available weights renormalized. No federal Senate or presidential errors.',
-     correctionDefinition:'Error = governor D–R polling margin minus governor D–R actual result; adjusted 2026 governor margin = current published polling margin minus weighted historic governor error.',
+     method:'Ervin’s Take uses same-state governor polling errors, most recent three 2018–2024 events weighted 50/30/20 and renormalized. Where documented, add a separately sourced and strongly discounted statewide candidate-performance context shift; never federal polling errors.',
+     correctionDefinition:'Governor error = prior governor D–R polling margin minus prior governor actual margin. Ervin’s Take = current governor poll margin − same-office historical error + any documented discounted candidate-relative result shift.',
      asOf:archive?.asOf||'2026-11-02',fallback:!history,missingPolling:pollMargin===null,
      weakEvidence:!history||history.evidence.length<3,
      currentPollingSource:r.poll?.url||null}};

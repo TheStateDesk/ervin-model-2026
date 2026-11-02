@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-01",
-  "description": "All 36 2026 U.S. state gubernatorial elections. Historical Ervin polling-error correction has NOT been estimated for governors. A published aggregate is shown where confirmed; it is not an independently validated Ervin forecast.",
+  "description": "36 2026 governor races. Ervin's Take uses governor-only 2018–2024 polling-error history, with limited, sourced Ohio candidate-relative actual election results as a separately documented, discounted forecast input. No Senate or presidential polling errors enter governor calibration.",
   "pollingSource": "https://www.onpointpolitics.us/polls/governor",
   "nomineesSource": "https://www.nga.org/governors/elections/",
   "races": [
@@ -514,15 +514,23 @@
       "rep": "Vivek Ramaswamy",
       "party": "D",
       "poll": {
-        "margin": 3.6,
-        "count": 33,
+        "margin": 5.4,
+        "count": 37,
         "asOf": "2026-11-01",
         "source": "On Point Politics (publisher polling average)",
         "url": "https://www.onpointpolitics.us/polls/oh/governor",
-        "method": "On Point's own public-poll fit; not an Ervin historical adjustment."
+        "method": "On Point weighted 37-poll public average, updated November 1; this is the polling input, not an Ervin historical adjustment."
       },
       "otherCandidates": null,
       "recentPolls": [
+        {
+          "pollster": "New York Times/Siena",
+          "date": "2026-11-01",
+          "margin": 6,
+          "note": "Oct 26–Nov 1 likely voters, Acton 49%, Ramaswamy 43%; On Point poll index.",
+          "url": "https://www.onpointpolitics.us/polls/oh/governor",
+          "source": "On Point Politics individual survey index"
+        },
         {
           "pollster": "ActiVote",
           "date": "2026-10-31",
@@ -548,7 +556,39 @@
           "source": "DDHQ recent-polls listing; separate from aggregate"
         }
       ],
-      "nomineesSource": "https://www.nga.org/governors/elections/"
+      "nomineesSource": "https://www.nga.org/governors/elections/",
+      "candidatePerformance": {
+        "method": "Ervin's Take makes a small Ohio candidate-strength adjustment using statewide Republican candidates' gaps in the SAME election. Only 5% of Renacci's 2018 gap to DeWine, 6% of Vance's 2022 gap to DeWine, and 12% of Moreno's 2024 gap to Trump are transferred. These subjective shrinkage coefficients are not fitted or validated and are never treated as Senate or presidential polling errors.",
+        "comparisons": [
+          {
+            "year": 2018,
+            "reference": "DeWine governor vs. Renacci Senate",
+            "referenceRepublicanMargin": 3.71,
+            "comparisonRepublicanMargin": -6.8,
+            "weight": 0.05,
+            "referenceUrl": "https://en.wikipedia.org/wiki/2018_Ohio_gubernatorial_election",
+            "comparisonUrl": "https://en.wikipedia.org/wiki/2018_United_States_Senate_election_in_Ohio"
+          },
+          {
+            "year": 2022,
+            "reference": "DeWine governor vs. Vance Senate",
+            "referenceRepublicanMargin": 25.53,
+            "comparisonRepublicanMargin": 6.11,
+            "weight": 0.06,
+            "referenceUrl": "https://en.wikipedia.org/wiki/2022_Ohio_gubernatorial_election",
+            "comparisonUrl": "https://en.wikipedia.org/wiki/2022_United_States_Senate_election_in_Ohio"
+          },
+          {
+            "year": 2024,
+            "reference": "Trump president vs. Moreno Senate",
+            "referenceRepublicanMargin": 11.2,
+            "comparisonRepublicanMargin": 3.6,
+            "weight": 0.12,
+            "referenceUrl": "https://en.wikipedia.org/wiki/2024_United_States_presidential_election_in_Ohio",
+            "comparisonUrl": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Ohio"
+          }
+        ]
+      }
     },
     {
       "code": "OK",

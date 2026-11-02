@@ -16,10 +16,11 @@ for(const r of out.governor){
  const c=prior.correction(archive.races,r.code,2026);
  const raw=r.poll?.margin;
  assert.equal(r.model.correction,c?.value??null,'Governor-only source mismatch '+r.code);
- assert.equal(r.model.adjustedMargin,c&&Number.isFinite(raw)?+(raw-c.value).toFixed(2):null,'Governor-only math mismatch '+r.code);
+ assert.equal(r.model.adjustedMargin,c&&Number.isFinite(raw)?+(raw-c.value+r.model.candidateShift).toFixed(2):null,'Governor error plus candidate context mismatch '+r.code);
  assert(r.model.events.every(e=>e.year<2026&&e.year>=2018&&e.office==='Governor'),'Federal or future governor evidence leaked '+r.code);
  if(!c)assert(r.model.fallback&&r.model.adjustedMargin===null,'Unknown governor history must not create 2026 estimate '+r.code);
 }
+const ohio=out.governor.find(x=>x.code==='OH');assert.equal(ohio.model.pollMargin,5.4);assert(ohio.model.candidateShift>2&&ohio.model.candidateShift<3);assert(ohio.model.adjustedMargin>0&&ohio.model.adjustedMargin<4);
 for(const ss of out.senate)assert.equal(ss.model.adjustedMargin,senate.states[ss.code].adjustedMargin,'Original Senate model changed '+ss.code);
 const geo=read('geo/counties/MI.json');assert.equal(geo.features.length,83);
 const manual=read('michigan/election-night/county_totals.json'),auto=read('michigan/election-night/county_auto.json'),precincts=read('michigan/election-night/results.json');
