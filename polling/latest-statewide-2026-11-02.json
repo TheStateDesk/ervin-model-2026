@@ -1,0 +1,176 @@
+{
+  "asOf": "2026-11-02",
+  "note": "Individual poll observations shown on RealClearPolling's election listing on Nov. 2; listing dates are not independently validated field dates. Varying candidate formats, sample designs and sponsorship. Do not combine as though they were independent aggregates.",
+  "source": "https://www.realclearpolling.com/latest-polls/election",
+  "senate": {
+    "ME": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 54,
+        "rep": 45,
+        "margin": 9,
+        "demCandidate": "Troy Jackson",
+        "repCandidate": "Susan Collins",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "NH": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 54,
+        "rep": 42,
+        "margin": 12,
+        "demCandidate": "Chris Pappas",
+        "repCandidate": "John Sununu",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "MA": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 53,
+        "rep": 32,
+        "margin": 21,
+        "demCandidate": "Ed Markey",
+        "repCandidate": "John Deaton",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "RI": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 63,
+        "rep": 32,
+        "margin": 31,
+        "demCandidate": "Jack Reed",
+        "repCandidate": "Raymond McKay",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "TX": [
+      {
+        "pollster": "AtlasIntel",
+        "date": "2026-11-02",
+        "dem": 52,
+        "rep": 46,
+        "margin": 6,
+        "demCandidate": "James Talarico",
+        "repCandidate": "Ken Paxton",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      },
+      {
+        "pollster": "Trafalgar Group",
+        "date": "2026-11-02",
+        "dem": 48,
+        "rep": 48,
+        "margin": 0,
+        "demCandidate": "James Talarico",
+        "repCandidate": "Ken Paxton",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ]
+  },
+  "governor": {
+    "ME": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 51,
+        "rep": 40,
+        "margin": 11,
+        "demCandidate": "Hannah Pingree",
+        "repCandidate": "Bobby Charles",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "NH": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 48,
+        "rep": 48,
+        "margin": 0,
+        "demCandidate": "Cinde Warmington",
+        "repCandidate": "Kelly Ayotte",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "MA": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 55,
+        "rep": 36,
+        "margin": 19,
+        "demCandidate": "Maura Healey",
+        "repCandidate": "Brian Minogue",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "RI": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 55,
+        "rep": 34,
+        "margin": 21,
+        "demCandidate": "Helena Foulkes",
+        "repCandidate": "Ken Block",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "VT": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 51,
+        "rep": 43,
+        "margin": 8,
+        "demCandidate": "Amanda Janoo",
+        "repCandidate": "Phil Scott",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "CT": [
+      {
+        "pollster": "University of New Hampshire",
+        "date": "2026-11-02",
+        "dem": 54,
+        "rep": 41,
+        "margin": 13,
+        "demCandidate": "Ned Lamont",
+        "repCandidate": "Ryan Fazio",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ],
+    "TX": [
+      {
+        "pollster": "AtlasIntel",
+        "date": "2026-11-02",
+        "dem": 50,
+        "rep": 49,
+        "margin": 1,
+        "demCandidate": "Gina Hinojosa",
+        "repCandidate": "Greg Abbott",
+        "url": "https://www.realclearpolling.com/latest-polls/election",
+        "sourceKind": "RealClearPolling individual-poll listing; publication/fieldwork dates unverified"
+      }
+    ]
+  }
+}
