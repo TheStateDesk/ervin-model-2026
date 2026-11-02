@@ -75,12 +75,23 @@ function normalizedCivic(data){
 }
 async function json(url){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);try{const r=await fetch(url,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('HTTP '+r.status);return r.json()}finally{clearTimeout(timer)}}
 async function checkResults(force=false){
- if(today()<CLOSE){live={};updatePaint();return}
- if(!force&&today()-lastCheck<60000)return;lastCheck=today();
- const [oa,ca]=await Promise.allSettled([json('https://openamerica.io/elections/results.json?year=2026&office=House'),json('../civicapi/races.json')]);
- const independent=ca.status==='fulfilled'?normalizedCivic(ca.value):{},official=oa.status==='fulfilled'?normalizedOpenAmerica(oa.value):{};
- // Same race only once: official-mirror record takes priority over civicAPI for display.
- live={...independent,...official};snapshotChecked=true;updatePaint();
+ if(!force&&today()-lastCheck<60000)return;
+ lastCheck=today();
+ const core=window.ERVIN_RETURNS;
+ if(!core){live={};updatePaint();return}
+ const [ca,oa]=await Promise.allSettled([
+  json('../civicapi/races.json'),
+  json('https://openamerica.io/elections/results.json?year=2026&office=House')
+ ]);
+ const civic=ca.status==='fulfilled'?core.civic(ca.value):{};
+ const mirror=oa.status==='fulfilled'?core.openAmerica(oa.value,'House'):{};
+ const chosen=core.preferCivic(civic,mirror).races;
+ live={};
+ for(const [id,row] of Object.entries(chosen)){
+  if(row.office!=='House'||!registry.some(x=>x.id===id))continue;
+  live[id]={candidates:row.candidates,total:row.total,pct:row.precincts,provider:row.source,asOf:row.asOf};
+ }
+ snapshotChecked=true;updatePaint();
 }
 async function boot(){
  if(!$('districtMap')||!$('districtModeControls'))return;
