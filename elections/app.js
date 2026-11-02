@@ -202,14 +202,14 @@ async function drawMap(r){
   if(districtMode){
    const match=data.features.find(f=>String(f.id).padStart(2,'0')===String(r.district).padStart(2,'0'));
    if(!match)throw Error('Historic district boundary unavailable for '+r.id);
-   window.ERVIN_GEO.draw(svg,{...data,features:[match]},{kind:'districts',onSelect:()=>{$('countyInspector').textContent=r.id+' · 118th Congress (2022 Census) geographic reference, NOT confirmed for 2026 redistricting. Switch map layer to see statewide historical counties.'}});
+   window.ERVIN_GEO.draw(svg,{...data,features:[match]},{kind:'districts',className:'geo-district',onSelect:()=>{$('countyInspector').textContent=r.id+' · 118th Congress (2022 Census) geographic reference, NOT confirmed for 2026 redistricting. Switch map layer to see statewide historical counties.'}});
    $('countyCount').textContent=r.id+' · reference boundary';
    $('countyMapLegend').textContent='118th CONGRESS reference district shape · 2026 lines may have changed; historical geometry is not a result, forecast or guaranteed valid ballot boundary';
    $('mapProvenance').textContent='Census TIGER 2022 congressional district boundaries via Civic Interconnect. Changes since 2022 are not verified. For county context choose 2024 history.';
    $('countyInspector').textContent='Select the district for reference information. Switch to a county layer to explore historical county results.';
    return;
   }
-  const n=window.ERVIN_GEO.draw(svg,data,{kind:'counties',onSelect:el=>el.dataset?.name&&countyInteractionSelect(el)});
+  const n=window.ERVIN_GEO.draw(svg,data,{kind:'counties'});
   for(const p of svg.querySelectorAll('path.county'))countyInteraction(p,p.dataset.name,p.dataset.fips);
   if($('countyMapMode').value==='2026live'&&window.ErvinCountyLayer)window.ErvinCountyLayer();else applyCountyLayer();
   $('countyCount').textContent=n+' county outlines';
@@ -220,7 +220,6 @@ async function drawMap(r){
   fallbackMap(r,'Local county data unavailable: '+error.message+'. Try another state; the site must not invent geographic boundaries.');
  }
 }
-function countyInteractionSelect(el){el.dispatchEvent(new MouseEvent('click',{bubbles:false}));}
 async function loadSenate(){
  const response=await fetch('../index.html');if(!response.ok)throw Error('Senate source file unavailable');
  const html=await response.text(),prefix='window.ERVIN_DATA = ',start=html.indexOf(prefix);
