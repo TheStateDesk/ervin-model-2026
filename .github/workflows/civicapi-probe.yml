@@ -1,0 +1,62 @@
+name: Probe civicAPI v2 for November 2026 results and polling
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/civicapi_probe.py'
+      - 'tests/test_civicapi_probe.py'
+      - '.github/workflows/civicapi-probe.yml'
+  schedule:
+    - cron: '31 2,8,14,20 * * *'
+    - cron: '*/15 * 3-5 11 *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: civicapi-2026-check
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test exact November 2026 election matching
+        run: python3 -m unittest discover -s tests -p test_civicapi_probe.py -v
+      - name: Check API discovery and validated vote totals
+        run: python3 scripts/civicapi_probe.py
+      - name: Validate generated JSON and browser script
+        run: |
+          python3 -m json.tool civicapi/races.json >/dev/null
+          python3 -m json.tool civicapi/discovery.json >/dev/null
+          node --check state/district-extra.js
+      - name: Publish safe source audit to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git reset --hard origin/main
+            python3 scripts/civicapi_probe.py
+          fi
+          git add civicapi/races.json civicapi/discovery.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update civicAPI pilot source audit and validated returns"
+            git pull --rebase origin main
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy checked snapshot to GitHub Pages
+        uses: actions/deploy-pages@v4
