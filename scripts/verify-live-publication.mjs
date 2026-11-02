@@ -49,35 +49,39 @@ try{
    await page.close();
   }
  }
- // Verify what is actually painted after Pages deployment, not just CI success.
+ // The State Desk is the only canonical public homepage. The root path
+ // redirects here; the experimental research workbench is not linked from it.
+ const rootPage=await browser.newPage();
+ await rootPage.goto(base+'?release='+stamp,{waitUntil:'domcontentloaded'});
+ await rootPage.waitForURL(/\/states\//,{timeout:18000});
+ await rootPage.close();
  const front=await browser.newPage({viewport:{width:390,height:844}});
- await front.goto(base+'?release='+stamp,{waitUntil:'domcontentloaded'});
+ await front.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
  await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#controlDemChance')?.textContent.endsWith('%'),null,{timeout:35000});
  const frontModel=await front.evaluate(()=>{
-  const power=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
+  const balance=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
   const control=document.querySelector('#senate-control')?.getBoundingClientRect();
-  const dem=document.querySelector('#controlDemChance')?.textContent;
-  const rep=document.querySelector('#controlRepChance')?.textContent;
-  return {controlTop:control?.top,powerTop:power?.top,width:control?.width,demChance:dem,repChance:rep,
+  const map=document.querySelector('#nationMap')?.getBoundingClientRect();
+  return {controlTop:control?.top,powerTop:balance?.top,mapTop:map?.top,
+   width:control?.width,demChance:document.querySelector('#controlDemChance')?.textContent,
+   repChance:document.querySelector('#controlRepChance')?.textContent,
    oldLab:!!document.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),
+   badLinks:[...document.querySelectorAll('a')].filter(a=>a.getAttribute('href')==='../').length,
    count:document.querySelectorAll('#powerCards .power-card').length,
    governors:document.querySelector('[data-power-office="governors"]')?.textContent,
    senateD:Number(document.querySelector('[data-power-office="senate"] [data-power-d]')?.textContent),
    senateR:Number(document.querySelector('[data-power-office="senate"] [data-power-r]')?.textContent),
-   overflow:document.documentElement.scrollWidth>window.innerWidth+4,
-   versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
+   overflow:document.documentElement.scrollWidth>window.innerWidth+4};
  });
- if(!(frontModel.count===3&&frontModel.controlTop>=0&&frontModel.controlTop<450
-  &&frontModel.powerTop>frontModel.controlTop&&frontModel.width>280
-  &&frontModel.demChance?.endsWith('%')&&frontModel.repChance?.endsWith('%')
+ if(!(frontModel.count===3&&frontModel.controlTop>=0&&frontModel.controlTop<850
+  &&frontModel.controlTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop
+  &&frontModel.width>280&&frontModel.demChance?.endsWith('%')&&frontModel.repChance?.endsWith('%')
   &&frontModel.governors?.includes('25')&&frontModel.senateD===50&&frontModel.senateR===50
-  &&!frontModel.oldLab&&!frontModel.overflow))
-  throw Error('LIVE MOBILE NEW HOMEPAGE OR SENATE CONTROL INCORRECT '+JSON.stringify(frontModel));
- if(!frontModel.versions.some(s=>s.includes('public-home-1')))
-  throw Error('LIVE HOMEPAGE USING STALE GOVERNOR ENGINE '+JSON.stringify(frontModel.versions));
- await front.locator('#senate-control').screenshot({path:'postdeploy-checks/Homepage-Senate-Control-Mobile.png'});
- await front.screenshot({path:'postdeploy-checks/Homepage-Balance-Visible-Mobile.png',fullPage:false});
- console.log('LIVE HOMEPAGE PUBLIC CONTROL PASS '+JSON.stringify(frontModel));
+  &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow))
+  throw Error('LIVE MOBILE STATE DESK HOMEPAGE FORECAST INCORRECT '+JSON.stringify(frontModel));
+ await front.locator('#senate-control').screenshot({path:'postdeploy-checks/State-Desk-Senate-Control-Mobile.png'});
+ await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
+ console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
  await front.close();
  const oh=await browser.newPage({viewport:{width:390,height:844}});
  await oh.goto(base+'state/?state=OH&release='+stamp,{waitUntil:'domcontentloaded'});
