@@ -19,7 +19,7 @@ function draw(){
  const state=active;
  const {governors,governorHistory,senateHistory,houseModel,houseRegistry,coverage,senateBaseline,countyHistory}=all;
  const gov=governors.races?.find(x=>x.code===state);
- const governorEvents=(governorHistory.races||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year<2026&&e.pollType!=='single stale poll').sort((a,b)=>b.year-a.year).slice(0,3);
+ const governorEvents=(governorHistory.races||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year>=2018&&e.year<2026&&e.pollType!=='single stale poll').sort((a,b)=>b.year-a.year).slice(0,3);
  const senate=senateHistory.senateStates?.[state];
  const baseline=senateBaseline.states?.[state],senIndex=coverage.senate?.states?.[state],govIndex=coverage.governor?.states?.[state];
  const districts=(houseRegistry.seats||[]).filter(r=>r.code===state).sort((a,b)=>r.id.localeCompare(b.id));
@@ -27,7 +27,7 @@ function draw(){
  if(gov){
   const m=gov.poll;
   let body='<p>2026 publisher polling input: <strong>'+fmt(m?.margin)+'</strong> · '+esc(m?.count??'Unknown')+' listed surveys · as of '+esc(m?.asOf||'undated')+'. '+link(m?.url,'Open source polling average')+'.</p>';
-  body+='<p class="ed-mini">Historical adjustment uses the newest three available same-state governor elections, weighted 50/30/20 (renormalized when fewer than three). No Senate or presidential results are included. Individual polls and publisher averages are not interchangeable.</p>';
+  body+='<p class="ed-mini">Historical adjustment excludes 2014 and uses the newest three available 2018–2024 same-state governor elections, weighted 50/30/20 (renormalized when fewer than three). No Senate or presidential results are included. Individual polls and publisher averages are not interchangeable.</p>';
   body+=governorEvents.length?'<details open><summary>'+governorEvents.length+' same-state governor cycle'+(governorEvents.length===1?'':'s')+' used in 2026 correction</summary><ol class="ed-evidence-list">'+governorEvents.map(x=>historicalRow(x,'historical governor')).join('')+'</ol></details>':'<p class="ed-notice">No qualifying historical governor poll–result comparisons are in the verified archive. No governor-specific historical correction can be substantiated.</p>';
   body+='<p class="ed-mini"><a href="../research/governor-same-office-2014-2024.json">Governor historical input archive (JSON)</a> · <a href="../governors/#governorBacktest">Past-only governor backtest</a>. Polling and final returns are linked separately above, when distinct result sources exist.</p>';
 

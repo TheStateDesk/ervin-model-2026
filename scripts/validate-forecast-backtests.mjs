@@ -4,21 +4,23 @@ const req=createRequire(import.meta.url),json=p=>JSON.parse(fs.readFileSync(p,'u
 const g=req('./governor-backtest.js'),govData=json('research/governor-same-office-2014-2024.json'),
  score=json('research/governor-same-office-backtest-2026-11-02.json');
 const recomputed=g.compute(govData);
-assert.equal(govData.races.length,44);
+assert.equal(govData.races.length,35);
+assert(govData.races.every(e=>e.year>=2018),'2014 gubernatorial error must not enter active source archive');
+assert.equal(g.correction([{state:'MI',year:2014,office:'Governor',pollMargin:3,actualMargin:1}], 'MI',2026),null,'2014 governor errors must never enter 2026 adjustment');
 assert.equal(recomputed.summary.n,score.summary.n);
 assert.equal(recomputed.summary.adjustedMAE,score.summary.adjustedMAE);
 assert.equal(recomputed.summary.rawMAE,score.summary.rawMAE);
 assert.equal(recomputed.summary.rawWinners,score.summary.rawWinners);
 assert.equal(recomputed.summary.adjustedWinners,score.summary.adjustedWinners);
-assert.equal(recomputed.summary.eligible,24);
-assert.equal(recomputed.preferredRCP.n,13);
+assert.equal(recomputed.summary.eligible,15);
+assert.equal(recomputed.preferredRCP.n,9);
 assert(score.summary.adjustedMAE>score.summary.rawMAE,'Do not hide underperformance of same-office governor correction');
 assert(score.preferredRCP.adjustedMAE>score.preferredRCP.rawMAE,'RCP-only cohort must not be silently reweighted');
 for(let i=0;i<recomputed.records.length;i++){
  const r=recomputed.records[i],b=score.records[i];
  assert.equal(r.correction,b.correction,'Governor correction drift '+r.state+' '+r.year);
  assert.equal(r.adjustedMargin,b.adjustedMargin,'Governor adjusted forecast drift '+r.state+' '+r.year);
- assert(r.evidence.every(x=>x.year<r.year&&x.year>=2014&&x.office==='Governor'),'Federal or future election leaked into gubernatorial backtest '+r.state+' '+r.year);
+ assert(r.evidence.every(x=>x.year<r.year&&x.year>=2018&&x.office==='Governor'),'Federal or future election leaked into gubernatorial backtest '+r.state+' '+r.year);
  assert(r.resultUrl.startsWith('https://'),'Missing historical governor result source '+r.state+' '+r.year);
  assert(r.sourceUrl.startsWith('https://'),'Missing public poll source '+r.state);
 }

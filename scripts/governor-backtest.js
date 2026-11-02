@@ -7,7 +7,7 @@
 const W=[.5,.3,.2],exclude=r=>r.pollType==='single stale poll';
 const round=n=>+n.toFixed(3);
 function correction(events,state,targetYear){
- const eligible=(events||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year<targetYear&&e.year>=2014&&Number.isFinite(e.pollMargin)&&Number.isFinite(e.actualMargin)&&!exclude(e))
+ const eligible=(events||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year<targetYear&&e.year>=2018&&Number.isFinite(e.pollMargin)&&Number.isFinite(e.actualMargin)&&!exclude(e))
  .sort((a,b)=>b.year-a.year).slice(0,3);
  if(!eligible.length)return null;
  const sum=W.slice(0,eligible.length).reduce((a,b)=>a+b,0);
@@ -25,7 +25,7 @@ function score(records){
  return {n,rawMAE:mae(x=>x.pollMargin-x.actualMargin),adjustedMAE:mae(x=>x.adjustedMargin-x.actualMargin),rawRMSE:rms(x=>x.pollMargin-x.actualMargin),adjustedRMSE:rms(x=>x.adjustedMargin-x.actualMargin),rawWinners:wins(x=>x.pollMargin),adjustedWinners:wins(x=>x.adjustedMargin)};
 }
 function compute(input){
- const races=(input?.races||[]).slice().sort((a,b)=>a.year-b.year||a.state.localeCompare(b.state));
+ const races=(input?.races||[]).filter(e=>e.year>=2018).sort((a,b)=>a.year-b.year||a.state.localeCompare(b.state));
  const rows=races.map(r=>{
    const past=correction(races,r.state,r.year);
    const adjusted=past?round(r.pollMargin-past.value):null;
@@ -36,7 +36,7 @@ function compute(input){
  });
  const scored=rows.filter(x=>x.eligible),strict=scored.filter(x=>x.pollType==='RCP average');
  return {asOf:input.asOf,method:'Only earlier state governor polls vs actual governor results. D-R error = poll margin minus actual margin. Latest 3 eligible same-state gubernatorial errors weighted 0.5/0.3/0.2, normalized over observed cycles. No federal-election inputs, no future election results.',
- caveats:'Nonrandom 2014–24 sourced cohort, different candidates and survey sources; sparse states with only one prior election have fragile corrections. Single stale surveys (Aug 2022 South Carolina) are displayed but excluded from calibration and scoring. RCP-only target subset scored separately. No calibrated win chances or exact retrospective recreation of 2026.',
+ caveats:'Nonrandom 2018–24 sourced cohort, different candidates and survey sources; sparse states with only one prior election have fragile corrections. Single stale surveys (Aug 2022 South Carolina) are displayed but excluded from calibration and scoring. RCP-only target subset scored separately. No calibrated win chances or exact retrospective recreation of 2026.',
  summary:{observed:rows.length,eligible:scored.length,notBacktestable:rows.length-scored.length,...score(scored)},
  preferredRCP:score(strict),
  byYear:Object.fromEntries([...new Set(rows.map(x=>x.year))].map(year=>[year,{observed:rows.filter(x=>x.year===year).length,...score(scored.filter(x=>x.year===year))}])),

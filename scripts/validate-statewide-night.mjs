@@ -9,14 +9,15 @@ const out=engine.apply(archive,governors,senate);
 assert.equal(out.governor.length,36);assert.equal(out.senate.length,17);
 assert.equal(out.summary.withPublishedPolling,33);
 assert.equal(out.summary.adjustedGovernorRaces,19,'Only 19 currently verified governor-only state corrections are available');
-assert.equal(archive.races.length,44);
+assert.equal(archive.races.length,35);
+assert(archive.races.every(e=>e.year>=2018),'2014 governor rows still active');
 assert(historical.events.some(e=>e.year===2016)&&historical.events.some(e=>e.year===2024),'Historical scope must include 2016–24');
 for(const r of out.governor){
  const c=prior.correction(archive.races,r.code,2026);
  const raw=r.poll?.margin;
  assert.equal(r.model.correction,c?.value??null,'Governor-only source mismatch '+r.code);
  assert.equal(r.model.adjustedMargin,c&&Number.isFinite(raw)?+(raw-c.value).toFixed(2):null,'Governor-only math mismatch '+r.code);
- assert(r.model.events.every(e=>e.year<2026&&e.year>=2014&&e.office==='Governor'),'Federal or future governor evidence leaked '+r.code);
+ assert(r.model.events.every(e=>e.year<2026&&e.year>=2018&&e.office==='Governor'),'Federal or future governor evidence leaked '+r.code);
  if(!c)assert(r.model.fallback&&r.model.adjustedMargin===null,'Unknown governor history must not create 2026 estimate '+r.code);
 }
 for(const ss of out.senate)assert.equal(ss.model.adjustedMargin,senate.states[ss.code].adjustedMargin,'Original Senate model changed '+ss.code);
