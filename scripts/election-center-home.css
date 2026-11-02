@@ -10,3 +10,7 @@
 @media(max-width:849px){.readers-guide-grid{grid-template-columns:1fr!important}}
 @media(max-width:1479px){.topbar .navend{display:none!important}}
 @media(min-width:1480px){.topbar .navend{gap:5px!important}.topbar .navend a{padding:8px 7px!important;font-size:12px!important}}
+
+/* Keep the keyboard skip link, but do not show it as an extra mobile header. */
+.skip-to-content{position:fixed!important;left:-10000px!important;top:0!important;width:1px;height:1px;overflow:hidden;z-index:1100}
+.skip-to-content:focus-visible,.skip-to-content:focus{left:12px!important;top:9px!important;width:auto;height:auto;overflow:visible;padding:10px 15px;border-radius:5px;background:var(--surface);color:var(--text);border:2px solid var(--accent)}

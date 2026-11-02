@@ -43,6 +43,10 @@ try{
  const nationalNight=await browser.newPage({viewport:{width:1440,height:940}});
  const nightErrors=[];nationalNight.on('pageerror',e=>nightErrors.push(e.message));
  await nationalNight.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
+ const navTargets=await nationalNight.locator('.night-head nav a').evaluateAll(a=>a.map(x=>x.getAttribute('href')));
+ assert(JSON.stringify(navTargets)===JSON.stringify(['../states/','#nationalBoard','#michiganSpotlight']),'Election Night links to retired dedicated pages');
+ assert((await nationalNight.locator('.night-links a[href="../state/?state=MI#stateResults"]').count())===1,'Michigan source card must link into consolidated state page');
+
  await nationalNight.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
  await nationalNight.waitForFunction(()=>document.querySelector('#nationalCount')?.textContent.includes('488 indexed races'),null,{timeout:30000});
  assert((await nationalNight.locator('#balanceOfPower').count())===0,'Election Night must not display pre-election power bars');
@@ -60,6 +64,18 @@ try{
  await nationalNight.screenshot({path:'visual-checks/National-Election-Night-Full-Desk.png',fullPage:true});
  console.log('NATIONAL NIGHT QA PASS',JSON.stringify({counties:83,contests:488,gov:36,house:435,errors:nightErrors}));
  await nationalNight.close();
+ const nightMobile=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
+ await nightMobile.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
+ await nightMobile.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
+ const navBox=await nightMobile.locator('.night-head nav').boundingBox();
+ const brandBox=await nightMobile.locator('.night-brand').boundingBox();
+ const themeBox=await nightMobile.locator('#appearance').boundingBox();
+ assert(navBox.y>brandBox.y,'Mobile nav must have its own row');
+ assert(brandBox.x+brandBox.width<themeBox.x+1,'Brand and theme control must not overlap');
+ assert((await nightMobile.locator('.night-head nav a').count())===3,'Mobile nav must contain exactly three destinations');
+ assert(await nightMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Mobile election-night masthead must not create horizontal scroll');
+ await nightMobile.locator('.night-head').screenshot({path:'visual-checks/National-Election-Night-Mobile-Header.png'});
+ await nightMobile.close();
  const governorPage=await browser.newPage({viewport:{width:1440,height:900}});
  await governorPage.goto(root+'/governors/',{waitUntil:'domcontentloaded'});
  await governorPage.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:20000});
