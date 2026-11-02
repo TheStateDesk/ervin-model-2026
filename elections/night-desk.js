@@ -89,20 +89,33 @@ function recolor(){
 window.ErvinCountyLayer=recolor;
 async function readCounties(){
  if(state!=='MI'||office!=='senate')return;
- try{
-  const res=await fetch('../michigan/election-night/county_totals.json?check='+Math.floor(Date.now()/30000),{cache:'no-store'});
-  if(!res.ok)throw Error('No verified county feed');
-  const payload=await res.json();
-  if(payload.version!==1||payload.election!=='2026-11-03'||payload.office!=='US Senate'||!Array.isArray(payload.counties))throw Error('Invalid county schema');
-  const ok=new Map();
-  for(const row of payload.counties){
-   if(!row||typeof row.county!=='string'||!Number.isSafeInteger(row.dem)||!Number.isSafeInteger(row.rep)||row.dem<0||row.rep<0||!/^https:\/\//.test(row.sourceUrl||''))continue;
-   const stamp=Date.parse(row.asOf),close=Date.parse('2026-11-03T20:00:00-05:00');
+ const central=new Set(['dickinson','gogebic','iron','menominee']);
+ const closeEastern=Date.parse('2026-11-03T20:00:00-05:00'),closeCentral=Date.parse('2026-11-03T21:00:00-05:00');
+ const paths=['county_totals.json','county_auto.json'];
+ const outcomes=await Promise.allSettled(paths.map(async file=>{
+  const res=await fetch('../michigan/election-night/'+file+'?check='+Math.floor(Date.now()/30000),{cache:'no-store'});
+  if(!res.ok)throw Error('County report unavailable');
+  const data=await res.json();
+  if(data.version!==1||data.election!=='2026-11-03'||data.office!=='US Senate'||!Array.isArray(data.counties)||data.counties.length>83)throw Error('Invalid county report');
+  return data.counties;
+ }));
+ const next=new Map();
+ /* Automatic and reviewed manual reports represent the SAME counties: never sum them. */
+ for(const result of outcomes){
+  if(result.status!=='fulfilled')continue;
+  for(const row of result.value){
+   const name=normalize(row?.county);
+   if(!name||!Number.isSafeInteger(row.dem)||!Number.isSafeInteger(row.rep)||!Number.isSafeInteger(row.other)||row.dem<0||row.rep<0||row.other<0||row.dem+row.rep+row.other>2000000||!['partial','complete'].includes(row.reportingStatus))continue;
+   let source;
+   try{source=new URL(row.sourceUrl);if(source.protocol!=='https:'||source.username||source.password)continue;}catch{continue;}
+   const stamp=Date.parse(row.asOf),close=central.has(name)?closeCentral:closeEastern;
    if(!Number.isFinite(stamp)||stamp<close||stamp>Date.now()+300000)continue;
-   ok.set(normalize(row.county),row);
+   const old=next.get(name);
+   if(!old||Date.parse(row.asOf)>Date.parse(old.asOf))next.set(name,row);
   }
-  countyFeed=ok;recolor();
- }catch(e){if(!countyFeed)countyFeed=new Map();recolor();}
+ }
+ if(outcomes.every(x=>x.status==='rejected')&&countyFeed){recolor();return;}
+ countyFeed=next;recolor();
 }
 function initMap(){
  const svg=$('countyMap');
