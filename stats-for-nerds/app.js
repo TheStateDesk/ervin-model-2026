@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id),SEED=20261103,N=14000;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const closeTimes={'KY-06':'2026-11-03T18:00:00-05:00','VA-02':'2026-11-03T19:00:00-05:00',
  'VA-05':'2026-11-03T19:00:00-05:00','GA-SENATE':'2026-11-03T19:00:00-05:00',
- 'SC-SENATE':'2026-11-03T19:00:00-05:00','FL-27':'2026-11-03T20:00:00-05:00',
+ 'SC-SENATE':'2026-11-03T19:00:00-05:00','FL-27':'2026-11-03T19:00:00-05:00',
  'NC-SENATE':'2026-11-03T19:30:00-05:00','OH-SENATE':'2026-11-03T19:30:00-05:00'};
 const specs=[
  {id:'KY-06',title:'Kentucky 6th · House',close:'6:00 p.m.',why:'Interior / rural-suburban swing; a possible early check on Kansas and Iowa.',focus:'KS, IA',w:[.95,.10,.40,.30,.60]},
@@ -14,7 +14,7 @@ const specs=[
  {id:'VA-05',title:'Virginia 5th · House',close:'7:00 p.m.',why:'Rural and exurban performance; possible signal for nonmetro Kansas/Iowa.',focus:'KS, IA',w:[.90,.15,.25,.10,.65]},
  {id:'GA-SENATE',title:'Georgia · Senate',close:'7:00 p.m.',why:'Statewide coalition test; early vote-heavy counties need mode and geography review.',focus:'TX',w:[1.05,.90,.02,.45,.10]},
  {id:'SC-SENATE',title:'South Carolina · Senate',close:'7:00 p.m.',why:'Southern statewide swing; partial counties alone can mislead.',focus:'TX',w:[.95,.85,.03,.10,.35]},
- {id:'FL-27',title:'Florida 27th · House',close:'8:00 p.m.',why:'Miami-area Hispanic/suburban swing; not a clean proxy for every Texas voter.',focus:'TX',w:[.85,.62,.03,.60,.00]},
+ {id:'FL-27',title:'Florida 27th · House',close:'7:00 p.m.',why:'Miami-area Hispanic/suburban swing; not a clean proxy for every Texas voter.',focus:'TX',w:[.85,.62,.03,.60,.00]},
  {id:'NC-SENATE',title:'North Carolina · Senate',close:'7:30 p.m.',why:'Statewide competitive race; early-vote composition especially important.',focus:'TX, KS',w:[1.00,.70,.15,.45,.15]},
  {id:'OH-SENATE',title:'Ohio · Senate',close:'7:30 p.m.',why:'Midwestern industrial and exurban indicator, particularly for Iowa and Kansas.',focus:'IA, KS',w:[1.12,.04,.95,.24,.40]}
 ];
