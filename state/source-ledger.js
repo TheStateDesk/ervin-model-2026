@@ -29,9 +29,8 @@ function draw(){
   let body='<p>2026 publisher polling input: <strong>'+fmt(m?.margin)+'</strong> · '+esc(m?.count??'Unknown')+' listed surveys · as of '+esc(m?.asOf||'undated')+'. '+link(m?.url,'Open source polling average')+'.</p>';
   body+='<p class="ed-mini">Historical adjustment uses the newest three available same-state governor elections, weighted 50/30/20 (renormalized when fewer than three). No Senate or presidential results are included. Individual polls and publisher averages are not interchangeable.</p>';
   body+=governorEvents.length?'<details open><summary>'+governorEvents.length+' same-state governor cycle'+(governorEvents.length===1?'':'s')+' used in 2026 correction</summary><ol class="ed-evidence-list">'+governorEvents.map(x=>historicalRow(x,'historical governor')).join('')+'</ol></details>':'<p class="ed-notice">No qualifying historical governor poll–result comparisons are in the verified archive. No governor-specific historical correction can be substantiated.</p>';
-  body+='<p class="ed-mini">'+link('../research/governor-same-office-2014-2024.json','Source data (JSON)').replace('source not available','source not available')+' · <a href="../governors/#governorBacktest">Past-only governor backtest</a>. Source pages may display polling and final returns together; where independent result sources are available, both are linked above.</p>';
-  // Use a relative internal source link directly; URL allowlist above intentionally targets offsite URLs.
-  body=body.replace('<span>Source data (JSON) (source not available)</span>','<a href="../research/governor-same-office-2014-2024.json">Historical source archive (JSON)</a>');
+  body+='<p class="ed-mini"><a href="../research/governor-same-office-2014-2024.json">Governor historical input archive (JSON)</a> · <a href="../governors/#governorBacktest">Past-only governor backtest</a>. Polling and final returns are linked separately above, when distinct result sources exist.</p>';
+
   entries.push(card('Governor · '+esc(gov.dem)+' / '+esc(gov.rep),'GOVERNOR-TO-GOVERNOR HISTORY',body));
  }else entries.push(card('Governor','NO 2026 CONTEST','<p class="ed-mini">No governor race is scheduled in this state’s 2026 registry.</p>'));
  if(baseline||senate){
