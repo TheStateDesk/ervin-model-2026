@@ -1,11 +1,11 @@
 {
   "asOf": "2026-11-02",
   "method": "Only earlier same-state gubernatorial polling-versus-actual errors dated 2018–2024. All 2014 errors excluded. D–R polling margin minus actual D–R result. Latest three eligible prior governor cycles weighted 0.5/0.3/0.2, normalized if fewer than three. Never includes Senate, presidential or future results.",
-  "caveats": "Selective 2018–2024 source-linked governor cohort; 2018 target races have no earlier eligible comparators and cannot be scored. Sparse earlier cycles and nonuniform publishers limit inference. Stale polls excluded. No calibrated win chances.",
+  "caveats": "Selective 2018–2024 source-linked governor cohort; 2018 target races have no earlier eligible comparators and cannot be scored. Sparse earlier cycles and nonuniform publishers limit inference. Stale polls excluded. No calibrated win chances. Four newly sourced 2022 CO/MA/NM/OR averages have no earlier same-state comparable governor error, so they expand 2026 history but not the eligible historical holdout.",
   "summary": {
-    "observed": 35,
+    "observed": 39,
     "eligible": 15,
-    "notBacktestable": 20,
+    "notBacktestable": 24,
     "n": 15,
     "rawMAE": 4.659,
     "adjustedMAE": 4.705,
@@ -45,7 +45,7 @@
       "adjustedWinners": 1
     },
     "2022": {
-      "observed": 19,
+      "observed": 23,
       "n": 12,
       "rawMAE": 3.554,
       "adjustedMAE": 4.452,
@@ -365,6 +365,25 @@
       "pastOnly": true
     },
     {
+      "state": "CO",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 12,
+      "actualMargin": 19.35,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/colorado/",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?fips=8&off=5&year=2022",
+      "note": "270toWin most-recent-five published polls: Polis 54.0, Ganahl 42.0; state-certified result Polis 58.53 and Ganahl 39.18; comparable D-R plurality margin.",
+      "error": -7.35,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 7.35,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "eligible": false,
+      "pastOnly": true
+    },
+    {
       "state": "CT",
       "year": 2022,
       "office": "Governor",
@@ -531,6 +550,25 @@
       "pastOnly": true
     },
     {
+      "state": "MA",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 27,
+      "actualMargin": 29.17,
+      "pollType": "270toWin 4-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/massachusetts/",
+      "resultUrl": "https://en.wikipedia.org/wiki/2022_Massachusetts_gubernatorial_election",
+      "note": "270toWin Healey 57.3 versus Diehl 30.3 four-poll average; certified Healey 63.74, Diehl 34.57.",
+      "error": -2.17,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 2.17,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "eligible": false,
+      "pastOnly": true
+    },
+    {
       "state": "ME",
       "year": 2022,
       "office": "Governor",
@@ -671,6 +709,25 @@
       "pastOnly": true
     },
     {
+      "state": "NM",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 5,
+      "actualMargin": 6.38,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/new-mexico",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?elect=0&fips=35&off=5&year=2022",
+      "note": "270toWin five-poll average Lujan Grisham 47.8 Ronchetti 42.8; certified 51.97 versus 45.59.",
+      "error": -1.38,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 1.38,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "eligible": false,
+      "pastOnly": true
+    },
+    {
       "state": "NV",
       "year": 2022,
       "office": "Governor",
@@ -751,6 +808,25 @@
         }
       ],
       "eligible": true,
+      "pastOnly": true
+    },
+    {
+      "state": "OR",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 1.4,
+      "actualMargin": 3.42,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/oregon",
+      "resultUrl": "https://sos.oregon.gov/elections/Documents/results/november-general-2022.pdf",
+      "note": "270toWin final 5-poll average Kotek 43.6 Drazan 42.2, separately tracking independent Betsy Johnson; official Oregon results 917,074 Kotek and 850,347 Drazan (D-R about 3.42 points).",
+      "error": -2.02,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 2.02,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "eligible": false,
       "pastOnly": true
     },
     {
