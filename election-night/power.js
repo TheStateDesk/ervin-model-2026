@@ -52,9 +52,9 @@ function compute(house,senate,governors){
 function render(rootEl,projection){
  if(!rootEl)throw Error('Balance-of-power container missing');
  const specs=[
-  {office:'house',label:'U.S. House',data:projection.house,href:'../house/',note:'435 districts · 218 seats for a majority · model Tossups remain unassigned'},
-  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'../#senate-control',note:'100 seats · 17 races modeled · 18 unmodeled 2026 contests presumed held'},
-  {office:'governors',label:'Governorships',data:projection.governors,href:'../governors/',note:'50 states · 36 elections, 14 holdovers · unavailable polling left unprojected'}
+  {office:'house',label:'U.S. House',data:projection.house,href:'house/',note:'435 districts · 218 seats for a majority · model Tossups remain unassigned'},
+  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:'100 seats · 17 races modeled · 18 unmodeled 2026 contests presumed held'},
+  {office:'governors',label:'Governorships',data:projection.governors,href:'governors/',note:'50 states · 36 elections, 14 holdovers · unavailable polling left unprojected'}
  ];
  rootEl.innerHTML=specs.map(({office,label:headline,data,href,note})=>{
   const partyD=office==='senate'?'D-aligned':'Democratic';

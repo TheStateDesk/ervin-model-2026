@@ -1,0 +1,39 @@
+/* Homepage-only projected balance bars; deliberately absent from Election Night.
+   Styled to coexist with the forecast's light/dark tokens. */
+:root{--line:var(--edge);--ink:var(--text);--dem-fill:#186da8;--rep-fill:#b33548;--unknown-fill:#8494a2}
+html:not(.light){--dem-fill:#3185c4;--rep-fill:#c4485b;--unknown-fill:#78899a}
+/* Homepage forecast balance: sharp but restrained editorial red/blue, and a
+   third neutral category for seats which have not been assigned a party. */
+.power-panel{border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:clamp(16px,2.4vw,27px);margin:0 0 25px;box-shadow:0 7px 22px #10283c0b}
+.power-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.power-heading h2{font:700 clamp(24px,3vw,35px)/1.15 Georgia,serif;letter-spacing:-.018em;margin:5px 0 8px}
+.power-heading p{margin:0;color:var(--muted);font-size:13px;max-width:850px}
+.power-heading p strong{color:var(--ink)}
+.power-asof{border:1px solid var(--line);background:var(--bg);padding:7px 10px;font-size:10px;font-weight:800;letter-spacing:.08em;white-space:nowrap;border-radius:5px;color:var(--muted)}
+.power-legend{display:flex;align-items:center;flex-wrap:wrap;gap:8px 22px;margin:17px 0 13px;font-size:11px;font-weight:650;color:var(--muted)}
+.power-legend>span{display:inline-flex;align-items:center;gap:7px}
+.power-swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
+.power-swatch-d{background:var(--dem-fill)}.power-swatch-r{background:var(--rep-fill)}.power-swatch-t{background:var(--unknown-fill)}
+.power-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.power-card{border:1px solid var(--line);background:color-mix(in srgb,var(--surface),var(--bg) 28%);padding:17px;border-radius:8px;min-width:0}
+.power-card-head{display:flex;align-items:center;justify-content:space-between;gap:5px 8px;flex-wrap:wrap}
+.power-card-head h3{font-size:15px;margin:0;font-weight:800;color:var(--ink)}
+.power-card-head a{font-size:11px;white-space:nowrap;font-weight:700}
+.power-numbers{display:flex;justify-content:space-between;align-items:baseline;gap:9px;margin:15px 0 13px}
+.power-numbers span{min-width:0;display:grid;gap:1px}
+.power-numbers strong{font:800 clamp(27px,3.1vw,41px)/1 system-ui,sans-serif;letter-spacing:-.065em;font-variant-numeric:tabular-nums}
+.power-numbers small{font-size:10px;font-weight:700;color:var(--muted);line-height:1.25}
+.power-numbers .power-d strong{color:var(--dem-fill)}.power-numbers .power-r strong{color:var(--rep-fill)}
+html:not(.light) .power-numbers .power-d strong{color:var(--blue)}
+html:not(.light) .power-numbers .power-r strong{color:var(--red)}
+.power-numbers .power-t strong{color:var(--muted)}
+.power-bar{display:flex;overflow:hidden;width:100%;height:19px;border-radius:4px;background:var(--unknown-fill);border:1px solid color-mix(in srgb,var(--line),var(--ink) 8%);gap:1px}
+.power-segment{height:100%;min-width:0;flex:none}
+.power-segment-d{background:var(--dem-fill)}.power-segment-r{background:var(--rep-fill)}.power-segment-t{background:var(--unknown-fill)}
+.power-card-footer{margin-top:10px}.power-card-footer small{font-size:10px;color:var(--muted);line-height:1.5}
+.power-method{color:var(--muted);font-size:11px;margin:15px 0 0;line-height:1.65}
+.power-method a{font-weight:650}
+.race-row .model-value{display:inline-block;border-left:3px solid var(--blue);padding-left:9px}
+.race-row .live-value{display:inline-block;border-left:3px solid var(--gold);padding-left:9px}
+@media(max-width:970px){.power-grid{grid-template-columns:1fr}.power-heading{flex-wrap:wrap}.power-card{padding:16px}.power-numbers{justify-content:flex-start;gap:clamp(28px,9vw,95px)}.power-numbers strong{font-size:34px}}
+@media(max-width:660px){.power-grid{grid-template-columns:1fr;gap:10px}.power-numbers{gap:24px}.power-numbers strong{font-size:30px}.power-asof{font-size:9px}.power-bar{height:17px}}

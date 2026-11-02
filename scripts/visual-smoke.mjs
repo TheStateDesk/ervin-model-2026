@@ -26,16 +26,26 @@ try{
   await test.close();
  }
  // Verify the consolidated national Election Night dashboard and all 83 Michigan counties.
+ const homepage=await browser.newPage({viewport:{width:1440,height:940}});
+ await homepage.goto(root+'/',{waitUntil:'domcontentloaded'});
+ await homepage.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:30000});
+ assert((await homepage.locator('#powerCards .power-card').count())===3,'Homepage must display House Senate Governors bars');
+ const seatRows=await homepage.locator('#powerCards .power-card').evaluateAll(elements=>elements.map(node=>({office:node.dataset.powerOffice,numbers:[...node.querySelectorAll('[data-power-d],[data-power-r],[data-power-t]')].map(x=>+x.textContent),bars:[...node.querySelectorAll('.power-segment')].map(x=>parseFloat(x.style.width))})));
+ for(const row of seatRows){assert(row.numbers.reduce((a,b)=>a+b,0)===(row.office==='house'?435:row.office==='senate'?100:50),'Seat total inconsistent: '+row.office);assert(Math.abs(row.bars.reduce((a,b)=>a+b,0)-100)<.01,'Bar width not 100%: '+row.office);}
+ await homepage.locator('#balanceOfPower').screenshot({path:'visual-checks/Homepage-Projected-Balance-Of-Power.png'});
+ await homepage.close();
+ const homeMobile=await browser.newPage({viewport:{width:390,height:844}});
+ await homeMobile.goto(root+'/',{waitUntil:'domcontentloaded'});
+ await homeMobile.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:30000});
+ assert((await homeMobile.locator('#balanceOfPower').count())===1,'Mobile homepage forecast balance absent');
+ await homeMobile.locator('#balanceOfPower').screenshot({path:'visual-checks/Homepage-Power-Mobile.png'});
+ await homeMobile.close();
  const nationalNight=await browser.newPage({viewport:{width:1440,height:940}});
  const nightErrors=[];nationalNight.on('pageerror',e=>nightErrors.push(e.message));
  await nationalNight.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
  await nationalNight.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
  await nationalNight.waitForFunction(()=>document.querySelector('#nationalCount')?.textContent.includes('488 indexed races'),null,{timeout:30000});
- await nationalNight.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:20000});
- assert((await nationalNight.locator('#powerCards .power-card').count())===3,'All three projected chamber/office balance bars required');
- const seatRows=await nationalNight.locator('#powerCards .power-card').evaluateAll(elements=>elements.map(node=>({office:node.dataset.powerOffice,numbers:[...node.querySelectorAll('[data-power-d],[data-power-r],[data-power-t]')].map(x=>+x.textContent),bars:[...node.querySelectorAll('.power-segment')].map(x=>parseFloat(x.style.width))})));
- for(const row of seatRows){assert(row.numbers.reduce((a,b)=>a+b,0)===(row.office==='house'?435:row.office==='senate'?100:50),'Seat balance did not conserve office total: '+row.office);assert(Math.abs(row.bars.reduce((a,b)=>a+b,0)-100)<.01,'Bar widths not 100%: '+row.office);}
- await nationalNight.locator('#balanceOfPower').screenshot({path:'visual-checks/National-Election-Night-Balance-Of-Power.png'});
+ assert((await nationalNight.locator('#balanceOfPower').count())===0,'Election Night must not display pre-election power bars');
 
  assert((await nationalNight.locator('#miCounties').innerText())==='0 / 83','Fake Michigan county counts before polls close');
  assert((await nationalNight.locator('#miD').innerText())==='—','Synthetic Michigan Senate votes before polls close');
