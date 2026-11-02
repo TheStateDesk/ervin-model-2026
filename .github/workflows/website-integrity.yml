@@ -8,6 +8,10 @@ on:
       - 'house/**'
       - 'elections/**'
       - 'governors/**'
+      - 'states/**'
+      - 'state/**'
+      - 'index.html'
+      - 'site-chrome.js'
       - '.github/workflows/website-integrity.yml'
   pull_request:
     paths:
@@ -16,6 +20,10 @@ on:
       - 'house/**'
       - 'elections/**'
       - 'governors/**'
+      - 'states/**'
+      - 'state/**'
+      - 'index.html'
+      - 'site-chrome.js'
 jobs:
   integrity:
     runs-on: ubuntu-latest
@@ -27,3 +35,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/validate-election-site.mjs
+      - run: node scripts/validate-state-desk.mjs
