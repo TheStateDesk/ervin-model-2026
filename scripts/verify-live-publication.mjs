@@ -52,16 +52,32 @@ try{
  // Verify what is actually painted after Pages deployment, not just CI success.
  const front=await browser.newPage({viewport:{width:390,height:844}});
  await front.goto(base+'?release='+stamp,{waitUntil:'domcontentloaded'});
- await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:35000});
+ await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#controlDemChance')?.textContent.endsWith('%'),null,{timeout:35000});
  const frontModel=await front.evaluate(()=>{
-  const panel=document.querySelector('#balanceOfPower');
-  const box=panel?.getBoundingClientRect();
-  return {top:box?.top,width:box?.width,count:document.querySelectorAll('#powerCards .power-card').length,governors:document.querySelector('[data-power-office="governors"]')?.textContent,senate:document.querySelector('[data-power-office="senate"]')?.textContent,senateD:Number(document.querySelector('[data-power-office="senate"] [data-power-d]')?.textContent),senateR:Number(document.querySelector('[data-power-office="senate"] [data-power-r]')?.textContent),versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
+  const power=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
+  const control=document.querySelector('#senate-control')?.getBoundingClientRect();
+  const dem=document.querySelector('#controlDemChance')?.textContent;
+  const rep=document.querySelector('#controlRepChance')?.textContent;
+  return {controlTop:control?.top,powerTop:power?.top,width:control?.width,demChance:dem,repChance:rep,
+   oldLab:!!document.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),
+   count:document.querySelectorAll('#powerCards .power-card').length,
+   governors:document.querySelector('[data-power-office="governors"]')?.textContent,
+   senateD:Number(document.querySelector('[data-power-office="senate"] [data-power-d]')?.textContent),
+   senateR:Number(document.querySelector('[data-power-office="senate"] [data-power-r]')?.textContent),
+   overflow:document.documentElement.scrollWidth>window.innerWidth+4,
+   versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
  });
- if(!(frontModel.count===3&&frontModel.top>=0&&frontModel.top<150&&frontModel.width>250&&frontModel.governors?.includes('25')&&frontModel.senateD===50&&frontModel.senateR===50))throw Error('LIVE MOBILE HOMEPAGE FORECAST NOT VISIBLE '+JSON.stringify(frontModel));
- if(!frontModel.versions.some(s=>s.includes('pollrefresh-v2')))throw Error('LIVE HOMEPAGE USING CACHED GOVERNOR ENGINE '+JSON.stringify(frontModel.versions));
+ if(!(frontModel.count===3&&frontModel.controlTop>=0&&frontModel.controlTop<450
+  &&frontModel.powerTop>frontModel.controlTop&&frontModel.width>280
+  &&frontModel.demChance?.endsWith('%')&&frontModel.repChance?.endsWith('%')
+  &&frontModel.governors?.includes('25')&&frontModel.senateD===50&&frontModel.senateR===50
+  &&!frontModel.oldLab&&!frontModel.overflow))
+  throw Error('LIVE MOBILE NEW HOMEPAGE OR SENATE CONTROL INCORRECT '+JSON.stringify(frontModel));
+ if(!frontModel.versions.some(s=>s.includes('public-home-1')))
+  throw Error('LIVE HOMEPAGE USING STALE GOVERNOR ENGINE '+JSON.stringify(frontModel.versions));
+ await front.locator('#senate-control').screenshot({path:'postdeploy-checks/Homepage-Senate-Control-Mobile.png'});
  await front.screenshot({path:'postdeploy-checks/Homepage-Balance-Visible-Mobile.png',fullPage:false});
- console.log('LIVE HOMEPAGE BALANCE PASS '+JSON.stringify(frontModel));
+ console.log('LIVE HOMEPAGE PUBLIC CONTROL PASS '+JSON.stringify(frontModel));
  await front.close();
  const oh=await browser.newPage({viewport:{width:390,height:844}});
  await oh.goto(base+'state/?state=OH&release='+stamp,{waitUntil:'domcontentloaded'});
