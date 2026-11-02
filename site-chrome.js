@@ -6,11 +6,15 @@ const head=document.querySelector(".site-header");
    Resolve from this script URL, not from a nested page's relative path. */
 const siteRoot=new URL('./',document.currentScript?.src||location.href);
 const stateDeskURL=new URL('states/',siteRoot).href;
+const nationalNightURL=new URL('election-night/',siteRoot).href;
 for(const nav of [document.querySelector('.site-header .site-nav'),document.getElementById('topNavigation')]){
  if(nav&&!nav.querySelector('[data-state-desk]')){
   const a=document.createElement('a');a.href=stateDeskURL;a.dataset.stateDesk='true';
   a.textContent='All states';a.setAttribute('aria-label','All 50 state election editions');
   nav.prepend(a);
+ }
+ if(nav&&!nav.querySelector('[data-night-desk]')&&!Array.from(nav.querySelectorAll('a')).some(a=>a.href===nationalNightURL)){
+  const a=document.createElement('a');a.href=nationalNightURL;a.dataset.nightDesk='true';a.textContent='Election Night';a.setAttribute('aria-label','All 2026 election-night contests and Michigan Senate county reporting');nav.append(a);
  }
 }
 

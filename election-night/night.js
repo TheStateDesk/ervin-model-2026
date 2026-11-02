@@ -64,7 +64,7 @@ function combineCounty(){
 }
 function renderInspector(){
  const c=counties.find(x=>x.name===selectedCounty);if(!c)return;
- const h=history[String(c.fips)]||{},b=h.y24||null,source=sourceLinks[c.name]||countyDirectory;
+ const h=history[c.name]||{},p=h.president2024||{},b=Number.isFinite(p.d)&&Number.isFinite(p.r)?[p.d,p.r]:null,source=sourceLinks[c.name]||countyDirectory;
  const prev=b&&b[0]+b[1]>0?100*(b[0]-b[1])/(b[0]+b[1]):null;
  const row=countyResolved.get(c.name);
  let swing='';
@@ -89,8 +89,8 @@ async function initCountyMap(){
   path.dataset.name=target||fallback||'';
   path.addEventListener('click',()=>{selectedCounty=path.dataset.name;renderInspector()});
  }
- const [a,b]=await Promise.allSettled([fetchJSON('../geo/county-history.json'),fetchJSON(here+'county_watch_sources.json')]);
- if(a.status==='fulfilled')history=a.value.counties||{};
+ const [a,b]=await Promise.allSettled([fetchJSON('../michigan/county_history.json'),fetchJSON(here+'county_watch_sources.json')]);
+ if(a.status==='fulfilled')history=Object.fromEntries((a.value.counties||[]).map(x=>[x.name,x]));
  if(b.status==='fulfilled')sourceLinks=b.value.counties||{};
  renderInspector();combineCounty();
 }
@@ -159,12 +159,12 @@ function drawRaces(){
  $('nationalCount').textContent=shown.length+' displayed · '+races.length+' indexed races, filtered without leaving this page';
 }
 async function loadRaces(){
- const [gov,house,sen,archive]=await Promise.all([fetchJSON('../governors/data.json'),fetchJSON('../house/data.json'),fetchJSON(forecastURL),fetchJSON('../research/calibration_events_2016_2024.json')]);
+ const [gov,house,sen,archive]=await Promise.all([fetchJSON('../governors/data.json'),fetchJSON('../house/data.json'),fetchJSON(forecastURL),fetchJSON('../research/original-ervin-senate-calibration-2026-11-02.json')]);
  const report=window.ERVIN_STATEWIDE.apply(archive,gov,sen);
  const houseForecast=await fetchJSON('../house/ervin-forecast-2026-11-02.json');
  senate=sen.states||{};
  const senRaces=report.senate.map(s=>({id:s.code+'-SENATE',code:s.code,state:s.state,office:'Senate',label:(s.nonR||'Independent/Democrat')+' vs. '+s.rep,margin:s.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(s.model.adjustedMargin)}));
- const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin)}));
+ const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:Number.isFinite(g.model.adjustedMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin):Number.isFinite(g.model.pollMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.pollMargin)+' · unadjusted':'No numeric published poll'}));
  const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:h.incumbent?'Historically: '+h.incumbent:'Candidate list not verified',margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
  races=[...senRaces,...govRaces,...houseRaces];
  $('miForecast').textContent=window.ERVIN_STATEWIDE.formatMargin(sen.states?.MI?.adjustedMargin??null);
