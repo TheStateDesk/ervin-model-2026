@@ -172,7 +172,7 @@ function countedBreakdown(row){
  return '<div class="night-counts">'+row.candidates.slice().sort((a,b)=>b.votes-a.votes).slice(0,5).map(c=>{
   const p=(100*c.votes/row.total).toFixed(1);
   const cls=c.party==='D'?'dem':c.party==='R'?'rep':'other';
-  return '<div class="night-counted-candidate '+cls+'"><span>'+esc(c.name)+'</span><b>'+fmt(c.votes)+'</b><small>'+p+'%</small></div>';
+  return '<div class="night-counted-candidate '+cls+'">'+(c.photo?'<img class="night-candidate-photo" src="'+esc(c.photo)+'" alt="'+esc(c.name)+' portrait" loading="lazy" referrerpolicy="no-referrer">':'')+'<span>'+esc(c.name)+'</span><b>'+fmt(c.votes)+'</b><small>'+p+'%</small></div>';
  }).join('')+'</div>'+
  (Number.isFinite(row.precincts)?'<small class="night-report-progress">'+row.precincts.toFixed(1)+'% precincts/batches estimated reported by source — not vote share</small>':'');
 }
@@ -183,7 +183,7 @@ function renderRace(x){
  const report=live[x.office]?.races?.[id],reportText=report?lead(report):null;
  const source=report?.sourceURL?'<a href="'+esc(report.sourceURL)+'" target="_blank" rel="noopener noreferrer">Original count source</a>':'Source pending';
  return '<article class="race-row" id="race-'+esc(x.id)+'" role="listitem"><div><h3>'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+
- (reportText?countedBreakdown(report)+'<small>UNOFFICIAL · '+esc(report.source)+' · '+esc(date(report.asOf))+'</small>':'<span class="no-data">No verified returns</span><small>NOT REPORTED TO THIS FEED</small>')+
+ (reportText?countedBreakdown(report)+'<small>UNOFFICIAL · '+esc(report.source)+' · '+esc(date(report.asOf))+'</small>':'<span class="no-data">Awaiting verified results</span><small>County/state feed has not supplied attributable 2026 vote totals yet</small>')+
  '</div><div><div class="night-row-links"><a href="'+liveRaceURL(x)+'">Election-night race view</a><a href="'+raceURL(x)+'">State/district context</a></div><small>'+source+'</small></div></article>';
 }
 function drawRaces(){
@@ -203,7 +203,7 @@ async function loadRaces(){
  const ballotNames=h=>{const a=houseRoster?.races?.[h.id]?.candidates||[];return a.length?a.map(c=>c.name+' ('+c.party+')').join(' · '):'2026 candidate roster not confirmed'};
  senate=sen.states||{};
  const senRaces=report.senate.map(s=>({id:s.code+'-SENATE',code:s.code,state:s.state,office:'Senate',label:(s.nonR||'Independent/Democrat')+' vs. '+s.rep,margin:s.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(s.model.adjustedMargin)}));
- const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:Number.isFinite(g.model.adjustedMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin):Number.isFinite(g.model.pollMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.pollMargin)+' · unadjusted':'No numeric published poll'}));
+ const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:Number.isFinite(g.model.adjustedMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin):Number.isFinite(g.model.pollMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.pollMargin)+' · published poll (no same-state comparison)':'No numeric published poll'}));
  const region=$('nightStateFilter');
  if(region){const opts=[...new Map(house.seats.map(x=>[x.code,x.state]))].sort((a,b)=>a[1].localeCompare(b[1]));
   region.innerHTML='<option value="all">Every state</option>'+opts.map(([c,n])=>'<option value="'+c+'">'+esc(n)+'</option>').join('');
