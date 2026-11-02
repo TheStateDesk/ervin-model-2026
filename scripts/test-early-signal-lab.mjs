@@ -14,6 +14,8 @@ assert.equal(Object.keys(candidateData.races).length,11,'All eight early signals
 for(const [id,row] of Object.entries(candidateData.races)){assert(row.democrat&&row.republican&&row.sourceUrl.startsWith('https://'),'Unverified major-party candidate pair: '+id);}
 const baselines=readJSON('counties-watch/forecast-baselines.json');
 const house=readJSON('house/ervin-forecast-2026-11-02.json');
+const historical=readJSON('research/election-night-historical-moe-2026.json');
+const civicHealth=readJSON('civicapi/discovery.json');
 assert.equal(audit.election,'2026-11-03');
 assert.deepEqual(audit.signals,[],'No fabricated election-night votes may ship in the reviewed feed');
 assert(html.includes('Stats for Nerds')&&html.includes('id="whatifForm"'));
@@ -35,6 +37,9 @@ const fakeFetch=async url=>{
  if(url==='../house/ervin-forecast-2026-11-02.json')return {ok:true,json:async()=>house};
  if(url==='../stats-for-nerds/reviewed-signals.json')return {ok:true,json:async()=>audit};
  if(url==='./candidates-2026.json')return {ok:true,json:async()=>candidateData};
+ if(url==='../research/election-night-historical-moe-2026.json')return {ok:true,json:async()=>historical};
+ if(url==='../civicapi/discovery.json')return {ok:true,json:async()=>civicHealth};
+ if(url==='../civicapi/races.json')return {ok:true,json:async()=>({version:1,election:'2026-11-03',races:{}})};
  throw Error('Offline test: upstream results feed not connected');
 };
 const context={document,fetch:fakeFetch,AbortController,Date,Math,Number,URL,Promise,Intl,
@@ -47,8 +52,22 @@ assert(initial.includes('James Talarico')&&initial.includes('Ken Paxton'),'Texas
 assert(initial.includes('Adam Hamilton')&&initial.includes('Roger Marshall'),'Kansas matchup missing');
 assert(initial.includes('Josh Turek')&&initial.includes('Ashley Hinson'),'Iowa matchup missing');
 const watchRows=el('signalRows').innerHTML;
+assert(html.includes('id="evidence"')&&html.includes('id="watchFilter"')&&html.includes('id="transferRows"'),'Historical research/filters/transfers missing');
+assert(el('errorSummary').innerHTML.includes('4.09')&&el('errorSummary').innerHTML.includes('4.50'),'Actual Senate raw/adjusted historical errors must render');
+assert(el('errorYearBars').innerHTML.includes('2018')&&el('errorYearBars').innerHTML.includes('2024'),'All historical election-year bars must render');
+assert((el('transferRows').innerHTML.match(/<tr>/g)||[]).length===8,'All eight signal transfer rows must remain visible');
+assert(el('watchSourceHealth').textContent.includes('CivicAPI'),'Primary source must be explicitly attributed');
 for(const name of ['Zach Dembo','Ralph Alvarado','Elaine Luria','Jennifer Kiggans','Tom Perriello','John McGuire','Jon Ossoff','Mike Collins','Annie Andrews','Darline Graham','Eliott Rodriguez','María Elvira Salazar','Roy Cooper','Michael Whatley','Sherrod Brown','Jon Husted'])assert(watchRows.includes(name),'Missing early-signal nominee '+name);
 assert(watchRows.includes('Candidate roster source'),'Source links must accompany candidate names');
+el('watchFilter').value='senate';el('watchFilter').events.change();
+assert(el('signalRows').innerHTML.includes('Georgia')&&!el('signalRows').innerHTML.includes('Kentucky 6th'),'Senate-only watchlist filtering must work');
+el('watchFilter').value='house';el('watchFilter').events.change();
+assert(el('signalRows').innerHTML.includes('Kentucky 6th')&&!el('signalRows').innerHTML.includes('Georgia · Senate'),'House-only watchlist filtering must work');
+el('watchFilter').value='reported';el('watchFilter').events.change();
+assert(el('signalRows').innerHTML.includes('No watched races match'),'No actual votes means reported filter empty');
+el('watchFilter').value='all';el('watchFilter').events.change();
+el('watchSort').value='close';el('watchSort').events.change();
+assert(el('signalRows').innerHTML.indexOf('Kentucky 6th')<el('signalRows').innerHTML.indexOf('Georgia · Senate'),'Chronological watchlist order must be earliest-first');
 assert(initial.includes('50.6%'),'TX must load actual baseline +1.2 D margin / 50.6% D share');
 assert(initial.includes('47.6%'),'KS must load actual baseline -4.8 D margin / 47.6% D share');
 assert(initial.includes('46.8%'),'IA must load actual baseline -6.33 D margin / 46.8% D share');
