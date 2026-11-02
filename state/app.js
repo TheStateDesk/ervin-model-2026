@@ -271,32 +271,46 @@ function renderPolls(){
 }
 function stateCodeFromResultKey(k){return String(k).slice(0,2).toUpperCase();}
 async function loadReturns(force=false){
- const now=Date.now();if(!force&&now-resultLast<60000)return;resultLast=now;
- const editions=['Senate','Governor','House'],ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),11000),chunks=[];
- $('resultStatus').className='ed-inline-status';$('resultStatus').textContent='Checking documented state-office sources';
+ const now=Date.now();
+ if(!force&&now-resultLast<60000)return;
+ resultLast=now;
+ const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),11000);
+ $('resultStatus').className='ed-inline-status';
+ $('resultStatus').textContent='Checking civicAPI v2 and source-backed fallback reports';
  try{
-  const answers=await Promise.allSettled(editions.map(async office=>{
-   const response=await fetch('https://openamerica.io/elections/results.json?year=2026&office='+office,{cache:'no-cache',signal:ctrl.signal});
-   if(!response.ok)throw Error(office+' feed unreachable');
-   const j=await response.json();if(j.year!==2026||j.office!==office||j.api!==1||!j.races||typeof j.races!=='object')throw Error('Unsupported feed format');return j;
+  const core=window.ERVIN_RETURNS;
+  if(!core)throw Error('Result validator not initialized');
+  const urls=['../civicapi/races.json',...['Senate','Governor','House'].map(o=>'https://openamerica.io/elections/results.json?year=2026&office='+o)];
+  const response=await Promise.allSettled(urls.map(async u=>{
+   const v=await fetch(u,{cache:'no-store',signal:ctrl.signal});
+   if(!v.ok)throw Error(u+' HTTP '+v.status);
+   return v.json();
   }));
-  const supported=answers.filter(x=>x.status==='fulfilled').length;
-  if(!supported)throw Error('No official-source results feeds available');
-  for(let i=0;i<answers.length;i++){
-   const rr=answers[i];if(rr.status!=='fulfilled')continue;
-   for(const [key,row] of Object.entries(rr.value.races||{})){
-    if(stateCodeFromResultKey(key)!==code||!Number.isFinite(row.total)||row.total<=0||!Array.isArray(row.cands))continue;
-    const leader=[...row.cands].sort((a,b)=>(b.v||0)-(a.v||0)).slice(0,2).map(x=>x.n+' '+fmt(x.v)).join(' · ');
-    chunks.push('<article><strong>'+esc(editions[i]+' · '+key)+'</strong><small>'+esc(leader)+' · '+fmt(row.total)+' votes counted · '+(Number.isFinite(row.pct_in)?row.pct_in.toFixed(1)+'% precincts reporting':'precinct reporting unavailable')+'</small></article>');
-   }
+  const civic=response[0].status==='fulfilled'?core.civic(response[0].value):{};
+  const fallback={};
+  let working=0;
+  for(let i=1;i<response.length;i++){
+   if(response[i].status!=='fulfilled')continue;
+   const rows=core.openAmerica(response[i].value,['Senate','Governor','House'][i-1]);
+   if(Object.keys(rows).length){Object.assign(fallback,rows);working++}
   }
-  const count=chunks.length;
-  $('resultRows').innerHTML=count?chunks.slice(0,60).join(''):'<div class="ed-empty">No confirmed 2026 counted-vote records for '+esc(stateName(code))+' in the supported feeds. This does not mean zero votes or no election.</div>';
-  $('resultStatus').className='ed-inline-status'+(count?' live':'');
-  $('resultStatus').textContent=count?count+' reported contests in supported result feeds':'No supported published return for this state yet';
-  $('resultUpdated').textContent='Checked '+new Date().toLocaleTimeString()+' · Official state-office data mirrored by Open America, which covers only a subset of states. Publication and precinct percentages may lag; no winner calls are made.';
- }catch(e){$('resultStatus').className='ed-inline-status stale';$('resultStatus').textContent='Published source unavailable';$('resultRows').innerHTML='<div class="ed-empty">Unable to confirm state results. Open the official state election office for the latest figures.</div>';}
- finally{clearTimeout(timer);}
+  const chosen=core.preferCivic(civic,fallback);
+  const inState=Object.values(chosen.races).filter(row=>row.id.startsWith(code+'-'));
+  $('resultRows').innerHTML=inState.length?inState.map(row=>{
+   const sorted=row.candidates.slice().sort((a,b)=>b.votes-a.votes);
+   const summary=sorted.slice(0,3).map(c=>c.name+' '+fmt(c.votes)).join(' · ');
+   return '<article><strong>'+esc(row.office+' · '+row.id)+'</strong><small>'+esc(summary)+' · '+fmt(row.total)+' unofficial votes · '+esc(row.source)+' · '+esc(row.asOf)+'</small>'+
+   (row.sourceURL?'<a href="'+safeURL(row.sourceURL)+'" target="_blank" rel="noopener noreferrer">Count provenance</a>':'')+'</article>';
+  }).join(''):'<div class="ed-empty">No accepted 2026 vote totals for '+esc(stateName(code))+' in the published providers. This does not mean that zero votes have been counted.</div>';
+  const civicCount=inState.filter(r=>r.source.includes('CivicAPI')).length;
+  $('resultStatus').className='ed-inline-status'+(inState.length?' live':'');
+  $('resultStatus').textContent=inState.length?inState.length+' contests with attributed returns · '+civicCount+' from CivicAPI':'Awaiting attributed current-election results';
+  $('resultUpdated').textContent='Checked '+new Date().toLocaleTimeString()+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
+ }catch(e){
+  $('resultStatus').className='ed-inline-status stale';
+  $('resultStatus').textContent='Source audit unavailable: '+String(e.message||e).slice(0,90);
+  $('resultRows').innerHTML='<div class="ed-empty">Open the live Election Night dashboard or state election office for available counts.</div>';
+ }finally{clearTimeout(timer)}
 }
 function officialLinks(){
  let links='<a href="https://www.nass.org/can-I-vote/state-election-officials" target="_blank" rel="noopener noreferrer">Directory of state election offices</a>';
