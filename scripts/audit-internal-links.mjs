@@ -55,7 +55,8 @@ const nightLinks=[...nightNav.matchAll(/href=["']([^"']+)["']/g)].map(x=>x[1]);
 const expectedNightLinks=['../states/','#nationalBoard','#michiganSpotlight','../stats-for-nerds/'];
 if(JSON.stringify(nightLinks)!==JSON.stringify(expectedNightLinks))issues.push('Election Night nav must link only to the consolidated State Desk and on-page sections: '+nightLinks.join(', '));
 if(nightHtml.includes('href="../michigan/election-night/"'))issues.push('Election Night retains link to retired separate Michigan results page');
-if(!nightHtml.includes('href="../state/?state=MI#stateResults"'))issues.push('Michigan results must link to consolidated state dossier');
+if(!nightHtml.includes('href="../state/?state=MI#stateGeography"'))issues.push('Michigan context must link to consolidated county-history section');
+if(nightHtml.includes('href="../state/?state=MI#stateResults"'))issues.push('Live national desk still points to retired results panel');
 const front=fs.readFileSync(path.join(root,'index.html'),'utf8');
 if(front.indexOf('id="balanceOfPower"')>front.indexOf('<section class="hero'))issues.push('Balance of power must be above homepage hero');
 for(const rel of ['index.html','governors/index.html','states/index.html','state/index.html']){
