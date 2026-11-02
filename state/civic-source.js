@@ -20,15 +20,20 @@ async function load(){
 function show(data){
  const host=$('civicAudit');if(!host)return;
  const code=state(),[audit,feed]=data;
- const targets=Object.entries(audit.status||{}).filter(([key])=>key.startsWith(code+'-')&&validKey(key));
- const live=Object.entries(feed.races||{}).filter(([key,r])=>key.startsWith(code+'-')&&validKey(key)&&r?.verified===true&&Array.isArray(r.candidates));
- const checks=targets.map(([key,v])=>'<li><b>'+esc(key)+'</b> · '+esc(String(v.state||'unknown').replaceAll('_',' '))+'</li>').join('');
- const records=live.map(([key,r])=>'<article class="dx-civic-row"><strong>'+esc(key)+' · '+fmt(r.total)+' counted ballots</strong><small>'+r.candidates.map(c=>esc(c.name)+': '+fmt(c.votes)).join(' · ')+'</small><small>civicAPI snapshot '+esc(r.asOf)+' · <a target="_blank" rel="noopener noreferrer" href="'+url(r.sourceUrl)+'">Original API record</a></small></article>').join('');
- host.innerHTML='<p class="ed-mini">Independent provider check: '+esc(audit.checkedAt||'Time unavailable')+'. Only six pilot contests are currently queried; missing data do not mean zero votes. CivicAPI and Open America may mirror the same official totals and must not be added together.</p>'+
-  (live.length?records:'<p class="ed-mini">No independently validated CivicAPI result has passed identity, timestamp and vote-total checks for this state yet.</p>')+
-  (targets.length?'<ul class="dx-civic-list">'+checks+'</ul>':'<p class="ed-mini">No race in this state is included in the initial six-race pilot.</p>')+
-  '<p class="ed-mini"><strong>Polling:</strong> '+esc(audit.polling?.note||'Polling schema not yet verified.')+'</p>'+
-  '<a href="https://civicapi.org/api-documentation" target="_blank" rel="noopener noreferrer">CivicAPI documentation and attribution</a>';
+ const current=Object.entries(feed.races||{}).filter(([key,r])=>key.startsWith(code+'-')&&validKey(key)&&r?.verified===true&&Array.isArray(r.candidates));
+ const total=Number(audit.targetRaces)||488,registered=Number(audit.registeredRaces)||0;
+ const records=current.map(([key,r])=>'<article class="dx-civic-row"><strong>'+esc(key)+' · '+fmt(r.total)+' unofficial votes</strong>'+
+ '<small>'+r.candidates.map(c=>esc(c.name)+': '+fmt(c.votes)).join(' · ')+'</small>'+
+ '<small>As of '+esc(r.asOf)+' · timestamp: '+esc(r.timestampBasis||'provider verified')+' · <a target="_blank" rel="noopener noreferrer" href="'+url(r.sourceUrl)+'">CivicAPI original contest</a></small></article>').join('');
+ const lag=Date.parse(audit.checkedAt||'');
+ const age=Number.isFinite(lag)?Math.max(0,Math.round((Date.now()-lag)/60000)):null;
+ host.innerHTML='<p class="ed-mini"><strong>Primary reporting service: <a href="https://civicapi.org" target="_blank" rel="noopener noreferrer">civicAPI v2</a>.</strong> Matched '+fmt(registered)+' of '+fmt(total)+' races to provider IDs. '+
+ (age===null?'No collector timestamp.':'Last collector check: '+age+' minutes ago. ')+
+ 'The site checks election, office, district, report timestamp, ballot totals and provider test-data flags before displaying votes.</p>'+
+ (records||'<p class="ed-mini">No verified civicAPI vote totals for this state yet. Missing returns are not zero votes.</p>')+
+ '<p class="ed-mini">National publisher schedule is best effort; actual refresh time can lag behind civicAPI reporting. When a civicAPI record is missing or stale, a separately attributed fallback may be displayed in the national results view. Providers are never added together.</p>'+
+ '<p class="ed-mini"><strong>Polling:</strong> '+esc(audit.polling?.note||'CivicAPI polling endpoint not independently verified.')+'</p>'+
+ '<a href="https://civicapi.org/api-documentation" target="_blank" rel="noopener noreferrer">API documentation and attribution</a>';
 }
 function ready(){
  if(!$('civicAudit'))return;
