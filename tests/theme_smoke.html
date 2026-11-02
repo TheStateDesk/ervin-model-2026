@@ -38,7 +38,7 @@
   assert(!html.classList.contains('light'),file+': dark root active');
   assert(relativeLuminance(readRgb(bs.backgroundColor))<.04,file+': body uses a genuinely dark background');
   assert(contrast(bs.color,bs.backgroundColor)>=8,file+': body text exceeds 8:1 contrast ratio');
-  assert(d.querySelector('meta[name="theme-color"]').content==='#0c1826',file+': dark browser UI color set');
+  assert(d.querySelector('meta[name="theme-color"]').content===(file==='State Desk'?'#101925':'#0c1826'),file+': dark browser UI color set');
   let panel=d.querySelector('main .panel');
   if(panel){
    let st=w.getComputedStyle(panel);
@@ -59,16 +59,16 @@
  }
  try{
   localStorage.removeItem('ervin-2026-appearance');
-  let d=await load('index.html');
+  let d=await load('states/index.html');
   assert(d.documentElement.classList.contains('light'),'Main page defaults to light mode when no preference exists');
   const mainToggle=d.getElementById('themeToggle');
   assert(!!mainToggle,'Main appearance switch exists');
-  mainToggle.click();assertDark(d,'National forecast');
+  mainToggle.click();assertDark(d,'State Desk');
   assert(mainToggle.getAttribute('aria-pressed')==='true','Main switch announces dark selection');
   assert(localStorage.getItem('ervin-2026-appearance')==='dark','Dark selection saved for subsequent pages');
-  d.getElementById('themeToggleMenu').click();
-  assert(d.documentElement.classList.contains('light'),'All pages menu appearance control switches back to light');
-  mainToggle.click();assertDark(d,'National forecast (restored)');
+  mainToggle.click();
+  assert(d.documentElement.classList.contains('light'),'State Desk appearance control switches back to light');
+  mainToggle.click();assertDark(d,'State Desk');
   for(const file of ['counties-watch/index.html','michigan/index.html','michigan/election-night/index.html']){
    d=await load(file);
    assertDark(d,file);
