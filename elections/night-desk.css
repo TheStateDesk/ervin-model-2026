@@ -82,3 +82,22 @@ html:not(.light) body #countyMap .geo-district{fill:#497898;stroke:#193d59}
 .er-county-table tbody th small{display:block;color:var(--muted);font-size:9px;font-weight:500}
 .er-county-table tbody tr:hover th,.er-county-table tbody tr:hover td{background:var(--surface2)}
 @media(max-width:760px){.er-county-table-controls{align-items:stretch}.er-county-table-controls input{flex-basis:100%}.er-county-table{font-size:11px}.er-county-table thead th{font-size:10px;padding:10px 7px}.er-county-table tbody td,.er-county-table tbody th{padding:9px 7px}}
+
+/* Mobile legibility pass: scale labels stay WITHIN the graphic rather than
+   protruding into the adjacent forecast and counted-vote cards. */
+.er-margin-track{box-sizing:border-box}
+.er-margin-track .er-margin-tick{left:50%!important;right:auto!important;transform:translateX(-50%);max-width:52px;white-space:nowrap;color:#122f45;background:#ffffffd9;border-radius:4px;padding:2px 3px;line-height:1.15;text-align:center;z-index:2;font-size:9px;letter-spacing:0}
+.er-margin-track .er-margin-tick.top{top:7px}
+.er-margin-track .er-margin-tick.middle{top:calc(50% - 20px)}
+.er-margin-track .er-margin-tick.bottom{bottom:7px}
+.er-margin-marker{z-index:4}
+@media(max-width:760px){
+  .er-margin-layout{grid-template-columns:minmax(0,1fr) 74px!important;gap:7px!important}
+  .er-margin-track{width:56px!important;margin:14px auto!important}
+  .er-margin-rows strong{font-size:clamp(18px,5vw,23px)!important;overflow-wrap:anywhere}
+  .er-margin-rows>div{padding:10px!important}
+  .er-map-actions{gap:10px}
+  .er-map-actions label{min-width:0;flex-wrap:wrap}
+  .er-map-actions input{width:min(180px,44vw)}
+  #erCountyFind{font-size:16px}
+}
