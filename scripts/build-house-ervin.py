@@ -4,7 +4,7 @@ References: MEDSL CC0 2022/2024 House results; PeoplesPoll NYT CC-BY-4.0
 published survey index; existing Ervin state historical adjustments.
 This is not a validated election probability model. Do not conflate 2024 with redrawn 2026 maps.
 """
-import json, re, math, sys, collections, datetime, time, urllib.request
+import json, re, math, sys, collections, datetime, time, urllib.request, csv, io
 from pathlib import Path
 from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1]
@@ -92,6 +92,50 @@ def poll_directory(seats):
     if len(found)<100:raise RuntimeError(f'Poll directory only parsed {len(found)} races; stop rather than claiming complete polling')
     print('POLL DIRECTORY districts',len(found),'indexed polls',sum(x['publishedCount'] for x in found.values()),flush=True)
     return found
+def house_poll_questions(seats):
+    """Preserve one row per published candidate matchup, including alternate ballot questions.
+    These are *not* independently verified original poll releases and are not model inputs.
+    Same poll_id can appear multiple times with alternate candidate combinations.
+    """
+    url='https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/race_polls.csv'
+    csv_text=download(url).decode('utf-8-sig','replace')
+    reader=csv.DictReader(io.StringIO(csv_text))
+    archive=collections.defaultdict(list)
+    for row in reader:
+        id=str(row.get('race_code') or '')
+        if id not in seats or not re.fullmatch('[A-Z]{2}-[0-9]{2}',id):continue
+        date=str(row.get('end_date') or '').strip()
+        if not re.fullmatch('202[56]-[01][0-9]-[0-3][0-9]',date):continue
+        try:
+            shares={k:(float(row[k]) if row.get(k) not in ('',None) else None) for k in ('dem','rep','oth','dem2','rep2')}
+            size=int(float(row.get('n') or 0))
+        except (ValueError,TypeError):continue
+        p={'pollId':row.get('poll_id') or None,'pollster':(row.get('pollster') or '').strip(),
+            'date':date,'sampleSize':size if size>0 else None,
+            'dem':shares['dem'],'rep':shares['rep'],'demCandidate':(row.get('dem_name') or '').strip(),
+            'repCandidate':(row.get('rep_name') or '').strip(),
+            'otherShare':shares['oth'],'otherParty':(row.get('oth_party') or '').strip(),
+            'otherCandidate':(row.get('oth_name') or '').strip(),'dem2':shares['dem2'],'rep2':shares['rep2'],
+            'rating':row.get('rating') or None,'lean':row.get('lean') or None,
+            'sourceUrl':'https://github.com/ElectIndex/26_us_forecast_data/blob/main/race_polls.csv',
+            'source':'ElectIndex question-level NYT poll compilation','usedInErvinModel':False,
+            'caution':'One row is a matchup/question, not an independent poll. Multiple rows can share pollId. Candidate names and party labels are taken from archived source, and sample, dates and methodology require original-release verification.'}
+        if p['pollster']:archive[id].append(p)
+    for key in archive:
+        archive[key].sort(key=lambda x:(x['date'],x['pollster']),reverse=True)
+    total=sum(len(v) for v in archive.values())
+    distinct=sum(len({p['pollId'] for p in v if p['pollId']}) for v in archive.values())
+    if total<400 or len(archive)<100:raise RuntimeError(f'House question archive parsed only {total} rows across {len(archive)} races, refusing partial import')
+    output={'asOf':TODAY.isoformat(),'title':'House survey question archive · historical and current',
+        'source':'ElectIndex public dataset, compiled from New York Times polling index','sourceUrl':'https://github.com/ElectIndex/26_us_forecast_data/blob/main/race_polls.csv',
+        'sourceAttribution':'NYT polling-index compilation; CC BY 4.0 attribution claimed by source directory. Cross-check pollster original releases for individual poll methodology.',
+        'note':'Question-level evidence, not unique independent surveys. Multiple hypothetical matchups from a single pollId must never be counted as independent polls. These supplemental questions are displayed for research only, not used in Ervin House margin calculation. Some records date to 2025.',
+        'summary':{'districts':len(archive),'pollQuestionRows':total,'distinctPollIds':distinct},
+        'races':dict(archive)}
+    write('house/poll-questions-2026-11-02.json',output)
+    print('HOUSE QUESTION ARCHIVE',json.dumps(output['summary']),flush=True)
+    return output
+
 def dedup(raw):
     found={}
     for p in raw:
@@ -118,6 +162,7 @@ def main():
     yearly={};national={}
     for y in (2022,2024):yearly[y],national[y]=house_year(y,seatmap)
     directory=poll_directory(seatmap)
+    house_poll_questions(seatmap)
     # National publisher-weighted generic ballot: source shares renormalized over verified inputs.
     # 270-to-Win excluded because we do not have a separately verified comparable average.
     inputs=[{'publisher':'RealClearPolling','marginD':8.5,'weight':.40,'url':'https://www2.realclearpolitics.com/epolls/other/2026_generic_congressional_vote-8670.html'},
