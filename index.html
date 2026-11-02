@@ -3477,7 +3477,7 @@ function detail(){if(state.untracked){const geo=window.ERVIN_US_GEOGRAPHY?.state
  $('historyExplanation').innerHTML=`Original Ervin's archived shift is <b>${r.correction>=0?'R':'D'} +${Math.abs(r.correction).toFixed(2)}</b> from ${r.historical.length} older comparison${r.historical.length===1?'':'s'}. Current mode: <b>${esc(state.biasMode==='weighted'?'Ervin + pooled adjustment':state.biasMode==='shrink'?'Shrink small samples':'Original Ervin')}</b>, applied R-oriented correction <b>${v.correction.toFixed(2)}</b> points. Ervin + also uses the separate 88-record 2016–2024 dataset and shrinks thin state histories toward common regional/national evidence. Legacy audit MAE ${v.h.mae.toFixed(2)} pts; legacy dispersion ${Math.max(4.7,v.h.sd).toFixed(1)} pts. ${errMode?'D–R shift is not transferred to this independent matchup.':''} Election-year observations are correlated, not fully independent.`;
 }
 function currentWinFrequency(code){
- const u=Number($('controlUncertainty')?.value||1),key=state.source+'|'+state.biasMode+'|'+u;
+ const u=Number($('controlUncertainty')?.value||1),key=state.source+'|'+state.biasMode+'|'+state.level+'|'+u;
  const chance=controlCache.get(key)?.chanceByRace?.[code];
  return typeof chance==='number'&&Number.isFinite(chance)?Math.max(0,Math.min(1,chance)):null;
 }
