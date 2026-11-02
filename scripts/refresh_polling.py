@@ -16,13 +16,11 @@ from bs4 import BeautifulSoup
 from recent_poll_parser import parse_recent_polls
 
 ROOT=Path(__file__).resolve().parent.parent
-HTML=ROOT/"index.html"
+MODEL=ROOT/"research/senate-workbench-data.json"
 AUDIT=ROOT/"refresh_log.json"
 RECENT=ROOT/"recent_polls.json"
 CURATED=ROOT/"research/curated_individual_polls_2026.json"
 CSV=ROOT/"source_snapshot.csv"
-PREFIX="window.ERVIN_DATA = "
-ENDING=";\n\n</script><script>"
 SOURCES={
     "rcp": ("realclearpolling","realclearpolitics"),
     "ddhq": ("decision desk hq",),
@@ -140,10 +138,7 @@ def merge_survey_evidence(curated, verified):
                   reverse=True)[:12]
 
 def main():
-    contents=HTML.read_text(encoding="utf-8")
-    a=contents.index(PREFIX)+len(PREFIX)
-    b=contents.index(ENDING,a)
-    data=json.loads(contents[a:b])
+    data=json.loads(MODEL.read_text(encoding="utf-8"))
     checked=dt.datetime.now(dt.timezone.utc)
     report={"checkedAt":checked.isoformat(),"pagesParsed":0,"checkedRaceCount":len(data["states"]),"changes":0,"observationsFound":0,"errors":[],"updated":[],"sourceCoverage":[],"stalePublisherRaces":[],"sources":"Wikipedia 2026 general-election aggregate tables; matching candidate pair required"}
     previous_polls={}
@@ -204,9 +199,9 @@ def main():
     data["liveMeta"]=report
     if report["changes"]:
         data["asof"]=checked.strftime("%B %d, %Y")
-    replacement=json.dumps(data,ensure_ascii=False,indent=2)
-    new_html=contents[:a]+replacement+contents[b:]
-    if new_html!=contents:HTML.write_text(new_html,encoding="utf-8")
+    replacement=json.dumps(data,ensure_ascii=False,indent=2)+"\n"
+    if not MODEL.exists() or MODEL.read_text(encoding="utf-8")!=replacement:
+        MODEL.write_text(replacement,encoding="utf-8")
     with CSV.open("w",newline="",encoding="utf-8") as out:
         writer=csv.writer(out)
         writer.writerow(["As of","State","Code","2026 non-R candidate","2026 Republican candidate","Source tab","Poll lead (non-R minus R)","Publisher or proxy","Field date","Proxy","Notes","Source link"])
