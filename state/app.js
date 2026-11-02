@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let governorErvin={};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
+let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
 let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -154,6 +154,16 @@ function toneRating(r){const t=String(getModel(r)?.modelRating||r?.rating||'').t
 function getModel(r){return houseScenario.races?.[r?.id]||null;}
 const modeledMargin=m=>Number.isFinite(m)?(Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)):'Not estimated';
 const formatHouseYear=(v,y)=>!v?'No comparable '+y+' return available':y+' House: D '+fmt(v.D)+' · R '+fmt(v.R)+' · '+modeledMargin(v.margin)+(v.contested?'':' · uncontested/limited');
+function candidateRosterCard(r){
+ const row=houseRoster.races?.[r.id],people=row?.candidates||[];
+ if(!people.length)return '<div class="ed-notice" style="margin:14px 0">2026 general-election candidate roster not confirmed for this district. The historical incumbent is not necessarily on the ballot.</div>';
+ const label=p=>p==='D'?'Democratic':p==='R'?'Republican':p==='I'?'Independent':p==='L'?'Libertarian':p==='G'?'Green':p;
+ const html=people.map(c=>{
+  const color=c.party==='D'?'#3f82c2':c.party==='R'?'#cc5060':'#8595a4';
+  return '<article class="ed-coverage" style="margin:6px 0;padding:10px 12px;border-left:3px solid '+color+'"><div><strong>'+esc(c.name)+'</strong><small>'+esc(label(c.party))+(c.incumbent?' · Incumbent':'')+'</small></div><a href="'+safeURL(c.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Candidate source</a></article>';
+ }).join('');
+ return '<div class="ed-cap" style="margin-top:19px">2026 general-election candidates · '+people.length+' listed</div><div class="ed-house-surveys">'+html+'</div><p class="ed-mini">Listed in public general-election directories; the state election office remains the final ballot authority. The list is not a certified race call or polling input.</p>';
+}
 function renderDistrictDetail(r){
  if(!r)return;selectedDistrict=r;
  const model=getModel(r),rating=model?.modelRating||r.rating||'No model rating available';
@@ -178,7 +188,7 @@ function renderDistrictDetail(r){
  const indexText=model?.publishedSurveyCount||indexed?.count||0;
  const caveat='<p class="ed-mini">The survey directory may index '+fmt(indexText)+' polls for this district, but only '+fmt(rows.length)+' identifiable local entries are displayed here. Original releases, sponsors and ranked-choice/same-party ballot structures may differ. A directory count is not a poll average.</p>';
  const links='<div class="ed-source-links"><a href="'+safeURL(model?.pollDirectoryLink||p?.url||'https://peoplespoll.com/house')+'" target="_blank" rel="noopener noreferrer">Full published district poll directory</a><a href="https://www.cookpolitical.com/ratings/house-race-ratings" target="_blank" rel="noopener noreferrer">Cook comparison ratings</a><a href="https://electiondata.dev/datasets/house-results/" target="_blank" rel="noopener noreferrer">2022/2024 House returns</a><a href="../elections/?office=house&state='+code+'&district='+esc(r.district)+'">Separate technical race dossier</a></div>';
- $('districtDetail').innerHTML=source+top+'<p><strong>Historical incumbent:</strong> '+esc(r.incumbent||'Not verified')+' · 2026 candidates must be confirmed from the state election office.</p>'+surveyMarkup+additional+caveat+links;
+ $('districtDetail').innerHTML=source+top+candidateRosterCard(r)+'<p class="ed-mini"><strong>Historical incumbent:</strong> '+esc(r.incumbent||'Not verified')+' (not necessarily a 2026 ballot candidate).</p>'+surveyMarkup+additional+caveat+links;
  $('districtButtons').querySelectorAll('button[data-district]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.district===r.district)));
  $('districtMap').querySelectorAll('path.geo-district').forEach(path=>path.classList.toggle('is-selected',String(path.dataset.district).padStart(2,'0')===String(r.district).padStart(2,'0')));
  $('districtSelect').value=String(r.district);
@@ -323,12 +333,13 @@ async function start(){
     fetchJSON('../polling/texas-governor-surveys-2026-11-02.json'),
     fetchJSON('../house/ervin-forecast-2026-11-02.json'),
     fetchJSON('../house/poll-questions-2026-11-02.json'),
-    fetchJSON('../research/governor-same-office-2014-2024.json')];
+    fetchJSON('../research/governor-same-office-2014-2024.json'),
+    fetchJSON('../house/candidates-2026.json')];
   const updated=Promise.allSettled(optionalFiles).then(results=>{
    const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
    baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
-   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;
+   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;houseRoster=values[14]||houseRoster;
    if(values[13]&&window.ERVIN_STATEWIDE){const cal=window.ERVIN_STATEWIDE.apply(values[13],{races:governors},{states:baselines});governorErvin=Object.fromEntries(cal.governor.map(g=>[g.code,g]));}
    pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
    renderLead();renderOverview();renderPolls();
