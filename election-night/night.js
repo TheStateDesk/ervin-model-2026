@@ -216,8 +216,8 @@ async function loadRaces(){
  drawRaces();
 }
 async function init(){
- $('appearance').onclick=()=>{const dark=document.documentElement.classList.toggle('light')===false;try{localStorage.setItem('ervin-2026-appearance',dark?'dark':'light')}catch(e){}$('appearance').textContent=dark?'Light mode':'Dark mode';};
- $('appearance').textContent=document.documentElement.classList.contains('light')?'Dark mode':'Light mode';
+ $('appearance').onclick=()=>{const dark=document.documentElement.classList.toggle('light')===false;document.documentElement.classList.toggle('theme-dark',dark);document.documentElement.style.colorScheme=dark?'dark':'light';try{localStorage.setItem('ervin-2026-appearance',dark?'dark':'light')}catch(e){}$('appearance').textContent=dark?'Light mode':'Dark mode';$('appearance').setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#101925':'#f5f3ee');};
+ $('appearance').textContent=document.documentElement.classList.contains('light')?'Dark mode':'Light mode';$('appearance').setAttribute('aria-pressed',String(!document.documentElement.classList.contains('light')));
  $('miCountySearch').addEventListener('input',drawCounties);
  $('miCountyRows').addEventListener('click',e=>{const b=e.target.closest('button[data-name]');if(b){selectedCounty=b.dataset.name;renderInspector()}});
  for(const button of document.querySelectorAll('[data-office]'))button.addEventListener('click',()=>{filter=button.dataset.office;document.querySelectorAll('[data-office]').forEach(x=>x.classList.toggle('is-active',x===button));drawRaces()});
