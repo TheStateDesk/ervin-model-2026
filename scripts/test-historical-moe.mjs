@@ -23,7 +23,7 @@ const js=fs.readFileSync('stats-for-nerds/app.js','utf8');
 const state=fs.readFileSync('state/app.js','utf8'),board=fs.readFileSync('house/board.js','utf8');
 assert(js.includes('targetResidual(id)')&&js.includes("historicalMOE?.senate?.raw?.rmse"),'No historical Senate RMSE in simulation');
 assert(js.includes("if(!key.endsWith('-SENATE'))return {ok:false"),'House results must not automatically shift Senate');
-assert(js.includes("'FL-27':'2026-11-03T20:00:00-05:00'"),'Florida closing time regression');
+assert(js.includes("'FL-27':'2026-11-03T19:00:00-05:00'"),'Florida closing time regression');
 assert(state.includes('changed2026Map')&&state.includes('historicalP90')&&state.includes("'Not comparable'"),'Changed maps not excluded from historical House error evidence');
 assert(board.includes('232 comparable 2022→2024 districts'));
 console.log('HISTORICAL MOE AUDIT PASS',JSON.stringify({senateEvents:err.length,houseComparable:houseErr.length,senateP90Margin:hist.senate.raw.p90Abs,houseP90Margin:hist.house.unchangedDistrictHoldout.p90Abs,redrawnExcluded:203}));
