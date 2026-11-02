@@ -7,8 +7,8 @@
 - **50/50** states with valid county and House geography.
 - **3,143** county-equivalent boundary polygons and **435** voting House district shapes; all match the district registry.
 - **100/100** actual local map render tests passed with finite SVG paths, mouse click and Enter activation.
-- All 10 local regional geometry packs loaded and passed the render checks. Five states (AK, AZ, MI, PA, TX) have individual state assets; the map loader uses bundles directly in the other 45 states rather than issuing failed 404 requests.
-- The four states with both a separately hosted file and a regional duplicate (AZ, MI, PA, TX) have matching county FIPS IDs and district IDs; Alaska is individual-only.
+- All 10 local regional geometry packs loaded and passed the render checks. Five states (AK, AZ, MI, PA, TX) have individual state assets with local regional backups; the map loader uses bundles directly in the other 45 states rather than issuing failed 404 requests.
+- The four states with both a separately hosted file and a regional duplicate (AZ, MI, PA, TX) have matching county FIPS IDs and district IDs; Alaska is also included in the first local pack for resilience if its individual state file fails.
 - 2026 conditional county scenarios generated finite margins for all **3,112 available 2024-historical counties** across 49 non-Alaska states; Alaska's separate geography/reporting units are deliberately excluded from these numeric scenarios.
 - **One missing historical unit:** Kalawao County, HI (FIPS 15005) has no separate 2024 presidential voting record in this dataset. The county outline must remain visible, but any independently generated 2026 vote-margin estimate stays unavailable.
 - Map polygons reflect **2022 Census/TIGER reference geography** and 118th Congress House boundaries. Congressional redistricting after those datasets is not automatically represented, and source shapes should not be used as legally certified 2026 districts.
@@ -18,7 +18,7 @@
 
 | State | County shapes | House districts | Geometry source | Historical limitation |
 |---|---:|---:|---|---|
-| AK | 30 | 1 | Individual file + local bundle (individual only) | Alaska reporting units not harmonized |
+| AK | 30 | 1 | Individual file + local bundle | Alaska reporting units not harmonized |
 | AL | 67 | 7 | Local regional bundle | None |
 | AR | 75 | 4 | Local regional bundle | None |
 | AZ | 15 | 9 | Individual file + local bundle | None |
@@ -71,6 +71,6 @@
 
 ## Reproduce
 
-Run `node scripts/validate-election-site.mjs` from the repository root. The GitHub Actions **Website integrity** workflow runs on updates to relevant election source files. The validator loads every state via the same local geography engine, tests the SVG render output and keyboard/click events, and checks the 435 House directory IDs, source integrity and page asset references.
+Run `node scripts/validate-election-site.mjs` from the repository root. It also simulates an Alaska state-file outage and confirms the regional backup works. The GitHub Actions **Website integrity** workflow runs on updates to relevant election source files. The validator loads every state via the same local geography engine, tests the SVG render output and keyboard/click events, and checks the 435 House directory IDs, source integrity and page asset references.
 
 **Caution:** Passing static integrity checks does not establish up-to-date vote totals, county-by-county turnout, legally authoritative district boundaries, or calibrated model accuracy.
