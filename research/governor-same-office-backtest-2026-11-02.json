@@ -1,27 +1,27 @@
 {
   "asOf": "2026-11-02",
-  "method": "Only earlier state governor polls vs actual governor results. D-R error = poll margin minus actual margin. Latest 3 eligible same-state gubernatorial errors weighted 0.5/0.3/0.2, normalized over observed cycles. No federal-election inputs, no future election results.",
-  "caveats": "Nonrandom 2014–22 sourced cohort, different candidates and survey sources; sparse states with only one prior election have fragile corrections. Single stale surveys (Aug 2022 South Carolina) are displayed but excluded from calibration and scoring. RCP-only target subset scored separately. No calibrated win chances or exact retrospective recreation of 2026.",
+  "method": "Only earlier state governor polls vs actual governor results. D-R error = poll margin minus actual margin. Latest 3 eligible same-state gubernatorial errors weighted 0.5/0.3/0.2, normalized over observed cycles. Includes 2014/2018/2020/2022/2024 governor results as available. No federal-election inputs, no future election results.",
+  "caveats": "Nonrandom sourced cohort, different candidates and survey sources; sparse states with only one prior election have fragile corrections. Single stale surveys excluded from calibration and scoring. RCP-only target subset scored separately. No calibrated win chances or exact retrospective recreation of 2026.",
   "summary": {
-    "observed": 39,
-    "eligible": 19,
+    "observed": 44,
+    "eligible": 24,
     "notBacktestable": 20,
-    "n": 19,
-    "rawMAE": 3.529,
-    "adjustedMAE": 4.557,
-    "rawRMSE": 4.269,
-    "adjustedRMSE": 5.491,
-    "rawWinners": 17,
-    "adjustedWinners": 16
+    "n": 24,
+    "rawMAE": 4.194,
+    "adjustedMAE": 4.64,
+    "rawRMSE": 5.158,
+    "adjustedRMSE": 5.526,
+    "rawWinners": 22,
+    "adjustedWinners": 21
   },
   "preferredRCP": {
-    "n": 11,
-    "rawMAE": 3.309,
-    "adjustedMAE": 4.315,
-    "rawRMSE": 4.265,
-    "adjustedRMSE": 5.288,
-    "rawWinners": 10,
-    "adjustedWinners": 9
+    "n": 13,
+    "rawMAE": 3.442,
+    "adjustedMAE": 4.586,
+    "rawRMSE": 4.378,
+    "adjustedRMSE": 5.445,
+    "rawWinners": 12,
+    "adjustedWinners": 11
   },
   "byYear": {
     "2014": {
@@ -35,7 +35,7 @@
       "adjustedWinners": 0
     },
     "2018": {
-      "observed": 11,
+      "observed": 13,
       "n": 8,
       "rawMAE": 3.362,
       "adjustedMAE": 5.162,
@@ -44,15 +44,35 @@
       "rawWinners": 6,
       "adjustedWinners": 6
     },
+    "2020": {
+      "observed": 1,
+      "n": 1,
+      "rawMAE": 7.8,
+      "adjustedMAE": 4.8,
+      "rawRMSE": 7.8,
+      "adjustedRMSE": 4.8,
+      "rawWinners": 1,
+      "adjustedWinners": 1
+    },
     "2022": {
       "observed": 19,
-      "n": 11,
-      "rawMAE": 3.65,
-      "adjustedMAE": 4.116,
-      "rawRMSE": 4.495,
-      "adjustedRMSE": 5.155,
-      "rawWinners": 11,
-      "adjustedWinners": 10
+      "n": 13,
+      "rawMAE": 3.578,
+      "adjustedMAE": 4.071,
+      "rawRMSE": 4.369,
+      "adjustedRMSE": 5.178,
+      "rawWinners": 13,
+      "adjustedWinners": 12
+    },
+    "2024": {
+      "observed": 2,
+      "n": 2,
+      "rawMAE": 9.72,
+      "adjustedMAE": 6.169,
+      "rawRMSE": 10.138,
+      "adjustedRMSE": 6.353,
+      "rawWinners": 2,
+      "adjustedWinners": 2
     }
   },
   "records": [
@@ -439,6 +459,25 @@
       "pastOnly": true
     },
     {
+      "state": "NH",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": -4,
+      "actualMargin": -7,
+      "pollType": "RCP average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+      "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+      "note": "RCP final average Sununu R50–Kelly D46, actual Sununu R52.8–D45.8.",
+      "error": 3,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 3,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "eligible": false,
+      "pastOnly": true
+    },
+    {
       "state": "NY",
       "year": 2018,
       "office": "Governor",
@@ -535,6 +574,57 @@
           "url": "https://www.realclearpolling.com/polls/governor/general/2014/texas/abbott-vs-davis",
           "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2014/texas/abbott-vs-davis",
           "note": "Final published D–R poll margin and general-election result on the same archived page."
+        }
+      ],
+      "eligible": true,
+      "pastOnly": true
+    },
+    {
+      "state": "VT",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": -10,
+      "actualMargin": -15,
+      "pollType": "single late poll",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2018/vermont/scott-vs-hallquist",
+      "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2018/vermont/scott-vs-hallquist",
+      "note": "Latest Gravis (Oct30–Nov1) Scott R49 Hallquist D39; actual R55.4 D40.4.",
+      "error": 5,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 5,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "eligible": false,
+      "pastOnly": true
+    },
+    {
+      "state": "NH",
+      "year": 2020,
+      "office": "Governor",
+      "pollMargin": -24,
+      "actualMargin": -31.8,
+      "pollType": "three-poll average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2020/new-hampshire/sununu-vs-feltes",
+      "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2020/new-hampshire/sununu-vs-feltes",
+      "note": "Custom unweighted late three-distinct-pollster average: St Anselm R+25, UNH R+24, UMass Lowell R+23. Not a published RCP average; actual R+31.8.",
+      "error": 7.8,
+      "correction": 3,
+      "adjustedMargin": -27,
+      "rawAbsError": 7.8,
+      "adjustedAbsError": 4.8,
+      "evidence": [
+        {
+          "year": 2018,
+          "office": "Governor",
+          "poll": -4,
+          "actual": -7,
+          "error": 3,
+          "weight": 1,
+          "pollType": "RCP average",
+          "url": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+          "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+          "note": "RCP final average Sununu R50–Kelly D46, actual Sununu R52.8–D45.8."
         }
       ],
       "eligible": true,
@@ -917,12 +1007,37 @@
       "resultUrl": "https://www.realclearpolitics.com/epolls/2022/governor/NewHampshire.html",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": -1.5,
-      "correction": null,
-      "adjustedMargin": null,
+      "correction": 6,
+      "adjustedMargin": -23,
       "rawAbsError": 1.5,
-      "adjustedAbsError": null,
-      "evidence": [],
-      "eligible": false,
+      "adjustedAbsError": 7.5,
+      "evidence": [
+        {
+          "year": 2020,
+          "office": "Governor",
+          "poll": -24,
+          "actual": -31.8,
+          "error": 7.8,
+          "weight": 0.625,
+          "pollType": "three-poll average",
+          "url": "https://www.realclearpolling.com/polls/governor/general/2020/new-hampshire/sununu-vs-feltes",
+          "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2020/new-hampshire/sununu-vs-feltes",
+          "note": "Custom unweighted late three-distinct-pollster average: St Anselm R+25, UNH R+24, UMass Lowell R+23. Not a published RCP average; actual R+31.8."
+        },
+        {
+          "year": 2018,
+          "office": "Governor",
+          "poll": -4,
+          "actual": -7,
+          "error": 3,
+          "weight": 0.375,
+          "pollType": "RCP average",
+          "url": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+          "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+          "note": "RCP final average Sununu R50–Kelly D46, actual Sununu R52.8–D45.8."
+        }
+      ],
+      "eligible": true,
       "pastOnly": true
     },
     {
@@ -1126,12 +1241,25 @@
       "resultUrl": "https://outside.vermont.gov/dept/sos/Elections_Division/election_info_resources/elections_results_data/2022_general_election_official_report_canvassing_committee_vermont_statewide_public_questions.pdf",
       "note": "Data for Progress Nov 1 2022, D24 R65.",
       "error": 4.86,
-      "correction": null,
-      "adjustedMargin": null,
+      "correction": 5,
+      "adjustedMargin": -46,
       "rawAbsError": 4.86,
-      "adjustedAbsError": null,
-      "evidence": [],
-      "eligible": false,
+      "adjustedAbsError": 0.14,
+      "evidence": [
+        {
+          "year": 2018,
+          "office": "Governor",
+          "poll": -10,
+          "actual": -15,
+          "error": 5,
+          "weight": 1,
+          "pollType": "single late poll",
+          "url": "https://www.realclearpolling.com/polls/governor/general/2018/vermont/scott-vs-hallquist",
+          "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2018/vermont/scott-vs-hallquist",
+          "note": "Latest Gravis (Oct30–Nov1) Scott R49 Hallquist D39; actual R55.4 D40.4."
+        }
+      ],
+      "eligible": true,
       "pastOnly": true
     },
     {
@@ -1151,6 +1279,106 @@
       "adjustedAbsError": null,
       "evidence": [],
       "eligible": false,
+      "pastOnly": true
+    },
+    {
+      "state": "NH",
+      "year": 2024,
+      "office": "Governor",
+      "pollMargin": -2.5,
+      "actualMargin": -9.34,
+      "pollType": "RCP average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2024/new-hampshire/ayotte-vs-craig",
+      "resultUrl": "https://ballotpedia.org/New_Hampshire_gubernatorial_election,_2024",
+      "note": "RCP final Ayotte R46.8 Craig D44.3; final vote shares (436,122 R − 360,149 D) / 813,497 total = R+9.34.",
+      "error": 6.84,
+      "correction": 2.19,
+      "adjustedMargin": -4.69,
+      "rawAbsError": 6.84,
+      "adjustedAbsError": 4.65,
+      "evidence": [
+        {
+          "year": 2022,
+          "office": "Governor",
+          "poll": -17,
+          "actual": -15.5,
+          "error": -1.5,
+          "weight": 0.5,
+          "pollType": "RCP average",
+          "url": "https://www.realclearpolitics.com/epolls/2022/governor/NewHampshire.html",
+          "resultUrl": "https://www.realclearpolitics.com/epolls/2022/governor/NewHampshire.html",
+          "note": "Final published D–R poll margin and general-election result on the same archived page."
+        },
+        {
+          "year": 2020,
+          "office": "Governor",
+          "poll": -24,
+          "actual": -31.8,
+          "error": 7.8,
+          "weight": 0.3,
+          "pollType": "three-poll average",
+          "url": "https://www.realclearpolling.com/polls/governor/general/2020/new-hampshire/sununu-vs-feltes",
+          "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2020/new-hampshire/sununu-vs-feltes",
+          "note": "Custom unweighted late three-distinct-pollster average: St Anselm R+25, UNH R+24, UMass Lowell R+23. Not a published RCP average; actual R+31.8."
+        },
+        {
+          "year": 2018,
+          "office": "Governor",
+          "poll": -4,
+          "actual": -7,
+          "error": 3,
+          "weight": 0.2,
+          "pollType": "RCP average",
+          "url": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+          "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2018/new-hampshire/sununu-vs-kelly",
+          "note": "RCP final average Sununu R50–Kelly D46, actual Sununu R52.8–D45.8."
+        }
+      ],
+      "eligible": true,
+      "pastOnly": true
+    },
+    {
+      "state": "VT",
+      "year": 2024,
+      "office": "Governor",
+      "pollMargin": -39,
+      "actualMargin": -51.6,
+      "pollType": "single late poll",
+      "sourceUrl": "https://www.270towin.com/2024-governor-polls/vermont",
+      "resultUrl": "https://en.wikipedia.org/wiki/2024_Vermont_gubernatorial_election",
+      "note": "Late UNH Oct29–Nov2: Scott R65 Charlestin D26; final official-sourced candidate percentages Scott R73.43 Charlestin D21.83. Not an RCP average.",
+      "error": 12.6,
+      "correction": 4.912,
+      "adjustedMargin": -43.912,
+      "rawAbsError": 12.6,
+      "adjustedAbsError": 7.688,
+      "evidence": [
+        {
+          "year": 2022,
+          "office": "Governor",
+          "poll": -41,
+          "actual": -45.86,
+          "error": 4.86,
+          "weight": 0.625,
+          "pollType": "single late poll",
+          "url": "https://www.270towin.com/2022-governor-polls/vermont/",
+          "resultUrl": "https://outside.vermont.gov/dept/sos/Elections_Division/election_info_resources/elections_results_data/2022_general_election_official_report_canvassing_committee_vermont_statewide_public_questions.pdf",
+          "note": "Data for Progress Nov 1 2022, D24 R65."
+        },
+        {
+          "year": 2018,
+          "office": "Governor",
+          "poll": -10,
+          "actual": -15,
+          "error": 5,
+          "weight": 0.375,
+          "pollType": "single late poll",
+          "url": "https://www.realclearpolling.com/polls/governor/general/2018/vermont/scott-vs-hallquist",
+          "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2018/vermont/scott-vs-hallquist",
+          "note": "Latest Gravis (Oct30–Nov1) Scott R49 Hallquist D39; actual R55.4 D40.4."
+        }
+      ],
+      "eligible": true,
       "pastOnly": true
     }
   ]
