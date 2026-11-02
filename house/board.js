@@ -9,9 +9,8 @@ const margin=m=>!Number.isFinite(m)?'No estimate':Math.abs(m)<.05?'Even':(m>0?'D
 const rank=r=>{const x=pick(r);return x?Math.abs(x.marginD):100};
 function draw(){
  const q=$('houseSearch').value.trim().toLowerCase(),code=$('houseState').value,cat=$('houseRating').value;
- let arr=seats.filter(r=>(code==='all'||r.code===code)&&(!q||[r.id,r.state,r.incumbent].join(' ').toLowerCase().includes(q))&&(cat==='all'||(cat==='rated'&&r.rating)||cat==='Tossup'?(false):true));
  // Respect existing advanced categories, now filtering the visible model grade.
- arr=seats.filter(r=>{
+ let arr=seats.filter(r=>{
   const model=pick(r),rating=model?.modelRating||r.rating||'';
   const inState=code==='all'||r.code===code,match=!q||[r.id,r.state,r.incumbent,model?.modelRating].join(' ').toLowerCase().includes(q);
   const type=cat==='all'||(cat==='rated'&&!!r.rating)||(cat==='Tossup'&&/tossup/i.test(rating))||(cat==='Lean'&&/^(?:Lean|Tilt)/.test(rating))||(cat==='Likely'&&rating.startsWith('Likely'));
