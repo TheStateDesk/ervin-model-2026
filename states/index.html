@@ -4,7 +4,7 @@
 <meta name="description" content="The Ervin Model State Desk: open an entire state election picture, with statewide races, every House district, county maps and polling in one place.">
 <title>The State Desk | Ervin Model</title>
 <script src="./theme.js?v=20261102-theme-fix-3"></script>
-<link rel="stylesheet" href="./editorial.css?v=20261102-theme-map-fix-3"><link rel="stylesheet" href="./control.css?v=20261102-senate-outlook-1">
+<link rel="stylesheet" href="./editorial.css?v=20261102-theme-map-fix-3"><link rel="stylesheet" href="../scripts/home-power.css?v=20261102-desk-power-1"><link rel="stylesheet" href="./control.css?v=20261102-senate-outlook-1">
 </head><body class="ed-body">
 <div class="ed-topline"></div>
 <header class="ed-head"><div class="ed-head-inner"><a class="ed-brand" href="./"><b>E</b> ERVIN MODEL</a>
@@ -45,6 +45,17 @@
  <p class="desk-control__evidence" id="controlStatus">Loading Senate model inputs…</p>
  <p class="desk-control__evidence">The simulation is not statistically calibrated; its 10th–90th percentiles are scenario bands, not guaranteed prediction intervals. Other Senate contests are assumed unchanged. <a href="../research/election-night-historical-moe-2026.json">Historical forecasting-error evidence</a>.</p>
 </section>
+<section id="balanceOfPower" class="power-panel desk-balance" aria-labelledby="powerTitle">
+ <div class="power-heading"><div>
+  <div class="ed-kicker">THE NATIONAL BOARD / 2026 FORECAST</div>
+  <h2 id="powerTitle">Projected balance of power</h2>
+  <p>How the model currently allocates the House, Senate and governorships. Forecasts only—not results or race calls.</p>
+ </div><span class="power-asof">SNAPSHOT · NOVEMBER 2, 2026</span></div>
+ <div class="power-legend"><span><i class="power-swatch power-swatch-d"></i>Democratic / D-aligned</span>
+ <span><i class="power-swatch power-swatch-r"></i>Republican</span><span><i class="power-swatch power-swatch-t"></i>Toss-up / unprojected</span></div>
+ <div id="powerCards" class="power-grid" aria-live="polite"><p>Loading seat forecast...</p></div>
+ <p class="power-method">435 House districts · 100 senators · 50 governorships. Toss-ups are not assigned to either party; unmodeled Senate races are assumed to retain their current alignment. <a href="../election-night/">See separately attributed election-night results</a>.</p>
+</section>
 <div class="ed-band"><label for="stateSearch" class="ed-cap">Find your state <input id="stateSearch" class="ed-control" type="search" placeholder="Type Michigan, Texas, Maine…" style="width:min(370px,82vw);margin-left:10px" autocomplete="off"></label><label class="ed-cap" for="quickSelect">or choose <select class="ed-control" id="quickSelect" style="min-width:150px;margin-left:5px"><option value="">Select a state</option></select></label></div>
 <div class="ed-columns" id="nationMap">
 <section class="ed-card"><div class="ed-kicker">NATIONWIDE / TAP ANY STATE TO OPEN</div><h2 style="margin:7px 0 13px">The 50-state election map</h2>
@@ -67,4 +78,4 @@
 <div class="ed-card"><h2>What is not inferred</h2><p class="ed-mini">The existence of a House district on a map does not certify the applicable 2026 boundary. A county scenario is not independently collected county polling. No nationwide real-time turnout estimate, calibrated House win probability, or unverified race call is silently manufactured.</p></div>
 </section>
 <footer class="ed-footer"><span>ERVIN MODEL · 2026 independent political analysis</span><div class="ed-link-list"><a href="./">The State Desk</a><a href="../house/">House forecasts</a><a href="../governors/">Governor forecasts</a></div></footer></main>
-<script src="../scripts/senate_control.js?v=20261102-desk-1"></script><script src="../scripts/home-control.js?v=20261102-desk-1"></script><script src="../scripts/us-geography.js"></script><script src="../scripts/governor-backtest.js?v=20261102-no2014-1"></script><script src="../scripts/statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2"></script><script defer src="./app.js?v=20261102-power-oh-pollrefresh-v2"></script></body></html>
+<script src="../scripts/senate_control.js?v=20261102-desk-1"></script><script src="../scripts/home-control.js?v=20261102-desk-1"></script><script src="../election-night/power.js?v=20261102-desk-power-1"></script><script src="../scripts/us-geography.js"></script><script src="../scripts/governor-backtest.js?v=20261102-no2014-1"></script><script src="../scripts/statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2"></script><script defer src="./app.js?v=20261102-power-oh-pollrefresh-v2"></script><script defer src="../scripts/home-power.js?v=20261102-desk-power-1"></script></body></html>
