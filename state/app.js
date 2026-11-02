@@ -32,8 +32,9 @@ function renderLead(){
  const n=r=>r===1?'One district':fmt(r)+' districts';
  $('heroHouse').textContent=fmt(stateHouse.length);
  $('heroHouseSub').textContent=stateHouse.filter(r=>r.rating).length+' published competitiveness ratings indexed';
- $('heroSenate').textContent=sen?margin(Number(sen.adjustedMargin)):'No modeled race';
- $('heroSenateSub').textContent=sen?'Original Ervin adjustment · '+fmt(sen.publisherInputs)+' publisher inputs':'No Senate race in the 17-state model';
+ const senateIndex=coverage.senate?.states?.[code];
+ $('heroSenate').textContent=sen?margin(Number(sen.adjustedMargin)):senateIndex?fmt(senateIndex.count)+' polls indexed':'No modeled race';
+ $('heroSenateSub').textContent=sen?'Original Ervin adjustment · '+fmt(sen.publisherInputs)+' publisher inputs':senateIndex?'Public Senate poll index · not an Ervin prediction':'No Senate race in the 17-state model';
  $('heroGovernor').textContent=gov?.poll&&Number.isFinite(gov.poll.margin)?margin(gov.poll.margin):gov?'No average':'No election';
  $('heroGovSub').textContent=gov?'Governor publisher snapshot; not an Ervin projection':'No governor contest in the 2026 registry';
  $('houseCoverage').textContent=n(stateHouse.length)+' · '+stateName(code);
