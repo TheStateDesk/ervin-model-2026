@@ -88,9 +88,9 @@ def type_ok(key,row):
   if d in (key,code+"-"+str(int(district)),str(int(district)),district):return True
   # Six states elect an at-large Representative, often named "US House"
   # without a numerical district in the API.
-  if district=="01" and code in ("AK","DE","ND","SD","VT","WY") and
-     ("us house" in blob or "congress" in blob) and
-     (d in ("",code+"-AL",code+"-AT-LARGE","AT-LARGE","AL","AT LARGE",code+"-01")):
+  if (district=="01" and code in ("AK","DE","ND","SD","VT","WY")
+      and ("us house" in blob or "congress" in blob)
+      and d in ("",code+"-AL",code+"-AT-LARGE","AT-LARGE","AL","AT LARGE",code+"-01")):
    return True
   # e.g. Michigan US House 7, but never Michigan State House 7
   return bool(re.search(r"\bus[\s.]*house\s*(?:district\s*)?0*"+str(int(district))+r"\b",blob))
