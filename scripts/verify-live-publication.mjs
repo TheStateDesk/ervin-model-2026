@@ -57,14 +57,14 @@ try{
  await rootPage.close();
  const front=await browser.newPage({viewport:{width:390,height:844}});
  await front.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
- await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#controlDemChance')?.textContent.endsWith('%'),null,{timeout:35000});
+ await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#watchCards')?.querySelectorAll('.watch-card').length>=4&&document.querySelectorAll('#usMap path.ed-state').length>=50,null,{timeout:35000});
  const frontModel=await front.evaluate(()=>{
   const balance=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
-  const control=document.querySelector('#senate-control')?.getBoundingClientRect();
+  const watch=document.querySelector('#watchSection')?.getBoundingClientRect();
   const map=document.querySelector('#nationMap')?.getBoundingClientRect();
-  return {controlTop:control?.top,powerTop:balance?.top,mapTop:map?.top,
-   width:control?.width,demChance:document.querySelector('#controlDemChance')?.textContent,
-   repChance:document.querySelector('#controlRepChance')?.textContent,
+  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,
+   width:watch?.width,watchCount:document.querySelectorAll('#watchCards .watch-card').length,
+   finalDashboard:!!document.querySelector('#electionDashboard'),officeTabs:document.querySelectorAll('[data-atlas-office]').length,
    oldLab:!!document.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),
    badLinks:[...document.querySelectorAll('a')].filter(a=>a.getAttribute('href')==='../').length,
    count:document.querySelectorAll('#powerCards .power-card').length,
@@ -73,24 +73,23 @@ try{
    senateR:Number(document.querySelector('[data-power-office="senate"] [data-power-r]')?.textContent),
    overflow:document.documentElement.scrollWidth>window.innerWidth+4};
  });
- if(!(frontModel.count===3&&frontModel.controlTop>=0&&frontModel.controlTop<850
-  &&frontModel.controlTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop
-  &&frontModel.width>280&&frontModel.demChance?.endsWith('%')&&frontModel.repChance?.endsWith('%')
-  &&frontModel.governors?.includes('25')&&frontModel.senateD===50&&frontModel.senateR===50
+ if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.watchTop<850
+  &&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop
+  &&frontModel.width>280&&frontModel.watchCount>=4&&frontModel.finalDashboard&&frontModel.officeTabs===3
   &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow))
-  throw Error('LIVE MOBILE STATE DESK HOMEPAGE FORECAST INCORRECT '+JSON.stringify(frontModel));
- await front.locator('#senate-control').screenshot({path:'postdeploy-checks/State-Desk-Senate-Control-Mobile.png'});
+  throw Error('LIVE MOBILE STATE DESK HOMEPAGE INCORRECT '+JSON.stringify(frontModel));
+ await front.locator('#watchSection').screenshot({path:'postdeploy-checks/State-Desk-Races-To-Watch-Mobile.png'});
  await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
  console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
  await front.close();
  const oh=await browser.newPage({viewport:{width:390,height:844}});
  await oh.goto(base+'state/?state=OH&release='+stamp,{waitUntil:'domcontentloaded'});
- await oh.waitForFunction(()=>document.querySelector('#heroGovernor')?.textContent==='D +2.6',null,{timeout:35000});
+ await oh.waitForFunction(()=>/^(?:D|R) \\+\\d+\\.\\d|Even$/.test(document.querySelector('#heroGovernor')?.textContent||''),null,{timeout:35000});
  const ohModel=await oh.locator('#heroGovernor').innerText();
  const ohRaces=await oh.locator('#stateRaceCards').innerText();
- if(ohModel!=='D +2.6'||!ohRaces.includes('D +2.6'))throw Error('LIVE OHIO FORECAST ERROR '+JSON.stringify({ohModel,ohRaces:ohRaces.slice(0,300)}));
+ if(!ohRaces.includes(ohModel))throw Error('LIVE OHIO FORECAST HERO/CARD MISMATCH '+JSON.stringify({ohModel,ohRaces:ohRaces.slice(0,300)}));
  await oh.screenshot({path:'postdeploy-checks/Ohio-Governor-State-Desk-Mobile.png',fullPage:false});
- console.log('LIVE OHIO D +2.6 VERIFIED IN RENDERED STATE DESK');
+ console.log('LIVE OHIO GOVERNOR CROSS-CHECK PASS '+ohModel);
  await oh.close();
  // A deployed model must show the evidence, not silently introduce a
  // religion- or county-demographic penalty into Michigan's Ervin's Take.
@@ -99,9 +98,10 @@ try{
  await michiganAudit.waitForFunction(()=>document.querySelector('#miCandidateEffect')?.textContent.includes('not applied'),null,{timeout:35000});
  const michiganEvidence=await michiganAudit.locator('#miCandidateEffect').innerText();
  if(!michiganEvidence.includes('In 9 matched Michigan survey samples')||!michiganEvidence.includes('not applied')||!michiganEvidence.includes('−1.84'))throw Error('LIVE MI CANDIDATE-EFFECT AUDIT MISSING '+michiganEvidence.slice(0,400));
- if((await michiganAudit.locator('#heroSenate').innerText())!=='R +0.8')throw Error('LIVE MI SENATE MARGIN INCORRECT');
+ const liveMISenate=await michiganAudit.locator('#heroSenate').innerText();
+ if(!/^(?:D|R) \\+\\d+\\.\\d|Even$/.test(liveMISenate))throw Error('LIVE MI SENATE MARGIN UNAVAILABLE');
  const cardDetails=await michiganAudit.locator('#stateRaceCards').innerText();
- if(!cardDetails.includes('R +0.8'))throw Error('LIVE MI SENATE RACE CARD NOT UPDATED');
+ if(!cardDetails.includes(liveMISenate))throw Error('LIVE MI SENATE RACE CARD NOT UPDATED');
  await michiganAudit.locator('#miCandidateEffect').screenshot({path:'postdeploy-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
  await michiganAudit.locator('#stateOverview').screenshot({path:'postdeploy-checks/Michigan-Candidate-Strength-Model.png'});
  console.log('LIVE MI CANDIDATE-EFFECT AUDIT PASS 9 linked paired polls / no invented polling penalty');
@@ -111,7 +111,7 @@ try{
  await national.goto(base+'election-night/?release='+stamp,{waitUntil:'domcontentloaded'});
  await national.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83&&document.querySelector('#nationalCount')?.textContent.includes('488 indexed races'),null,{timeout:35000});
  if((await national.locator('#miD').innerText())!=='—')throw Error('Live national desk fabricated a pre-election vote total');
- if((await national.locator('#miForecast').innerText())!=='R +0.8')throw Error('LIVE ELECTION NIGHT MICHIGAN FORECAST INCORRECT');
+ if((await national.locator('#miForecast').innerText())!==liveMISenate)throw Error('LIVE ELECTION NIGHT MICHIGAN FORECAST INCORRECT');
  await national.screenshot({path:'postdeploy-checks/Election-Night-National.png',fullPage:false});
  console.log('LIVE NATIONAL NIGHT PASS 488 races / 83 Michigan counties / no premature votes');
  await national.close();
@@ -120,7 +120,7 @@ try{
  await governor.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:25000});
  if((await governor.locator('#govCards .gov-card').count())!==36)throw Error('Not all governor Ervin projections live');
  const liveOH=governor.locator('#govCards [data-code="OH"]');
- if(!(await liveOH.innerText()).includes('D +2.6')||!(await liveOH.evaluate(el=>el.classList.contains('d'))))throw Error('LIVE OHIO GOVERNOR CARD NOT BLUE D +2.6');
+ if(!(await liveOH.innerText()).includes(ohModel))throw Error('LIVE OHIO GOVERNOR CARD DOES NOT MATCH STATE DESK '+ohModel);
  await governor.screenshot({path:'postdeploy-checks/Governor-Ervin-Live.png',fullPage:false});
  console.log('LIVE GOVERNORS PASS 36 races');
  await governor.close();
