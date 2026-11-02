@@ -9,6 +9,13 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"civicapi"
 DATE="2026-11-03"
 CLOSE=dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc)
+# Last applicable polling-place closing time for each piloted race (UTC).
+TARGET_CLOSE={"AL-07":dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc),
+ "MI-07":dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc),
+ "TX-18":dt.datetime(2026,11,4,2,tzinfo=dt.timezone.utc),
+ "MI-SENATE":dt.datetime(2026,11,4,2,tzinfo=dt.timezone.utc),
+ "ME-SENATE":dt.datetime(2026,11,4,1,tzinfo=dt.timezone.utc),
+ "TX-GOVERNOR":dt.datetime(2026,11,4,2,tzinfo=dt.timezone.utc)}
 TARGETS={
  "AL-07":("Alabama","house",7),
  "MI-07":("Michigan","house",7),
@@ -52,10 +59,12 @@ def match(key,record):
  date=str(record.get("date") or record.get("election_date") or record.get("electionDate") or "")
  if date and not date.startswith(DATE): return False
  if office=="house":
-  if not ("house" in value or "congress" in value): return False
+  if "us house" not in value and "u.s. house" not in value and "congress" not in value:return False
   pattern=r"\b(?:house|district|congress(?:ional)?)\s*(?:district\s*)?0*"+str(num)+r"\b"
   return bool(re.search(pattern,value))
- return office in value
+ if office=="senate":return "us senate" in value or "u.s. senate" in value
+ if office=="governor":return "governor" in value and "lieutenant" not in value
+ return False
 def normalize(key,search,detail,current):
  if not (isinstance(detail,dict) and match(key,search)): return None
  if not match(key,{**search,**{k:v for k,v in detail.items() if k in ("name","title","race_name","election_name","office","state","district")}}): return None
@@ -65,7 +74,7 @@ def normalize(key,search,detail,current):
  types=" ".join(str(x.get(k) or "") for x in (search,detail) for k in ("type","election_type")).lower()
  if "general" not in types or any(w in types for w in ("primary","special","runoff")): return None
  stamp=next((parse_date(detail.get(k)) for k in ("updated_at","updatedAt","last_updated","lastUpdated","as_of","asOf") if parse_date(detail.get(k))),None)
- if not stamp or stamp<CLOSE or stamp>current+dt.timedelta(minutes=5) or current<CLOSE: return None
+ if not stamp or stamp<TARGET_CLOSE[key] or stamp>current+dt.timedelta(minutes=5) or current<TARGET_CLOSE[key]: return None
  race_id=search.get("id",search.get("race_id",search.get("raceId")))
  if not re.fullmatch(r"\d{1,12}",str(race_id)): return None
  people=detail.get("candidates")
