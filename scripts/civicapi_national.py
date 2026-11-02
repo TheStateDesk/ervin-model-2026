@@ -119,7 +119,8 @@ def candidates(detail):
   seen.add(name.lower())
   p=str(row.get("party") or "").lower()
   p="D" if p in ("d","dem","democrat","democratic") else "R" if p in ("r","rep","republican") else "O"
-  out.append({"name":name,"party":p,"votes":val})
+  pic=next((row[k] for k in ("photo","photo_url","portrait_url","image_url","image","avatar") if safeurl(row.get(k))),None)
+  out.append({"name":name,"party":p,"votes":val,**({"photo":pic} if pic else {})})
  if sum(c["votes"] for c in out)==0:return None
  return out
 def safeurl(x):
