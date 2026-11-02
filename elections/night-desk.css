@@ -101,3 +101,9 @@ html:not(.light) body #countyMap .geo-district{fill:#497898;stroke:#193d59}
   .er-map-actions input{width:min(180px,44vw)}
   #erCountyFind{font-size:16px}
 }
+
+/* Map repair controls: keep the retry button usable on narrow displays. */
+.er-map-buttons{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.er-map-buttons button{min-height:40px}
+.er-map-buttons button:disabled{opacity:.6;cursor:progress}
+@media(max-width:760px){.er-map-buttons{width:100%}.er-map-buttons button{flex:1 1 130px;max-width:100%}}
