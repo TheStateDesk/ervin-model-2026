@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let houseVerified={races:{}};let houseZoom=1,houseCenter={x:450,y:290};
+let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let houseZoom=1,houseCenter={x:450,y:290};
 let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -205,10 +205,12 @@ function renderPolls(){
  const localSenate=senatePolls[code]||[],localGov=govPolls[code]||[],gov=getGov(),verified=siena.races?.[code];
  const indexedSen=coverage.senate?.states?.[code],indexedGov=coverage.governor?.states?.[code];
  const sourceNotice=(index,url,type)=>index?'<div class="ed-coverage ed-index"><div><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(type)+' polling index</a></strong><small>'+fmt(index.count)+' published poll(s) indexed by the publisher. Summary: '+esc(index.summary)+' · does not replace individual polls or Ervin forecast.</small></div><span class="ed-pill">Index</span></div>':'';
- let senateContent=verified?.senate?'<div class="ed-cap">Newly verified primary-source Senate release · Nov 1</div>'+listPolls([verified.senate],null,1):'';
+ let senateContent=statewideLatest.senate?.[code]?.length?'<div class="ed-cap">Senate · November 2 publisher listings</div>'+listPolls(statewideLatest.senate[code],null,7):'';
+  senateContent+=verified?.senate?'<div class="ed-cap">Primary-source Senate release · Nov 1</div>'+listPolls([verified.senate],null,1):'';
  senateContent+=localSenate.length?'<div class="ed-cap">Senate · earlier indexed individual surveys ('+fmt(localSenate.length)+')</div>'+listPolls(localSenate,null,14):'';
  senateContent+=sourceNotice(indexedSen,coverage.senate?.source,'Senate');
- let govContent=verified?.governor?'<div class="ed-cap" style="margin-top:14px">Newly verified primary-source governor release · Nov 1</div>'+listPolls([verified.governor],null,1):'';
+ let govContent=statewideLatest.governor?.[code]?.length?'<div class="ed-cap" style="margin-top:14px">Governor · November 2 publisher listings</div>'+listPolls(statewideLatest.governor[code],null,7):'';
+  govContent+=verified?.governor?'<div class="ed-cap" style="margin-top:14px">Primary-source governor release · Nov 1</div>'+listPolls([verified.governor],null,1):'';
  govContent+=gov?'<div class="ed-cap" style="margin-top:14px">Governor · published average</div><div class="ed-coverage"><div><strong><a href="'+safeURL(gov.poll?.url)+'" target="_blank" rel="noopener noreferrer">Published statewide governor average</a></strong><small>'+esc(gov.poll?.count||'Unknown')+' underlying surveys; methodology belongs to publisher</small></div><strong>'+esc(margin(gov.poll?.margin))+'</strong></div>':'';
  if(localGov.length)govContent+='<div class="ed-cap" style="margin-top:14px">Governor · individual surveys ('+fmt(localGov.length)+')</div>'+listPolls(localGov,null,14);
  govContent+=sourceNotice(indexedGov,coverage.governor?.source,'Governor');
@@ -282,12 +284,13 @@ async function start(){
    fetchJSON('../house/research-polls.json'),
    fetchJSON('../polling/coverage-2026-11-02.json'),
    fetchJSON('../polling/primary-seven-states-2026-11-01.json'),
-    fetchJSON('../polling/house-verified-2026-11-02.json')];
+    fetchJSON('../polling/house-verified-2026-11-02.json'),
+    fetchJSON('../polling/latest-statewide-2026-11-02.json')];
   const updated=Promise.allSettled(optionalFiles).then(results=>{
    const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
    baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
-   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;
+   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;
    pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
    renderLead();renderOverview();renderPolls();
    if(countyShape){buildScenario();drawCounties();}
