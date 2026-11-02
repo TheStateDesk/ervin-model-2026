@@ -39,7 +39,26 @@ for(const c of ['Alcona','Leelanau','Muskegon','Houghton','Wayne']){
  assert.deepEqual(get(land,c).geometry,get(shore,c).geometry,'Michigan county geography must be clipped at shore '+c);
  assert(/^\d{5}$/.test(String(get(land,c).id)),'Lost FIPS on shoreline '+c);
 }
+// Source-ledger audit: every modeled Senate race has an inspectable original correction,
+ // all House districts have a matching line-item, and each archived governor
+ // polling/actual pair is linked to source references.
+const senateArchive=json('research/original-ervin-senate-calibration-2026-11-02.json'),
+ senateForecast=json('counties-watch/forecast-baselines.json'),
+ houseRegister=json('house/data.json'),governorRegister=json('governors/data.json');
+assert.equal(Object.keys(senateForecast.states).length,Object.keys(senateArchive.senateStates).length);
+for(const [code,row] of Object.entries(senateForecast.states)){
+ const h=senateArchive.senateStates[code];
+ assert(h&&h.events.length,'No original Senate state-error history for '+code);
+ assert(h.events.every(x=>['Senate','President'].includes(x.office)&&/^https:\\/\\//.test(x.url)), 'Missing federal polling source '+code);
+}
+assert.equal(houseRegister.seats.length,435);
+for(const district of houseRegister.seats)assert(house.races[district.id], 'Missing House model source row '+district.id);
+assert.equal(governorRegister.races.length,36);
+assert(govData.races.every(x=>/^https:\\/\\//.test(x.sourceUrl)&&/^https:\\/\\//.test(x.resultUrl)), 'Historical governor evidence must have two provenance URLs');
+const ledger=text('state/source-ledger.js');
+assert(ledger.includes('governorHistory')&&ledger.includes('senateHistory')&&ledger.includes('houseModel'),'Source ledger missing an office');
 const mapHTML=text('states/index.html'),mapJS=text('states/app.js'),stateHTML=text('state/index.html'),nightJS=text('state/county-night.js');
+assert(stateHTML.includes('id="stateSources"')&&stateHTML.includes('id="stateSourceLedger"')&&stateHTML.includes('source-ledger.js'),'State source ledger not present');
 assert(mapHTML.includes('id="stateMapTooltip"')&&mapHTML.includes('id="aggregateLegend"'),'State map aggregate/hover not installed');
 assert(mapJS.includes('D')&&mapJS.includes('R')&&mapJS.includes('T')&&mapJS.includes('populate()'),'Aggregate rating calculations missing');
 for(const id of ['countyNightMap','nightCountyRows','nightCountyDem','nightCountyRep','nightCountyCount','nightCountyFeedStatus'])assert(stateHTML.includes('id="'+id+'"'),'Missing per-state election-night UI '+id);
