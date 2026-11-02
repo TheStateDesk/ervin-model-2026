@@ -49,6 +49,11 @@ const OA={api:1,year:2026,office:'Senate',as_of:'2026-11-04T02:05:00Z',
 const od=engine.openAmerica(OA,'Senate',now);
 assert.equal(od['MI-SENATE']?.total,190,'Accept attributed source once polls close');
 const cid=engine.civic(make(),now);
+const civicPreferred=engine.preferCivic(cid,od);
+assert.equal(civicPreferred.races['MI-SENATE'].source,'CivicAPI (provider-verified schema)','Fresh Civic should be primary');
+const civicBehind=engine.civic(make('MI-SENATE','2026-11-04T02:03:00Z',60,60),now);
+const preferFallback=engine.preferCivic(civicBehind,od);
+assert.equal(preferFallback.races['MI-SENATE'].source,'Open America / state reporting mirror','CivicAPI with lower vote count must defer to verified newer provider');
 let merged=engine.reconcile([cid,od]);
 assert.equal(Object.keys(merged.races).length,1,'Do not double count overlapping result providers');
 assert.equal(merged.races['MI-SENATE'].total,190);
