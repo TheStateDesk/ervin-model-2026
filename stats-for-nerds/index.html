@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" class="light"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="canonical" href="https://geervin.github.io/ervin-model-2026/stats-for-nerds/">
+<meta name="description" content="Ervin Model election-night early signal laboratory: 14,000 scenario draws, balanced-return audit, and conditional Texas Kansas Iowa Senate estimates.">
+<title>Stats for Nerds | Ervin Model 2026</title>
+<script>try{if(localStorage.getItem('ervin-2026-appearance')==='dark')document.documentElement.classList.remove('light')}catch(e){}</script>
+<link rel="stylesheet" href="../states/editorial.css">
+<link rel="stylesheet" href="./style.css">
+</head><body class="ed-body">
+<div class="ed-topline"></div>
+<header class="ed-head"><div class="ed-head-inner"><a class="ed-brand" href="../states/"><b>E</b> ERVIN MODEL</a>
+<div class="ed-mast"><a href="./">Stats for Nerds</a><small>ELECTION NIGHT LAB · NOVEMBER 3, 2026</small></div>
+<div class="ed-utility"><a class="ed-btn outline" href="../election-night/">Election night</a><a class="ed-btn outline" href="../states/">All states</a></div></div>
+<nav class="ed-nav" aria-label="Primary navigation"><div class="ed-nav-inner">
+<a href="../states/">State Desk</a><a href="../election-night/">Election Night</a><a aria-current="page" href="./">Stats for Nerds</a>
+<a href="#signals">Early signals</a><a href="#model">Conditional forecasts</a><a href="#method">Methodology</a>
+</div></nav></header>
+<main class="ed-shell nerd-shell">
+<div class="ed-sectionline"><span class="ed-kicker">2026 MIDTERMS / EARLY RETURNS INTELLIGENCE</span><span id="runLabel">14,000 reproducible scenario draws</span></div>
+<h1 class="ed-headline">Stats for Nerds.</h1>
+<p class="ed-standfirst">Which early eastern-time returns might tell us something about the later Texas, Kansas and Iowa Senate contests? Watch the signals, inspect the ballot-composition safeguards, and compare the independent Ervin baseline against a strictly conditional what-if scenario.</p>
+<div class="nerd-status" id="sourceStatus" role="status">Loading Ervin baseline and source coverage…</div>
+<section class="nerd-metrics" aria-label="Lab summary">
+<div><small>Modeled scenarios</small><strong id="numSim">14,000</strong><span>Seeded, reproducible</span></div>
+<div><small>Signals monitored</small><strong id="numWatch">8</strong><span>Eastern-close shortlist</span></div>
+<div><small>Approved live inputs</small><strong id="numApproved">0</strong><span>Passed all audit gates</span></div>
+<div><small>Conditional sample health</small><strong id="sampleHealth">—</strong><span>Effective scenario count</span></div>
+</section>
+<section id="model" class="nerd-section">
+<div class="nerd-section-head"><div><span class="ed-kicker">LIVE CONDITIONAL SANDBOX</span><h2>What early signals would imply</h2></div><div class="nerd-actions"><label class="nerd-switch"><input type="checkbox" id="includeManual" checked> Include my reviewed what-if inputs</label><button type="button" class="nerd-button" id="clearManual">Clear what-if inputs</button></div></div>
+<p class="nerd-explain">The baseline is the existing Original Ervin forecast. The conditional estimate changes only when a source passes explicit composition and timing checks, or when you explicitly enter a <strong>separately labeled hypothetical</strong> below. Neither view overwrites the public Ervin election forecasts.</p>
+<div id="targetCards" class="nerd-targets"><p>Loading forecasts…</p></div>
+<div id="sampleWarning" class="nerd-note">No scenario evidence applied yet.</div>
+</section>
+<section id="signals" class="nerd-section">
+<div class="nerd-section-head"><div><span class="ed-kicker">A SMALL EARLY WATCHLIST</span><h2>Races to watch before Central-time closings</h2></div><button type="button" class="nerd-button primary" id="refreshSignals">Check result sources</button></div>
+<p class="nerd-explain">These races close earlier than most Texas, Kansas and Iowa polls. Expected reporting speed and geographic representativeness are <strong>not independently established</strong>; no precinct is labeled a dependable early reporter without historical release timestamps. Official results may arrive well after the listed closing time.</p>
+<div class="nerd-table-wrap"><table class="nerd-table" id="signalTable"><thead><tr><th>Race / poll close (ET)</th><th>What it tests</th><th>Live-source status</th><th>Audit / action</th></tr></thead><tbody id="signalRows"><tr><td colspan="4">Loading signal candidates…</td></tr></tbody></table></div>
+<div class="nerd-legend"><span><i class="nerd-dot grey"></i> Watchlist, not yet a signal</span><span><i class="nerd-dot amber"></i> Partial returns; composition unchecked</span><span><i class="nerd-dot green"></i> Independently reviewed, eligible</span></div>
+</section>
+<section class="nerd-section">
+<div class="nerd-section-head"><div><span class="ed-kicker">REVIEW A SIGNAL YOURSELF</span><h2>Analyst what-if console</h2></div></div>
+<p class="nerd-explain">Enter a two-party Democratic share for a watched race and the fraction of the final electorate it represents. This is a <strong>hypothetical adjustment</strong> for examining possibilities, not a verified result. An explicit source URL and the method of vote reporting make your reasoning auditable. A hypothetical is never promoted to an official result.</p>
+<form id="whatifForm" class="nerd-form">
+<label>Signal race <select id="inputRace" required></select></label>
+<label>Observed / hypothetical Democratic two-party share (%) <input type="number" id="inputShare" min="0" max="100" step=".1" required placeholder="e.g. 52.5"></label>
+<label>Estimated share of the final vote already represented (%) <input type="number" id="inputCoverage" min="1" max="100" step="1" required placeholder="e.g. 35"></label>
+<label>Counting composition <select id="inputMode"><option value="unknown">Unknown or distorted</option><option value="reviewed">Personally reviewed as mixed/balanced</option></select></label>
+<label class="nerd-wide">Source link (optional for a hypothetical; required for verified ingestion) <input type="url" id="inputURL" placeholder="https://..."></label>
+<div class="nerd-form-actions"><button class="nerd-button primary" type="submit">Apply what-if scenario</button><span id="formStatus" aria-live="polite">Only your local browser session is affected.</span></div>
+</form>
+<div id="manualList" class="nerd-whatif-list" aria-live="polite"></div>
+</section>
+<section id="method" class="nerd-section">
+<span class="ed-kicker">REPRODUCIBILITY & RISK</span><h2>How this works — and what it cannot know</h2>
+<div class="nerd-methods">
+<article><h3>14,000 new draws</h3><p>A seeded exploratory scenario ensemble varies national, regional, suburban/rural and race-specific Democratic margin shocks. It is <strong>not</strong> the missing historic 14,000-run archive and is not fitted to precinct reporting-time data.</p></article>
+<article><h3>Conditional reweighting</h3><p>Early race outcomes are compared with their Ervin baseline. Draws consistent with an observed departure receive greater weight, propagating common swing assumptions toward TX, KS and IA. This is a <strong>scenario sensitivity</strong>, not empirically calibrated winning odds.</p></article>
+<article><h3>Compositional guard</h3><p>Automatic use requires a dated, matched source, adequate turnout share, multiple precinct reporting units, documented geographic coverage, and audited absentee/early versus in-person composition. A precincts-reporting percentage alone fails the gate.</p></article>
+<article><h3>Correlations are provisional</h3><p>Virginia suburbs, rural Kentucky and Ohio may signal different national coalition components. Correlations and estimated ranges here are explicit judgmental priors; do not treat them as measured cross-state predictive accuracy.</p></article>
+</div>
+<div class="nerd-sources"><a href="../counties-watch/forecast-baselines.json">Underlying Original Ervin Senate margins</a><a href="../house/ervin-forecast-2026-11-02.json">District model source</a><a href="../research/EARLY_SIGNAL_LAB_2026.md">Complete source contract and methods</a><a href="https://www.nass.org/can-I-vote/state-election-officials" target="_blank" rel="noopener noreferrer">Official election offices</a></div>
+</section>
+<footer class="ed-footer"><span>ERVIN MODEL · EXPERIMENTAL ELECTION-NIGHT RESEARCH</span><span>Forecast ≠ votes · Human review required for partial returns</span></footer>
+</main><script defer src="./app.js"></script>
+</body></html>
