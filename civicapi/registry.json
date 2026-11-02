@@ -3502,6 +3502,22 @@
         "type": "House of Representatives"
       }
     },
+    "MA-GOVERNOR": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-02T20:03:11.525753Z",
+      "name": "Massachusetts Governor",
+      "office": "governor",
+      "raceId": "87276",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Massachusetts Governor",
+        "election_type": "Statewide",
+        "id": 87276,
+        "province": "MA",
+        "type": "Governor"
+      }
+    },
     "MD-01": {
       "election": "2026-11-03",
       "identifiedAt": "2026-11-02T19:56:40.448850Z",
@@ -3939,6 +3955,22 @@
         "id": 87213,
         "province": "MI",
         "type": "House of Representatives"
+      }
+    },
+    "MI-GOVERNOR": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-02T20:03:11.525753Z",
+      "name": "Michigan Governor",
+      "office": "governor",
+      "raceId": "87215",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Michigan Governor",
+        "election_type": "Statewide",
+        "id": 87215,
+        "province": "MI",
+        "type": "Governor"
       }
     },
     "MI-SENATE": {
@@ -4717,6 +4749,22 @@
         "type": "House of Representatives"
       }
     },
+    "NE-GOVERNOR": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-02T20:03:11.525753Z",
+      "name": "Nebraska Governor",
+      "office": "governor",
+      "raceId": "87255",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Nebraska Governor",
+        "election_type": "Statewide",
+        "id": 87255,
+        "province": "NE",
+        "type": "Governor"
+      }
+    },
     "NE-SENATE": {
       "election": "2026-11-03",
       "identifiedAt": "2026-11-02T19:56:40.448850Z",
@@ -5000,6 +5048,57 @@
         "election_type": "General",
         "id": 87301,
         "province": "NJ",
+        "type": "House of Representatives"
+      }
+    },
+    "NM-01": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-02T20:03:11.525753Z",
+      "name": "New Mexico US House 1",
+      "office": "house",
+      "raceId": "87285",
+      "search": {
+        "country": "US",
+        "district": "NM-01",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "New Mexico US House 1",
+        "election_type": "General",
+        "id": 87285,
+        "province": "NM",
+        "type": "House of Representatives"
+      }
+    },
+    "NM-02": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-02T20:03:11.525753Z",
+      "name": "New Mexico US House 2",
+      "office": "house",
+      "raceId": "87286",
+      "search": {
+        "country": "US",
+        "district": "NM-02",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "New Mexico US House 2",
+        "election_type": "General",
+        "id": 87286,
+        "province": "NM",
+        "type": "House of Representatives"
+      }
+    },
+    "NM-03": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-02T20:03:11.525753Z",
+      "name": "New Mexico US House 3",
+      "office": "house",
+      "raceId": "87287",
+      "search": {
+        "country": "US",
+        "district": "NM-03",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "New Mexico US House 3",
+        "election_type": "General",
+        "id": 87287,
+        "province": "NM",
         "type": "House of Representatives"
       }
     },
