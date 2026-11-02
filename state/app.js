@@ -4,7 +4,7 @@ const $=id=>document.getElementById(id);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeURL=u=>/^https:\/\//i.test(String(u||''))?esc(u):'https://www.nass.org/can-I-vote/state-election-officials';
 const fmt=n=>Number(n||0).toLocaleString('en-US');
-const margin=v=>Number.isFinite(v)?(v>0?'D +':v<0?'R +':'Even ')+Math.abs(v).toFixed(1):'Not available';
+const margin=v=>Number.isFinite(v)?(Math.abs(v)<.05?'Even':(v>0?'D +':'R +')+Math.abs(v).toFixed(1)):'Not available';
 const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:'Northeast',VT:'Northeast',NJ:'Northeast',NY:'Northeast',PA:'Northeast',MI:'Midwest',WI:'Midwest',OH:'Midwest',IN:'Midwest',IL:'Midwest',IA:'Midwest',MN:'Midwest',MO:'Midwest',KS:'Midwest',NE:'Midwest',ND:'Midwest',SD:'Midwest'};
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));

@@ -49,6 +49,29 @@ try{
    await page.close();
   }
  }
+ // Verify what is actually painted after Pages deployment, not just CI success.
+ const front=await browser.newPage({viewport:{width:390,height:844}});
+ await front.goto(base+'?release='+stamp,{waitUntil:'domcontentloaded'});
+ await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:35000});
+ const frontModel=await front.evaluate(()=>{
+  const panel=document.querySelector('#balanceOfPower');
+  const box=panel?.getBoundingClientRect();
+  return {top:box?.top,width:box?.width,count:document.querySelectorAll('#powerCards .power-card').length,governors:document.querySelector('[data-power-office="governors"]')?.textContent,versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
+ });
+ if(!(frontModel.count===3&&frontModel.top>=0&&frontModel.top<150&&frontModel.width>250&&frontModel.governors?.includes('25')))throw Error('LIVE MOBILE HOMEPAGE FORECAST NOT VISIBLE '+JSON.stringify(frontModel));
+ if(!frontModel.versions.some(s=>s.includes('pollrefresh-v2')))throw Error('LIVE HOMEPAGE USING CACHED GOVERNOR ENGINE '+JSON.stringify(frontModel.versions));
+ await front.screenshot({path:'postdeploy-checks/Homepage-Balance-Visible-Mobile.png',fullPage:false});
+ console.log('LIVE HOMEPAGE BALANCE PASS '+JSON.stringify(frontModel));
+ await front.close();
+ const oh=await browser.newPage({viewport:{width:390,height:844}});
+ await oh.goto(base+'state/?state=OH&release='+stamp,{waitUntil:'domcontentloaded'});
+ await oh.waitForFunction(()=>document.querySelector('#heroGovernor')?.textContent==='D +2.6',null,{timeout:35000});
+ const ohModel=await oh.locator('#heroGovernor').innerText();
+ const ohRaces=await oh.locator('#stateRaceCards').innerText();
+ if(ohModel!=='D +2.6'||!ohRaces.includes('D +2.6'))throw Error('LIVE OHIO FORECAST ERROR '+JSON.stringify({ohModel,ohRaces:ohRaces.slice(0,300)}));
+ await oh.screenshot({path:'postdeploy-checks/Ohio-Governor-State-Desk-Mobile.png',fullPage:false});
+ console.log('LIVE OHIO D +2.6 VERIFIED IN RENDERED STATE DESK');
+ await oh.close();
  // Explicit acceptance of newly published national Election Night / governor model.
  const national=await browser.newPage({viewport:{width:1440,height:940}});
  await national.goto(base+'election-night/?release='+stamp,{waitUntil:'domcontentloaded'});
@@ -62,6 +85,8 @@ try{
  await governor.goto(base+'governors/?release='+stamp,{waitUntil:'domcontentloaded'});
  await governor.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:25000});
  if((await governor.locator('#govCards .gov-card').count())!==36)throw Error('Not all governor Ervin projections live');
+ const liveOH=governor.locator('#govCards [data-code="OH"]');
+ if(!(await liveOH.innerText()).includes('D +2.6')||!(await liveOH.evaluate(el=>el.classList.contains('d'))))throw Error('LIVE OHIO GOVERNOR CARD NOT BLUE D +2.6');
  await governor.screenshot({path:'postdeploy-checks/Governor-Ervin-Live.png',fullPage:false});
  console.log('LIVE GOVERNORS PASS 36 races');
  await governor.close();

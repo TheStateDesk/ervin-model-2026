@@ -56,5 +56,11 @@ const expectedNightLinks=['../states/','#nationalBoard','#michiganSpotlight'];
 if(JSON.stringify(nightLinks)!==JSON.stringify(expectedNightLinks))issues.push('Election Night nav must link only to the consolidated State Desk and on-page sections: '+nightLinks.join(', '));
 if(nightHtml.includes('href="../michigan/election-night/"'))issues.push('Election Night retains link to retired separate Michigan results page');
 if(!nightHtml.includes('href="../state/?state=MI#stateResults"'))issues.push('Michigan results must link to consolidated state dossier');
+const front=fs.readFileSync(path.join(root,'index.html'),'utf8');
+if(front.indexOf('id="balanceOfPower"')>front.indexOf('<section class="hero'))issues.push('Balance of power must be above homepage hero');
+for(const rel of ['index.html','governors/index.html','states/index.html','state/index.html']){
+ const html=fs.readFileSync(path.join(root,rel),'utf8');
+ if(!html.includes('statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2'))issues.push(rel+': old cached governor model script');
+}
 if(issues.length){console.error('INTERNAL LINK AUDIT FAILED:\n'+issues.join('\n'));process.exitCode=1;}
 else console.log('INTERNAL LINK AUDIT PASS',JSON.stringify({htmlPages:pages.length,checkedLocalLinks:links,brokenLinks:0,retiredNavigation:0}));

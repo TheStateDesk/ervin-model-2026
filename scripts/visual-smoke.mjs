@@ -30,6 +30,8 @@ try{
  await homepage.goto(root+'/',{waitUntil:'domcontentloaded'});
  await homepage.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:30000});
  assert((await homepage.locator('#powerCards .power-card').count())===3,'Homepage must display House Senate Governors bars');
+ assert((await homepage.locator('#balanceOfPower').boundingBox()).y<150,'Homepage power bars must be ABOVE the large hero');
+ assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='25','Governor balance must include Ohio Democratic projection');
  const seatRows=await homepage.locator('#powerCards .power-card').evaluateAll(elements=>elements.map(node=>({office:node.dataset.powerOffice,numbers:[...node.querySelectorAll('[data-power-d],[data-power-r],[data-power-t]')].map(x=>+x.textContent),bars:[...node.querySelectorAll('.power-segment')].map(x=>parseFloat(x.style.width))})));
  for(const row of seatRows){assert(row.numbers.reduce((a,b)=>a+b,0)===(row.office==='house'?435:row.office==='senate'?100:50),'Seat total inconsistent: '+row.office);assert(Math.abs(row.bars.reduce((a,b)=>a+b,0)-100)<.01,'Bar width not 100%: '+row.office);}
  await homepage.locator('#balanceOfPower').screenshot({path:'visual-checks/Homepage-Projected-Balance-Of-Power.png'});
@@ -38,6 +40,8 @@ try{
  await homeMobile.goto(root+'/',{waitUntil:'domcontentloaded'});
  await homeMobile.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true',null,{timeout:30000});
  assert((await homeMobile.locator('#balanceOfPower').count())===1,'Mobile homepage forecast balance absent');
+ assert((await homeMobile.locator('#balanceOfPower').boundingBox()).y<125,'Mobile homepage power bars must start in first screen');
+ assert(await homeMobile.evaluate(()=>getComputedStyle(document.querySelector('#balanceOfPower')).display!=='none'&&document.querySelector('#balanceOfPower').getBoundingClientRect().width>250),'Mobile power bar must be visible');
  await homeMobile.locator('#balanceOfPower').screenshot({path:'visual-checks/Homepage-Power-Mobile.png'});
  await homeMobile.close();
  const nationalNight=await browser.newPage({viewport:{width:1440,height:940}});
@@ -80,12 +84,24 @@ try{
  await governorPage.goto(root+'/governors/',{waitUntil:'domcontentloaded'});
  await governorPage.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:20000});
  assert((await governorPage.locator('#govCards .gov-card').count())===36,'Governor board no longer covers all 36 elections');
+ const ohioCard=governorPage.locator('#govCards [data-code="OH"]');
+ assert((await ohioCard.innerText()).includes('D +2.6'),'Ohio governor forecast must show D +2.6 (not R +0.0)');
+ assert(await ohioCard.evaluate(el=>el.classList.contains('d')&&!el.classList.contains('tie')),'Ohio must have Democratic map tone, not tie');
+ assert((await governorPage.locator('#govUSMap a[data-code="OH"] path.d').count())===1,'Ohio state geometry must match projected winner');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
  assert((await governorPage.locator('#coverage').innerText()).includes('19 Ervin-adjusted'),'Expected 19 governor-only corrections');
  await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('4.66')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.71'),null,{timeout:12000});
  assert((await governorPage.locator('#govBacktestRows tr').count())===35,'Governor source-linked backtest missing historic events');
  await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
+ await ohioCard.screenshot({path:'visual-checks/Ohio-Governor-Ervins-Take-Verified.png'});
  await governorPage.close();
+ const ohioDetail=await browser.newPage({viewport:{width:390,height:844}});
+ await ohioDetail.goto(root+'/state/?state=OH',{waitUntil:'domcontentloaded'});
+ await ohioDetail.waitForFunction(()=>document.querySelector('#heroGovernor')?.textContent==='D +2.6',null,{timeout:30000});
+ assert((await ohioDetail.locator('#stateRaceCards').innerText()).includes('D +2.6'),'State dossier and map must use same Ohio forecast');
+ assert(!(await ohioDetail.locator('#heroGovernor').innerText()).includes('R +0.0'),'Negative zero Ohio regression');
+ await ohioDetail.screenshot({path:'visual-checks/Ohio-State-Desk-Actual-Mobile.png',fullPage:false});
+ await ohioDetail.close();
  // Verify all-state aggregate ratings, hover D/R/T counts and each race margin.
  const stateAtlas=await browser.newPage({viewport:{width:1440,height:940}});
  const atlasErrors=[];stateAtlas.on('pageerror',e=>atlasErrors.push(e.message));
