@@ -52,7 +52,7 @@ const nightHtml=fs.readFileSync(path.join(root,'election-night/index.html'),'utf
 const nightHeader=nightHtml.match(/<header\b[^>]*>[\s\S]*?<\/header>/i)?.[0]||'';
 const nightNav=nightHeader.match(/<nav\b[^>]*>[\s\S]*?<\/nav>/i)?.[0]||'';
 const nightLinks=[...nightNav.matchAll(/href=["']([^"']+)["']/g)].map(x=>x[1]);
-const expectedNightLinks=['../states/','#nationalBoard','#michiganSpotlight'];
+const expectedNightLinks=['../states/','#nationalBoard','#michiganSpotlight','../stats-for-nerds/'];
 if(JSON.stringify(nightLinks)!==JSON.stringify(expectedNightLinks))issues.push('Election Night nav must link only to the consolidated State Desk and on-page sections: '+nightLinks.join(', '));
 if(nightHtml.includes('href="../michigan/election-night/"'))issues.push('Election Night retains link to retired separate Michigan results page');
 if(!nightHtml.includes('href="../state/?state=MI#stateResults"'))issues.push('Michigan results must link to consolidated state dossier');
