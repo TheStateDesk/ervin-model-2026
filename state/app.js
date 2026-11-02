@@ -37,7 +37,7 @@ function renderLead(){
  $('heroSenate').textContent=sen?margin(Number(sen.adjustedMargin)):senateIndex?fmt(senateIndex.count)+' polls indexed':'No modeled race';
  $('heroSenateSub').textContent=sen?(code==='MI'?'Ervin’s Take · candidate-strength context · ':'Original Ervin adjustment · ')+fmt(sen.publisherInputs)+' publisher inputs':senateIndex?'Public Senate poll index · not an Ervin prediction':'No Senate race in the 17-state model';
  $('heroGovernor').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?margin(governorErvin[code].model.adjustedMargin):Number.isFinite(governorErvin[code]?.model?.pollMargin)?margin(governorErvin[code].model.pollMargin):'No poll input'):'No election';
- $('heroGovSub').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?'Ervin’s Take · governor calibration':governorErvin[code]?.model?'Raw publisher poll · no prior governor comparison':'Loading Ervin correction'):'No governor contest in the 2026 registry';
+ $('heroGovSub').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?'Ervin’s Take · governor calibration':governorErvin[code]?.model?'Published poll · comparable state history not yet verified':'Loading Ervin correction'):'No governor contest in the 2026 registry';
  $('houseCoverage').textContent=n(stateHouse.length)+' · '+stateName(code);
  $('editionDate').textContent='Research snapshot · November 2026';
 }
@@ -103,7 +103,7 @@ function drawCounties(){
   p.setAttribute('aria-label',String(p.dataset.name)+' County, '+(Number.isFinite(v)?margin(v)+' points':"no comparable figure"));
   p.classList.toggle('is-selected',selectedCounty===String(p.dataset.fips).padStart(5,'0'));
  }
- $('countySourceLabel').textContent=layer==='senate'?'Conditional Ervin Senate scenario · '+colored+' counties':layer==='governor'?'Conditional published-governor polling scenario · '+colored+' counties':layer==='neutral'?'Geographic outlines only':layer==='swing'?'Change in two-party presidential margin · '+colored+' counties':layer+' presidential results · '+colored+' counties';
+ $('countySourceLabel').textContent=layer==='senate'?'Conditional Ervin Senate scenario · '+colored+' counties':layer==='governor'?'Conditional governor margin scenario · '+colored+' counties':layer==='neutral'?'Geographic outlines only':layer==='swing'?'Change in two-party presidential margin · '+colored+' counties':layer+' presidential results · '+colored+' counties';
  $('countyInspector').innerHTML=countyInformation(cachedCountyRows.find(r=>r.id===selectedCounty));
  renderCountyTable();
 }
@@ -111,7 +111,7 @@ function renderCountyTable(){
  const query=$('countyTableFind').value.trim().toLowerCase(),layer=$('countyLayer').value;
  const rows=cachedCountyRows.filter(r=>r.name.toLowerCase().includes(query)).sort((a,b)=>a.name.localeCompare(b.name));
  const preferred=layer==='senate'?'senate':layer==='governor'?'governor':getSen()?'senate':getGov()?'governor':null;
- $('scenarioExplanation').textContent=preferred==='senate'?'Conditional county scenario anchored to the Original Ervin Senate statewide margin. Not independent county polling.':preferred==='governor'?'Conditional county scenario anchored to an unadjusted governor publisher average. Not independent county polling.':'No comparable statewide 2026 margin to allocate; showing presidential history only.';
+ $('scenarioExplanation').textContent=preferred==='senate'?'Conditional county scenario anchored to the Original Ervin Senate statewide margin. Not independent county polling.':preferred==='governor'?'Conditional county scenario anchored to the available governor margin (historically adjusted where sourced, otherwise publisher poll). Not independent county polling.':'No comparable statewide 2026 margin to allocate; showing presidential history only.';
  $('countyTableBody').innerHTML=rows.map(r=>'<tr><td>'+esc(r.name)+'</td><td>'+esc(margin(r.m24))+'</td><td>'+esc(margin(preferred?r[preferred]:null))+'</td></tr>').join('')||'<tr><td colspan="3">No matching counties.</td></tr>';
  $('countyCount').textContent=fmt(cachedCountyRows.length)+' county-equivalent geographic shapes';
 }
@@ -193,7 +193,7 @@ function renderDistrictDetail(r){
  const indexText=model?.publishedSurveyCount||indexed?.count||0;
  const caveat='<p class="ed-mini">The survey directory may index '+fmt(indexText)+' polls for this district, but only '+fmt(rows.length)+' identifiable local entries are displayed here. Original releases, sponsors and ranked-choice/same-party ballot structures may differ. A directory count is not a poll average.</p>';
  const links='<div class="ed-source-links"><a href="'+safeURL(model?.pollDirectoryLink||p?.url||'https://peoplespoll.com/house')+'" target="_blank" rel="noopener noreferrer">Full published district poll directory</a><a href="https://www.cookpolitical.com/ratings/house-race-ratings" target="_blank" rel="noopener noreferrer">Cook comparison ratings</a><a href="https://electiondata.dev/datasets/house-results/" target="_blank" rel="noopener noreferrer">2022/2024 House returns</a><a href="#stateResults">State Desk source audit and reported returns</a></div>';
- $('districtDetail').innerHTML=source+top+candidateRosterCard(r)+'<p class="ed-mini"><strong>Historical incumbent:</strong> '+esc(r.incumbent||'Not verified')+' (not necessarily a 2026 ballot candidate).</p>'+surveyMarkup+additional+caveat+links;
+ $('districtDetail').innerHTML=source+top+candidateRosterCard(r)+'<p class="ed-mini"><strong>Historical incumbent:</strong> '+esc(r.incumbent||'No historical incumbent record in this directory')+' (not necessarily a 2026 ballot candidate).</p>'+surveyMarkup+additional+caveat+links;
  $('districtButtons').querySelectorAll('button[data-district]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.district===r.district)));
  $('districtMap').querySelectorAll('path.geo-district').forEach(path=>path.classList.toggle('is-selected',String(path.dataset.district).padStart(2,'0')===String(r.district).padStart(2,'0')));
  $('districtSelect').value=String(r.district);
