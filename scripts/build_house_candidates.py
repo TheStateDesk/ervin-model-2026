@@ -52,6 +52,8 @@ def create_rows(seats):
   if str(r.get("ballot_status") or "").lower().strip()!="nominee":continue
   state=(r.get("state") or "").upper().strip()
   id=race_id(state,r.get("district") or "")
+  if id not in official and id.endswith("-AL") and id[:2]+"-01" in official and sum(k.startswith(id[:2]+"-") for k in official)==1:
+   id=id[:2]+"-01"
   if id not in official:continue
   name=str(r.get("name") or "").strip()
   if not name or len(name)>160:continue
@@ -63,6 +65,8 @@ def create_rows(seats):
  for r in raw.get("deepsyte",[]):
   if str(r.get("office") or "").lower() not in ("house","us_house","u.s. house"):continue
   id=race_id(r.get("state") or "",r.get("district") or "")
+  if id not in official and id.endswith("-AL") and id[:2]+"-01" in official and sum(k.startswith(id[:2]+"-") for k in official)==1:
+   id=id[:2]+"-01"
   if id not in official:continue
   name=str(r.get("candidate") or "").strip()
   if not name or len(name)>160:continue
@@ -74,7 +78,17 @@ def create_rows(seats):
   evidence["deepsyte_on_ballot"]+=1
  out={};mixed=[];missing=[];disagreements=[]
  for seat in seats:
-  id=seat["id"];rows=official[id];merged={}
+  id=seat["id"];rows=official[id]
+  # Use the on-ballot provider list as the district roster. A FEC directory can
+  # retain outdated primary candidates mistakenly still flagged as nominees.
+  if any(r["source"]=="DeepSyte" for r in rows):
+   deep=[r for r in rows if r["source"]=="DeepSyte"]
+   source_ids={r["fecId"] for r in deep if r["fecId"]}
+   source_names={(normalized_name(r["name"]),r["party"]) for r in deep}
+   rows=[r for r in rows if r["source"]=="DeepSyte" or
+    (r["fecId"] and r["fecId"] in source_ids) or
+    (normalized_name(r["name"]),r["party"]) in source_names]
+  merged={}
   for r in rows:
    fid=r["fecId"];key="ID:"+fid if fid else "NAME:"+normalized_name(r["name"])+"-"+r["party"]
    if key not in merged:merged[key]=r.copy();merged[key]["providers"]=[r["source"]]
