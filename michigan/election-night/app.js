@@ -216,14 +216,16 @@ function tick(){
 }
 async function initialize(){
  try{
-  const [countiesRes,mainRes]=await Promise.all([fetch("../county_history.json"),fetch("../../index.html")]);
+  const [countiesRes,mainRes]=await Promise.all([fetch("../county_history.json"),fetch("../../research/senate-workbench-data.json")]);
   if(!countiesRes.ok||!mainRes.ok)throw Error("Michigan baseline was unavailable");
-  const history=await countiesRes.json(),html=await mainRes.text();
+  const history=await countiesRes.json(),model=await mainRes.json();
   if(!Array.isArray(history.counties)||history.counties.length!==83)throw Error("Expected all 83 county baselines");
   counties=history.counties;
   for(const county of counties)countyLookup.set(county.name.toLowerCase(),county.name);
-  const marker="window.ERVIN_DATA = ",start=html.indexOf(marker)+marker.length,end=html.indexOf(";\n\n</script><script>",start);
-  if(start>=marker.length&&end>start){const model=JSON.parse(html.slice(start,end));const mi=model.states.find(r=>r.code==="MI");if(mi){$("demName").textContent=mi.dem;$("repName").textContent=mi.rep}}
+  if(Array.isArray(model?.states)){
+   const mi=model.states.find(r=>r.code==="MI");
+   if(mi){$("demName").textContent=mi.dem;$("repName").textContent=mi.rep}
+  }
   $("refreshNow").addEventListener("click",()=>{
     if(!demo&&Date.now()<liveStart)return;
     if(Date.now()-lastPrecinctAttempt>=5000)readPrecinct();
