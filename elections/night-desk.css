@@ -43,3 +43,5 @@ body:has(.er-map-expanded){overflow:hidden}
 @media(min-width:1171px){.er-margin-tick{right:63px}.er-margin-layout{grid-template-columns:minmax(0,1fr) 58px;gap:7px}.er-margin-track{margin-left:1px;margin-right:0}}
 @media(max-width:760px){.race-panel.er-map-expanded{inset:0;padding:15px!important}.er-map-actions input{width:min(200px,47vw)}.er-margin-layout{grid-template-columns:minmax(0,1fr) 82px}}
 @media(prefers-reduced-motion:reduce){#countyMap .county{transition:none!important}}
+
+#erPreMarker[hidden],#erLiveMarker[hidden]{display:none!important}
