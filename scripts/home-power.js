@@ -2,7 +2,8 @@
 (()=>{'use strict';
 const target=document.getElementById('powerCards');
 if(!target)return;
-const read=async path=>{const response=await fetch(path,{cache:'no-cache'});if(!response.ok)throw Error(path+' HTTP '+response.status);return response.json()};
+const siteRoot=new URL('../',document.currentScript?.src||new URL('../scripts/home-power.js',location.href));
+const read=async path=>{const response=await fetch(new URL(path,siteRoot),{cache:'no-cache'});if(!response.ok)throw Error(path+' HTTP '+response.status);return response.json()};
 async function start(){
  try{
   const [house,governor,senate,history]=await Promise.all([
@@ -17,7 +18,7 @@ async function start(){
   window.ERVIN_POWER.render(target,results);
  }catch(error){
   console.error('Homepage balance forecast unavailable:',error);
-  target.innerHTML='<p class="power-unavailable">The forecast balance could not be loaded. <a href="states/">Browse the current state forecasts</a>.</p>';
+  target.innerHTML='<p class="power-unavailable">The forecast balance could not be loaded. <a href="../states/">Browse the current state forecasts</a>.</p>';
  }
 }
 start();
