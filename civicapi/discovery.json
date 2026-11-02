@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-02T18:23:20.319773Z",
+  "checkedAt": "2026-11-02T18:27:13.611801Z",
   "note": "Six-race pilot. Missing or rejected values do not mean zero votes; source access and Pages publication may lag.",
   "polling": {
     "note": "Polling advertised by provider; verified v2 polling endpoint and schema not established. No polls added to Ervin model.",
@@ -8,34 +8,78 @@
   "provider": "civicAPI v2",
   "status": {
     "AL-07": {
-      "query": "Alabama US House 7 General Election 2026",
-      "searchMatches": 0,
-      "state": "not_found"
+      "query": "House",
+      "raceId": "86906",
+      "responseType": "dict",
+      "returned": 200,
+      "sampleTitles": [
+        "   alabama state house     statewide state house",
+        "   alabama state house barbour     local state house",
+        "   alabama state house barbour     local state house"
+      ],
+      "searchMatches": 1,
+      "state": "schema_or_votes_unverified"
     },
     "ME-SENATE": {
-      "query": "Maine Senate General Election 2026",
-      "searchMatches": 0,
-      "state": "not_found"
+      "query": "Senate",
+      "responseType": "dict",
+      "returned": 99,
+      "sampleTitles": [
+        "   maine state senate     statewide state senate",
+        "   maine us senate     general us senate",
+        "   maine us senate democratic primary     primary us senate"
+      ],
+      "searchMatches": 37,
+      "state": "ambiguous"
     },
     "MI-07": {
-      "query": "Michigan US House 7 General Election 2026",
-      "searchMatches": 0,
-      "state": "not_found"
+      "query": "House",
+      "responseType": "dict",
+      "returned": 199,
+      "sampleTitles": [
+        "   michigan state house     statewide state house",
+        "   michigan us house 8    mi-08 general house of representatives",
+        "   michigan us house 1    mi-01 general house of representatives"
+      ],
+      "searchMatches": 2,
+      "state": "ambiguous"
     },
     "MI-SENATE": {
-      "query": "Michigan Senate General Election 2026",
-      "searchMatches": 0,
-      "state": "not_found"
+      "query": "Senate",
+      "responseType": "dict",
+      "returned": 76,
+      "sampleTitles": [
+        "   michigan state senate     statewide state senate",
+        "   michigan us senate     general us senate",
+        "   michigan us senate democratic primary     primary us senate"
+      ],
+      "searchMatches": 40,
+      "state": "ambiguous"
     },
     "TX-18": {
-      "query": "Texas US House 18 General Election 2026",
-      "searchMatches": 0,
-      "state": "not_found"
+      "query": "House",
+      "raceId": "87425",
+      "responseType": "dict",
+      "returned": 200,
+      "sampleTitles": [
+        "   texas state house     statewide state house",
+        "   texas us house 28    tx-28 general house of representatives",
+        "   texas us house 38    tx-38 general house of representatives"
+      ],
+      "searchMatches": 1,
+      "state": "schema_or_votes_unverified"
     },
     "TX-GOVERNOR": {
-      "query": "Texas Governor General Election 2026",
-      "searchMatches": 0,
-      "state": "not_found"
+      "query": "Governor",
+      "responseType": "dict",
+      "returned": 200,
+      "sampleTitles": [
+        "   texas lieutenant governor     statewide lieutenant governor",
+        "   texas governor     statewide governor",
+        "   texas lieutenant governor democratic primary runoff     primary lieutenant governor"
+      ],
+      "searchMatches": 2,
+      "state": "ambiguous"
     }
   },
   "version": 1
