@@ -1,25 +1,25 @@
 {
-  "checkedAt": "2026-11-02T19:59:17.399902Z",
+  "checkedAt": "2026-11-02T20:01:59.191505Z",
   "discovery": {
-    "found": 474,
+    "found": 481,
     "lookups": 12,
     "statusSample": {
-      "AK-01": "unavailable",
-      "DE-01": "unavailable",
-      "FL-SENATE": "unavailable",
-      "MA-GOVERNOR": "ambiguous",
-      "MI-GOVERNOR": "ambiguous",
-      "ND-01": "unavailable",
-      "NE-GOVERNOR": "ambiguous",
-      "NM-01": "unavailable",
-      "NM-02": "unavailable",
-      "NM-03": "unavailable",
-      "OH-SENATE": "unavailable",
-      "SD-01": "unavailable",
-      "VT-01": "unavailable",
-      "WY-01": "unavailable"
+      "AK-01": "mapped",
+      "DE-01": "mapped",
+      "FL-SENATE": "mapped",
+      "MA-GOVERNOR": "ambiguous: Massachusetts Question 1 - Public Records Law for Legislature and Go, Massachusetts Governor, Massachusetts Governor's Council 5, Massachusetts Governor's Council 2",
+      "MI-GOVERNOR": "ambiguous: Michigan Wayne State University Board of Governors, Michigan Governor",
+      "ND-01": "mapped",
+      "NE-GOVERNOR": "ambiguous: Nebraska Governor, Metropolitan Community College For Board of Governors - District 5, Southeast Community College For Board of Governors - District 1, Western Community College For Board of Governors - District 4",
+      "NM-01": "unavailable: ",
+      "NM-02": "unavailable: ",
+      "NM-03": "unavailable: ",
+      "OH-SENATE": "mapped",
+      "SD-01": "mapped",
+      "VT-01": "unavailable: ",
+      "WY-01": "mapped"
     },
-    "unmapped": 14
+    "unmapped": 7
   },
   "election": "2026-11-03",
   "eligibleRaces": 0,
@@ -32,7 +32,7 @@
   },
   "provider": "civicAPI v2",
   "publishedRaces": 0,
-  "registeredRaces": 474,
+  "registeredRaces": 481,
   "targetRaces": 488,
   "updatedRaces": 0,
   "version": 2
