@@ -10,7 +10,7 @@ const desiredOffice=['senate','governor','house'].includes(params.get('office'))
 const desiredDistrict=String(params.get('district')||'01').replace(/[^0-9]/g,'').padStart(2,'0').slice(-2);
 const desiredCode=(params.get('state')||'MI').toUpperCase().replace(/[^A-Z]/g,'').slice(0,2);
 const href=r=>'?office='+encodeURIComponent(r.office.toLowerCase())+'&state='+encodeURIComponent(r.code)+(r.office==='House'?'&district='+encodeURIComponent(r.district):'');
-let raceList=[],current=null,pollArchive={},countyHistory={},michiganHistory=[],allHistorical={},scenario=null;
+let raceList=[],current=null,pollArchive={},countyHistory={},michiganHistory=[],allHistorical={},scenario=null,housePolling={};
 function toDate(value){const d=Date.parse(/\b20\d{2}\b/.test(String(value))?String(value):String(value)+', 2026');return Number.isFinite(d)?d:null}
 function formatMargin(m,dem,rep){if(m==null||!Number.isFinite(m))return 'No comparable average';if(Math.abs(m)<.05)return 'Tied';return (m>0?dem:rep).split(' ').slice(-1)[0]+' +'+Math.abs(m).toFixed(1)}
 function senateAggregate(r){
@@ -43,7 +43,7 @@ function renderHeader(r){
  if(r.office==='House'){
   document.title=r.id+' 2026 U.S. House · Ervin Model';
   $('raceTitle').textContent=r.state+' · U.S. House District '+Number(r.district);
-  $('raceDeck').textContent='2026 House district '+r.id+' · current published ratings and geographic county context. The candidate ballot slate, quantitative poll average, and district boundaries are NOT independently verified in this local record.';
+  $('raceDeck').textContent='2026 House district '+r.id+' · current published ratings and geographic county context. The candidate ballot slate and fitted district forecast are not independently verified; sourced individual public surveys are shown where available. Reference district geography is historical (2022).';
   $('topKicker').textContent='2026 elections / house / '+r.id;
   $('backLink').href='../house/?state='+r.code;
   $('backLink').textContent='← All 435 House districts';
@@ -68,8 +68,8 @@ function renderForecast(r){
   $('leadValue').textContent=r.rating||'Rating not entered';$('leadValue').className='';
   $('leadExplanation').textContent='A qualitative publisher rating only. No numerical House winning chance or vote-share prediction was computed.';
   $('repBar').style.width='0%';$('demBar').style.width='0%';
-  $('modelStatus').textContent='Uncalibrated';$('pollCount').textContent='Not verified';$('pollDate').textContent=r.rating?'Oct 30':'Unavailable';
-  $('pollDate').parentElement.querySelector('small').textContent='Publisher rating date';
+  $('modelStatus').textContent='Uncalibrated';const p=housePolling[r.id];$('pollCount').textContent=p?.count!=null?p.count+' listed surveys':'Not indexed';$('pollDate').textContent=p?.date||'Unavailable';
+  $('pollDate').parentElement.querySelector('small').textContent='Latest individual poll date';
   $('raceSources').innerHTML='<a href="'+esc(r.ratingSource||'https://www.cookpolitical.com/ratings/house-race-ratings')+'" target="_blank" rel="noopener noreferrer">Cook source ratings ↗</a><a href="../house/?state='+r.code+'">All '+r.code+' districts ↗</a>';
   $('certainty').textContent='The House district is indexed, but a full matchup, district boundary and matching archived polling are not available. No Ervin district probability or historical-error adjustment is claimed.';
   $('qualifiers').textContent='Ratings are publisher judgments, not a quantitative seat forecast. The 2026 district may have been redrawn; counties on this map may lie outside the district. Do not treat state-level baseline counties as district-level votes.';
@@ -103,10 +103,17 @@ function renderForecast(r){
 }
 function renderPolls(r){
  if(r.office==='House'){
-  $('pollIntro').textContent='No verified individual poll archive or quantitative House race average for this district. No survey values have been inferred from the Cook rating.';
-  $('pollRows').innerHTML='<div class="race-note">'+(r.rating?'Cook rating: '+esc(r.rating)+' (October 30, 2026). ':'No Cook rating entered for this district. ')+'<a href="https://www.cookpolitical.com/ratings/house-race-ratings" target="_blank" rel="noopener noreferrer">Review publisher ratings ↗</a>. Separate poll samples are not verified.</div>';
-  $('pollPlot').innerHTML='<div class="race-muted" style="margin:auto">No numerical House polling series available</div>';
-  $('pollLinks').innerHTML='<a href="../house/">All House districts ↗</a>';return;
+  const p=housePolling[r.id];
+  $('pollIntro').textContent=p?'The latest documented public district survey is shown below. Other listed surveys, if any, are accessible in the linked directory. This is not an Ervin polling average. Sponsor independence and methodology vary by poll.':'No 2026 House district survey has been imported for this district. A missing local poll record does not mean no public polling exists.';
+  if(p){
+    const label=p.margin>0?'D +'+p.margin.toFixed(1):p.margin<0?'R +'+Math.abs(p.margin).toFixed(1):'Tie';
+    $('pollRows').innerHTML='<div class="race-row"><div><strong><a href="'+esc(p.url)+'" rel="noopener noreferrer" target="_blank">'+esc(p.pollster)+'</a></strong><small>'+esc(p.date)+' · most recent public survey in directory · '+esc(p.count)+' publicly indexed survey(s)</small><small>'+esc(p.sourceKind)+'</small></div><div class="race-number">'+esc(label)+'</div></div><div class="race-note">Reported major-party shares: D '+esc(p.dem.toFixed(1))+'% · R '+esc(p.rep.toFixed(1))+'%. Third-party and undecided responses are not reassigned. Confirm the sponsor and respondent sample in the original release.</div>';
+    $('pollPlot').innerHTML='<b>Latest documented public survey · not an average</b><div class="bar '+(p.margin<0?'r':'')+'" style="height:'+Math.max(14,Math.min(84,25+Math.abs(p.margin)*2))+'%"><span>'+esc(label)+'</span></div>';
+  }else{
+    $('pollRows').innerHTML='<div class="race-note">No comparable race-specific public poll in the imported sample. Open the linked full public polling directories for additional releases.</div>';
+    $('pollPlot').innerHTML='<div class="race-muted" style="margin:auto">No sourced district survey imported</div>';
+  }
+  $('pollLinks').innerHTML='<a href="../house/research-polls.json">Local poll evidence index ↗</a><a href="https://peoplespoll.com/house" target="_blank" rel="noopener noreferrer">Complete public House polls directory ↗</a><a href="https://www.realclearpolling.com/latest-polls/house" target="_blank" rel="noopener noreferrer">RealClearPolling House surveys ↗</a><a href="../house/">All 435 House districts ↗</a>';return;
  }
  let polls=[],rows=[];
  if(r.office==='Senate'){
@@ -231,16 +238,17 @@ async function loadSenate(){
 }
 async function start(){
  try{
-  const [governors,senate,archive,house,counties,mi,national]=await Promise.all([
+  const [governors,senate,archive,house,counties,mi,national,housePolls]=await Promise.all([
    fetch('../governors/data.json').then(r=>{if(!r.ok)throw Error('Governor registry unavailable');return r.json()}),
    loadSenate(),
    fetch('../recent_polls.json').then(r=>r.ok?r.json():{}).catch(()=>({})),
    fetch('../house/data.json').then(r=>{if(!r.ok)throw Error('House registry unavailable');return r.json()}),
    fetch('../counties-watch/history.json').then(r=>r.ok?r.json():{states:{}}).catch(()=>({states:{}})),
    fetch('../michigan/county_history.json').then(r=>r.ok?r.json():{counties:[]}).catch(()=>({counties:[]})),
-    window.ERVIN_SCENARIOS.load().catch(()=>({counties:{}}))
+    window.ERVIN_SCENARIOS.load().catch(()=>({counties:{}})),
+    fetch('../house/research-polls.json').then(r=>r.ok?r.json():{polls:{}}).catch(()=>({polls:{}}))
   ]);
-  raceList=[...senate,...governors.races,...house.seats];pollArchive=archive.polls||{};countyHistory=counties.states||{};michiganHistory=mi.counties||[];allHistorical=national.counties||{};
+  raceList=[...senate,...governors.races,...house.seats];pollArchive=archive.polls||{};countyHistory=counties.states||{};michiganHistory=mi.counties||[];allHistorical=national.counties||{};housePolling=housePolls.polls||{};
   current=raceList.find(r=>r.code===desiredCode&&r.office.toLowerCase()===desiredOffice&&(r.office!=='House'||r.district===desiredDistrict)) || raceList.find(r=>r.office.toLowerCase()===desiredOffice) || raceList[0];
   const target=current.office==='Senate'?(()=>{const a=senateAggregate(current).raw;return Number.isFinite(a)?a-(current.history_mode==='not_comparable'?0:Number(current.correction)||0):null})():current.office==='Governor'&&Number.isFinite(current.poll?.margin)?current.poll.margin:null;
    scenario=window.ERVIN_SCENARIOS.build(national,FIPS[current.code],target);
