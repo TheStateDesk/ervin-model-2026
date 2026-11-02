@@ -69,6 +69,11 @@
 <div class="nerd-evidence-summary" id="errorSummary"><p>Loading historical comparisons…</p></div>
 <div class="nerd-error-graph"><div class="nerd-graph-head"><h3>Senate polling error by election year</h3><span>Mean absolute error, D–R margin points · shorter is better</span></div><div class="nerd-error-years" id="errorYearBars">Loading year-by-year data…</div></div>
 <div class="nerd-error-notes" id="errorFootnote">Historical evidence is displayed independently from the speculative 14,000-draw covariance assumptions.</div>
+<div class="nerd-transfer" id="transfer">
+ <div class="nerd-section-head"><div><span class="ed-kicker">ASSUMED CORRELATIONS · NOT HISTORICAL ESTIMATES</span><h3>How one race influences another in the simulation</h3></div><button type="button" id="downloadTransfer" class="nerd-button">Export sensitivity CSV</button></div>
+ <p class="nerd-explain">Each value is the model's assumed change in a target state's Democratic–Republican margin for a one-point departure from a watched race's baseline. The relationship is <strong>derived from our hypothetical shared-swing model</strong>, not from a measured 2026 correlation or historical early-reporting study. House races remain manual-only for Senate forecasting.</p>
+ <div class="nerd-table-wrap"><table class="nerd-table nerd-matrix"><caption>Illustrative transfer coefficients, D–R margin points per one-point signal surprise</caption><thead><tr><th>Early watchlist race</th><th>Texas</th><th>Kansas</th><th>Iowa</th><th>Auto-use status</th></tr></thead><tbody id="transferRows"><tr><td colspan="5">Calculating assumptions…</td></tr></tbody></table></div>
+</div>
 </section>
 <section id="houseDirectory" class="nerd-section">
 <div class="nerd-section-head"><div><span class="ed-kicker">ALL 435 U.S. HOUSE DISTRICTS</span><h2>Candidate ballot atlas</h2></div><a href="../house/" class="nerd-button">House forecast board</a></div>
