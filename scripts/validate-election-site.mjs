@@ -85,5 +85,45 @@ for(const html of ['house/index.html','elections/index.html','elections/overview
   report.assets++;
  }
 }
+
+// Browser-like map execution smoke test; catches cases where valid polygon JSON
+// nevertheless fails to render due to URL/base-path logic or SVG path bugs.
+class TestElement {
+ constructor(tag){this.tag=tag;this.children=[];this.attrs={};this.dataset={};}
+ setAttribute(name,val){this.attrs[name]=String(val);}
+ append(node){this.children.push(node);}
+ replaceChildren(...nodes){this.children=nodes;}
+ addEventListener(){}
+}
+const documentStub={
+ currentScript:{src:'https://geervin.github.io/ervin-model-2026/scripts/geo-engine.js'},
+ createElementNS:(_,tag)=>new TestElement(tag),
+ createDocumentFragment:()=>new TestElement('fragment')
+};
+const browserWindow={};
+const fetchStub=async url=>{
+ const parsed=new URL(url);
+ const marker='/ervin-model-2026/';
+ assert(parsed.pathname.startsWith(marker),'Geography escaped site base path: '+parsed.pathname);
+ const local=path.join(root,parsed.pathname.slice(marker.length));
+ if(!fs.existsSync(local))return {ok:false,status:404};
+ return {ok:true,json:async()=>JSON.parse(fs.readFileSync(local,'utf8'))};
+};
+const context={document:documentStub,window:browserWindow,fetch:fetchStub,URL,location:{href:'https://geervin.github.io/ervin-model-2026/elections/'}};
+new Script(file('scripts/geo-engine.js'),{filename:'scripts/geo-engine.js'}).runInNewContext(context);
+for(const [code,kind,expected] of [['TX','counties',254],['MI','counties',83],['TX','districts',38]]){
+ const collection=await browserWindow.ERVIN_GEO.get(code,kind);
+ const svg=new TestElement('svg');
+ const result=browserWindow.ERVIN_GEO.draw(svg,collection,{kind,labels:false});
+ assert.equal(result,expected,'Wrong rendered shape count: '+code+' '+kind);
+ const paths=svg.children.flatMap(node=>node.tag==='fragment'?node.children:[node]).filter(node=>node.tag==='path');
+ assert.equal(paths.length,expected,'County paths lost during DOM build: '+code+' '+kind);
+ assert(paths.every(node=>node.attrs.d?.startsWith('M')&&!/NaN|Infinity|undefined/.test(node.attrs.d)),code+' invalid SVG path');
+}
+const chromeCss=file('site-chrome.css');
+assert(chromeCss.includes('html:not(.light) body .site-header .site-nav.is-open'),'Dark mobile menu must override the global light-theme stylesheet');
+assert(chromeCss.includes('justify-content:flex-start!important'),'Mobile menu spacing must not stretch links vertically');
+report.renderedMaps=3;
+
 console.log('ERVIN MODEL SITE VALIDATION PASS');
 console.log(JSON.stringify(report,null,2));
