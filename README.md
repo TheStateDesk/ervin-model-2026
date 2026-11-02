@@ -119,3 +119,16 @@ Michigan's [election-night dashboard](https://geervin.github.io/ervin-model-2026
 
 
 **Release integrity checks (November 1).** `node scripts/validate-election-site.mjs` validates 50 state boundary packs, the 435 House-seat IDs against voting-district shapes (excluding non-voting `ZZ` placeholders), historical county baseline availability, House and governor polling structure, JavaScript parseability, and referenced local CSS/JS assets. `.github/workflows/website-integrity.yml` is configured to run the same test on pushes and pull requests involving election sources. The Michigan and Texas local map assets were independently checked for finite polygon coordinates, and mobile ruler labels were adjusted to avoid overlapping data cards. A successful commit is not itself confirmation that all visitors see the new GitHub Pages deployment immediately; a full live Safari end-to-end test remains necessary.
+
+
+## November 1, 2026: Consolidated State Desk
+
+The new primary entrypoint is https://geervin.github.io/ervin-model-2026/states/ . It opens a 50-state clickable map and search directory. The unified state edition is at https://geervin.github.io/ervin-model-2026/state/?state=MI (substitute any two-letter state code).
+
+Each state edition combines an Original Ervin Senate forecast where available (17 modeled states), published governor polling where a governor race exists, all House districts with in-page geographic selection, sources and ratings, historical county data, conditional county polling allocations, and an attributed official-results desk. Source lists and methods are explicit. Missing local data are not invented.
+
+The independent editorial CSS is at states/editorial.css. Original technical election dossiers, research pages and the original Senate lab remain available for deeper work and stable links, while homepage, governor and House directories and the Election Center prefer unified state editions. One reusable state page serves all 50 states, rather than generating a separate page for every contest.
+
+Validation: the website integrity workflow now also runs node scripts/validate-state-desk.mjs, alongside the all-state map and district validation script. Static checks cover 50 state names, 435 House districts, 36 governors, 17 modeled Senate states, asset links, polling indexes and code/DOM references. Simulated-DOM checks rendered Michigan (83 county paths, 13 House districts) and Texas (254 counties, 38 districts) with source-attributed county scenarios and house reports. Live iOS Safari/Pages deployment and election-night data feeds require independent verification.
+
+Important limits: county scenarios distribute statewide model assumptions; they are not standalone county surveys. Congressional boundaries are 2022 reference shapes and may differ from certified 2026 boundaries. Official vote reporting must not be treated as turnout, and missing result records never mean zero votes.
