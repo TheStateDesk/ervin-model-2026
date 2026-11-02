@@ -58,7 +58,13 @@ try{
  await nerdMobile.goto(root+'/stats-for-nerds/',{waitUntil:'domcontentloaded'});
  await nerdMobile.waitForFunction(()=>document.querySelector('#houseRosterSummary')?.textContent.includes('435 of 435 House districts'),null,{timeout:30000});
  await nerdMobile.waitForFunction(()=>document.querySelector('#targetCards')?.textContent.includes('Iowa'),null,{timeout:30000});
- assert(await nerdMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Stats for Nerds creates mobile horizontal overflow');
+ const nerdLayout=await nerdMobile.evaluate(()=>({
+  viewport:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,
+  offenders:[...document.querySelectorAll('body *')].map(e=>({name:e.tagName,id:e.id,cls:String(e.className||'').slice(0,80),left:e.getBoundingClientRect().left,right:e.getBoundingClientRect().right,width:e.scrollWidth}))
+   .filter(e=>e.right>window.innerWidth+4||e.left< -4).sort((x,y)=>y.right-x.right).slice(0,18)
+ }));
+ if(nerdLayout.scrollWidth>nerdLayout.viewport+4)console.error('STATS FOR NERDS PHONE OVERFLOW DIAGNOSTIC',JSON.stringify(nerdLayout));
+ assert(nerdLayout.scrollWidth<=nerdLayout.viewport+4,'Stats for Nerds creates mobile horizontal overflow');
  await nerdMobile.screenshot({path:'visual-checks/Stats-For-Nerds-Mobile.png',fullPage:true});
  await nerdMobile.close();
  // Verify the consolidated national Election Night dashboard and all 83 Michigan counties.
