@@ -1,0 +1,10 @@
+
+/* Nationwide geographical county layer, separate from actual 2026 results. */
+.center-us path.er-county-path{fill:#b4c6d5;stroke:#f5f8fa;stroke-width:.35;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .1s ease}
+.center-us path.er-county-path:hover{fill:#6b9fbf;stroke:#17486b;stroke-width:1.5;filter:none}
+.center-us path.er-state-stroke{fill:none;stroke:#314b60;stroke-width:1.7;vector-effect:non-scaling-stroke;pointer-events:none}
+.center-us path.er-state-stroke:focus-visible{stroke:#cc9951;stroke-width:3;outline:none}
+html:not(.light) body .center-us path.er-county-path{fill:#44647e;stroke:#273e52}
+html:not(.light) body .center-us path.er-county-path:hover{fill:#79a7c3}
+html:not(.light) body .center-us path.er-state-stroke{stroke:#b8d0df}
+@media(prefers-reduced-motion:reduce){.center-us path.er-county-path{transition:none}}
