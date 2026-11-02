@@ -28,6 +28,14 @@ for(const [id,r] of Object.entries(d.races)){
   if(p.compatible)assert(Number.isFinite(p.dem)&&Number.isFinite(p.rep),'Non-numeric compatible poll '+id);
  }
 }
+const questions=json('house/poll-questions-2026-11-02.json');
+assert(questions.summary.pollQuestionRows>=400&&questions.summary.districts>=100,'Question-level dataset incomplete');
+assert.equal(Object.values(questions.races).reduce((n,rows)=>n+rows.length,0),questions.summary.pollQuestionRows);
+for(const [id,qs] of Object.entries(questions.races)){
+ assert(seats.has(id),'Unknown district in archived questions '+id);
+ for(const q of qs){assert(q.pollster&&q.date&&/^https:\\/\\//.test(q.sourceUrl),'Unattributed question '+id);assert(q.usedInErvinModel===false,'Question should not double count in forecast '+id)}
+}
+assert(fs.readFileSync('state/app.js','utf8').includes("houseQuestions=values[12]"),'Supplemental questions not connected to state dashboard');
 assert.equal(d.summary.districts,435);
 assert.equal(d.summary.districtsWithPollRows,polled);
 assert.equal(d.summary.indexedPublishedSurveys,indexed);
