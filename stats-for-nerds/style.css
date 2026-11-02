@@ -90,3 +90,11 @@ html.theme-dark .nerd-year-track{background:#172c3f}
 @media(max-width:1050px){.nerd-evidence-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.nerd-reading-guide{grid-template-columns:1fr}.nerd-evidence-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.nerd-jump a{padding:12px 14px}.nerd-year-row{grid-template-columns:70px minmax(0,1fr) 68px;gap:8px}.nerd-year-row b{font-size:11px}.nerd-watch-tools label{flex:1;min-width:120px}}
 @media(max-width:410px){.nerd-evidence-summary>div{padding:10px}.nerd-evidence-summary strong{font-size:22px}.nerd-jump a{font-size:11px}}
+
+.nerd-transfer{margin-top:26px;border-top:2px solid var(--ed-ink);padding-top:23px}
+.nerd-transfer h3{font:700 clamp(21px,2.4vw,28px)/1.2 var(--ed-serif);margin:5px 0 9px}
+.nerd-matrix caption{text-align:left;color:var(--ed-muted);font-size:11px;line-height:1.5;margin:0 0 10px}
+.nerd-matrix td{font-size:12px}
+.nerd-matrix td:first-child{min-width:195px}
+.nerd-matrix td:last-child{min-width:170px;color:var(--ed-muted)}
+.nerd-matrix-num{text-align:center;min-width:68px;font-weight:800;font-variant-numeric:tabular-nums}
