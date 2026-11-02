@@ -28,7 +28,7 @@
   ok(d.getElementById('raceTitle').textContent.includes('District 4'),'House race dossier resolves district query');
   ok(d.getElementById('leadValue').textContent==='Tossup','House rating is qualitative');
   ok(d.getElementById('pollIntro').textContent.includes('No verified individual poll'),'House polling is not fabricated');
-  ok(d.getElementById('countyInspector').textContent.includes('House district')||d.getElementById('mapProvenance').textContent.includes('House district'),'Statewide county context clearly disclaims district boundaries');
+  ok(d.getElementById('mapTitle').textContent.includes('district boundary not overlaid'),'Statewide county context clearly disclaims district boundaries');
   ok(d.getElementById('resultNotice').textContent.includes('No verified'),'House returns are not invented');
   d=await load('../elections/overview/');
   await until(()=>d.getElementById('centerCount').textContent.includes('races'));
