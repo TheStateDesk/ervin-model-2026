@@ -24,6 +24,7 @@
   ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
   ok(d.getElementById('ratingsCount').textContent==='68','68 sourced House ratings are explicitly identified');
   ok(d.getElementById('houseModelSummary').textContent.includes('Every House district, modeled')&&d.getElementById('houseModelSummary').textContent.includes('not a calibrated seat probability'),'House model ratings are displayed and explicitly labeled provisional');
+  ok(!d.getElementById('houseCards').textContent.includes('No model loaded')&&d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House cards include provisional model ratings rather than blank placeholders');
   const search=d.getElementById('houseSearch');search.value='MI-04';search.dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));
   ok(d.querySelectorAll('#houseCards .gov-card').length===1&&d.getElementById('houseCards').textContent.includes('Tossup'),'House search and Cook rating work');
   d=await load('../house/?state=MI');
