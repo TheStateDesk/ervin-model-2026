@@ -3,7 +3,7 @@
 const $=id=>document.getElementById(id),escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const path=r=>'../elections/?office=house&state='+encodeURIComponent(r.code)+'&district='+encodeURIComponent(r.district);
 let seats=[],selectState='MI',generation=0;
-function tone(r){let c=(r?.rating||'').toLowerCase();return c.includes('tossup')?'#bca481':c.includes('d')?'#5194c4':c.includes('r')?'#b96172':'#89a1b4';}
+function tone(r){let c=(r?.rating||'').toLowerCase();return c.includes('tossup')?'#bca481':/\b(lean|likely|solid) d\b/.test(c)?'#5194c4':/\b(lean|likely|solid) r\b/.test(c)?'#b96172':'#89a1b4';}
 function fallback(races,msg){
  $('districtMapSvg').replaceChildren();
  $('districtMapStatus').textContent=msg+' Select any district below to open its election dashboard.';
@@ -22,7 +22,8 @@ async function update(){
  $('districtMapStatus').textContent='Loading local district outlines…';
  try{
   const data=await window.ERVIN_GEO.get(code,'districts');if(gen!==generation)return;
-  const count=window.ERVIN_GEO.draw($('districtMapSvg'),data,{kind:'districts',className:'geo-district',onSelect:(el,f)=>{
+  const available={...data,features:data.features.filter(f=>all.some(r=>r.district===String(f.id).padStart(2,'0')))};
+  const count=window.ERVIN_GEO.draw($('districtMapSvg'),available,{kind:'districts',className:'geo-district',onSelect:(el,f)=>{
    const r=all.find(x=>String(x.district).padStart(2,'0')===String(f.id).padStart(2,'0'));if(!r)return;
    location.href=path(r);
   }});
