@@ -45,7 +45,7 @@ These are **candidates**, not guaranteed early-reporting jurisdictions or certif
 | VA-05 House | 7:00 p.m. | Rural/exurban swing; KS and IA |
 | Georgia Senate | 7:00 p.m. | Southern statewide candidate/coalition effect; TX |
 | South Carolina Senate | 7:00 p.m. | Southern statewide shift; TX |
-| FL-27 House | 7:00 p.m. | Miami-area Hispanic/suburban electorate; limited TX comparison |
+| FL-27 House | 8:00 p.m. | Miami-area Hispanic/suburban electorate; limited TX comparison |
 | North Carolina Senate | 7:30 p.m. | Southern statewide margin; TX/KS, with early-vote caution |
 | Ohio Senate | 7:30 p.m. | Industrial/Midwestern statewide movement; IA/KS |
 
@@ -105,3 +105,17 @@ The what-if form allows a viewer to enter a hypothetical two-party share and est
 4. Only after successful historical tests promote vetted precinct/county signals into the automated reweighting pipeline. Preserve immutable audit provenance and replayable correction snapshots.
 
 Current output is a **working exploratory laboratory**, not a certified 14,000-run precinct oracle or automated national vote projection service.
+
+## November 2 historical-error revision and CivicAPI readiness
+
+The previously documented 3.6–3.7-point *target-specific* random shocks were an unvalidated choice. The experimental 14,000-scenario engine now uses the **observed 2018–2024 Senate pre-election historical polling RMSE of 5.181 D−R margin points** as the total marginal scenario dispersion before conditioning, and retains shared region/swing loadings only as a hypothetical covariance structure. This calibration concerns the size of historical final-margin errors; there is **no archival timestamped partial-count dataset** sufficient to estimate mail/early vs Election Day reporting-mode error or cross-office covariance.
+
+See [machine-readable historical-error audit](election-night-historical-moe-2026.json), computed from original stored data:
+- Senate walk-forward: **n=61**, raw MAE **4.086**, RMSE **5.181**, historical 80th absolute error **6.525** and 90th **9.280 D−R points**. The earlier *state-adjusted* walk-forward has a **higher** MAE (**4.498**) than raw polling in this sample. Do not automatically give that correction a lower MOE.
+- House comparable district 2022→2024 holdout: **n=232**, mean absolute error **4.217**, RMSE **7.798**, 80th absolute error **5.480**, 90th **8.347 D−R points**. **203** districts were excluded due to comparability concerns. This is *not* an Ervin 2026 House model backtest.
+- House early results remain *watchlist-only* for automatically adjusting TX/KS/IA Senate forecasts. Their contribution to a user-entered what-if is displayed separately, weighted much less than Senate-to-Senate observations, and cannot be promoted to a verified model signal absent separately tested correlations. House districts with new 2026 boundaries do not inherit the historical House holdout envelope.
+- 2026 national Election Night ingests CivicAPI **only** through the versioned server-side `civicapi/races.json` and the shared `election-night/returns-core.js`, never directly from unvalidated browser API responses. The adapter refuses mismatched election years, prematurely timestamped votes, invalid totals, unsafe source links and stale or contradictory updates. CivicAPI and other provider vote totals are **not summed**.
+
+The 80th/90th historical errors are empirical descriptions of past *pre-election forecast errors*, not classical survey sampling margins of error. The conditional 10th–90th experimental scenario bands are illustrative and not confidence/credible intervals validated for 2026. Validation continues to require archived timestamped partial reports stratified by vote mode, district boundaries and number of votes represented.
+
+Closing hours reflect the **last** applicable polls in each state (Eastern standard time November 3). For example Florida's 27th District closes **8 p.m. ET**, not 7 p.m. Texas/Kansas/Iowa statewide results remain gated until **9 p.m. ET** and individual Michigan statewide outcomes also wait until the last Central-time counties close. Check local election offices for legal poll-closing particulars.
