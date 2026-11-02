@@ -124,13 +124,13 @@ try{
  await miBiasPage.goto(root+'/state/?state=MI#stateSources',{waitUntil:'domcontentloaded'});
  await miBiasPage.waitForFunction(()=>document.querySelector('#miCandidateEffect')?.innerText.includes('median governor-minus-Senate margin'),null,{timeout:30000});
  assert((await miBiasPage.locator('#stateResearchDrawer').getAttribute('open'))!==null,'A direct citation anchor should open the research drawer');
- assert((await miBiasPage.locator('#miCandidateEffect').innerText()).includes('p = 0.039'),'Scientific limitation should be visible within deliberate research drawer');
+ assert((await miBiasPage.locator('#miCandidateEffect').innerText()).includes('Scientific status: NOT VALIDATED'),'Scientific limitations should be visible within deliberate research drawer');
 
  const miBias=await miBiasPage.locator('#miCandidateEffect').innerText();
  assert(miBias.includes('not evidence of a hidden voting preference')||miBias.includes('not evidence of a hidden voting preference.'),'Candidate audit omitted stated-versus-hidden distinction');
  assert(miBias.includes('not applied'),'Unverified Muslim Bradley effect improperly presented as a correction');
  assert(miBias.includes('−1.84')&&miBias.includes('R +0.76'),'MI candidate-strength shift must be visible with sourcing');
- assert((await miBiasPage.locator('#miCandidateEffect details').count())===2,'Evidence and counterexample controls missing');
+ assert((await miBiasPage.locator('#miCandidateEffect details').count())>=3,'Sensitivity evidence and counterexample controls missing');
  await miBiasPage.locator('#miCandidateEffect').screenshot({path:'visual-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
  await miBiasPage.close();
  const countyNight=await browser.newPage({viewport:{width:1440,height:940}}),nightPageErrors=[];
