@@ -138,6 +138,34 @@ function fallbackMap(r,msg){
  $('mapProvenance').textContent=msg+' Geographic outline: PublicaMundi/MappingAPI. County results are not connected.';
  $('countyInspector').textContent=r.state+': statewide outline only. No 2026 local returns verified.';
 }
+/* County historical layers are always distinct from 2026 vote reporting.
+   83 Michigan counties plus the 160 three-cycle national watch counties have
+   sourced margin records. No fake colors for unavailable counties. */
+function historicCounty(code,name,fips){
+ const norm=x=>String(x||'').toLowerCase().trim().replace(/ county$/,'');
+ const item=(countyHistory[code]?.units||[]).find(x=>(fips&&String(x.fips)===String(fips))||norm(x.name)===norm(name));
+ const mi=code==='MI'?michiganHistory.find(x=>norm(x.name)===norm(name)):null;
+ if(mi){
+  const margin=e=>e&&(e.d+e.r)>0?100*(e.d-e.r)/(e.d+e.r):null;
+  return {m24:margin(mi.president2024),m20:margin(mi.president2020),source:'Michigan historical county file'};
+ }
+ return item?{m24:item.m24,m20:item.m20,source:'Three-cycle county watch archive'}:null;
+}
+function applyCountyLayer(){
+ if(!current)return;
+ const mode=$('countyMapMode')?.value||'2024',paths=$('countyMap').querySelectorAll('path.county');
+ let n=0;
+ for(const p of paths){
+  const info=historicCounty(current.code,p.dataset.name,p.dataset.fips);
+  const value=!info||mode==='unreported'?null:mode==='swing'&&Number.isFinite(info.m24)&&Number.isFinite(info.m20)?info.m24-info.m20:mode==='2024'?info.m24:null;
+  p.style.fill=value==null?'':value>=0?(Math.abs(value)>=15?'#347caf':'#90bedc'):(Math.abs(value)>=15?'#bd6573':'#e2a2a9');
+  p.dataset.historical=value==null?'unknown':String(value);
+  if(value!=null)n++;
+ }
+ $('countyMapLegend').textContent=mode==='2024'?'2024 PRESIDENTIAL HISTORICAL margin · blue = D, red = R · '+n+' sourced counties; gray = unavailable':mode==='swing'?'2020→2024 PRESIDENTIAL historical change · blue = D shift, red = R shift · '+n+' sourced counties':'2026 UNREPORTED geography · no verified votes displayed';
+ $('mapDate').textContent=mode==='unreported'?'Nov 3, 2026 · no verified returns':'Historical source only · not 2026 votes';
+}
+
 function countyInteraction(path,name,fips){
  const title=svgNode('title');title.textContent=name+' County — 2026 results unavailable';path.append(title);
  path.setAttribute('tabindex','0');path.setAttribute('role','button');path.setAttribute('aria-label',name+' County: see data status');
@@ -180,9 +208,10 @@ async function drawMap(r){
    const d=path(feature);if(!d)continue;
    const item=svgNode('path',{class:'county',d});
    const fips=String(feature.id||'');const archiveCounty=(countyHistory[r.code]?.units||[]).find(x=>String(x.fips)===fips);const name=String(feature.properties?.name||archiveCounty?.name||'County '+feature.id);
-   countyInteraction(item,name,fips);svg.append(item);
+   item.dataset.name=name;item.dataset.fips=fips;countyInteraction(item,name,fips);svg.append(item);
   }
-  $('countyCount').textContent=features.length+' county outlines';
+  applyCountyLayer();
+ $('countyCount').textContent=features.length+' county outlines';
   $('mapProvenance').textContent=(r.office==='House'?'County shapes are statewide context, NOT the House district boundary. ': '')+(r.code==='MI'?'Michigan county GeoJSON hosted by the Ervin Model.':'U.S. county boundary geography: us-atlas / U.S. Census cartographic boundaries.')+' All areas are neutral because no verified 2026 county results are ingested for this election dossier.';
   $('countyInspector').textContent='Select any county for available 2016/2020/2024 historical context. 2026 returns are not attached.'+(r.office==='House'?' The congressional district is NOT outlined.':'');
  }catch(err){if(current===r)fallbackMap(r,'County outlines could not be loaded in this browser.');console.warn('County geometry fallback:',err.message)}
@@ -208,7 +237,7 @@ async function start(){
   ]);
   raceList=[...senate,...governors.races,...house.seats];pollArchive=archive.polls||{};countyHistory=counties.states||{};michiganHistory=mi.counties||[];
   current=raceList.find(r=>r.code===desiredCode&&r.office.toLowerCase()===desiredOffice&&(r.office!=='House'||r.district===desiredDistrict)) || raceList.find(r=>r.office.toLowerCase()===desiredOffice) || raceList[0];
-  renderHeader(current);renderNav();renderForecast(current);renderPolls(current);drawMap(current);
+  renderHeader(current);renderNav();renderForecast(current);renderPolls(current);$('countyMapMode').onchange=applyCountyLayer;drawMap(current);
  }catch(error){console.error('Election dossier data error',error);$('raceTitle').textContent='Election data unavailable';$('raceDeck').textContent='The published source files could not be loaded. Return to the race index or try reloading.';$('raceList').textContent='Data request unsuccessful.'}
 }
 start();
