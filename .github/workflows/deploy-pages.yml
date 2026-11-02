@@ -165,3 +165,15 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify the published state pages in Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install chromium
+          node scripts/verify-live-publication.mjs
+      - name: Preserve live-deployment screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-live-county-pages
+          path: postdeploy-checks/
+          retention-days: 14
