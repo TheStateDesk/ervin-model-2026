@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build current county watch pace targets from the national Ervin default.
+"""Build county watch benchmarks from preserved national Senate workbench data.
 
-Read exactly the public ERVIN_DATA object; use the same four publisher
-weights/freshness factor and Original Ervin correction as index.html.
-Benchmark inputs, NOT predicted county vote totals or conditional win odds.
+The public landing page no longer embeds the research workbench. Current
+polling and historic adjustment data live in research/senate-workbench-data.json.
+Benchmarks are not county vote totals or conditional win odds.
 """
 import datetime as dt
 import json
@@ -11,14 +11,11 @@ import math
 import pathlib
 import re
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-HTML=ROOT/"index.html"
+MODEL=ROOT/"research/senate-workbench-data.json"
 TARGET=ROOT/"counties-watch/forecast-baselines.json"
 WEIGHTS={"rcp":0.40,"ddhq":0.29,"win270":0.21,"silver":0.10}
 def parse():
- s=HTML.read_text(encoding="utf-8")
- m=re.search(r"window\.ERVIN_DATA = (\{[\s\S]*?\});\s*</script><script>",s)
- if m is None:raise ValueError("ERVIN_DATA JSON missing from website")
- return json.loads(m.group(1))
+ return json.loads(MODEL.read_text(encoding="utf-8"))
 def parse_date(raw,now):
  s=str(raw or "").strip()
  try:
