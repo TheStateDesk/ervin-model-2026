@@ -54,7 +54,7 @@ for(const [code,row] of Object.entries(senateForecast.states)){
 assert.equal(houseRegister.seats.length,435);
 for(const district of houseRegister.seats)assert(house.races[district.id], 'Missing House model source row '+district.id);
 assert.equal(governorRegister.races.length,36);
-assert(govData.races.every(x=>String(x.sourceUrl)&&String(x.resultUrl).startsWith('https://')), 'Historical governor evidence must have two provenance URLs');
+assert(govData.races.every(x=>String(x.sourceUrl).startsWith('https://')&&String(x.resultUrl).startsWith('https://')), 'Historical governor evidence must have two provenance URLs');
 const ledger=text('state/source-ledger.js');
 assert(ledger.includes('governorHistory')&&ledger.includes('senateHistory')&&ledger.includes('houseModel'),'Source ledger missing an office');
 const mapHTML=text('states/index.html'),mapJS=text('states/app.js'),stateHTML=text('state/index.html'),nightJS=text('state/county-night.js');
