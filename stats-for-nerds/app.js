@@ -216,45 +216,63 @@ function render(){
  $('manualList').innerHTML=manual.map(x=>'<div class="nerd-manual"><div><b>'+esc(x.id)+'</b> · what-if D share '+pct(share(baseline(x.id)+x.delta))+' · assumed '+pct(x.frac*100)+' reported · '+esc(x.mode)+'<br><small>Hypothetical, not official votes; D-R deviation: '+margin(x.delta)+'. '+(x.url?'<a target="_blank" rel="noopener noreferrer" href="'+esc(x.url)+'">Research link</a>':'No source link')+'</small></div><button type="button" class="nerd-button" data-remove="'+esc(x.id)+'">Remove</button></div>').join('');
 }
 async function json(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),11000);try{const r=await fetch(url,{cache:'no-store',signal:c.signal});if(!r.ok)throw Error('HTTP '+r.status);return r.json()}finally{clearTimeout(timer)}}
-function oaIndex(key){if(key.includes('-SENATE'))return key.slice(0,2);return key}
 async function refresh(force=false){
- if(!force&&Date.now()-lastCheck<60000)return;lastCheck=Date.now();
- const sourcesToFetch=[json('../stats-for-nerds/reviewed-signals.json'),
-  json('https://openamerica.io/elections/results.json?year=2026&office=House'),
-  json('https://openamerica.io/elections/results.json?year=2026&office=Senate')];
- const outcomes=await Promise.allSettled(sourcesToFetch);raw={};
- if(outcomes[0].status==='fulfilled'){
-  const v=outcomes[0].value;
-  reviewed=v?.election==='2026-11-03'&&v?.version===1&&Array.isArray(v.signals)?v.signals.slice(0,150):[];
+ if(!force&&Date.now()-lastCheck<60000)return;
+ lastCheck=Date.now();
+ const urls=[
+  '../stats-for-nerds/reviewed-signals.json',
+  '../civicapi/races.json',
+  '../civicapi/discovery.json',
+  'https://openamerica.io/elections/results.json?year=2026&office=House',
+  'https://openamerica.io/elections/results.json?year=2026&office=Senate'
+ ];
+ const outcomes=await Promise.allSettled(urls.map(json));
+ raw={};sourceSnapshot={civic:0,fallback:0};
+ const review=outcomes[0].status==='fulfilled'?outcomes[0].value:null;
+ reviewed=review?.version===1&&review.election==='2026-11-03'&&Array.isArray(review.signals)?review.signals.slice(0,150):[];
+ civicHealth=outcomes[2].status==='fulfilled'&&outcomes[2].value?.election==='2026-11-03'?outcomes[2].value:null;
+ const core=globalThis.ERVIN_RETURNS;
+ const civic=core&&outcomes[1].status==='fulfilled'?core.civic(outcomes[1].value):{};
+ const mirror={};
+ if(core){
+  if(outcomes[3].status==='fulfilled')Object.assign(mirror,core.openAmerica(outcomes[3].value,'House'));
+  if(outcomes[4].status==='fulfilled')Object.assign(mirror,core.openAmerica(outcomes[4].value,'Senate'));
  }
- const names=['House','Senate'];
- for(let i=1;i<=2;i++){
-  if(outcomes[i].status!=='fulfilled')continue;
-  const v=outcomes[i].value;
-  if(v?.api!==1||v.year!==2026||v.office!==names[i-1]||typeof v.races!=='object')continue;
-  for(const [id,row] of Object.entries(v.races)){
-   const key=String(id).toUpperCase();
-   const possible=specs.find(s=>i===1?s.id===key:(s.id.endsWith('-SENATE')&&s.id.slice(0,2)===key));
-   if(!possible||!Number.isSafeInteger(row?.total)||row.total<1||!Array.isArray(row.cands))continue;
-   const timestamp=Date.parse(v.as_of||'');
-   if(v.source!=='state'||!Number.isFinite(timestamp)||timestamp<Date.parse(closeTimes[possible.id])||timestamp>Date.now()+300000)continue;
-   const parties=Object.fromEntries(['D','R'].map(p=>[p,row.cands.filter(c=>c?.p===p&&Number.isSafeInteger(c?.v)&&c.v>=0).reduce((n,c)=>n+c.v,0)]));
-   const validParties=parties.D>0&&parties.R>0&&parties.D+parties.R<=row.total;
-   raw[possible.id]={total:row.total,asOf:v.as_of,provider:'Open America',marginD:validParties?100*(parties.D-parties.R)/(parties.D+parties.R):null};
-  }
+ const chosen=core?core.preferCivic(civic,mirror).races:{};
+ for(const signal of specs){
+  const row=chosen[signal.id];
+  if(!row||!Number.isSafeInteger(row.total)||row.total<=0||!Array.isArray(row.candidates))continue;
+  const dem=row.candidates.filter(c=>c.party==='D').reduce((v,c)=>v+c.votes,0);
+  const rep=row.candidates.filter(c=>c.party==='R').reduce((v,c)=>v+c.votes,0);
+  if(dem<=0||rep<=0||dem+rep>row.total)continue;
+  raw[signal.id]={total:row.total,asOf:row.asOf,provider:row.source,
+    marginD:100*(dem-rep)/(dem+rep),sourceURL:row.sourceURL};
+  if(row.source?.includes('CivicAPI'))sourceSnapshot.civic++;else sourceSnapshot.fallback++;
  }
- audit();
+ audit();render();
  const passed=Object.values(signalMeta).filter(x=>x.state==='approved').length;
- $('sourceStatus').textContent='Last source check: '+new Date().toLocaleString('en-US')+'. '+passed+' reviewed eligible signal(s). '+
- (outcomes[0].status==='fulfilled'?'Reviewed-intake file accessible.':'Reviewed-intake file unavailable; no new automatic inputs.')+
- ' Open America may report an unaudited contest total, which is flagged but not used.';
- render();
+ const eligible=Number(civicHealth?.registeredRaces);
+ const checked=Date.parse(civicHealth?.checkedAt||'');
+ const minutes=Number.isFinite(checked)?Math.max(0,Math.round((Date.now()-checked)/60000)):null;
+ const age=minutes===null?'collector update time unavailable':minutes+' min old';
+ const sourceBase=Number.isFinite(eligible)&&eligible>0?eligible+' of 488 registered CivicAPI races; ':'CivicAPI registry not yet verified; ';
+ $('watchSourceHealth').textContent=
+  'CivicAPI primary · '+sourceBase+age+'. '+sourceSnapshot.civic+' watched contests with attributed CivicAPI candidate totals; '+
+  sourceSnapshot.fallback+' watched contests on the separately attributed fallback. No partial result is automatically treated as representative. '+
+  (minutes!==null&&minutes>30?'The published collector snapshot is more than 30 minutes old. ':'')+
+  (passed?passed+' independently audited signals are eligible.':'No independently audited early signals are eligible.');
+ $('sourceStatus').textContent='Source audit · '+new Date().toLocaleString('en-US')+
+  ' · '+passed+' fully eligible early signal(s) · '+Object.keys(raw).length+' attributed reports. '+
+  (outcomes[0].status==='fulfilled'?'Reviewed-signal file checked. ':'Reviewed-signal file unavailable. ')+
+  'CivicAPI is preferred; older or lower-count results may defer to the fallback. Neither provider alone verifies mail/early versus election-day composition.';
 }
 async function init(){
  $('numWatch').textContent=specs.length;
  $('inputRace').innerHTML=specs.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.title)+'</option>').join('');
  $('inputRace').value='VA-02';
  $('refreshSignals').addEventListener('click',()=>refresh(true));
+ $('watchFilter')?.addEventListener('change',render);
+ $('watchSort')?.addEventListener('change',render);
  $('includeManual').onchange=e=>{includeManual=e.target.checked;render()};
  $('clearManual').onclick=()=>{manual=[];render()};
  $('whatifForm').addEventListener('submit',e=>{
