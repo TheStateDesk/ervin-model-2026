@@ -154,6 +154,7 @@ function historicCounty(code,name,fips){
 function applyCountyLayer(){
  if(!current)return;
  const mode=$('countyMapMode')?.value||'2024',paths=$('countyMap').querySelectorAll('path.county');
+  if(mode==='2026live'&&window.ErvinCountyLayer){window.ErvinCountyLayer();return;}
  let n=0;
  for(const p of paths){
   const info=historicCounty(current.code,p.dataset.name,p.dataset.fips);
@@ -199,7 +200,7 @@ async function drawMap(r){
    for(const item of list)if(String(item.id).padStart(5,'0').startsWith(fips))features.push(item);
    if(!features.length)throw Error('No county boundaries for '+r.code);
    const geo={type:'FeatureCollection',features};
-   projection=d3.geoIdentity().fitExtent([[25,20],[875,550]],geo);
+   projection=d3.geoAlbersUsa().fitExtent([[25,20],[875,550]],geo);
    path=d3.geoPath(projection);
   }
   if(current!==r)return;
@@ -212,7 +213,7 @@ async function drawMap(r){
   }
   applyCountyLayer();
  $('countyCount').textContent=features.length+' county outlines';
-  $('mapProvenance').textContent=(r.office==='House'?'County shapes are statewide context, NOT the House district boundary. ': '')+(r.code==='MI'?'Michigan county GeoJSON hosted by the Ervin Model.':'U.S. county boundary geography: us-atlas / U.S. Census cartographic boundaries.')+' All areas are neutral because no verified 2026 county results are ingested for this election dossier.';
+  $('mapProvenance').textContent=(r.office==='House'?'County shapes are statewide context, NOT the House district boundary. ': '')+(r.code==='MI'?'Michigan county GeoJSON hosted by the Ervin Model.':'U.S. county boundary geography: us-atlas / U.S. Census cartographic boundaries.')+' Historical colors reflect sourced past elections; 2026 colors require verified local results.';
   $('countyInspector').textContent='Select any county for available 2016/2020/2024 historical context. 2026 returns are not attached.'+(r.office==='House'?' The congressional district is NOT outlined.':'');
  }catch(err){if(current===r)fallbackMap(r,'County outlines could not be loaded in this browser.');console.warn('County geometry fallback:',err.message)}
 }
