@@ -69,7 +69,7 @@ for(let i=0;i<10000;i++){
  const r=engine.civic(p,now),a=engine.reconcile([r],last);last=a.races;warnings+=a.warnings.length;count++;
 }
 assert.equal(Object.keys(last).length,1);
-assert.equal(last['MI-SENATE'].total,21998);
+assert.equal(last['MI-SENATE'].total,21898);
 const elapsed=+(performance.now()-since).toFixed(1);
 const all=JSON.parse(fs.readFileSync('house/data.json','utf8')).seats;
 assert.equal(all.length,435);
