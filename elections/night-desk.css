@@ -66,3 +66,19 @@ html:not(.light) body #countyMap .geo-district{fill:#497898;stroke:#193d59}
  .er-map-actions input{width:min(100%,320px)!important}
  .er-map-actions button{justify-self:start}
 }
+
+
+/* Searchable county research without turning ordinal House ratings into numeric votes. */
+.er-county-table-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:13px 0}
+.er-county-table-controls input,.er-county-table-controls select{background:var(--surface2);color:var(--text);border:1px solid var(--edge);border-radius:9px;padding:10px 12px;font:inherit;font-size:13px;max-width:100%}
+.er-county-table-controls input{flex:1;min-width:min(215px,100%)}
+.er-county-table-controls button{background:var(--surface2);color:var(--text);border:1px solid var(--edge);padding:10px 12px;border-radius:9px;font-size:12px;font-weight:750;cursor:pointer}
+.er-county-table-scroller{max-height:560px;overflow:auto;border:1px solid var(--edge);border-radius:11px}
+.er-county-table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.er-county-table thead th{position:sticky;top:0;background:var(--surface2);border-bottom:1px solid var(--edge);font-size:11px;text-align:right;padding:13px 9px;z-index:1}
+.er-county-table thead th:first-child{text-align:left}
+.er-county-table tbody td,.er-county-table tbody th{border-bottom:1px solid var(--edge);text-align:right;padding:10px 9px;background:var(--surface)}
+.er-county-table tbody th{text-align:left;min-width:140px;font-weight:750}
+.er-county-table tbody th small{display:block;color:var(--muted);font-size:9px;font-weight:500}
+.er-county-table tbody tr:hover th,.er-county-table tbody tr:hover td{background:var(--surface2)}
+@media(max-width:760px){.er-county-table-controls{align-items:stretch}.er-county-table-controls input{flex-basis:100%}.er-county-table{font-size:11px}.er-county-table thead th{font-size:10px;padding:10px 7px}.er-county-table tbody td,.er-county-table tbody th{padding:9px 7px}}
