@@ -15,9 +15,9 @@
 <div class="race-dashboard">
 <aside class="race-panel race-left" aria-label="Election navigation"><div class="race-kicker">Explore elections</div><h2 style="margin:5px 0 10px">Race selector</h2><div class="race-list" id="raceList">Loading…</div></aside>
 <div class="race-center">
-<section class="race-panel" id="mapSection"><div class="race-map-head"><div><div class="race-kicker">Geographic election map</div><h2 id="mapTitle">County-level map</h2><p class="race-muted" style="margin:4px 0">County outlines are geographic context, not predicted results.</p></div><span class="race-flag" id="countyCount">Loading map</span></div>
+<section class="race-panel" id="mapSection"><div class="race-map-head"><div><div class="race-kicker">Geographic election map</div><h2 id="mapTitle">County-level map</h2><p class="race-muted" style="margin:4px 0">County outlines are geographic context, not predicted results.</p></div><div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center"><label class="race-muted" for="countyMapMode">Map layer <select id="countyMapMode" aria-label="Select historical county map layer"><option value="2024">2024 presidential history</option><option value="swing">2020–2024 presidential swing</option><option value="unreported">2026 unreported geography</option></select></label><span class="race-flag" id="countyCount">Loading map</span></div></div>
 <div class="race-map-frame"><svg id="countyMap" role="group" aria-label="State map with clickable counties" viewBox="0 0 900 580"><text x="450" y="280" text-anchor="middle" fill="#8298aa">Loading geographic boundaries…</text></svg></div>
-<div class="race-map-legend"><span class="race-key"></span> No verified 2026 county results <span style="margin-left:auto" id="mapDate">2026 pre-election</span></div>
+<div class="race-map-legend"><span class="race-key"></span> <span id="countyMapLegend">Historical baseline where sourced; gray = history unavailable</span> <span style="margin-left:auto" id="mapDate">2026 pre-election</span></div>
 <div class="race-county-detail" id="countyInspector" aria-live="polite">Select a county to inspect its geographic information and any available verified election returns.</div>
 <p class="race-map-note" id="mapProvenance">Boundaries are for navigation only. A county appearing on this map does not imply any data has been reported.</p>
 </section>
