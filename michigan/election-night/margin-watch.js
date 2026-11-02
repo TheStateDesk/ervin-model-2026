@@ -15,10 +15,9 @@ function readCounts(){
 }
 async function baseline(){
  try{
-  const res=await fetch('../../index.html',{cache:'force-cache'});if(!res.ok)throw Error('Model source unavailable');
-  const html=await res.text(),mark='window.ERVIN_DATA = ',start=html.indexOf(mark)+mark.length,end=html.indexOf(';\n\n</script><script>',start);
-  if(start<mark.length||end<start)throw Error('Model data unavailable');
-  const mi=JSON.parse(html.slice(start,end)).states.find(x=>x.code==='MI');if(!mi)throw Error('Michigan forecast unavailable');
+  const res=await fetch('../../research/senate-workbench-data.json',{cache:'force-cache'});if(!res.ok)throw Error('Model source unavailable');
+  const config=await res.json();
+  const mi=config?.states?.find(x=>x.code==='MI');if(!mi)throw Error('Michigan forecast unavailable');
   const shares={rcp:.40,ddhq:.29,win270:.21,silver:.10};
   const selected=Object.entries(shares).filter(([key])=>mi.sources?.[key]&&!mi.sources[key].proxy&&Number.isFinite(+mi.sources[key].value));
   if(!selected.length)throw Error('No comparable current polling sources');
