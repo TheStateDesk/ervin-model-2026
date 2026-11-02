@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
+let historicalError=null;let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
 let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -168,11 +168,16 @@ function renderDistrictDetail(r){
  if(!r)return;selectedDistrict=r;
  const model=getModel(r),rating=model?.modelRating||r.rating||'No model rating available';
  const p=housePolls[r.id],indexed=coverage.house?.districts?.[r.id],verified=houseVerified.races?.[r.id]||[];
+ const historicalHouse=historicalError?.house?.unchangedDistrictHoldout;
+ const historicalP90=Number(historicalHouse?.p90Abs);
+ const comparableHistorical=model&&!model.changed2026Map&&Number.isFinite(historicalP90);
+ const historicalDisplay=model?.changed2026Map?'Not comparable':comparableHistorical?'±'+historicalP90.toFixed(1)+' pts':'Unverified';
+ const historicalDetail=model?.changed2026Map?'Redrawn boundaries: historic 2022→24 district errors do not apply':comparableHistorical?'90th percentile absolute historical 2022→24 margin error · '+historicalHouse.n+' comparable districts · not 2026 MOE':'Insufficient comparable archived historical results';
  $('districtTitle').textContent=r.state+' District '+Number(r.district);
  const source='<div class="ed-kicker">2026 HOUSE ELECTION · '+esc(r.id)+'</div>';
- const top=model?'<div class="ed-house-grade"><div><small>ERVIN HOUSE · PROVISIONAL MODEL</small><strong>'+esc(model.modelRating)+'</strong><span>Modeled margin: '+esc(modeledMargin(model.marginD))+'</span></div><div><small>SENSITIVITY / EVIDENCE</small><strong>±'+esc(model.uncertaintySensitivity.toFixed(0))+' pts</strong><span>'+esc(model.confidence)+' confidence in inputs · not a calibrated interval</span></div></div>'+
+ const top=model?'<div class="ed-house-grade"><div><small>ERVIN HOUSE · PROVISIONAL MODEL</small><strong>'+esc(model.modelRating)+'</strong><span>Modeled margin: '+esc(modeledMargin(model.marginD))+'</span></div><div><small>HISTORICAL ERROR EVIDENCE</small><strong>'+esc(historicalDisplay)+'</strong><span>'+esc(historicalDetail)+'</span></div></div>'+
  '<div class="ed-house-minigrid"><div><small>Comparable poll rows used</small><strong>'+fmt(model.pollEvidence)+'</strong></div><div><small>Published poll count in index</small><strong>'+fmt(model.publishedSurveyCount)+'</strong></div><div><small>Independent Cook entry</small><strong>'+esc(model.sourceRating||'Not stored')+'</strong></div></div>'+
- '<p class="ed-mini">'+esc(model.methodNote)+'</p>'+
+ '<p class="ed-mini">'+esc(model.methodNote)+' · Independent 2026 scenario sensitivity ±'+esc(model.uncertaintySensitivity.toFixed(0))+' D−R points (heuristic, not calibrated).</p>'+
  (model.changed2026Map?'<p class="ed-notice">Boundary warning: this state has a changed 2026 congressional map. The 2022/2024 returns refer to the previous district lines and may not measure the same voters. The SVG is also a reference boundary, not a certified 2026 district.</p>':'')+
  '<details class="ed-model-math"><summary>See exactly how this rating was calculated</summary><div class="ed-model-calculation"><p>'+esc(formatHouseYear(model.historic?.['2022'],'2022'))+'</p><p>'+esc(formatHouseYear(model.historic?.['2024'],'2024'))+'</p><p>National House generic ballot: <strong>'+esc(modeledMargin(model.generic2026D))+'</strong> · Partial state historical polling-error adjustment: '+esc(model.stateErrorPartialCorrection.toFixed(2))+' points.</p><p>History-plus-national scenario: <strong>'+esc(modeledMargin(model.fundamentalsD))+'</strong> · Compatible district survey blend: <strong>'+esc(modeledMargin(model.pollMeanD))+'</strong> · District polling weight: <strong>'+esc(Math.round(model.pollWeight*100))+'%</strong> · Combined Ervin estimate: <strong>'+esc(modeledMargin(model.marginD))+'</strong>.</p><p>The sensitivity is a scenario range, not a statistical confidence interval or a validated win probability. Different election systems, uncontested historical races, changes in district lines and poll sponsors can significantly change it.</p></div></details>':
  '<div class="ed-stat" style="margin:14px 0"><small>Current rating</small><strong>'+esc(r.rating||'Not available')+'</strong></div><p class="ed-notice">The independent 435-district model file is unavailable. This page is showing only its older poll and rating references; do not interpret missing results as a model forecast.</p>';
@@ -334,12 +339,13 @@ async function start(){
     fetchJSON('../house/ervin-forecast-2026-11-02.json'),
     fetchJSON('../house/poll-questions-2026-11-02.json'),
     fetchJSON('../research/governor-same-office-2014-2024.json'),
-    fetchJSON('../house/candidates-2026.json')];
+    fetchJSON('../house/candidates-2026.json'),
+    fetchJSON('../research/election-night-historical-moe-2026.json')];
   const updated=Promise.allSettled(optionalFiles).then(results=>{
    const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
    baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
-   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;houseRoster=values[14]||houseRoster;
+   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;houseRoster=values[14]||houseRoster;historicalError=values[15]?.version===1?values[15]:null;
    if(values[13]&&window.ERVIN_STATEWIDE){const cal=window.ERVIN_STATEWIDE.apply(values[13],{races:governors},{states:baselines});governorErvin=Object.fromEntries(cal.governor.map(g=>[g.code,g]));}
    pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
    renderLead();renderOverview();renderPolls();
