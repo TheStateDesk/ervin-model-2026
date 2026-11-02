@@ -1,0 +1,1411 @@
+{
+  "asOf": "2026-11-02",
+  "type": "historical-lagged-margin-control-not-Ervin-house-model-backtest",
+  "method": "2022 party-margin held forward to the 2024 result in districts with verified comparable 2022 and 2024 House contests, excluding 2026-redrawn flags and known historical proxy records. National-trend version shifts the 2022 margin by the difference in the historical national House D-R baselines. This is NOT a backtest of the full 2026 House model: its 2026 polling inputs, current generic ballot and adaptive poll weight have no analogous frozen historical inputs in this repository.",
+  "rows": 232,
+  "baseline": {
+    "n": 232,
+    "mae": 4.22,
+    "winnerMatch": 222
+  },
+  "trendAdjusted": {
+    "n": 232,
+    "mae": 4.23,
+    "winnerMatch": 222
+  },
+  "excluded": 203,
+  "records": [
+    {
+      "id": "AK-01",
+      "predicted2024Margin": -0.32,
+      "actual2024Margin": -1.05,
+      "adjustedByNationalTrend": -0.24600000000000016
+    },
+    {
+      "id": "AZ-01",
+      "predicted2024Margin": -0.88,
+      "actual2024Margin": -3.81,
+      "adjustedByNationalTrend": -0.8060000000000002
+    },
+    {
+      "id": "AZ-02",
+      "predicted2024Margin": -7.74,
+      "actual2024Margin": -8.96,
+      "adjustedByNationalTrend": -7.666
+    },
+    {
+      "id": "AZ-03",
+      "predicted2024Margin": 53.96,
+      "actual2024Margin": 45.49,
+      "adjustedByNationalTrend": 54.034
+    },
+    {
+      "id": "AZ-04",
+      "predicted2024Margin": 12.21,
+      "actual2024Margin": 7.42,
+      "adjustedByNationalTrend": 12.284
+    },
+    {
+      "id": "AZ-05",
+      "predicted2024Margin": -20.54,
+      "actual2024Margin": -20.78,
+      "adjustedByNationalTrend": -20.466
+    },
+    {
+      "id": "AZ-06",
+      "predicted2024Margin": -1.48,
+      "actual2024Margin": -2.57,
+      "adjustedByNationalTrend": -1.4060000000000001
+    },
+    {
+      "id": "AZ-07",
+      "predicted2024Margin": 29.09,
+      "actual2024Margin": 26.9,
+      "adjustedByNationalTrend": 29.164
+    },
+    {
+      "id": "AR-01",
+      "predicted2024Margin": -47.6,
+      "actual2024Margin": -50.46,
+      "adjustedByNationalTrend": -47.526
+    },
+    {
+      "id": "AR-02",
+      "predicted2024Margin": -26.01,
+      "actual2024Margin": -17.87,
+      "adjustedByNationalTrend": -25.936
+    },
+    {
+      "id": "AR-03",
+      "predicted2024Margin": -31.89,
+      "actual2024Margin": -33.52,
+      "adjustedByNationalTrend": -31.816000000000003
+    },
+    {
+      "id": "AR-04",
+      "predicted2024Margin": -46.11,
+      "actual2024Margin": -45.82,
+      "adjustedByNationalTrend": -46.036
+    },
+    {
+      "id": "CO-01",
+      "predicted2024Margin": 64.17,
+      "actual2024Margin": 56.03,
+      "adjustedByNationalTrend": 64.244
+    },
+    {
+      "id": "CO-02",
+      "predicted2024Margin": 42.83,
+      "actual2024Margin": 40.52,
+      "adjustedByNationalTrend": 42.903999999999996
+    },
+    {
+      "id": "CO-03",
+      "predicted2024Margin": -0.17,
+      "actual2024Margin": -5.16,
+      "adjustedByNationalTrend": -0.09600000000000017
+    },
+    {
+      "id": "CO-04",
+      "predicted2024Margin": -25,
+      "actual2024Margin": -12.13,
+      "adjustedByNationalTrend": -24.926000000000002
+    },
+    {
+      "id": "CO-05",
+      "predicted2024Margin": -16.28,
+      "actual2024Margin": -14.44,
+      "adjustedByNationalTrend": -16.206000000000003
+    },
+    {
+      "id": "CO-06",
+      "predicted2024Margin": 23.64,
+      "actual2024Margin": 21.06,
+      "adjustedByNationalTrend": 23.714
+    },
+    {
+      "id": "CO-07",
+      "predicted2024Margin": 15.32,
+      "actual2024Margin": 14.7,
+      "adjustedByNationalTrend": 15.394
+    },
+    {
+      "id": "CO-08",
+      "predicted2024Margin": 0.72,
+      "actual2024Margin": -0.76,
+      "adjustedByNationalTrend": 0.7939999999999998
+    },
+    {
+      "id": "CT-01",
+      "predicted2024Margin": 22.58,
+      "actual2024Margin": 26.44,
+      "adjustedByNationalTrend": 22.653999999999996
+    },
+    {
+      "id": "CT-02",
+      "predicted2024Margin": 18.34,
+      "actual2024Margin": 16.03,
+      "adjustedByNationalTrend": 18.414
+    },
+    {
+      "id": "CT-03",
+      "predicted2024Margin": 16.57,
+      "actual2024Margin": 19.64,
+      "adjustedByNationalTrend": 16.644
+    },
+    {
+      "id": "CT-04",
+      "predicted2024Margin": 20.09,
+      "actual2024Margin": 24.1,
+      "adjustedByNationalTrend": 20.164
+    },
+    {
+      "id": "CT-05",
+      "predicted2024Margin": 0.19,
+      "actual2024Margin": 4.28,
+      "adjustedByNationalTrend": 0.26399999999999985
+    },
+    {
+      "id": "DE-01",
+      "predicted2024Margin": 12.7,
+      "actual2024Margin": 15.73,
+      "adjustedByNationalTrend": 12.774
+    },
+    {
+      "id": "GA-01",
+      "predicted2024Margin": -18.29,
+      "actual2024Margin": -23.97,
+      "adjustedByNationalTrend": -18.216
+    },
+    {
+      "id": "GA-02",
+      "predicted2024Margin": 9.95,
+      "actual2024Margin": 12.66,
+      "adjustedByNationalTrend": 10.024
+    },
+    {
+      "id": "GA-03",
+      "predicted2024Margin": -37.5,
+      "actual2024Margin": -32.61,
+      "adjustedByNationalTrend": -37.426
+    },
+    {
+      "id": "GA-04",
+      "predicted2024Margin": 56.97,
+      "actual2024Margin": 51.17,
+      "adjustedByNationalTrend": 57.044
+    },
+    {
+      "id": "GA-05",
+      "predicted2024Margin": 64.96,
+      "actual2024Margin": 71.36,
+      "adjustedByNationalTrend": 65.03399999999999
+    },
+    {
+      "id": "GA-06",
+      "predicted2024Margin": -24.44,
+      "actual2024Margin": 49.37,
+      "adjustedByNationalTrend": -24.366
+    },
+    {
+      "id": "GA-07",
+      "predicted2024Margin": 21.74,
+      "actual2024Margin": -29.7,
+      "adjustedByNationalTrend": 21.814
+    },
+    {
+      "id": "GA-08",
+      "predicted2024Margin": -37.15,
+      "actual2024Margin": -37.83,
+      "adjustedByNationalTrend": -37.076
+    },
+    {
+      "id": "GA-09",
+      "predicted2024Margin": -44.71,
+      "actual2024Margin": -38.01,
+      "adjustedByNationalTrend": -44.636
+    },
+    {
+      "id": "GA-10",
+      "predicted2024Margin": -29.07,
+      "actual2024Margin": -26.1,
+      "adjustedByNationalTrend": -28.996000000000002
+    },
+    {
+      "id": "GA-11",
+      "predicted2024Margin": -25.2,
+      "actual2024Margin": -34.62,
+      "adjustedByNationalTrend": -25.125999999999998
+    },
+    {
+      "id": "GA-12",
+      "predicted2024Margin": -19.19,
+      "actual2024Margin": -20.64,
+      "adjustedByNationalTrend": -19.116
+    },
+    {
+      "id": "GA-13",
+      "predicted2024Margin": 63.55,
+      "actual2024Margin": 43.67,
+      "adjustedByNationalTrend": 63.623999999999995
+    },
+    {
+      "id": "GA-14",
+      "predicted2024Margin": -31.73,
+      "actual2024Margin": -28.74,
+      "adjustedByNationalTrend": -31.656
+    },
+    {
+      "id": "HI-01",
+      "predicted2024Margin": 47.41,
+      "actual2024Margin": 43.68,
+      "adjustedByNationalTrend": 47.483999999999995
+    },
+    {
+      "id": "HI-02",
+      "predicted2024Margin": 27.59,
+      "actual2024Margin": 37.56,
+      "adjustedByNationalTrend": 27.664
+    },
+    {
+      "id": "ID-01",
+      "predicted2024Margin": -46.09,
+      "actual2024Margin": -47.23,
+      "adjustedByNationalTrend": -46.016000000000005
+    },
+    {
+      "id": "ID-02",
+      "predicted2024Margin": -27.18,
+      "actual2024Margin": -32.92,
+      "adjustedByNationalTrend": -27.106
+    },
+    {
+      "id": "IL-01",
+      "predicted2024Margin": 34.07,
+      "actual2024Margin": 31.7,
+      "adjustedByNationalTrend": 34.144
+    },
+    {
+      "id": "IL-02",
+      "predicted2024Margin": 34.26,
+      "actual2024Margin": 35.12,
+      "adjustedByNationalTrend": 34.333999999999996
+    },
+    {
+      "id": "IL-03",
+      "predicted2024Margin": 37,
+      "actual2024Margin": 34.58,
+      "adjustedByNationalTrend": 37.074
+    },
+    {
+      "id": "IL-04",
+      "predicted2024Margin": 41.81,
+      "actual2024Margin": 42.43,
+      "adjustedByNationalTrend": 41.884
+    },
+    {
+      "id": "IL-05",
+      "predicted2024Margin": 41.42,
+      "actual2024Margin": 37.94,
+      "adjustedByNationalTrend": 41.494
+    },
+    {
+      "id": "IL-06",
+      "predicted2024Margin": 8.72,
+      "actual2024Margin": 8.42,
+      "adjustedByNationalTrend": 8.794
+    },
+    {
+      "id": "IL-08",
+      "predicted2024Margin": 13.78,
+      "actual2024Margin": 14.11,
+      "adjustedByNationalTrend": 13.854
+    },
+    {
+      "id": "IL-09",
+      "predicted2024Margin": 43.39,
+      "actual2024Margin": 36.78,
+      "adjustedByNationalTrend": 43.464
+    },
+    {
+      "id": "IL-10",
+      "predicted2024Margin": 26,
+      "actual2024Margin": 19.96,
+      "adjustedByNationalTrend": 26.073999999999998
+    },
+    {
+      "id": "IL-11",
+      "predicted2024Margin": 12.91,
+      "actual2024Margin": 11.18,
+      "adjustedByNationalTrend": 12.984
+    },
+    {
+      "id": "IL-12",
+      "predicted2024Margin": -50,
+      "actual2024Margin": -48.39,
+      "adjustedByNationalTrend": -49.926
+    },
+    {
+      "id": "IL-13",
+      "predicted2024Margin": 13.23,
+      "actual2024Margin": 16.23,
+      "adjustedByNationalTrend": 13.304
+    },
+    {
+      "id": "IL-14",
+      "predicted2024Margin": 8.32,
+      "actual2024Margin": 10.21,
+      "adjustedByNationalTrend": 8.394
+    },
+    {
+      "id": "IL-17",
+      "predicted2024Margin": 3.97,
+      "actual2024Margin": 8.85,
+      "adjustedByNationalTrend": 4.0440000000000005
+    },
+    {
+      "id": "IN-01",
+      "predicted2024Margin": 5.68,
+      "actual2024Margin": 8.63,
+      "adjustedByNationalTrend": 5.754
+    },
+    {
+      "id": "IN-02",
+      "predicted2024Margin": -33.17,
+      "actual2024Margin": -28.9,
+      "adjustedByNationalTrend": -33.096000000000004
+    },
+    {
+      "id": "IN-03",
+      "predicted2024Margin": -36.95,
+      "actual2024Margin": -34.87,
+      "adjustedByNationalTrend": -36.876000000000005
+    },
+    {
+      "id": "IN-04",
+      "predicted2024Margin": -36.43,
+      "actual2024Margin": -35.4,
+      "adjustedByNationalTrend": -36.356
+    },
+    {
+      "id": "IN-05",
+      "predicted2024Margin": -22.14,
+      "actual2024Margin": -19.64,
+      "adjustedByNationalTrend": -22.066000000000003
+    },
+    {
+      "id": "IN-06",
+      "predicted2024Margin": -35.06,
+      "actual2024Margin": -33.7,
+      "adjustedByNationalTrend": -34.986000000000004
+    },
+    {
+      "id": "IN-07",
+      "predicted2024Margin": 37.25,
+      "actual2024Margin": 40.48,
+      "adjustedByNationalTrend": 37.324
+    },
+    {
+      "id": "IN-08",
+      "predicted2024Margin": -35.17,
+      "actual2024Margin": -39.53,
+      "adjustedByNationalTrend": -35.096000000000004
+    },
+    {
+      "id": "IN-09",
+      "predicted2024Margin": -30.83,
+      "actual2024Margin": -32.56,
+      "adjustedByNationalTrend": -30.756
+    },
+    {
+      "id": "IA-01",
+      "predicted2024Margin": -6.81,
+      "actual2024Margin": -0.19,
+      "adjustedByNationalTrend": -6.736
+    },
+    {
+      "id": "IA-02",
+      "predicted2024Margin": -8.25,
+      "actual2024Margin": -15.78,
+      "adjustedByNationalTrend": -8.176
+    },
+    {
+      "id": "IA-03",
+      "predicted2024Margin": -0.69,
+      "actual2024Margin": -3.83,
+      "adjustedByNationalTrend": -0.6160000000000001
+    },
+    {
+      "id": "IA-04",
+      "predicted2024Margin": -37.77,
+      "actual2024Margin": -34.44,
+      "adjustedByNationalTrend": -37.696000000000005
+    },
+    {
+      "id": "KS-01",
+      "predicted2024Margin": -35.33,
+      "actual2024Margin": -38.27,
+      "adjustedByNationalTrend": -35.256
+    },
+    {
+      "id": "KS-02",
+      "predicted2024Margin": -15.28,
+      "actual2024Margin": -19.81,
+      "adjustedByNationalTrend": -15.206
+    },
+    {
+      "id": "KS-03",
+      "predicted2024Margin": 12.46,
+      "actual2024Margin": 11.21,
+      "adjustedByNationalTrend": 12.534
+    },
+    {
+      "id": "KS-04",
+      "predicted2024Margin": -26.68,
+      "actual2024Margin": -30.1,
+      "adjustedByNationalTrend": -26.606
+    },
+    {
+      "id": "KY-01",
+      "predicted2024Margin": -49.81,
+      "actual2024Margin": -49.43,
+      "adjustedByNationalTrend": -49.736000000000004
+    },
+    {
+      "id": "KY-02",
+      "predicted2024Margin": -43.72,
+      "actual2024Margin": -46.2,
+      "adjustedByNationalTrend": -43.646
+    },
+    {
+      "id": "KY-03",
+      "predicted2024Margin": 24,
+      "actual2024Margin": 23.91,
+      "adjustedByNationalTrend": 24.073999999999998
+    },
+    {
+      "id": "KY-06",
+      "predicted2024Margin": -30.18,
+      "actual2024Margin": -26.07,
+      "adjustedByNationalTrend": -30.106
+    },
+    {
+      "id": "ME-01",
+      "predicted2024Margin": 25.93,
+      "actual2024Margin": 23.46,
+      "adjustedByNationalTrend": 26.003999999999998
+    },
+    {
+      "id": "ME-02",
+      "predicted2024Margin": 6.1,
+      "actual2024Margin": 0.69,
+      "adjustedByNationalTrend": 6.1739999999999995
+    },
+    {
+      "id": "MD-01",
+      "predicted2024Margin": -11.59,
+      "actual2024Margin": -22.77,
+      "adjustedByNationalTrend": -11.516
+    },
+    {
+      "id": "MD-02",
+      "predicted2024Margin": 18.62,
+      "actual2024Margin": 19.08,
+      "adjustedByNationalTrend": 18.694000000000003
+    },
+    {
+      "id": "MD-03",
+      "predicted2024Margin": 20.5,
+      "actual2024Margin": 22.04,
+      "adjustedByNationalTrend": 20.573999999999998
+    },
+    {
+      "id": "MD-04",
+      "predicted2024Margin": 80.65,
+      "actual2024Margin": 77.45,
+      "adjustedByNationalTrend": 80.724
+    },
+    {
+      "id": "MD-05",
+      "predicted2024Margin": 32,
+      "actual2024Margin": 35.83,
+      "adjustedByNationalTrend": 32.074
+    },
+    {
+      "id": "MD-06",
+      "predicted2024Margin": 9.58,
+      "actual2024Margin": 6.34,
+      "adjustedByNationalTrend": 9.654
+    },
+    {
+      "id": "MD-07",
+      "predicted2024Margin": 64.49,
+      "actual2024Margin": 64.76,
+      "adjustedByNationalTrend": 64.564
+    },
+    {
+      "id": "MD-08",
+      "predicted2024Margin": 63.08,
+      "actual2024Margin": 57.93,
+      "adjustedByNationalTrend": 63.153999999999996
+    },
+    {
+      "id": "MA-08",
+      "predicted2024Margin": 39.64,
+      "actual2024Margin": 41.16,
+      "adjustedByNationalTrend": 39.714
+    },
+    {
+      "id": "MA-09",
+      "predicted2024Margin": 18.4,
+      "actual2024Margin": 13.04,
+      "adjustedByNationalTrend": 18.473999999999997
+    },
+    {
+      "id": "MI-01",
+      "predicted2024Margin": -23.17,
+      "actual2024Margin": -21.88,
+      "adjustedByNationalTrend": -23.096000000000004
+    },
+    {
+      "id": "MI-02",
+      "predicted2024Margin": -29.99,
+      "actual2024Margin": -34.54,
+      "adjustedByNationalTrend": -29.915999999999997
+    },
+    {
+      "id": "MI-03",
+      "predicted2024Margin": 13.33,
+      "actual2024Margin": 10.15,
+      "adjustedByNationalTrend": 13.404
+    },
+    {
+      "id": "MI-04",
+      "predicted2024Margin": -12.28,
+      "actual2024Margin": -11.89,
+      "adjustedByNationalTrend": -12.206
+    },
+    {
+      "id": "MI-05",
+      "predicted2024Margin": -28.18,
+      "actual2024Margin": -33.44,
+      "adjustedByNationalTrend": -28.106
+    },
+    {
+      "id": "MI-06",
+      "predicted2024Margin": 31.78,
+      "actual2024Margin": 27.85,
+      "adjustedByNationalTrend": 31.854
+    },
+    {
+      "id": "MI-07",
+      "predicted2024Margin": 5.52,
+      "actual2024Margin": -3.84,
+      "adjustedByNationalTrend": 5.593999999999999
+    },
+    {
+      "id": "MI-08",
+      "predicted2024Margin": 10.7,
+      "actual2024Margin": 6.93,
+      "adjustedByNationalTrend": 10.774
+    },
+    {
+      "id": "MI-09",
+      "predicted2024Margin": -31.66,
+      "actual2024Margin": -38.7,
+      "adjustedByNationalTrend": -31.586
+    },
+    {
+      "id": "MI-10",
+      "predicted2024Margin": -0.51,
+      "actual2024Margin": -6.38,
+      "adjustedByNationalTrend": -0.43600000000000017
+    },
+    {
+      "id": "MI-11",
+      "predicted2024Margin": 22.64,
+      "actual2024Margin": 19.02,
+      "adjustedByNationalTrend": 22.714
+    },
+    {
+      "id": "MI-12",
+      "predicted2024Margin": 45.91,
+      "actual2024Margin": 46.51,
+      "adjustedByNationalTrend": 45.983999999999995
+    },
+    {
+      "id": "MI-13",
+      "predicted2024Margin": 49.57,
+      "actual2024Margin": 47.34,
+      "adjustedByNationalTrend": 49.644
+    },
+    {
+      "id": "MN-01",
+      "predicted2024Margin": -11.98,
+      "actual2024Margin": -17.11,
+      "adjustedByNationalTrend": -11.906
+    },
+    {
+      "id": "MN-02",
+      "predicted2024Margin": 5.41,
+      "actual2024Margin": 13.78,
+      "adjustedByNationalTrend": 5.484
+    },
+    {
+      "id": "MN-03",
+      "predicted2024Margin": 19.21,
+      "actual2024Margin": 16.99,
+      "adjustedByNationalTrend": 19.284
+    },
+    {
+      "id": "MN-04",
+      "predicted2024Margin": 35.38,
+      "actual2024Margin": 34.73,
+      "adjustedByNationalTrend": 35.454
+    },
+    {
+      "id": "MN-05",
+      "predicted2024Margin": 50.37,
+      "actual2024Margin": 50.35,
+      "adjustedByNationalTrend": 50.443999999999996
+    },
+    {
+      "id": "MN-06",
+      "predicted2024Margin": -24.23,
+      "actual2024Margin": -25.07,
+      "adjustedByNationalTrend": -24.156
+    },
+    {
+      "id": "MN-07",
+      "predicted2024Margin": -41.6,
+      "actual2024Margin": -41.05,
+      "adjustedByNationalTrend": -41.526
+    },
+    {
+      "id": "MN-08",
+      "predicted2024Margin": -14.48,
+      "actual2024Margin": -16.09,
+      "adjustedByNationalTrend": -14.406
+    },
+    {
+      "id": "MS-01",
+      "predicted2024Margin": -45.95,
+      "actual2024Margin": -39.62,
+      "adjustedByNationalTrend": -45.876000000000005
+    },
+    {
+      "id": "MS-02",
+      "predicted2024Margin": 20.2,
+      "actual2024Margin": 24.03,
+      "adjustedByNationalTrend": 20.274
+    },
+    {
+      "id": "MS-04",
+      "predicted2024Margin": -49.76,
+      "actual2024Margin": -47.9,
+      "adjustedByNationalTrend": -49.686
+    },
+    {
+      "id": "MO-01",
+      "predicted2024Margin": 49.93,
+      "actual2024Margin": 61.04,
+      "adjustedByNationalTrend": 50.004
+    },
+    {
+      "id": "MO-02",
+      "predicted2024Margin": -12.09,
+      "actual2024Margin": -12.37,
+      "adjustedByNationalTrend": -12.016
+    },
+    {
+      "id": "MO-03",
+      "predicted2024Margin": -30.22,
+      "actual2024Margin": -26.93,
+      "adjustedByNationalTrend": -30.146
+    },
+    {
+      "id": "MO-04",
+      "predicted2024Margin": -46.12,
+      "actual2024Margin": -45.82,
+      "adjustedByNationalTrend": -46.046
+    },
+    {
+      "id": "MO-05",
+      "predicted2024Margin": 25.23,
+      "actual2024Margin": 24.6,
+      "adjustedByNationalTrend": 25.304000000000002
+    },
+    {
+      "id": "MO-06",
+      "predicted2024Margin": -43.8,
+      "actual2024Margin": -44.84,
+      "adjustedByNationalTrend": -43.726
+    },
+    {
+      "id": "MO-07",
+      "predicted2024Margin": -45.15,
+      "actual2024Margin": -46.29,
+      "adjustedByNationalTrend": -45.076
+    },
+    {
+      "id": "MO-08",
+      "predicted2024Margin": -55.26,
+      "actual2024Margin": -55.49,
+      "adjustedByNationalTrend": -55.186
+    },
+    {
+      "id": "MT-01",
+      "predicted2024Margin": -3.29,
+      "actual2024Margin": -7.92,
+      "adjustedByNationalTrend": -3.216
+    },
+    {
+      "id": "MT-02",
+      "predicted2024Margin": -47.44,
+      "actual2024Margin": -31.98,
+      "adjustedByNationalTrend": -47.366
+    },
+    {
+      "id": "NE-01",
+      "predicted2024Margin": -15.82,
+      "actual2024Margin": -20.21,
+      "adjustedByNationalTrend": -15.746
+    },
+    {
+      "id": "NE-02",
+      "predicted2024Margin": -2.67,
+      "actual2024Margin": -1.85,
+      "adjustedByNationalTrend": -2.596
+    },
+    {
+      "id": "NE-03",
+      "predicted2024Margin": -66.43,
+      "actual2024Margin": -60.84,
+      "adjustedByNationalTrend": -66.35600000000001
+    },
+    {
+      "id": "NV-01",
+      "predicted2024Margin": 5.75,
+      "actual2024Margin": 7.78,
+      "adjustedByNationalTrend": 5.824
+    },
+    {
+      "id": "NV-03",
+      "predicted2024Margin": 3.97,
+      "actual2024Margin": 2.74,
+      "adjustedByNationalTrend": 4.0440000000000005
+    },
+    {
+      "id": "NV-04",
+      "predicted2024Margin": 4.83,
+      "actual2024Margin": 8.32,
+      "adjustedByNationalTrend": 4.904
+    },
+    {
+      "id": "NH-01",
+      "predicted2024Margin": 8.13,
+      "actual2024Margin": 8.07,
+      "adjustedByNationalTrend": 8.204
+    },
+    {
+      "id": "NH-02",
+      "predicted2024Margin": 11.74,
+      "actual2024Margin": 5.97,
+      "adjustedByNationalTrend": 11.814
+    },
+    {
+      "id": "NJ-01",
+      "predicted2024Margin": 27.83,
+      "actual2024Margin": 18.24,
+      "adjustedByNationalTrend": 27.903999999999996
+    },
+    {
+      "id": "NJ-02",
+      "predicted2024Margin": -19.12,
+      "actual2024Margin": -17.02,
+      "adjustedByNationalTrend": -19.046
+    },
+    {
+      "id": "NJ-03",
+      "predicted2024Margin": 11.93,
+      "actual2024Margin": 8.77,
+      "adjustedByNationalTrend": 12.004
+    },
+    {
+      "id": "NJ-04",
+      "predicted2024Margin": -36.17,
+      "actual2024Margin": -36.07,
+      "adjustedByNationalTrend": -36.096000000000004
+    },
+    {
+      "id": "NJ-05",
+      "predicted2024Margin": 10.51,
+      "actual2024Margin": 11.53,
+      "adjustedByNationalTrend": 10.584
+    },
+    {
+      "id": "NJ-06",
+      "predicted2024Margin": 16.7,
+      "actual2024Margin": 16.31,
+      "adjustedByNationalTrend": 16.774
+    },
+    {
+      "id": "NJ-07",
+      "predicted2024Margin": -2.8,
+      "actual2024Margin": -5.51,
+      "adjustedByNationalTrend": -2.726
+    },
+    {
+      "id": "NJ-08",
+      "predicted2024Margin": 51.7,
+      "actual2024Margin": 26.16,
+      "adjustedByNationalTrend": 51.774
+    },
+    {
+      "id": "NJ-09",
+      "predicted2024Margin": 11.56,
+      "actual2024Margin": 5.06,
+      "adjustedByNationalTrend": 11.634
+    },
+    {
+      "id": "NJ-10",
+      "predicted2024Margin": 58.97,
+      "actual2024Margin": 53.98,
+      "adjustedByNationalTrend": 59.044
+    },
+    {
+      "id": "NJ-11",
+      "predicted2024Margin": 18.97,
+      "actual2024Margin": 14.99,
+      "adjustedByNationalTrend": 19.043999999999997
+    },
+    {
+      "id": "NJ-12",
+      "predicted2024Margin": 27.48,
+      "actual2024Margin": 25.36,
+      "adjustedByNationalTrend": 27.554000000000002
+    },
+    {
+      "id": "NM-01",
+      "predicted2024Margin": 11.51,
+      "actual2024Margin": 12.74,
+      "adjustedByNationalTrend": 11.584
+    },
+    {
+      "id": "NM-02",
+      "predicted2024Margin": 0.73,
+      "actual2024Margin": 4.16,
+      "adjustedByNationalTrend": 0.8039999999999998
+    },
+    {
+      "id": "NM-03",
+      "predicted2024Margin": 16.31,
+      "actual2024Margin": 12.57,
+      "adjustedByNationalTrend": 16.384
+    },
+    {
+      "id": "NY-01",
+      "predicted2024Margin": -6.53,
+      "actual2024Margin": -5.01,
+      "adjustedByNationalTrend": -6.456
+    },
+    {
+      "id": "NY-02",
+      "predicted2024Margin": -16.73,
+      "actual2024Margin": -16.25,
+      "adjustedByNationalTrend": -16.656
+    },
+    {
+      "id": "NY-03",
+      "predicted2024Margin": -5.44,
+      "actual2024Margin": 7.01,
+      "adjustedByNationalTrend": -5.3660000000000005
+    },
+    {
+      "id": "NY-04",
+      "predicted2024Margin": 0.58,
+      "actual2024Margin": 5.81,
+      "adjustedByNationalTrend": 0.6539999999999998
+    },
+    {
+      "id": "NY-05",
+      "predicted2024Margin": 53.75,
+      "actual2024Margin": 49.64,
+      "adjustedByNationalTrend": 53.824
+    },
+    {
+      "id": "NY-06",
+      "predicted2024Margin": 31.54,
+      "actual2024Margin": 26.63,
+      "adjustedByNationalTrend": 31.613999999999997
+    },
+    {
+      "id": "NY-07",
+      "predicted2024Margin": 56.8,
+      "actual2024Margin": 54.25,
+      "adjustedByNationalTrend": 56.873999999999995
+    },
+    {
+      "id": "NY-08",
+      "predicted2024Margin": 45.86,
+      "actual2024Margin": 55.3,
+      "adjustedByNationalTrend": 45.934
+    },
+    {
+      "id": "NY-10",
+      "predicted2024Margin": 71.48,
+      "actual2024Margin": 69.19,
+      "adjustedByNationalTrend": 71.554
+    },
+    {
+      "id": "NY-11",
+      "predicted2024Margin": -20.13,
+      "actual2024Margin": -24.13,
+      "adjustedByNationalTrend": -20.055999999999997
+    },
+    {
+      "id": "NY-12",
+      "predicted2024Margin": 63.7,
+      "actual2024Margin": 58.84,
+      "adjustedByNationalTrend": 63.774
+    },
+    {
+      "id": "NY-14",
+      "predicted2024Margin": 39.74,
+      "actual2024Margin": 37.26,
+      "adjustedByNationalTrend": 39.814
+    },
+    {
+      "id": "NY-15",
+      "predicted2024Margin": 65.58,
+      "actual2024Margin": 60.1,
+      "adjustedByNationalTrend": 65.654
+    },
+    {
+      "id": "NY-16",
+      "predicted2024Margin": 26.28,
+      "actual2024Margin": 43.17,
+      "adjustedByNationalTrend": 26.354
+    },
+    {
+      "id": "NY-17",
+      "predicted2024Margin": 2.98,
+      "actual2024Margin": -1.98,
+      "adjustedByNationalTrend": 3.054
+    },
+    {
+      "id": "NY-18",
+      "predicted2024Margin": 2.58,
+      "actual2024Margin": 15.54,
+      "adjustedByNationalTrend": 2.654
+    },
+    {
+      "id": "NY-19",
+      "predicted2024Margin": -2.19,
+      "actual2024Margin": 1.81,
+      "adjustedByNationalTrend": -2.116
+    },
+    {
+      "id": "NY-20",
+      "predicted2024Margin": 13.64,
+      "actual2024Margin": 24.46,
+      "adjustedByNationalTrend": 13.714
+    },
+    {
+      "id": "NY-21",
+      "predicted2024Margin": -14.42,
+      "actual2024Margin": -23.42,
+      "adjustedByNationalTrend": -14.346
+    },
+    {
+      "id": "NY-22",
+      "predicted2024Margin": 6.57,
+      "actual2024Margin": 11.33,
+      "adjustedByNationalTrend": 6.644
+    },
+    {
+      "id": "NY-23",
+      "predicted2024Margin": -22.05,
+      "actual2024Margin": -24.99,
+      "adjustedByNationalTrend": -21.976
+    },
+    {
+      "id": "NY-24",
+      "predicted2024Margin": -24.39,
+      "actual2024Margin": -25.35,
+      "adjustedByNationalTrend": -24.316000000000003
+    },
+    {
+      "id": "NY-25",
+      "predicted2024Margin": 12.85,
+      "actual2024Margin": 17.36,
+      "adjustedByNationalTrend": 12.924
+    },
+    {
+      "id": "NY-26",
+      "predicted2024Margin": 33.6,
+      "actual2024Margin": 33.47,
+      "adjustedByNationalTrend": 33.674
+    },
+    {
+      "id": "OK-01",
+      "predicted2024Margin": -27.63,
+      "actual2024Margin": -27.27,
+      "adjustedByNationalTrend": -27.555999999999997
+    },
+    {
+      "id": "OK-02",
+      "predicted2024Margin": -51.18,
+      "actual2024Margin": -55.15,
+      "adjustedByNationalTrend": -51.106
+    },
+    {
+      "id": "OK-04",
+      "predicted2024Margin": -33.5,
+      "actual2024Margin": -39.54,
+      "adjustedByNationalTrend": -33.426
+    },
+    {
+      "id": "OK-05",
+      "predicted2024Margin": -22.4,
+      "actual2024Margin": -21.39,
+      "adjustedByNationalTrend": -22.326
+    },
+    {
+      "id": "OR-01",
+      "predicted2024Margin": 36.04,
+      "actual2024Margin": 41.9,
+      "adjustedByNationalTrend": 36.114
+    },
+    {
+      "id": "OR-02",
+      "predicted2024Margin": -35.19,
+      "actual2024Margin": -32.14,
+      "adjustedByNationalTrend": -35.116
+    },
+    {
+      "id": "OR-03",
+      "predicted2024Margin": 45.34,
+      "actual2024Margin": 45.72,
+      "adjustedByNationalTrend": 45.414
+    },
+    {
+      "id": "OR-04",
+      "predicted2024Margin": 7.98,
+      "actual2024Margin": 8.12,
+      "adjustedByNationalTrend": 8.054
+    },
+    {
+      "id": "OR-05",
+      "predicted2024Margin": -2.08,
+      "actual2024Margin": 2.94,
+      "adjustedByNationalTrend": -2.0060000000000002
+    },
+    {
+      "id": "OR-06",
+      "predicted2024Margin": 2.51,
+      "actual2024Margin": 6.86,
+      "adjustedByNationalTrend": 2.5839999999999996
+    },
+    {
+      "id": "PA-01",
+      "predicted2024Margin": -9.73,
+      "actual2024Margin": -12.81,
+      "adjustedByNationalTrend": -9.656
+    },
+    {
+      "id": "PA-02",
+      "predicted2024Margin": 51.3,
+      "actual2024Margin": 42.92,
+      "adjustedByNationalTrend": 51.373999999999995
+    },
+    {
+      "id": "PA-04",
+      "predicted2024Margin": 22.58,
+      "actual2024Margin": 18.13,
+      "adjustedByNationalTrend": 22.653999999999996
+    },
+    {
+      "id": "PA-05",
+      "predicted2024Margin": 30.16,
+      "actual2024Margin": 30.58,
+      "adjustedByNationalTrend": 30.234
+    },
+    {
+      "id": "PA-06",
+      "predicted2024Margin": 16.63,
+      "actual2024Margin": 12.4,
+      "adjustedByNationalTrend": 16.704
+    },
+    {
+      "id": "PA-07",
+      "predicted2024Margin": 1.97,
+      "actual2024Margin": -1.01,
+      "adjustedByNationalTrend": 2.0439999999999996
+    },
+    {
+      "id": "PA-08",
+      "predicted2024Margin": 2.45,
+      "actual2024Margin": -1.62,
+      "adjustedByNationalTrend": 2.524
+    },
+    {
+      "id": "PA-09",
+      "predicted2024Margin": -38.62,
+      "actual2024Margin": -41.02,
+      "adjustedByNationalTrend": -38.546
+    },
+    {
+      "id": "PA-10",
+      "predicted2024Margin": -7.67,
+      "actual2024Margin": -1.26,
+      "adjustedByNationalTrend": -7.596
+    },
+    {
+      "id": "PA-11",
+      "predicted2024Margin": -23.09,
+      "actual2024Margin": -25.79,
+      "adjustedByNationalTrend": -23.016
+    },
+    {
+      "id": "PA-12",
+      "predicted2024Margin": 12.39,
+      "actual2024Margin": 12.82,
+      "adjustedByNationalTrend": 12.464
+    },
+    {
+      "id": "PA-15",
+      "predicted2024Margin": -39.88,
+      "actual2024Margin": -42.93,
+      "adjustedByNationalTrend": -39.806000000000004
+    },
+    {
+      "id": "PA-16",
+      "predicted2024Margin": -18.72,
+      "actual2024Margin": -27.31,
+      "adjustedByNationalTrend": -18.646
+    },
+    {
+      "id": "PA-17",
+      "predicted2024Margin": 6.78,
+      "actual2024Margin": 7.75,
+      "adjustedByNationalTrend": 6.854
+    },
+    {
+      "id": "RI-01",
+      "predicted2024Margin": 28.31,
+      "actual2024Margin": 32.66,
+      "adjustedByNationalTrend": 28.384
+    },
+    {
+      "id": "RI-02",
+      "predicted2024Margin": 3.82,
+      "actual2024Margin": 16.76,
+      "adjustedByNationalTrend": 3.8939999999999997
+    },
+    {
+      "id": "SC-01",
+      "predicted2024Margin": -14.08,
+      "actual2024Margin": -16.64,
+      "adjustedByNationalTrend": -14.006
+    },
+    {
+      "id": "SC-02",
+      "predicted2024Margin": -20.19,
+      "actual2024Margin": -19.33,
+      "adjustedByNationalTrend": -20.116
+    },
+    {
+      "id": "SC-05",
+      "predicted2024Margin": -30.01,
+      "actual2024Margin": -27.22,
+      "adjustedByNationalTrend": -29.936
+    },
+    {
+      "id": "SC-06",
+      "predicted2024Margin": 24.21,
+      "actual2024Margin": 23.67,
+      "adjustedByNationalTrend": 24.284
+    },
+    {
+      "id": "SC-07",
+      "predicted2024Margin": -29.75,
+      "actual2024Margin": -29.96,
+      "adjustedByNationalTrend": -29.676000000000002
+    },
+    {
+      "id": "VT-01",
+      "predicted2024Margin": 38.49,
+      "actual2024Margin": 35.29,
+      "adjustedByNationalTrend": 38.564
+    },
+    {
+      "id": "VA-01",
+      "predicted2024Margin": -13.15,
+      "actual2024Margin": -12.8,
+      "adjustedByNationalTrend": -13.076
+    },
+    {
+      "id": "VA-02",
+      "predicted2024Margin": -3.41,
+      "actual2024Margin": -3.94,
+      "adjustedByNationalTrend": -3.3360000000000003
+    },
+    {
+      "id": "VA-03",
+      "predicted2024Margin": 34.72,
+      "actual2024Margin": 40.2,
+      "adjustedByNationalTrend": 34.794
+    },
+    {
+      "id": "VA-04",
+      "predicted2024Margin": 30.07,
+      "actual2024Margin": 34.98,
+      "adjustedByNationalTrend": 30.144
+    },
+    {
+      "id": "VA-05",
+      "predicted2024Margin": -15.36,
+      "actual2024Margin": -15.06,
+      "adjustedByNationalTrend": -15.286
+    },
+    {
+      "id": "VA-06",
+      "predicted2024Margin": -29,
+      "actual2024Margin": -28.94,
+      "adjustedByNationalTrend": -28.926000000000002
+    },
+    {
+      "id": "VA-07",
+      "predicted2024Margin": 4.66,
+      "actual2024Margin": 2.65,
+      "adjustedByNationalTrend": 4.734
+    },
+    {
+      "id": "VA-08",
+      "predicted2024Margin": 49.62,
+      "actual2024Margin": 48.72,
+      "adjustedByNationalTrend": 49.693999999999996
+    },
+    {
+      "id": "VA-09",
+      "predicted2024Margin": -46.8,
+      "actual2024Margin": -45.24,
+      "adjustedByNationalTrend": -46.726
+    },
+    {
+      "id": "VA-10",
+      "predicted2024Margin": 6.51,
+      "actual2024Margin": 4.57,
+      "adjustedByNationalTrend": 6.584
+    },
+    {
+      "id": "VA-11",
+      "predicted2024Margin": 33.78,
+      "actual2024Margin": 33.97,
+      "adjustedByNationalTrend": 33.854
+    },
+    {
+      "id": "WA-01",
+      "predicted2024Margin": 27.12,
+      "actual2024Margin": 26.32,
+      "adjustedByNationalTrend": 27.194000000000003
+    },
+    {
+      "id": "WA-02",
+      "predicted2024Margin": 20.35,
+      "actual2024Margin": 28.06,
+      "adjustedByNationalTrend": 20.424
+    },
+    {
+      "id": "WA-03",
+      "predicted2024Margin": 0.83,
+      "actual2024Margin": 3.89,
+      "adjustedByNationalTrend": 0.9039999999999998
+    },
+    {
+      "id": "WA-05",
+      "predicted2024Margin": -19.31,
+      "actual2024Margin": -21.31,
+      "adjustedByNationalTrend": -19.235999999999997
+    },
+    {
+      "id": "WA-06",
+      "predicted2024Margin": 20.13,
+      "actual2024Margin": 13.63,
+      "adjustedByNationalTrend": 20.204
+    },
+    {
+      "id": "WA-07",
+      "predicted2024Margin": 71.49,
+      "actual2024Margin": 68.35,
+      "adjustedByNationalTrend": 71.564
+    },
+    {
+      "id": "WA-08",
+      "predicted2024Margin": 6.87,
+      "actual2024Margin": 8.17,
+      "adjustedByNationalTrend": 6.944
+    },
+    {
+      "id": "WA-10",
+      "predicted2024Margin": 14.13,
+      "actual2024Margin": 17.35,
+      "adjustedByNationalTrend": 14.204
+    },
+    {
+      "id": "WV-01",
+      "predicted2024Margin": -39.68,
+      "actual2024Margin": -43.47,
+      "adjustedByNationalTrend": -39.606
+    },
+    {
+      "id": "WV-02",
+      "predicted2024Margin": -31.14,
+      "actual2024Margin": -41.54,
+      "adjustedByNationalTrend": -31.066000000000003
+    },
+    {
+      "id": "WI-01",
+      "predicted2024Margin": -8.98,
+      "actual2024Margin": -10.42,
+      "adjustedByNationalTrend": -8.906
+    },
+    {
+      "id": "WI-02",
+      "predicted2024Margin": 45.02,
+      "actual2024Margin": 40.28,
+      "adjustedByNationalTrend": 45.094
+    },
+    {
+      "id": "WI-03",
+      "predicted2024Margin": -3.7,
+      "actual2024Margin": -2.73,
+      "adjustedByNationalTrend": -3.6260000000000003
+    },
+    {
+      "id": "WI-04",
+      "predicted2024Margin": 53.8,
+      "actual2024Margin": 53.87,
+      "adjustedByNationalTrend": 53.873999999999995
+    },
+    {
+      "id": "WI-05",
+      "predicted2024Margin": -28.85,
+      "actual2024Margin": -28.93,
+      "adjustedByNationalTrend": -28.776000000000003
+    },
+    {
+      "id": "WI-07",
+      "predicted2024Margin": -23.76,
+      "actual2024Margin": -27.21,
+      "adjustedByNationalTrend": -23.686
+    },
+    {
+      "id": "WY-01",
+      "predicted2024Margin": -47.34,
+      "actual2024Margin": -50.48,
+      "adjustedByNationalTrend": -47.266000000000005
+    }
+  ]
+}

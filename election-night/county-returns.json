@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "election": "2026-11-03",
+  "updatedAt": null,
+  "states": {},
+  "schema": "states[ST].races[Senate|Governor].counties: {fips,county,dem,rep,other,asOf,sourceUrl}. FIPS must match locally bundled geography. County-wide sources replace overlapping precinct detail; no synthetic data.",
+  "sourcePolicy": "No state or county vote record is created until a named election authority publishes attributed November 3, 2026 results with a timestamp after the applicable polls close."
+}

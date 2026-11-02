@@ -147,6 +147,7 @@ jobs:
           node scripts/validate-state-desk.mjs
           node scripts/validate-house-forecast.mjs
           node scripts/validate-statewide-night.mjs
+          node scripts/validate-forecast-backtests.mjs
           node scripts/validate-house-model.mjs
       - name: Pre-publish rendered screenshots and visual gate
         run: |

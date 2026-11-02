@@ -1,0 +1,134 @@
+{
+  "asOf": "2026-11-02",
+  "signConvention": "Democrat minus Republican candidate share in percentage points; third party not merged with either major party",
+  "inputMethod": "Final published RCP general-election average when available. IA, KS, ME use most recent specifically identified general-election poll and are separately flagged. Actual D-R margin is published actual candidate percent difference.",
+  "scope": "Sourced research cohort only, not all US gubernatorial elections: selected 2018 and 2022 races with independently verifiable final candidate-matched polls and actual outcomes.",
+  "races": [
+    {
+      "state": "MI",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": 10,
+      "actualMargin": 8.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/Michigan.html"
+    },
+    {
+      "state": "FL",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": 3.6,
+      "actualMargin": -0.4,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/Florida.html"
+    },
+    {
+      "state": "GA",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": -3,
+      "actualMargin": -1.4,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/Georgia.html"
+    },
+    {
+      "state": "NY",
+      "year": 2018,
+      "office": "Governor",
+      "pollMargin": 18,
+      "actualMargin": 22.2,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2018/governor/NewYork.html"
+    },
+    {
+      "state": "MI",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 1,
+      "actualMargin": 10.6,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Michigan.html"
+    },
+    {
+      "state": "FL",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -12.2,
+      "actualMargin": -19.4,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/florida/desantis-vs-crist"
+    },
+    {
+      "state": "GA",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -8.3,
+      "actualMargin": -7.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Georgia.html"
+    },
+    {
+      "state": "MN",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 4.3,
+      "actualMargin": 7.7,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Minnesota.html"
+    },
+    {
+      "state": "NH",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -17,
+      "actualMargin": -15.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/new-hampshire/sununu-vs-sherman"
+    },
+    {
+      "state": "TX",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -10.4,
+      "actualMargin": -10.9,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolitics.com/epolls/2022/governor/Texas.html"
+    },
+    {
+      "state": "OH",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -22.4,
+      "actualMargin": -25.5,
+      "pollType": "RCP final average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/ohio/dewine-vs-whaley"
+    },
+    {
+      "state": "IA",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -17,
+      "actualMargin": -18.5,
+      "pollType": "Last Des Moines Register poll; no published RCP average",
+      "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/iowa/reynolds-vs-dejear"
+    },
+    {
+      "state": "KS",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 3,
+      "actualMargin": 2.21,
+      "pollType": "Last Emerson poll; no published RCP average",
+      "sourceUrl": "https://ballotpedia.org/Kansas_gubernatorial_election,_2022"
+    },
+    {
+      "state": "ME",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": 10,
+      "actualMargin": 13.2,
+      "pollType": "Last Pan Atlantic poll; no published RCP average",
+      "sourceUrl": "https://ballotpedia.org/Maine_gubernatorial_election,_2022"
+    }
+  ]
+}

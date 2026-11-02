@@ -49,8 +49,36 @@ try{
  await governorPage.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:20000});
  assert((await governorPage.locator('#govCards .gov-card').count())===36,'Governor board no longer covers all 36 elections');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
+ await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('2.98')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.69'),null,{timeout:12000});
+ assert((await governorPage.locator('#govBacktestRows tr').count())===14,'Governor source-linked backtest missing historic events');
  await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
  await governorPage.close();
+ // Verify all-state aggregate ratings, hover D/R/T counts and each race margin.
+ const stateAtlas=await browser.newPage({viewport:{width:1440,height:940}});
+ const atlasErrors=[];stateAtlas.on('pageerror',e=>atlasErrors.push(e.message));
+ await stateAtlas.goto(root+'/states/',{waitUntil:'domcontentloaded'});
+ await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('50 states with'),null,{timeout:27000});
+ await stateAtlas.locator('#usMap a[data-state-link="MI"]').focus();
+ await stateAtlas.waitForFunction(()=>document.querySelector('#stateMapTooltip')&&!document.querySelector('#stateMapTooltip').hidden,null,{timeout:8000});
+ const tipText=await stateAtlas.locator('#stateMapTooltip').innerText();
+ assert(tipText.includes('Michigan')&&tipText.includes('U.S. Senate')&&tipText.includes('MI-07')&&/\d+D.{1,3}\d+R.{1,3}\d+T/.test(tipText),'State hover does not display all race types, margins and aggregate D-R-T totals: '+tipText.slice(0,500));
+ assert(atlasErrors.length===0,'State atlas errors: '+atlasErrors.join(', '));
+ await stateAtlas.screenshot({path:'visual-checks/States-Aggregate-2026-Michigan-Hover.png',fullPage:false});
+ await stateAtlas.close();
+ const countyNight=await browser.newPage({viewport:{width:1440,height:940}}),nightPageErrors=[];
+ countyNight.on('pageerror',e=>nightPageErrors.push(e.message));
+ await countyNight.goto(root+'/state/?state=MI#stateResults',{waitUntil:'domcontentloaded'});
+ await countyNight.waitForFunction(()=>document.querySelectorAll('#countyNightMap path.night-county').length===83,null,{timeout:26000});
+ await countyNight.waitForFunction(()=>document.querySelector('#nightCountyCount')?.textContent.includes('0 / 83'),null,{timeout:8000});
+ assert((await countyNight.locator('#nightCountyDem').innerText())==='—','Michigan election-night county page shows fictitious ballots');
+ assert((await countyNight.locator('#nightCountyRows tr').count())===83,'Michigan county night reporting table incomplete');
+ assert(nightPageErrors.length===0,'Michigan state county desk errors: '+nightPageErrors.join(', '));
+ await countyNight.locator('.ed-night-county').screenshot({path:'visual-checks/MI-State-Election-Night-83-land-clipped.png'});
+ await countyNight.goto(root+'/state/?state=TX#stateResults',{waitUntil:'domcontentloaded'});
+ await countyNight.waitForFunction(()=>document.querySelectorAll('#countyNightMap path.night-county').length===254,null,{timeout:27000});
+ assert((await countyNight.locator('#nightCountyDem').innerText())==='—','Texas county results invented before election');
+ await countyNight.close();
+ console.log('ALL STATE NIGHT & AGGREGATE QA PASS',JSON.stringify({hover:'MI all races',states:50,miCounties:83,txCounties:254,errors:atlasErrors.concat(nightPageErrors)}));
  // Verify all 435 House model ratings and a genuinely interactive district-level geographic page.
  const nationalHouse=await browser.newPage({viewport:{width:1440,height:940}});
  await nationalHouse.goto(root+'/house/',{waitUntil:'domcontentloaded'});

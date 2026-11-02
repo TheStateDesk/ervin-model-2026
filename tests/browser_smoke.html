@@ -30,7 +30,7 @@
   check(!doc.documentElement.classList.contains('large-text'),'Standard text size can be restored');
   check(!!doc.querySelector('.editorial-hero .hero-primary-action')&&doc.querySelectorAll('.readers-guide .guide-link').length===5,'New visitors get five guided entries including governors and House');
   check(!!doc.querySelector('#forecast-settings')&&!!doc.querySelector('.model-settings-help summary'),'Forecast source choices remain available with progressive explanations');
-  check(['states/','governors/','house/','elections/overview/'].every(href=>!!doc.querySelector('#topNavigation a[href="'+href+'"]')),'Primary navigation links to all states, Governors, House and Election Center');
+  check(['states/','governors/','house/','election-night/'].every(href=>!!doc.querySelector('#topNavigation a[href="'+href+'"]')),'Primary navigation links to states, Governors, House and Election Night');
   check(!!el('mainContent')&&!!doc.querySelector('a.skip-to-content'),'Keyboard users can skip navigation and reach the main content');
   check(doc.querySelectorAll('#tabs button').length===6,'All six polling tabs rendered');
   check(source('take')?.getAttribute('aria-selected')==='true','Ervin Take default selected');

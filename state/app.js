@@ -62,6 +62,7 @@ function buildScenario(){
  const valid=countyShape?.features||[];
  cachedCountyRows=valid.map(x=>{const id=String(x.id).padStart(5,'0'),history=historical.counties?.[id];
  return{id,name:String(x.properties?.name||'County '+id),m24:window.ERVIN_SCENARIOS.margin(history?.y24),m20:window.ERVIN_SCENARIOS.margin(history?.y20),senate:countyScenario.senate?.map.get(id)?.expected??null,governor:countyScenario.governor?.map.get(id)?.expected??null};});
+ window.dispatchEvent(new CustomEvent('ervin:county-context',{detail:{code,rows:cachedCountyRows}}));
 }
 function activeCountyMargin(row,layer){
  if(layer==='2024')return row.m24;
@@ -289,7 +290,7 @@ function officialLinks(){
  $('officialStateLinks').innerHTML=links;
 }
 async function display(next){
- const c=String(next||'MI').toUpperCase();code=byCode[c]?c:'MI';
+ const c=String(next||'MI').toUpperCase();code=byCode[c]?c:'MI';window.dispatchEvent(new CustomEvent('ervin:state-edition',{detail:{code}}));
  selectedDistrict=null;countyShape=null;districtShape=null;cachedCountyRows=[];selectedCounty=null;countyToken++;houseToken++;
  stateHouse=house.filter(x=>x.code===code).sort((a,b)=>String(a.district).localeCompare(String(b.district)));
  renderLead();renderOverview();initDistrictButtons();renderPolls();officialLinks();
