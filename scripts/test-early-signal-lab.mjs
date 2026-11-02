@@ -8,6 +8,10 @@ const readJSON=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const html=fs.readFileSync('stats-for-nerds/index.html','utf8');
 const code=fs.readFileSync('stats-for-nerds/app.js','utf8');
 const audit=readJSON('stats-for-nerds/reviewed-signals.json');
+const candidateData=readJSON('stats-for-nerds/candidates-2026.json');
+assert.equal(candidateData.election,'2026-11-03');
+assert.equal(Object.keys(candidateData.races).length,11,'All eight early signals and three target Senate contests must have sourced candidate rosters');
+for(const [id,row] of Object.entries(candidateData.races)){assert(row.democrat&&row.republican&&row.sourceUrl.startsWith('https://'),'Unverified major-party candidate pair: '+id);}
 const baselines=readJSON('counties-watch/forecast-baselines.json');
 const house=readJSON('house/ervin-forecast-2026-11-02.json');
 assert.equal(audit.election,'2026-11-03');
@@ -30,6 +34,7 @@ const fakeFetch=async url=>{
  if(url==='../counties-watch/forecast-baselines.json')return {ok:true,json:async()=>baselines};
  if(url==='../house/ervin-forecast-2026-11-02.json')return {ok:true,json:async()=>house};
  if(url==='../stats-for-nerds/reviewed-signals.json')return {ok:true,json:async()=>audit};
+ if(url==='./candidates-2026.json')return {ok:true,json:async()=>candidateData};
  throw Error('Offline test: upstream results feed not connected');
 };
 const context={document,fetch:fakeFetch,AbortController,Date,Math,Number,URL,Promise,Intl,
@@ -38,6 +43,12 @@ vm.runInNewContext(code,context,{filename:'stats-for-nerds/app.js',timeout:1200}
 await sleep(200);
 const initial=el('targetCards').innerHTML;
 assert(initial.includes('Texas')&&initial.includes('Kansas')&&initial.includes('Iowa'),'All three Senate forecasts should render');
+assert(initial.includes('James Talarico')&&initial.includes('Ken Paxton'),'Texas matchup missing');
+assert(initial.includes('Adam Hamilton')&&initial.includes('Roger Marshall'),'Kansas matchup missing');
+assert(initial.includes('Josh Turek')&&initial.includes('Ashley Hinson'),'Iowa matchup missing');
+const watchRows=el('signalRows').innerHTML;
+for(const name of ['Zach Dembo','Ralph Alvarado','Elaine Luria','Jennifer Kiggans','Tom Perriello','John McGuire','Jon Ossoff','Mike Collins','Annie Andrews','Darline Graham','Eliott Rodriguez','María Elvira Salazar','Roy Cooper','Michael Whatley','Sherrod Brown','Jon Husted'])assert(watchRows.includes(name),'Missing early-signal nominee '+name);
+assert(watchRows.includes('Candidate roster source'),'Source links must accompany candidate names');
 assert(initial.includes('50.6%'),'TX must load actual baseline +1.2 D margin / 50.6% D share');
 assert(initial.includes('47.6%'),'KS must load actual baseline -4.8 D margin / 47.6% D share');
 assert(initial.includes('46.8%'),'IA must load actual baseline -6.33 D margin / 46.8% D share');
