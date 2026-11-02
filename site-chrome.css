@@ -45,3 +45,74 @@ body.light .site-header button,html.light .site-header button{background:#f3f7fa
  .site-header .site-nav.is-open{max-height:72vh;overflow:auto}
  .site-back-top{display:none!important}
 }
+
+
+/* Mobile navigation repair, 2026-11-01.
+   The global light design system forced white menu backgrounds even when
+   dark-theme.css had already changed the link text to white. Unify both. */
+@media(max-width:1080px){
+  html:not(.light) body .site-header .site-nav.is-open{
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-start!important;
+    align-items:stretch!important;
+    gap:3px!important;
+    background:#10283c!important;
+    border:1px solid #496b81!important;
+    color:#f0f7ff!important;
+    border-radius:0 0 14px 14px!important;
+    padding:8px!important;
+    box-shadow:0 18px 32px #050c1890!important;
+  }
+  html.light body .site-header .site-nav.is-open{
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-start!important;
+    align-items:stretch!important;
+    gap:3px!important;
+    background:#f8fbfd!important;
+    color:#183347!important;
+    border:1px solid #c9d9e5!important;
+    border-radius:0 0 14px 14px!important;
+    padding:8px!important;
+    box-shadow:0 16px 26px #17354b20!important;
+  }
+  html:not(.light) body .site-header .site-nav.is-open a{
+    color:#f4f8fc!important;
+    background:transparent!important;
+    border-radius:8px!important;
+  }
+  html.light body .site-header .site-nav.is-open a{
+    color:#1c3b52!important;
+    background:transparent!important;
+    border-radius:8px!important;
+  }
+  html:not(.light) body .site-header .site-nav.is-open a:is(:hover,:focus-visible,[aria-current="page"]){background:#305473!important;color:#fff!important}
+  html.light body .site-header .site-nav.is-open a:is(:hover,:focus-visible,[aria-current="page"]){background:#dfebf3!important;color:#123248!important}
+  html body .site-header .site-nav.is-open a{
+    display:flex!important;
+    flex:0 0 auto!important;
+    justify-content:flex-start!important;
+    align-items:center!important;
+    width:100%!important;
+    min-height:42px!important;
+    height:auto!important;
+    padding:11px 13px!important;
+    margin:0!important;
+    font-size:14px!important;
+    line-height:1.35!important;
+    text-align:left!important;
+    box-sizing:border-box!important;
+  }
+  html body .site-header .site-nav.is-open .reading-toggle{
+    flex:0 0 auto!important;
+    align-self:flex-start!important;
+    margin:6px 4px!important;
+    min-height:40px!important;
+  }
+  html body .site-header .site-nav.is-open{max-height:min(70dvh,640px)!important;overflow-y:auto!important;overscroll-behavior:contain!important}
+  html body .site-header .site-header-inner{align-content:flex-start}
+}
+@media(max-width:760px){
+  html body .site-header .site-nav.is-open{max-height:min(65dvh,580px)!important}
+}
