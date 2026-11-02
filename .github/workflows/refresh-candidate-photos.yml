@@ -1,0 +1,44 @@
+name: Refresh sourced Senate and governor portraits
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/refresh_candidate_photos.py
+      - .github/workflows/refresh-candidate-photos.yml
+  schedule:
+    - cron: '22 10 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: candidate-portrait-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Find verified individual Wikimedia portraits
+        run: python3 scripts/refresh_candidate_photos.py
+      - name: Validate portrait URLs and metadata
+        run: |
+          python3 - <<'PY'
+          import json
+          a=json.load(open('candidate-portraits.json'))
+          assert all(v['url'].startswith('https://upload.wikimedia.org/') and v['page'].startswith('https://en.wikipedia.org/wiki/') for v in a['portraits'].values())
+          print('Audited',len(a['portraits']),'attributed photographs')
+          PY
+      - name: Publish verified portrait manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git add candidate-portraits.json
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "Refresh verified Wikimedia candidate portrait manifest"
+          git pull --rebase origin main
+          git push origin HEAD:main
