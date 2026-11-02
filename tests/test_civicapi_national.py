@@ -48,6 +48,18 @@ class ElectionReporting(unittest.TestCase):
  def test_same_party_ballot(self):
   r=m.normalize("MI-SENATE",self.search,{**self.detail,"candidates":[{"name":"Dem A","party":"D","votes":550},{"name":"Dem B","party":"D","votes":450}]},self.now,87214)
   self.assertEqual(r["total"],1000)
+ def test_at_large_and_special_election(self):
+  ak={"province":"AK","election_name":"Alaska US House At Large","district":"AK-AL","election_date":"2026-11-03","election_type":"General"}
+  self.assertTrue(m.type_ok("AK-01",ak))
+  ohio={"province":"OH","election_name":"Ohio US Senate Special Election","election_date":"2026-11-03","election_type":"Special"}
+  self.assertTrue(m.type_ok("OH-SENATE",ohio))
+  ohio["election_name"]="Ohio US Senate Special Primary"
+  self.assertFalse(m.type_ok("OH-SENATE",ohio))
+ def test_governor_false_positives(self):
+  base={"province":"MI","election_date":"2026-11-03","election_type":"General"}
+  self.assertTrue(m.type_ok("MI-GOVERNOR",{**base,"election_name":"Michigan Governor"}))
+  self.assertFalse(m.type_ok("MI-GOVERNOR",{**base,"election_name":"Michigan Wayne State University Board of Governors"}))
+  self.assertFalse(m.type_ok("MA-GOVERNOR",{**base,"province":"MA","election_name":"Massachusetts Governor's Council 5"}))
  def test_invalid_vote_type(self):
   for value in (-1,5.5,None,False,"100"):
    rows=[{"name":"A","votes":value},{"name":"B","votes":200}]
