@@ -198,6 +198,14 @@ function countyInteraction(path,name,fips){
  };
  path.addEventListener('click',show);path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show()}})
 }
+function publishCountyTable(r,data){
+ const rows=(data.features||[]).map(f=>{
+  const fips=String(f.id||"").padStart(5,"0"),record=scenario?.map.get(fips),archive=allHistorical[fips],
+  margin=window.ERVIN_SCENARIOS?.margin;
+  return{fips,name:String(f.properties?.name||"County "+fips),m20:record?.m20??margin?.(archive?.y20)??null,m24:record?.m24??margin?.(archive?.y24)??null,expected:r.office==="House"?null:record?.expected??null};
+ });
+ window.dispatchEvent(new CustomEvent("ervin:county-scenario",{detail:{code:r.code,office:r.office,target:r.office==="House"?null:scenario?.target??null,rows}}));
+}
 async function drawMap(r){
  const svg=$('countyMap');svg.replaceChildren(svgNode('text',{x:450,y:290,'text-anchor':'middle',fill:'#8ca4b7'}));
  svg.firstChild.textContent='Loading locally hosted geographic boundaries…';
@@ -208,6 +216,8 @@ async function drawMap(r){
   const data=await window.ERVIN_GEO.get(r.code,kind);
   if(current!==r)return;
   if(districtMode){
+   const countyData=await window.ERVIN_GEO.get(r.code,'counties').catch(()=>({features:[]}));
+   publishCountyTable(r,countyData);
    const match=data.features.find(f=>String(f.id).padStart(2,'0')===String(r.district).padStart(2,'0'));
    if(!match)throw Error('Historic district boundary unavailable for '+r.id);
    window.ERVIN_GEO.draw(svg,{...data,features:[match]},{kind:'districts',className:'geo-district',onSelect:()=>{$('countyInspector').textContent=r.id+' · 118th Congress (2022 Census) geographic reference, NOT confirmed for 2026 redistricting. Switch map layer to see statewide historical counties.'}});
@@ -217,6 +227,7 @@ async function drawMap(r){
    $('countyInspector').textContent='Select the district for reference information. Switch to a county layer to explore historical county results.';
    return;
   }
+  publishCountyTable(r,data);
   const n=window.ERVIN_GEO.draw(svg,data,{kind:'counties'});
   for(const p of svg.querySelectorAll('path.county'))countyInteraction(p,p.dataset.name,p.dataset.fips);
   if($('countyMapMode').value==='2026live'&&window.ErvinCountyLayer)window.ErvinCountyLayer();else applyCountyLayer();
