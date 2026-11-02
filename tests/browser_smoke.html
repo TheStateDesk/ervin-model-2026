@@ -1,36 +1,35 @@
-<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex,follow"><meta charset="utf-8"><title>Ervin public homepage smoke test</title></head>
-<body><h1>Public homepage browser smoke</h1><pre id="report" data-status="RUNNING">Checking…</pre>
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex,follow"><meta charset="utf-8"><title>State Desk public homepage browser smoke</title></head>
+<body><h1>State Desk public homepage browser acceptance</h1><pre id="report" data-status="RUNNING">Running…</pre>
 <script>
 (async()=>{
  const report=document.getElementById('report'),checks=[];
  const check=(v,msg)=>{if(!v)throw Error(msg);checks.push(msg)};
- const iframe=document.createElement('iframe');iframe.title='Ervin 2026 public homepage';iframe.style.cssText='width:1180px;height:940px;border:0';
- const wait=new Promise((res,rej)=>{iframe.onload=res;iframe.onerror=()=>rej(Error('Homepage unavailable'))});
- iframe.src='../index.html';document.body.appendChild(iframe);
+ const frame=document.createElement('iframe');frame.title='The State Desk homepage';frame.style.cssText='width:1180px;height:940px;border:0';
+ const load=new Promise((res,rej)=>{frame.onload=res;frame.onerror=()=>rej(Error('State Desk unavailable'))});
+ frame.src='../states/';document.body.appendChild(frame);
  try{
-  await wait;
-  const d=iframe.contentDocument,w=iframe.contentWindow,$=id=>d.getElementById(id);
-  const until=async fn=>{for(let i=0;i<160;i++){if(fn())return;await new Promise(r=>setTimeout(r,100))}throw Error('Timed out waiting for homepage model')};
-  await until(()=>$('powerCards')?.dataset.powerReady==='true'&&$('controlDemChance')?.textContent.endsWith('%'));
-  check($('frontTitle')?.textContent.includes('national picture'),'New editorial home is visible');
-  check($('senate-control')&&$('balanceOfPower'),'Both core models appear');
-  check($('senate-control').getBoundingClientRect().top<$('balanceOfPower').getBoundingClientRect().top,'Senate control precedes office seat totals');
-  check(Number.parseInt($('controlDemChance').textContent)>=0,'Democratic-aligned control displays scenario frequency');
-  check(Number.parseInt($('controlRepChance').textContent)>=0,'Republican control displays scenario frequency');
-  check(Math.abs([...$('controlBar').children].reduce((a,n)=>a+Number.parseFloat(n.style.width),0)-100)<.03,'Probability bar adds to 100%');
-  check($('powerCards').querySelectorAll('.power-card').length===3,'House Senate Governors seat forecasts render');
-  check(d.querySelectorAll('#topNavigation a').length===4,'Front-facing header has only four core destinations');
-  check(d.querySelectorAll('#globalMenuPanel .global-menu-group').length===3,'Compact 3-group public navigation works');
-  check(!d.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races,#tabs,#map-area'),'Retired public research dashboard is removed');
-  check(!d.querySelector('a[href*="#races"],a[href*="#tabs"],a[href*="researchLab"]'),'No links to retired model UI');
+  await load;const d=frame.contentDocument,w=frame.contentWindow,$=id=>d.getElementById(id);
+  const until=async fn=>{for(let i=0;i<180;i++){if(fn())return;await new Promise(r=>setTimeout(r,100))}throw Error('Timeout waiting for State Desk models')};
+  await until(()=>$('powerCards')?.dataset.powerReady==='true'&&$('controlDemChance')?.textContent.endsWith('%')&&$('usMap')?.querySelector('path.ed-state'));
+  check(d.querySelector('h1.ed-headline')?.textContent.includes('Every state'),'The 50-state editorial State Desk remains homepage');
+  check($('senate-control')&&$('balanceOfPower')&&$('nationMap'),'Control, office balance, and atlas are present');
+  check($('senate-control').getBoundingClientRect().top<$('balanceOfPower').getBoundingClientRect().top,'Senate control precedes office balance');
+  check($('balanceOfPower').getBoundingClientRect().top<$('nationMap').getBoundingClientRect().top,'Three office balance forecasts precede map');
+  check($('controlDemChance').textContent.endsWith('%')&&$('controlRepChance').textContent.endsWith('%'),'Control probabilities are generated');
+  check(Math.abs([...$('controlBar').children].reduce((a,n)=>a+parseFloat(n.style.width||0),0)-100)<.03,'Scenario probabilities sum to 100%');
+  check($('powerCards').querySelectorAll('.power-card').length===3,'Three office cards render');
+  check(d.querySelectorAll('#usMap path.ed-state').length>=50,'All 50 state shapes accessible');
+  check(!d.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),'Retired workbench does not appear');
+  check(!d.querySelector('a[href="../"]'),'State Desk does not link back to retired root');
   $('controlUncertainty').value='1.3';$('controlUncertainty').dispatchEvent(new w.Event('change',{bubbles:true}));
-  check($('controlStatus').textContent.includes('14,000'),'Sensitivity selector recalculates simulation');
+  check($('controlStatus').textContent.includes('14,000'),'Sensitivity selector runs simulation');
   $('controlUncertainty').value='1';$('controlUncertainty').dispatchEvent(new w.Event('change',{bubbles:true}));
-  check($('controlDemChance').textContent.endsWith('%'),'Reset restores model result');
-  const t=$('themeToggle');if(t){t.click();check(!d.documentElement.classList.contains('light'),'Dark appearance works');t.click();check(d.documentElement.classList.contains('light'),'Light appearance works')}
-  iframe.style.width='390px';await new Promise(r=>w.requestAnimationFrame(r));
-  check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'No horizontal overflow at phone width');
+  check($('controlDemChance').textContent.endsWith('%'),'Scenario can reset');
+  $('themeToggle').click();check(d.documentElement.classList.contains('theme-dark'),'State Desk dark mode works');
+  $('themeToggle').click();check(!d.documentElement.classList.contains('theme-dark'),'State Desk light mode works');
+  frame.style.width='390px';await new Promise(res=>w.requestAnimationFrame(res));
+  check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'No phone horizontal overflow');
   report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.join('\n');
- }catch(e){report.dataset.status='FAIL';report.textContent='FAIL: '+e.stack}
+ }catch(err){report.dataset.status='FAIL';report.textContent='FAIL: '+err.stack}
 })();
 </script></body></html>
