@@ -76,7 +76,8 @@ def type_ok(key,row):
  if prov and prov not in (code,STATES[code].upper()):return False
  if not prov and STATES[code].lower() not in blob:return False
  if when(row) and when(row)!=DAY:return False
- if "primary" in blob or "runoff" in blob or "special" in blob:return False
+ if "primary" in blob or "runoff" in blob:return False
+ # A special GENERAL election still elects a federal senator or representative.
  scope=str(row.get("election_scope") or row.get("scope") or "").lower()
  if scope and "general" not in scope:return False
  office_type=str(row.get("election_type") or row.get("office") or "").lower()
@@ -85,6 +86,12 @@ def type_ok(key,row):
   district=key[3:]
   d=str(row.get("district") or "").upper().replace(" ","")
   if d in (key,code+"-"+str(int(district)),str(int(district)),district):return True
+  # Six states elect an at-large Representative, often named "US House"
+  # without a numerical district in the API.
+  if district=="01" and code in ("AK","DE","ND","SD","VT","WY") and
+     ("us house" in blob or "congress" in blob) and
+     (d in ("",code+"-AL",code+"-AT-LARGE","AT-LARGE","AL","AT LARGE",code+"-01")):
+   return True
   # e.g. Michigan US House 7, but never Michigan State House 7
   return bool(re.search(r"\bus[\s.]*house\s*(?:district\s*)?0*"+str(int(district))+r"\b",blob))
  if office=="senate":return "us senate" in blob or "u.s. senate" in blob
@@ -181,7 +188,9 @@ def resolve_registry(expected,registry,now,limit_states=50):
     if len(m)==1 and re.fullmatch(r"\d{1,12}",ids[0]):
      current_items[key]={"raceId":ids[0],"election":DAY,"office":expected[key]["office"],"name":str(m[0].get("election_name") or m[0].get("name") or "")[:120],"search":m[0],"identifiedAt":iso(now)}
      checks[key]="mapped"
-    else:checks[key]="unavailable" if not m else "ambiguous"
+    else:
+     checks[key]="unavailable" if not m else "ambiguous"
+     checks[key]+=": "+", ".join(str(x.get("election_name") or x.get("name") or "")[:68] for x in m[:4])
     if error:checks[key]="source_"+error
  return current_items,{"found":len(current_items),"lookups":len(pairs),"unmapped":sum(v!="mapped" for v in checks.values()),"statusSample":dict(list(checks.items())[:30])}
 def main():
@@ -194,6 +203,11 @@ def main():
  registry={k:v for k,v in registry.items() if k in expected}
  # Do not keep a registry item whose office contradicts the expected election office.
  registry={k:v for k,v in registry.items() if v.get("office")==expected[k]["office"]}
+ # Keep only the identity fields required for revalidation on collection.
+ # Search candidates can be huge and are not necessary for selecting elections.
+ identity=("id","election_name","name","election_date","province","district","country","election_type","election_scope","type")
+ for row in registry.values():
+  row["search"]={k:row.get("search",{}).get(k) for k in identity if row.get("search",{}).get(k) is not None}
  save(REG,{"version":1,"election":DAY,"races":registry})
  prior=load(OUT,{"version":1,"election":DAY,"races":{}})
  stored=prior.get("races",{}) if prior.get("election")==DAY else {}
