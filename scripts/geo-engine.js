@@ -1,21 +1,37 @@
 /* ERVIN GEOGRAPHY 2.0 — local Census-derived boundaries; no runtime D3 or CDN required. */
 (()=>{"use strict";
-const NS="http://www.w3.org/2000/svg",cache=new Map(),packCache=new Map(),BASE=new URL('../geo/',document.currentScript?.src||location.href).href;
+const NS="http://www.w3.org/2000/svg",cache=new Map(),packCache=new Map(),BASE=new URL("../geo/",document.currentScript?.src||location.href).href,REV="20261101-mobile-map-3";
 const STATES="AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY".split(" ");
 async function fromPack(code,kind){
  const index=STATES.indexOf(code);if(index<0)throw Error("Unknown state "+code);
  const pack="packs/p"+String(Math.floor(index/5)+1).padStart(2,"0")+".json";
- if(!packCache.has(pack))packCache.set(pack,fetch(BASE+pack,{cache:"force-cache"}).then(r=>{if(!r.ok)throw Error("Local map bundle not found");return r.json();}).catch(e=>{packCache.delete(pack);throw e}));
+ if(!packCache.has(pack))packCache.set(pack,fetch(BASE+pack+"?rev="+encodeURIComponent(REV),{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("Local map bundle not found");return r.json();}).catch(e=>{packCache.delete(pack);throw e}));
  const content=await packCache.get(pack);
  const shapes=content.states?.[code]?.[kind];if(!shapes)throw Error("No "+kind+" data for "+code+" in local package");
  return shapes;
 }
 const make=(tag,attrs={})=>{const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);return el;};
 const slug=x=>String(x||"").toUpperCase().replace(/[^A-Z]/g,"").slice(0,2);
-async function get(code,kind="counties"){
+async function get(code,kind="counties",options={}){
  code=slug(code);if(!["counties","districts"].includes(kind)||!code)throw Error("Invalid geographic request");
  const key=kind+"/"+code;
- if(!cache.has(key))cache.set(key,(async()=>{let data;try{const r=await fetch(BASE+key+".json",{cache:"force-cache"});if(!r.ok)throw Error("Specific state asset missing");data=await r.json();}catch{data=await fromPack(code,kind)}if(data.type!=="FeatureCollection"||!Array.isArray(data.features)||!data.features.length||data.state!==code)throw Error("State geometry invalid for "+code);return data;})().catch(e=>{cache.delete(key);throw e}));
+ if(options.refresh){cache.delete(key);packCache.clear();}
+ if(!cache.has(key))cache.set(key,(async()=>{
+   let data=null,primaryError=null;
+   try{
+     const response=await fetch(BASE+key+".json?rev="+encodeURIComponent(REV),{cache:"no-cache"});
+     if(!response.ok)throw Error("state asset HTTP "+response.status);
+     const parsed=await response.json();
+     if(parsed.type!=="FeatureCollection"||parsed.state!==code||!Array.isArray(parsed.features)||!parsed.features.length)throw Error("State asset invalid");
+     data=parsed;
+   }catch(e){primaryError=e;}
+   if(!data){
+     try{data=await fromPack(code,kind);}
+     catch(e){throw Error(code+" "+kind+" shapes unavailable (state: "+(primaryError?.message||"unavailable")+"; pack: "+e.message+")");}
+   }
+   if(data.type!=="FeatureCollection"||!Array.isArray(data.features)||!data.features.length||data.state!==code)throw Error("State geometry invalid for "+code);
+   return data;
+ })().catch(e=>{cache.delete(key);throw e}));
  return cache.get(key);
 }
 function rings(geometry){return geometry?.type==="Polygon"?geometry.coordinates:geometry?.type==="MultiPolygon"?geometry.coordinates.flat():[];}
@@ -58,5 +74,5 @@ function draw(svg,collection,options={}){
  svg.setAttribute("aria-label",features.length+" "+(options.kind==="districts"?"historic congressional district":"county")+" outlines for "+collection.state);
  return features.length;
 }
-window.ERVIN_GEO={get,draw};
+window.ERVIN_GEO={get,draw,reload:(code,kind="counties")=>get(code,kind,{refresh:true}),revision:REV};
 })();
