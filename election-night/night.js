@@ -164,7 +164,7 @@ async function loadRaces(){
  const houseForecast=await fetchJSON('../house/ervin-forecast-2026-11-02.json');
  senate=sen.states||{};
  const senRaces=report.senate.map(s=>({id:s.code+'-SENATE',code:s.code,state:s.state,office:'Senate',label:(s.nonR||'Independent/Democrat')+' vs. '+s.rep,margin:s.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(s.model.adjustedMargin)}));
- const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin)}));
+ const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:Number.isFinite(g.model.adjustedMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin):Number.isFinite(g.model.pollMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.pollMargin)+' · unadjusted':'No numeric published poll'}));
  const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:h.incumbent?'Historically: '+h.incumbent:'Candidate list not verified',margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
  races=[...senRaces,...govRaces,...houseRaces];
  $('miForecast').textContent=window.ERVIN_STATEWIDE.formatMargin(sen.states?.MI?.adjustedMargin??null);
