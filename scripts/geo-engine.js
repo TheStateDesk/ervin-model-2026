@@ -20,7 +20,7 @@ async function get(code,kind="counties"){
 }
 function rings(geometry){return geometry?.type==="Polygon"?geometry.coordinates:geometry?.type==="MultiPolygon"?geometry.coordinates.flat():[];}
 function draw(svg,collection,options={}){
- const features=collection.features||[],w=900,h=580,pad=25,ak=collection.state==="AK";
+ const features=(collection.features||[]).filter(f=>options.kind!=="districts"||/^\d{1,2}$/.test(String(f.id||""))),w=900,h=580,pad=25,ak=collection.state==="AK";
  const lon=x=>ak&&x>0?x-360:x;
  // Mercator-like local projection with a simple state-specific longitudinal scale.
  let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;for(const f of features)for(const ring of rings(f.geometry))for(const p of ring){if(p?.length>=2&&Number.isFinite(p[0])&&Number.isFinite(p[1])){const x=lon(p[0]),y=p[1];minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);}}
