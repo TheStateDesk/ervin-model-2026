@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f3ee">
+<meta name="description" content="Ervin Model State Desk: Senate, governor, all House districts, polling, county election history, state outlook and sourced results in one place.">
+<title>State Election Desk | Ervin Model</title>
+<link rel="stylesheet" href="../states/editorial.css?v=state-desk-1">
+</head><body class="ed-body"><a class="ed-toplink" href="#mainContent" style="position:absolute;left:-2000px;top:5px" onfocus="this.style.left='5px'" onblur="this.style.left='-2000px'">Skip to content</a>
+<div class="ed-topline"></div>
+<header class="ed-head"><div class="ed-head-inner"><a class="ed-brand" href="../states/"><b>E</b> ERVIN MODEL</a>
+<div class="ed-mast"><a href="../states/">The State Desk</a><small>2026 ELECTIONS · INDEPENDENT DATA JOURNAL</small></div>
+<div class="ed-utility"><span class="ed-date" id="headerDate">November 2026</span><a href="../states/" class="ed-btn outline">All states</a></div></div>
+<nav class="ed-nav" aria-label="Election desk navigation"><div class="ed-nav-inner"><a href="../states/" aria-current="page">States</a><a href="#stateOverview">At a glance</a><a href="#stateGeography">County map</a><a href="#stateHouse">House districts</a><a href="#statePolling">Polls</a><a href="#stateResults">Returns</a><a href="../">Model lab</a></div></nav></header>
+<main class="ed-shell" id="mainContent">
+<div class="ed-sectionline"><span class="ed-kicker">50 state editions / 2026 midterms</span><span id="editionDate">November 1, 2026 · research snapshot</span></div>
+<div class="ed-band" style="margin:0 0 10px"><label for="stateSelect" class="ed-cap">Your state <select class="ed-control" id="stateSelect" style="margin-left:9px;min-width:170px"><option>Loading states…</option></select></label><a href="../states/" class="ed-toplink">See nationwide map</a></div>
+<h1 id="stateTitle" class="ed-headline">The state election picture.</h1>
+<p id="stateDeck" class="ed-standfirst">A single edition for Senate, governor, every House district, local trends and the votes reported by election officials.</p>
+<div class="ed-stat-grid" style="margin:20px 0 25px">
+ <div class="ed-stat"><small>Senate / Ervin model</small><strong id="heroSenate">Loading</strong><div class="ed-mini" id="heroSenateSub">Where modeled</div></div>
+ <div class="ed-stat r"><small>Governor / publisher average</small><strong id="heroGovernor">Loading</strong><div class="ed-mini" id="heroGovSub">No new calibration applied</div></div>
+ <div class="ed-stat"><small>House districts</small><strong id="heroHouse">Loading</strong><div class="ed-mini" id="heroHouseSub">All districts in the state</div></div>
+</div>
+<nav class="ed-subnav" aria-label="State sections"><a href="#stateOverview">Overview</a><a href="#stateGeography">County expectations</a><a href="#stateHouse">House</a><a href="#statePolling">Polling desk</a><a href="#stateResults">Election night</a></nav>
+<div class="ed-columns" id="stateOverview">
+ <section class="ed-card" aria-labelledby="overviewTitle"><div class="ed-kicker">THE BIG PICTURE</div><h2 id="overviewTitle">Statewide races and outlook</h2><div id="stateRaceCards"><div class="ed-empty">Loading statewide election details…</div></div></section>
+ <aside class="ed-card"><div class="ed-kicker">STATE NOTEBOOK</div><h2>What we know</h2><div id="stateNotebook" class="ed-small-list"><p class="ed-mini">Loading source coverage…</p></div><div class="ed-notice"><strong>How to read this:</strong> Polling averages, modeled margins, and counted ballots are different measures. Unmodeled races are never classified as winners or assigned invented probabilities.</div><div class="ed-link-list"><a href="../research/ALL_50_STATE_GEOGRAPHY_AUDIT_2026-11-01.md">50-state map audit</a><a href="../research/EXPANDED_BACKTEST_2018_2024.md">Model backtest</a></div></aside>
+</div>
+<section id="stateGeography" style="margin-top:32px">
+ <div class="ed-sectionline"><span class="ed-kicker">COUNTY-BY-COUNTY / HISTORICAL & CONDITIONAL</span><span id="countyCount">Locally hosted boundaries</span></div>
+ <div class="ed-band"><div><h2 style="margin:0;font:700 31px Georgia,serif">The county map</h2><p class="ed-mini" style="margin:6px 0">Tap a county to see its voting history and the statewide-race scenario, if available.</p></div><a href="#countyTableSection" class="ed-btn outline">County figures</a></div>
+ <div class="ed-columns">
+  <div class="ed-card"><div class="ed-map-tools"><label for="countyLayer">Layer <select id="countyLayer" class="ed-control"><option value="2024">2024 presidential margin</option><option value="2020">2020 presidential margin</option><option value="swing">2020 to 2024 swing</option><option value="senate">2026 Senate conditional scenario</option><option value="governor">2026 governor conditional scenario</option><option value="neutral">County boundaries only</option></select></label>
+  <label for="countySearch">County <input id="countySearch" class="ed-control" placeholder="Find a county" list="countySuggestions" autocomplete="off"><datalist id="countySuggestions"></datalist></label>
+  <button id="countyRetry" type="button" class="ed-btn outline">Reload map</button></div>
+  <div class="ed-map-surface"><svg id="countyMap" viewBox="0 0 900 580" role="group" aria-label="County map"><text x="450" y="290" fill="#72838a" text-anchor="middle">Loading county outlines…</text></svg></div>
+  <div class="ed-legend"><i class="ed-dot d"></i> Democratic margin <i class="ed-dot r"></i> Republican margin <i class="ed-dot n"></i> No model/history <span id="countySourceLabel">Historic voting margins</span></div>
+  <div class="ed-inspector" id="countyInspector" aria-live="polite">Choose a county on the map to inspect its historic votes.</div></div>
+  <aside class="ed-card" id="countyTableSection"><div class="ed-kicker">STATE RESEARCH</div><h2>County expectations</h2><p class="ed-mini" id="scenarioExplanation">County margins are conditional illustrations anchored to current statewide polling/model inputs; they are not independently polled county forecasts.</p>
+  <div class="ed-map-tools"><input class="ed-control" type="search" id="countyTableFind" placeholder="Filter county table" aria-label="Filter county table"><button class="ed-btn outline" id="countyCSV">Download CSV</button></div>
+  <div class="ed-table-wrap"><table class="ed-table"><thead><tr><th>County</th><th>2024</th><th>2026 scenario</th></tr></thead><tbody id="countyTableBody"><tr><td colspan="3">Loading…</td></tr></tbody></table></div><p class="ed-mini">House races use separate congressional boundaries. Statewide county forecasts must not be treated as estimates for the population within a specific House district.</p></aside>
+ </div>
+</section>
+<section id="stateHouse" style="margin-top:34px"><div class="ed-sectionline"><span class="ed-kicker">U.S. HOUSE / ONE STATE, EVERY DISTRICT</span><span id="houseCoverage">435 nationwide</span></div>
+ <div class="ed-columns"><section class="ed-card"><div class="ed-band" style="margin-top:0"><div><h2 style="margin:0">Choose a House district</h2><p class="ed-mini">Tap the congressional district itself or its number.</p></div><button id="houseMapReload" type="button" class="ed-btn outline">Reload district map</button></div><div class="ed-map-surface"><svg id="districtMap" viewBox="0 0 900 580" role="group" aria-label="Congressional district selector"><text x="450" y="290" text-anchor="middle">Loading House geography…</text></svg></div><p class="ed-mini">Census 2022 / 118th Congress reference shapes. District maps may not represent redistricting completed for 2026. Confirm current boundaries with state election authorities.</p><div id="districtButtons" class="ed-district-grid" style="margin-top:15px"></div></section>
+ <aside class="ed-card"><div class="ed-kicker">DISTRICT REPORT</div><h2 id="districtTitle">Select a district</h2><div id="districtDetail" class="ed-empty">Choose a numbered House district to see its incumbent, sourced ratings, any documented public polls and source links—all within this state page.</div></aside></div>
+</section>
+<section id="statePolling" style="margin-top:34px"><div class="ed-sectionline"><span class="ed-kicker">THE POLLING DESK / SOURCE-ATTRIBUTED</span><span>Publisher averages ≠ individual surveys</span></div>
+<div class="ed-split"><section class="ed-card"><h2>Statewide polling</h2><div id="pollStatewide"><p class="ed-mini">Loading individual surveys…</p></div></section><section class="ed-card"><h2>House polling and ratings</h2><div id="pollHouse"><p class="ed-mini">Loading district surveys…</p></div></section></div></section>
+<section id="stateResults" style="margin-top:34px"><div class="ed-sectionline"><span class="ed-kicker">ELECTION NIGHT / VERIFIED RETURNS</span><span>Not a race-call service</span></div>
+<div class="ed-columns"><section class="ed-card"><div class="ed-band" style="margin-top:0"><h2 style="margin:0">Reported returns in this state</h2><button class="ed-btn outline" id="reloadResults">Check source</button></div><div class="ed-inline-status" id="resultStatus">Checking supported official-source feeds</div><div id="resultRows" style="margin:14px 0" class="ed-small-list"><p class="ed-mini">No vote totals loaded yet.</p></div><p class="ed-mini" id="resultUpdated">The published results source has limited state coverage. A missing race is not zero votes.</p></section>
+<aside class="ed-card"><h2>Official source & participation</h2><p class="ed-mini">A published vote count is not a turnout estimate. Precincts reporting is not the same as votes outstanding. For Michigan, the participation dashboard can update daily rather than live on election night.</p><div class="ed-link-list" id="officialStateLinks"><a href="https://www.nass.org/can-I-vote/state-election-officials" target="_blank" rel="noopener noreferrer">State election offices</a></div><p class="ed-mini" style="margin-top:18px">The election desk shows no invented county vote totals or mathematical win probabilities.</p></aside></div></section>
+<footer class="ed-footer"><span>Ervin Model · Independent election research · 2026</span><div class="ed-link-list"><a href="../states/">All states</a><a href="../elections/overview/">Detailed research center</a><a href="../">Original Ervin model</a></div></footer></main>
+<script src="../scripts/us-geography.js"></script>
+<script defer src="../scripts/geo-engine.js?v=20261101-allstate-map-5"></script>
+<script defer src="../scripts/county-scenarios.js"></script>
+<script defer src="./app.js?v=state-desk-1"></script></body></html>
