@@ -17,9 +17,10 @@ try{
  for(const file of ['browser_smoke','michigan_smoke','michigan_election_night_smoke','counties_watch_smoke','election_dossier_smoke','house_election_center_smoke','theme_smoke']){
   const test=await browser.newPage({viewport:{width:1200,height:950}});
   await test.goto(root+'/tests/'+file+'.html',{waitUntil:'domcontentloaded'});
-  await test.waitForFunction(()=>['PASS','FAIL'].includes(document.querySelector('#report')?.dataset.status),null,{timeout:55000});
-  const passed=(await test.locator('#report').getAttribute('data-status'))==='PASS';
-  const report=await test.locator('#report').innerText();
+  const resultSelector=file==='theme_smoke'?'#result':'#report';
+  await test.waitForFunction(selector=>['PASS','FAIL'].includes(document.querySelector(selector)?.dataset.status),resultSelector,{timeout:55000});
+  const passed=(await test.locator(resultSelector).getAttribute('data-status'))==='PASS';
+  const report=await test.locator(resultSelector).innerText();
   if(!passed)throw Error('RELEASE BLOCKER '+file+': '+report.slice(0,2800));
   console.log('RELEASE SMOKE PASS '+file+' '+report.slice(0,100).replaceAll('\\n',' '));
   await test.close();
