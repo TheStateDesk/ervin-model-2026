@@ -41,10 +41,20 @@ jobs:
           python3 scripts/audit_cross_office.py --check
           node --check house/board.js
           node --check elections/overview/center.js
-      - name: Check dashboard JavaScript syntax
+      - name: Validate public homepage and stand-alone control script
         run: |
-          python3 -c 'from pathlib import Path; h=Path("index.html").read_text(); scripts=[x.split("</script>",1)[0] for x in h.split("<script>")[1:]]; Path("/tmp/dashboard-script.js").write_text(chr(10).join(scripts)); assert len(scripts)>=2'
-          node --check /tmp/dashboard-script.js
+          python3 - <<'PY'
+          from pathlib import Path
+          h=Path('index.html').read_text()
+          assert 'id="senate-control"' in h
+          assert 'id="balanceOfPower"' in h
+          assert h.index('id="senate-control"') < h.index('id="balanceOfPower"')
+          assert 'window.ERVIN_DATA' not in h and 'id="researchLab"' not in h
+          assert 'scripts/home-control.js' in h
+          print('PASS public landing page: retired research UI absent')
+          PY
+          node --check scripts/home-control.js
+          node --check scripts/home-power.js
       - name: Test multi-cycle calibration and past-only backtest
         run: |
           node --check scripts/calibration_engine.js
