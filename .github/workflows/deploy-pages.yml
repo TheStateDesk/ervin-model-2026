@@ -145,6 +145,7 @@ jobs:
         run: |
           node scripts/validate-election-site.mjs
           node scripts/validate-state-desk.mjs
+          node scripts/validate-house-model.mjs
       - name: Pre-publish rendered screenshots and visual gate
         run: |
           npm install --no-save playwright@1.56.1
