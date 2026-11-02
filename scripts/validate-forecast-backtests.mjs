@@ -18,7 +18,8 @@ for(let i=0;i<recomputed.records.length;i++){
  const r=recomputed.records[i],b=score.records[i];
  assert.equal(r.correction,b.correction,'Governor correction drift '+r.state+' '+r.year);
  assert.equal(r.adjustedMargin,b.adjustedMargin,'Governor adjusted forecast drift '+r.state+' '+r.year);
- assert(r.evidence.every(x=>x.year<r.year&&x.year>=2016),'Historical target/future leaked into '+r.state+' '+r.year);
+ assert(r.evidence.every(x=>x.year<r.year&&x.year>=2014&&x.office==='Governor'),'Federal or future election leaked into gubernatorial backtest '+r.state+' '+r.year);
+ assert(r.resultUrl.startsWith('https://'),'Missing historical governor result source '+r.state+' '+r.year);
  assert(r.sourceUrl.startsWith('https://'),'Missing public poll source '+r.state);
 }
 const house=json('house/ervin-forecast-2026-11-02.json'),houseAudit=json('research/house-holdout-baseline-2022-2024.json');
