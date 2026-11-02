@@ -27,6 +27,24 @@ const senate=json('counties-watch/forecast-baselines.json').states;
 const housePolls=json('house/research-polls.json').polls;
 const govPolls=json('governors/recent_verified_polls.json').states;
 const countyHistory=json('geo/county-history.json');
+const polled=json('polling/coverage-2026-11-02.json'),original=json('polling/primary-seven-states-2026-11-01.json');
+assert.equal(Object.keys(polled.senate.states).length,30,'Missing published Senate state indexes');
+assert.equal(Object.keys(polled.governor.states).length,33,'Missing published governor indexes');
+assert(Object.keys(polled.house.districts).length>=118,'Missing district polling index');
+assert.equal(Object.keys(original.races).length,7,'Primary-source seven-state surveys incomplete');
+const codeSet=new Set(states.map(s=>s.code)),districtSet=new Set(house.map(h=>h.id));
+for(const key of Object.keys(polled.senate.states))assert(codeSet.has(key),'Unrecognized Senate index state '+key);
+for(const key of Object.keys(polled.governor.states))assert(codeSet.has(key),'Unrecognized governor index state '+key);
+for(const key of Object.keys(polled.house.districts))assert(districtSet.has(key),'Index district absent from House roster '+key);
+for(const [c,races] of Object.entries(original.races))for(const office of ['senate','governor']){
+ const p=races[office];
+ assert(p&&Number.isFinite(p.dem)&&Number.isFinite(p.rep)&&Math.abs(p.dem-p.rep-p.margin)<0.01,'Invalid verified source poll '+c+' '+office);
+ assert(/^https:\/\//.test(p.url),'Survey missing primary URL '+c);
+}
+assert(stateJS.includes('Promise.allSettled(optionalFiles)'),'Optional polling feeds must not block county loading');
+assert(stateJS.includes('loadCountyMap(),loadHouseMap()'),'Both map loaders must run independently');
+assert(stateHTML.includes('id="countyStatus"')&&stateHTML.includes('id="countyZoomReset"'),'Visible county load/zoom controls missing');
+
 assert.equal(house.length,435,'House seat list incomplete');
 assert.equal(governors.length,36,'2026 governor registry incomplete');
 assert(Object.keys(senate).length>=17,'Senate model state list incomplete');
@@ -50,4 +68,4 @@ for(const html of [indexHTML,stateHTML]){
  }
 }
 console.log('STATE DESK VALIDATION PASS');
-console.log(JSON.stringify({stateEditions:states.length,houseDistricts:house.length,governorRaces:governors.length,senateModels:Object.keys(senate).length,publicHousePolls:Object.keys(housePolls).length,governorPollStates:Object.keys(govPolls).length,countyHistoryRecords:Object.keys(countyHistory.counties).length,navigation:'state-first'},null,2));
+console.log(JSON.stringify({stateEditions:states.length,houseDistricts:house.length,governorRaces:governors.length,senateModels:Object.keys(senate).length,publicHousePolls:Object.keys(housePolls).length,governorPollStates:Object.keys(govPolls).length,countyHistoryRecords:Object.keys(countyHistory.counties).length,pollingIndex:{senateStates:Object.keys(polled.senate.states).length,governorStates:Object.keys(polled.governor.states).length,houseDistricts:Object.keys(polled.house.districts).length},primarySurveys:Object.keys(original.races).length*2,countyMap:'independent loading and labeled zoom controls',navigation:'state-first'},null,2));
