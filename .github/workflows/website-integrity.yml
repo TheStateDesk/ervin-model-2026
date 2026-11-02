@@ -44,6 +44,7 @@ jobs:
       - run: node scripts/validate-statewide-night.mjs
       - run: node scripts/validate-forecast-backtests.mjs
       - run: node scripts/test-election-night-balance.mjs
+      - run: node scripts/test-michigan-candidate-effect.mjs
       - name: Install browser for visual verification
         run: |
           npm install --no-save playwright@1.56.1

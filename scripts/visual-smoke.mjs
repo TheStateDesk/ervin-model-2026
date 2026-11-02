@@ -114,6 +114,15 @@ try{
  assert(atlasErrors.length===0,'State atlas errors: '+atlasErrors.join(', '));
  await stateAtlas.screenshot({path:'visual-checks/States-Aggregate-2026-Michigan-Hover.png',fullPage:false});
  await stateAtlas.close();
+ const miBiasPage=await browser.newPage({viewport:{width:390,height:844}});
+ await miBiasPage.goto(root+'/state/?state=MI#stateSources',{waitUntil:'domcontentloaded'});
+ await miBiasPage.waitForFunction(()=>document.querySelector('#miCandidateEffect')?.innerText.includes('median governor-minus-Senate margin'),null,{timeout:30000});
+ const miBias=await miBiasPage.locator('#miCandidateEffect').innerText();
+ assert(miBias.includes('not evidence of a hidden voting preference')||miBias.includes('not evidence of a hidden voting preference.'),'Candidate audit omitted stated-versus-hidden distinction');
+ assert(miBias.includes('not applied'),'Unverified Muslim Bradley effect improperly presented as a correction');
+ assert((await miBiasPage.locator('#miCandidateEffect details').count())===2,'Evidence and counterexample controls missing');
+ await miBiasPage.locator('#miCandidateEffect').screenshot({path:'visual-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
+ await miBiasPage.close();
  const countyNight=await browser.newPage({viewport:{width:1440,height:940}}),nightPageErrors=[];
  countyNight.on('pageerror',e=>nightPageErrors.push(e.message));
  await countyNight.goto(root+'/state/?state=MI#stateResults',{waitUntil:'domcontentloaded'});

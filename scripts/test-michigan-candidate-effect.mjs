@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+/* Election candidate-effect descriptive audit. Never turn it into an unverified poll penalty. */
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const a=read('research/michigan-candidate-effect-audit-2026-11-02.json');
+const sen=read('counties-watch/forecast-baselines.json').states.MI;
+const governorArchive=read('research/governor-same-office-2014-2024.json');
+assert.equal(a.pairs.length,9);
+const differences=a.pairs.map(x=>{
+ for(const race of [x.senate,x.governor])assert(Number.isFinite(race.dem)&&Number.isFinite(race.rep));
+ for(const k of ['senateSource','governorSource'])assert(x[k].startsWith('https://'));
+ const margin=+(x.governor.dem-x.governor.rep-x.senate.dem+x.senate.rep).toFixed(2);
+ assert.equal(margin,x.governorMinusSenateMargin,'Paired survey mismatch '+x.id);
+ return margin;
+}).sort((x,y)=>x-y);
+assert.equal(differences.filter(x=>x>0).length,8);
+assert.equal(differences.filter(x=>x<0).length,1);
+assert.equal(differences[4],2);
+assert.equal(differences[0],-2);
+assert.equal(differences.at(-1),9.9);
+assert.equal(a.summary.meanGovernorMinusSenateMargin,2.83);
+assert.equal(a.forecast.automaticAdditionalMuslimPenalty,0);
+assert.equal(sen.adjustedMargin,1.08,'Never quietly modify headline Ervin Michigan Senate margin');
+assert.equal(sen.pollMargin,4.31);
+assert(a.pairs.some(x=>x.mode.includes('Live operator')));
+assert(a.pairs.some(x=>x.mode.includes('Online')));
+assert(governorArchive.races.every(x=>x.year>=2018),'Independent governor 2014 cutoff changed');
+const stateLedger=fs.readFileSync('state/source-ledger.js','utf8');
+const stateHtml=fs.readFileSync('state/index.html','utf8');
+assert(stateLedger.includes('miCandidateEffect')&&stateLedger.includes('candidateEffect'));
+assert(stateLedger.includes('not applied')&&stateLedger.includes('not evidence of a hidden voting preference'));
+assert(stateHtml.includes('source-ledger.js?v=20261102-michigan-candidate-effect-1'));
+console.log('MI CANDIDATE-EFFECT AUDIT PASS',JSON.stringify({samples:a.pairs.length,widerGovernor:8,medianOfficeGap:2,range:[-2,9.9],automaticReligionPenalty:0,ervinSenate:sen.adjustedMargin}));

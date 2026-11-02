@@ -72,6 +72,16 @@ try{
  await oh.screenshot({path:'postdeploy-checks/Ohio-Governor-State-Desk-Mobile.png',fullPage:false});
  console.log('LIVE OHIO D +2.6 VERIFIED IN RENDERED STATE DESK');
  await oh.close();
+ // A deployed model must show the evidence, not silently introduce a
+ // religion- or county-demographic penalty into Michigan's Ervin's Take.
+ const michiganAudit=await browser.newPage({viewport:{width:390,height:844}});
+ await michiganAudit.goto(base+'state/?state=MI&release='+stamp+'#stateSources',{waitUntil:'domcontentloaded'});
+ await michiganAudit.waitForFunction(()=>document.querySelector('#miCandidateEffect')?.textContent.includes('not applied'),null,{timeout:35000});
+ const michiganEvidence=await michiganAudit.locator('#miCandidateEffect').innerText();
+ if(!michiganEvidence.includes('In 9 matched Michigan survey samples')||!michiganEvidence.includes('not applied'))throw Error('LIVE MI CANDIDATE-EFFECT AUDIT MISSING '+michiganEvidence.slice(0,400));
+ await michiganAudit.locator('#miCandidateEffect').screenshot({path:'postdeploy-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
+ console.log('LIVE MI CANDIDATE-EFFECT AUDIT PASS 9 linked paired polls / no invented polling penalty');
+ await michiganAudit.close();
  // Explicit acceptance of newly published national Election Night / governor model.
  const national=await browser.newPage({viewport:{width:1440,height:940}});
  await national.goto(base+'election-night/?release='+stamp,{waitUntil:'domcontentloaded'});

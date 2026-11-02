@@ -17,7 +17,7 @@ function draw(){
  if(!$('stateSourceLedger'))return;
  if(!all){$('sourceLedgerSummary').textContent='Loading source archive…';return;}
  const state=active;
- const {governors,governorHistory,senateHistory,houseModel,houseRegistry,coverage,senateBaseline,countyHistory}=all;
+ const {governors,governorHistory,senateHistory,houseModel,houseRegistry,coverage,senateBaseline,countyHistory,candidateEffect}=all;
  const gov=governors.races?.find(x=>x.code===state);
  const governorEvents=(governorHistory.races||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year>=2018&&e.year<2026&&e.pollType!=='single stale poll').sort((a,b)=>b.year-a.year).slice(0,3);
  const senate=senateHistory.senateStates?.[state];
@@ -45,6 +45,18 @@ function draw(){
   body+=events.length?'<details open><summary>'+events.length+' archived original federal correction inputs · '+dec(senate.correction)+' pts</summary><ol class="ed-evidence-list">'+events.map(x=>historicalRow(x,'federal calibration')).join('')+'</ol></details>':'<p class="ed-notice">No state-specific Original Ervin historical events are in this exported archive; inspect the Senate methodology page.</p>';
   body+='<p class="ed-mini"><a href="../research/original-ervin-senate-calibration-2026-11-02.json">Federal original-model source file (JSON)</a></p>';
   entries.push(card('U.S. Senate · '+(baseline?.nonR||'Democrat')+' / '+(baseline?.rep||'Republican'),'ORIGINAL ERVIN · FEDERAL STATEWIDE',body));
+  if(state==='MI'&&candidateEffect){
+   const a=candidateEffect,stats=a.summary,pairRows=a.pairs||[];
+   const rounded=n=>(Number(n)>=0?'+':'')+Number(n).toFixed(1);
+   let candidateBody='<div id="miCandidateEffect" data-bias-study="descriptive" class="ed-candidate-audit"><p class="ed-mini"><strong>Measured candidate support, not a demonstrated hidden polling error.</strong> In '+stats.pairs+' matched Michigan survey samples, Benson has the larger Democratic margin in '+stats.governorLeadWider+'; El-Sayed has the larger margin in '+stats.senateLeadWider+'. The median governor-minus-Senate margin is <strong>'+rounded(stats.medianGovernorMinusSenateMargin)+' points</strong>, with values from '+rounded(stats.min)+' to '+rounded(stats.max)+'. The comparison holds the poll sample and field period constant but cannot isolate the effect of religion, ideology, opponents, or office.</p>';
+   candidateBody+='<p class="ed-mini">These differences are <strong>already reported in the Senate voting-intention questions</strong>. They should not be deducted again from the Senate model. The earlier Michigan Senate historical-error correction remains Ervin’s Take; additional religion-based poll-mode (-3.5/-2.0/-0.5), county demographic coefficients, and separate ticket-drag penalties have <strong>not been validated</strong> against comparable final election outcomes and are <strong>not applied</strong>.</p>';
+   candidateBody+='<details><summary>Compare '+stats.pairs+' matched poll samples and survey methods</summary><div class="ed-table-wrap"><table class="ed-table"><thead><tr><th>Same poll sample</th><th>Senate D−R</th><th>Governor D−R</th><th>Gov − Senate</th><th>Mode and sources</th></tr></thead><tbody>'+pairRows.map(x=>'<tr><td>'+esc(x.pollster)+'<div class="ed-mini">'+esc(x.fieldEnd)+'</div></td><td>'+esc(rounded(x.senateMargin))+'</td><td>'+esc(rounded(x.governorMargin))+'</td><td><strong>'+esc(rounded(x.governorMinusSenateMargin))+'</strong></td><td>'+esc(x.mode)+'<div class="ed-mini">'+link(x.senateSource,'Senate')+' · '+link(x.governorSource,'Governor')+'</div></td></tr>').join('')+'</tbody></table></div></details>';
+   candidateBody+='<p class="ed-mini">In MSU/IPPSR’s own Michigan survey, about 38% said a Muslim candidate would make them less likely to support that person: this is a <em>stated</em> attitude, not evidence of a hidden voting preference. '+link(a.surveyAttitudes.source,'Read MSU methodology and results')+'.</p>';
+   candidateBody+='<details><summary>Check counterexamples and underlying research</summary><p class="ed-mini">In the 2018 Michigan Democratic governor primary, El-Sayed received 30.5% against a prior polling average of 17.5%. In the 2026 Senate Democratic primary, his final margin over Stevens was +1.0 versus an earlier polling average of +10.2. These conflicting, non-comparable primary snapshots cannot identify a general-election Bradley effect: field dates, undecided voters and turnout differ.</p>'+a.history.map(x=>'<p class="ed-mini">'+link(x.source,x.year+' primary polling versus outcome')+' — '+esc(x.caveat)+'</p>').join('')+'<p class="ed-mini">Research on voter evaluations supports the possibility of a candidate disadvantage, but does not establish the proposed specific poll-to-vote adjustments.</p>'+a.research.map(x=>'<p class="ed-mini">'+link(x.url,x.title)+'</p>').join('')+'</details>';
+   candidateBody+='<p class="ed-mini"><a href="../research/michigan-candidate-effect-audit-2026-11-02.json">Complete paired-sample data, hypotheses, sources and post-election falsification test (JSON)</a>. The first proper test of hidden polling error is pollster-mode residuals versus certified November 3 results, after the election; earlier votes must never be inferred from this survey evidence.</p></div>';
+   entries.push(card('Michigan · candidate effect and polling accuracy','ERVIN’S TAKE · EVIDENCE AUDIT',candidateBody));
+  }
+
  }else if(senIndex){
   entries.push(card('U.S. Senate · polling index only','NO ORIGINAL ERVIN FORECAST','<p>'+senIndex.count+' surveys listed in the public index; '+esc(senIndex.summary)+'. '+link(coverage.senate?.source,'Publisher index')+'. No unverified model value is substituted.</p>'));
  }
@@ -72,11 +84,11 @@ async function init(){
  '../governors/data.json','../research/governor-same-office-2014-2024.json',
  '../research/original-ervin-senate-calibration-2026-11-02.json',
  '../house/ervin-forecast-2026-11-02.json','../house/data.json',
- '../polling/coverage-2026-11-02.json','../counties-watch/forecast-baselines.json','../geo/county-history.json'
+ '../polling/coverage-2026-11-02.json','../counties-watch/forecast-baselines.json','../geo/county-history.json','../research/michigan-candidate-effect-audit-2026-11-02.json'
  ];
  try{
   const values=await Promise.all(urls.map(async u=>{const r=await fetch(u);if(!r.ok)throw Error(u+' HTTP '+r.status);return r.json()}));
-  all=Object.fromEntries(['governors','governorHistory','senateHistory','houseModel','houseRegistry','coverage','senateBaseline','countyHistory'].map((k,i)=>[k,values[i]]));
+  all=Object.fromEntries(['governors','governorHistory','senateHistory','houseModel','houseRegistry','coverage','senateBaseline','countyHistory','candidateEffect'].map((k,i)=>[k,values[i]]));
   draw();
  }catch(e){root.innerHTML='<p class="ed-notice">Unable to load the linked source archive. See the Senate, House and governor polling pages for their source links.</p>';console.error('Source ledger',e);}
 }
