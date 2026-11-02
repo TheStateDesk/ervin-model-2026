@@ -58,7 +58,7 @@ try{
  const atlasErrors=[];stateAtlas.on('pageerror',e=>atlasErrors.push(e.message));
  await stateAtlas.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('50 states with'),null,{timeout:27000});
- await stateAtlas.locator('#usMap path[data-state="MI"]').hover({force:true});
+ await stateAtlas.locator('#usMap a[data-state-link="MI"]').focus();
  await stateAtlas.waitForFunction(()=>document.querySelector('#stateMapTooltip')&&!document.querySelector('#stateMapTooltip').hidden,null,{timeout:8000});
  const tipText=await stateAtlas.locator('#stateMapTooltip').innerText();
  assert(tipText.includes('Michigan')&&tipText.includes('U.S. Senate')&&tipText.includes('MI-07')&&/\d+D.{1,3}\d+R.{1,3}\d+T/.test(tipText),'State hover does not display all race types, margins and aggregate D-R-T totals: '+tipText.slice(0,500));
