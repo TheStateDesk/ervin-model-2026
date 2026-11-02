@@ -206,14 +206,14 @@ function publishCountyTable(r,data){
  });
  window.dispatchEvent(new CustomEvent("ervin:county-scenario",{detail:{code:r.code,office:r.office,target:r.office==="House"?null:scenario?.target??null,rows}}));
 }
-async function drawMap(r){
+async function drawMap(r,forceRefresh=false){
  const svg=$('countyMap');svg.replaceChildren(svgNode('text',{x:450,y:290,'text-anchor':'middle',fill:'#8ca4b7'}));
  svg.firstChild.textContent='Loading locally hosted geographic boundaries…';
  try{
   if(!window.ERVIN_GEO)throw Error('Local geographic renderer unavailable');
   const districtMode=r.office==='House'&&$('countyMapMode').value==='district';
   const kind=districtMode?'districts':'counties';
-  const data=await window.ERVIN_GEO.get(r.code,kind);
+  const data=await window.ERVIN_GEO.get(r.code,kind,{refresh:forceRefresh});
   if(current!==r)return;
   if(districtMode){
    const countyData=await window.ERVIN_GEO.get(r.code,'counties').catch(()=>({features:[]}));
@@ -232,10 +232,12 @@ async function drawMap(r){
   for(const p of svg.querySelectorAll('path.county'))countyInteraction(p,p.dataset.name,p.dataset.fips);
   if($('countyMapMode').value==='2026live'&&window.ErvinCountyLayer)window.ErvinCountyLayer();else applyCountyLayer();
   $('countyCount').textContent=n+' county outlines';
+  if($('erReloadMap')){$('erReloadMap').disabled=false;$('erReloadMap').textContent='Reload boundaries';}
   $('mapProvenance').textContent='Locally hosted Census-derived 2022 county-equivalent boundaries. Historical colors come from attributed 2020/2024 presidential returns; 2026 scenario colors are separate analytical assumptions. House county boundaries are statewide context and NOT clipped to congressional districts.';
   $('countyInspector').textContent='Select a county to compare historical margins and the conditional 2026 scenario where available; this is not verified 2026 county vote reporting.';
  }catch(error){
   console.warn('Local county rendering:',error.message);
+  if($('erReloadMap')){$('erReloadMap').disabled=false;$('erReloadMap').textContent='Retry county boundaries';}
   fallbackMap(r,'Local county data unavailable: '+error.message+'. Try another state; the site must not invent geographic boundaries.');
  }
 }
@@ -268,7 +270,7 @@ async function start(){
    // Alaska's 2024 reporting units do not align with most 2022 borough/census-area FIPS; avoid projecting artificial county results.
    if(current.code==='AK'){scenario.target=null;for(const rec of scenario.map.values())rec.expected=null;}
    if(current.office==='House')$('countyMapMode').value='district';else $('countyMapMode').value=target==null||current.code==='AK'?'2024':'expected';
-   renderHeader(current);renderNav();renderForecast(current);renderPolls(current);$('countyMapMode').onchange=()=>{const districtPaths=$('countyMap').querySelector('path.geo-district');if($('countyMapMode').value==='district'||districtPaths)drawMap(current);else applyCountyLayer()};drawMap(current);
+   renderHeader(current);renderNav();renderForecast(current);renderPolls(current);if($('erReloadMap'))$('erReloadMap').onclick=()=>{const button=$('erReloadMap');button.disabled=true;button.textContent='Reloading…';drawMap(current,true).finally(()=>{button.disabled=false;if(button.textContent==='Reloading…')button.textContent='Reload boundaries';});};$('countyMapMode').onchange=()=>{const districtPaths=$('countyMap').querySelector('path.geo-district');if($('countyMapMode').value==='district'||districtPaths)drawMap(current);else applyCountyLayer()};drawMap(current);
  }catch(error){console.error('Election dossier data error',error);$('raceTitle').textContent='Election data unavailable';$('raceDeck').textContent='The published source files could not be loaded. Return to the race index or try reloading.';$('raceList').textContent='Data request unsuccessful.'}
 }
 start();
