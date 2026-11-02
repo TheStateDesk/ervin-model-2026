@@ -24,12 +24,26 @@ try{
    await page.addInitScript(mode=>localStorage.setItem('ervin-2026-appearance',mode),mode);
    await page.goto(base+'state/?state='+code+'&release='+stamp,{waitUntil:'domcontentloaded'});
    await page.waitForFunction(({n,h})=>document.querySelectorAll('#countyMap path.county').length===n&&document.querySelectorAll('#districtMap path.geo-district').length===h,{n:expect,h:house},{timeout:25000});
+   // County geometry is loaded independently of the optional House model/poll archives.
+   // Wait for both before assessing published content; DOMContentLoaded is too early.
+   await page.waitForFunction(()=>document.querySelector('#districtDetail')?.textContent.includes('ERVIN HOUSE'),null,{timeout:30000});
+   if(code==='TX'&&mode==='light'){
+    try{
+     await page.waitForFunction(()=>{
+      const text=document.querySelector('#pollStatewide')?.textContent||'';
+      return text.includes('Publisher averages')&&text.includes('Decision Desk HQ')&&text.includes('270toWin');
+     },null,{timeout:30000});
+    }catch(err){
+     const diagnostics=await page.evaluate(()=>({pollText:document.querySelector('#pollStatewide')?.textContent?.slice(0,1200),mainState:document.querySelector('#stateTitle')?.textContent,warning:document.querySelector('#pollHouse')?.textContent?.slice(-300)}));
+     throw Error('Texas polling publisher averages did not render after archive loading: '+JSON.stringify(diagnostics)+'; '+err.message);
+    }
+   }
    const status=await page.evaluate(()=>{
     const counties=[...document.querySelectorAll('#countyMap path.county')];
     return{visible:counties.filter(p=>{const r=p.getBoundingClientRect(),s=getComputedStyle(p);return r.width>.2&&r.height>.2&&s.fill!=='none';}).length,dark:document.documentElement.classList.contains('theme-dark'),text:document.body.innerText};
    });
    if(status.visible!==expect||status.dark!==(mode==='dark'))throw Error('LIVE RENDER FAILED '+code+' '+mode+' '+JSON.stringify({visible:status.visible,expected:expect,dark:status.dark}));
-   if(code==='TX'&&mode==='light'&&(!status.text.includes('Publisher averages')||!status.text.includes('Decision Desk HQ')))throw Error('Texas publisher averages missing on LIVE page');
+   if(code==='TX'&&mode==='light'&&(!status.text.includes('Publisher averages')||!status.text.includes('Decision Desk HQ')||!status.text.includes('270toWin')))throw Error('Texas publisher averages missing after archived sources loaded');
    await page.screenshot({path:'postdeploy-checks/'+code+'-'+mode+'.png',fullPage:false});
    console.log('LIVE PAGES PASS '+code+' '+mode+' counties='+status.visible+' House='+house);
    await page.close();
