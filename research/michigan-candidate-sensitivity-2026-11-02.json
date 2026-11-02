@@ -1,0 +1,57 @@
+{
+  "asOf": "2026-11-02",
+  "status": "NOT VALIDATED: 20% primary-to-general transfer is an editorial assumption, not fitted or backtested",
+  "primary": {
+    "url": "https://www.realclearpolling.com/polls/senate/democratic-primary/2026/michigan",
+    "pollMarginD": 10.2,
+    "resultMarginD": 1,
+    "errorD": 9.2
+  },
+  "comparison": {
+    "url": "https://www.270towin.com/2026-senate-polls/michigan",
+    "pollMarginD": 7.4,
+    "resultMarginD": 1,
+    "errorD": 6.4,
+    "independent": false
+  },
+  "originalMarginD": 1.08,
+  "weight": 0.2,
+  "adjustmentD": -1.84,
+  "finalMarginD": -0.76,
+  "breakEvenWeight": 0.1173913043478261,
+  "comparableHeldOutTests": 0,
+  "identifiedReligionEffect": false,
+  "identifiedSurveyModeError": false,
+  "sensitivity": [
+    {
+      "weight": 0,
+      "rcp": 1.08,
+      "alternative": 1.08
+    },
+    {
+      "weight": 0.05,
+      "rcp": 0.62,
+      "alternative": 0.76
+    },
+    {
+      "weight": 0.1,
+      "rcp": 0.16,
+      "alternative": 0.44
+    },
+    {
+      "weight": 0.15,
+      "rcp": -0.3,
+      "alternative": 0.12
+    },
+    {
+      "weight": 0.2,
+      "rcp": -0.76,
+      "alternative": -0.2
+    },
+    {
+      "weight": 0.3,
+      "rcp": -1.68,
+      "alternative": -0.84
+    }
+  ]
+}
