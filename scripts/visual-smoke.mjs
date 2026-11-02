@@ -25,6 +25,32 @@ try{
   console.log('RELEASE SMOKE PASS '+file+' '+report.slice(0,100).replaceAll('\\n',' '));
   await test.close();
  }
+ // Verify the consolidated national Election Night dashboard and all 83 Michigan counties.
+ const nationalNight=await browser.newPage({viewport:{width:1440,height:940}});
+ const nightErrors=[];nationalNight.on('pageerror',e=>nightErrors.push(e.message));
+ await nationalNight.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
+ await nationalNight.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
+ await nationalNight.waitForFunction(()=>document.querySelector('#nationalCount')?.textContent.includes('488 indexed races'),null,{timeout:30000});
+ assert((await nationalNight.locator('#miCounties').innerText())==='0 / 83','Fake Michigan county counts before polls close');
+ assert((await nationalNight.locator('#miD').innerText())==='—','Synthetic Michigan Senate votes before polls close');
+ assert((await nationalNight.locator('#miForecast').innerText()).length>2,'Michigan Ervin headline missing');
+ assert(nightErrors.length===0,'National Election Night JS errors: '+nightErrors.join(', '));
+ await nationalNight.locator('#michiganSpotlight').screenshot({path:'visual-checks/National-Election-Night-Michigan-83.png'});
+ await nationalNight.locator('[data-office="Governor"]').click();
+ await nationalNight.waitForFunction(()=>document.querySelectorAll('#raceList .race-row').length===36,null,{timeout:12000});
+ await nationalNight.locator('[data-office="House"]').click();
+ await nationalNight.waitForFunction(()=>document.querySelectorAll('#raceList .race-row').length===435,null,{timeout:12000});
+ await nationalNight.locator('[data-office="All"]').click();
+ await nationalNight.screenshot({path:'visual-checks/National-Election-Night-Full-Desk.png',fullPage:true});
+ console.log('NATIONAL NIGHT QA PASS',JSON.stringify({counties:83,contests:488,gov:36,house:435,errors:nightErrors}));
+ await nationalNight.close();
+ const governorPage=await browser.newPage({viewport:{width:1440,height:900}});
+ await governorPage.goto(root+'/governors/',{waitUntil:'domcontentloaded'});
+ await governorPage.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:20000});
+ assert((await governorPage.locator('#govCards .gov-card').count())===36,'Governor board no longer covers all 36 elections');
+ assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
+ await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
+ await governorPage.close();
  // Verify all 435 House model ratings and a genuinely interactive district-level geographic page.
  const nationalHouse=await browser.newPage({viewport:{width:1440,height:940}});
  await nationalHouse.goto(root+'/house/',{waitUntil:'domcontentloaded'});

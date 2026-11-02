@@ -16,7 +16,7 @@ async function ready(path){
 let browser;
 try{
  fs.mkdirSync('postdeploy-checks',{recursive:true});
- for(const path of ['states/','state/','geo/counties/TX.json','geo/counties/MI.json','states/editorial.css'])await ready(path);
+ for(const path of ['states/','state/','election-night/','geo/counties/TX.json','geo/counties/MI.json','states/editorial.css'])await ready(path);
  browser=await chromium.launch({headless:true,args:['--disable-dev-shm-usage']});
  for(const [code,expect,house] of [['TX',254,38],['MI',83,13]]){
   for(const mode of ['light','dark']){
@@ -49,5 +49,21 @@ try{
    await page.close();
   }
  }
+ // Explicit acceptance of newly published national Election Night / governor model.
+ const national=await browser.newPage({viewport:{width:1440,height:940}});
+ await national.goto(base+'election-night/?release='+stamp,{waitUntil:'domcontentloaded'});
+ await national.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83&&document.querySelector('#nationalCount')?.textContent.includes('488 indexed races'),null,{timeout:35000});
+ if((await national.locator('#miD').innerText())!=='—')throw Error('Live national desk fabricated a pre-election vote total');
+ if(!(await national.locator('#miForecast').innerText()).includes('D')&&!(await national.locator('#miForecast').innerText()).includes('R'))throw Error('Michigan original Ervin projection missing');
+ await national.screenshot({path:'postdeploy-checks/Election-Night-National.png',fullPage:false});
+ console.log('LIVE NATIONAL NIGHT PASS 488 races / 83 Michigan counties / no premature votes');
+ await national.close();
+ const governor=await browser.newPage({viewport:{width:1440,height:940}});
+ await governor.goto(base+'governors/?release='+stamp,{waitUntil:'domcontentloaded'});
+ await governor.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:25000});
+ if((await governor.locator('#govCards .gov-card').count())!==36)throw Error('Not all governor Ervin projections live');
+ await governor.screenshot({path:'postdeploy-checks/Governor-Ervin-Live.png',fullPage:false});
+ console.log('LIVE GOVERNORS PASS 36 races');
+ await governor.close();
  console.log('LIVE DEPLOYMENT VISUAL ACCEPTANCE PASS '+stamp);
 }catch(e){console.error(e);process.exitCode=1;}finally{await browser?.close();}

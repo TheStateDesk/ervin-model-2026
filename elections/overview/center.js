@@ -5,7 +5,7 @@ try{fav=new Set(JSON.parse(localStorage.getItem('ervin-model-watchlist-v2')||'[]
 const id=r=>r.office==='House'?r.id:r.office.toLowerCase()+':'+r.code;
 const route=r=>'../../state/?state='+encodeURIComponent(r.code)+(r.office==='House'?'#house-'+encodeURIComponent(r.district):'#stateOverview');
 const labels=r=>r.office==='House'?r.id:r.state+' '+r.office;
-const status=r=>r.office==='House'?(r.rating||'Rating not entered'):r.office==='Governor'?(r.poll?'Published aggregate '+(r.poll.margin>=0?'D':'R')+' +'+Math.abs(r.poll.margin).toFixed(1):'No published average'):(baseline[r.code]&&Number.isFinite(baseline[r.code].adjustedMargin)?'Ervin adj. '+(baseline[r.code].adjustedMargin>=0?'D':'R')+' +'+Math.abs(baseline[r.code].adjustedMargin).toFixed(1):'No current model estimate');
+const status=r=>r.office==='House'?(r.rating||'Rating not entered'):r.office==='Governor'?(Number.isFinite(r.model?.adjustedMargin)?'Original Ervin '+(r.model.adjustedMargin>=0?'D':'R')+' +'+Math.abs(r.model.adjustedMargin).toFixed(1)+(r.model.fallback?' · pooled history':' · state history'):'No comparable governor polling'):(baseline[r.code]&&Number.isFinite(baseline[r.code].adjustedMargin)?'Ervin adj. '+(baseline[r.code].adjustedMargin>=0?'D':'R')+' +'+Math.abs(baseline[r.code].adjustedMargin).toFixed(1):'No current model estimate');
 const quality=r=>r.office==='House'?r.rating==='Tossup'?0:r.rating?.startsWith('Lean')?1:r.rating?.startsWith('Likely')?2:5:r.office==='Senate'?3:4;
 function store(){try{localStorage.setItem('ervin-model-watchlist-v2',JSON.stringify([...fav]))}catch{}renderFav();renderSearch()}
 function renderFav(){const rows=all.filter(r=>fav.has(id(r)));$('centerWatchlist').innerHTML=rows.length?rows.map(r=>'<div class="center-watch"><a href="'+route(r)+'">'+esc(labels(r))+'</a><button type="button" data-favorite="'+esc(id(r))+'" aria-label="Remove '+esc(labels(r))+' from watchlist">Remove</button></div>').join(''):'<div class="race-note">No saved races yet. Open the Race finder and select ☆ Save on any contest.</div>'}
@@ -20,10 +20,10 @@ function drawMap(){
 const geo=window.ERVIN_US_GEOGRAPHY?.states||[],layer=$('centerMapLayer').value;
  if(layer==='counties'){if(window.ERVIN_CENTER_COUNTIES)window.ERVIN_CENTER_COUNTIES(chooseState);else $('centerMapLegend').textContent='County atlas is loading…';return;}
 const hCount={};for(const r of house)if(r.rating&&(/Tossup|Lean/.test(r.rating)))hCount[r.code]=(hCount[r.code]||0)+1;
-const value=code=>layer==='senate'?baseline[code]?.adjustedMargin:layer==='governor'?governors.find(r=>r.code===code)?.poll?.margin:layer==='house'?hCount[code]||0:countyHistory[code]?.stateCycles?.['2024']?.margin*100;
+const value=code=>layer==='senate'?baseline[code]?.adjustedMargin:layer==='governor'?governors.find(r=>r.code===code)?.model?.adjustedMargin:layer==='house'?hCount[code]||0:countyHistory[code]?.stateCycles?.['2024']?.margin*100;
 const color=code=>{const v=value(code);if(v==null||!Number.isFinite(v))return document.documentElement.classList.contains('light')?'#d7e3ea':'#36556b';if(layer==='house'){const n=Math.max(0,+v);return n===0?'#b4c6d4':n>=4?'#775d9a':n>=2?'#9981b2':'#b9a2c9'}const a=Math.min(1,Math.abs(v)/20);if(v<0)return a>.5?'#a7495e':'#d78c95';return a>.5?'#276b9c':'#7bb5db'};
 $('centerUSMap').innerHTML=geo.map(g=>'<path data-code="'+g.code+'" tabindex="0" role="button" aria-label="Select '+esc(g.name)+'" fill="'+color(g.code)+'" d="'+g.d+'"><title>'+esc(g.name)+' — '+(value(g.code)==null?'No published input':layer==='house'?hCount[g.code]||0:typeof value(g.code)==='number'?value(g.code).toFixed(1)+' margin points':'No input')+'</title></path>').join('');
-$('centerMapLegend').textContent=layer==='senate'?'Blue = non-Republican adjusted lead; red = Republican adjusted lead. Only 17 modeled Senate states. No unmodeled race calls.':layer==='governor'?'Blue = Democratic polling lead; red = Republican polling lead. These are published aggregates, not Ervin gubernatorial forecasts.':layer==='house'?'Purple intensity = count of sourced Lean/Tossup House district ratings in each state. Gray does not imply safe; no House seat outcomes calculated.':'Historical 2024 presidential two-party county-summed state margin where available. This is not a forecast.';
+$('centerMapLegend').textContent=layer==='senate'?'Blue = non-Republican adjusted lead; red = Republican adjusted lead. Only 17 modeled Senate states. No unmodeled race calls.':layer==='governor'?'Blue = Original Ervin-adjusted Democratic lead; red = Original Ervin-adjusted Republican lead. Governor transfer is provisional and uses 2016–2024 historical Senate/presidential errors.':layer==='house'?'Purple intensity = count of sourced Lean/Tossup House district ratings in each state. Gray does not imply safe; no House seat outcomes calculated.':'Historical 2024 presidential two-party county-summed state margin where available. This is not a forecast.';
 $('centerUSMap').querySelectorAll('path').forEach(p=>{p.addEventListener('click',()=>chooseState(p.dataset.code));p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();chooseState(p.dataset.code)}})});
 }
 const layerChoice=()=>$('centerMapLayer').value;
@@ -58,14 +58,15 @@ $('centerMapLayer').onchange=drawMap;
 async function start(){
 try{
 const root='../../';
-const [h,g,baselineData,countyData,score,source]=await Promise.all([
+const [h,g,baselineData,countyData,score,source,archive]=await Promise.all([
 fetch(root+'house/data.json').then(r=>r.json()),fetch(root+'governors/data.json').then(r=>r.json()),
 fetch(root+'counties-watch/forecast-baselines.json').then(r=>r.json()),
 fetch(root+'counties-watch/history.json').then(r=>r.json()),
 fetch(root+'research/cross_office_backtest_scorecard.json').then(r=>r.json()),
-fetch(root+'index.html').then(r=>r.text())
+fetch(root+'index.html').then(r=>r.text()),
+fetch(root+'research/calibration_events_2016_2024.json').then(r=>r.json())
 ]);
-house=h.seats||[];governors=g.races||[];baseline=baselineData.states||{};countyHistory=countyData.states||{};audit=score;
+house=h.seats||[];governors=window.ERVIN_STATEWIDE.apply(archive,g,baselineData).governor;baseline=baselineData.states||{};countyHistory=countyData.states||{};audit=score;
 const pre='window.ERVIN_DATA = ',a=source.indexOf(pre);if(a<0)throw Error('Senate source missing');
 const begin=a+pre.length,end=source.indexOf(';\n\n</script><script>',begin);if(end<0)throw Error('Senate source terminator missing');
 senate=JSON.parse(source.slice(begin,end)).states.map(x=>({...x,office:'Senate'}));
