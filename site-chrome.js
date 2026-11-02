@@ -2,6 +2,18 @@
 (()=>{
 "use strict";
 const head=document.querySelector(".site-header");
+/* The 50-state editorial desk is now the primary public navigation.
+   Resolve from this script URL, not from a nested page's relative path. */
+const siteRoot=new URL('./',document.currentScript?.src||location.href);
+const stateDeskURL=new URL('states/',siteRoot).href;
+for(const nav of [document.querySelector('.site-header .site-nav'),document.getElementById('topNavigation')]){
+ if(nav&&!nav.querySelector('[data-state-desk]')){
+  const a=document.createElement('a');a.href=stateDeskURL;a.dataset.stateDesk='true';
+  a.textContent='All states';a.setAttribute('aria-label','All 50 state election editions');
+  nav.prepend(a);
+ }
+}
+
 if(head){
  const button=head.querySelector(".site-mobile-toggle"),nav=head.querySelector(".site-nav");
  function collapse(){if(!button||!nav)return;nav.classList.remove("is-open");button.setAttribute("aria-expanded","false")}
