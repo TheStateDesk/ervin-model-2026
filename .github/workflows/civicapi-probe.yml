@@ -1,4 +1,4 @@
-name: CivicAPI first-party results collector and deployment
+name: CivicAPI primary election-results collector
 on:
   push:
     branches: [main]
@@ -13,17 +13,12 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-  pages: write
-  id-token: write
 concurrency:
   group: civicapi-2026-results
   cancel-in-progress: false
 jobs:
   collect:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     timeout-minutes: 16
     steps:
       - uses: actions/checkout@v4
@@ -58,10 +53,6 @@ jobs:
             git pull --rebase origin main
             git push
           fi
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - name: Publish validated returns to GitHub Pages
-        id: deploy
-        uses: actions/deploy-pages@v4
+      # The existing "Publish Ervin Model website" workflow publishes
+      # any new committed civicapi/*.json snapshot. Do not deploy Pages
+      # twice from competing workflows; GitHub Actions timing is best effort.
