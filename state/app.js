@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let houseScenario={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
+let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
 let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -166,6 +166,8 @@ function renderDistrictDetail(r){
  '<details class="ed-model-math"><summary>See exactly how this rating was calculated</summary><div class="ed-model-calculation"><p>'+esc(formatHouseYear(model.historic?.['2022'],'2022'))+'</p><p>'+esc(formatHouseYear(model.historic?.['2024'],'2024'))+'</p><p>National House generic ballot: <strong>'+esc(modeledMargin(model.generic2026D))+'</strong> · Partial state historical polling-error adjustment: '+esc(model.stateErrorPartialCorrection.toFixed(2))+' points.</p><p>History-plus-national scenario: <strong>'+esc(modeledMargin(model.fundamentalsD))+'</strong> · Compatible district survey blend: <strong>'+esc(modeledMargin(model.pollMeanD))+'</strong> · District polling weight: <strong>'+esc(Math.round(model.pollWeight*100))+'%</strong> · Combined Ervin estimate: <strong>'+esc(modeledMargin(model.marginD))+'</strong>.</p><p>The sensitivity is a scenario range, not a statistical confidence interval or a validated win probability. Different election systems, uncontested historical races, changes in district lines and poll sponsors can significantly change it.</p></div></details>':
  '<div class="ed-stat" style="margin:14px 0"><small>Current rating</small><strong>'+esc(r.rating||'Not available')+'</strong></div><p class="ed-notice">The independent 435-district model file is unavailable. This page is showing only its older poll and rating references; do not interpret missing results as a model forecast.</p>';
  const rows=model?.surveys||[];
+ const questions=houseQuestions.races?.[r.id]||[];
+ const additional=questions.length?'<details class="ed-model-math ed-question-archive"><summary>Browse '+fmt(questions.length)+' additional public poll questions (with candidate names and sample sizes)</summary><p class="ed-mini">Additional archived matchup questions—not independent surveys and not inputs to the numerical Ervin model. The same poll ID may contain several hypothetical candidate matchups. Some questions are from 2025 or feature independent candidates, so do not treat each as an election-day candidate comparison.</p><div class="ed-house-surveys">'+questions.map(q=>'<article class="ed-coverage"><div><strong>'+esc(q.pollster||'Poll')+'</strong><small>'+esc(q.date||'Date unknown')+' · '+(Number.isFinite(q.sampleSize)?fmt(q.sampleSize)+' respondents · ':'')+'poll ID '+esc(q.pollId||'not provided')+'</small><small>'+esc(q.demCandidate||'D')+' '+esc(Number.isFinite(q.dem)?q.dem+'%':'—')+' / '+esc(q.repCandidate||'R')+' '+esc(Number.isFinite(q.rep)?q.rep+'%':'—')+(q.otherCandidate?' / '+esc(q.otherCandidate)+' '+esc(Number.isFinite(q.otherShare)?q.otherShare+'%':'—'):'')+'</small><small>Archived question · not separately counted in Ervin model</small></div><a href="'+safeURL(q.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Question data</a></article>').join('')+'</div><p class="ed-mini"><a href="'+safeURL(houseQuestions.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Source dataset and compilation context</a> · Multiple rows can refer to one underlying poll. Refer to the original poll release for questionnaire and methodology.</p></details>':'';
  const surveyMarkup=rows.length?'<div class="ed-cap" style="margin-top:18px">Public surveys · '+fmt(rows.length)+' locally identified records</div>'+
  '<div class="ed-house-surveys">'+rows.map(v=>{
   const comparable=v.compatible&&Number.isFinite(v.dem)&&Number.isFinite(v.rep);
@@ -175,7 +177,7 @@ function renderDistrictDetail(r){
  const indexText=model?.publishedSurveyCount||indexed?.count||0;
  const caveat='<p class="ed-mini">The survey directory may index '+fmt(indexText)+' polls for this district, but only '+fmt(rows.length)+' identifiable local entries are displayed here. Original releases, sponsors and ranked-choice/same-party ballot structures may differ. A directory count is not a poll average.</p>';
  const links='<div class="ed-source-links"><a href="'+safeURL(model?.pollDirectoryLink||p?.url||'https://peoplespoll.com/house')+'" target="_blank" rel="noopener noreferrer">Full published district poll directory</a><a href="https://www.cookpolitical.com/ratings/house-race-ratings" target="_blank" rel="noopener noreferrer">Cook comparison ratings</a><a href="https://electiondata.dev/datasets/house-results/" target="_blank" rel="noopener noreferrer">2022/2024 House returns</a><a href="../elections/?office=house&state='+code+'&district='+esc(r.district)+'">Separate technical race dossier</a></div>';
- $('districtDetail').innerHTML=source+top+'<p><strong>Historical incumbent:</strong> '+esc(r.incumbent||'Not verified')+' · 2026 candidates must be confirmed from the state election office.</p>'+surveyMarkup+caveat+links;
+ $('districtDetail').innerHTML=source+top+'<p><strong>Historical incumbent:</strong> '+esc(r.incumbent||'Not verified')+' · 2026 candidates must be confirmed from the state election office.</p>'+surveyMarkup+additional+caveat+links;
  $('districtButtons').querySelectorAll('button[data-district]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.district===r.district)));
  $('districtMap').querySelectorAll('path.geo-district').forEach(path=>path.classList.toggle('is-selected',String(path.dataset.district).padStart(2,'0')===String(r.district).padStart(2,'0')));
  $('districtSelect').value=String(r.district);
@@ -318,12 +320,13 @@ async function start(){
     fetchJSON('../polling/latest-statewide-2026-11-02.json'),
     fetchJSON('../polling/texas-governor-publisher-averages-2026-11-02.json'),
     fetchJSON('../polling/texas-governor-surveys-2026-11-02.json'),
-    fetchJSON('../house/ervin-forecast-2026-11-02.json')];
+    fetchJSON('../house/ervin-forecast-2026-11-02.json'),
+    fetchJSON('../house/poll-questions-2026-11-02.json')];
   const updated=Promise.allSettled(optionalFiles).then(results=>{
    const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
    baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
-   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;
+   coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;
    pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
    renderLead();renderOverview();renderPolls();
    if(countyShape){buildScenario();drawCounties();}
