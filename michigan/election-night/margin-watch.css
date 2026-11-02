@@ -1,0 +1,18 @@
+
+/* Independent Ervin Michigan margin comparison — no estimated final vote on election night. */
+.mi-margin-shell{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 18px;margin:16px 0;border:1px solid #50718a;border-radius:12px;background:linear-gradient(125deg,#102b42,#15354d)}
+.mi-margin-copy h2{margin:3px 0 8px;font-size:21px;letter-spacing:-.03em}
+.mi-margin-copy .tiny{max-width:700px}
+.mi-margin-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:13px 0}
+.mi-margin-facts>div{padding:9px 13px;border-radius:9px;border:1px solid #48677d;background:#0b2235}
+.mi-margin-facts small{display:block;font-size:10px;color:#b8ccdc;font-weight:750}
+.mi-margin-facts strong{font-variant-numeric:tabular-nums;font-size:22px;color:#fff}
+.mi-margin-side{width:90px;flex:none;display:flex;justify-content:center}
+.mi-margin-rule{position:relative;width:37px;height:205px;background:linear-gradient(180deg,#397fb7 0%,#9bc5dd 43%,#f1e6db 50%,#d79a9e 57%,#aa4554 100%);border-radius:25px;border:2px solid #7892a8}
+.mi-margin-rule:before{content:"";position:absolute;top:50%;left:-7px;right:-7px;height:2px;background:#11283c}
+.mi-margin-rule small{position:absolute;right:43px;white-space:nowrap;color:#d9e6ef;font-weight:750;font-size:10px}
+.mi-margin-rule small:first-child{top:-5px}.mi-margin-rule small:last-child{bottom:-5px}
+.mi-margin-pointer{position:absolute;top:50%;left:50%;width:15px;height:15px;border:2px solid white;border-radius:100%;transform:translate(-50%,-50%);background:#11283c;box-shadow:0 2px 9px #041019a0}
+.mi-margin-pointer.pre{width:14px;height:14px;border-radius:3px;background:#f2c781;transform:translate(-50%,-50%) rotate(45deg)}
+.mi-margin-pointer[hidden]{display:none!important}
+@media(max-width:600px){.mi-margin-shell{align-items:flex-start;gap:12px;padding:14px}.mi-margin-facts{grid-template-columns:1fr}.mi-margin-side{width:62px}.mi-margin-rule small{right:36px}}
