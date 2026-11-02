@@ -52,6 +52,16 @@
 </form>
 <div id="manualList" class="nerd-whatif-list" aria-live="polite"></div>
 </section>
+<section id="houseDirectory" class="nerd-section">
+<div class="nerd-section-head"><div><span class="ed-kicker">ALL 435 U.S. HOUSE DISTRICTS</span><h2>Candidate ballot atlas</h2></div><a href="../house/" class="nerd-button">House forecast board</a></div>
+<p class="nerd-explain">Find the named 2026 House candidates, including California's same-party matchups and races with third-party candidates. Two public candidate directories are compared; no general-election nomination is inferred merely from an FEC registration. These are ballot-directory records rather than independently certified state lists.</p>
+<div class="nerd-roster-controls"><label>Find a district or candidate <input id="houseCandidateSearch" type="search" placeholder="Michigan 10, AL-07, Sewell…" autocomplete="off"></label>
+<label>Filter state <select id="houseCandidateState"><option value="all">All 50 states</option></select></label></div>
+<p class="nerd-explain" id="houseRosterSummary">Loading nationwide House candidate directory…</p>
+<div id="houseRosterCards" class="nerd-house-cards" aria-live="polite"></div>
+<div class="nerd-house-controls"><button id="houseRosterMore" type="button" class="nerd-button" hidden>Show more districts</button></div>
+<p class="nerd-explain">Sources: <a href="https://deepsyte.app/data">DeepSyte on-ballot directory</a> and <a href="https://electionsinusa.com/data/">Elections in USA nominee records</a>. Lists can lag ballot changes; use state election-office publications to resolve discrepancies.</p>
+</section>
 <section id="method" class="nerd-section">
 <span class="ed-kicker">REPRODUCIBILITY & RISK</span><h2>How this works — and what it cannot know</h2>
 <div class="nerd-methods">
@@ -63,5 +73,5 @@
 <div class="nerd-sources"><a href="../counties-watch/forecast-baselines.json">Underlying Original Ervin Senate margins</a><a href="../house/ervin-forecast-2026-11-02.json">District model source</a><a href="../research/EARLY_SIGNAL_LAB_2026.md">Complete source contract and methods</a><a href="https://www.nass.org/can-I-vote/state-election-officials" target="_blank" rel="noopener noreferrer">Official election offices</a></div>
 </section>
 <footer class="ed-footer"><span>ERVIN MODEL · EXPERIMENTAL ELECTION-NIGHT RESEARCH</span><span>Forecast ≠ votes · Human review required for partial returns</span></footer>
-</main><script defer src="./app.js"></script>
+</main><script defer src="./app.js"></script><script defer src="./house-roster.js"></script>
 </body></html>
