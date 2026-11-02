@@ -69,9 +69,9 @@ for(const rel of ['states/index.html','state/index.html','stats-for-nerds/index.
 const front=fs.readFileSync(path.join(root,'states/index.html'),'utf8');
 const entry=fs.readFileSync(path.join(root,'index.html'),'utf8');
 if(!entry.includes('location.replace')||!entry.includes('states/')||!entry.includes('noindex,follow'))issues.push('Site root must redirect to the canonical State Desk homepage');
-if(!front.includes('id="senate-control"')||!front.includes('id="balanceOfPower"')||!front.includes('id="powerCards"'))issues.push('State Desk homepage missing national Senate control or projected office balance');
-if(front.indexOf('id="senate-control"')>front.indexOf('id="balanceOfPower"')||front.indexOf('id="balanceOfPower"')>front.indexOf('id="nationMap"'))issues.push('The State Desk should show the control and office balance before the geographic atlas');
-if(!front.includes('../scripts/home-control.js')||!front.includes('../scripts/home-power.js'))issues.push('National forecast scripts not loaded on actual homepage');
+if(!front.includes('id="watchSection"')||!front.includes('id="balanceOfPower"')||!front.includes('id="powerCards"'))issues.push('State Desk homepage missing races carousel or projected office balance');
+if(front.indexOf('id="watchSection"')>front.indexOf('id="balanceOfPower"')||front.indexOf('id="balanceOfPower"')>front.indexOf('id="nationMap"'))issues.push('The State Desk should show the races carousel and office balance before the geographic atlas');
+if(!front.includes('../scripts/home-election-2026.js')||!front.includes('../scripts/home-power.js'))issues.push('National forecast scripts not loaded on actual homepage');
 for(const rel of ['state/app.js','state/district-extra.js']){
  const body=fs.readFileSync(path.join(root,rel),'utf8');
  if(/href=\\?["']\.\.\/elections\//.test(body)||body.includes('Separate technical race dossier'))issues.push(rel+': runtime links to retired standalone district view');
