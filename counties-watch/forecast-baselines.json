@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-02T21:16:36.238Z",
+  "asOf": "2026-11-02T21:43:38.076Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -179,8 +179,8 @@
       "nonR": "Dan Osborn",
       "rep": "Pete Ricketts",
       "party": "I",
-      "pollMargin": -1.73,
-      "adjustedMargin": -6.8,
+      "pollMargin": -1.71,
+      "adjustedMargin": -6.78,
       "mode": "Original Ervin",
       "publisherInputs": 3,
       "proxyOrSingleInput": false,

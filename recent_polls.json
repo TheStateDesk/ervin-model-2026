@@ -1,8 +1,19 @@
 {
-  "checkedAt": "2026-11-02T21:16:36.238950+00:00",
+  "checkedAt": "2026-11-02T21:43:38.076481+00:00",
   "source": "Original releases, RCP individual poll listings, and candidate-matched Wikipedia general-election survey tables; source type disclosed per row",
   "polls": {
     "ME": [
+      {
+        "pollster": "Survey160",
+        "dates": "October 27 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,322 (LV)",
+        "dem": 50.0,
+        "rep": 47.0,
+        "margin": 3.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "New York Times / Siena University",
         "dates": "October 27 – November 1, 2026",
@@ -121,17 +132,6 @@
         "dem": 51.0,
         "rep": 44.0,
         "margin": 7.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Beacon Research (D)/ Shaw & Co. Research (R)",
-        "dates": "October 16–20, 2026",
-        "fieldEnd": "2026-10-20",
-        "sample": "1,514 (LV)",
-        "dem": 49.0,
-        "rep": 49.0,
-        "margin": 0.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
@@ -675,6 +675,17 @@
     ],
     "KS": [
       {
+        "pollster": "Survey 160",
+        "dates": "October 27 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,267 (LV)",
+        "dem": 50.0,
+        "rep": 44.0,
+        "margin": 6.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
         "pollster": "New York Times / Siena University",
         "dates": "October 27 – November 1, 2026",
         "fieldEnd": "2026-11-01",
@@ -796,17 +807,6 @@
         "margin": -1.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "InsiderAdvantage (R)",
-        "dates": "October 9–10, 2026",
-        "fieldEnd": "2026-10-10",
-        "sample": "1,200 (LV)",
-        "dem": 48.0,
-        "rep": 47.0,
-        "margin": 1.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Kansas",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "MN": [
@@ -818,6 +818,17 @@
         "dem": 48.0,
         "rep": 43.0,
         "margin": 5.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
+        "pollster": "Survey 160",
+        "dates": "October 27 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,365 (LV)",
+        "dem": 52.0,
+        "rep": 43.0,
+        "margin": 9.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       },
@@ -928,17 +939,6 @@
         "dem": 45.0,
         "rep": 42.0,
         "margin": 3.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Mason-Dixon Polling & Strategy",
-        "dates": "October 5–7, 2026",
-        "fieldEnd": "2026-10-07",
-        "sample": "800 (LV)",
-        "dem": 47.0,
-        "rep": 43.0,
-        "margin": 4.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Minnesota",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }

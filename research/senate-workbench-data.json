@@ -1159,9 +1159,9 @@
           "note": ""
         },
         "silver": {
-          "value": -1,
+          "value": -0.9,
           "origin": "Silver Bulletin",
-          "date": "Nov 01",
+          "date": "Nov 02",
           "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska",
           "proxy": false,
           "note": "Verified from Wikipedia general-election aggregator table; individual underlying polls may overlap."
@@ -1702,83 +1702,17 @@
   "ratings": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1",
   "errorResearch": "https://www.pollingforecast.com/research/us-polling-error",
   "liveMeta": {
-    "checkedAt": "2026-11-02T21:16:36.238950+00:00",
+    "checkedAt": "2026-11-02T21:43:38.076481+00:00",
     "pagesParsed": 15,
     "checkedRaceCount": 17,
-    "changes": 12,
+    "changes": 1,
     "observationsFound": 57,
     "errors": [],
     "updated": [
       {
-        "state": "ME",
-        "source": "ddhq",
-        "margin": 5.7,
-        "published": "Nov 02"
-      },
-      {
-        "state": "ME",
+        "state": "NE",
         "source": "silver",
-        "margin": 4.0,
-        "published": "Nov 02"
-      },
-      {
-        "state": "OH",
-        "source": "ddhq",
-        "margin": 2.3,
-        "published": "Nov 02"
-      },
-      {
-        "state": "OH",
-        "source": "silver",
-        "margin": 3.0,
-        "published": "Nov 02"
-      },
-      {
-        "state": "IA",
-        "source": "ddhq",
-        "margin": -0.7,
-        "published": "Nov 02"
-      },
-      {
-        "state": "IA",
-        "source": "rcp",
-        "margin": -0.5,
-        "published": "Nov 02"
-      },
-      {
-        "state": "IA",
-        "source": "silver",
-        "margin": 0.7,
-        "published": "Nov 02"
-      },
-      {
-        "state": "KS",
-        "source": "silver",
-        "margin": 3.3,
-        "published": "Nov 02"
-      },
-      {
-        "state": "AK",
-        "source": "win270",
-        "margin": 3.5,
-        "published": "Nov 02"
-      },
-      {
-        "state": "AK",
-        "source": "ddhq",
-        "margin": 1.4,
-        "published": "Nov 02"
-      },
-      {
-        "state": "AK",
-        "source": "rcp",
-        "margin": 1.0,
-        "published": "Nov 02"
-      },
-      {
-        "state": "AK",
-        "source": "silver",
-        "margin": 2.7,
+        "margin": -0.9,
         "published": "Nov 02"
       }
     ],
