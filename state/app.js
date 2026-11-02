@@ -10,7 +10,7 @@ const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
 let historicalError=null;let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
-let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
+let countyChosenByUser=false;let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
 function sourceItem(text,url,detail=''){return '<article><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(text)+'</a></strong>'+(detail?'<small>'+esc(detail)+'</small>':'')+'</article>';}
@@ -49,6 +49,17 @@ function renderOverview(){
  const senate=s?statewideCard('U.S. Senate',code==='MI'?'Ervin’s Take · candidate-strength context':'Original Ervin adjustment',s.nonR+' vs. '+s.rep,margin(Number(s.adjustedMargin)),'Historical partisan polling correction applied to sourced statewide averages. '+(s.candidateStrength?'The candidate-specific, discounted primary-overpolling comparison is also applied; methodology in the source ledger. ':'')+'Not a race call or a win probability. '+(s.stale?'Publisher inputs may be outdated.':''),'https://www.realclearpolling.com/latest-polls/senate','../elections/?office=senate&state='+code+'#pollSection'):'<article class="ed-race"><div class="ed-kicker">U.S. Senate</div><h3>'+(indexedSenate?'Senate polling indexed':'No Ervin-modeled Senate contest')+'</h3><p>'+(indexedSenate?'A separate public polling index lists '+fmt(indexedSenate.count)+' published surveys and displays '+esc(indexedSenate.summary)+'. This index is not an Ervin forecast or a verified candidate-matched polling average.':'No model or public survey index available here; this does not imply the election is uncontested.')+'</p>'+(indexedSenate?'<a href="'+safeURL(coverage.senate.source)+'" target="_blank" rel="noopener noreferrer">Review all Senate polls at publisher</a>':'')+'</article>';
  const govEst=governorErvin[code]?.model;const governor=g?statewideCard('Governor',Number.isFinite(govEst?.adjustedMargin)?'Ervin’s Take':'Published polling average',g.dem+' vs. '+g.rep,govEst&&Number.isFinite(govEst.adjustedMargin)?margin(govEst.adjustedMargin):Number.isFinite(govEst?.pollMargin)?margin(govEst.pollMargin)+' · published average':'No comparable public poll average',govEst?'Published poll: '+(Number.isFinite(govEst.pollMargin)?margin(govEst.pollMargin):'unavailable')+'; 2018–24 governor-only error correction '+(govEst.correction===null?'not available':govEst.correction.toFixed(2))+' points. '+(govEst.candidateShift?'Candidate-performance context +'+govEst.candidateShift.toFixed(2)+' D points (included in Ervin’s Take). ':'')+(govEst.fallback?'No verified same-state governor polling error available; the displayed publisher margin is not a modeled Ervin forecast. ':'Same-state governor history included. ')+'Governor-only adjustment was backtested against earlier state governor contests and increased error in the sourced holdout sample.': 'Awaiting historical calibration inputs.',g.poll?.url||g.nomineesSource,'../governors/?state='+code):'<article class="ed-race"><div class="ed-kicker">Governor</div><h3>No 2026 gubernatorial contest</h3><p>The governorship is not up for election in this registry.</p></article>';
  $('stateRaceCards').innerHTML=senate+governor;
+ // Conditional statewide odds use office-specific historic error widths, not
+ // sample MOE or certified race-call probabilities.
+ const cards=$('stateRaceCards').querySelectorAll('.ed-race');
+ const potential=[s?{race:s,office:'Senate',margin:Number(s.adjustedMargin)}:null,
+  g?{race:g,office:'Governor',margin:Number.isFinite(govEst?.adjustedMargin)?govEst.adjustedMargin:govEst?.pollMargin,cycles:govEst?.calibrationCycles||0}:null].filter(Boolean);
+ potential.forEach((entry,i)=>{
+  const forecast=cards[i]?.querySelector('.ed-race-big'),ch=window.ERVIN_ODDS?.estimate(entry.margin,entry.office,{cycles:entry.cycles||0});
+  if(!forecast||!ch)return;
+  forecast.insertAdjacentHTML('afterend','<div class="ed-win-odds"><span><b>'+window.ERVIN_ODDS.pct(ch.dem)+'</b> D/non-R</span><span><b>'+window.ERVIN_ODDS.pct(ch.rep)+'</b> R</span></div><small class="ed-odds-footnote">Illustrative model win chances · ±'+ch.sigma.toFixed(1)+' pts assumed forecast error; not validated probabilities'+(entry.office==='Governor'&&!Number.isFinite(govEst?.adjustedMargin)?' · publisher average only':'')+'</small>');
+ });
+
  const withPolls=stateHouse.filter(x=>housePolls[x.id]||houseVerified.races?.[x.id]?.length||coverage.house?.districts?.[x.id]).length,withRatings=stateHouse.filter(x=>x.rating).length;
  $('stateNotebook').innerHTML='<article><strong>State contests</strong><small>'+(s?'Senate model available · ':'No Senate model · ')+(g?'Governor polling indexed':'No governor election')+'</small></article>'+
  '<article><strong>'+withRatings+' of '+stateHouse.length+' House ratings sourced</strong><small>Ratings are qualitative; missing ratings are not Safe D or Safe R predictions.</small></article>'+
@@ -144,7 +155,7 @@ function initCountyControls(){
  $('countyZoomIn').onclick=()=>countyZoom(1.65);
  $('countyZoomOut').onclick=()=>countyZoom(1/1.65);
  $('countyZoomReset').onclick=()=>{mapZoom=1;mapCenter={x:450,y:290};updateCountyViewport();};
- $('countyLayer').onchange=drawCounties;
+ $('countyLayer').onchange=()=>{countyChosenByUser=true;drawCounties()};
  $('countyTableFind').oninput=renderCountyTable;
  $('countyCSV').onclick=countyCSV;
  $('countyRetry').onclick=()=>loadCountyMap(true);
@@ -323,7 +334,7 @@ async function display(next){
  selectedDistrict=null;countyShape=null;districtShape=null;cachedCountyRows=[];selectedCounty=null;countyToken++;houseToken++;
  stateHouse=house.filter(x=>x.code===code).sort((a,b)=>String(a.district).localeCompare(String(b.district)));
  renderLead();renderOverview();initDistrictButtons();renderPolls();officialLinks();
- $('countyLayer').value='2024';$('countyTableFind').value='';$('countySearch').value='';
+ countyChosenByUser=false;$('countyLayer').value=getSen()?'senate':getGov()?'governor':'2024';$('countyTableFind').value='';$('countySearch').value='';
  $('countyMap').replaceChildren();$('districtMap').replaceChildren();
  // Map and results start independently; slow polling metadata cannot block geographic boundaries.
  loadReturns(true);
@@ -361,6 +372,11 @@ async function start(){
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
    coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;houseRoster=values[14]||houseRoster;historicalError=values[15]?.version===1?values[15]:null;
    if(values[13]&&window.ERVIN_STATEWIDE){const cal=window.ERVIN_STATEWIDE.apply(values[13],{races:governors},{states:baselines});governorErvin=Object.fromEntries(cal.governor.map(g=>[g.code,g]));}
+   if(!countyChosenByUser){
+    $('countyLayer').value=getSen()?'senate':getGov()?'governor':'2024';
+    if(countyShape)drawCounties();
+   }
+
    pollingWarning=results.some(r=>r.status==='rejected')?'Some polling/history sources are unavailable; counts may be incomplete.':'';
    renderLead();renderOverview();renderPolls();
    if(countyShape){buildScenario();drawCounties();}
