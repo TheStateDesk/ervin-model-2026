@@ -36,8 +36,8 @@ function renderLead(){
  const senateIndex=coverage.senate?.states?.[code];
  $('heroSenate').textContent=sen?margin(Number(sen.adjustedMargin)):senateIndex?fmt(senateIndex.count)+' polls indexed':'No modeled race';
  $('heroSenateSub').textContent=sen?'Original Ervin adjustment · '+fmt(sen.publisherInputs)+' publisher inputs':senateIndex?'Public Senate poll index · not an Ervin prediction':'No Senate race in the 17-state model';
- $('heroGovernor').textContent=code==='TX'&&texasGovAverages?.averages?.length?margin(texasGovAverages.averages[0].margin):gov?.poll&&Number.isFinite(gov.poll.margin)?margin(gov.poll.margin):gov?'No average':'No election';
- $('heroGovSub').textContent=code==='TX'&&texasGovAverages?.averages?.length?'RCP publisher average, with comparison of 5 sources below':gov?'Governor publisher snapshot; not an Ervin projection':'No governor contest in the 2026 registry';
+ $('heroGovernor').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?margin(governorErvin[code].model.adjustedMargin):'No model input'):'No election';
+ $('heroGovSub').textContent=gov?(governorErvin[code]?.model?'Original Ervin correction · 2016–24 reference events':'Loading 2016–24 Ervin correction'):'No governor contest in the 2026 registry';
  $('houseCoverage').textContent=n(stateHouse.length)+' · '+stateName(code);
  $('editionDate').textContent='Research snapshot · November 2026';
 }
