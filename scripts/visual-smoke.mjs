@@ -25,6 +25,30 @@ try{
   console.log('RELEASE SMOKE PASS '+file+' '+report.slice(0,100).replaceAll('\\n',' '));
   await test.close();
  }
+ // Verify the new 14,000-draw early-signal research tab without a live vote feed.
+ const nerd=await browser.newPage({viewport:{width:1240,height:880}});
+ const nerdErrors=[];nerd.on('pageerror',e=>nerdErrors.push(e.message));
+ await nerd.goto(root+'/stats-for-nerds/',{waitUntil:'domcontentloaded'});
+ await nerd.waitForFunction(()=>document.querySelector('#targetCards')?.textContent.includes('Texas')&&document.querySelector('#sampleHealth')?.textContent==='14,000',null,{timeout:30000});
+ assert((await nerd.locator('.nerd-target').count())===3,'Stats for Nerds must show TX/KS/IA three-state scenario');
+ assert((await nerd.locator('#numApproved').innerText())==='0','Lab must not invent approved early-return signals');
+ assert((await nerd.locator('#targetCards').innerText()).includes('50.6%'),'Texas original baseline must be D 50.6%');
+ await nerd.locator('#inputRace').selectOption('VA-02');
+ await nerd.locator('#inputShare').fill('65');
+ await nerd.locator('#inputCoverage').fill('60');
+ await nerd.locator('#whatifForm button[type="submit"]').click();
+ assert((await nerd.locator('#sampleWarning').innerText()).includes('what-if'),'Hypothetical scenario not indicated');
+ await nerd.locator('#includeManual').uncheck();
+ assert((await nerd.locator('#sampleWarning').innerText()).includes('No audited'),'Disabling local hypotheticals must reset baseline');
+ assert(nerdErrors.length===0,'Stats for Nerds browser errors: '+nerdErrors.join(', '));
+ await nerd.screenshot({path:'visual-checks/Stats-For-Nerds-Desktop.png',fullPage:true});
+ await nerd.close();
+ const nerdMobile=await browser.newPage({viewport:{width:390,height:844}});
+ await nerdMobile.goto(root+'/stats-for-nerds/',{waitUntil:'domcontentloaded'});
+ await nerdMobile.waitForFunction(()=>document.querySelector('#targetCards')?.textContent.includes('Iowa'),null,{timeout:30000});
+ assert(await nerdMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Stats for Nerds creates mobile horizontal overflow');
+ await nerdMobile.screenshot({path:'visual-checks/Stats-For-Nerds-Mobile.png',fullPage:true});
+ await nerdMobile.close();
  // Verify the consolidated national Election Night dashboard and all 83 Michigan counties.
  const homepage=await browser.newPage({viewport:{width:1440,height:940}});
  await homepage.goto(root+'/',{waitUntil:'domcontentloaded'});
