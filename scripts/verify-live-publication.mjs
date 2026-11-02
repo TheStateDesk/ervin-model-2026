@@ -56,9 +56,9 @@ try{
  const frontModel=await front.evaluate(()=>{
   const panel=document.querySelector('#balanceOfPower');
   const box=panel?.getBoundingClientRect();
-  return {top:box?.top,width:box?.width,count:document.querySelectorAll('#powerCards .power-card').length,governors:document.querySelector('[data-power-office="governors"]')?.textContent,senate:document.querySelector('[data-power-office="senate"]')?.textContent,versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
+  return {top:box?.top,width:box?.width,count:document.querySelectorAll('#powerCards .power-card').length,governors:document.querySelector('[data-power-office="governors"]')?.textContent,senate:document.querySelector('[data-power-office="senate"]')?.textContent,senateD:Number(document.querySelector('[data-power-office="senate"] [data-power-d]')?.textContent),senateR:Number(document.querySelector('[data-power-office="senate"] [data-power-r]')?.textContent),versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
  });
- if(!(frontModel.count===3&&frontModel.top>=0&&frontModel.top<150&&frontModel.width>250&&frontModel.governors?.includes('25')&&frontModel.senate?.includes('50Democratic')&&frontModel.senate?.includes('50Republican')))throw Error('LIVE MOBILE HOMEPAGE FORECAST NOT VISIBLE '+JSON.stringify(frontModel));
+ if(!(frontModel.count===3&&frontModel.top>=0&&frontModel.top<150&&frontModel.width>250&&frontModel.governors?.includes('25')&&frontModel.senateD===50&&frontModel.senateR===50))throw Error('LIVE MOBILE HOMEPAGE FORECAST NOT VISIBLE '+JSON.stringify(frontModel));
  if(!frontModel.versions.some(s=>s.includes('pollrefresh-v2')))throw Error('LIVE HOMEPAGE USING CACHED GOVERNOR ENGINE '+JSON.stringify(frontModel.versions));
  await front.screenshot({path:'postdeploy-checks/Homepage-Balance-Visible-Mobile.png',fullPage:false});
  console.log('LIVE HOMEPAGE BALANCE PASS '+JSON.stringify(frontModel));
