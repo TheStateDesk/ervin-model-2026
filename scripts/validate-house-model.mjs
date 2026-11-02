@@ -33,7 +33,7 @@ assert(questions.summary.pollQuestionRows>=400&&questions.summary.districts>=100
 assert.equal(Object.values(questions.races).reduce((n,rows)=>n+rows.length,0),questions.summary.pollQuestionRows);
 for(const [id,qs] of Object.entries(questions.races)){
  assert(seats.has(id),'Unknown district in archived questions '+id);
- for(const q of qs){assert(q.pollster&&q.date&&/q.sourceUrl.startsWith('https://'),'Unattributed question '+id);assert(q.usedInErvinModel===false,'Question should not double count in forecast '+id)}
+ for(const q of qs){assert(q.pollster&&q.date&&q.sourceUrl.startsWith('https://'),'Unattributed question '+id);assert(q.usedInErvinModel===false,'Question should not double count in forecast '+id)}
 }
 assert(fs.readFileSync('state/app.js','utf8').includes("houseQuestions=values[12]"),'Supplemental questions not connected to state dashboard');
 assert.equal(d.summary.districts,435);
