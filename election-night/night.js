@@ -207,9 +207,9 @@ async function init(){
  $('nightStateFilter')?.addEventListener('change',e=>{
   selectedState=e.target.value;selectedRace='';const url=new URL(location.href);
   if(selectedState==='all')url.searchParams.delete('state');else url.searchParams.set('state',selectedState);
-  url.searchParams.delete('race');history.replaceState(null,'',url);drawRaces();
+  url.searchParams.delete('race');window.history.replaceState(null,'',url);drawRaces();
  });
- $('clearNightRace')?.addEventListener('click',()=>{selectedRace='';const url=new URL(location.href);url.searchParams.delete('race');history.replaceState(null,'',url);drawRaces()});
+ $('clearNightRace')?.addEventListener('click',()=>{selectedRace='';const url=new URL(location.href);url.searchParams.delete('race');window.history.replaceState(null,'',url);drawRaces()});
  $('refreshResults').onclick=()=>Promise.allSettled([refreshNational(),refreshCounty()]);
  try{await Promise.all([loadRaces(),initCountyMap()]);await Promise.allSettled([refreshNational(),refreshCounty()]);}
  catch(e){console.error(e);$('feedStatus').textContent='Some election sources unavailable';$('miFeedStatus').textContent='County reference or feed initialization failed: '+e.message}
