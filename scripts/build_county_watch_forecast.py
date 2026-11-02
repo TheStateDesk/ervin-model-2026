@@ -54,12 +54,28 @@ def build(data):
    margin=round(sum(v*w for v,w in vals)/sum(w for _,w in vals),2)
   bias=float(race.get("correction") or 0) if race.get("history_mode")!="not_comparable" else 0
   adjusted=round(margin-bias,2)
+  # Only apply a documented, non-backtested candidate-strength sensitivity.
+  # Unlike gubernatorial or federal historical polling errors, this transfer
+  # has no fitted accuracy estimate and is not a religion/geography penalty.
+  candidate_strength=None
+  if race["code"]=="MI":
+   research=json.loads((ROOT/"research/michigan-candidate-effect-audit-2026-11-02.json").read_text(encoding="utf-8"))
+   candidate_strength=research.get("forecast",{}).get("candidateStrength")
+   if not candidate_strength or candidate_strength.get("candidate")!=race["dem"]:
+    raise ValueError("MI Ervin candidate context source unavailable or candidate mismatch")
+   if candidate_strength.get("transferVerified") is not False:
+    raise ValueError("Do not label unsupported candidate-strength transfer as validated")
+   shifted=float(candidate_strength["adjustmentD"])
+   if not math.isfinite(shifted) or abs(shifted)>3:
+    raise ValueError("MI candidate-strength adjustment out of source boundaries")
+   adjusted=round(adjusted+shifted,2)
   out[race["code"]]={"state":race["state"],"nonR":race["dem"],"rep":race["rep"],
       "party":race["party"],"pollMargin":int(margin) if float(margin).is_integer() else round(margin,2),"adjustedMargin":adjusted,
       "mode":"Original Ervin","publisherInputs":len(vals),"proxyOrSingleInput":len(vals)<2,
-      "source":"Ervin's Take · recent publisher blend (7-day limit)" if vals else "OLDER REFERENCE · no recent qualifying publisher average",
+      "source":("Ervin's Take · publisher blend + original history + discounted candidate context" if candidate_strength else ("Ervin's Take · recent publisher blend (7-day limit)" if vals else "OLDER REFERENCE · no recent qualifying publisher average")),
       "stale":not bool(vals),
-      "note":"Model-based statewide non-R minus R margin. Historic proxy, not current polling." if not vals else "Model-based statewide margin from recent attributed publisher averages, not a county poll."}
+      "note":("Ervin’s Take: Original Michigan Senate historical correction plus an unvalidated, heavily discounted candidate-primary error context; not a religious/poll-mode penalty." if candidate_strength else ("Model-based statewide non-R minus R margin. Historic proxy, not current polling." if not vals else "Model-based statewide margin from recent attributed publisher averages, not a county poll.")),
+      **({"candidateStrength":candidate_strength} if candidate_strength else {})}
  return {"version":1,"asOf":now.isoformat(timespec="milliseconds").replace("+00:00","Z"),"source":"National 2026 Ervin polling dashboard; Original Ervin default",
          "method":"Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
          "states":out}

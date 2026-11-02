@@ -18,4 +18,7 @@ for code,model in expected["states"].items():
         assert abs(float(observed[key])-float(model[key]))<0.011, (code,key,observed[key],model[key])
     for key in ("publisherInputs","proxyOrSingleInput","stale","mode"):
         assert observed.get(key)==model.get(key), (code,key,observed.get(key),model.get(key))
+    if code == "MI":
+        assert observed.get("candidateStrength")==model.get("candidateStrength"), "MI subjective candidate-strength metadata differs from documented audit"
+        assert model["candidateStrength"].get("transferVerified") is False, "Do not report unvalidated candidate shift as a proven polling error"
 print("PASS: County benchmark source consistency for all 17 watched races")

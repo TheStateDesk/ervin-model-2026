@@ -261,9 +261,9 @@
   },
   "forecast": {
     "reference": "counties-watch/forecast-baselines.json#states.MI",
-    "currentMethod": "Michigan: original state Senate historical poll-error correction plus a user-directed 20% transfer of the same candidate's 2026 Senate primary overpoll, applied as a nonvalidated candidate-strength sensitivity marker.",
+    "currentMethod": "Michigan: original state Senate historical poll-error correction plus an explicitly disclosed judgmental 20% transfer of the same candidate's 2026 Senate primary overpoll, applied as a nonvalidated candidate-strength sensitivity marker.",
     "automaticAdditionalMuslimPenalty": 0,
-    "reason": "A candidate-specific historical primary polling discrepancy is discounted and added as a qualitative Ervin’s Take parameter; evidence remains insufficient for a generalized Muslim Bradley, pollster-mode or county-demographic penalty.",
+    "reason": "A candidate-specific historical primary polling discrepancy is discounted and added as an unvalidated sensitivity within Ervin’s Take; evidence remains insufficient for a generalized Muslim Bradley, pollster-mode or county-demographic penalty.",
     "postElectionTest": "Once official Michigan Senate/governor returns exist, compare Senate and governor forecast residuals and pollster-mode matched residuals; isolate from historic Michigan partisan error, sample frame and regional covariates.",
     "candidateStrength": {
       "label": "Ervin's Take candidate-strength marker",
