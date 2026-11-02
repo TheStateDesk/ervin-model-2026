@@ -1,0 +1,24 @@
+<!doctype html><html lang="en" class="light"><head>
+<script>try{if(localStorage.getItem("ervin-2026-appearance")==="dark")document.documentElement.classList.remove("light")}catch(e){}</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f6f8">
+<meta name="description" content="All 36 state gubernatorial races in November 2026: candidates, attributed polling averages and detailed election dashboards.">
+<title>2026 Governors • Ervin Model</title>
+<link rel="stylesheet" href="../site-chrome.css"><link rel="stylesheet" href="../design-system.css"><link rel="stylesheet" href="../interior-layout.css"><link rel="stylesheet" href="../dark-theme.css"><link rel="stylesheet" href="../elections/style.css">
+</head><body><a class="skip-to-content" href="#mainContent">Skip to content</a>
+<header class="site-header"><div class="site-header-inner">
+<a class="site-brand" href="../" aria-label="Ervin Model home"><span class="site-emblem">E</span><span>ERVIN <b>MODEL</b></span></a>
+<button class="site-mobile-toggle" type="button" aria-controls="siteNavigation" aria-expanded="false">☰ Menu</button>
+<nav id="siteNavigation" class="site-nav" aria-label="Website"><a href="../">Senate</a><a href="./" aria-current="page">Governors</a><a href="../counties-watch/">Counties to Watch</a><a href="../michigan/">Michigan</a><a href="../michigan/election-night/">Election night</a></nav></div></header>
+<main id="mainContent" class="race-shell">
+<div class="race-topline"><a href="../" class="race-back">← National forecast</a><span class="race-flag"><i></i> Pre-election research edition · Nov 3, 2026</span></div>
+<div class="race-lede"><div><div class="race-kicker">2026 elections / governors</div><h1 class="race-title">The races for governor.</h1><p class="race-description">Every state gubernatorial election in 2026, organized around real geography and published polling. Select a state to open its full election dossier, including a county map, polling, candidate matchup and transparent results status.</p></div><div class="race-flag" id="coverage">Loading 36 races…</div></div>
+<nav class="race-ribbon" aria-label="Sections"><a href="#governorMap">State map</a><a href="#governorRaces">All 36 races</a><a href="../elections/?office=governor&state=MI">Michigan governor ↗</a><a href="../elections/?office=senate&state=TX">Texas Senate ↗</a></nav>
+<section id="governorMap" class="race-panel"><div class="race-map-head"><div><div class="race-kicker">Geographic overview</div><h2>Choose a governor election on the map</h2></div><span class="race-flag">36 elections</span></div>
+<div class="gov-map"><svg id="govUSMap" viewBox="0 0 1080 625" role="group" aria-label="2026 governor election map, selectable by state"></svg></div>
+<p class="race-muted"><span style="color:var(--race-blue)">■</span> Democratic polling lead · <span style="color:var(--race-red)">■</span> Republican polling lead · Grey: no verified current average or no election. These are publisher polling leads, not race calls or calculated win probabilities.</p></section>
+<section id="governorRaces" style="margin-top:28px"><div class="race-kicker">State-by-state</div><h2 style="font-size:clamp(23px,3vw,32px);margin:5px 0">36 gubernatorial elections</h2>
+<div class="gov-toolbar"><input class="gov-search" id="govSearch" type="search" placeholder="Find a state or candidate…" aria-label="Find a governor election">
+<label class="race-muted" for="govSort">Sort <select id="govSort"><option value="close">Closest polling first</option><option value="alpha">State A–Z</option><option value="polls">Most surveys</option></select></label></div>
+<div class="gov-grid" id="govCards"></div></section>
+<section class="race-panel" style="margin-top:24px"><h2>How to read these numbers</h2><p class="race-muted">This governor board uses a dated, attributed <a href="https://www.onpointpolitics.us/polls/governor" target="_blank" rel="noopener noreferrer">On Point Politics polling average</a> as a comparison, not a new Ervin gubernatorial forecast. Senate-only historical error corrections have not been transferred to governor races. Poll counts reflect the publisher’s records, not distinct independent forecasters. Candidate rosters are cross-referenced with the <a href="https://www.nga.org/governors/elections/" target="_blank" rel="noopener noreferrer">National Governors Association</a>. No county result is treated as live until a verified source has provided it.</p></section>
+</main><script src="../scripts/us-geography.js"></script><script src="./board.js"></script><script src="../site-chrome.js" defer></script></body></html>
