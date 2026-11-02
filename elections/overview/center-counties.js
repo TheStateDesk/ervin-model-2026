@@ -31,7 +31,7 @@ async function draw(selectState){
   }
   svg.replaceChildren(frag);
   svg.setAttribute('aria-label','Nationwide county shapes; click a county to open its state election directory. State borders are keyboard-selectable.');
-  svg.onclick=e=>{const p=e.target.closest?.('path[data-code]');if(p&&STATE[String((p.dataset.code||''))]===undefined)selectState(p.dataset.code);};
+  svg.onclick=e=>{const p=e.target.closest?.('path[data-code]');if(p?.dataset.code)selectState(p.dataset.code);};
   legend.textContent=counties.length.toLocaleString('en-US')+' Census-derived county geometries nationwide · outline only · gray does not mean a 2026 result · select a county to browse its state contests. Boundaries are historical atlas cartography, not 2026 district outlines.';
  }catch(e){status.textContent='County atlas could not load. State map layers remain available.';legend.textContent='External county geometry unavailable ('+e.message+'); select another map layer.';svg.replaceChildren(status);}
 }
