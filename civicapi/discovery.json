@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-02T19:51:59.228922Z",
+  "checkedAt": "2026-11-02T19:53:45.491778Z",
   "note": "Six-race pilot. Missing or rejected values do not mean zero votes; source access and Pages publication may lag.",
   "polling": {
     "note": "Polling advertised by provider; verified v2 polling endpoint and schema not established. No polls added to Ervin model.",
@@ -43,7 +43,16 @@
         "region_results"
       ],
       "detailType": "dict",
+      "field_country": "US",
+      "field_district": "AL-07",
+      "field_election_date": "2026-11-03T05:00:00.000Z",
+      "field_election_scope": "General",
       "field_election_type": "House of Representatives",
+      "field_last_updated": "2026-10-30T18:52:46.998Z",
+      "field_percent_reporting": "0",
+      "field_polls_close": "2026-11-04T01:00:00.000Z",
+      "field_province": "AL",
+      "field_test_data": "False",
       "query": "House",
       "raceId": "86906",
       "responseType": "dict",
@@ -54,6 +63,16 @@
         "   alabama state house barbour     local state house"
       ],
       "searchMatches": 1,
+      "searchRecord": {
+        "country": "US",
+        "district": "AL-07",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Alabama US House 7",
+        "election_type": "General",
+        "id": "86906",
+        "province": "AL",
+        "type": "House of Representatives"
+      },
       "state": "schema_or_votes_unverified"
     },
     "ME-SENATE": {
@@ -92,7 +111,16 @@
         "region_results"
       ],
       "detailType": "dict",
+      "field_country": "US",
+      "field_district": "None",
+      "field_election_date": "2026-11-03T05:00:00.000Z",
+      "field_election_scope": "General",
       "field_election_type": "US Senate",
+      "field_last_updated": "2026-10-30T23:08:25.898Z",
+      "field_percent_reporting": "0",
+      "field_polls_close": "2026-11-04T01:00:00.000Z",
+      "field_province": "ME",
+      "field_test_data": "False",
       "query": "Senate",
       "raceId": "87188",
       "responseType": "dict",
@@ -100,9 +128,19 @@
       "sampleTitles": [
         "   maine state senate     statewide state senate",
         "   maine us senate     general us senate",
-        "   maine us senate democratic primary     primary us senate"
+        "   maine us senate republican primary     primary us senate"
       ],
       "searchMatches": 1,
+      "searchRecord": {
+        "country": "US",
+        "district": "None",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Maine US Senate",
+        "election_type": "General",
+        "id": "87188",
+        "province": "ME",
+        "type": "US Senate"
+      },
       "state": "schema_or_votes_unverified"
     },
     "MI-07": {
@@ -141,17 +179,36 @@
         "region_results"
       ],
       "detailType": "dict",
+      "field_country": "US",
+      "field_district": "MI-07",
+      "field_election_date": "2026-11-03T05:00:00.000Z",
+      "field_election_scope": "General",
       "field_election_type": "House of Representatives",
+      "field_last_updated": "2026-11-01T22:29:21.465Z",
+      "field_percent_reporting": "0",
+      "field_polls_close": "2026-11-04T01:00:00.000Z",
+      "field_province": "MI",
+      "field_test_data": "False",
       "query": "House",
       "raceId": "87207",
       "responseType": "dict",
       "returned": 199,
       "sampleTitles": [
         "   michigan state house     statewide state house",
-        "   michigan us house 8    mi-08 general house of representatives",
-        "   michigan us house 1    mi-01 general house of representatives"
+        "   michigan us house 9    mi-09 general house of representatives",
+        "   michigan us house 6    mi-06 general house of representatives"
       ],
       "searchMatches": 1,
+      "searchRecord": {
+        "country": "US",
+        "district": "MI-07",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Michigan US House 7",
+        "election_type": "General",
+        "id": "87207",
+        "province": "MI",
+        "type": "House of Representatives"
+      },
       "state": "schema_or_votes_unverified"
     },
     "MI-SENATE": {
@@ -190,7 +247,16 @@
         "region_results"
       ],
       "detailType": "dict",
+      "field_country": "US",
+      "field_district": "None",
+      "field_election_date": "2026-11-03T05:00:00.000Z",
+      "field_election_scope": "General",
       "field_election_type": "US Senate",
+      "field_last_updated": "2026-11-01T22:29:22.518Z",
+      "field_percent_reporting": "0",
+      "field_polls_close": "2026-11-04T01:00:00.000Z",
+      "field_province": "MI",
+      "field_test_data": "False",
       "query": "Senate",
       "raceId": "87214",
       "responseType": "dict",
@@ -201,6 +267,16 @@
         "   michigan us senate democratic primary     primary us senate"
       ],
       "searchMatches": 1,
+      "searchRecord": {
+        "country": "US",
+        "district": "None",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Michigan US Senate",
+        "election_type": "General",
+        "id": "87214",
+        "province": "MI",
+        "type": "US Senate"
+      },
       "state": "schema_or_votes_unverified"
     },
     "TX-18": {
@@ -239,17 +315,36 @@
         "region_results"
       ],
       "detailType": "dict",
+      "field_country": "US",
+      "field_district": "TX-18",
+      "field_election_date": "2026-11-03T05:00:00.000Z",
+      "field_election_scope": "General",
       "field_election_type": "House of Representatives",
+      "field_last_updated": "2026-10-26T23:10:49.709Z",
+      "field_percent_reporting": "0",
+      "field_polls_close": "2026-11-04T01:00:00.000Z",
+      "field_province": "TX",
+      "field_test_data": "False",
       "query": "House",
       "raceId": "87425",
       "responseType": "dict",
       "returned": 200,
       "sampleTitles": [
         "   texas state house     statewide state house",
-        "   texas us house 17    tx-17 general house of representatives",
-        "   texas us house 2    tx-02 general house of representatives"
+        "   texas us house 28    tx-28 general house of representatives",
+        "   texas us house 38    tx-38 general house of representatives"
       ],
       "searchMatches": 1,
+      "searchRecord": {
+        "country": "US",
+        "district": "TX-18",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Texas US House 18",
+        "election_type": "General",
+        "id": "87425",
+        "province": "TX",
+        "type": "House of Representatives"
+      },
       "state": "schema_or_votes_unverified"
     },
     "TX-GOVERNOR": {
@@ -288,7 +383,16 @@
         "region_results"
       ],
       "detailType": "dict",
+      "field_country": "US",
+      "field_district": "None",
+      "field_election_date": "2026-11-03T05:00:00.000Z",
+      "field_election_scope": "Statewide",
       "field_election_type": "Governor",
+      "field_last_updated": "2026-10-26T23:10:27.485Z",
+      "field_percent_reporting": "0",
+      "field_polls_close": "2026-11-04T01:00:00.000Z",
+      "field_province": "TX",
+      "field_test_data": "False",
       "query": "Governor",
       "raceId": "55857",
       "responseType": "dict",
@@ -299,6 +403,16 @@
         "   texas lieutenant governor democratic primary runoff     primary lieutenant governor"
       ],
       "searchMatches": 1,
+      "searchRecord": {
+        "country": "US",
+        "district": "None",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Texas Governor",
+        "election_type": "Statewide",
+        "id": "55857",
+        "province": "TX",
+        "type": "Governor"
+      },
       "state": "schema_or_votes_unverified"
     }
   },
