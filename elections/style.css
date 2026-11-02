@@ -1,0 +1,102 @@
+/* Ervin Model / election dossiers — separate namespace, shared typography and appearance preference. */
+:root{--race-red:#b85164;--race-blue:#276fa8;--race-gold:#aa7b35}
+body{overflow-x:hidden}.race-shell{width:min(1510px,calc(100% - 44px));margin:0 auto;padding:24px 0 65px}
+.race-topline{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0 19px}
+.race-back{font-size:14px;font-weight:750;color:var(--blue);text-decoration:none}
+.race-back:hover{text-decoration:underline}
+.race-kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--accent)}
+.race-title{font-size:clamp(32px,4vw,56px)!important;letter-spacing:-.045em!important;margin:8px 0 8px;line-height:1.12!important}
+.race-description{font-size:15px;line-height:1.6;color:var(--muted);max-width:850px}
+.race-lede{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:17px 0 23px}
+.race-flag{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--edge);border-radius:999px;color:var(--muted);font-weight:700;font-size:12px;background:var(--surface2)}
+.race-flag i{display:inline-block;height:7px;width:7px;border-radius:50%;background:#b58b55}
+.race-ribbon{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 27px}
+.race-ribbon a{background:var(--surface);border:1px solid var(--edge);border-radius:10px;padding:10px 15px;color:var(--text);text-decoration:none;font-weight:800;font-size:13px}
+.race-ribbon a:hover{border-color:var(--accent);background:var(--surface2)}
+.race-panel{border:1px solid var(--edge)!important;background:var(--surface)!important;border-radius:17px!important;padding:21px;min-width:0;box-shadow:0 13px 34px #0d2a4012}
+.race-panel h2{font-size:20px!important;line-height:1.25;margin:0 0 7px}
+.race-panel h3{font-size:15px!important;margin:0}
+.race-muted{color:var(--muted);font-size:13px;line-height:1.58}
+.race-dashboard{display:grid;grid-template-columns:minmax(195px,.62fr) minmax(0,2fr) minmax(305px,1.02fr);gap:15px;align-items:start}
+.race-left{position:sticky;top:94px;max-height:calc(100vh - 110px);overflow:hidden;display:flex;flex-direction:column}
+.race-list{overflow-y:auto;min-height:100px;padding-right:5px;display:grid;gap:6px;scrollbar-width:thin}
+.race-list a{display:flex;justify-content:space-between;align-items:center;gap:7px;text-decoration:none;padding:10px 10px;border-radius:9px;border:1px solid transparent;color:var(--muted);font-size:12px;line-height:1.4}
+.race-list a:hover,.race-list a[aria-current=page]{background:var(--surface2);border-color:var(--edge);color:var(--text)}
+.race-list b{color:var(--text)}
+.race-list .race-code{min-width:30px;font-weight:850;color:var(--accent)}
+.race-center{display:grid;gap:15px;min-width:0}
+.race-right{display:grid;gap:15px;min-width:0}
+.race-map-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.race-map-frame{margin-top:18px;min-height:330px;position:relative;border:1px solid var(--edge);border-radius:13px;overflow:hidden;background:var(--surface2)}
+#countyMap{display:block;width:100%;height:clamp(330px,39vw,585px);background:transparent}
+#countyMap .state-outline{fill:#dbe6ed;stroke:#7390a6;stroke-width:2.2;vector-effect:non-scaling-stroke}
+#countyMap .county{fill:#cedde6;stroke:#f6fbfe;stroke-width:.72;vector-effect:non-scaling-stroke;cursor:pointer}
+#countyMap .county:hover,#countyMap .county:focus{fill:#86b5d3;stroke:#1c5a7d;stroke-width:1.8}
+.race-map-legend{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:12px}
+.race-key{width:12px;height:12px;background:#cedde6;border:1px solid #a8bbc9;display:inline-block;border-radius:3px}
+.race-county-detail{margin-top:10px;padding:12px 14px;border:1px solid var(--edge);border-radius:10px;background:var(--surface2);font-size:13px;color:var(--text)}
+.race-map-note{font-size:12px;color:var(--muted);margin:10px 0 0;line-height:1.5}
+.race-candidate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.race-candidate{border-radius:11px;border:1px solid var(--edge);padding:13px 14px;background:var(--surface2);min-width:0}
+.race-candidate:before{content:'';display:block;width:36px;height:4px;background:var(--race-blue);margin-bottom:11px;border-radius:2px}
+.race-candidate.r:before{background:var(--race-red)}
+.race-candidate small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
+.race-candidate strong{display:block;font-size:clamp(15px,1.6vw,21px);line-height:1.25;margin-top:6px;overflow-wrap:anywhere;color:var(--text)}
+.race-candidate .race-party{font-size:13px;color:var(--muted);margin-top:5px}
+.race-margin{margin:15px 0 5px;padding:16px 17px;background:var(--surface2);border-radius:12px;border:1px solid var(--edge)}
+.race-margin small{display:block;color:var(--muted);font-weight:700;font-size:11px}
+.race-margin strong{font-size:clamp(25px,3vw,36px);font-weight:800;letter-spacing:-.04em;color:var(--text)}
+.race-margin .race-positive{color:var(--race-blue)!important}
+.race-margin .race-negative{color:var(--race-red)!important}
+.race-halfbar{height:11px;display:flex;border-radius:8px;overflow:hidden;background:var(--surface2);margin:14px 0 12px}
+.race-halfbar .left{background:#b95566}.race-halfbar .right{background:#327eb7}
+.race-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.race-meta>div{padding:12px;border:1px solid var(--edge);border-radius:11px;background:var(--surface2)}
+.race-meta small{display:block;color:var(--muted);font-size:10px;line-height:1.4}
+.race-meta strong{display:block;color:var(--text);font-size:15px;font-weight:800;margin-top:5px;overflow-wrap:anywhere}
+.race-sources{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.race-sources a{font-size:12px;font-weight:750;color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.race-rows{display:grid;gap:8px;margin-top:14px}
+.race-row{border:1px solid var(--edge);padding:12px;border-radius:11px;background:var(--surface2);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;align-items:center}
+.race-row strong{font-size:13px;line-height:1.35;color:var(--text)}
+.race-row a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.race-row small{font-size:11px;color:var(--muted);display:block;line-height:1.5;margin-top:4px}
+.race-row .race-number{font-weight:800;white-space:nowrap;font-size:14px;color:var(--text)}
+.race-note{background:var(--surface2);border:1px solid var(--edge);border-radius:11px;padding:13px 15px;color:var(--muted);font-size:13px;line-height:1.62}
+.race-data-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:15px;margin:15px 0}
+.race-graph{height:150px;position:relative;padding:10px 0 25px;display:flex;align-items:flex-end;gap:6px;border-bottom:1px solid var(--edge)}
+.race-graph b{font-size:11px;position:absolute;left:0;top:0;color:var(--muted)}
+.race-graph .bar{flex:1;min-width:4px;max-width:50px;background:var(--race-blue);border-radius:4px 4px 0 0;position:relative}
+.race-graph .bar.r{background:var(--race-red)}
+.race-graph .bar span{font-size:9px;position:absolute;bottom:-23px;left:50%;transform:translateX(-50%);color:var(--muted)}
+.gov-toolbar{display:flex;align-items:center;justify-content:space-between;gap:13px;flex-wrap:wrap;margin:20px 0}
+.gov-search{width:min(350px,100%);border:1px solid var(--edge)!important;border-radius:10px!important;padding:12px 14px;background:var(--surface)!important;color:var(--text)!important}
+.gov-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.gov-card{display:block;background:var(--surface);border:1px solid var(--edge);border-radius:15px;padding:19px;text-decoration:none;color:var(--text);transition:transform .15s,border-color .15s,box-shadow .15s;min-width:0}
+.gov-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:var(--shadow)}
+.gov-card .gov-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 13px}
+.gov-card h3{font-size:20px;margin:0;color:var(--text)}
+.gov-card .gov-candidates{font-size:13px;color:var(--muted);line-height:1.6;min-height:45px}
+.gov-card .gov-candidates strong{color:var(--text)}
+.gov-card .gov-lead{border-top:1px solid var(--edge);margin-top:14px;padding-top:12px;font-size:14px;color:var(--text);font-weight:800}
+.gov-card small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+.gov-map{background:var(--surface2);border:1px solid var(--edge);border-radius:15px;padding:15px;margin:17px 0}
+.gov-map svg{width:100%;height:auto;display:block;max-height:490px}
+.gov-map .gov-state{fill:#b9c9d5;stroke:var(--surface);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.gov-map .gov-state.election{cursor:pointer;fill:#879dad}
+.gov-map .gov-state.election.d{fill:#458bb9}.gov-map .gov-state.election.r{fill:#be6877}
+.gov-map .gov-state.election:hover{filter:brightness(1.15);stroke:var(--accent);stroke-width:2}
+html:not(.light) body .race-panel,html:not(.light) body .gov-card{background:linear-gradient(155deg,#1a354c,#142a3e)!important;border-color:#496a80!important}
+html:not(.light) body .race-candidate,html:not(.light) body .race-margin,html:not(.light) body .race-meta>div,
+html:not(.light) body .race-row,html:not(.light) body .race-note,html:not(.light) body .race-map-frame,
+html:not(.light) body .race-county-detail,html:not(.light) body .gov-map{background:#203e55!important;border-color:#52748b!important}
+html:not(.light) body #countyMap .state-outline{fill:#365873;stroke:#8da9bf}
+html:not(.light) body #countyMap .county{fill:#355871;stroke:#234259}
+html:not(.light) body #countyMap .county:hover{fill:#6b9dbd}
+html:not(.light) body .gov-map .gov-state{fill:#3b5669}
+html:not(.light) body .race-row a,html:not(.light) body .race-sources a{color:#b3defb}
+html:not(.light) body :is(.race-title,.race-panel h2,.gov-card h3,.race-candidate strong){color:#f5f9fc!important}
+html:not(.light) body :is(.race-muted,.race-description,.race-map-note,.race-row small,.race-note,.race-candidate small,.gov-candidates){color:#d0dfe9!important}
+@media(max-width:1170px){.race-dashboard{grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr)}.race-left{grid-column:1/-1;position:static;max-height:none}.race-list{display:flex;overflow:auto;gap:4px}.race-list a{flex:0 0 auto}.gov-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.race-shell{width:calc(100% - 24px);padding-top:15px}.race-dashboard,.race-data-grid{grid-template-columns:1fr}.race-panel{padding:16px!important}.race-title{font-size:clamp(30px,8vw,43px)!important}.race-meta{gap:7px}.race-meta strong{font-size:13px}.race-map-frame{min-height:260px}#countyMap{height:350px}.gov-grid{grid-template-columns:1fr}.race-left{padding:13px!important}.race-ribbon a{flex:1;text-align:center}.race-candidate strong{font-size:16px}.gov-card{padding:17px}}
+@media(prefers-reduced-motion:reduce){.gov-card{transition:none}.gov-card:hover{transform:none}}
