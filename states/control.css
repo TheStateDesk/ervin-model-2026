@@ -53,3 +53,16 @@
 html.theme-dark .ed-body .desk-balance .power-card{background:#192736;border-color:var(--ed-rule)}
 @media(max-width:930px){.ed-body .desk-balance .power-grid{grid-template-columns:1fr 1fr}.ed-body .desk-balance .power-card:last-child{grid-column:1/-1}}
 @media(max-width:660px){.ed-body .desk-balance{padding:17px 15px}.ed-body .desk-balance .power-grid{grid-template-columns:1fr}.ed-body .desk-balance .power-card:last-child{grid-column:auto}.ed-body .desk-balance .power-heading{display:block}.ed-body .desk-balance .power-asof{display:inline-flex;margin-top:10px}}
+
+/* Navigational context shown only when the House or governor seat-total link
+   sends a visitor to the canonical, state-centric election atlas. */
+.ed-office-focus{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+ gap:12px 20px;border:1px solid var(--ed-rule);border-left:4px solid var(--ed-gold);
+ background:var(--ed-white);padding:14px 17px;margin:4px 0 15px;
+ font:12px/1.55 var(--ed-sans);color:var(--ed-muted);
+}
+.ed-office-focus strong{font:700 19px/1.2 var(--ed-serif);color:var(--ed-ink)}
+.ed-office-focus span{flex:1;min-width:210px}
+.ed-office-focus a{font-weight:800;white-space:nowrap}
+@media(max-width:600px){.ed-office-focus{padding:11px 13px}.ed-office-focus span{flex:1 1 100%}}
