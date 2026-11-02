@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-02T11:05:04.126Z",
+  "asOf": "2026-11-02T16:51:19.169Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -9,8 +9,8 @@
       "nonR": "Troy Jackson",
       "rep": "Susan Collins",
       "party": "D",
-      "pollMargin": 3.92,
-      "adjustedMargin": -2.88,
+      "pollMargin": 4.11,
+      "adjustedMargin": -2.69,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
@@ -28,9 +28,9 @@
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
-      "source": "Ervin's Take · source-blended polls, original Michigan Senate history and discounted candidate strength",
+      "source": "Ervin's Take · publisher blend + original history + discounted candidate context",
       "stale": false,
-      "note": "Ervin’s Take: recent attributed publisher-average blend minus Michigan historical Senate polling error, then a discounted candidate-specific primary overpolling comparison (−1.84 D points). Unvalidated qualitative forecast input; no religion or county-demographic adjustment is imposed.",
+      "note": "Ervin’s Take: Original Michigan Senate historical correction plus an unvalidated, heavily discounted candidate-primary error context; not a religious/poll-mode penalty.",
       "candidateStrength": {
         "label": "Ervin's Take candidate-strength marker",
         "type": "discounted_previous_candidate_primary_poll_error",
@@ -53,8 +53,8 @@
       "nonR": "Sherrod Brown",
       "rep": "Jon Husted",
       "party": "D",
-      "pollMargin": 2.55,
-      "adjustedMargin": 0.39,
+      "pollMargin": 2.56,
+      "adjustedMargin": 0.4,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
@@ -67,8 +67,8 @@
       "nonR": "James Talarico",
       "rep": "Ken Paxton",
       "party": "D",
-      "pollMargin": 3.23,
-      "adjustedMargin": 1.34,
+      "pollMargin": 3.09,
+      "adjustedMargin": 1.2,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
@@ -95,8 +95,8 @@
       "nonR": "Adam Hamilton",
       "rep": "Roger Marshall",
       "party": "D",
-      "pollMargin": 2.63,
-      "adjustedMargin": -5.89,
+      "pollMargin": 3.72,
+      "adjustedMargin": -4.8,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
@@ -151,8 +151,8 @@
       "nonR": "Roy Cooper",
       "rep": "Michael Whatley",
       "party": "D",
-      "pollMargin": 10.76,
-      "adjustedMargin": 9.45,
+      "pollMargin": 10.77,
+      "adjustedMargin": 9.46,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
@@ -258,6 +258,5 @@
       "stale": false,
       "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
     }
-  },
-  "notes": " Michigan candidate-strength marker is independently documented and does not alter the underlying original federal correction or its backtest."
+  }
 }

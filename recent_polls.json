@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-02T11:05:04.126938+00:00",
+  "checkedAt": "2026-11-02T16:51:19.169071+00:00",
   "source": "Original releases, RCP individual poll listings, and candidate-matched Wikipedia general-election survey tables; source type disclosed per row",
   "polls": {
     "ME": [
@@ -494,7 +494,7 @@
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       },
       {
-        "pollster": "Quantus Insights (R)",
+        "pollster": "Quantus Insights",
         "dates": "October 26–28, 2026",
         "fieldEnd": "2026-10-28",
         "sample": "1,221 (LV)",
