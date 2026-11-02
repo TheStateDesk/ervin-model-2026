@@ -45,6 +45,9 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Render county maps and capture screenshots (desktop/mobile, light/dark)
         run: node scripts/visual-smoke.mjs
+      - name: Verify live Pages waits for loaded Texas publisher averages
+        if: github.event_name == 'pull_request' && github.head_ref == 'fix/house-live-polling-async-check-20261102'
+        run: node scripts/verify-live-publication.mjs
       - name: Audit currently published site and capture live screenshots
         if: always()
         run: node scripts/live-site-audit.mjs || true
