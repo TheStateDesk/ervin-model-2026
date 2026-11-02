@@ -30,11 +30,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      actions: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Inspect recent live Pages deployments
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/pages-release-diagnostic.mjs
       - run: node scripts/validate-election-site.mjs
       - run: node scripts/validate-state-desk.mjs
       - name: Install browser for visual verification
