@@ -18,6 +18,7 @@ $('centerResults').innerHTML=filtered.map(r=>'<div class="center-result"><strong
 }
 function drawMap(){
 const geo=window.ERVIN_US_GEOGRAPHY?.states||[],layer=$('centerMapLayer').value;
+ if(layer==='counties'){if(window.ERVIN_CENTER_COUNTIES)window.ERVIN_CENTER_COUNTIES(chooseState);else $('centerMapLegend').textContent='County atlas is loading…';return;}
 const hCount={};for(const r of house)if(r.rating&&(/Tossup|Lean/.test(r.rating)))hCount[r.code]=(hCount[r.code]||0)+1;
 const value=code=>layer==='senate'?baseline[code]?.adjustedMargin:layer==='governor'?governors.find(r=>r.code===code)?.poll?.margin:layer==='house'?hCount[code]||0:countyHistory[code]?.stateCycles?.['2024']?.margin*100;
 const color=code=>{const v=value(code);if(v==null||!Number.isFinite(v))return document.documentElement.classList.contains('light')?'#d7e3ea':'#36556b';if(layer==='house'){const n=Math.max(0,+v);return n===0?'#b4c6d4':n>=4?'#775d9a':n>=2?'#9981b2':'#b9a2c9'}const a=Math.min(1,Math.abs(v)/20);if(v<0)return a>.5?'#a7495e':'#d78c95';return a>.5?'#276b9c':'#7bb5db'};
