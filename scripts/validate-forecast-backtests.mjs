@@ -49,12 +49,12 @@ assert.equal(Object.keys(senateForecast.states).length,Object.keys(senateArchive
 for(const [code,row] of Object.entries(senateForecast.states)){
  const h=senateArchive.senateStates[code];
  assert(h&&h.events.length,'No original Senate state-error history for '+code);
- assert(h.events.every(x=>['Senate','President'].includes(x.office)&&/^https:\\/\\//.test(x.url)), 'Missing federal polling source '+code);
+ assert(h.events.every(x=>['Senate','President'].includes(x.office)&&String(x.url).startsWith('https://')), 'Missing federal polling source '+code);
 }
 assert.equal(houseRegister.seats.length,435);
 for(const district of houseRegister.seats)assert(house.races[district.id], 'Missing House model source row '+district.id);
 assert.equal(governorRegister.races.length,36);
-assert(govData.races.every(x=>/^https:\\/\\//.test(x.sourceUrl)&&/^https:\\/\\//.test(x.resultUrl)), 'Historical governor evidence must have two provenance URLs');
+assert(govData.races.every(x=>String(x.sourceUrl)&&String(x.resultUrl).startsWith('https://')), 'Historical governor evidence must have two provenance URLs');
 const ledger=text('state/source-ledger.js');
 assert(ledger.includes('governorHistory')&&ledger.includes('senateHistory')&&ledger.includes('houseModel'),'Source ledger missing an office');
 const mapHTML=text('states/index.html'),mapJS=text('states/app.js'),stateHTML=text('state/index.html'),nightJS=text('state/county-night.js');
