@@ -1,0 +1,269 @@
+{
+  "asOf": "2026-11-02",
+  "scope": "Michigan 2026 Senate and governor pairs (same samples), NOT a 2026 election-result backtest",
+  "status": "Evidence for candidate-vote differences; NOT evidence of systematic poll-to-election hidden-Muslim-candidate overstatement",
+  "summary": {
+    "pairs": 9,
+    "governorLeadWider": 8,
+    "senateLeadWider": 1,
+    "tied": 0,
+    "medianGovernorMinusSenateMargin": 2,
+    "meanGovernorMinusSenateMargin": 2.83,
+    "min": -2,
+    "max": 9.9
+  },
+  "pairs": [
+    {
+      "id": "siena",
+      "pollster": "New York Times / Siena",
+      "fieldEnd": "2026-11-01",
+      "sample": "1,011 LV",
+      "mode": "Not independently verified as a single mode",
+      "senate": {
+        "dem": 52.6,
+        "rep": 41.6
+      },
+      "governor": {
+        "dem": 51.8,
+        "rep": 39.4
+      },
+      "senateSource": "https://535.wtf/dispatches/749-our-michigan-senate-forecast-rises-to-86-as-a-times-siena",
+      "governorSource": "https://www.callthemap.com/polls/GOV-MI",
+      "caveat": "Two independently indexed race figures, not an original matched-crosstab release",
+      "senateMargin": 11,
+      "governorMargin": 12.4,
+      "governorMinusSenateMargin": 1.4
+    },
+    {
+      "id": "yougov",
+      "pollster": "YouGov",
+      "fieldEnd": "2026-10-29",
+      "sample": "2,093 LV",
+      "mode": "Online, voter list/text invitation",
+      "senate": {
+        "dem": 51,
+        "rep": 47
+      },
+      "governor": {
+        "dem": 52,
+        "rep": 46
+      },
+      "senateSource": "https://www.realclearpolling.com/latest-polls/election",
+      "governorSource": "https://www.realclearpolling.com/latest-polls/election",
+      "caveat": "One paired Michigan sample, not two independent surveys",
+      "senateMargin": 4,
+      "governorMargin": 6,
+      "governorMinusSenateMargin": 2
+    },
+    {
+      "id": "mitchell",
+      "pollster": "CBS Detroit / Mitchell",
+      "fieldEnd": "2026-10-27",
+      "sample": "636 LV",
+      "mode": "Online panel and text-to-web",
+      "senate": {
+        "dem": 51,
+        "rep": 44
+      },
+      "governor": {
+        "dem": 49,
+        "rep": 44
+      },
+      "senateSource": "https://www.cbsnews.com/detroit/news/el-sayed-widens-lead-rogers-michigan-senate-poll/",
+      "governorSource": "https://www.cbsnews.com/detroit/news/jocelyn-benson-john-james-october-michigan-gubernatorial-poll/",
+      "caveat": "Same survey; reverse-sign governor-minus-Senate gap",
+      "senateMargin": 7,
+      "governorMargin": 5,
+      "governorMinusSenateMargin": -2
+    },
+    {
+      "id": "cnn",
+      "pollster": "CNN / SSRS",
+      "fieldEnd": "2026-10-27",
+      "sample": "768 LV",
+      "mode": "Mixed: probability panel / online and telephone",
+      "senate": {
+        "dem": 49,
+        "rep": 42
+      },
+      "governor": {
+        "dem": 53,
+        "rep": 41
+      },
+      "senateSource": "https://insideelections.com/polls/?filter_election_year=2026&filter_state=mi",
+      "governorSource": "https://insideelections.com/polls/?filter_election_year=2026&filter_state=mi",
+      "caveat": "Both candidate pairs from same dated sample; no submode breakdown",
+      "senateMargin": 7,
+      "governorMargin": 12,
+      "governorMinusSenateMargin": 5
+    },
+    {
+      "id": "redbox",
+      "pollster": "RedBox Research / A Fight Worth Having",
+      "fieldEnd": "2026-10-23",
+      "sample": "2,696 weighted LV; effective n smaller",
+      "mode": "Text-to-web, self-administered; partisan sponsor",
+      "senate": {
+        "dem": 49,
+        "rep": 44
+      },
+      "governor": {
+        "dem": 49,
+        "rep": 43
+      },
+      "senateSource": "https://afightworthhaving.com/polling/2026/michigan",
+      "governorSource": "https://afightworthhaving.com/polling/2026/michigan",
+      "caveat": "Partisan-sponsored; 49 and 43 rounded, gap not necessarily exactly one point",
+      "senateMargin": 5,
+      "governorMargin": 6,
+      "governorMinusSenateMargin": 1
+    },
+    {
+      "id": "verasight",
+      "pollster": "MSU Political Science / Verasight",
+      "fieldEnd": "2026-10-23",
+      "sample": "1,383 LV in MRP analysis",
+      "mode": "Text/email plus mail; initial MRP estimates",
+      "senate": {
+        "dem": 48,
+        "rep": 41.8
+      },
+      "governor": {
+        "dem": 48.5,
+        "rep": 38.7
+      },
+      "senateSource": "https://spectrumlocalnews.com/mi/michigan/news/2026/10/30/msu-2026-elections-michigan",
+      "governorSource": "https://spectrumlocalnews.com/mi/michigan/news/2026/10/30/msu-2026-elections-michigan",
+      "caveat": "Initial MRP figures in both offices; not mixed with leaner follow-up or standard weighted estimates",
+      "senateMargin": 6.2,
+      "governorMargin": 9.8,
+      "governorMinusSenateMargin": 3.6
+    },
+    {
+      "id": "glengariff",
+      "pollster": "Glengariff / WDIV / Detroit News",
+      "fieldEnd": "2026-10-22",
+      "sample": "600 LV",
+      "mode": "Live operator telephone (85% cell)",
+      "senate": {
+        "dem": 51.4,
+        "rep": 45.1
+      },
+      "governor": {
+        "dem": 51.4,
+        "rep": 44.5
+      },
+      "senateSource": "https://www.clickondetroit.com/news/local/2026/10/27/democratic-candidate-el-sayed-leads-michigan-us-senate-race-new-poll-finds/",
+      "governorSource": "https://www.clickondetroit.com/decision-2026/2026/10/27/heres-where-michigan-voters-stand-on-the-2026-governors-race-per-new-poll/",
+      "caveat": "Directly published two-office figures; live phone",
+      "senateMargin": 6.3,
+      "governorMargin": 6.9,
+      "governorMinusSenateMargin": 0.6
+    },
+    {
+      "id": "marist",
+      "pollster": "Marist",
+      "fieldEnd": "2026-10-18",
+      "sample": "1,185 RV survey; LV subset",
+      "mode": "Mixed live phone, online, and text",
+      "senate": {
+        "dem": 50,
+        "rep": 48
+      },
+      "governor": {
+        "dem": 51,
+        "rep": 45
+      },
+      "senateSource": "https://maristpoll.marist.edu/polls/midterm-elections-in-michigan-october-2026/",
+      "governorSource": "https://maristpoll.marist.edu/polls/midterm-elections-in-michigan-october-2026/",
+      "caveat": "Compare likely-voter estimates; registered-voter numbers differ",
+      "senateMargin": 2,
+      "governorMargin": 6,
+      "governorMinusSenateMargin": 4
+    },
+    {
+      "id": "msu-ippsr",
+      "pollster": "MSU IPPSR / YouGov",
+      "fieldEnd": "2026-10-19",
+      "sample": "1,000 online interviews; LV weighted subset",
+      "mode": "Online panel; weighted likely voters",
+      "senate": {
+        "dem": 48,
+        "rep": 45.5
+      },
+      "governor": {
+        "dem": 53.3,
+        "rep": 40.9
+      },
+      "senateSource": "https://ippsr.msu.edu/news/msu-poll-shows-benson-large-lead-while-el-sayed-roger-race-tight",
+      "governorSource": "https://ippsr.msu.edu/news/msu-poll-shows-benson-large-lead-while-el-sayed-roger-race-tight",
+      "caveat": "Same wave, but high outlier in office gap; not the separate Verasight survey",
+      "senateMargin": 2.5,
+      "governorMargin": 12.4,
+      "governorMinusSenateMargin": 9.9
+    }
+  ],
+  "surveyAttitudes": {
+    "statistic": "38% said a Muslim candidate would make them less likely to support the candidate",
+    "source": "https://ippsr.msu.edu/news/msu-poll-shows-benson-large-lead-while-el-sayed-roger-race-tight",
+    "interpretation": "Directly reported attitude, not concealed preference, and not an incremental polling error"
+  },
+  "history": [
+    {
+      "year": 2018,
+      "office": "Michigan governor Democratic primary",
+      "pollElSayedShare": 17.5,
+      "finalElSayedShare": 30.5,
+      "source": "https://www.realclearpolling.com/polls/governor/democratic-primary/2018/michigan",
+      "caveat": "June-July average vs August result; cannot infer a religion-specific polling error"
+    },
+    {
+      "year": 2026,
+      "office": "Michigan Senate Democratic primary",
+      "polledElSayedVsStevensMargin": 10.2,
+      "actualElSayedVsStevensMargin": 1,
+      "source": "https://www.realclearpolling.com/elections/senate/2026/michigan",
+      "caveat": "Primary turnout, late movement, two- versus three-candidate polling and sponsorship confound religion interpretation"
+    }
+  ],
+  "research": [
+    {
+      "title": "MSU/IPPSR Michigan attitudes and paired candidate margins",
+      "url": "https://ippsr.msu.edu/news/msu-poll-shows-benson-large-lead-while-el-sayed-roger-race-tight",
+      "finding": "Correlational candidate support gap and overt religious attitudes, not hidden-vote polling overstatement"
+    },
+    {
+      "title": "Islam to the state legislature (2026)",
+      "url": "https://www.cambridge.org/core/journals/politics-and-religion/article/islam-to-the-state-legislature-an-exploratory-analysis-of-muslim-american-candidate-supply-and-demand/D4A58B03D7FB288FC6B9A8F9767166C0",
+      "finding": "Observational candidate electoral disadvantage relative to other candidate groups, not a poll-versus-result calibration"
+    },
+    {
+      "title": "What Drives Voter Bias Against Muslim Politicians? (2026)",
+      "url": "https://link.springer.com/article/10.1007/s11109-026-10213-z",
+      "finding": "Norwegian election and survey experiment evidence of voter bias; not US Michigan poll-mode error estimation"
+    }
+  ],
+  "proposedModePenalties": {
+    "liveCaller": -3.5,
+    "ivr": -2,
+    "online": -0.5,
+    "status": "Not validated by matched poll-mode-versus-final-results data; refuse to implement as numerical model correction"
+  },
+  "regionalCoefficients": {
+    "status": "Not validated; no representative county-specific survey-vs-election error dataset; no geography/religion-based penalty applied"
+  },
+  "extraTicketDrag": {
+    "proposedRange": [
+      -3,
+      -1.5
+    ],
+    "status": "Not validated as hidden residual; double-counting risk when already reflected in Senate-specific toplines"
+  },
+  "forecast": {
+    "reference": "counties-watch/forecast-baselines.json#states.MI",
+    "currentMethod": "Original Ervin historical Michigan Senate correction, with published polling inputs",
+    "automaticAdditionalMuslimPenalty": 0,
+    "reason": "Cannot estimate a systematic poll-to-election error before 2026 outcome, independent of candidate effects already measured in polls",
+    "postElectionTest": "Once official Michigan Senate/governor returns exist, compare Senate and governor forecast residuals and pollster-mode matched residuals; isolate from historic Michigan partisan error, sample frame and regional covariates."
+  }
+}
