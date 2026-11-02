@@ -56,9 +56,9 @@ try{
  const frontModel=await front.evaluate(()=>{
   const panel=document.querySelector('#balanceOfPower');
   const box=panel?.getBoundingClientRect();
-  return {top:box?.top,width:box?.width,count:document.querySelectorAll('#powerCards .power-card').length,governors:document.querySelector('[data-power-office="governors"]')?.textContent,versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
+  return {top:box?.top,width:box?.width,count:document.querySelectorAll('#powerCards .power-card').length,governors:document.querySelector('[data-power-office="governors"]')?.textContent,senate:document.querySelector('[data-power-office="senate"]')?.textContent,versions:[...document.scripts].filter(s=>s.src.includes('statewide-ervin.js')).map(s=>s.src)};
  });
- if(!(frontModel.count===3&&frontModel.top>=0&&frontModel.top<150&&frontModel.width>250&&frontModel.governors?.includes('25')))throw Error('LIVE MOBILE HOMEPAGE FORECAST NOT VISIBLE '+JSON.stringify(frontModel));
+ if(!(frontModel.count===3&&frontModel.top>=0&&frontModel.top<150&&frontModel.width>250&&frontModel.governors?.includes('25')&&frontModel.senate?.includes('50Democratic')&&frontModel.senate?.includes('50Republican')))throw Error('LIVE MOBILE HOMEPAGE FORECAST NOT VISIBLE '+JSON.stringify(frontModel));
  if(!frontModel.versions.some(s=>s.includes('pollrefresh-v2')))throw Error('LIVE HOMEPAGE USING CACHED GOVERNOR ENGINE '+JSON.stringify(frontModel.versions));
  await front.screenshot({path:'postdeploy-checks/Homepage-Balance-Visible-Mobile.png',fullPage:false});
  console.log('LIVE HOMEPAGE BALANCE PASS '+JSON.stringify(frontModel));
@@ -78,8 +78,12 @@ try{
  await michiganAudit.goto(base+'state/?state=MI&release='+stamp+'#stateSources',{waitUntil:'domcontentloaded'});
  await michiganAudit.waitForFunction(()=>document.querySelector('#miCandidateEffect')?.textContent.includes('not applied'),null,{timeout:35000});
  const michiganEvidence=await michiganAudit.locator('#miCandidateEffect').innerText();
- if(!michiganEvidence.includes('In 9 matched Michigan survey samples')||!michiganEvidence.includes('not applied'))throw Error('LIVE MI CANDIDATE-EFFECT AUDIT MISSING '+michiganEvidence.slice(0,400));
+ if(!michiganEvidence.includes('In 9 matched Michigan survey samples')||!michiganEvidence.includes('not applied')||!michiganEvidence.includes('−1.84'))throw Error('LIVE MI CANDIDATE-EFFECT AUDIT MISSING '+michiganEvidence.slice(0,400));
+ if((await michiganAudit.locator('#heroSenate').innerText())!=='R +0.8')throw Error('LIVE MI SENATE MARGIN INCORRECT');
+ const cardDetails=await michiganAudit.locator('#stateRaceCards').innerText();
+ if(!cardDetails.includes('R +0.8'))throw Error('LIVE MI SENATE RACE CARD NOT UPDATED');
  await michiganAudit.locator('#miCandidateEffect').screenshot({path:'postdeploy-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
+ await michiganAudit.locator('#stateOverview').screenshot({path:'postdeploy-checks/Michigan-Candidate-Strength-Model.png'});
  console.log('LIVE MI CANDIDATE-EFFECT AUDIT PASS 9 linked paired polls / no invented polling penalty');
  await michiganAudit.close();
  // Explicit acceptance of newly published national Election Night / governor model.
@@ -87,7 +91,7 @@ try{
  await national.goto(base+'election-night/?release='+stamp,{waitUntil:'domcontentloaded'});
  await national.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83&&document.querySelector('#nationalCount')?.textContent.includes('488 indexed races'),null,{timeout:35000});
  if((await national.locator('#miD').innerText())!=='—')throw Error('Live national desk fabricated a pre-election vote total');
- if(!(await national.locator('#miForecast').innerText()).includes('D')&&!(await national.locator('#miForecast').innerText()).includes('R'))throw Error('Michigan original Ervin projection missing');
+ if((await national.locator('#miForecast').innerText())!=='R +0.8')throw Error('LIVE ELECTION NIGHT MICHIGAN FORECAST INCORRECT');
  await national.screenshot({path:'postdeploy-checks/Election-Night-National.png',fullPage:false});
  console.log('LIVE NATIONAL NIGHT PASS 488 races / 83 Michigan counties / no premature votes');
  await national.close();

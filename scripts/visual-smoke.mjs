@@ -32,6 +32,8 @@ try{
  assert((await homepage.locator('#powerCards .power-card').count())===3,'Homepage must display House Senate Governors bars');
  assert((await homepage.locator('#balanceOfPower').boundingBox()).y<150,'Homepage power bars must be ABOVE the large hero');
  assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='25','Governor balance must include Ohio Democratic projection');
+ assert((await homepage.locator('[data-power-office="senate"] [data-power-d]').innerText())==='50','Michigan candidate strength must change Senate balance to 50-50');
+ assert((await homepage.locator('[data-power-office="senate"] [data-power-r]').innerText())==='50','Senate GOP forecast must include Michigan');
  const seatRows=await homepage.locator('#powerCards .power-card').evaluateAll(elements=>elements.map(node=>({office:node.dataset.powerOffice,numbers:[...node.querySelectorAll('[data-power-d],[data-power-r],[data-power-t]')].map(x=>+x.textContent),bars:[...node.querySelectorAll('.power-segment')].map(x=>parseFloat(x.style.width))})));
  for(const row of seatRows){assert(row.numbers.reduce((a,b)=>a+b,0)===(row.office==='house'?435:row.office==='senate'?100:50),'Seat total inconsistent: '+row.office);assert(Math.abs(row.bars.reduce((a,b)=>a+b,0)-100)<.01,'Bar width not 100%: '+row.office);}
  await homepage.locator('#balanceOfPower').screenshot({path:'visual-checks/Homepage-Projected-Balance-Of-Power.png'});
@@ -57,7 +59,7 @@ try{
 
  assert((await nationalNight.locator('#miCounties').innerText())==='0 / 83','Fake Michigan county counts before polls close');
  assert((await nationalNight.locator('#miD').innerText())==='—','Synthetic Michigan Senate votes before polls close');
- assert((await nationalNight.locator('#miForecast').innerText()).length>2,'Michigan Ervin headline missing');
+ assert((await nationalNight.locator('#miForecast').innerText())==='R +0.8','Michigan national Election Night must display R +0.8 Ervin’s Take');
  assert(nightErrors.length===0,'National Election Night JS errors: '+nightErrors.join(', '));
  await nationalNight.locator('#michiganSpotlight').screenshot({path:'visual-checks/National-Election-Night-Michigan-83.png'});
  await nationalNight.locator('[data-office="Governor"]').click();
@@ -120,12 +122,16 @@ try{
  const miBias=await miBiasPage.locator('#miCandidateEffect').innerText();
  assert(miBias.includes('not evidence of a hidden voting preference')||miBias.includes('not evidence of a hidden voting preference.'),'Candidate audit omitted stated-versus-hidden distinction');
  assert(miBias.includes('not applied'),'Unverified Muslim Bradley effect improperly presented as a correction');
+ assert(miBias.includes('−1.84')&&miBias.includes('R +0.76'),'MI candidate-strength shift must be visible with sourcing');
  assert((await miBiasPage.locator('#miCandidateEffect details').count())===2,'Evidence and counterexample controls missing');
  await miBiasPage.locator('#miCandidateEffect').screenshot({path:'visual-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
  await miBiasPage.close();
  const countyNight=await browser.newPage({viewport:{width:1440,height:940}}),nightPageErrors=[];
  countyNight.on('pageerror',e=>nightPageErrors.push(e.message));
  await countyNight.goto(root+'/state/?state=MI#stateResults',{waitUntil:'domcontentloaded'});
+ await countyNight.waitForFunction(()=>document.querySelector('#heroSenate')?.textContent==='R +0.8',null,{timeout:20000});
+ assert((await countyNight.locator('#stateRaceCards').innerText()).includes('R +0.8'),'Michigan state hero and model card disagree');
+ await countyNight.locator('#stateOverview').screenshot({path:'visual-checks/MI-Ervins-Take-Candidate-Strength.png'});
  await countyNight.waitForFunction(()=>document.querySelectorAll('#countyNightMap path.night-county').length===83,null,{timeout:26000});
  await countyNight.waitForFunction(()=>document.querySelector('#nightCountyCount')?.textContent.includes('0 / 83'),null,{timeout:8000});
  assert((await countyNight.locator('#nightCountyDem').innerText())==='—','Michigan election-night county page shows fictitious ballots');

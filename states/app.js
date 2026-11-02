@@ -74,7 +74,7 @@ async function populate(){
   state.races.push({label:r.id+' · House '+r.modelRating,margin:Number.isFinite(r.marginD)?r.marginD:null,type:'model'});
  }
  for(const s of G.senate){
-  if(byState[s.code])byState[s.code].races.push({label:'U.S. Senate · Original Ervin',margin:s.model.adjustedMargin,type:'model'});
+  if(byState[s.code])byState[s.code].races.push({label:'U.S. Senate · '+(s.code==='MI'?'Ervin’s Take':'Original Ervin'),margin:s.model.adjustedMargin,type:'model'});
  }
  for(const g of G.governor){
   if(byState[g.code])byState[g.code].races.push({label:'Governor · '+(Number.isFinite(g.model.adjustedMargin)?'Ervin’s Take':'unadjusted poll'),margin:Number.isFinite(g.model.adjustedMargin)?g.model.adjustedMargin:g.model.pollMargin,type:Number.isFinite(g.model.adjustedMargin)?'model':'poll'});

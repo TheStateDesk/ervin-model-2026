@@ -20,6 +20,8 @@ assert.equal(sum(out.senate),100);
 assert.equal(sum(out.governors),50);
 assert.equal(out.house.T,hs.summary.ratings.Tossup,'Tossup districts cannot be counted as called seats');
 assert.equal(out.senate.D+out.senate.R+out.senate.I,100);
+assert.equal(out.senate.D,50,'Michigan R lead should change balance to 50 D-aligned Senate seats');
+assert.equal(out.senate.R,50,'Michigan R lead should change balance to 50 Republican Senate seats');
 assert.equal(model.senate.length,17);
 assert.equal(model.governor.length,36);
 assert.equal(out.governors.offCycle,14);
