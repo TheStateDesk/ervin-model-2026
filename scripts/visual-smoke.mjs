@@ -95,7 +95,8 @@ try{
  assert((await homepage.locator('[data-power-office="senate"] [data-power-d]').innerText())==='50','Projected Senate seat balance must include Michigan');
  assert((await homepage.locator('[data-power-office="senate"] [data-power-r]').innerText())==='50','Republican seat total must be 50');
  const links=await homepage.locator('#powerCards .power-card-head a').evaluateAll(a=>a.map(x=>x.href));
- assert(links.some(x=>x.includes('/house/'))&&links.some(x=>x.includes('/governors/')),'Office cards must link to real nested race pages');
+ assert(links.filter(x=>x.includes('/states/?office=house#nationMap')).length===1&&links.filter(x=>x.includes('/states/?office=governor#nationMap')).length===1,'House and governor power links must open consolidated State Desk office selections');
+ assert(!links.some(x=>/\/(house|governors)\/$/.test(x)),'Retired research boards must not be linked by public balance cards');
  assert((await homepage.locator('a[href="../"],a[href*="#researchLab"],a[href*="#tabs"]').count())===0,'State Desk must not link to retired research home');
  assert((await homepage.locator('#researchLab,#advancedPollingDrawer,#races').count())===0,'Legacy forecast lab still present on public State Desk');
  assert(homepageErrors.length===0,'State Desk browser errors: '+homepageErrors.join(', '));
@@ -116,6 +117,10 @@ try{
  const nationalNight=await browser.newPage({viewport:{width:1440,height:940}});
  const nightErrors=[];nationalNight.on('pageerror',e=>nightErrors.push(e.message));
  await nationalNight.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
+ assert((await nationalNight.locator('.night-head.ed-head').count())===1,'Election Night must use the shared editorial masthead');
+ assert((await nationalNight.locator('.night-shell.ed-shell').count())===1,'Election Night must use the State Desk content grid');
+ assert((await nationalNight.locator('.ed-sectionline').count())>=1,'Election Night requires State Desk section label');
+
  const navTargets=await nationalNight.locator('.night-head nav a').evaluateAll(a=>a.map(x=>x.getAttribute('href')));
  assert(JSON.stringify(navTargets)===JSON.stringify(['../states/','#nationalBoard','#michiganSpotlight','../stats-for-nerds/']),'Election Night links to retired dedicated pages');
  assert((await nationalNight.locator('.night-links a[href="../state/?state=MI#stateGeography"]').count())===1,'Michigan historical county link must be clearly distinct from live board');
@@ -147,11 +152,14 @@ try{
  const navBox=await nightMobile.locator('.night-head nav').boundingBox();
  const brandBox=await nightMobile.locator('.night-brand').boundingBox();
  const themeBox=await nightMobile.locator('#appearance').boundingBox();
- assert(navBox.y>brandBox.y,'Mobile nav must have its own row');
- assert(brandBox.x+brandBox.width<themeBox.x+1,'Brand and theme control must not overlap');
- assert((await nightMobile.locator('.night-head nav a').count())===4,'Mobile nav must contain exactly three destinations');
- assert(await nightMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Mobile election-night masthead must not create horizontal scroll');
- await nightMobile.locator('.night-head').screenshot({path:'visual-checks/National-Election-Night-Mobile-Header.png'});
+ const mastBox=await nightMobile.locator('.night-head .ed-mast').boundingBox();
+ assert(navBox.y>brandBox.y,'Editorial Election Night nav must have its own second row');
+ assert(themeBox.y>=brandBox.y,'Theme and brand controls must not overlap vertically');
+ assert(mastBox.x>=brandBox.x,'Editorial center masthead must remain visible');
+ assert((await nightMobile.locator('.night-head nav a').count())===4,'Mobile nav must contain four State Desk destinations');
+ assert(await nightMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Editorial Election Night mobile masthead must not overflow');
+ assert((await nightMobile.locator('.night-head .ed-mast a').innerText())==='Election Night','National masthead heading missing');
+  await nightMobile.locator('.night-head').screenshot({path:'visual-checks/National-Election-Night-Mobile-Header.png'});
  await nightMobile.close();
  const governorPage=await browser.newPage({viewport:{width:1440,height:900}});
  await governorPage.goto(root+'/governors/',{waitUntil:'domcontentloaded'});
