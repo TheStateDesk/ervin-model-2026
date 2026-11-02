@@ -45,7 +45,7 @@ These are **candidates**, not guaranteed early-reporting jurisdictions or certif
 | VA-05 House | 7:00 p.m. | Rural/exurban swing; KS and IA |
 | Georgia Senate | 7:00 p.m. | Southern statewide candidate/coalition effect; TX |
 | South Carolina Senate | 7:00 p.m. | Southern statewide shift; TX |
-| FL-27 House | 8:00 p.m. | Miami-area Hispanic/suburban electorate; limited TX comparison |
+| FL-27 House | 7:00 p.m. | Miami-area Hispanic/suburban electorate; limited TX comparison |
 | North Carolina Senate | 7:30 p.m. | Southern statewide margin; TX/KS, with early-vote caution |
 | Ohio Senate | 7:30 p.m. | Industrial/Midwestern statewide movement; IA/KS |
 
@@ -118,4 +118,4 @@ See [machine-readable historical-error audit](election-night-historical-moe-2026
 
 The 80th/90th historical errors are empirical descriptions of past *pre-election forecast errors*, not classical survey sampling margins of error. The conditional 10th–90th experimental scenario bands are illustrative and not confidence/credible intervals validated for 2026. Validation continues to require archived timestamped partial reports stratified by vote mode, district boundaries and number of votes represented.
 
-Closing hours reflect the **last** applicable polls in each state (Eastern standard time November 3). For example Florida's 27th District closes **8 p.m. ET**, not 7 p.m. Texas/Kansas/Iowa statewide results remain gated until **9 p.m. ET** and individual Michigan statewide outcomes also wait until the last Central-time counties close. Check local election offices for legal poll-closing particulars.
+Closing hours reflect the **last** applicable polls in each state (Eastern standard time November 3). For example Florida's 27th District's Miami-Dade polling places close at **7 p.m. ET** (Miami-Dade county feeds may begin after 7:15), while the Florida **statewide** reporting service states it waits until **8 p.m. ET** because of Central-time Panhandle precincts. A local county feed and statewide release do not share one release time. Texas/Kansas/Iowa statewide results remain gated until **9 p.m. ET** and individual Michigan statewide outcomes also wait until the last Central-time counties close. Check local election offices for legal poll-closing particulars.
