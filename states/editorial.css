@@ -95,3 +95,66 @@
 .ed-inline-race:hover{color:#12354a}
 .ed-index{background:#f3f1e9}
 @media(max-width:600px){.ed-map-county{min-height:345px;padding:2px}.ed-map-county svg{height:clamp(340px,103vw,530px)}.ed-map-tools #countyZoomIn,.ed-map-tools #countyZoomOut,.ed-map-tools #countyZoomReset{min-width:65px;padding:8px 10px;flex:1 1 72px}.ed-map-status{top:7px;left:7px}}
+
+/* 2026-11-02: fully themed editorial pages, matching the original site's saved preference.
+   Every large surface and text-bearing control gets a dark counterpart. */
+.ed-theme-toggle{white-space:nowrap;min-width:92px;min-height:40px}
+.ed-district-tools{margin-top:10px}
+.ed-district-tools label{display:flex;gap:8px;align-items:center}
+.ed-district-tools select{min-width:142px}
+.ed-district-map-surface{background:var(--ed-sand);min-height:380px}
+.ed-district-map-surface svg{height:clamp(410px,51vw,650px);overflow:hidden}
+.ed-district-map-surface path.geo-district{stroke-width:1.65!important;stroke:#fafdfd!important;pointer-events:visiblePainted}
+.ed-district-map-surface path.geo-district:is(:focus-visible,:hover){stroke:#263e53!important;stroke-width:3!important;filter:brightness(1.11)}
+.ed-district-map-surface path.geo-district.is-selected{stroke:#e6af4e!important;stroke-width:4.2!important;paint-order:stroke fill}
+.ed-district-map-surface .geo-district-label{paint-order:stroke;stroke-width:4px;font-size:17px}
+.ed-district-grid[hidden]{display:none!important}
+.ed-map-county svg{overflow:hidden}
+.ed-map-county svg path.county{paint-order:normal}
+.ed-map-county svg path.county.is-selected{paint-order:stroke fill}
+.ed-poll-detail{margin:14px 0;padding:11px;border-top:1px solid var(--ed-rule);border-bottom:1px solid var(--ed-rule)}
+.ed-poll-detail h3{font:700 18px var(--ed-serif);margin:5px 0 8px}
+.ed-poll-detail .ed-coverage{padding:9px 0}
+.ed-poll-detail .ed-coverage strong{font-variant-numeric:tabular-nums}
+.ed-source-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.ed-source-links a{font-size:11px;font-weight:800}
+html.theme-dark{color-scheme:dark;--ed-paper:#101925;--ed-white:#192736;--ed-ink:#edf2f4;--ed-muted:#b3c4ce;--ed-rule:#344858;--ed-rule-dark:#637b89;--ed-blue:#91c7e8;--ed-blue-light:#253f53;--ed-red:#e58e98;--ed-sand:#1b3040;--ed-gold:#e4bf7c}
+.theme-dark .ed-head,.theme-dark .ed-card{background:var(--ed-white)}
+.theme-dark .ed-mast small,.theme-dark .ed-kicker,.theme-dark .ed-cap{color:#e4bf7c}
+.theme-dark .ed-nav{background:#142230}
+.theme-dark .ed-nav a{color:#dbe6ef!important}
+.theme-dark .ed-nav a:hover,.theme-dark .ed-nav a[aria-current=page]{background:#284153}
+.theme-dark .ed-standfirst,.theme-dark .ed-race p,.theme-dark .ed-race-source,.theme-dark .ed-coverage small{color:#afc2ce}
+.theme-dark .ed-subnav{border-color:var(--ed-rule)}
+.theme-dark .ed-subnav a{color:#c5dce9!important}
+.theme-dark .ed-btn.outline{color:#e1edf2!important;border-color:#5c7787;background:#1c3041}
+.theme-dark .ed-btn.outline:hover{background:#304b60}
+.theme-dark .ed-control{background:#101b29;color:#edf3f6;border-color:#52687a}
+.theme-dark .ed-control option{background:#1b2d3e;color:#f1f5f7}
+.theme-dark .ed-empty{background:#152331;color:#bfd0da;border-color:#506576}
+.theme-dark .ed-pill,.theme-dark .ed-pill.neutral{background:#263846;color:#d4e2eb;border-color:#526779}
+.theme-dark .ed-pill.r{background:#492e3a;color:#f7b3b8;border-color:#935362}
+.theme-dark .ed-map-surface{background:#152738;border-color:#465d6e}
+.theme-dark .ed-map-county{background-color:#142736!important;background-image:radial-gradient(#7290a130 .8px,transparent .8px)}
+.theme-dark .ed-map-county svg path.county{stroke:#243f50!important}
+.theme-dark .ed-map-county svg path.county:is(:focus-visible,:hover){stroke:#f5ddaa!important}
+.theme-dark .ed-map-status{color:#e7edf0;background:#1a2d3bf0;border-color:#597588}
+.theme-dark .ed-map-status.is-warning{color:#ffe3be;background:#593b2f;border-color:#a77454}
+.theme-dark .ed-map-surface svg path.ed-state{stroke:#223c4f}
+.theme-dark .ed-district-map-surface path.geo-district{stroke:#233c50!important}
+.theme-dark .ed-district-map-surface .geo-district-label{stroke:#122738;fill:#fff}
+.theme-dark .ed-legend,.theme-dark .ed-map-tools label{color:#b8cbd5}
+.theme-dark .ed-inspector,.theme-dark .ed-stat{background:#203446}
+.theme-dark .ed-race,.theme-dark .ed-coverage,.theme-dark .ed-small-list article{border-color:var(--ed-rule)}
+.theme-dark .ed-notice{background:#332e27;color:#efdfbe;border-left-color:#e0b267}
+.theme-dark .ed-index{background:#213547}
+.theme-dark .ed-table th{background:#263d50;color:#e1eaf1;border-color:#496173}
+.theme-dark .ed-table td{border-color:#364d5b}
+.theme-dark .ed-table tbody tr:nth-child(2n){background:#1c2e3b}
+.theme-dark .ed-table tbody tr:hover{background:#29475b}
+.theme-dark .ed-state-chip{background:#192e41;border-color:#4c6475;color:#f0f5f7!important}
+.theme-dark .ed-state-chip:hover,.theme-dark .ed-state-chip.active{background:#315b74}
+.theme-dark .ed-inline-race{color:#9ed5ef}
+.theme-dark .ed-inline-race:hover{color:#c7eaff}
+.theme-dark .ed-footer{border-color:#5d7787;color:#c1d0d9}
+@media(max-width:600px){.ed-district-tools{gap:6px}.ed-district-tools label{flex:1 1 100%;justify-content:space-between}.ed-district-tools select{flex:1 1 auto}.ed-district-map-surface svg{height:clamp(350px,102vw,540px)}.ed-theme-toggle{padding:8px 10px;min-width:75px}}
