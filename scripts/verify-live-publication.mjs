@@ -84,7 +84,7 @@ try{
  await front.close();
  const oh=await browser.newPage({viewport:{width:390,height:844}});
  await oh.goto(base+'state/?state=OH&release='+stamp,{waitUntil:'domcontentloaded'});
- await oh.waitForFunction(()=>/^(?:D|R) \\+\\d+\\.\\d|Even$/.test(document.querySelector('#heroGovernor')?.textContent||''),null,{timeout:35000});
+ await oh.waitForFunction(()=>/^(?:D|R) \+\d+\.\d|Even$/.test(document.querySelector('#heroGovernor')?.textContent||''),null,{timeout:35000});
  const ohModel=await oh.locator('#heroGovernor').innerText();
  const ohRaces=await oh.locator('#stateRaceCards').innerText();
  if(!ohRaces.includes(ohModel))throw Error('LIVE OHIO FORECAST HERO/CARD MISMATCH '+JSON.stringify({ohModel,ohRaces:ohRaces.slice(0,300)}));
@@ -99,7 +99,7 @@ try{
  const michiganEvidence=await michiganAudit.locator('#miCandidateEffect').innerText();
  if(!michiganEvidence.includes('In 9 matched Michigan survey samples')||!michiganEvidence.includes('not applied')||!michiganEvidence.includes('−1.84'))throw Error('LIVE MI CANDIDATE-EFFECT AUDIT MISSING '+michiganEvidence.slice(0,400));
  const liveMISenate=await michiganAudit.locator('#heroSenate').innerText();
- if(!/^(?:D|R) \\+\\d+\\.\\d|Even$/.test(liveMISenate))throw Error('LIVE MI SENATE MARGIN UNAVAILABLE');
+ if(!/^(?:D|R) \+\d+\.\d|Even$/.test(liveMISenate))throw Error('LIVE MI SENATE MARGIN UNAVAILABLE');
  const cardDetails=await michiganAudit.locator('#stateRaceCards').innerText();
  if(!cardDetails.includes(liveMISenate))throw Error('LIVE MI SENATE RACE CARD NOT UPDATED');
  await michiganAudit.locator('#miCandidateEffect').screenshot({path:'postdeploy-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
