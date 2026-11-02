@@ -10,7 +10,7 @@ const desiredOffice=['senate','governor','house'].includes(params.get('office'))
 const desiredDistrict=String(params.get('district')||'01').replace(/[^0-9]/g,'').padStart(2,'0').slice(-2);
 const desiredCode=(params.get('state')||'MI').toUpperCase().replace(/[^A-Z]/g,'').slice(0,2);
 const href=r=>'?office='+encodeURIComponent(r.office.toLowerCase())+'&state='+encodeURIComponent(r.code)+(r.office==='House'?'&district='+encodeURIComponent(r.district):'');
-let raceList=[],current=null,pollArchive={},countyHistory={},michiganHistory=[],allHistorical={},scenario=null,housePolling={};
+let raceList=[],current=null,pollArchive={},countyHistory={},michiganHistory=[],allHistorical={},scenario=null,housePolling={},governorPolls={};
 function toDate(value){const d=Date.parse(/\b20\d{2}\b/.test(String(value))?String(value):String(value)+', 2026');return Number.isFinite(d)?d:null}
 function formatMargin(m,dem,rep){if(m==null||!Number.isFinite(m))return 'No comparable average';if(Math.abs(m)<.05)return 'Tied';return (m>0?dem:rep).split(' ').slice(-1)[0]+' +'+Math.abs(m).toFixed(1)}
 function senateAggregate(r){
@@ -123,8 +123,9 @@ function renderPolls(r){
   $('pollIntro').textContent='Publisher averages used for the Senate model are shown first. The separate recent-polls archive is listed below; a shared poll may appear inside several publishers’ aggregates.';
  }else{
   if(r.poll)rows=[{name:'On Point Politics polling average',value:r.poll.margin,kind:r.poll.count+' underlying public surveys; publisher own methodology',date:r.poll.asOf,source:r.poll.source,url:r.poll.url}];
-  polls=(r.recentPolls||[]).map(p=>({pollster:p.pollster,margin:p.margin,dates:p.date,sample:p.note,url:p.url,sourceKind:p.source}));
-  $('pollIntro').textContent='The governing polling figure is a third-party aggregate. Separately identified surveys below are supporting context, not a claim that this model incorporates those surveys independently.';
+  polls=[...(r.recentPolls||[]).map(p=>({pollster:p.pollster,margin:p.margin,dates:p.date,sample:p.note,url:p.url,sourceKind:p.source})),...(governorPolls[r.code]||[]).map(p=>({...p,dates:p.date}))];
+  const signatures=new Set();polls=polls.filter(p=>{const key=String(p.pollster).toLowerCase().replace(/[^a-z]/g,'')+'|'+p.dates+'|'+p.margin;if(signatures.has(key))return false;signatures.add(key);return true});
+  $('pollIntro').textContent='The displayed statewide polling average is a third-party aggregate; individual polls below are separately sourced context. Survey lists may overlap each other and the publisher aggregate, and dates can indicate publication rather than exact field periods.';
  }
  const avgHtml=rows.length?rows.map(q=>'<div class="race-row"><div><strong><a href="'+esc(q.url||'#')+'" target="_blank" rel="noopener noreferrer">'+esc(q.name)+'</a></strong><small>'+esc(q.kind||q.source||'')+' · '+esc(q.date||'date unavailable')+'</small></div><div class="race-number">'+esc(formatMargin(q.value,r.dem,r.rep))+'</div></div>').join(''):'<div class="race-note">No verified, comparable publisher-average input is available for this contest.</div>';
  const sorted=[...polls].sort((a,b)=>(toDate(b.fieldEnd||b.publishedAt||b.dates)||0)-(toDate(a.fieldEnd||a.publishedAt||a.dates)||0)).slice(0,40);
@@ -132,7 +133,7 @@ function renderPolls(r){
  $('pollRows').innerHTML='<h3 style="margin:8px 0 2px">Published source averages</h3>'+avgHtml+'<h3 style="margin:17px 0 2px">Recent individual surveys ('+sorted.length+' shown)</h3>'+surveyHtml;
  const plotted=sorted.filter(p=>Number.isFinite(+p.margin)).slice(0,16).reverse();
  $('pollPlot').innerHTML='<b>Individual polls · non-R minus R</b>'+plotted.map(p=>{const val=+p.margin;return '<div class="bar '+(val<0?'r':'')+'" style="height:'+Math.max(8,Math.min(88,20+Math.abs(val)*3))+'%" title="'+esc(p.pollster+': '+formatMargin(val,r.dem,r.rep))+'"><span>'+esc((p.pollster||'').split(' ')[0].slice(0,6))+'</span></div>'}).join('')+(plotted.length?'':'<div class="race-muted" style="margin:auto">No individual survey chart available</div>');
- $('pollLinks').innerHTML=r.office==='Governor'?'<a href="'+esc(r.poll?.url||'https://www.onpointpolitics.us/polls/governor')+'" target="_blank" rel="noopener noreferrer">See full published polling history ↗</a>':'<a href="../recent_polls.json" target="_blank" rel="noopener noreferrer">Recent survey archive (JSON) ↗</a>';
+ $('pollLinks').innerHTML=r.office==='Governor'?'<a href="'+esc(r.poll?.url||'https://www.onpointpolitics.us/polls/governor')+'" target="_blank" rel="noopener noreferrer">Full publisher polling history ↗</a><a href="https://www.realclearpolling.com/latest-polls/governor" target="_blank" rel="noopener noreferrer">RCP recent governor surveys ↗</a>':'<a href="../recent_polls.json" target="_blank" rel="noopener noreferrer">Recent survey archive (JSON) ↗</a>';
 }
 function svgNode(tag,props){const el=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(props||{}))el.setAttribute(k,v);return el}
 function fallbackMap(r,msg){
@@ -238,7 +239,7 @@ async function loadSenate(){
 }
 async function start(){
  try{
-  const [governors,senate,archive,house,counties,mi,national,housePolls]=await Promise.all([
+  const [governors,senate,archive,house,counties,mi,national,housePolls,govArchive]=await Promise.all([
    fetch('../governors/data.json').then(r=>{if(!r.ok)throw Error('Governor registry unavailable');return r.json()}),
    loadSenate(),
    fetch('../recent_polls.json').then(r=>r.ok?r.json():{}).catch(()=>({})),
@@ -246,9 +247,10 @@ async function start(){
    fetch('../counties-watch/history.json').then(r=>r.ok?r.json():{states:{}}).catch(()=>({states:{}})),
    fetch('../michigan/county_history.json').then(r=>r.ok?r.json():{counties:[]}).catch(()=>({counties:[]})),
     window.ERVIN_SCENARIOS.load().catch(()=>({counties:{}})),
-    fetch('../house/research-polls.json').then(r=>r.ok?r.json():{polls:{}}).catch(()=>({polls:{}}))
+    fetch('../house/research-polls.json').then(r=>r.ok?r.json():{polls:{}}).catch(()=>({polls:{}})),
+    fetch('../governors/recent_verified_polls.json').then(r=>r.ok?r.json():{states:{}}).catch(()=>({states:{}}))
   ]);
-  raceList=[...senate,...governors.races,...house.seats];pollArchive=archive.polls||{};countyHistory=counties.states||{};michiganHistory=mi.counties||[];allHistorical=national.counties||{};housePolling=housePolls.polls||{};
+  raceList=[...senate,...governors.races,...house.seats];pollArchive=archive.polls||{};countyHistory=counties.states||{};michiganHistory=mi.counties||[];allHistorical=national.counties||{};housePolling=housePolls.polls||{};governorPolls=govArchive.states||{};
   current=raceList.find(r=>r.code===desiredCode&&r.office.toLowerCase()===desiredOffice&&(r.office!=='House'||r.district===desiredDistrict)) || raceList.find(r=>r.office.toLowerCase()===desiredOffice) || raceList[0];
   const target=current.office==='Senate'?(()=>{const a=senateAggregate(current).raw;return Number.isFinite(a)?a-(current.history_mode==='not_comparable'?0:Number(current.correction)||0):null})():current.office==='Governor'&&Number.isFinite(current.poll?.margin)?current.poll.margin:null;
    scenario=window.ERVIN_SCENARIOS.build(national,FIPS[current.code],target);
