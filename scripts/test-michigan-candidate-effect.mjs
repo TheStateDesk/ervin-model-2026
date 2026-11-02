@@ -30,7 +30,8 @@ assert(governorArchive.races.every(x=>x.year>=2018),'Independent governor 2014 c
 const stateModule=fs.readFileSync('state/mi-candidate-audit.js','utf8');
 const stateHtml=fs.readFileSync('state/index.html','utf8');
 assert(stateModule.includes('miCandidateEffect')&&stateModule.includes('not applied')&&stateModule.includes('not evidence of a hidden voting preference'));
-assert(stateHtml.includes('mi-candidate-audit.js?v=20261102-mi-candidate-effect-2'));
+assert(stateHtml.includes('mi-candidate-audit.js?v=20261102-mi-candidate-effect-3'));
 assert(stateHtml.includes('id="miCandidateEffectMount"'));
+assert(stateModule.includes('|\\.\\.\\/')||stateModule.includes('|\\.\\.\\/'), 'Source link helper should permit relative audit JSON download');
 assert(!fs.readFileSync('state/source-ledger.js','utf8').includes('candidateEffect'),'Optional audit must not break core bibliography fetches');
 console.log('MI CANDIDATE-EFFECT AUDIT PASS',JSON.stringify({samples:a.pairs.length,widerGovernor:8,medianOfficeGap:2,range:[-2,9.9],automaticReligionPenalty:0,ervinSenate:sen.adjustedMargin}));

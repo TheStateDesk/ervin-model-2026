@@ -4,7 +4,7 @@
 const mount=document.getElementById('miCandidateEffectMount');if(!mount)return;
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=x=>(Number(x)>=0?'+':'')+Number(x).toFixed(1);
-const link=(url,label)=>/^https:\/\//.test(url)?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>':esc(label);
+const link=(url,label)=>/^(https:\/\/|\.\.\/)/.test(url)?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>':esc(label);
 let loaded=false;
 async function show(){
  if(loaded)return;
