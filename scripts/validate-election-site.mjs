@@ -89,11 +89,11 @@ for(const html of ['house/index.html','elections/index.html','elections/overview
 // Browser-like map execution smoke test; catches cases where valid polygon JSON
 // nevertheless fails to render due to URL/base-path logic or SVG path bugs.
 class TestElement {
- constructor(tag){this.tag=tag;this.children=[];this.attrs={};this.dataset={};}
+ constructor(tag){this.tag=tag;this.children=[];this.attrs={};this.dataset={};this.events={};}
  setAttribute(name,val){this.attrs[name]=String(val);}
  append(node){this.children.push(node);}
  replaceChildren(...nodes){this.children=nodes;}
- addEventListener(){}
+ addEventListener(type,callback){this.events[type]=callback;}
 }
 const documentStub={
  currentScript:{src:'https://geervin.github.io/ervin-model-2026/scripts/geo-engine.js'},
@@ -111,19 +111,35 @@ const fetchStub=async url=>{
 };
 const context={document:documentStub,window:browserWindow,fetch:fetchStub,URL,location:{href:'https://geervin.github.io/ervin-model-2026/elections/'}};
 new Script(file('scripts/geo-engine.js'),{filename:'scripts/geo-engine.js'}).runInNewContext(context);
-for(const [code,kind,expected] of [['TX','counties',254],['MI','counties',83],['TX','districts',38]]){
- const collection=await browserWindow.ERVIN_GEO.get(code,kind);
- const svg=new TestElement('svg');
- const result=browserWindow.ERVIN_GEO.draw(svg,collection,{kind,labels:false});
- assert.equal(result,expected,'Wrong rendered shape count: '+code+' '+kind);
- const paths=svg.children.flatMap(node=>node.tag==='fragment'?node.children:[node]).filter(node=>node.tag==='path');
- assert.equal(paths.length,expected,'County paths lost during DOM build: '+code+' '+kind);
- assert(paths.every(node=>node.attrs.d?.startsWith('M')&&!/NaN|Infinity|undefined/.test(node.attrs.d)),code+' invalid SVG path');
+let projectedCountyShapes=0,projectedDistrictShapes=0;
+for(const [code,meta] of geographicStates){
+ for(const [kind,expectedCount] of [['counties',meta.counties],['districts',meta.districts]]){
+  const collection=await browserWindow.ERVIN_GEO.get(code,kind);
+  const svg=new TestElement('svg');
+  let selections=0;
+  const rendered=browserWindow.ERVIN_GEO.draw(svg,collection,{kind,labels:false,onSelect:()=>selections++});
+  assert.equal(rendered,expectedCount,'Wrong rendered shape count: '+code+' '+kind);
+  const paths=svg.children.flatMap(node=>node.tag==='fragment'?node.children:[node]).filter(node=>node.tag==='path');
+  assert.equal(paths.length,expectedCount,'Lost SVG paths: '+code+' '+kind);
+  assert(paths.every(node=>node.attrs.d?.startsWith('M')&&!/NaN|Infinity|undefined/.test(node.attrs.d)),code+' invalid SVG path');
+  assert.equal(svg.attrs.viewBox,'0 0 900 580',code+' invalid viewport');
+  assert(paths.every(node=>node.events.click&&node.events.keydown),code+' map shapes are not clickable/keyboard accessible');
+  paths[0].events.click();
+  paths[0].events.keydown({key:'Enter',preventDefault(){}});
+  assert.equal(selections,2,code+' map selection event not working');
+  if(kind==='counties')projectedCountyShapes+=rendered;
+  else projectedDistrictShapes+=rendered;
+ }
 }
+assert.equal(projectedCountyShapes,3143,'All-state county geometry total changed; review source');
+assert.equal(projectedDistrictShapes,435,'All-state voting district count changed');
+
 const chromeCss=file('site-chrome.css');
 assert(chromeCss.includes('html:not(.light) body .site-header .site-nav.is-open'),'Dark mobile menu must override the global light-theme stylesheet');
 assert(chromeCss.includes('justify-content:flex-start!important'),'Mobile menu spacing must not stretch links vertically');
-report.renderedMaps=3;
+report.renderedMaps=geographicStates.size*2;
+report.svgCountyShapes=projectedCountyShapes;
+report.svgHouseShapes=projectedDistrictShapes;
 
 console.log('ERVIN MODEL SITE VALIDATION PASS');
 console.log(JSON.stringify(report,null,2));
