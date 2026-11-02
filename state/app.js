@@ -9,7 +9,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={};
-let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,mapToken=0,resultLast=0;
+let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0;
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
 function sourceItem(text,url,detail=''){return '<article><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(text)+'</a></strong>'+(detail?'<small>'+esc(detail)+'</small>':'')+'</article>';}
@@ -113,15 +113,15 @@ function countyCSV(){
  link.href=url;link.download='ervin-'+code+'-county-context.csv';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 async function loadCountyMap(reload=false){
- const generation=++mapToken;
+ const generation=++countyToken;
  $('countyInspector').textContent='Loading '+stateName(code)+' county geography…';
  try{
   const shape=await window.ERVIN_GEO.get(code,'counties',{refresh:reload});
-  if(generation!==mapToken)return;
+  if(generation!==countyToken)return;
   countyShape=shape;selectedCounty=null;buildScenario();
   $('countySuggestions').innerHTML=shape.features.map(x=>'<option value="'+esc(x.properties?.name||'')+'"></option>').join('');
   drawCounties();
- }catch(e){if(generation!==mapToken)return;countyShape=null;$('countyInspector').textContent='Map loading problem: '+e.message+'. Use Reload map to retry.';}
+ }catch(e){if(generation!==countyToken)return;countyShape=null;$('countyInspector').textContent='Map loading problem: '+e.message+'. Use Reload map to retry.';}
 }
 function initCountyControls(){
  $('countyLayer').onchange=drawCounties;
@@ -150,9 +150,9 @@ function initDistrictButtons(){
  $('districtButtons').onclick=e=>{const b=e.target.closest('button[data-district]');if(b){const r=getDistrict(b.dataset.district);if(r)renderDistrictDetail(r);}};
 }
 async function loadHouseMap(reload=false){
- const token=++mapToken;
+ const token=++houseToken;
  try{
-  const shape=await window.ERVIN_GEO.get(code,'districts',{refresh:reload});if(token!==mapToken)return;
+  const shape=await window.ERVIN_GEO.get(code,'districts',{refresh:reload});if(token!==houseToken)return;
   districtShape=shape;const map=$('districtMap');
   window.ERVIN_GEO.draw(map,shape,{kind:'districts',className:'geo-district',onSelect:(el,f)=>{const r=getDistrict(f.id);if(r)renderDistrictDetail(r);}});
   for(const path of map.querySelectorAll('path.geo-district')){
@@ -208,7 +208,7 @@ function officialLinks(){
 }
 async function display(next){
  const c=String(next||'MI').toUpperCase();code=byCode[c]?c:'MI';
- selectedDistrict=null;countyShape=null;districtShape=null;cachedCountyRows=[];selectedCounty=null;mapToken++;
+ selectedDistrict=null;countyShape=null;districtShape=null;cachedCountyRows=[];selectedCounty=null;countyToken++;houseToken++;
  stateHouse=house.filter(x=>x.code===code).sort((a,b)=>String(a.district).localeCompare(String(b.district)));
  renderLead();renderOverview();initDistrictButtons();renderPolls();officialLinks();
  $('countyLayer').value='2024';$('countyTableFind').value='';$('countySearch').value='';
