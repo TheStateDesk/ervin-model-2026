@@ -1,12 +1,12 @@
 /* ERVIN GEOGRAPHY 2.0 — local Census-derived boundaries; no runtime D3 or CDN required. */
 (()=>{"use strict";
-const NS="http://www.w3.org/2000/svg",cache=new Map();
+const NS="http://www.w3.org/2000/svg",cache=new Map(),BASE=new URL('../geo/',document.currentScript?.src||location.href).href;
 const make=(tag,attrs={})=>{const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);return el;};
 const slug=x=>String(x||"").toUpperCase().replace(/[^A-Z]/g,"").slice(0,2);
 async function get(code,kind="counties"){
  code=slug(code);if(!["counties","districts"].includes(kind)||!code)throw Error("Invalid geographic request");
  const key=kind+"/"+code;
- if(!cache.has(key))cache.set(key,fetch("../geo/"+key+".json",{cache:"force-cache"}).then(r=>{if(!r.ok)throw Error("Local "+kind+" file not yet available for "+code);return r.json()}).then(data=>{if(data.type!=="FeatureCollection"||!Array.isArray(data.features)||!data.features.length||data.state!==code)throw Error("Invalid state map file");return data;}).catch(e=>{cache.delete(key);throw e}));
+ if(!cache.has(key))cache.set(key,fetch(BASE+key+".json",{cache:"force-cache"}).then(r=>{if(!r.ok)throw Error("Local "+kind+" file not yet available for "+code);return r.json()}).then(data=>{if(data.type!=="FeatureCollection"||!Array.isArray(data.features)||!data.features.length||data.state!==code)throw Error("Invalid state map file");return data;}).catch(e=>{cache.delete(key);throw e}));
  return cache.get(key);
 }
 function rings(geometry){return geometry?.type==="Polygon"?geometry.coordinates:geometry?.type==="MultiPolygon"?geometry.coordinates.flat():[];}
