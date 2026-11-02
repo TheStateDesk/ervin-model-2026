@@ -66,7 +66,7 @@ function search(){
 async function populate(){
  const read=async url=>{const res=await fetch(url,{cache:'no-cache'});if(!res.ok)throw Error('Data '+url+' '+res.status);return res.json()};
  try{
- const [house,gov,sen,archive]=await Promise.all([read('../house/ervin-forecast-2026-11-02.json'),read('../governors/data.json'),read('../counties-watch/forecast-baselines.json'),read('../research/original-ervin-senate-calibration-2026-11-02.json')]);
+ const [house,gov,sen,archive]=await Promise.all([read('../house/ervin-forecast-2026-11-02.json'),read('../governors/data.json'),read('../counties-watch/forecast-baselines.json'),read('../research/governor-same-office-2014-2022.json')]);
  const G=window.ERVIN_STATEWIDE.apply(archive,gov,sen);
  for(const state of states)byState[state.code]={name:state.name,code:state.code,races:[],D:0,R:0,T:0};
  for(const r of Object.values(house.races||{})){

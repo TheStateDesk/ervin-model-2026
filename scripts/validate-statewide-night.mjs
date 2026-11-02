@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 import fs from 'node:fs';import assert from 'node:assert/strict';import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const prior=require('./governor-backtest.js');
 const engine=require('./statewide-ervin.js');
-const archive=read('research/original-ervin-senate-calibration-2026-11-02.json'),governors=read('governors/data.json'),senate=read('counties-watch/forecast-baselines.json');
+const archive=read('research/governor-same-office-2014-2022.json'),governors=read('governors/data.json'),senate=read('counties-watch/forecast-baselines.json');
 const historical=read('research/calibration_events_2016_2024.json');
 const out=engine.apply(archive,governors,senate);
 assert.equal(out.governor.length,36);assert.equal(out.senate.length,17);
 assert.equal(out.summary.withPublishedPolling,33);
-assert.equal(out.summary.adjustedGovernorRaces,11,'Only comparable Original Ervin Senate state corrections transfer to governor');
-assert.equal(Object.keys(archive.senateStates).length,17);
+assert.equal(out.summary.adjustedGovernorRaces,19,'Only 19 currently verified governor-only state corrections are available');
+assert.equal(archive.races.length,39);
 assert(historical.events.some(e=>e.year===2016)&&historical.events.some(e=>e.year===2024),'Historical scope must include 2016–24');
 for(const r of out.governor){
- const original=archive.senateStates[r.code];
- const eligible=original&&original.historyMode==='standard'&&Number.isFinite(original.correction);
+ const c=prior.correction(archive.races,r.code,2026);
  const raw=r.poll?.margin;
- assert.equal(r.model.correction,eligible?original.correction:null,'Original Ervin source mismatch '+r.code);
- assert.equal(r.model.adjustedMargin,eligible&&Number.isFinite(raw)?+(raw-original.correction).toFixed(2):null,'Original correction math incorrect '+r.code);
- assert(r.model.events.every(e=>e.year>=2016&&e.year<=2024),'Historical leak '+r.code);
- if(!eligible)assert(r.model.fallback&&r.model.adjustedMargin===null,'Cannot invent unverified Original Ervin correction '+r.code);
+ assert.equal(r.model.correction,c?.value??null,'Governor-only source mismatch '+r.code);
+ assert.equal(r.model.adjustedMargin,c&&Number.isFinite(raw)?+(raw-c.value).toFixed(2):null,'Governor-only math mismatch '+r.code);
+ assert(r.model.events.every(e=>e.year<2026&&e.year>=2014&&e.office==='Governor'),'Federal or future governor evidence leaked '+r.code);
+ if(!c)assert(r.model.fallback&&r.model.adjustedMargin===null,'Unknown governor history must not create 2026 estimate '+r.code);
 }
 for(const ss of out.senate)assert.equal(ss.model.adjustedMargin,senate.states[ss.code].adjustedMargin,'Original Senate model changed '+ss.code);
 const geo=read('geo/counties/MI.json');assert.equal(geo.features.length,83);
