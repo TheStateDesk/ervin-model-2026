@@ -5,7 +5,7 @@
    Absence of historical current-boundary precinct votes forbids local variation.
 */
 (()=>{"use strict";
-const KEY="window.ERVIN_DATA = ";
+
 const clamp=x=>Math.max(0,Math.min(1,x));
 const mean=x=>(x.d-x.r)/x.total;
 const other=x=>Math.max(0,1-(x.d+x.r)/x.total);
@@ -60,15 +60,13 @@ function derive(counties,mi){
 async function load(){
  const [historyResponse,modelResponse]=await Promise.all([
   fetch("../county_history.json",{cache:"force-cache"}),
-  fetch("../../index.html",{cache:"no-store"})]);
+  fetch("../../research/senate-workbench-data.json",{cache:"no-store"})]);
  if(!historyResponse.ok||!modelResponse.ok)throw Error("Current county model inputs unavailable");
- const history=await historyResponse.json(),html=await modelResponse.text();
+ const history=await historyResponse.json(),config=await modelResponse.json();
  if(history.counties?.length!==83)throw Error("County baseline does not cover 83 counties");
  const sum=k=>history.counties.reduce((n,c)=>n+c.senate2024[k],0);
  if(sum("d")!==2712686||sum("r")!==2693680)throw Error("Historical Senate statewide audit mismatch");
- const pos=html.indexOf(KEY),end=html.indexOf(";\n\n</script><script>",pos);
- if(pos<0||end<pos)throw Error("Could not resolve national model data");
- const config=JSON.parse(html.slice(pos+KEY.length,end));
+ if(!Array.isArray(config?.states)||config.states.length!==17)throw Error("Preserved Senate baseline malformed");
  const mi=config.states?.find(x=>x.code==="MI");
  if(!mi)throw Error("Michigan statewide forecast unavailable");
  const forecasts=derive(history.counties,mi);
