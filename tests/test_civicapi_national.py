@@ -23,6 +23,9 @@ class ElectionReporting(unittest.TestCase):
   self.assertEqual(r["office"],"senate")
   self.assertEqual(r["source"],"civicAPI")
   self.assertEqual(r["timestampBasis"],"provider_last_updated")
+ def test_provider_geography_scope(self):
+  result=m.normalize("MI-SENATE",self.search,{**self.detail,"election_scope":"Statewide"},self.now,87214)
+  self.assertIsNotNone(result)
  def test_reject_test_data(self):
   self.assertIsNone(m.normalize("MI-SENATE",self.search,{**self.detail,"test_data":True},self.now,87214))
  def test_reject_primary_or_wrong_office(self):
