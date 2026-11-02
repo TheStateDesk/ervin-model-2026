@@ -79,7 +79,7 @@ def type_ok(key,row):
  if "primary" in blob or "runoff" in blob:return False
  # A special GENERAL election still elects a federal senator or representative.
  scope=str(row.get("election_scope") or row.get("scope") or "").lower()
- if scope and not any(term in scope for term in ("general","special")):return False
+ if "primary" in scope or "runoff" in scope:return False
  office_type=str(row.get("election_type") or row.get("office") or "").lower()
  if office=="house":
   if not ("us house" in blob or "u.s. house" in blob or "congress" in blob):return False
