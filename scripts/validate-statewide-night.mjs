@@ -16,7 +16,7 @@ for(const r of out.governor){
  const c=prior.correction(archive.races,r.code,2026);
  const raw=r.poll?.margin;
  assert.equal(r.model.correction,c?.value??null,'Governor-only source mismatch '+r.code);
- assert.equal(r.model.adjustedMargin,c&&Number.isFinite(raw)?+(raw-c.value+r.model.candidateShift).toFixed(2):null,'Governor error plus candidate context mismatch '+r.code);
+ assert.equal(r.model.adjustedMargin,c&&Number.isFinite(raw)?+(+(raw-c.value).toFixed(2)+r.model.candidateShift).toFixed(2):null,'Governor error plus candidate context mismatch '+r.code);
  assert(r.model.events.every(e=>e.year<2026&&e.year>=2018&&e.office==='Governor'),'Federal or future governor evidence leaked '+r.code);
  if(!c)assert(r.model.fallback&&r.model.adjustedMargin===null,'Unknown governor history must not create 2026 estimate '+r.code);
 }
