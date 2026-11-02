@@ -3,13 +3,13 @@ import fs from 'node:fs';import assert from 'node:assert/strict';import {createR
 const require=createRequire(import.meta.url),read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const prior=require('./governor-backtest.js');
 const engine=require('./statewide-ervin.js');
-const archive=read('research/governor-same-office-2014-2022.json'),governors=read('governors/data.json'),senate=read('counties-watch/forecast-baselines.json');
+const archive=read('research/governor-same-office-2014-2024.json'),governors=read('governors/data.json'),senate=read('counties-watch/forecast-baselines.json');
 const historical=read('research/calibration_events_2016_2024.json');
 const out=engine.apply(archive,governors,senate);
 assert.equal(out.governor.length,36);assert.equal(out.senate.length,17);
 assert.equal(out.summary.withPublishedPolling,33);
 assert.equal(out.summary.adjustedGovernorRaces,19,'Only 19 currently verified governor-only state corrections are available');
-assert.equal(archive.races.length,39);
+assert.equal(archive.races.length,44);
 assert(historical.events.some(e=>e.year===2016)&&historical.events.some(e=>e.year===2024),'Historical scope must include 2016–24');
 for(const r of out.governor){
  const c=prior.correction(archive.races,r.code,2026);

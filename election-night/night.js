@@ -159,7 +159,7 @@ function drawRaces(){
  $('nationalCount').textContent=shown.length+' displayed · '+races.length+' indexed races, filtered without leaving this page';
 }
 async function loadRaces(){
- const [gov,house,sen,archive]=await Promise.all([fetchJSON('../governors/data.json'),fetchJSON('../house/data.json'),fetchJSON(forecastURL),fetchJSON('../research/governor-same-office-2014-2022.json')]);
+ const [gov,house,sen,archive]=await Promise.all([fetchJSON('../governors/data.json'),fetchJSON('../house/data.json'),fetchJSON(forecastURL),fetchJSON('../research/governor-same-office-2014-2024.json')]);
  const report=window.ERVIN_STATEWIDE.apply(archive,gov,sen);
  const houseForecast=await fetchJSON('../house/ervin-forecast-2026-11-02.json');
  senate=sen.states||{};
@@ -168,7 +168,7 @@ async function loadRaces(){
  const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:h.incumbent?'Historically: '+h.incumbent:'Candidate list not verified',margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
  races=[...senRaces,...govRaces,...houseRaces];
  $('miForecast').textContent=window.ERVIN_STATEWIDE.formatMargin(sen.states?.MI?.adjustedMargin??null);
- $('nightHorizon').textContent='Source coverage: 17 modeled Senate contests, 36 governor elections, all 435 House districts. The governor calibration uses the 2014–2022 same-state governor-only polling-error method; county counts below are verified separately.';
+ $('nightHorizon').textContent='Source coverage: 17 modeled Senate contests, 36 governor elections, all 435 House districts. The governor calibration uses the 2014–2024 same-state governor-only polling-error method; county counts below are verified separately.';
  drawRaces();
 }
 async function init(){
