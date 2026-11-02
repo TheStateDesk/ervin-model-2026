@@ -82,3 +82,16 @@
 @media(max-width:900px){.ed-columns{grid-template-columns:1fr}.ed-head-inner{grid-template-columns:auto 1fr auto}.ed-mast{text-align:left}.ed-mast a{font-size:28px}.ed-mast small{display:none}.ed-date{display:none}.ed-nav-inner{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.ed-nav a{white-space:nowrap}.ed-shell{width:calc(100% - 30px)}}
 @media(max-width:600px){.ed-head-inner{padding:12px 14px;gap:9px}.ed-brand{font-size:0}.ed-brand b{margin-right:0;font-size:19px}.ed-mast a{font-size:26px}.ed-nav a{padding:10px 12px}.ed-shell{padding-top:18px}.ed-headline{font-size:clamp(36px,10vw,54px)}.ed-split{grid-template-columns:1fr}.ed-card{padding:15px}.ed-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ed-stat-grid .ed-stat:last-child{grid-column:1/-1}.ed-map-surface{padding:5px;min-height:290px}.ed-map-surface svg{height:clamp(315px,100vw,510px)}.ed-map-tools{align-items:stretch}.ed-map-tools .ed-control{flex:1 1 150px}.ed-race-big{font-size:19px}.ed-race h3{font-size:21px}.ed-sectionline{align-items:start}.ed-sectionline span{max-width:140px;text-align:right}.ed-state-chip{padding:7px 9px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Geographic legibility v2: map is visible independently of polling data. */
+.ed-map-county{background-color:#e5edf0!important;background-image:radial-gradient(#b3c6cf55 .7px,transparent .7px);background-size:15px 15px;min-height:clamp(350px,50vw,650px)}
+.ed-map-county svg{height:clamp(380px,51vw,660px);background:transparent;overflow:hidden;display:block;touch-action:pan-y;user-select:none}
+.ed-map-county svg path.county{stroke:#fcfeff!important;stroke-width:1.25!important;stroke-linejoin:round;fill:#c1d1dc;vector-effect:non-scaling-stroke;cursor:pointer;pointer-events:visiblePainted}
+.ed-map-county svg path.county:is(:hover,:focus-visible){stroke:#112f46!important;stroke-width:3!important}
+.ed-map-county svg path.county.is-selected{stroke:#e4b250!important;stroke-width:3.9!important;paint-order:stroke fill}
+.ed-map-status{position:absolute;top:12px;left:12px;z-index:5;padding:6px 9px;border:1px solid #aec1cd;background:#fffef9ec;color:#315067;font-size:11px;font-weight:850;border-radius:3px;max-width:calc(100% - 24px);pointer-events:none}
+.ed-map-status.is-warning{background:#fff1ea;border-color:#d7aa9c;color:#81483e}
+.ed-inline-race{border:none;background:none;color:#2b688d;padding:0;text-decoration:underline;font-weight:800;cursor:pointer}
+.ed-inline-race:hover{color:#12354a}
+.ed-index{background:#f3f1e9}
+@media(max-width:600px){.ed-map-county{min-height:345px;padding:2px}.ed-map-county svg{height:clamp(340px,103vw,530px)}.ed-map-tools #countyZoomIn,.ed-map-tools #countyZoomOut,.ed-map-tools #countyZoomReset{min-width:65px;padding:8px 10px;flex:1 1 72px}.ed-map-status{top:7px;left:7px}}
