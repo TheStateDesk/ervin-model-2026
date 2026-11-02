@@ -1,0 +1,168 @@
+/* ERVIN MODEL — 2026 state election dossiers. No synthetic returns. */
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FIPS={AL:'01',AK:'02',AZ:'04',AR:'05',CA:'06',CO:'08',CT:'09',DE:'10',FL:'12',GA:'13',HI:'15',ID:'16',IL:'17',IN:'18',IA:'19',KS:'20',KY:'21',LA:'22',ME:'23',MD:'24',MA:'25',MI:'26',MN:'27',MS:'28',MO:'29',MT:'30',NE:'31',NV:'32',NH:'33',NJ:'34',NM:'35',NY:'36',NC:'37',ND:'38',OH:'39',OK:'40',OR:'41',PA:'42',RI:'44',SC:'45',SD:'46',TN:'47',TX:'48',UT:'49',VT:'50',VA:'51',WA:'53',WV:'54',WI:'55',WY:'56'};
+const sourceLabels={rcp:'RealClearPolling',ddhq:'Decision Desk HQ',win270:'270toWin',silver:'Silver Bulletin',average:'Wikipedia aggregator average'};
+const weights={rcp:.40,ddhq:.29,win270:.21,silver:.10};
+const params=new URLSearchParams(location.search);
+const desiredOffice=params.get('office')==='senate'?'senate':'governor';
+const desiredCode=(params.get('state')||'MI').toUpperCase().replace(/[^A-Z]/g,'').slice(0,2);
+const href=r=>'?office='+encodeURIComponent(r.office.toLowerCase())+'&state='+encodeURIComponent(r.code);
+let raceList=[],current=null,pollArchive={};
+function toDate(value){const d=Date.parse(/\b20\d{2}\b/.test(String(value))?String(value):String(value)+', 2026');return Number.isFinite(d)?d:null}
+function formatMargin(m,dem,rep){if(m==null||!Number.isFinite(m))return 'No comparable average';if(Math.abs(m)<.05)return 'Tied';return (m>0?dem:rep).split(' ').slice(-1)[0]+' +'+Math.abs(m).toFixed(1)}
+function senateAggregate(r){
+ const seen=new Set(),inputs=[];
+ for(const [key,weight] of Object.entries(weights)){
+   const q=r.sources?.[key];if(!q||q.proxy||!Number.isFinite(Number(q.value)))continue;
+   const id=String(q.publisherId||q.origin||key).trim().toLowerCase();
+   if(seen.has(id))continue;seen.add(id);
+   const time=toDate(q.date),age=time==null?21:Math.max(0,(Date.now()-time)/86400000);
+   inputs.push({key,value:+q.value,weight:weight*Math.max(.5,Math.exp(-age/35)),date:q.date,source:q.origin,url:q.url});
+ }
+ const total=inputs.reduce((n,x)=>n+x.weight,0);
+ if(!total){const q=r.sources?.rcp;return {raw:q&&Number.isFinite(+q.value)?+q.value:null,inputs:[],date:q?.date||'Unverified',origin:'RCP proxy fallback'};}
+ const raw=inputs.reduce((n,x)=>n+x.weight*x.value,0)/total;
+ const mostRecent=[...inputs].sort((a,b)=>(toDate(b.date)||0)-(toDate(a.date)||0))[0];
+ return {raw,inputs,date:mostRecent?.date||'Unknown',origin:'Ervin’s Take (dated source blend)'};
+}
+function renderNav(){
+ const selected=current;
+ $('raceJump').innerHTML=['senate','governor'].map(office=>{
+  const entries=raceList.filter(r=>r.office.toLowerCase()===office).sort((a,b)=>a.state.localeCompare(b.state));
+  return '<optgroup label="'+(office==='senate'?'Senate elections':'Governor elections')+'">'+entries.map(r=>'<option value="'+href(r)+'">'+esc(r.state)+' · '+esc(r.office)+'</option>').join('')+'</optgroup>';
+ }).join('');
+ $('raceJump').value=href(selected);
+ $('raceJump').onchange=()=>{location.href=$('raceJump').value};
+ const same=raceList.filter(r=>r.office===selected.office).sort((a,b)=>a.state.localeCompare(b.state));
+ $('raceList').innerHTML=same.map(r=>'<a href="'+href(r)+'" '+(r.code===selected.code?'aria-current="page"':'')+'><span><span class="race-code">'+esc(r.code)+'</span> '+esc(r.state)+'</span><b>'+esc(r.office==='Senate'?'SEN':'GOV')+'</b></a>').join('');
+}
+function renderHeader(r){
+ document.title=r.state+' '+r.office+' 2026 · Ervin Model';
+ $('raceTitle').textContent=r.state+' '+r.office+' election';
+ $('raceDeck').textContent=r.dem+' (D'+(r.party==='I'?'-aligned independent':'')+') vs '+r.rep+' (R) · November 3, 2026. Source-attributed polling, county geography, and documented election results.';
+ $('topKicker').textContent='2026 elections / '+r.office.toLowerCase()+' / '+r.code;
+ $('backLink').href=r.office==='Governor'?'../governors/':'../?race='+encodeURIComponent(r.code)+'#map-area';
+ $('backLink').textContent=r.office==='Governor'?'← All governor races':'← National Senate forecast';
+ $('mapTitle').textContent=r.state+' county boundaries';
+ $('matchupTitle').textContent=r.state+' '+r.office;
+ $('candidates').innerHTML='<div class="race-candidate"><small>Democratic'+(r.party==='I'?' aligned independent':' ticket')+'</small><strong>'+esc(r.dem)+'</strong><div class="race-party">'+(r.party==='I'?'Independent':'Democrat')+'</div></div><div class="race-candidate r"><small>Republican ticket</small><strong>'+esc(r.rep)+'</strong><div class="race-party">Republican</div></div>';
+}
+function renderForecast(r){
+ const isSen=r.office==='Senate';
+ const poll=isSen?senateAggregate(r):null;
+ const raw=isSen?poll.raw:r.poll?.margin??null;
+ const correction=isSen&&r.history_mode!=='not_comparable'?Number(r.correction)||0:0;
+ const adjusted=isSen&&raw!=null?raw-correction:raw;
+ const shown=isSen?adjusted:raw;
+ $('leadLabel').textContent=isSen?'Original Ervin adjusted Senate margin':'Published gubernatorial polling lead';
+ $('leadValue').textContent=formatMargin(shown,r.dem,r.rep);
+ $('leadValue').className=shown==null?'':shown>=0?'race-positive':'race-negative';
+ $('leadExplanation').textContent=isSen?(raw==null?'Current comparable polling input unavailable.':'Publisher blend '+(raw>=0?'D +':'R +')+Math.abs(raw).toFixed(1)+' − historical R-oriented correction '+correction.toFixed(1)+' = adjusted margin. Original Ervin scenario; not a validated win probability.'):(raw==null?'No verified numerical gubernatorial average in this snapshot.':'Published '+(raw>=0?'D +':'R +')+Math.abs(raw).toFixed(1)+' on Nov 1. This is an external polling average, NOT an Ervin gubernatorial forecast.');
+ const left=shown==null?50:Math.max(8,Math.min(92,50-shown*1.55));
+ $('repBar').style.width=left.toFixed(1)+'%';$('demBar').style.width=(100-left).toFixed(1)+'%';
+ $('modelStatus').textContent=isSen?'Original Ervin':'Source average';
+ $('pollCount').textContent=isSen?'See surveys':r.poll?.count??'Unavailable';
+ $('pollDate').textContent=isSen?poll.date:r.poll?.asOf||'Unavailable';
+ $('raceSources').innerHTML=(isSen?'<a href="../?race='+r.code+'#map-area">Edit Senate model assumptions ↗</a>':'<a href="../governors/">All gubernatorial races ↗</a>')+'<a href="'+esc(isSen?(r.sources?.rcp?.url||r.sourceUrl):r.poll?.url||'https://www.onpointpolitics.us/polls/governor')+'" target="_blank" rel="noopener noreferrer">Polling publisher ↗</a>';
+ $('certainty').textContent=isSen?'The Senate page applies state historical error under the Original Ervin assumptions. Its scenario bands have not been statistically validated as election probabilities, and independent candidacies may not be directly comparable.':'No Ervin historical governor calibration is published for this race. These are unadjusted third-party polling margins, not a projected percentage of the vote and not a chance of winning.';
+ $('qualifiers').textContent=(r.otherCandidates||r.notes||'Polls reflect sampled opinion; they do not measure verified ballots.')+(isSen?' Historical correction: '+(r.history_mode==='not_comparable'?'not transferred to this matchup':correction.toFixed(2)+' R-oriented points')+'.':' Polling source may include overlapping underlying surveys; no new Ervin governor historical adjustment has been calculated.');
+ $('methodology').textContent=isSen?'Senate display reproduces the dashboard’s Ervin’s Take four-publisher blend (RCP 40%, DDHQ 29%, 270toWin 21%, Silver 10%), filtering declared proxy entries, de-duplicating publisher identities, and applying its Original Ervin correction where comparable. The detailed survey archive is context and may overlap these averages.':'Governor margins are a separately attributed November 1, 2026 On Point publisher snapshot. A governor-specific Ervin prediction requires additional historical governor backtesting; Senate adjustments must not be recycled to manufacture one. Individual polls below are an independent audit list, not proof that the aggregator used each one.';
+ $('methodLinks').innerHTML=isSen?'<a href="../#methodology">Senate methodology ↗</a><a href="../research/CALIBRATION_2016_2024_REPORT.md">Historical audit ↗</a>':'<a href="https://www.nga.org/governors/elections/" target="_blank" rel="noopener noreferrer">Governor nominee roster ↗</a><a href="https://www.onpointpolitics.us/polls/governor" target="_blank" rel="noopener noreferrer">Poll board ↗</a>';
+ $('resultLinks').innerHTML='<a href="https://www.nass.org/can-I-vote/state-election-officials" target="_blank" rel="noopener noreferrer">State election offices ↗</a>'+(r.code==='MI'?'<a href="../michigan/election-night/">Michigan source audit ↗</a>':'');
+}
+function renderPolls(r){
+ let polls=[],rows=[];
+ if(r.office==='Senate'){
+  const avg=senateAggregate(r);
+  rows=Object.entries(r.sources||{}).filter(([key])=>sourceLabels[key]).map(([key,q])=>({name:sourceLabels[key],value:+q.value,source:q.origin,kind:q.proxy?'Reference/proxy — excluded from blend':'Publisher average; overlaps possible',date:q.date,url:q.url}));
+  polls=pollArchive[r.code]||[];
+  $('pollIntro').textContent='Publisher averages used for the Senate model are shown first. The separate recent-polls archive is listed below; a shared poll may appear inside several publishers’ aggregates.';
+ }else{
+  if(r.poll)rows=[{name:'On Point Politics polling average',value:r.poll.margin,kind:r.poll.count+' underlying public surveys; publisher own methodology',date:r.poll.asOf,source:r.poll.source,url:r.poll.url}];
+  polls=(r.recentPolls||[]).map(p=>({pollster:p.pollster,margin:p.margin,dates:p.date,sample:p.note,url:p.url,sourceKind:p.source}));
+  $('pollIntro').textContent='The governing polling figure is a third-party aggregate. Separately identified surveys below are supporting context, not a claim that this model incorporates those surveys independently.';
+ }
+ const avgHtml=rows.length?rows.map(q=>'<div class="race-row"><div><strong><a href="'+esc(q.url||'#')+'" target="_blank" rel="noopener noreferrer">'+esc(q.name)+'</a></strong><small>'+esc(q.kind||q.source||'')+' · '+esc(q.date||'date unavailable')+'</small></div><div class="race-number">'+esc(formatMargin(q.value,r.dem,r.rep))+'</div></div>').join(''):'<div class="race-note">No verified, comparable publisher-average input is available for this contest.</div>';
+ const sorted=[...polls].sort((a,b)=>(toDate(b.fieldEnd||b.publishedAt||b.dates)||0)-(toDate(a.fieldEnd||a.publishedAt||a.dates)||0)).slice(0,14);
+ const surveyHtml=sorted.length?sorted.map(p=>'<div class="race-row"><div><strong><a href="'+esc(p.url||'#')+'" target="_blank" rel="noopener noreferrer">'+esc(p.pollster)+'</a></strong><small>'+esc(p.dates||p.date||'Field date unverified')+' · '+esc(p.sample||'Sample not independently verified')+'</small><small>'+esc(p.sourceKind||'Individual poll; not independent of publisher averages')+'</small></div><div class="race-number">'+esc(formatMargin(+p.margin,r.dem,r.rep))+'</div></div>').join(''):'<div class="race-note">Individual polls are not archived for this race yet. The published source link above leads to any available poll-level information.</div>';
+ $('pollRows').innerHTML='<h3 style="margin:8px 0 2px">Published source averages</h3>'+avgHtml+'<h3 style="margin:17px 0 2px">Recent individual surveys ('+sorted.length+' shown)</h3>'+surveyHtml;
+ const plotted=sorted.filter(p=>Number.isFinite(+p.margin)).slice(0,10).reverse();
+ $('pollPlot').innerHTML='<b>Individual polls · non-R minus R</b>'+plotted.map(p=>{const val=+p.margin;return '<div class="bar '+(val<0?'r':'')+'" style="height:'+Math.max(8,Math.min(88,20+Math.abs(val)*3))+'%" title="'+esc(p.pollster+': '+formatMargin(val,r.dem,r.rep))+'"><span>'+esc((p.pollster||'').split(' ')[0].slice(0,6))+'</span></div>'}).join('')+(plotted.length?'':'<div class="race-muted" style="margin:auto">No individual survey chart available</div>');
+ $('pollLinks').innerHTML=r.office==='Governor'?'<a href="'+esc(r.poll?.url||'https://www.onpointpolitics.us/polls/governor')+'" target="_blank" rel="noopener noreferrer">See full published polling history ↗</a>':'<a href="../recent_polls.json" target="_blank" rel="noopener noreferrer">Recent survey archive (JSON) ↗</a>';
+}
+function svgNode(tag,props){const el=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(props||{}))el.setAttribute(k,v);return el}
+function fallbackMap(r,msg){
+ const geo=window.ERVIN_US_GEOGRAPHY?.states?.find(g=>g.code===r.code),svg=$('countyMap');
+ svg.replaceChildren();if(!geo){svg.append(svgNode('text',{x:200,y:200,fill:'#9aabbc'})).textContent='State map unavailable';$('countyCount').textContent='Map unavailable';return}
+ const outline=svgNode('path',{d:geo.d,class:'state-outline'});svg.append(outline);
+ const bbox=outline.getBBox(),m=Math.max(bbox.width,bbox.height)*.16;
+ svg.setAttribute('viewBox',[bbox.x-m,bbox.y-m,bbox.width+2*m,bbox.height+2*m].join(' '));
+ $('countyCount').textContent='State outline';
+ $('mapProvenance').textContent=msg+' Geographic outline: PublicaMundi/MappingAPI. County results are not connected.';
+ $('countyInspector').textContent=r.state+': statewide outline only. No 2026 local returns verified.';
+}
+function countyInteraction(path,name,fips){
+ const title=svgNode('title');title.textContent=name+' County — 2026 results unavailable';path.append(title);
+ path.setAttribute('tabindex','0');path.setAttribute('role','button');path.setAttribute('aria-label',name+' County: see data status');
+ const show=()=>{$('countyInspector').textContent=name+' County'+(fips?' · FIPS '+fips:'')+' — No authenticated 2026 '+current.office.toLowerCase()+' vote totals attached. Gray is unreported geography, not a partisan prediction.'};
+ path.addEventListener('click',show);path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show()}})
+}
+async function drawMap(r){
+ fallbackMap(r,'County geometry is being loaded.');
+ try{
+  if(typeof d3==='undefined'||typeof topojson==='undefined')throw Error('County mapping libraries unavailable');
+  const svg=$('countyMap'),features=[];
+  let projection,path;
+  if(r.code==='MI'){
+   const response=await fetch('../michigan/counties.geojson');if(!response.ok)throw Error('Michigan county geometry unavailable');
+   const data=await response.json();features.push(...data.features);
+   projection=d3.geoMercator().fitExtent([[24,20],[876,552]],data);
+   path=d3.geoPath(projection);
+  }else{
+   const response=await fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json');if(!response.ok)throw Error('Nationwide county atlas unavailable');
+   const atlas=await response.json(),fips=FIPS[r.code];if(!fips||!atlas.objects.counties)throw Error('No county atlas layer');
+   const list=topojson.feature(atlas,atlas.objects.counties).features;
+   for(const item of list)if(String(item.id).padStart(5,'0').startsWith(fips))features.push(item);
+   if(!features.length)throw Error('No county boundaries for '+r.code);
+   const geo={type:'FeatureCollection',features};
+   projection=d3.geoIdentity().fitExtent([[25,20],[875,550]],geo);
+   path=d3.geoPath(projection);
+  }
+  if(current!==r)return;
+  svg.setAttribute('viewBox','0 0 900 580');svg.replaceChildren();
+  for(const feature of features){
+   const d=path(feature);if(!d)continue;
+   const item=svgNode('path',{class:'county',d});
+   const name=String(feature.properties?.name||'County '+feature.id);
+   countyInteraction(item,name,String(feature.id||''));svg.append(item);
+  }
+  $('countyCount').textContent=features.length+' counties';
+  $('mapProvenance').textContent=(r.code==='MI'?'Michigan county GeoJSON hosted by the Ervin Model.':'U.S. county boundary geography: us-atlas / U.S. Census cartographic boundaries.')+' All areas are neutral because no verified 2026 county results are ingested for this election dossier.';
+  $('countyInspector').textContent='Select any outlined county. Boundaries are interactive, but 2026 votes and county forecasts are not available on this page.';
+ }catch(err){if(current===r)fallbackMap(r,'County outlines could not be loaded in this browser.');console.warn('County geometry fallback:',err.message)}
+}
+async function loadSenate(){
+ const response=await fetch('../index.html');if(!response.ok)throw Error('Senate source file unavailable');
+ const html=await response.text(),prefix='window.ERVIN_DATA = ',start=html.indexOf(prefix);
+ if(start<0)throw Error('Senate model embedded data absent');
+ const a=start+prefix.length,b=html.indexOf(';\n\n</script><script>',a);
+ if(b<0)throw Error('Senate model end marker absent');
+ const data=JSON.parse(html.slice(a,b));
+ return (data.states||[]).map(r=>({...r,office:'Senate'}));
+}
+async function start(){
+ try{
+  const [governors,senate,archive]=await Promise.all([
+   fetch('../governors/data.json').then(r=>{if(!r.ok)throw Error('Governor registry unavailable');return r.json()}),
+   loadSenate(),
+   fetch('../recent_polls.json').then(r=>r.ok?r.json():{}).catch(()=>({}))
+  ]);
+  raceList=[...senate,...governors.races];pollArchive=archive.polls||{};
+  current=raceList.find(r=>r.code===desiredCode&&r.office.toLowerCase()===desiredOffice) || raceList.find(r=>r.office.toLowerCase()===desiredOffice) || raceList[0];
+  renderHeader(current);renderNav();renderForecast(current);renderPolls(current);drawMap(current);
+ }catch(error){console.error('Election dossier data error',error);$('raceTitle').textContent='Election data unavailable';$('raceDeck').textContent='The published source files could not be loaded. Return to the race index or try reloading.';$('raceList').textContent='Data request unsuccessful.'}
+}
+start();
+})();
