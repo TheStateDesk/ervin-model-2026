@@ -28,9 +28,9 @@
   check(doc.documentElement.classList.contains('large-text')&&el('readingToggle').getAttribute('aria-pressed')==='true','Larger text setting functions');
   el('readingToggle').click();
   check(!doc.documentElement.classList.contains('large-text'),'Standard text size can be restored');
-  check(!!doc.querySelector('.editorial-hero .hero-primary-action')&&doc.querySelectorAll('.readers-guide .guide-link').length===3,'New visitors get a clear overview and three guided entry points');
+  check(!!doc.querySelector('.editorial-hero .hero-primary-action')&&doc.querySelectorAll('.readers-guide .guide-link').length===4,'New visitors get four guided entries including governors');
   check(!!doc.querySelector('#forecast-settings')&&!!doc.querySelector('.model-settings-help summary'),'Forecast source choices remain available with progressive explanations');
-  check(doc.querySelectorAll('#topNavigation a').length===5,'Desktop primary navigation exposes the five major page destinations');
+  check(doc.querySelectorAll('#topNavigation a').length===6,'Desktop primary navigation exposes six major page destinations including governors');
   check(!!el('mainContent')&&!!doc.querySelector('a.skip-to-content'),'Keyboard users can skip navigation and reach the main content');
   check(doc.querySelectorAll('#tabs button').length===6,'All six polling tabs rendered');
   check(source('take')?.getAttribute('aria-selected')==='true','Ervin Take default selected');
