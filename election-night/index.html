@@ -22,6 +22,11 @@
 <div id="raceList" class="race-list" role="list"><p>Loading race registry…</p></div>
 <div class="source-note">Source coverage is incomplete and varies by state. Missing live totals mean no attributed 2026 return was available through this provider, not that no votes have been cast. Current forecasts are not winners, and estimated margins are not probabilities. This desk never declares races called.</div>
 </section>
+<details class="national-panel" id="historicalErrorEvidence" style="margin:20px 0">
+<summary style="cursor:pointer;font-weight:750">Historical forecast error and uncertainty — underlying evidence</summary>
+<p class="source-note">From archived historical outcomes, not simulated votes: 61 Senate elections in 2018–2024 had a <strong>4.09-point average absolute polling-margin error</strong> and a <strong>9.28-point 90th-percentile absolute error</strong>. A separate comparison of 232 geometrically comparable House districts between 2022 and 2024 had <strong>4.22-point mean absolute error</strong> and <strong>8.35-point 90th-percentile absolute error</strong>. The House sample excluded 203 noncomparable districts; the historical House benchmark is not a validation of the full Ervin 2026 model.</p>
+<p class="source-note">These are errors in the Democratic-minus-Republican margin, not sampling margins of error, confidence intervals, race calls or indications that 90% of future races will fall within these bounds. Partial-count accuracy additionally depends on which precincts and vote modes report first. <a href="../research/election-night-historical-moe-2026.json">Inspect the empirical calculation</a> · <a href="../stats-for-nerds/#model">Explore sensitivity scenarios</a></p>
+</details>
 <footer class="night-footer">ERVIN MODEL · INDEPENDENT ELECTION RESEARCH <a href="../states/">State Desk</a> <a href="../research/calibration_events_2016_2024.json">Historical calibration sources</a></footer>
 </main>
 <script defer src="../scripts/calibration_engine.js"></script><script defer src="../scripts/governor-backtest.js"></script><script defer src="../scripts/statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2"></script><script defer src="../scripts/geo-engine.js?v=20261102-mi-shoreline-1"></script><script defer src="./returns-core.js?v=20261102-returns-v2"></script><script defer src="./night.js?v=20261102-returns-v2"></script>
