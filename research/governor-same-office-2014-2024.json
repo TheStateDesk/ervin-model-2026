@@ -2,7 +2,7 @@
   "asOf": "2026-11-02",
   "revision": "governor-same-office-biennial-2024-2",
   "method": "Only gubernatorial races within the same state: D-minus-R final published polling margin vs certified or archived D-minus-R election margin. No Senate or presidential elections contribute.",
-  "sourcesScope": "43 source-linked historical gubernatorial poll–result comparisons from 2014, 2018, 2020, 2022 and 2024, including biennial governors New Hampshire and Vermont. No federal elections. Quality of source type flagged.",
+  "sourcesScope": "44 source-linked historical gubernatorial poll–result comparisons from 2014, 2018, 2020, 2022 and 2024, including biennial governors New Hampshire and Vermont. No federal elections. Quality of source type flagged.",
   "signConvention": "Democratic share minus Republican share; third parties and undecided are not reassigned. Poll errors = published D–R polling margin minus actual D–R result.",
   "qualityWarning": "Aggregates and single polls are not equally reliable; single stale surveys excluded from preferred holdout. This archive is not exhaustive; unverified state-years remain unmodeled, never inferred.",
   "races": [
