@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-03T23:16:05.000583Z",
+  "checkedAt": "2026-11-03T23:19:30.185903Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
@@ -12,10 +12,10 @@
   "election": "2026-11-03",
   "eligibleRaces": 1,
   "errors": {
-    "KY-06": "fetch_HTTPError"
+    "KY-06": "no_valid_reported_votes"
   },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
-  "fetched": 0,
+  "fetched": 1,
   "polling": {
     "note": "No verified CivicAPI polling endpoint; election results never become a pre-election poll.",
     "state": "not_integrated"
@@ -23,16 +23,66 @@
   "provider": "civicAPI v2",
   "providerConnectivity": {
     "KY-06": {
-      "connected": false,
-      "detail": "HTTP Error 502: Bad Gateway",
-      "failure": "HTTPError",
-      "responseMs": 98
+      "candidateRows": 5,
+      "connected": true,
+      "fields": [
+        "election_name",
+        "election_type",
+        "election_scope",
+        "election_date",
+        "country",
+        "province",
+        "district",
+        "municipality",
+        "polls_open",
+        "polls_close",
+        "is_disputed",
+        "has_map",
+        "registered_voters",
+        "percent_reporting",
+        "test_data",
+        "last_updated",
+        "round",
+        "maps",
+        "candidates",
+        "region_results"
+      ],
+      "identityMatches": true,
+      "payloadType": "dict",
+      "positiveCandidateTotals": false,
+      "providerTimestamp": "2026-11-03T23:19:28.549Z",
+      "responseMs": 319
     },
     "MI-SENATE": {
-      "connected": false,
-      "detail": "HTTP Error 502: Bad Gateway",
-      "failure": "HTTPError",
-      "responseMs": 97
+      "candidateRows": 11,
+      "connected": true,
+      "fields": [
+        "election_name",
+        "election_type",
+        "election_scope",
+        "election_date",
+        "country",
+        "province",
+        "district",
+        "municipality",
+        "polls_open",
+        "polls_close",
+        "is_disputed",
+        "has_map",
+        "registered_voters",
+        "percent_reporting",
+        "test_data",
+        "last_updated",
+        "round",
+        "maps",
+        "candidates",
+        "region_results"
+      ],
+      "identityMatches": true,
+      "payloadType": "dict",
+      "positiveCandidateTotals": false,
+      "providerTimestamp": "2026-11-03T03:44:10.357Z",
+      "responseMs": 1012
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -41,12 +91,13 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 4002
+      "responseMs": 1409
     }
   },
   "publishedRaces": 0,
   "registeredRaces": 504,
   "targetRaces": 506,
+  "transientApiErrors": 0,
   "updatedRaces": 0,
   "version": 2
 }
