@@ -5,7 +5,7 @@ const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g
 const root='../', finalAt=Date.parse('2026-11-03T12:00:00-05:00'), read=async(p)=>{const r=await fetch(root+p,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};
 const margin=n=>!Number.isFinite(n)?'No numerical forecast':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
 const states=window.ERVIN_US_GEOGRAPHY?.states||[], stateName=Object.fromEntries(states.map(s=>[s.code,s.name]));
-let model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null;
+let paused=false,cycles=0,model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null;
 const isValid=n=>typeof n==='number'&&Number.isFinite(n), party=n=>!isValid(n)?'N':n>0?'D':n<0?'R':'T';
 function label(x){return x.state+' · '+x.office+(x.office==='House'?' '+x.id:'')}
 function races(){
@@ -16,7 +16,7 @@ function races(){
 function oddsText(r){
  if(!r.odds)return '';
  const d=window.ERVIN_ODDS.pct(r.odds.dem),rep=window.ERVIN_ODDS.pct(r.odds.rep);
- return '<div class="watch-chance"><div><b>'+d+'</b><small>'+esc(r.dem)+' · D/non-R</small></div><div><b>'+rep+'</b><small>'+esc(r.rep)+' · R</small></div></div>';
+ return '<div class="watch-chance"><div><b>'+d+'</b><small>'+esc(r.dem)+' · '+(r.office==='Senate'&&['MT','NE','SD'].includes(r.code)?'Ind.':'Dem.')+'</small></div><div><b>'+rep+'</b><small>'+esc(r.rep)+' · R</small></div></div>';
 }
 function watchFaces(r){
  return '<div class="watch-card__people watch-card__people--pair">'+[['D',r.dem],['R',r.rep]].map(([side,name])=>
@@ -33,32 +33,34 @@ function drawWatch(){
    '<div class="watch-card__margin">50 states</div>'+
    '<small>Updated published margins · forecast, not certified results</small>'+
    '<a class="watch-card__open" href="#electionDashboard">Open final projection maps</a></article>';
-  const source=r.kind==='poll'?'Publisher polling only · wider uncertainty assumption':'Governor/Senate historical-error-adjusted forecast';
+  const source=r.kind==='poll'?'Publisher polling average':'Ervin forecast ('+r.office+')';
   const href='../state/?state='+encodeURIComponent(r.code)+(r.office==='House'?'#stateHouse':'#stateOverview');
     return '<article class="watch-card"><div class="watch-card__overline">'+esc(r.office)+' · #'+(position+i+1)+' CLOSEST</div>'+
   '<a class="watch-card__name" href="'+href+'">'+esc(label(r))+'</a>'+
   watchFaces(r)+
   '<div class="watch-card__margin '+party(r.margin)+'">'+esc(margin(r.margin))+'</div>'+
-  oddsText(r)+'<small>'+esc(source)+' · illustrative, not calibrated odds</small>'+
-  '<a class="watch-card__open" href="'+href+'">Open state election desk</a></article>';
+  oddsText(r)+'<small>'+esc(source)+' · rough odds</small>'+
+  '<a class="watch-card__open" href="'+href+'">State details</a></article>';
  }).join('');
  $('watchPosition').textContent=(position+1)+'–'+(position+visible.length)+' of '+watched.length;
- $('watchPrev').disabled=position===0;$('watchNext').disabled=position+4>=watched.length;
+ $('watchPrev').disabled=false;$('watchNext').disabled=false;
  visible.forEach(r=>{if(r.id==='final-predictions')return;for(const [side,name] of [['D',r.dem],['R',r.rep]])window.ERVIN_PORTRAITS?.attach(panel.querySelector('[data-watch-photo="'+r.id+'-'+side+'"]'),name)});
 }
 function watchInit(){
  const panel=$('watchSection');if(!panel)return;
  const advance=direction=>{if(!watched.length)return;position=(position+direction+watched.length)%watched.length;drawWatch()};
- $('watchPrev')?.addEventListener('click',()=>{position=Math.max(0,position-4);drawWatch()});
- $('watchNext')?.addEventListener('click',()=>{position=position+4>=watched.length?0:position+4;drawWatch()});
+ $('watchPrev')?.addEventListener('click',()=>advance(-4));
+ $('watchNext')?.addEventListener('click',()=>advance(4));
  const reduced=window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+ if(reduced){paused=true;const b=$('watchPause');if(b){b.textContent='Rotation off';b.disabled=true}}
+ $('watchPause')?.addEventListener('click',()=>{paused=!paused;const b=$('watchPause');b.setAttribute('aria-pressed',String(paused));b.textContent=paused?'Resume rotation':'Pause rotation'});
  if(!reduced){
   let hover=false,focus=false;
   panel.addEventListener('mouseenter',()=>hover=true);
   panel.addEventListener('mouseleave',()=>hover=false);
   panel.addEventListener('focusin',()=>focus=true);
   panel.addEventListener('focusout',e=>focus=panel.contains(e.relatedTarget));
-  rotateTimer=setInterval(()=>{if(!document.hidden&&!hover&&!focus&&!live&&watched.length>4)advance(1)},7000);
+  rotateTimer=setInterval(()=>{if(!document.hidden&&!hover&&!focus&&!paused&&!live&&watched.length>4&&cycles<Math.ceil(watched.length/4)){advance(4);cycles++}},7000);
  }
 }
 async function loadModel(){
