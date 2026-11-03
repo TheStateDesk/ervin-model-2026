@@ -5,7 +5,7 @@ const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const states=window.ERVIN_US_GEOGRAPHY?.states||[];
 const KEY=()=>new URLSearchParams(location.search).get('state')?.toUpperCase()||'MI';
 const CLOSE=Date.parse('2026-11-03T20:00:00-05:00');
-let registry=[],forecast={},mode='forecast',live={},asOf='',provider='',snapshotChecked=false,lastCheck=0,renderToken=0;
+let roster={},registry=[],forecast={},mode='forecast',live={},asOf='',provider='',snapshotChecked=false,lastCheck=0,renderToken=0;
 const raceId=r=>r?.id||'';
 const normalize=(value)=>{const r=String(value||'').toUpperCase().match(/^([A-Z]{2})[- ]?(\d{1,2})$/);return r?r[1]+'-'+r[2].padStart(2,'0'):''};
 const number=v=>Number(v).toLocaleString('en-US');
@@ -36,7 +36,9 @@ function inspector(){
   html+='<p class="dx-empty">No attributed 2026 votes for '+escapeHTML(r.id)+' in the connected result feeds. Districts without counts remain gray; this is not a zero-vote report.</p>';
  }else{
   html+='<div class="dx-forecast-number">'+escapeHTML(fmtMargin(marginD(r)))+'</div><p class="dx-caption">'+escapeHTML(model?.modelRating||r.rating||'No verified rating')+' · Original Ervin House scenario. A forecast is not a vote count or a race call.</p>';
-  if(r.incumbent)html+='<div class="dx-candidate-list">'+candidateCard({name:r.incumbent,party:'',votes:null},'historical incumbent; consult 2026 candidate roster above')+'</div>';
+  const incumbent=roster?.[r.id]?.candidates?.find(c=>c.incumbent===true);
+  if(incumbent)html+='<div class="dx-candidate-list">'+candidateCard({name:incumbent.name,party:incumbent.party,votes:null},'2026 candidate roster · incumbent')+'</div>';
+  else if(r.incumbent)html+='<div class="dx-candidate-list">'+candidateCard({name:r.incumbent,party:'',votes:null},'historical officeholder · 2026 status not verified')+'</div>';
   html+='<p class="dx-caption">Candidate portraits and 2026 party affiliations appear only when supported by an attributed roster or results feed. Historical incumbency does not establish the 2026 candidate slate.</p>';
  }
  html+='<div class="dx-links"><a href="../election-night/?state='+encodeURIComponent(r.code)+'&race='+encodeURIComponent(r.id)+'#nationalBoard">Election Night results and sources</a><a href="https://civicapi.org/results" target="_blank" rel="noopener noreferrer">CivicAPI election coverage</a></div>';
@@ -96,8 +98,8 @@ async function checkResults(force=false){
 async function boot(){
  if(!$('districtMap')||!$('districtModeControls'))return;
  try{
-  const [a,b]=await Promise.all([json('../house/data.json'),json('../house/ervin-forecast-2026-11-02.json').catch(()=>({}))]);
-  registry=a.seats||[];forecast=b.races||{};
+  const [a,b,c]=await Promise.all([json('../house/data.json'),json('../house/ervin-forecast-2026-11-02.json').catch(()=>({})),json('../house/candidates-2026.json').catch(()=>({}))]);
+  registry=a.seats||[];forecast=b.races||{};roster=c.races||{};
  }catch(e){console.warn('District display supplements unavailable',e);return}
  document.querySelectorAll('[data-dx-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.dxMode;updatePaint();if(mode==='results')checkResults(true)}));
  $('districtSelect').addEventListener('change',()=>setTimeout(updatePaint,0));
