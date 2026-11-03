@@ -278,6 +278,9 @@ async function loadHouseMap(reload=false){
  try{
   const shape=await window.ERVIN_GEO.get(code,'districts',{refresh:reload});if(token!==houseToken)return;
   districtShape=shape;const map=$('districtMap');
+  $('districtMapStatus').setAttribute('title',
+    (Number(shape.boundaryYear)===2026?'Official Census 120th-Congress 2026 voting boundaries':'Unchanged congressional district reference boundaries')+
+    ' · '+(shape.sourceUrl||shape.source||'U.S. Census'));
   window.ERVIN_GEO.draw(map,shape,{kind:'districts',className:'geo-district',onSelect:(el,f)=>{const r=getDistrict(f.id);if(r)renderDistrictDetail(r);}});
    updateDistrictViewport();
   for(const path of map.querySelectorAll('path.geo-district')){
@@ -287,7 +290,14 @@ async function loadHouseMap(reload=false){
     path.addEventListener('pointerleave',()=>{if(selectedDistrict)$('districtMapStatus').textContent=selectedDistrict.id+' · select another district on the map';});
   }
   const requested=location.hash.match(/^#house-(\d{1,2})$/)?.[1];renderDistrictDetail(getDistrict(requested)||selectedDistrict&&getDistrict(selectedDistrict.district)||stateHouse[0]);
- }catch(e){$('districtMapStatus').classList.add('is-warning');$('districtMapStatus').textContent='District map unavailable — use district selector';$('districtDetail').textContent='Map failed: '+e.message+'. Choose a district by number above.';}
+ }catch(e){
+  if(token!==houseToken)return;
+  $('districtMapStatus').classList.add('is-warning');
+  $('districtMapStatus').textContent='Geographic map unavailable; the House race selector and sourced forecast remain accessible. '+e.message;
+  // Rendering the map is optional: losing a network-fed SVG must never erase
+  // candidate, polling, or historical source evidence for an entire state.
+  if(!selectedDistrict&&stateHouse.length)renderDistrictDetail(stateHouse[0]);
+ }
 }
 function listPolls(data,asOf,limit=12){
  const entries=Array.isArray(data)?data.filter(p=>Number.isFinite(+p.margin)):[];
