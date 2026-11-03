@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T07:56:59.585510+00:00",
+  "updatedAt": "2026-11-03T20:07:59.200468+00:00",
   "events": [
     {
       "at": "2026-10-26T14:19:02.019910+00:00",
@@ -321,6 +321,53 @@
       "kind": "page_modified",
       "newLinks": [],
       "sourceUrl": "https://oceana.mi.us/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-03T20:07:59.200468+00:00",
+      "county": "Livingston",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Statement of Votes Cast Report",
+          "url": "https://milivcounty.gov/wp-content/uploads/Statement-of-Votes-Cast-Report-11-3-2026.pdf"
+        }
+      ],
+      "sourceUrl": "https://milivcounty.gov/elections/election-results/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-03T20:07:59.200468+00:00",
+      "county": "Oceana",
+      "kind": "page_modified",
+      "newLinks": [],
+      "sourceUrl": "https://oceana.mi.us/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-03T20:07:59.200468+00:00",
+      "county": "Sanilac",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Election Results Learn More",
+          "url": "https://www.sanilaccounty.gov/2026NovElectResults.html"
+        }
+      ],
+      "sourceUrl": "https://www.sanilaccounty.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-03T20:07:59.200468+00:00",
+      "county": "Van Buren",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "See Live Election Results Click on this banner to see the live election results for the November 3rd election.",
+          "url": "https://app.enhancedvoting.com/results/public/van-buren-county-mi/elections/November2026"
+        }
+      ],
+      "sourceUrl": "https://www.vanburencountymi.gov/",
       "notice": "Source change is not an election return"
     }
   ]
