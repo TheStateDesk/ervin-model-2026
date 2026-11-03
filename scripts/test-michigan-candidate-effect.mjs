@@ -28,13 +28,15 @@ assert.equal(a.scientificValidation.pairedPolling.exactTwoSidedSignTestPAssuming
 assert(a.scientificValidation.primaryTransferValidation.includes('not calibrated'));
 assert(a.scientificValidation.surveyModeValidation.includes('INSUFFICIENT'));
 
-assert.equal(sen.adjustedMargin,-0.76,'Candidate context must alter the headline Ervin’s Take for Michigan');
+const miArchive=read('research/senate-workbench-data.json').states.find(x=>x.code==='MI');
+assert(miArchive&&Number.isFinite(miArchive.correction),'Michigan historical federal correction is missing');
 const w=sen.candidateStrength;
 assert.equal(w.pollingMarginD,10.2);assert.equal(w.actualMarginD,1);
 assert.equal(w.overstatementD,w.pollingMarginD-w.actualMarginD);
 assert.equal(w.retainedFraction,0.2);
 assert.equal(w.adjustmentD,-1.84);
-assert.equal(+(w.referenceMarginD+w.adjustmentD).toFixed(2),sen.adjustedMargin);
+assert.equal(w.referenceMarginD,+(sen.pollMargin-miArchive.correction).toFixed(2),'Refreshed federal polling and historical correction must determine the current candidate reference');
+assert.equal(+(w.referenceMarginD+w.adjustmentD).toFixed(2),sen.adjustedMargin,'The candidate adjustment must be applied exactly once');
 assert.equal(a.forecast.automaticAdditionalMuslimPenalty,0);
 assert.equal(a.forecast.candidateStrength.adjustmentD,w.adjustmentD);
 assert(a.forecast.candidateStrength.sourcePolling.startsWith('https://www.realclearpolling.com/'));
@@ -48,7 +50,7 @@ assert(science.status.startsWith('NOT VALIDATED'));
 assert.equal(science.primary.errorD,9.2);
 assert.equal(science.comparison.errorD,6.4);
 assert.equal(science.comparableHeldOutTests,0);
-assert.equal(science.finalMarginD,sen.adjustedMargin);
+assert.equal(science.finalMarginD,+(a.forecast.candidateStrength.referenceMarginD+w.adjustmentD).toFixed(2),'Archived sensitivity result must match the archived, not newly refreshed, poll baseline');
 assert(science.breakEvenWeight>.11&&science.breakEvenWeight<.12);
 for(const x of science.sensitivity){
  assert.equal(x.rcp,+(1.08-9.2*x.weight).toFixed(2));
@@ -58,7 +60,8 @@ assert(science.sensitivity.find(x=>x.weight===.1).rcp>0);
 assert(science.sensitivity.find(x=>x.weight===.2).rcp<0);
 assert(fs.readFileSync('research/CANDIDATE_STRENGTH_VALIDATION_2026.md','utf8').includes('not robust'));
 assert(fs.readFileSync('state/mi-candidate-audit.js','utf8').includes('Scientific status: NOT VALIDATED'));
-assert.equal(sen.pollMargin,4.31);
+assert(Number.isFinite(sen.pollMargin),'Fresh pre-election polling blend must remain numeric');
+assert.equal(w.archivedReferenceMarginD,a.forecast.candidateStrength.referenceMarginD,'Historical primary audit baseline stays immutable');
 assert(a.pairs.some(x=>x.mode.includes('Live operator')));
 assert(a.pairs.some(x=>x.mode.includes('Online')));
 assert(governorArchive.races.every(x=>x.year>=2018),'Independent governor 2014 cutoff changed');
