@@ -1,0 +1,43 @@
+name: Independently audit all 50-state county reporting sources
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/audit_national_county_sources.py
+      - election-night/county-sources.json
+      - .github/workflows/audit-national-county-sources.yml
+  schedule:
+    - cron: '19 */8 * * *'
+    - cron: '11,41 23 3 11 *'
+    - cron: '11,41 0-9 4 11 *'
+permissions:
+  contents: write
+concurrency:
+  group: county-source-health-2026
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check all 50 state and 3143 county-equivalent FIPS mappings
+        run: python3 -m unittest discover -s tests -p test_national_county_sources.py -v
+      - name: Independently probe official election authorities and county pages
+        run: python3 scripts/audit_national_county_sources.py
+      - name: Publish nuanced source readiness and gaps (no vote totals)
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add election-night/county-source-health.json
+          if git diff --staged --quiet; then echo "No source health changes"; exit 0; fi
+          git commit -m 'Independent county-source reachability audit across all 50 states'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
