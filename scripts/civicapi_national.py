@@ -228,7 +228,7 @@ def probe_provider(registry,now):
  status["statusEndpoint"]=safe_probe("status",BASE+"/status")
  for key in ("KY-06","MI-SENATE"):
   row=registry.get(key)
-  if row and re.fullmatch(r"\\d{1,12}",str(row.get("raceId",""))):
+  if row and re.fullmatch(r"\d{1,12}",str(row.get("raceId",""))):
    status[key]=safe_probe(key,BASE+"/race/"+str(row["raceId"]),key)
  status["networkReachable"]=any(v.get("connected") for v in status.values())
  return status
