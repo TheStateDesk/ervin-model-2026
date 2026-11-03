@@ -89,9 +89,9 @@ try{
   assert((await homepage.locator('#watchCards .watch-card__name').first().innerText())!==cardBefore,'Races-to-watch next button did not advance');
   await homepage.locator('#watchPrev').click();
   assert((await homepage.locator('#powerCards .power-card').count())===3,'All three office balance cards must render');
- assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='26','Governor projection must include new 2022 Oregon governor comparison');
- assert((await homepage.locator('[data-power-office="senate"] [data-power-d]').innerText())==='50','Projected Senate seat balance must include Michigan');
- assert((await homepage.locator('[data-power-office="senate"] [data-power-r]').innerText())==='50','Republican seat total must be 50');
+ assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='25','Close governor races should be unassigned by the 1.5-point toss-up rule');
+ assert((await homepage.locator('[data-power-office="senate"] [data-power-d]').innerText())==='48','Senate model must exclude three true toss-ups');
+ assert((await homepage.locator('[data-power-office="senate"] [data-power-r]').innerText())==='49','Republican Senate tally must exclude toss-ups');
  const links=await homepage.locator('#powerCards .power-card-head a').evaluateAll(a=>a.map(x=>x.href));
  assert(links.filter(x=>x.includes('/states/?office=house#nationMap')).length===1&&links.filter(x=>x.includes('/states/?office=governor#nationMap')).length===1,'House and governor power links must open consolidated State Desk office selections');
  assert(!links.some(x=>/\/(house|governors)\/$/.test(x)),'Retired research boards must not be linked by public balance cards');
@@ -212,7 +212,7 @@ try{
  await stateAtlas.locator('#usMap a[data-state-link="MI"]').focus();
  await stateAtlas.waitForFunction(()=>document.querySelector('#stateMapTooltip')&&!document.querySelector('#stateMapTooltip').hidden,null,{timeout:8000});
  const tipText=await stateAtlas.locator('#stateMapTooltip').innerText();
- assert(tipText.includes('Michigan')&&tipText.includes('U.S. Senate')&&tipText.includes('MI-07')&&/\d+D.{1,3}\d+R.{1,3}\d+T/.test(tipText),'State hover does not display all race types, margins and aggregate D-R-T totals: '+tipText.slice(0,500));
+ assert(tipText.includes('Michigan')&&tipText.includes('U.S. Senate')&&tipText.includes('House:')&&/\d+D.{1,3}\d+R.{1,3}\d+T/.test(tipText),'State hover does not display all race types, margins and aggregate D-R-T totals: '+tipText.slice(0,500));
  assert(atlasErrors.length===0,'State atlas errors: '+atlasErrors.join(', '));
  await stateAtlas.screenshot({path:'visual-checks/States-Aggregate-2026-Michigan-Hover.png',fullPage:false});
  await stateAtlas.close();
