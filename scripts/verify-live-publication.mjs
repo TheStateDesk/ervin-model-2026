@@ -150,6 +150,7 @@ try{
  const liveMISenate=(await michiganAudit.locator('#heroSenate').innerText()).trim();
  if(!/^(?:D|R) \+\d+\.\d|Even$/.test(liveMISenate))throw Error('LIVE MI SENATE MARGIN UNAVAILABLE');
  const cardDetails=await michiganAudit.locator('#stateRaceCards').innerText();
+ if(cardDetails.includes('so it should not be mistaken for a documented religion-related polling bias'))throw Error('Requested Michigan forecast text still visible on the published website');
  if(!cardDetails.includes(liveMISenate))throw Error('LIVE MI SENATE RACE CARD NOT UPDATED');
  await michiganAudit.locator('#miCandidateEffect').screenshot({path:'postdeploy-checks/Michigan-Candidate-Effect-Evidence-Mobile.png'});
  await michiganAudit.locator('#stateOverview').screenshot({path:'postdeploy-checks/Michigan-Candidate-Strength-Model.png'});
