@@ -53,6 +53,13 @@ function liveLead(code){
 function forecastTone(r){
  const races=officeRaces(r),valid=races.filter(x=>Number.isFinite(x.margin));
  if(!valid.length)return 'var(--ed-map-neutral)';
+ if(valid.length===1){
+  const m=valid[0].margin;
+  if(Math.abs(m)<1.5)return 'var(--ed-grade-toss)';
+  const party=m>0?'d':'r';
+  const tier=Math.abs(m)>=17?'solid':Math.abs(m)>=9?'likely':'lean';
+  return 'var(--ed-grade-'+tier+'-'+party+')';
+ }
  const counts={D:0,R:0,T:0};
  for(const x of valid){const k=rank(x.margin);if(k)counts[k]++}
  if(counts.T===valid.length)return 'var(--ed-map-even)';
