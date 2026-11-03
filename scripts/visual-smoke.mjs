@@ -107,7 +107,7 @@ try{
  await homepage.locator('[data-national-county-office="Governor"]').click();
  assert((await homepage.locator('[data-national-county-office="Governor"]').getAttribute('aria-pressed'))==='true','Governor national county projection toggle failed');
  await homepage.locator('[data-national-county-office="Senate"]').click();
- assert((await homepage.locator('#allCountyStatus').innerText()).includes('senate'),'County projection map did not return to Senate');
+ assert((await homepage.locator('#allCountyStatus').innerText()).includes('Senate'),'County projection map did not return to Senate');
  assert(homepageErrors.length===0,'State Desk browser errors: '+homepageErrors.join(', '));
  await homepage.locator('#watchSection').screenshot({path:'visual-checks/State-Desk-Races-To-Watch-Desktop.png'});
  await homepage.locator('#balanceOfPower').screenshot({path:'visual-checks/State-Desk-National-Balance-Desktop.png'});
