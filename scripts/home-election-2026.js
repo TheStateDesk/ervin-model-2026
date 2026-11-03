@@ -162,6 +162,16 @@ function paintCounties(){
  }
 }
 function chooseState(code){selected=code;drill()}
+function finalForecastHeadline(){
+ const b=modelBalance;if(!b)return 'Final Ervin forecast · 2026';
+ const h=b.house.D>=218?'Democrats favored to flip the House':b.house.R>=218?'Republicans favored to keep the House':'House control depends on the competitive districts';
+ const senate=b.senate;
+ const toss=model.senate.filter(r=>isValid(r.margin)&&Math.abs(r.margin)<1.5).map(r=>r.state||stateName[r.code]||r.code);
+ const names=toss.length===1?toss[0]:toss.length===2?toss.join(' and '):toss.length>2?toss.slice(0,-1).join(', ')+' and '+toss.at(-1):'the remaining toss-ups';
+ const d=senate.D+(senate.I||0);
+ const s=d>=51?'Democrats favored to win the Senate':senate.R>=50?'Republicans favored to keep the Senate':'Senate control comes down to '+names;
+ return h+'; '+s;
+}
 function updatePhase(){
  if(!model.senate.length)return;
  const now=Date.now(),preview=new URLSearchParams(location.search).get('preview');
@@ -179,7 +189,7 @@ function updatePhase(){
  for(const id of ['watchSection','balanceOfPower','stateDirectory','editorialNotes'])if($(id))$(id).hidden=false; // The States / Counties selector owns map visibility.
  const headline=document.querySelector('.ed-headline'),standfirst=document.querySelector('.ed-standfirst');
  const status=window.document.getElementById('finalPhaseStatus');
- if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished?'The final Ervin forecast for 2026':'Every state. One clear picture.';
+ if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished&&lockedAt?finalForecastHeadline():forecastPublished?'Election Day 2026: final forecast awaiting source lock':'Every state. One clear picture.';
  if(standfirst){
   const forecast=(modelBalance?.house?.D>=218?'Democrats lead in '+modelBalance.house.D+' House districts. ':modelBalance?'House control depends on the remaining competitive districts. ':'');
   standfirst.textContent=showResults?n+' contests have validated unofficial returns. Our pre-election forecast remains below for comparison; there are no projected winners presented as race calls.':forecastPublished?forecast+'Explore the locked Senate and governor estimates, county scenarios and the competitive House districts in the interactive map.':'Explore Senate and governor polling, House districts, county scenarios and attributed results in one state edition.';
