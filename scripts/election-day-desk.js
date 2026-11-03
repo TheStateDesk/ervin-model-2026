@@ -23,7 +23,6 @@ function build(){
  dashboard.insertAdjacentElement('afterend',stage);
  const hero=document.querySelector('.ed-headline');
  if(hero)hero.dataset.electionOriginal=hero.textContent;
- addEntry('The election-night desk opens five minutes before the first polls close. No 2026 vote totals appear here until accepted, source-attributed reports become available.',Date.now(),null,'Election-night desk',false);
  loadEnsemble();
 }
 function addEntry(message,time,url,source,prepend=true){
@@ -34,7 +33,7 @@ function addEntry(message,time,url,source,prepend=true){
  header.append(tm,make('span','',source||'Data desk'));
  const para=make('p','',message);item.append(header,para);
  const href=safeLink(url);
- if(href){const a=make('a','ed-commentary-link','View underlying vote source');a.href=href;a.target='_blank';a.rel='noopener noreferrer';item.append(a);}
+ if(href){const a=make('a','ed-commentary-link',href.includes('/elections/api/')?'About the attributed results feed':'View underlying vote source');a.href=href;a.target='_blank';a.rel='noopener noreferrer';item.append(a);}
  if(prepend)holder.prepend(item);else holder.append(item);
  while(holder.children.length>10)holder.lastElementChild.remove();
 }
@@ -82,6 +81,7 @@ function enter(){
  const stage=$('edResultsStage'),map=$('nationMap'),slot=$('edNightMapSlot'),dashboard=$('electionDashboard');
  if(!stage||!map||!slot)return;
  stage.hidden=false;dashboard.hidden=false;slot.append(map);document.documentElement.classList.add('ed-election-night');
+ addEntry('The national results desk opened at 5:55 p.m. Eastern, five minutes before the first polls closed. Unreported contests stay neutral until source-attributed unofficial returns arrive.',SWITCH_AT,null,'Election-night desk',false);
  const btns=document.querySelectorAll('[data-state-map-view="reported"]');
  let switched=false,attempts=0;
  const setReported=()=>{if(switched||!btns.length||attempts++>20)return;const btn=btns[0];if(btn.getAttribute('aria-pressed')==='true'){switched=true;return;}btn.click();switched=btn.getAttribute('aria-pressed')==='true';};
@@ -129,7 +129,7 @@ function flush(force){
  const fingerprint=r.id+':'+r.asOf+':'+r.total;
  if(posted.has(fingerprint))return;
  posted.add(fingerprint);lastPost=Date.now();
- addEntry(sentence,stamp,r.sourceURL,r.source||'Unofficial vote report');
+ addEntry(sentence,stamp,r.sourceURL||(/Open America/.test(r.source||'')?'https://openamerica.io/elections/api/':null),r.source||'Unofficial vote report');
 }
 function init(){
  build();pollPhase();

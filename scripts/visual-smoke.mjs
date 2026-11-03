@@ -324,6 +324,25 @@ try{
  assert(await mobile.locator('html').evaluate(e=>e.classList.contains('theme-dark')),'Dark toggle failed on mobile');
  await mobile.screenshot({path:'visual-checks/TX-mobile-dark.png',fullPage:true});
  await mobile.close();
+ // Confirm the five-minute-before-poll-close transition, using the public rehearsal flag.
+ const electionDesk=await browser.newPage({viewport:{width:1440,height:940}});
+ const deskErrors=[];electionDesk.on('pageerror',e=>deskErrors.push(e.message));
+ await electionDesk.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
+ await electionDesk.waitForFunction(()=>document.querySelector('#edResultsStage')?.hidden===false&&document.querySelector('#edNightMapSlot #nationMap')&&document.querySelector('#edSimSummary')?.textContent.includes('House')&&document.querySelector('[data-state-map-view="reported"]')?.getAttribute('aria-pressed')==='true',null,{timeout:32000});
+ assert((await electionDesk.locator('#edCommentaryEntries').innerText()).includes('5:55 p.m.'),'Election-night desk fails to introduce the scheduled handoff');
+ assert((await electionDesk.locator('#controlStatus').innerText()).includes('144,000'),'Public Senate control card must reference the final ensemble');
+ assert((await electionDesk.locator('#edCommentaryEntries .ed-commentary-item').count())===1,'Site invented an unofficial early vote commentary');
+ assert(deskErrors.length===0,'Election-night desk JavaScript errors: '+deskErrors.join(' | '));
+ await electionDesk.screenshot({path:'visual-checks/Election-Night-5-55-Desktop.png',fullPage:true});
+ await electionDesk.close();
+ const electionMobile=await browser.newPage({viewport:{width:390,height:844}});
+ await electionMobile.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
+ await electionMobile.waitForFunction(()=>document.querySelector('#edResultsStage')?.hidden===false&&document.querySelector('#edCommentaryTitle')?.textContent==='Live commentary',null,{timeout:32000});
+ const nightOverflow=await electionMobile.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+ assert(nightOverflow<6,'Election-night phone viewport overflow '+nightOverflow+'px');
+ await electionMobile.screenshot({path:'visual-checks/Election-Night-5-55-Mobile.png',fullPage:true});
+ await electionMobile.close();
+ console.log('ELECTION NIGHT 5:55 HANDOFF VISUAL PASS · verified-count-only commentary · zero fabricated votes');
  const directory=await browser.newPage({viewport:{width:1280,height:900}});
  await directory.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  assert(await directory.locator('#themeToggle').isVisible(),'State directory theme switch missing');
