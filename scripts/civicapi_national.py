@@ -203,6 +203,36 @@ def resolve_registry(expected,registry,now,limit_states=50):
      checks[key]+=": "+", ".join(str(x.get("election_name") or x.get("name") or "")[:68] for x in m[:4])
     if error:checks[key]="source_"+error
  return current_items,{"found":len(current_items),"lookups":len(pairs),"unmapped":sum(v!="mapped" for v in checks.values()),"statusSample":dict(list(checks.items())[:30])}
+def probe_provider(registry,now):
+ """Independent, low-volume network diagnostics. Never produces vote records."""
+ status={}
+ def safe_probe(label,url,key=None):
+  began=time.monotonic()
+  try:
+   payload=request(url,timeout=15)
+   outcome={"connected":True,"responseMs":round((time.monotonic()-began)*1000),
+     "payloadType":type(payload).__name__}
+   if isinstance(payload,dict):
+    outcome["fields"]=list(payload.keys())[:22]
+    if key:
+     who=payload.get("candidates")
+     outcome["candidateRows"]=len(who) if isinstance(who,list) else None
+     outcome["positiveCandidateTotals"]=bool(isinstance(who,list) and
+       any(type(c.get("votes"))==int and c["votes"]>0 for c in who if isinstance(c,dict)))
+     outcome["identityMatches"]=race_identity(key,registry[key].get("search",{}),payload)
+     outcome["providerTimestamp"]=str(payload.get("last_updated") or "")[:32]
+   return outcome
+  except Exception as error:
+   return {"connected":False,"failure":type(error).__name__,
+    "detail":str(error)[:160],"responseMs":round((time.monotonic()-began)*1000)}
+ status["statusEndpoint"]=safe_probe("status",BASE+"/status")
+ for key in ("KY-06","MI-SENATE"):
+  row=registry.get(key)
+  if row and re.fullmatch(r"\\d{1,12}",str(row.get("raceId",""))):
+   status[key]=safe_probe(key,BASE+"/race/"+str(row["raceId"]),key)
+ status["networkReachable"]=any(v.get("connected") for v in status.values())
+ return status
+
 def main():
  now=current()
  expected=targets()
@@ -219,6 +249,7 @@ def main():
  for row in registry.values():
   row["search"]={k:row.get("search",{}).get(k) for k in identity if row.get("search",{}).get(k) is not None}
  save(REG,{"version":1,"election":DAY,"races":registry})
+ provider_connectivity=probe_provider(registry,now)
  prior=load(OUT,{"version":1,"election":DAY,"races":{}})
  stored=prior.get("races",{}) if prior.get("election")==DAY else {}
  eligible={k:v for k,v in registry.items() if now>=after_close(k)}
@@ -250,9 +281,9 @@ def main():
  health={"version":2,"election":DAY,"provider":"civicAPI v2","checkedAt":iso(now),
   "targetRaces":len(expected),"registeredRaces":len(registry),"eligibleRaces":len(eligible),
   "fetched":fetched,"publishedRaces":len(stored),"updatedRaces":added,
-  "discovery":discovery,"errors":dict(list(issues.items())[:80]),
+  "discovery":discovery,"providerConnectivity":provider_connectivity,"errors":dict(list(issues.items())[:80]),
   "fallback":"Open America and state clerks only if CivicAPI has no valid current report for the contest",
   "polling":{"state":"not_integrated","note":"No verified CivicAPI polling endpoint; election results never become a pre-election poll."}}
  save(HEALTH,health)
- print(json.dumps({"targets":len(expected),"registered":len(registry),"eligible":len(eligible),"fetched":fetched,"published":len(stored),"new":added,"errors":dict(list(issues.items())[:8])}))
+ print(json.dumps({"targets":len(expected),"registered":len(registry),"eligible":len(eligible),"fetched":fetched,"published":len(stored),"new":added,"connection":provider_connectivity,"errors":dict(list(issues.items())[:8])}))
 if __name__=="__main__":main()
