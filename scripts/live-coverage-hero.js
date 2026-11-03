@@ -223,7 +223,7 @@ function sync(){
  lastSync=Date.now();
 }
 function activate(){
- if(active)return;
+ if(active||new URLSearchParams(location.search).get('view')==='final')return;
  active=true;
  const panel=$('edSimulationPanel');if(!panel)return;
  panel.classList.add('ed-coverage-live');panel.dataset.liveReady='false';panel.dataset.coverageMode='live';
@@ -245,7 +245,8 @@ function activate(){
   const p=document.createElement('span');p.className='ed-live-tag';p.textContent='● LIVE RESULTS DESK · UNOFFICIAL REPORTING';
   const s=document.createElement('span');s.textContent='LIVE SOURCE UPDATES';
   const link=document.createElement('a');link.href='../election-night/#nationalBoard';link.className='ed-sim-source';link.textContent='Full race-by-race results';
-  metadata.append(p,s,link);
+  const archived=document.createElement('a');archived.href='../states/?view=final#edSimulationPanel';archived.className='ed-sim-source';archived.textContent='Original final prediction';
+  metadata.append(p,s,link,archived);
  }
  const legend=panel.querySelector('.ed-sim-map-legend');
  if(legend)legend.innerHTML='<span><i class="ed-sim-legend-d"></i> Democratic vote leader</span><span><i class="ed-sim-legend-r"></i> Republican vote leader</span><span><i class="ed-live-legend-i"></i> Independent / other</span><span><i class="ed-sim-legend-n"></i> Awaiting accepted results</span>';
@@ -266,7 +267,8 @@ function init(){
  const panel=$('edSimulationPanel');if(panel)panel.addEventListener('click',e=>{
   if(active&&e.target.closest('#edSimTabs button'))panel.dataset.liveReady='false';
  },true);
- const preview=new URLSearchParams(location.search).get('preview');
+ const params=new URLSearchParams(location.search),preview=params.get('preview');
+ if(params.get('view')==='final')return;
  if(Date.now()>=SWITCH_AT||preview==='closing'||preview==='live')activate();
  else {
   const delay=SWITCH_AT-Date.now();
