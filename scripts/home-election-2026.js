@@ -176,7 +176,7 @@ function updatePhase(){
  $('dashboardTitle').textContent=showResults?'Election night · reported votes':'Final predictions · 2026';
  $('dashboardIntro').textContent=showResults?'Unofficial reported votes are labeled separately from the locked forecast. Counties without attributable vote reports remain neutral.':'The Ervin forecast is a pre-election estimate.';
  $('reportingBanner').textContent=showResults?('LIVE · UNOFFICIAL RETURNS · '+n+' contests with verified reported totals'+(latestFeedAt?' · feed as of '+new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'}):'')):'';
- for(const id of ['nationMap','watchSection','balanceOfPower','stateDirectory','editorialNotes','allCountyNation'])if($(id))$(id).hidden=false;
+ for(const id of ['watchSection','balanceOfPower','stateDirectory','editorialNotes'])if($(id))$(id).hidden=false; // The States / Counties selector owns map visibility.
  const headline=document.querySelector('.ed-headline'),standfirst=document.querySelector('.ed-standfirst');
  const status=window.document.getElementById('finalPhaseStatus');
  if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished?'The final Ervin forecast for 2026':'Every state. One clear picture.';
