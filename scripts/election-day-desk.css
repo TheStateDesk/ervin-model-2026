@@ -6,20 +6,9 @@
 .ed-sim-top,.ed-night-stage-head{display:flex;justify-content:space-between;gap:20px;align-items:start;flex-wrap:wrap}
 .ed-sim-top p{max-width:770px;line-height:1.55}
 .ed-sim-source,.ed-night-action{font:750 12px var(--ed-sans,Arial,sans-serif);color:var(--ed-blue);text-decoration:underline;text-underline-offset:4px}
-.ed-sim-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0 14px}
-.ed-sim-stat{border:1px solid var(--ed-rule);background:var(--ed-paper);padding:14px;min-width:0;display:flex;flex-direction:column;gap:7px}
-.ed-sim-stat small{font:750 10px var(--ed-sans,Arial,sans-serif);color:var(--ed-muted);letter-spacing:.06em;text-transform:uppercase}
-.ed-sim-stat strong{font:750 clamp(19px,2.1vw,28px)/1.15 var(--ed-sans,Arial,sans-serif);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .ed-sim-tabs{display:flex;gap:7px;margin:17px 0 8px}
 .ed-sim-tabs button{border:1px solid var(--ed-rule-dark,var(--ed-rule));background:var(--ed-white);color:var(--ed-ink);font:750 12px var(--ed-sans,Arial,sans-serif);padding:8px 15px;cursor:pointer}
 .ed-sim-tabs button[aria-pressed="true"]{background:var(--ed-blue);color:white}
-.ed-sim-chart{height:195px;display:flex;align-items:flex-end;gap:3px;padding:8px 7px 0;border-bottom:1px solid var(--ed-rule-dark,var(--ed-rule));background:linear-gradient(to top,var(--ed-paper),transparent)}
-.ed-sim-bin{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:4px}
-.ed-sim-fill{display:block;width:100%;background:var(--ed-blue);min-height:1px;border-radius:3px 3px 0 0}
-.ed-sim-bin.is-median .ed-sim-fill{background:var(--ed-gold,#a08a55)}
-.ed-sim-bin small{font:650 9px var(--ed-sans,Arial,sans-serif);color:var(--ed-muted);text-align:center;height:12px}
-.ed-sim-detail,.ed-sim-note{font:13px/1.6 var(--ed-sans,Arial,sans-serif);color:var(--ed-ink);margin:12px 0}
-.ed-sim-note{color:var(--ed-muted);border-top:1px solid var(--ed-rule);padding-top:12px}
 .ed-night-stage{border-top:5px solid var(--ed-gold);margin:15px 0 26px;color:var(--ed-ink)}
 .ed-night-stage-head{padding:20px 24px;background:var(--ed-white);border:1px solid var(--ed-rule);border-top:0}
 .ed-night-stage-head p{max-width:680px;color:var(--ed-muted);font-size:13px;line-height:1.5}
@@ -40,17 +29,14 @@
 html.ed-election-night .ed-night-stage{scroll-margin-top:20px}
 html.ed-election-night #electionDashboard{margin-bottom:0}
 @media(max-width:980px){.ed-night-columns{grid-template-columns:minmax(0,1fr)}.ed-commentary{position:static}.ed-commentary-entries{max-height:400px}}
-@media(max-width:650px){.ed-sim-panel,.ed-night-stage-head{padding:14px}.ed-sim-summary{grid-template-columns:1fr}.ed-sim-chart{height:170px;gap:2px}.ed-sim-bin small{font-size:7px}.ed-night-columns{gap:10px}.ed-commentary{padding:14px}}
 
 
 /* Paired office-specific forecast map + 144,000-draw distribution. */
 .ed-sim-panel{margin:16px 0 23px;padding:21px 23px;scroll-margin-top:16px}
 .ed-sim-panel .ed-sim-top h2{margin:5px 0 8px}
 .ed-sim-panel .ed-sim-top .ed-mini{margin:6px 0}
-.ed-sim-panel .ed-sim-summary{margin:16px 0 13px}
 .ed-sim-panel .ed-sim-tabs{margin:12px 0 15px}
 .ed-sim-visual-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:stretch}
-.ed-sim-map-pane,.ed-sim-hist-pane{min-width:0;border:1px solid var(--ed-rule);background:var(--ed-paper);padding:12px}
 .ed-sim-visual-heading{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .ed-sim-visual-heading h3{margin:0;color:var(--ed-ink);font:700 18px/1.25 var(--ed-serif,Georgia,serif)}
 .ed-sim-preview-flag{font:750 9px var(--ed-sans,Arial,sans-serif);letter-spacing:.085em;color:var(--ed-muted);white-space:nowrap}
@@ -71,11 +57,6 @@ html.ed-election-night #electionDashboard{margin-bottom:0}
 .ed-sim-legend-n{background:var(--atlas-n,#c3ced1)}
 .ed-sim-map-readout{color:var(--ed-ink);font:650 12px/1.5 var(--ed-sans,Arial,sans-serif);margin:6px 0;min-height:37px}
 .ed-sim-map-foot{font:11px/1.5 var(--ed-sans,Arial,sans-serif);color:var(--ed-muted);margin:9px 0 0}
-.ed-sim-hist-pane .ed-sim-chart{height:210px;background:var(--ed-white);border:1px solid var(--ed-rule);padding:8px 5px 3px}
-.ed-sim-hist-pane .ed-sim-detail{font:12px/1.6 var(--ed-sans,Arial,sans-serif);margin:12px 0 0}
-.ed-sim-panel .ed-sim-note{font-size:12px;margin:13px 0 0}
-@media(max-width:1060px){.ed-sim-visual-grid{grid-template-columns:minmax(0,1fr)}.ed-sim-hist-pane .ed-sim-chart{height:175px}}
-@media(max-width:650px){.ed-sim-panel{padding:13px;margin:12px 0 17px}.ed-sim-map-pane,.ed-sim-hist-pane{padding:9px}.ed-sim-visual-heading h3{font-size:16px}#edSimMap{min-height:170px}.ed-sim-hist-pane .ed-sim-chart{height:155px}.ed-sim-map-legend{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.ed-sim-proj-state{transition:none}}
 
 
@@ -133,16 +114,6 @@ html.ed-election-night #electionDashboard{margin-bottom:0}
 .ed-sim-legend-n{background:var(--ed-map-neutral,#b7c1c6)}
 .ed-final-map-pane .ed-sim-map-readout{font:650 13px/1.55 var(--ed-sans,Arial,sans-serif);min-height:22px;margin:8px 0}
 .ed-final-map-pane .ed-sim-map-foot{font-size:11px;line-height:1.55;margin:7px 0 0}
-.ed-final-distribution{padding:26px clamp(13px,2.3vw,34px) 25px;background:var(--ed-white)}
-.ed-final-distribution-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.ed-final-distribution-head h3{font:700 clamp(24px,2.9vw,37px)/1.1 var(--ed-serif,Georgia,serif);letter-spacing:-.035em;margin:6px 0 0}
-.ed-final-distribution .ed-final-chart-intro{max-width:960px;line-height:1.6;margin:11px 0;color:var(--ed-muted)}
-.ed-final-distribution .ed-sim-summary{margin:15px 0 13px}
-.ed-final-distribution .ed-sim-stat{background:var(--ed-paper)}
-.ed-final-distribution .ed-sim-hist-pane{padding:16px 18px;border:1px solid var(--ed-rule);background:var(--ed-paper)}
-.ed-final-distribution .ed-sim-hist-pane .ed-sim-chart{height:230px}
-.ed-final-distribution .ed-sim-hist-pane .ed-sim-detail{font-size:12px}
-.ed-final-distribution .ed-sim-note{font-size:11px;margin:17px 0 0}
 @media(max-width:950px){
  .ed-final-hero-row{grid-template-columns:minmax(0,1fr)}
  .ed-final-hero-aside{max-width:690px;display:grid;grid-template-columns:1fr 1fr;gap:9px 15px}
@@ -169,10 +140,5 @@ html.ed-election-night #electionDashboard{margin-bottom:0}
  .ed-sim-preview-flag{font-size:8px}
  #edSimMap{width:740px;min-width:740px;max-width:none;min-height:0;height:428px;aspect-ratio:1080/625}
  .ed-final-map-scroller{overflow-x:auto}
- .ed-final-distribution{padding:17px 11px}
- .ed-final-distribution-head h3{font-size:26px}
- .ed-final-distribution .ed-sim-summary{grid-template-columns:1fr}
- .ed-final-distribution .ed-sim-hist-pane{padding:10px}
- .ed-final-distribution .ed-sim-hist-pane .ed-sim-chart{height:170px}
 }
 @media(prefers-reduced-motion:reduce){.ed-sim-proj-state,.ed-sim-proj-district{transition:none}}
