@@ -32,7 +32,7 @@
   assert(/No (verified|confirmed) 2026|No verified|Official feed cannot be checked|Unavailable|unavailable|Unofficial|unofficial|reported votes/i.test(doc.getElementById('resultNotice').textContent),'No made-up election returns');
   await waitFor(()=>doc.querySelectorAll('#countyMap path').length>=1||/unavailable|not available/i.test(doc.querySelector('#countyMapStatus,#countyStatus')?.textContent||''));
   assert(doc.querySelectorAll('#countyMap path').length>=1||/unavailable|not available/i.test(doc.querySelector('#countyMapStatus,#countyStatus')?.textContent||''),'Geographic county map or accurate no-geometry warning renders');
-  assert(doc.getElementById('raceJump').querySelectorAll('option').length===488,'All 36 governor, 17 Senate and 435 House destinations available');
+  assert(doc.getElementById('raceJump').querySelectorAll('option').length===506,'All 36 governor, 35 Senate and 435 House destinations available');
   doc=await load('../elections/?office=senate&state=TX');
   await waitFor(()=>doc.getElementById('raceTitle')?.textContent.includes('Texas'),'Texas Senate dossier');
   assert(doc.getElementById('raceTitle').textContent.includes('Senate'),'Senate dossier opens');
