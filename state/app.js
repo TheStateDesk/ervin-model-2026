@@ -201,7 +201,12 @@ function initCountyControls(){
  window.addEventListener('ervin:county-results-update',e=>{if(e.detail.code===code&&countyShape)drawCounties()});
  $('countySearch').oninput=e=>{const input=e.target.value.trim().toLowerCase().replace(/ county$/,'');const hit=cachedCountyRows.find(x=>x.name.toLowerCase()===input);if(hit){selectedCounty=hit.id;drawCounties();const path=$('countyMap').querySelector('path[data-fips="'+hit.id+'"]');if(path){const box=path.getBBox?.();if(box&&box.width>0&&box.height>0){mapZoom=Math.min(6,Math.max(1,Math.min(900/Math.max(box.width*4,15),580/Math.max(box.height*4,15))));mapCenter={x:box.x+box.width/2,y:box.y+box.height/2};updateCountyViewport();}}}};
 }
-function toneRating(r){const t=String(getModel(r)?.modelRating||r?.rating||'').toLowerCase();return t.includes('tossup')?'#b2a080':/\b(?:tilt|lean|likely|solid) d\b/.test(t)?'#4b89ac':/\b(?:tilt|lean|likely|solid) r\b/.test(t)?'#b25e6e':'#b8c7cd';}
+function toneRating(r){
+ const c=String(getModel(r)?.modelRating||r?.rating||'').toLowerCase();
+ const grade=/^(solid|likely|lean|tilt) ([dr])$/.exec(c);
+ if(!grade)return c==='tossup'?'var(--ed-grade-toss)':'var(--ed-map-neutral,#9cacb8)';
+ return 'var(--ed-grade-'+(grade[1]==='tilt'?'lean':grade[1])+'-'+grade[2]+')';
+}
 function getModel(r){return houseScenario.races?.[r?.id]||null;}
 const modeledMargin=m=>Number.isFinite(m)?(Math.abs(m)>=49.999?(m>0?'D +50 or more':'R +50 or more')+' (model cap)':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)):'Not estimated';
 const formatHouseYear=(v,y)=>!v?'No comparable '+y+' return available':y+' House: D '+fmt(v.D)+' · R '+fmt(v.R)+' · '+modeledMargin(v.margin)+(v.contested?'':' · uncontested/limited');
@@ -226,12 +231,15 @@ function renderDistrictDetail(r){
  const historicalDetail=model?.changed2026Map?'Redrawn boundaries: historic 2022→24 district errors do not apply':comparableHistorical?'90th percentile absolute historical 2022→24 margin error · '+historicalHouse.n+' comparable districts · not 2026 MOE':'Insufficient comparable archived historical results';
  $('districtTitle').textContent=r.state+' District '+Number(r.district);
  const source='<div class="ed-kicker">2026 HOUSE ELECTION · '+esc(r.id)+'</div>';
- const top=model?'<div class="ed-house-grade"><div><small>'+(model.changed2026Map?'2026 MAP · SOURCE RATING':'ERVIN HOUSE · PROVISIONAL MODEL')+'</small><strong>'+esc(model.modelRating)+'</strong><span>'+(model.changed2026Map?'Numerical 2026 House margin withheld — prior boundaries are incompatible':('Modeled margin: '+esc(modeledMargin(model.marginD))))+'</span></div><div><small>HISTORICAL ERROR EVIDENCE</small><strong>'+esc(historicalDisplay)+'</strong><span>'+esc(historicalDetail)+'</span></div></div>'+
- '<div class="ed-house-minigrid"><div><small>Comparable poll rows used</small><strong>'+fmt(model.pollEvidence)+'</strong></div><div><small>Published poll count in index</small><strong>'+fmt(model.publishedSurveyCount)+'</strong></div><div><small>Independent Cook entry</small><strong>'+esc(model.sourceRating||'Not stored')+'</strong></div></div>'+
- '<p class="ed-mini">'+esc(model.methodNote)+' · Independent 2026 scenario sensitivity ±'+esc(model.uncertaintySensitivity.toFixed(0))+' D−R points (heuristic, not calibrated).</p>'+
- (model.changed2026Map?'<p class="ed-notice">2026 redistricting: numerical House margins are withheld; the displayed Cook rating (where available) is qualitative and sourced from the current race. The district polygon is still 2022 reference geometry, not the correct 2026 voting boundary.</p>':'')+
- (model.changed2026Map?'<p class="ed-notice">The 2022/2024 district-number votes are from previous map lines and cannot reliably estimate the 2026 district. No old-map numerical forecast is displayed. '+(model.sourceRating?'Cook qualitative rating: '+esc(model.sourceRating)+'.':'A current-map public rating has not been stored.')+'</p>':'<details class="ed-model-math"><summary>See exactly how this rating was calculated</summary><div class="ed-model-calculation"><p>'+esc(formatHouseYear(model.historic?.['2022'],'2022'))+'</p><p>'+esc(formatHouseYear(model.historic?.['2024'],'2024'))+'</p><p>National House generic ballot: <strong>'+esc(modeledMargin(model.generic2026D))+'</strong> · House-only office calibration (no statewide Senate error transfer): '+esc(model.stateErrorPartialCorrection.toFixed(2))+' points.</p><p>History-plus-national scenario: <strong>'+esc(modeledMargin(model.fundamentalsD))+'</strong> · Compatible district survey blend: <strong>'+esc(modeledMargin(model.pollMeanD))+'</strong> · District polling weight: <strong>'+esc(Math.round(model.pollWeight*100))+'%</strong> · Combined Ervin estimate: <strong>'+esc(modeledMargin(model.marginD))+'</strong>.</p><p>The sensitivity is a scenario range, not a statistical confidence interval or a validated win probability. Different election systems, uncontested historical races, changes in district lines and poll sponsors can significantly change it.</p></div></details>'):
- '<div class="ed-stat" style="margin:14px 0"><small>Current rating</small><strong>'+esc(r.rating||'Not available')+'</strong></div><p class="ed-notice">The independent 435-district model file is unavailable. This page is showing only its older poll and rating references; do not interpret missing results as a model forecast.</p>';
+ const currentPres=model?.presidentialBaseline||{};
+ const presInfo=model?'<p class="ed-mini"><strong>District presidential voting on the current congressional boundaries:</strong> 2024 '+esc(modeledMargin(currentPres.pres2024MarginD))+'; 2020 '+esc(modeledMargin(currentPres.pres2020MarginD))+'; national-centered district lean '+esc(modeledMargin(currentPres.districtLeanD))+'. '+(currentPres.estimatedVoteAllocation?'Historical precinct/block votes RECONSTRUCTED for the 2026 district. These are model-derived allocations, not certified vote totals.':'Historical election voting normalized to currently comparable congressional boundaries.')+' <a href="'+safeURL(currentPres.sourceUrl||'https://www.census.gov')+'" target="_blank" rel="noopener noreferrer">Source and methods</a>.</p>':'';
+ const top=model?
+ '<div class="ed-house-grade"><div><small>ERVIN HOUSE · 2026 DISTRICT MODEL</small><strong>'+esc(model.modelRating)+'</strong><span>'+(Number.isFinite(model.marginD)?'Modeled D−R margin: '+esc(modeledMargin(model.marginD)):'Special candidate ballot · qualitative '+esc(model.modelRating))+'</span></div><div><small>HISTORICAL ERROR EVIDENCE</small><strong>±'+esc(model.uncertaintySensitivity.toFixed(1))+' pts</strong><span>Scenario sensitivity, not a calibrated confidence interval; +8 points of uncertainty for reconstructed redrawn-district presidential votes</span></div></div>'+
+ '<div class="ed-house-minigrid"><div><small>Comparable poll rows used</small><strong>'+fmt(model.pollEvidence)+'</strong></div><div><small>Published poll count in index</small><strong>'+fmt(model.publishedSurveyCount)+'</strong></div><div><small>Independent Cook rating</small><strong>'+esc(model.sourceRating||'Not stored')+'</strong></div></div>'+
+ '<p class="ed-mini">'+esc(model.methodNote)+'</p>'+presInfo+
+ (model.changed2026Map?'<p class="ed-notice">Redrawn district: this map uses official 2026 Census congressional boundaries. Its historical presidential vote shares were reconstructed for the new electorate; do not interpret older House votes under this district number as comparable results. The extra modeling uncertainty is shown above.</p>':'')+
+ (Number.isFinite(model.marginD)?'<details class="ed-model-math"><summary>How the House estimate was calculated</summary><div class="ed-model-calculation"><p>House-only district presidential lean: <strong>'+esc(modeledMargin(currentPres.districtLeanD))+'</strong> · National congressional generic ballot <strong>'+esc(modeledMargin(model.generic2026D))+'</strong> · Historical presidential coefficient <strong>'+esc(model.historicalModelCoefficient)+'</strong>.</p><p>Historically tested repeat-candidate House correction: <strong>'+esc(modeledMargin(model.candidateEffectD||0))+'</strong> · '+esc(model.candidateSource||'none')+'. No statewide Senate/governor polling-error term.</p><p>House-only baseline <strong>'+esc(modeledMargin(model.fundamentalsD))+'</strong> · Comparable candidate-matched survey mean <strong>'+esc(modeledMargin(model.pollMeanD))+'</strong> · Survey blending weight <strong>'+esc(Math.round(model.pollWeight*100))+'%</strong> · Final model <strong>'+esc(modeledMargin(model.marginD))+'</strong>.</p><p>Retrospective House history for context (NOT a basis for redrawn-seat numbers): '+esc(formatHouseYear(model.historic?.['2022'],'2022'))+'; '+esc(formatHouseYear(model.historic?.['2024'],'2024'))+'.</p><p><a href="../research/house-presidential-backtest-2026.json">House-only chronological backtest: 2018/22 development, 2024 holdout</a>. Sensitivity is not a calibrated election probability.</p></div></details>':'<p class="ed-notice">Candidate-ballot exception: a two-party numerical scenario would be misleading here. The source Cook rating is displayed instead; district presidential votes are contextual history only.</p>'):
+ '<div class="ed-stat" style="margin:14px 0"><small>Current rating</small><strong>'+esc(r.rating||'Not available')+'</strong></div><p class="ed-notice">The independent House source archive is unavailable; do not interpret missing model values as results.</p>';
  const rows=model?.surveys||[];
  const questions=houseQuestions.races?.[r.id]||[];
  const additional=questions.length?'<details class="ed-model-math ed-question-archive"><summary>Browse '+fmt(questions.length)+' additional public poll questions (with candidate names and sample sizes)</summary><p class="ed-mini">Additional archived matchup questions—not independent surveys and not inputs to the numerical Ervin model. The same poll ID may contain several hypothetical candidate matchups. Some questions are from 2025 or feature independent candidates, so do not treat each as an election-day candidate comparison.</p><div class="ed-house-surveys">'+questions.map(q=>'<article class="ed-coverage"><div><strong>'+esc(q.pollster||'Poll')+'</strong><small>'+esc(q.date||'Date unknown')+' · '+(Number.isFinite(q.sampleSize)?fmt(q.sampleSize)+' respondents · ':'')+'poll ID '+esc(q.pollId||'not provided')+'</small><small>'+esc(q.demCandidate||'D')+' '+esc(Number.isFinite(q.dem)?q.dem+'%':'—')+' / '+esc(q.repCandidate||'R')+' '+esc(Number.isFinite(q.rep)?q.rep+'%':'—')+(q.otherCandidate?' / '+esc(q.otherCandidate)+' '+esc(Number.isFinite(q.otherShare)?q.otherShare+'%':'—'):'')+'</small><small>Archived question · not separately counted in Ervin model</small></div><a href="'+safeURL(q.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Question data</a></article>').join('')+'</div><p class="ed-mini"><a href="'+safeURL(houseQuestions.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Source dataset and compilation context</a> · Multiple rows can refer to one underlying poll. Refer to the original poll release for questionnaire and methodology.</p></details>':'';
@@ -270,6 +278,9 @@ async function loadHouseMap(reload=false){
  try{
   const shape=await window.ERVIN_GEO.get(code,'districts',{refresh:reload});if(token!==houseToken)return;
   districtShape=shape;const map=$('districtMap');
+  $('districtMapStatus').setAttribute('title',
+    (Number(shape.boundaryYear)===2026?'Official Census 120th-Congress 2026 voting boundaries':'Unchanged congressional district reference boundaries')+
+    ' · '+(shape.sourceUrl||shape.source||'U.S. Census'));
   window.ERVIN_GEO.draw(map,shape,{kind:'districts',className:'geo-district',onSelect:(el,f)=>{const r=getDistrict(f.id);if(r)renderDistrictDetail(r);}});
    updateDistrictViewport();
   for(const path of map.querySelectorAll('path.geo-district')){
@@ -279,7 +290,14 @@ async function loadHouseMap(reload=false){
     path.addEventListener('pointerleave',()=>{if(selectedDistrict)$('districtMapStatus').textContent=selectedDistrict.id+' · select another district on the map';});
   }
   const requested=location.hash.match(/^#house-(\d{1,2})$/)?.[1];renderDistrictDetail(getDistrict(requested)||selectedDistrict&&getDistrict(selectedDistrict.district)||stateHouse[0]);
- }catch(e){$('districtMapStatus').classList.add('is-warning');$('districtMapStatus').textContent='District map unavailable — use district selector';$('districtDetail').textContent='Map failed: '+e.message+'. Choose a district by number above.';}
+ }catch(e){
+  if(token!==houseToken)return;
+  $('districtMapStatus').classList.add('is-warning');
+  $('districtMapStatus').textContent='Geographic map unavailable; the House race selector and sourced forecast remain accessible. '+e.message;
+  // Rendering the map is optional: losing a network-fed SVG must never erase
+  // candidate, polling, or historical source evidence for an entire state.
+  if(!selectedDistrict&&stateHouse.length)renderDistrictDetail(stateHouse[0]);
+ }
 }
 function listPolls(data,asOf,limit=12){
  const entries=Array.isArray(data)?data.filter(p=>Number.isFinite(+p.margin)):[];
@@ -343,6 +361,8 @@ async function loadReturns(force=false){
   if(!core)throw Error('Result validator not initialized');
   const urls=['../civicapi/races.json',...['Senate','Governor','House'].map(o=>'https://openamerica.io/elections/results.json?year=2026&office='+o)];
   const response=await Promise.allSettled(urls.map(async u=>{
+   if(u.startsWith('https://openamerica.io/')&&window.ERVIN_EXTERNAL_FEED)
+     return window.ERVIN_EXTERNAL_FEED.json(u,{timeout:11000});
    const v=await fetch(u,{cache:'no-store',signal:ctrl.signal});
    if(!v.ok)throw Error(u+' HTTP '+v.status);
    return v.json();
@@ -366,7 +386,7 @@ async function loadReturns(force=false){
   const civicCount=inState.filter(r=>r.source.includes('CivicAPI')).length;
   $('resultStatus').className='ed-inline-status'+(inState.length?' live':'');
   $('resultStatus').textContent=inState.length?inState.length+' contests with attributed returns · '+civicCount+' from CivicAPI':'Awaiting attributed current-election results';
-  $('resultUpdated').textContent='Checked '+new Date().toLocaleTimeString()+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
+  $('resultUpdated').textContent='Checked '+(window.ERVIN_AP_DATE?.timestamp(Date.now())||new Date().toLocaleTimeString())+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
  }catch(e){
   $('resultStatus').className='ed-inline-status stale';
   $('resultStatus').textContent='Source audit unavailable: '+String(e.message||e).slice(0,90);
@@ -398,7 +418,7 @@ async function start(){
   const [h,g]=await Promise.all([fetchJSON('../house/data.json'),fetchJSON('../governors/data.json')]);
   house=h.seats||[];governors=g.races||[];
   prepareSelection();initCountyControls();$('houseMapReload').onclick=()=>loadHouseMap(true);$('reloadResults').onclick=()=>loadReturns(true);
-  fetchJSON('../refresh_log.json').then(log=>{if(log.checkedAt){sourceTimeLabel='Updated '+new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});$('headerDate').textContent=sourceTimeLabel;$('editionDate').textContent=sourceTimeLabel}}).catch(()=>{$('headerDate').textContent='Source update time unavailable'});
+  fetchJSON('../refresh_log.json').then(log=>{if(log.checkedAt){sourceTimeLabel='Updated '+(window.ERVIN_AP_DATE?.timestamp(log.checkedAt)||new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}));$('headerDate').textContent=sourceTimeLabel;$('editionDate').textContent=sourceTimeLabel}}).catch(()=>{$('headerDate').textContent='Source update time unavailable'});
   const optionalFiles=[
    fetchJSON('../counties-watch/forecast-baselines.json'),
    window.ERVIN_SCENARIOS.load(),

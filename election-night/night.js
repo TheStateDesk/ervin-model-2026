@@ -13,7 +13,7 @@ const countyOfficial=new Map(),countyAuto=new Map(),precinctRows=new Map(),count
 const tabular=n=>Number.isFinite(n)?fmt(n):'—';
 const safeURL=v=>{try{const u=new URL(v,location.href);return u.protocol==='https:'?u.href:'#'}catch{return '#'}};
 function isVote(n){return Number.isSafeInteger(n)&&n>=0&&n<12000000}
-function date(t){if(!t)return 'Not published';const n=Date.parse(t);return Number.isFinite(n)?new Date(n).toLocaleString('en-US',{timeZone:'America/Detroit',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'Invalid timestamp'}
+function date(t){if(!t)return 'Not published';const n=Date.parse(t);return Number.isFinite(n)?(window.ERVIN_AP_DATE?.timestamp(t)||new Date(n).toLocaleString('en-US',{timeZone:'America/Detroit',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})):'Invalid timestamp'}
 const upcoming=()=>Date.now()<closeEastern;
 const fetchJSON=async(path,timeout=12000)=>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);try{let r=await fetch(path,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error(path+' HTTP '+r.status);return r.json()}finally{clearTimeout(timer)}};
 function checkCountyFeed(payload,kind){
@@ -121,7 +121,8 @@ async function refreshNational(){
   if(!core){$('feedStatus').textContent='Results validator unavailable; no unverified votes displayed';return}
   const offices=['Senate','Governor','House'];
   const urls=['../civicapi/races.json','../civicapi/discovery.json',...offices.map(x=>resultAPI+x)];
-  const responses=await Promise.allSettled(urls.map(x=>fetchJSON(x,13000)));
+  const responses=await Promise.allSettled(urls.map(x=>x.startsWith('https://openamerica.io/')
+   &&window.ERVIN_EXTERNAL_FEED?window.ERVIN_EXTERNAL_FEED.json(x,{timeout:13000}):fetchJSON(x,13000)));
   const civic=responses[0].status==='fulfilled'?core.civic(responses[0].value):{};
   const metadata=responses[1].status==='fulfilled'?responses[1].value:null;
   const fallback={};
@@ -147,7 +148,7 @@ async function refreshNational(){
     Date.now()<Date.parse('2026-11-03T18:00:00-05:00')?'CivicAPI primary feed ready; awaiting poll closings':'No verified 2026 vote totals in connected result feeds';
   const asOf=Object.values(merged.races).map(x=>x.asOf).sort().at(-1);
   $('feedAsOf').textContent=asOf?date(asOf):'Awaiting results';
-  $('lastRefresh').textContent='Checked '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
+  $('lastRefresh').textContent='Checked '+(window.ERVIN_AP_DATE?.timestamp(Date.now())||new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'}));
   const status=$('civicReportingStatus');
   if(status){
    const checked=Date.parse(metadata?.checkedAt||'');

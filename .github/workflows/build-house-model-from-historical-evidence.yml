@@ -1,0 +1,74 @@
+name: Rebuild current-map 2026 House forecasts from sourced evidence
+on:
+  push:
+    branches: [2026-house-geography-presidential-backtest-design-20261103]
+    paths:
+      - 'scripts/build-house-ervin.py'
+      - '.github/workflows/build-house-model-from-historical-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: current-map-house-2026-model
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install source HTML parser
+        run: python3 -m pip install beautifulsoup4
+      - name: Python syntax and immutable historical backtest checks
+        run: |
+          python3 -m py_compile scripts/build-house-ervin.py scripts/house_historical_backtest.py
+          python3 - <<'PY'
+          import json
+          p=json.load(open('research/house-presidential-backtest-2026.json'))
+          assert p['training']['n']>=700 and p['finalHoldout']['n']>=300
+          assert p['forward2026']['alpha']==p['alpha'] and p['candidateRetentionRho'] == 0.35
+          PY
+      - name: Rebuild all districts from new-map presidential voting, source-backed polling, and validated returning incumbents
+        run: python3 scripts/build-house-ervin.py
+      - name: Model output stress check
+        run: |
+          python3 - <<'PY'
+          import json, math
+          d=json.load(open('house/ervin-forecast-2026-11-02.json'))
+          r=d['races']
+          assert len(r)==435 and d['summary']['modeledCount']==433
+          assert d['summary']['presidentialEstimatedDistricts']==173
+          assert r['TX-09']['marginD'] is not None and r['TX-09']['marginD']<0
+          assert r['TX-35']['presidentialBaseline']['estimatedVoteAllocation']
+          assert r['AK-01']['marginD'] is None and r['CA-06']['marginD'] is None
+          assert not any(x['stateErrorPartialCorrection'] for x in r.values())
+          assert d['method']['pastOnlyAlpha'] == 1
+          print('2026 CURRENT MAP HOUSE BUILD PASS',d['summary'])
+          PY
+      - name: Publish source-resolved model to the development branch only
+        run: |
+          test "$GITHUB_REF_NAME" = "2026-house-geography-presidential-backtest-design-20261103"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json
+          if git diff --staged --quiet; then echo 'Built model already current'; exit 0; fi
+          git commit -m 'Recompute 2026 House scenarios from official map baselines and validated candidate repeat test'
+          for attempt in 1 2 3; do
+            git fetch origin 2026-house-geography-presidential-backtest-design-20261103
+            if ! git rebase origin/2026-house-geography-presidential-backtest-design-20261103; then
+              git rebase --abort || true
+              echo "Concurrent changes overlap rebuilt House data; refusing to overwrite evidence." >&2
+              exit 1
+            fi
+            if git push origin HEAD:2026-house-geography-presidential-backtest-design-20261103; then
+              echo "Validated House output pushed to current source branch"
+              exit 0
+            fi
+          done
+          echo "Source branch changed continuously; fail without overwriting" >&2
+          exit 1

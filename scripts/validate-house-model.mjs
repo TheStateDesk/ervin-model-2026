@@ -12,10 +12,16 @@ let polled=0,rows=0,indexed=0,redrawn=0,proxy=0;
 for(const [id,r] of Object.entries(d.races)){
  assert(validGrades.has(r.modelRating),'Missing grade '+id+' '+r.modelRating);
  assert(r.id===id&&r.state===id.slice(0,2),'Mismatched district '+id);
- if(r.changed2026Map){
-  assert(r.marginD===null&&r.numericModelWithheld===true,'Redrawn district must not publish old-map numeric margin '+id);
-  assert.equal(r.modelRating,r.sourceRating||'Unrated','2026 source rating only '+id);
- }else assert(Number.isFinite(r.marginD)&&Math.abs(r.marginD)<=50,'Out-of-bounds estimate '+id);
+ if(['AK-01','CA-06'].includes(id)){
+  assert.equal(r.marginD,null,'Special contest must not receive a D/R numerical margin '+id);
+  assert.equal(r.numericModelWithheld,true);
+ }else{
+  assert(Number.isFinite(r.marginD)&&Math.abs(r.marginD)<=50,'Current 2026 congressional district needs numerical House estimate '+id);
+  assert.equal(r.numericModelWithheld,false);
+ }
+ assert(r.presidentialBaseline&&Number.isFinite(r.presidentialBaseline.districtLeanD),'Sourced presidential baseline missing '+id);
+ if(r.changed2026Map)assert(r.presidentialBaseline.estimatedVoteAllocation===true,'Redrawn current-map presidential prior must be labeled reconstructed '+id);
+ assert(r.stateErrorPartialCorrection===0,'Senate/Governor historical correction must not enter House '+id);
  assert(r.confidence&&r.methodNote&&Number.isFinite(r.uncertaintySensitivity),'Unlabeled uncertainty '+id);
  assert(r.historic&&r.historic['2022']!==undefined&&r.historic['2024']!==undefined);
  assert(Array.isArray(r.surveys),'Missing survey array '+id);
@@ -41,8 +47,15 @@ for(const [id,qs] of Object.entries(questions.races)){
 assert(fs.readFileSync('state/app.js','utf8').includes("houseQuestions=values[12]"),'Supplemental questions not connected to state dashboard');
 assert.equal(d.summary.districts,435);
 assert.equal(d.summary.modeledCount,Object.values(d.races).filter(r=>Number.isFinite(r.marginD)).length,'Numerical count must match current-map availability');
-assert.equal(d.summary.redrawnUnrated,Object.values(d.races).filter(r=>r.changed2026Map&&!r.sourceRating).length,'Unrated redraw count must match sourced data');
+assert.equal(d.summary.redrawnUnrated,0,'All 173 reconstructed redrawn districts must be numerically estimated');
 assert.equal(d.summary.redrawnCookRated,Object.values(d.races).filter(r=>r.changed2026Map&&r.sourceRating).length);
+assert.equal(d.summary.modeledCount,433);
+assert.equal(d.summary.presidentialEstimatedDistricts,173);
+const backtest=json('research/house-presidential-backtest-2026.json');
+assert(backtest.training.n>=700&&backtest.finalHoldout.n>=300);
+assert.equal(backtest.alpha,d.method.pastOnlyAlpha);
+assert(backtest.candidateRetention.chronological2024.retainedAdjusted.MAE<backtest.candidateRetention.chronological2024.retainedRaw.MAE,'Candidate residual must improve chronological holdout');
+assert.equal(backtest.candidateRetentionRho,.35);
 assert.equal(d.summary.districtsWithPollRows,polled);
 assert.equal(d.summary.indexedPublishedSurveys,indexed);
 assert.equal(d.summary.changedMapDistricts,redrawn);

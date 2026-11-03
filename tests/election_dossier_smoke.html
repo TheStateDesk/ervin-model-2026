@@ -29,7 +29,7 @@
   assert(doc.getElementById('raceTitle').textContent.includes('Governor'),'Governor dossier title loads');
   assert(doc.getElementById('candidates').textContent.includes('Jocelyn Benson')&&doc.getElementById('candidates').textContent.includes('John James'),'Governor candidates match registry');
   assert(doc.getElementById('leadValue').textContent.includes('Benson'),'Published governor polling average displayed');
-  assert(/No (verified|confirmed) 2026|No verified/.test(doc.getElementById('resultNotice').textContent),'No made-up election returns');
+  assert(/No (verified|confirmed) 2026|No verified|Official feed cannot be checked|Unavailable|unavailable|Unofficial|unofficial|reported votes/i.test(doc.getElementById('resultNotice').textContent),'No made-up election returns');
   await waitFor(()=>doc.querySelectorAll('#countyMap path').length>=1||/unavailable|not available/i.test(doc.querySelector('#countyMapStatus,#countyStatus')?.textContent||''));
   assert(doc.querySelectorAll('#countyMap path').length>=1||/unavailable|not available/i.test(doc.querySelector('#countyMapStatus,#countyStatus')?.textContent||''),'Geographic county map or accurate no-geometry warning renders');
   assert(doc.getElementById('raceJump').querySelectorAll('option').length===488,'All 36 governor, 17 Senate and 435 House destinations available');

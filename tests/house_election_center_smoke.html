@@ -27,7 +27,7 @@
   ok(d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House district cards are indexed');
   ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
   ok(d.getElementById('ratingsCount').textContent==='68','68 sourced House ratings are explicitly identified');
-  ok(d.getElementById('houseModelSummary').textContent.includes('Comparable-map numerical estimates')&&d.getElementById('houseModelSummary').textContent.includes('not a calibrated seat probability'),'House numerical estimates are limited to compatible maps and visibly provisional');
+  ok(d.getElementById('houseModelSummary').textContent.includes('Numerical House scenarios')&&d.getElementById('houseModelSummary').textContent.includes('not calibrated win probabilities'),'House numerical margins use 2026 congressional boundaries with rebuilt-vote caveats');
   ok(!d.getElementById('houseCards').textContent.includes('No model loaded')&&d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House cards include provisional model ratings rather than blank placeholders');
   const search=d.getElementById('houseSearch');search.value='MI-04';search.dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));
   ok(d.querySelectorAll('#houseCards .gov-card').length===1&&d.getElementById('houseCards').textContent.includes('Tossup'),'House search and Cook rating work');
@@ -40,7 +40,7 @@
   ok(d.getElementById('leadValue').textContent==='Tossup','House rating is qualitative');
   ok(d.getElementById('pollIntro').textContent.includes('not an Ervin polling average')&&d.getElementById('pollRows').textContent.includes('GBAO'),'House survey is sourced and not presented as a fabricated average');
   ok(d.getElementById('mapTitle').textContent.includes('district or county reference geography')&&d.getElementById('qualifiers').textContent.includes('outside the district'),'Statewide county context clearly disclaims district boundaries');
-  ok(/No confirmed|No verified/i.test(d.getElementById('resultNotice').textContent)&&!/^[\\d,]+$/.test(d.getElementById('votesReported').textContent.trim()),'House election-night panel must not show fabricated totals before polls close');
+  ok(/No confirmed|No verified|Official feed cannot be checked|unavailable|Unofficial|reported votes/i.test(d.getElementById('resultNotice').textContent)&&(!/^[\\d,]+$/.test(d.getElementById('votesReported').textContent.trim())||d.getElementById('resultNotice').textContent.toLowerCase().includes('unofficial')),'House election-night panel must not show fabricated totals before polls close');
   // The old Research Center is deliberately retired; it must forward to the State Desk.
   stage='legacy-redirect';d=await load('../elections/overview/');
   // The direct homepage browser_smoke separately verifies all fifty rendered

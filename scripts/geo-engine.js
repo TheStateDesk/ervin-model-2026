@@ -1,10 +1,11 @@
 /* ERVIN GEOGRAPHY 2.0 — local Census-derived boundaries; no runtime D3 or CDN required. */
 (()=>{"use strict";
-const NS="http://www.w3.org/2000/svg",cache=new Map(),packCache=new Map(),BASE=new URL("../geo/",document.currentScript?.src||location.href).href,REV="20261102-mi-land-shoreline-1";
+const NS="http://www.w3.org/2000/svg",cache=new Map(),packCache=new Map(),BASE=new URL("../geo/",document.currentScript?.src||location.href).href,REV="20261103-census-CD120-11states-1";
 const STATES="AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY".split(" ");
 // Every state now has its own locally hosted county and district files.
 // Regional bundles remain a redundant fallback, not the primary browser download.
 const DIRECT=new Set(STATES);
+const CURRENT_MAP_STATES=new Set("AL CA FL GA LA NC NY OH TN TX UT".split(" "));
 async function fromPack(code,kind){
  const index=STATES.indexOf(code);if(index<0)throw Error("Unknown state "+code);
  const pack="packs/p"+String(Math.floor(index/5)+1).padStart(2,"0")+".json";
@@ -23,13 +24,26 @@ async function get(code,kind="counties",options={}){
    let data=null,primaryError=null;
    try{
      if(!DIRECT.has(code))throw Error("State uses regional bundle");
-     const response=await fetch(BASE+key+".json?rev="+encodeURIComponent(REV),{cache:"no-cache"});
-     if(!response.ok)throw Error("state asset HTTP "+response.status);
-     const parsed=await response.json();
-     if(parsed.type!=="FeatureCollection"||parsed.state!==code||!Array.isArray(parsed.features)||!parsed.features.length)throw Error("State asset invalid");
-     data=parsed;
+     // Fail closed on changed boundaries; never silently substitute a CD118
+     // regional pack when a current congressional district file is missing.
+     const url=BASE+key+".json?rev="+encodeURIComponent(REV);
+     let last=null;
+     for(let attempt=0;attempt<2;attempt++){
+       try{
+         const response=await fetch(url,{cache:"no-cache",signal:typeof AbortSignal!=="undefined"&&typeof AbortSignal.timeout==="function"?AbortSignal.timeout(16000):undefined});
+         if(!response.ok)throw Error("state asset HTTP "+response.status);
+         const parsed=await response.json();
+         if(parsed.type!=="FeatureCollection"||parsed.state!==code||!Array.isArray(parsed.features)||!parsed.features.length)throw Error("State asset invalid");
+         if(kind==="districts"&&CURRENT_MAP_STATES.has(code)&&Number(parsed.boundaryYear)!==2026)throw Error("Stale congressional district geometry for "+code);
+         data=parsed;
+         break;
+       }catch(e){last=e;if(attempt===0&&typeof setTimeout==="function")await new Promise(resolve=>setTimeout(resolve,320));}
+     }
+     if(!data)throw last||Error("State geography unavailable");
    }catch(e){primaryError=e;}
    if(!data){
+     if(kind==="districts"&&CURRENT_MAP_STATES.has(code))
+       throw Error(code+" 2026 congressional boundaries unavailable; will not show obsolete 118th-Congress districts ("+(primaryError?.message||"network error")+")");
      try{data=await fromPack(code,kind);}
      catch(e){throw Error(code+" "+kind+" shapes unavailable (state: "+(primaryError?.message||"unavailable")+"; pack: "+e.message+")");}
    }

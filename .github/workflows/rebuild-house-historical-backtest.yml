@@ -1,0 +1,39 @@
+name: Build House same-office chronological historical calibration
+on:
+  push:
+    branches: [2026-house-geography-presidential-backtest-design-20261103]
+    paths:
+      - 'scripts/house_historical_backtest.py'
+      - '.github/workflows/rebuild-house-historical-backtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: house-historical-source-2018-2024
+  cancel-in-progress: false
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate backtest code and source integrity
+        run: |
+          python3 -m py_compile scripts/house_historical_backtest.py
+          python3 -c "import json; d=json.load(open('research/house-presidential-historical.json')); assert all(len(d['cycles'][y])==435 for y in ('2018','2022'))"
+      - name: Independently score past-only 2018/2022 House folds against 2024 holdout
+        run: python3 scripts/house_historical_backtest.py
+      - name: Publish independently attributable backtest and candidate returns to development branch
+        run: |
+          test "$GITHUB_REF_NAME" = "2026-house-geography-presidential-backtest-design-20261103"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add research/house-actual-2016-2024.json research/house-presidential-backtest-2026.json
+          if git diff --staged --quiet; then echo 'Backtest already current'; exit 0; fi
+          git commit -m 'Archive official House election returns and 2018/2022 to 2024 historical model test'
+          git push origin HEAD:2026-house-geography-presidential-backtest-design-20261103
