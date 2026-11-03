@@ -44,6 +44,28 @@ class ElectionReporting(unittest.TestCase):
   detail={**search,"last_updated":"2026-11-03T23:05:00Z","candidates":[{"name":"D","party":"Democratic","votes":100},{"name":"R","party":"Republican","votes":200}]}
   self.assertIsNotNone(m.normalize("KY-SENATE",search,detail,dt.datetime(2026,11,3,23,12,tzinfo=UTC),87174))
   self.assertIsNone(m.normalize("KY-SENATE",search,detail,dt.datetime(2026,11,3,22,58,tzinfo=UTC),87174))
+ def test_unmapped_wyoming_senate_uses_narrow_retryable_lookup(self):
+  import urllib.parse
+  queries=[]
+  def fake(url,**kwargs):
+   q=urllib.parse.parse_qs(urllib.parse.urlparse(url).query)["query"][0]
+   queries.append((q,kwargs))
+   return {"results":[{"id":87878,"province":"WY","election_name":"Wyoming US Senate","election_date":"2026-11-03"}]}
+  with patch.object(m,"request_with_retry",side_effect=fake):
+   matches=m.discover("WY","senate")
+  self.assertEqual(len(matches),1)
+  self.assertEqual(queries,[("US Senate",{"timeout":10,"max_attempts":3})])
+ def test_unmapped_federal_house_fallback_deduplicates(self):
+  import urllib.parse
+  queries=[]
+  def fake(url,**kwargs):
+   q=urllib.parse.parse_qs(urllib.parse.urlparse(url).query)["query"][0]
+   queries.append(q)
+   return {"results":[]} if q=="US House" else {"results":[{"id":100,"province":"VT","election_name":"Vermont US House At Large","election_date":"2026-11-03"}]}
+  with patch.object(m,"request_with_retry",side_effect=fake):
+   rows=m.discover("VT","house")
+  self.assertEqual(len(rows),1)
+  self.assertEqual(queries,["US House","House"])
  def test_registry_506(self):
   x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)
