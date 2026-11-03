@@ -15,6 +15,9 @@
  OK:'20:00',OR:'23:00',PA:'20:00',RI:'20:00',SC:'19:00',SD:'21:00',TN:'20:00',
  TX:'21:00',UT:'22:00',VT:'19:00',VA:'19:00',WA:'23:00',WV:'19:30',WI:'21:00',WY:'21:00'
  };
+ // A statewide Senate race can receive attributed partial returns after its
+ // first regional poll closing; do not hold those votes for the last time zone.
+ const senateFirstClose={KY:'18:00',FL:'19:00',NH:'19:00',KS:'20:00',MI:'20:00',TX:'20:00',ID:'22:00',OR:'22:00',AK:'00:00'};
  // House district may finish earlier than split-zone statewide deadline.
  const districtClose={'KY-06':'18:00','VA-02':'19:00','VA-05':'19:00','FL-27':'19:00','AL-07':'20:00','MI-07':'20:00','TX-18':'20:00'};
  // All district deadlines are last polling-place closes, not the first county
@@ -39,7 +42,7 @@
  };
  const closeAt=(key,office)=>{
   const id=canonical(key,office);if(!id)return NaN;
-  const code=id.slice(0,2),time=districtClose[id]||closeByState[code];
+  const code=id.slice(0,2),time=office==='Senate'?(senateFirstClose[code]||closeByState[code]):(districtClose[id]||closeByState[code]);
   if(!time)return NaN;
   const d=(time==='01:00'||time==='00:00')?'2026-11-04':'2026-11-03';
   return Date.parse(d+'T'+time+':00-05:00');
