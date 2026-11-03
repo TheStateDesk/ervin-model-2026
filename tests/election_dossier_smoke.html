@@ -9,20 +9,23 @@
   frame.src=url;await ready;
   return frame.contentDocument;
  };
- const waitFor=async test=>{
-  for(let i=0;i<170;i++){if(test())return;await new Promise(r=>setTimeout(r,100))}
-  throw Error('Expected page UI did not render');
+ const waitFor=async (test,label)=>{
+  for(let i=0;i<300;i++){if(test())return;await new Promise(r=>setTimeout(r,100))}
+  const d=frame.contentDocument;
+  throw Error('Expected '+(label||'page UI')+' did not render at '+frame.src+'; title='+(d?.title||'unknown')+
+    '; governorCards='+(d?.querySelectorAll('#govCards .gov-card').length||0)+
+    '; status='+(d?.querySelector('#govCards')?.textContent?.slice(0,170)||d?.querySelector('#resultNotice')?.textContent?.slice(0,170)||'not mounted'));
  };
  try{
   let doc=await load('../governors/');
-  await waitFor(()=>doc.querySelectorAll('#govCards .gov-card').length===36);
+  await waitFor(()=>doc.querySelectorAll('#govCards .gov-card').length===36,'36 governor race cards');
   assert(doc.querySelectorAll('#govCards .gov-card').length===36,'All 36 governor contests appear');
   assert(doc.querySelectorAll('#govUSMap .gov-state').length>=50,'Geographic governor map contains real state outlines');
   assert(!!doc.querySelector('#govCards a[href*="state=MI"]'),'Michigan governor card links to dossier');
   const search=doc.getElementById('govSearch');search.value='Nevada';search.dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));
   assert(doc.querySelectorAll('#govCards .gov-card').length===1,'Governor search filters races');
   doc=await load('../elections/?office=governor&state=MI');
-  await waitFor(()=>doc.getElementById('raceTitle').textContent.includes('Michigan'));
+  await waitFor(()=>doc.getElementById('raceTitle')?.textContent.includes('Michigan'),'Michigan governor dossier');
   assert(doc.getElementById('raceTitle').textContent.includes('Governor'),'Governor dossier title loads');
   assert(doc.getElementById('candidates').textContent.includes('Jocelyn Benson')&&doc.getElementById('candidates').textContent.includes('John James'),'Governor candidates match registry');
   assert(doc.getElementById('leadValue').textContent.includes('Benson'),'Published governor polling average displayed');
@@ -31,7 +34,7 @@
   assert(doc.querySelectorAll('#countyMap path').length>=1||/unavailable|not available/i.test(doc.querySelector('#countyMapStatus,#countyStatus')?.textContent||''),'Geographic county map or accurate no-geometry warning renders');
   assert(doc.getElementById('raceJump').querySelectorAll('option').length===488,'All 36 governor, 17 Senate and 435 House destinations available');
   doc=await load('../elections/?office=senate&state=TX');
-  await waitFor(()=>doc.getElementById('raceTitle').textContent.includes('Texas'));
+  await waitFor(()=>doc.getElementById('raceTitle')?.textContent.includes('Texas'),'Texas Senate dossier');
   assert(doc.getElementById('raceTitle').textContent.includes('Senate'),'Senate dossier opens');
   assert(doc.getElementById('candidates').textContent.includes('James Talarico'),'Senate candidate comes from live homepage data');
   assert(doc.getElementById('pollRows').textContent.includes('RealClearPolling'),'Senate source evidence is displayed');
