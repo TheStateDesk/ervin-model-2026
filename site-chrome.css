@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap');
 
 /* Single Ervin Model navigation identity; used by every Michigan dashboard. */
 .site-header{position:sticky;inset:0 0 auto;z-index:500;height:auto;min-height:72px;width:100%;padding:0;background:#08121cee;border-bottom:1px solid #31475a;backdrop-filter:blur(17px);box-shadow:0 8px 28px #020a152e}
@@ -116,3 +117,12 @@ body.light .site-header button,html.light .site-header button{background:#f3f7fa
 @media(max-width:760px){
   html body .site-header .site-nav.is-open{max-height:min(65dvh,580px)!important}
 }
+
+/* Shared interior editorial typography: exact same typefaces as State Desk.
+   Maintains existing navigation hierarchy and dark-theme accessibility. */
+:root{--ed-serif:'Newsreader',Georgia,serif;--ed-sans:'Libre Franklin',Arial,system-ui,sans-serif}
+.site-header .site-brand,.site-header .site-nav a,.site-header .site-nav button,.site-header .site-mobile-toggle{font-family:var(--ed-sans)}
+.site-header .site-brand{letter-spacing:.075em}
+.site-header .site-nav a{font-size:12px}
+body:not(.ed-body){font-family:var(--ed-sans),system-ui,sans-serif}
+body:not(.ed-body) h1,body:not(.ed-body) h2,body:not(.ed-body) h3{font-family:var(--ed-serif),Georgia,serif}
