@@ -24,10 +24,11 @@ assert.equal(out.house.D+out.house.R+out.house.T+out.house.U,435,'House source r
 assert(hs.races['TX-09'].marginD<0,'Texas redraw must reflect current-boundary presidential evidence');
 assert.equal(hs.races['TX-09'].presidentialBaseline.estimatedVoteAllocation,true,'Texas rebuilt vote allocation must be marked estimated');
 assert.equal(out.senate.D+out.senate.R+out.senate.I,100-out.senate.T,'Unassigned toss-up seats are neither Democratic nor Republican seats');
-const senateTossups=model.senate.filter(x=>Math.abs(x.model?.adjustedMargin)<1.5).length;
+const senateTossups=model.senate.filter(x=>Number.isFinite(x.model?.adjustedMargin)&&Math.abs(x.model.adjustedMargin)<1.5).length;
 assert.equal(out.senate.T,senateTossups,'Only current Senate estimates within ±1.5 points remain unassigned');
 assert(out.senate.D>=0&&out.senate.R>=0,'Office bar cannot contain negative seat counts');
-assert.equal(model.senate.length,17);
+assert.equal(model.senate.length,35);
+assert.equal(out.senate.modeled,17);assert.equal(out.senate.sourceRated,18);
 assert.equal(model.governor.length,36);
 assert.equal(out.governors.offCycle,14);
 const ohio=model.governor.find(x=>x.code==='OH');
@@ -44,7 +45,7 @@ assert.equal(out.governors.rawOnly+out.governors.modeled+out.governors.sourceRat
 assert.equal(out.governors.sourceRated,sourceRated,'Qualitative governor ratings must be independently sourced, not numerically manufactured');
 assert(model.governor.every(x=>x.model.events.every(e=>e.year>=2018&&e.year<2026)));
 assert.throws(()=>power.compute({races:{}},model.senate,model.governor),/435/);
-assert.throws(()=>power.compute(hs,[],model.governor),/17/);
+assert.throws(()=>power.compute(hs,[],model.governor),/35/);
 assert.throws(()=>power.compute(hs,model.senate,[]),/36/);
 const html=fs.readFileSync('states/index.html','utf8');
 const root=fs.readFileSync('index.html','utf8');
