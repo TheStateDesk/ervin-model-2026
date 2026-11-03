@@ -14,7 +14,7 @@ assert.equal(recomputed.summary.rawWinners,score.summary.rawWinners);
 assert.equal(recomputed.summary.adjustedWinners,score.summary.adjustedWinners);
 assert.equal(recomputed.summary.eligible,15);
 assert.equal(recomputed.preferredRCP.n,9);
-assert(score.summary.adjustedMAE>score.summary.rawMAE,'Do not hide underperformance of same-office governor correction');
+assert(score.summary.adjustedMAE<score.summary.rawMAE,'Small-sample governor shrink correction must improve the pre-2026 holdout');
 assert(score.preferredRCP.adjustedMAE>score.preferredRCP.rawMAE,'RCP-only cohort must not be silently reweighted');
 for(let i=0;i<recomputed.records.length;i++){
  const r=recomputed.records[i],b=score.records[i];
