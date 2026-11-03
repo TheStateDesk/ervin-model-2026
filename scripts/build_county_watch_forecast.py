@@ -66,13 +66,33 @@ def build(data):
    if not math.isfinite(shifted) or abs(shifted)>3:
     raise ValueError("MI candidate-strength adjustment out of source boundaries")
    adjusted=round(adjusted+shifted,2)
+  # Osborn's 2024 Fischer contest is the repeat-CANDIDATE federal comparison.
+  # It already supplies Nebraska's 5.07-point polling-error correction above.
+  # Expose it visibly, but never apply the same historical miss a second time.
+  repeat_candidate=None
+  if race["code"]=="NE":
+   comparison=json.loads((ROOT/"research/verified-270towin-senate-2026-11-03.json").read_text(encoding="utf-8"))["lastElectionEvidenceNE"]
+   previous=next((h for h in race["historical"] if h.get("office")=="Senate" and h.get("year")==2024),None)
+   if not previous or race["dem"]!="Dan Osborn" or comparison["candidate"]!=race["dem"] or race["rep"]!=comparison["currentOpponent"]:
+    raise ValueError("Osborn repeat candidate pairing is not verified")
+   if (race.get("history_mode")!="candidate_repeat"
+       or abs(float(race["correction"])-float(previous["err"]))>.001
+       or abs(float(comparison["underestimatedRepublicanMargin"])-float(previous["err"]))>.001):
+    raise ValueError("Nebraska is using an unrelated or double-counted historical error")
+   repeat_candidate={"candidate":"Dan Osborn","earlierElection":"2024 U.S. Senate","earlierOpponent":"Deb Fischer",
+       "currentOpponent":"Pete Ricketts","priorPollMargin":float(previous["poll"]),
+       "priorActualMargin":float(previous["actual"]),"priorPollingError":float(previous["err"]),
+       "appliedOnce":True,"sourceHistoricalAverage":comparison["finalAggregateSource"],
+       "sourceElectionResult":comparison["certifiedOutcomeSource"],
+       "caveat":"Same candidate but different Republican opponent and only one past race; do not claim a predictive repeat."}
   out[race["code"]]={"state":race["state"],"nonR":race["dem"],"rep":race["rep"],
       "party":race["party"],"pollMargin":int(margin) if float(margin).is_integer() else round(margin,2),"adjustedMargin":adjusted,
       "mode":"Original Ervin","publisherInputs":len(vals),"proxyOrSingleInput":len(vals)<2,
       "source":("Ervin's Take · publisher blend + original history + discounted candidate context" if candidate_strength else ("Ervin's Take · recent publisher blend (7-day limit)" if vals else "OLDER REFERENCE · no recent qualifying publisher average")),
       "stale":not bool(vals),
       "note":("Ervin’s Take: Original Michigan Senate historical correction plus an unvalidated, heavily discounted candidate-primary error context; not a religious/poll-mode penalty." if candidate_strength else ("Model-based statewide non-R minus R margin. Historic proxy, not current polling." if not vals else "Model-based statewide margin from recent attributed publisher averages, not a county poll.")),
-      **({"candidateStrength":candidate_strength} if candidate_strength else {})}
+      **({"candidateStrength":candidate_strength} if candidate_strength else {}),
+      **({"candidateRepeat":repeat_candidate} if repeat_candidate else {})}
  return {"version":1,"asOf":now.isoformat(timespec="milliseconds").replace("+00:00","Z"),"source":"National 2026 Ervin polling dashboard; Original Ervin default",
          "method":"Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
          "states":out}
