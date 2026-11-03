@@ -1,6 +1,6 @@
 {
   "asOf": "2026-11-02",
-  "method": "Verbatim Original Ervin per-state corrections from website's original state registry, including 2016 event(s) when original rule did; NOT the pooled Ervin+ calibration_engine.js",
+  "method": "Original Ervin per-state corrections. General federal polling-error reference events are always Senate/President. Alaska-specific historical House candidate-repeat comparisons are NON-GENERAL contextual records, separately isolated under candidateRepeatContext; the legacy Alaska correction is retained unchanged for forecast continuity and clearly flagged.",
   "source": "index.html window.ERVIN_DATA.states[].correction, historical[].err",
   "senateStates": {
     "ME": {
@@ -265,18 +265,8 @@
     "AK": {
       "state": "Alaska",
       "correction": -2.783,
-      "historyMode": "candidate_repeat",
+      "historyMode": "candidate_repeat_context_separate",
       "events": [
-        {
-          "year": 2024,
-          "office": "House",
-          "poll": -4.2,
-          "actual": -2.44,
-          "error": -1.76,
-          "weight": 0.8,
-          "kind": "GOP campaign-sponsored Cygnal Oct 14–16 final-round RCV poll",
-          "url": "https://en.wikipedia.org/wiki/2024_United_States_House_of_Representatives_election_in_Alaska"
-        },
         {
           "year": 2024,
           "office": "President",
@@ -288,16 +278,6 @@
           "url": "https://www.270towin.com/2024-presidential-election-polls/alaska"
         },
         {
-          "year": 2022,
-          "office": "House",
-          "poll": 6,
-          "actual": 9.92,
-          "error": -3.92,
-          "weight": 0.72,
-          "kind": "AARP Sept 2022 final-round RCV poll",
-          "url": "https://alaskawatchman.com/wp-content/uploads/2022/09/aarp-alaska-2022-elections-voter-survey.doi_.10.26419-2Fres.00550.009.pdf"
-        },
-        {
           "year": 2020,
           "office": "Senate",
           "poll": -4.7,
@@ -307,7 +287,34 @@
           "kind": "270toWin Senate average",
           "url": "https://www.270towin.com/2020-senate-polls/alaska/"
         }
-      ]
+      ],
+      "candidateRepeatContext": [
+        {
+          "year": 2024,
+          "office": "House",
+          "poll": -4.2,
+          "actual": -2.44,
+          "error": -1.76,
+          "weight": 0.8,
+          "kind": "GOP campaign-sponsored Cygnal Oct 14–16 final-round RCV poll",
+          "url": "https://en.wikipedia.org/wiki/2024_United_States_House_of_Representatives_election_in_Alaska"
+        },
+        {
+          "year": 2022,
+          "office": "House",
+          "poll": 6,
+          "actual": 9.92,
+          "error": -3.92,
+          "weight": 0.72,
+          "kind": "AARP Sept 2022 final-round RCV poll",
+          "url": "https://alaskawatchman.com/wp-content/uploads/2022/09/aarp-alaska-2022-elections-voter-survey.doi_.10.26419-2Fres.00550.009.pdf"
+        }
+      ],
+      "generalFederalFamily": [
+        "Senate",
+        "President"
+      ],
+      "correctionProvenance": "LEGACY: -2.783 adjustment originally includes Alaska-specific Mary Peltola House candidate-repeat evidence in addition to Senate/President events. Those House rows are isolated under candidateRepeatContext and must never be treated as general federal election polling errors. No 2026 locked forecast altered by this archive split."
     },
     "GA": {
       "state": "Georgia",
