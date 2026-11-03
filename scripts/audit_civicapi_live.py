@@ -92,6 +92,12 @@ def summarize_race(key,record,provider):
         samples=rr[:1] if isinstance(rr,list) else list(rr.values())[:1]
         meta["regionExampleKeys"]=list(samples[0])[:35] if samples and isinstance(samples[0],dict) else []
         meta["regionsFound"]=len(rr)
+        from collections import Counter
+        types=Counter(str(x.get("type") or "unknown")[:45] for x in rr.values() if isinstance(x,dict)) if isinstance(rr,dict) else Counter(str(x.get("type") or "unknown")[:45] for x in rr if isinstance(x,dict))
+        meta["regionTypeCounts"]=dict(types)
+        meta["regionExamples"]=[{"name":str(x.get("name") or "")[:85],
+            "type":str(x.get("type") or "")[:45],"candidateSchema":schema(x.get("candidates"))}
+            for x in samples[:1] if isinstance(x,dict)]
     if isinstance(p.get("precinct_results"),(dict,list)):
         meta["precinctsFound"]=len(p["precinct_results"])
     return meta
@@ -119,7 +125,13 @@ def main():
           ("vt_search_house","/race/search",{"query":"US House","country":"US","province":"VT",
                                             "start_date":DAY,"end_date":DAY,"limit":200}),
           ("vt_search_atlarge","/race/search",{"query":"House At Large","country":"US","province":"VT",
-                                              "start_date":DAY,"end_date":DAY,"limit":200})]
+                                              "start_date":DAY,"end_date":DAY,"limit":200}),
+          ("vt_general_candidate_122670","/race/122670",{"light":"true"}),
+          ("vt_general_candidate_121781","/race/121781",{"light":"true"}),
+          ("vt_general_candidate_121260","/race/121260",{"light":"true"}),
+          ("michigan_senate_primary_search","/race/search",{"query":"Michigan US Senate Democratic Primary",
+                 "country":"US","province":"MI","start_date":"2026-08-04",
+                 "end_date":"2026-08-04","limit":200})]
     for name,key in chosen.items():
         record=registry.get(key)
         if record:
@@ -136,6 +148,16 @@ def main():
             key=chosen[label]
             record.update(summarize_race(key,{"payload":payload},registry[key]))
             record["raceId"]=registry[key]["raceId"]
+        elif label.startswith("vt_general_candidate_"):
+            record.update(summarize_race("VT-01",{"payload":payload},None))
+        elif label=="michigan_senate_primary_search":
+            items=collector.list_items(payload)
+            record["searchResultSchema"]=schema(payload)
+            record["returned"]=len(items)
+            shortlist=[x for x in items if isinstance(x,dict) and "michigan us senate democratic primary" in str(x.get("election_name") or x.get("name") or "").lower()]
+            record["matchingPrimaryRows"]=[{"id":x.get("id"),"election_name":x.get("election_name"),
+                "date":x.get("election_date"),"province":x.get("province")}
+                for x in shortlist[:5]]
         elif label.startswith("historic_"):
             record.update(summarize_race("NH-01" if "nh" in label else "TX-GOVERNOR",
                               {"payload":payload},None))
@@ -149,10 +171,25 @@ def main():
                                  "name":str(x.get("election_name") or x.get("name") or "")[:110],
                                  "district":str(x.get("district") or "")[:45],
                                  "type":str(x.get("election_type") or "")[:45],
-                                 "searchTypeOk":collector.type_ok("VT-01",x)}
+                                 "searchTypeOk":collector.type_ok("VT-01",x),
+                                 "electionDate":str(x.get("election_date") or x.get("date") or "")[:35],
+                                 "province":str(x.get("province") or "")[:12]}
                                  for x in items if isinstance(x,dict) and
                                     ("house" in str(x.get("election_name") or x.get("name") or "").lower())][:12]
         else: record["statusPayloadSchema"]=schema(payload)
+    # Real 2026 Michigan Senate primary is useful for evaluating 83-county
+    # locality schemas; do not infer general-election county coverage from it.
+    historical=results.get("michigan_senate_primary_search") or {}
+    primaries=historical.get("matchingPrimaryRows") or []
+    primary=next((x for x in primaries if str(x.get("date") or "").startswith("2026-08-04")
+                  and str(x.get("id") or "").isdigit()),None)
+    if primary:
+        label="michigan_senate_primary_detail"
+        _, detail=fetch(label,"/race/"+str(primary["id"]),{"precinct":"true"})
+        if detail.get("ok"):
+            payload=detail.pop("payload")
+            detail.update(summarize_race("MI-SENATE",{"payload":payload},None))
+        results[label]=detail
     probe={"checkedAt":collector.iso(now),"provider":BASE,"readOnly":True,
        "publishedVoteFilesChanged":False,
        "registry":{"expected":len(expected),"registered":len(registry),
@@ -178,6 +215,8 @@ def main():
                   "raceIdentity":v.get("providerIdentityOk"),
                   "candidateSchema":v.get("candidateSchema"),
                   "regions":v.get("regionsFound"),"precincts":v.get("precinctsFound"),
+                  "regionTypes":v.get("regionTypeCounts"),"regionExamples":v.get("regionExamples"),
+                  "electionDate":v.get("electionDate"),"primaryMatches":v.get("matchingPrimaryRows"),
                   "regionKeys":v.get("regionExampleKeys"),
                   "vtMatched":v.get("matchedVt01")}
               for k,v in results.items()}},ensure_ascii=False))
