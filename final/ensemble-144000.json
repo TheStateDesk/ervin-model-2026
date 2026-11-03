@@ -797,6 +797,156 @@
       ],
       "rawBinCountsSum": 144000
     },
+    "senateR": {
+      "mean": 49.797,
+      "median": 50,
+      "mode": 50,
+      "modeShare": 0.173896,
+      "sd": 2.238,
+      "skewness": -0.081,
+      "excessKurtosis": -0.137,
+      "p05": 46,
+      "p10": 47,
+      "p25": 48,
+      "p75": 51,
+      "p90": 53,
+      "p95": 53,
+      "localPeaks": [
+        {
+          "seats": 50,
+          "count": 25041,
+          "pct": 0.173896
+        }
+      ],
+      "histogram": [
+        {
+          "seats": 41,
+          "count": 5,
+          "pct": 0.000035
+        },
+        {
+          "seats": 42,
+          "count": 62,
+          "pct": 0.000431
+        },
+        {
+          "seats": 43,
+          "count": 261,
+          "pct": 0.001813
+        },
+        {
+          "seats": 44,
+          "count": 1013,
+          "pct": 0.007035
+        },
+        {
+          "seats": 45,
+          "count": 2772,
+          "pct": 0.01925
+        },
+        {
+          "seats": 46,
+          "count": 6261,
+          "pct": 0.043479
+        },
+        {
+          "seats": 47,
+          "count": 11519,
+          "pct": 0.079993
+        },
+        {
+          "seats": 48,
+          "count": 18340,
+          "pct": 0.127361
+        },
+        {
+          "seats": 49,
+          "count": 23626,
+          "pct": 0.164069
+        },
+        {
+          "seats": 50,
+          "count": 25041,
+          "pct": 0.173896
+        },
+        {
+          "seats": 51,
+          "count": 22520,
+          "pct": 0.156389
+        },
+        {
+          "seats": 52,
+          "count": 16272,
+          "pct": 0.113
+        },
+        {
+          "seats": 53,
+          "count": 9719,
+          "pct": 0.067493
+        },
+        {
+          "seats": 54,
+          "count": 4581,
+          "pct": 0.031813
+        },
+        {
+          "seats": 55,
+          "count": 1593,
+          "pct": 0.011062
+        },
+        {
+          "seats": 56,
+          "count": 373,
+          "pct": 0.00259
+        },
+        {
+          "seats": 57,
+          "count": 42,
+          "pct": 0.000292
+        }
+      ],
+      "rawBinCountsSum": 144000
+    },
+    "senateI": {
+      "mean": 0.373,
+      "median": 0,
+      "mode": 0,
+      "modeShare": 0.671715,
+      "sd": 0.568,
+      "skewness": 1.238,
+      "excessKurtosis": 0.541,
+      "p05": 0,
+      "p10": 0,
+      "p25": 0,
+      "p75": 1,
+      "p90": 1,
+      "p95": 1,
+      "localPeaks": [
+        {
+          "seats": 0,
+          "count": 96727,
+          "pct": 0.671715
+        }
+      ],
+      "histogram": [
+        {
+          "seats": 0,
+          "count": 96727,
+          "pct": 0.671715
+        },
+        {
+          "seats": 1,
+          "count": 40846,
+          "pct": 0.283653
+        },
+        {
+          "seats": 2,
+          "count": 6427,
+          "pct": 0.044632
+        }
+      ],
+      "rawBinCountsSum": 144000
+    },
     "governorsD": {
       "mean": 26.853,
       "median": 27,
@@ -933,6 +1083,146 @@
           "seats": 38,
           "count": 1,
           "pct": 0.000007
+        }
+      ],
+      "rawBinCountsSum": 144000
+    },
+    "governorsR": {
+      "mean": 23.147,
+      "median": 23,
+      "mode": 23,
+      "modeShare": 0.145396,
+      "sd": 2.721,
+      "skewness": 0.003,
+      "excessKurtosis": -0.096,
+      "p05": 19,
+      "p10": 20,
+      "p25": 21,
+      "p75": 25,
+      "p90": 27,
+      "p95": 28,
+      "localPeaks": [
+        {
+          "seats": 23,
+          "count": 20937,
+          "pct": 0.145396
+        }
+      ],
+      "histogram": [
+        {
+          "seats": 12,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 13,
+          "count": 17,
+          "pct": 0.000118
+        },
+        {
+          "seats": 14,
+          "count": 51,
+          "pct": 0.000354
+        },
+        {
+          "seats": 15,
+          "count": 215,
+          "pct": 0.001493
+        },
+        {
+          "seats": 16,
+          "count": 638,
+          "pct": 0.004431
+        },
+        {
+          "seats": 17,
+          "count": 1605,
+          "pct": 0.011146
+        },
+        {
+          "seats": 18,
+          "count": 3529,
+          "pct": 0.024507
+        },
+        {
+          "seats": 19,
+          "count": 6894,
+          "pct": 0.047875
+        },
+        {
+          "seats": 20,
+          "count": 11073,
+          "pct": 0.076896
+        },
+        {
+          "seats": 21,
+          "count": 15571,
+          "pct": 0.108132
+        },
+        {
+          "seats": 22,
+          "count": 18948,
+          "pct": 0.131583
+        },
+        {
+          "seats": 23,
+          "count": 20937,
+          "pct": 0.145396
+        },
+        {
+          "seats": 24,
+          "count": 19682,
+          "pct": 0.136681
+        },
+        {
+          "seats": 25,
+          "count": 16621,
+          "pct": 0.115424
+        },
+        {
+          "seats": 26,
+          "count": 12543,
+          "pct": 0.087104
+        },
+        {
+          "seats": 27,
+          "count": 7975,
+          "pct": 0.055382
+        },
+        {
+          "seats": 28,
+          "count": 4341,
+          "pct": 0.030146
+        },
+        {
+          "seats": 29,
+          "count": 2098,
+          "pct": 0.014569
+        },
+        {
+          "seats": 30,
+          "count": 852,
+          "pct": 0.005917
+        },
+        {
+          "seats": 31,
+          "count": 284,
+          "pct": 0.001972
+        },
+        {
+          "seats": 32,
+          "count": 94,
+          "pct": 0.000653
+        },
+        {
+          "seats": 33,
+          "count": 26,
+          "pct": 0.000181
+        },
+        {
+          "seats": 34,
+          "count": 5,
+          "pct": 0.000035
         }
       ],
       "rawBinCountsSum": 144000
