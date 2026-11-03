@@ -1,22 +1,21 @@
-/* Ervin Model 2026: frozen-forecast simulation evidence and election-night editorial desk.
+/* Ervin Model 2026: locked final prediction and election-night editorial desk.
    Static-site commentary is deterministic, generated only from normalized, source-attributed
    unofficial vote records; it does not invent live reporting, winner calls, or turnout. */
 (()=>{'use strict';
 const SWITCH_AT=Date.parse('2026-11-03T17:55:00-05:00');
 const $=id=>document.getElementById(id);
 const fmt=n=>Number(n).toLocaleString('en-US');
-const pct=n=>(100*n).toFixed(1)+'%';
 const labelTime=when=>new Date(when).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
 const stateNames={AK:'Alaska',AZ:'Arizona',GA:'Georgia',IA:'Iowa',KS:'Kansas',ME:'Maine',MI:'Michigan',MN:'Minnesota',MT:'Montana',NC:'North Carolina',NE:'Nebraska',NH:'New Hampshire',OH:'Ohio',PA:'Pennsylvania',SD:'South Dakota',TX:'Texas',WI:'Wisconsin'};
 const priorityStates=['MI','OH','TX','ME','GA','NC','IA','AK','NE','KS','MN'];
-let active=false,ensemble=null,lastPost=0,posted=new Set(),selectedDistribution='house';
+let active=false,lastPost=0,posted=new Set(),selectedDistribution='house';
 const pending=new Map(),seen=new Map();
 function make(tag,cls,textValue){const el=document.createElement(tag);if(cls)el.className=cls;if(textValue!==undefined)el.textContent=textValue;return el;}
 function safeLink(raw){try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password?u.href:null}catch{return null}}
 function build(){
  const balance=$('balanceOfPower'),dashboard=$('electionDashboard');if(!balance||!dashboard)return;
  const insight=$('edSimulationPanel')||make('section','ed-sim-panel');insight.id='edSimulationPanel';insight.className='ed-sim-panel';
- insight.innerHTML="\n<div class=\"ed-final-mast\">\n <div class=\"ed-final-eyebrow\"><span class=\"ed-final-monogram\" aria-hidden=\"true\">E</span><span>THE ERVIN MODEL <small>2026 ELECTION FORECAST</small></span><span class=\"ed-final-edition\">ELECTION DAY EDITION · NOVEMBER 3, 2026</span></div>\n <div class=\"ed-final-hero-row\">\n  <div class=\"ed-final-title-wrap\"><span class=\"ed-final-kicker\">THE NATIONAL ELECTION DESK / LOCKED FORECAST</span><h2 class=\"ed-final-headline\" id=\"edFinalHeadline\"><span>FINAL</span><span>PREDICTION</span></h2><p class=\"ed-final-deck\">Our final party-by-party projections for the House, Senate, and governors. Every shaded contest receives a definitive forecast call—no toss-up colors.</p></div>\n  <aside class=\"ed-final-hero-aside\"><span>THE BIG PICTURE</span><strong>A blue House.</strong><strong>A Senate cliffhanger.</strong><small>The maps are frozen individual-race predictions. The 144,000 simulations below show the uncertainty around the national outcome.</small></aside>\n </div>\n <div class=\"ed-final-metadata\"><span><span class=\"ed-final-dot\"></span> FORECAST LOCKED · NOV. 3, 2026</span><span>PROJECTIONS, NOT REPORTED VOTES</span><a class=\"ed-sim-source\" href=\"https://github.com/geervin/ervin-model-2026/blob/main/research/FINAL_2026_ELECTION_DAY_AUDIT.md\">Read the forecasting audit</a></div>\n</div>\n<div id=\"edSimTabs\" class=\"ed-sim-tabs\" role=\"group\" aria-label=\"Choose House, Senate or governor final prediction map and scenario distribution\"></div>\n<div id=\"edFinalCallSummary\" class=\"ed-final-call-summary\" aria-live=\"polite\">Loading final projected winners…</div>\n<div class=\"ed-sim-map-pane ed-final-map-pane\">\n <div class=\"ed-sim-visual-heading\"><h3 id=\"edSimMapTitle\">House · final predictions by district</h3><span class=\"ed-sim-preview-flag\">FINAL RACE-BY-RACE CALLS</span></div>\n <div class=\"ed-final-map-scroller\" tabindex=\"0\" role=\"region\" aria-label=\"Scroll to explore the projected congressional districts\"><svg id=\"edSimMap\" viewBox=\"0 0 1080 625\" role=\"group\" aria-label=\"Final election projection map\"><text x=\"540\" y=\"315\" text-anchor=\"middle\">Loading election geography…</text></svg></div>\n <div class=\"ed-sim-map-legend\"><span><i class=\"ed-sim-legend-d\"></i> Democratic call</span><span><i class=\"ed-sim-legend-r\"></i> Republican call</span><span><i class=\"ed-sim-legend-n\"></i> No election in 2026</span></div>\n <p class=\"ed-sim-map-readout\" id=\"edSimMapReadout\" aria-live=\"polite\">Hover, focus, or select a district to inspect the projected winner.</p>\n <p class=\"ed-sim-map-foot\" id=\"edSimMapNote\">Predicted winners are not counted vote totals or official race calls.</p>\n</div>\n<div class=\"ed-final-distribution\">\n <div class=\"ed-final-distribution-head\"><div><span class=\"ed-final-kicker\">THE MODEL / 144,000 SCENARIOS</span><h3>Where the election is most likely to land</h3></div><a class=\"ed-sim-source\" href=\"https://github.com/geervin/ervin-model-2026/blob/main/scripts/run-ensemble-144000.mjs\">Reproduce the simulation</a></div>\n <p class=\"ed-mini ed-final-chart-intro\">Forecast calls show each race’s predicted winner. The simulation distribution measures possible chamber totals under shared and local uncertainty; its median need not equal the number of individual race calls.</p>\n <div id=\"edSimSummary\" class=\"ed-sim-summary\">Loading the locked distribution…</div>\n <div class=\"ed-sim-hist-pane\"><div class=\"ed-sim-visual-heading\"><h3 id=\"edSimChartTitle\">House seat distribution</h3><span class=\"ed-sim-preview-flag\">144,000 RUNS</span></div><div id=\"edSimChart\" class=\"ed-sim-chart\" role=\"img\" aria-label=\"Seat count distribution\"></div><p id=\"edSimDetail\" class=\"ed-sim-detail\"></p></div>\n <p id=\"edSimAnomalies\" class=\"ed-sim-note\"></p>\n</div>";
+ insight.innerHTML="\n<div class=\"ed-final-mast\">\n <div class=\"ed-final-eyebrow\"><span class=\"ed-final-monogram\" aria-hidden=\"true\">E</span><span>THE ERVIN MODEL <small>2026 ELECTION FORECAST</small></span><span class=\"ed-final-edition\">ELECTION DAY EDITION · NOVEMBER 3, 2026</span></div>\n <div class=\"ed-final-hero-row\">\n  <div class=\"ed-final-title-wrap\"><span class=\"ed-final-kicker\">THE NATIONAL ELECTION DESK / LOCKED FORECAST</span><h2 class=\"ed-final-headline\" id=\"edFinalHeadline\"><span>FINAL</span><span>PREDICTION</span></h2><p class=\"ed-final-deck\">Our final party-by-party projections for the House, Senate, and governors. Every shaded contest receives a definitive forecast call—no toss-up colors.</p></div>\n  <aside class=\"ed-final-hero-aside\"><span>THE BIG PICTURE</span><strong>A blue House.</strong><strong>A Senate cliffhanger.</strong><small>The final party-by-party predictions, locked before election-night returns. Open any district or state for its detailed forecast.</small></aside>\n </div>\n <div class=\"ed-final-metadata\"><span><span class=\"ed-final-dot\"></span> FORECAST LOCKED · NOV. 3, 2026</span><span>PROJECTIONS, NOT REPORTED VOTES</span><a class=\"ed-sim-source\" href=\"https://github.com/geervin/ervin-model-2026/blob/main/research/FINAL_2026_ELECTION_DAY_AUDIT.md\">Read the forecasting audit</a></div>\n</div>\n<div id=\"edSimTabs\" class=\"ed-sim-tabs\" role=\"group\" aria-label=\"Choose House, Senate or governor final prediction map\"></div>\n<div id=\"edFinalCallSummary\" class=\"ed-final-call-summary\" aria-live=\"polite\">Loading final projected winners…</div>\n<div class=\"ed-sim-map-pane ed-final-map-pane\">\n <div class=\"ed-sim-visual-heading\"><h3 id=\"edSimMapTitle\">House · final predictions by district</h3><span class=\"ed-sim-preview-flag\">FINAL RACE-BY-RACE CALLS</span></div>\n <div class=\"ed-final-map-scroller\" tabindex=\"0\" role=\"region\" aria-label=\"Explore projected winners on the interactive map\"><svg id=\"edSimMap\" viewBox=\"0 0 1080 625\" role=\"group\" aria-label=\"Final election projection map\"><text x=\"540\" y=\"315\" text-anchor=\"middle\">Loading election geography…</text></svg></div>\n <div class=\"ed-sim-map-legend\"><span><i class=\"ed-sim-legend-d\"></i> Democratic call</span><span><i class=\"ed-sim-legend-r\"></i> Republican call</span><span><i class=\"ed-sim-legend-n\"></i> No election in 2026</span></div>\n <p class=\"ed-sim-map-readout\" id=\"edSimMapReadout\" aria-live=\"polite\">Hover, focus, or select a district to inspect the projected winner.</p>\n <p class=\"ed-sim-map-foot\" id=\"edSimMapNote\">Predicted winners are not counted vote totals or official race calls.</p>\n</div>\n";
  const byline=document.querySelector('.ed-byline');
  const heading=document.querySelector('.ed-headline');
  if(!insight.isConnected)(byline||heading||balance).insertAdjacentElement(byline||heading?'afterend':'beforebegin',insight);
@@ -25,7 +24,7 @@ function build(){
  dashboard.insertAdjacentElement('afterend',stage);
  const hero=document.querySelector('.ed-headline');
  if(hero)hero.dataset.electionOriginal=hero.textContent;
- loadEnsemble();
+ renderFinalTabs('house');
 }
 function addEntry(message,time,url,source,prepend=true){
  const holder=$('edCommentaryEntries');if(!holder)return;
@@ -39,52 +38,21 @@ function addEntry(message,time,url,source,prepend=true){
  if(prepend)holder.prepend(item);else holder.append(item);
  while(holder.children.length>10)holder.lastElementChild.remove();
 }
-async function loadEnsemble(){
- try{
-  const response=await fetch('../final/ensemble-144000.json',{cache:'no-store'});
-  if(!response.ok)throw Error('Ensemble currently unavailable');
-  const data=await response.json();
-  if(data.schema!==1||data.trials!==144000||!data.center||!data.outcomes||
-    !['house','senateD','governorsD'].every(k=>data.center[k].rawBinCountsSum===144000&&data.center[k].histogram.reduce((n,x)=>n+x.count,0)===144000))throw Error('Simulation integrity check failed');
-  ensemble=data;renderEnsemble(selectedDistribution);
- }catch(error){const el=$('edSimSummary');if(el)el.textContent='The 144,000-run data is temporarily unavailable. The locked state-by-state forecast is still accessible.';}
-}
-function renderEnsemble(selected){
+// The public homepage is focused on the locked final race calls.
+function renderFinalTabs(selected){
  selectedDistribution=selected;
+ const tabs=$('edSimTabs');if(!tabs)return;
+ tabs.replaceChildren();
+ for(const [key,label] of [['house','House'],['senateD','Senate'],['governorsD','Governors']]){
+  const button=make('button','',label);button.type='button';
+  button.setAttribute('aria-pressed',String(key===selected));
+  button.addEventListener('click',()=>renderFinalTabs(key));tabs.append(button);
+ }
  renderProjectionMap(selected);
- if(!ensemble)return;
- const titles={house:'U.S. House · Democratic seats',senateD:'U.S. Senate · Democratic seats',governorsD:'Governorships · Democratic'};
- const c=ensemble.center[selected];
- $('edSimChartTitle').textContent=selected==='house'?'House seat distribution':selected==='senateD'?'Senate seat distribution':'Governor distribution';
- const tabs=$('edSimTabs');tabs.replaceChildren();
- for(const key of Object.keys(titles)){
-  const b=make('button','',key==='house'?'House':key==='senateD'?'Senate':'Governors');b.type='button';
-  b.setAttribute('aria-pressed',String(selected===key));b.addEventListener('click',()=>renderEnsemble(key));tabs.append(b);
- }
- const card=$('edSimSummary');card.replaceChildren();
- const data=[['House',ensemble.center.house.median+' D / '+(435-ensemble.center.house.median)+' R'],['Senate',ensemble.center.senateD.median+' D-aligned seats*'],['Governors',ensemble.center.governorsD.median+' D / '+(50-ensemble.center.governorsD.median)+' R']];
- for(const [k,val] of data){const block=make('div','ed-sim-stat');block.append(make('small','',k+' · median'),make('strong','',val));card.append(block);}
- const bars=$('edSimChart');bars.replaceChildren();bars.setAttribute('aria-label',titles[selected]+': simulated results, 144,000 runs, most common '+c.mode+' seats');
- const step=selected==='house'?3:1,lo=selected==='house'?213:c.histogram[0].seats,hi=selected==='house'?291:c.histogram.at(-1).seats;
- const groups=[];for(let start=lo;start<=hi;start+=step){const end=Math.min(hi,start+step-1),count=c.histogram.filter(h=>h.seats>=start&&h.seats<=end).reduce((sum,r)=>sum+r.count,0);groups.push({start,end,count});}
- const max=Math.max(...groups.map(g=>g.count));
- for(const g of groups){
-  const col=make('div','ed-sim-bin');
-  if(g.start<=c.median&&g.end>=c.median)col.classList.add('is-median');
-  const fill=make('span','ed-sim-fill');fill.style.height=Math.max(1,Math.round(g.count/max*100))+'%';
-  col.append(fill);
-  const lbl=make('small','',String(g.start));
-  if(selected==='house'&&((g.start-lo)/step)%3!==0)lbl.textContent='';
-  col.append(lbl);col.title=g.start+(g.end>g.start?'–'+g.end:'')+' Democratic seats: '+fmt(g.count)+' scenarios ('+pct(g.count/ensemble.trials)+')';bars.append(col);
- }
- $('edSimDetail').textContent=titles[selected]+'. Average '+c.mean+'; median '+c.median+'; most frequent '+c.mode+' ('+pct(c.modeShare)+' of scenarios). The central 90% of simulations fall between '+c.p05+' and '+c.p95+' seats.';
- const house=ensemble.unusual?.house?.[0],sen=ensemble.unusual?.senateD||[];
- $('edSimAnomalies').textContent='Distribution audit: The House is approximately bell-shaped (skew '+ensemble.center.house.skewness+'); individual one-seat bumps are not separate forecasts. '+(house?'The '+house.seats+'-seat bin occurs '+fmt(house.count)+' times versus '+fmt(house.normalExpected)+' under a matched normal curve. ':'')+(sen.length?'Senate tail bins, including '+sen[0].seats+' seats, also differ from a rounded normal approximation. ':'')+'These are descriptive diagnostics, not proof of a second mode or a reason to alter the forecast. *Independent-caucus assignments can affect Senate control.';
 }
 
-/* The final election prediction explicitly calls every modeled contest D or R.
- * The 144k simulation histogram is an uncertainty distribution and is not
- * reverse-engineered into district calls. Nothing here reads election returns. */
+/* The final prediction calls every modeled contest D or R.
+ * This feature never reads live election results. */
 const SVG_NS='http://www.w3.org/2000/svg';
 const IS_FINITE=n=>typeof n==='number'&&Number.isFinite(n);
 let mapRevision=0,districtShapes=null,districtPromise=null;
@@ -221,16 +189,50 @@ function districtGeometry(){
  })().catch(e=>{districtPromise=null;throw e});
  return districtPromise;
 }
+
+/* Align the Senate/Governor state silhouettes with the exact House inset
+ * frames. Alaska and Hawaii keep their state outlines; only the visual inset
+ * translation/scale changes, never the forecast data or office coverage. */
+const FINAL_INSETS={
+ AK:{x:56,y:436,w:245,h:163,border:[45,427,262,183]},
+ HI:{x:310,y:525,w:165,h:73,border:[303,518,187,88]}
+};
+function stateInsetTransform(d,code){
+ const frame=FINAL_INSETS[code];if(!frame)return '';
+ let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity,count=0;
+ for(const p of d.matchAll(/[ML](-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)){
+  const x=Number(p[1]),y=Number(p[2]);
+  if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;
+  count++;
+ }
+ if(count<3||!Number.isFinite(minX)||maxX<=minX||maxY<=minY)throw Error(code+' inset geometry cannot be positioned');
+ const scale=Math.min(frame.w/(maxX-minX),frame.h/(maxY-minY));
+ const tx=frame.x+(frame.w-(maxX-minX)*scale)/2-minX*scale;
+ const ty=frame.y+(frame.h-(maxY-minY)*scale)/2-minY*scale;
+ return 'translate('+tx.toFixed(3)+' '+ty.toFixed(3)+') scale('+scale.toFixed(5)+')';
+}
+function addFinalInsetFrames(svg){
+ const frameGroup=makeSvg('g',{class:'ed-sim-map-insets','aria-hidden':'true','pointer-events':'none'});
+ for(const code of ['AK','HI']){
+  const [x,y,w,h]=FINAL_INSETS[code].border;
+  frameGroup.append(makeSvg('rect',{x,y,width:w,height:h,rx:2}));
+  const name=makeSvg('text',{x:x+9,y:y+18});name.textContent=code;frameGroup.append(name);
+ }
+ svg.append(frameGroup);
+}
 function fillStateMap(office,rows,revision){
  if(revision!==mapRevision)return;
  const el=$('edSimMap'),summary=$('edSimMapReadout');
  const geo=window.ERVIN_US_GEOGRAPHY?.states||[];
  el.replaceChildren();el.setAttribute('viewBox',window.ERVIN_US_GEOGRAPHY?.viewBox||'0 0 1080 625');
  el.dataset.simOffice=office;
- el.setAttribute('aria-label',office==='senateD'?'Final Senate forecast: 17 called contests on 50 state outlines':'Final governor forecast: 36 called contests on 50 state outlines');
+ el.setAttribute('aria-label',office==='senateD'?'Final Senate forecast: 17 called contests, 50 state outlines with Alaska and Hawaii insets':'Final governor forecast: 36 called contests, 50 state outlines with Alaska and Hawaii insets');
  const what=office==='senateD'?'U.S. Senate':'governor';
  const defaultText=office==='senateD'?'All 17 modeled Senate contests have final winner calls. Gray states have no Senate race in this forecast.':'All 36 governor contests have final winner calls. Gray states have no governor election in 2026.';
  summary.textContent=defaultText;
+ // The same x/y inset rectangles used by the House map remain in every tab.
+ addFinalInsetFrames(el);
+ const insetLayers=[];
  for(const geoState of geo){
   const s=rows[geoState.code],r=s.entries[0]||null,kind=r?.kind||'N';
   const candidate=kind==='D'?r?.dem:kind==='R'?r?.rep:null;
@@ -243,9 +245,14 @@ function fillStateMap(office,rows,revision){
   link.addEventListener('focus',()=>summary.textContent=detail);
   link.addEventListener('pointerleave',()=>summary.textContent=defaultText);
   link.addEventListener('blur',()=>summary.textContent=defaultText);
-  el.append(link);
+  if(FINAL_INSETS[s.code]){
+   const group=makeSvg('g',{'data-sim-inset':s.code,transform:stateInsetTransform(geoState.d,s.code)});
+   group.append(link);insetLayers.push(group);
+  }else el.append(link);
  }
+ for(const layer of insetLayers)el.append(layer);
 }
+
 async function fillHouseMap(rows,revision){
  const el=$('edSimMap'),summary=$('edSimMapReadout');
  el.dataset.simOffice='house-loading';
@@ -307,7 +314,7 @@ function renderProjectionMap(office){
  const rows=projectedRows(office,model);
  if(!renderCallTally(office,rows)){el.replaceChildren();return}
  if(isHouse){
-  note.textContent='435 district-by-district predictions, including two contests assigned by sourced Cook ratings rather than a numeric poll. This point-call map can differ from the 144,000-run national median; it does not revise the locked model or display reported votes.';
+  note.textContent='435 district-by-district predictions, including two contests assigned by attributed publisher ratings rather than numeric polling. These are projected winners, not reported votes.';
   fillHouseMap(rows,revision);
  }else{
   note.textContent=isSen?
