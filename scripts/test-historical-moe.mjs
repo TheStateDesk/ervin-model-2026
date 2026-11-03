@@ -25,5 +25,6 @@ assert(js.includes('targetResidual(id)')&&js.includes("historicalMOE?.senate?.ra
 assert(js.includes("if(!key.endsWith('-SENATE'))return {ok:false"),'House results must not automatically shift Senate');
 assert(js.includes("'FL-27':'2026-11-03T19:00:00-05:00'"),'Florida closing time regression');
 assert(state.includes('changed2026Map')&&state.includes('historicalP90')&&state.includes("'Not comparable'"),'Changed maps not excluded from historical House error evidence');
-assert(board.includes('232 comparable 2022→2024 districts'));
+assert(board.includes('2018 and 2022')&&board.includes('2024 holdout')&&board.includes('house-presidential-backtest-2026.json'),'New House board must cite its chronological 2018/2022 development and independent 2024 backtest');
+assert.equal(read('research/house-presidential-backtest-2026.json').finalHoldout.n,356,'Do not drop historical House holdout after redesign');
 console.log('HISTORICAL MOE AUDIT PASS',JSON.stringify({senateEvents:err.length,houseComparable:houseErr.length,senateP90Margin:hist.senate.raw.p90Abs,houseP90Margin:hist.house.unchangedDistrictHoldout.p90Abs,redrawnExcluded:203}));
