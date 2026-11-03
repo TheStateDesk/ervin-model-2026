@@ -1,11 +1,199 @@
 {
-  "checkedAt": "2026-11-03T06:46:03.592182+00:00",
+  "checkedAt": "2026-11-03T16:16:56.859130+00:00",
   "pagesParsed": 15,
   "checkedRaceCount": 17,
-  "changes": 0,
+  "changes": 29,
   "observationsFound": 57,
   "errors": [],
-  "updated": [],
+  "updated": [
+    {
+      "state": "ME",
+      "source": "win270",
+      "margin": 5.0,
+      "published": "Nov 03"
+    },
+    {
+      "state": "ME",
+      "source": "ddhq",
+      "margin": 5.3,
+      "published": "Nov 03"
+    },
+    {
+      "state": "ME",
+      "source": "rcp",
+      "margin": 3.6,
+      "published": "Nov 03"
+    },
+    {
+      "state": "ME",
+      "source": "silver",
+      "margin": 4.0,
+      "published": "Nov 03"
+    },
+    {
+      "state": "IA",
+      "source": "win270",
+      "margin": 0.9,
+      "published": "Nov 02"
+    },
+    {
+      "state": "IA",
+      "source": "ddhq",
+      "margin": -0.3,
+      "published": "Nov 03"
+    },
+    {
+      "state": "IA",
+      "source": "rcp",
+      "margin": 0.0,
+      "published": "Nov 03"
+    },
+    {
+      "state": "IA",
+      "source": "silver",
+      "margin": 1.0,
+      "published": "Nov 02"
+    },
+    {
+      "state": "AK",
+      "source": "silver",
+      "margin": 2.4,
+      "published": "Nov 03"
+    },
+    {
+      "state": "SC",
+      "source": "win270",
+      "margin": -2.2,
+      "published": "Nov 02"
+    },
+    {
+      "state": "SC",
+      "source": "ddhq",
+      "margin": 0.1,
+      "published": "Nov 02"
+    },
+    {
+      "state": "SC",
+      "source": "rcp",
+      "margin": -2.6,
+      "published": "Nov 02"
+    },
+    {
+      "state": "SC",
+      "source": "silver",
+      "margin": -1.1,
+      "published": "Nov 03"
+    },
+    {
+      "state": "FL",
+      "source": "win270",
+      "margin": -6.3,
+      "published": "Nov 02"
+    },
+    {
+      "state": "FL",
+      "source": "ddhq",
+      "margin": -5.6,
+      "published": "Nov 02"
+    },
+    {
+      "state": "FL",
+      "source": "silver",
+      "margin": -6.1,
+      "published": "Nov 03"
+    },
+    {
+      "state": "MI",
+      "source": "win270",
+      "margin": 5.9,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "OH",
+      "source": "win270",
+      "margin": 1.9,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "TX",
+      "source": "win270",
+      "margin": 3.2,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "IA",
+      "source": "win270",
+      "margin": 0.9,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "KS",
+      "source": "win270",
+      "margin": 5.0,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "MN",
+      "source": "win270",
+      "margin": 5.4,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "AK",
+      "source": "win270",
+      "margin": 3.5,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "GA",
+      "source": "win270",
+      "margin": 9.6,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "NC",
+      "source": "win270",
+      "margin": 11.4,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "NH",
+      "source": "win270",
+      "margin": 8.2,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "NE",
+      "source": "win270",
+      "margin": -2.6,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "SC",
+      "source": "win270",
+      "margin": -2.2,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    },
+    {
+      "state": "FL",
+      "source": "win270",
+      "margin": -6.3,
+      "published": "2026-11-02",
+      "evidence": "Direct named publisher average"
+    }
+  ],
   "sourceCoverage": [
     {
       "state": "ME",
@@ -101,5 +289,93 @@
       "reason": "No independently attributed publisher averages"
     }
   ],
-  "sources": "Wikipedia 2026 general-election aggregate tables; matching candidate pair required"
+  "sources": "Wikipedia 2026 general-election aggregate tables; matching candidate pair required",
+  "directPublisherAudits": [
+    {
+      "state": "ME",
+      "result": "archived newer source retained"
+    },
+    {
+      "state": "MI",
+      "result": "direct 270toWin candidate match",
+      "margin": 5.9,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "OH",
+      "result": "direct 270toWin candidate match",
+      "margin": 1.9,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "TX",
+      "result": "direct 270toWin candidate match",
+      "margin": 3.2,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "IA",
+      "result": "direct 270toWin candidate match",
+      "margin": 0.9,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "KS",
+      "result": "direct 270toWin candidate match",
+      "margin": 5.0,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "MN",
+      "result": "direct 270toWin candidate match",
+      "margin": 5.4,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "AK",
+      "result": "direct 270toWin candidate match",
+      "margin": 3.5,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "GA",
+      "result": "direct 270toWin candidate match",
+      "margin": 9.6,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "NC",
+      "result": "direct 270toWin candidate match",
+      "margin": 11.4,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "NH",
+      "result": "direct 270toWin candidate match",
+      "margin": 8.2,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "NE",
+      "result": "direct 270toWin candidate match",
+      "margin": -2.6,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "SC",
+      "result": "direct 270toWin candidate match",
+      "margin": -2.2,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "FL",
+      "result": "direct 270toWin candidate match",
+      "margin": -6.3,
+      "latestUnderlyingPoll": "2026-11-02"
+    },
+    {
+      "state": "SD",
+      "result": "archived newer source retained"
+    }
+  ]
 }
