@@ -15,7 +15,7 @@ class ElectionReporting(unittest.TestCase):
  def test_registry_506(self):
   x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)
-  self.assertEqual(sum(v["office"]=="senate" for v in x.values()),17)
+  self.assertEqual(sum(v["office"]=="senate" for v in x.values()),35)
   self.assertEqual(sum(v["office"]=="governor" for v in x.values()),36)
  def test_accept_valid(self):
   r=m.normalize("MI-SENATE",self.search,self.detail,self.now,87214)
