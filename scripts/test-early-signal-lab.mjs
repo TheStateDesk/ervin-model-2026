@@ -68,9 +68,11 @@ assert(el('signalRows').innerHTML.includes('No watched races match'),'No actual 
 el('watchFilter').value='all';el('watchFilter').events.change();
 el('watchSort').value='close';el('watchSort').events.change();
 assert(el('signalRows').innerHTML.indexOf('Kentucky 6th')<el('signalRows').innerHTML.indexOf('Georgia · Senate'),'Chronological watchlist order must be earliest-first');
-assert(initial.includes('50.6%'),'TX must load actual baseline +1.2 D margin / 50.6% D share');
-assert(initial.includes('47.6%'),'KS must load actual baseline -4.8 D margin / 47.6% D share');
-assert(initial.includes('46.8%'),'IA must load actual baseline -6.33 D margin / 46.8% D share');
+// Compare displayed model shares with current saved forecasts. The pre-election
+// polling sweep can legitimately change them, so do not pin old margin literals.
+const expectedShare=state=>((100+Number(baselines.states[state].adjustedMargin))/2).toFixed(1)+'%';
+for(const state of ['TX','KS','IA'])assert(initial.includes(expectedShare(state)),
+  state+' must use latest saved Senate forecast share '+expectedShare(state));
 assert.equal(el('numApproved').textContent,0,'Initial feed has no eligible observed returns');
 assert.equal(el('sampleHealth').textContent,'14,000','Unconditional 14k scenarios should have ESS 14000');
 assert(el('sampleWarning').textContent.includes('No audited'),'No approved source must mean zero shift');
@@ -84,6 +86,6 @@ assert(el('sampleWarning').textContent.includes('what-if'),'Manual signals must 
 assert(el('manualList').innerHTML.includes('VA-02'),'Manual review entry should render');
 el('includeManual').onchange({target:{checked:false}});
 assert(el('sampleWarning').textContent.includes('No audited'),'Disabling hypotheticals must restore base');
-assert(el('targetCards').innerHTML.includes('50.6%'),'Base remains unchanged after disabling what-if');
+assert(el('targetCards').innerHTML.includes(expectedShare('TX')),'Base remains unchanged after disabling what-if');
 assert(html.includes('../research/EARLY_SIGNAL_LAB_2026.md'),'Methodology provenance missing');
 console.log('EARLY-SIGNAL-LAB PASS: 14,000 seeded draws, TX/KS/IA baselines, source audit and what-if isolation');
