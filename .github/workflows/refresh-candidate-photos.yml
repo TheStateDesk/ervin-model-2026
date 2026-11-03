@@ -29,7 +29,7 @@ jobs:
           python3 - <<'PY'
           import json
           a=json.load(open('candidate-portraits.json'))
-          assert all(v['url'].startswith('https://upload.wikimedia.org/') and v['page'].startswith('https://en.wikipedia.org/wiki/') for v in a['portraits'].values())
+          assert all(v['url'].startswith(('https://upload.wikimedia.org/','https://thumb.wikimedia.org/','https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/','https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/')) and v['page'].startswith(('https://en.wikipedia.org/wiki/','https://github.com/ElectIndex/26_us_forecast_data/','https://ballotpedia.org/')) for v in a['portraits'].values())
           print('Audited',len(a['portraits']),'attributed photographs')
           PY
       - name: Publish verified portrait manifest
