@@ -1,4 +1,5 @@
 name: Build official 2026 congressional district geography
+# Reconcile source maps to the validated 2026 TIGER/Line zipped shapefiles; do not use lower-resolution live query copies.
 on:
   push:
     branches: [2026-house-geography-presidential-backtest-design-20261103]
