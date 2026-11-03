@@ -342,7 +342,8 @@ function enter(){
  window.dispatchEvent(new Event('ervin:election-night-open'));
 }
 function pollPhase(){
- const preview=new URLSearchParams(location.search).get('preview');
+ const params=new URLSearchParams(location.search),preview=params.get('preview');
+ if(params.get('view')==='final')return;
  if(Date.now()>=SWITCH_AT||preview==='closing'||preview==='live')enter();
 }
 function storyScore(r){
