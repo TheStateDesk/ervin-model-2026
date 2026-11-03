@@ -114,6 +114,33 @@ def attributed_source_type(item):
         return "Wikipedia candidate-matched survey table (not original release)"
     return "Pollster release or directly linked news reporting"
 
+def pollster_fingerprint(name):
+    """Strip common sponsor annotations; do not merge differently named pollsters."""
+    text=re.sub(r"\\s*\\((?:D|R|I)(?:[- ]sponsored)?\\)\\s*","",str(name),flags=re.I)
+    return re.sub(r"[^a-z0-9]+","",text.lower())
+
+def survey_fingerprint(item):
+    """A survey must match pollster, field-end AND both candidate shares to dedupe."""
+    try:
+        d=round(float(item["dem"]),1);r=round(float(item["rep"]),1)
+    except (TypeError,ValueError,KeyError):
+        return None
+    end=str(item.get("fieldEnd") or item.get("publishedAt") or "")
+    return (pollster_fingerprint(item.get("pollster","")),end,d,r)
+
+def dedupe_survey_evidence(items):
+    """Retain original primary release when a Wikipedia row repeats that survey."""
+    priority=lambda item:(4 if item.get("url","").startswith("https://en.wikipedia.org/") else
+        3 if "realclearpolling.com" in item.get("url","") else
+        1 if "callthemap.com" in item.get("url","") else 0)
+    combined={}
+    for item in items:
+        key=survey_fingerprint(item)
+        if not key or not key[0]:continue
+        if key not in combined or priority(item)<priority(combined[key]):
+            combined[key]=item
+    return list(combined.values())
+
 def merge_survey_evidence(curated, verified):
     """Keep source-linked publication snapshots and newly parsed fieldwork separate.
 
@@ -121,7 +148,7 @@ def merge_survey_evidence(curated, verified):
     Deduplicate near-identical releases without assuming two publishers are
     distinct polls based only on their names.
     """
-    combined={}
+    valid=[]
     for item in list(curated)+list(verified):
         if not isinstance(item,dict):continue
         pollster=str(item.get("pollster","")).strip()
@@ -129,11 +156,10 @@ def merge_survey_evidence(curated, verified):
             d=float(item["dem"]);r=float(item["rep"])
         except (KeyError,ValueError,TypeError):continue
         if not pollster or d<0 or r<0 or d+r>102:continue
-        identity=(norm(pollster),round(d,1),round(r,1),str(item.get("fieldEnd") or item.get("publishedAt") or ""))
-        if identity not in combined or item.get("url"):
-            combined[identity]={**item,"sourceKind":attributed_source_type(item)}
+        valid.append({**item,"sourceKind":attributed_source_type(item)})
+    unique=dedupe_survey_evidence(valid)
     # Preserve up to 12 per state, most recently fielded or released first.
-    return sorted(combined.values(),
+    return sorted(unique,
                   key=lambda p:str(p.get("fieldEnd") or p.get("publishedAt") or ""),
                   reverse=True)[:12]
 
