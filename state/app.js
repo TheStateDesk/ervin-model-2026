@@ -55,6 +55,14 @@ function renderOverview(){
   box.innerHTML='<strong>Why the Michigan forecast differs from published polls</strong><p>Publisher input: '+esc(margin(s.pollMargin))+'; historical Senate calibration before the candidate term: '+esc(margin(p.referenceMarginD))+'; discounted primary-polling context: '+esc(p.adjustmentD.toFixed(2))+' Democratic points. Combined forecast: '+esc(margin(s.adjustedMargin))+'.</p>';
   $('stateRaceCards').firstElementChild?.insertAdjacentElement('afterend',box);
  }
+ if(code==='NE'&&s?.candidateRepeat){
+  const p=s.candidateRepeat,box=document.createElement('div');box.className='ed-notice';
+  box.innerHTML='<strong>Osborn versus Osborn: the 2024 election benchmark</strong>'+
+    '<p>In 2024, Dan Osborn faced Deb Fischer. Final polling averaged <strong>'+esc(margin(p.priorPollMargin))+'</strong> for Osborn (non-Republican minus Republican); the certified result was <strong>'+esc(margin(p.priorActualMargin))+'</strong>. That is a <strong>'+esc(p.priorPollingError.toFixed(2))+'-point</strong> Republican polling underestimation.</p>'+
+    '<p>Against Pete Ricketts in 2026: current aggregated publisher margin <strong>'+esc(margin(s.pollMargin))+'</strong>; applying that historical correction once gives the Ervin model <strong>'+esc(margin(s.adjustedMargin))+'</strong>. This is the same independent candidate but a different Republican opponent, and one prior error does not guarantee a repeat.</p>'+
+    '<p><a href="'+safeURL(p.sourceHistoricalAverage)+'" target="_blank" rel="noopener noreferrer">2024 final polling aggregates</a> · <a href="'+safeURL(p.sourceElectionResult)+'" target="_blank" rel="noopener noreferrer">Certified 2024 result</a></p>';
+  $('stateRaceCards').firstElementChild?.insertAdjacentElement('afterend',box);
+ }
  // Conditional statewide odds use office-specific historic error widths, not
  // sample MOE or certified race-call probabilities.
  const cards=$('stateRaceCards').querySelectorAll('.ed-race');
