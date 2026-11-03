@@ -52,8 +52,8 @@
   ok(!!d.getElementById('usMap'),'Geographic states are accessible through the canonical State Desk');
   ok(d.getElementById('stateMapTooltip')!==null,'State hover ledger replaces legacy Research Center tabs');
   stage='election-night';d=await load('../election-night/');
-  await until(()=>d.querySelector('#nationalCount')?.textContent.includes('488 indexed races'));
-  ok(d.querySelectorAll('#raceList .race-row').length===488,'National Election Night covers all 435 House, 17 Senate and 36 governor races');
+  await until(()=>d.querySelector('#nationalCount')?.textContent.includes('506 indexed races'));
+  ok(d.querySelectorAll('#raceList .race-row').length===506,'National Election Night covers all 435 House, 35 Senate and 36 governor races');
   stage='election-night-house-filter';const button=d.querySelector('button[data-office="House"]');button.click();
   await until(()=>d.querySelectorAll('#raceList .race-row').length===435);
   ok(d.querySelectorAll('#raceList .race-row').length===435,'Election Night House filtering shows all districts');
