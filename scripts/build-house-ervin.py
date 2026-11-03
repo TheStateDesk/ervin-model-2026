@@ -240,7 +240,34 @@ def main():
             'Low · reconstructed 2026 district' if changed else
             'Moderate · congressional presidential evidence')
         if special:estimate=None
-        obj={'id':id,'state':state,'district':seat['district'],'modelRating':rating,'marginD':round(estimate,1) if estimate is not None else None,'uncertaintySensitivity':width,'pollEvidence':len(usable),'publishedSurveyCount':source.get('publishedCount',archive.get(id,{}).get('count',0)),'sourceRating':seat.get('rating'),'confidence':confidence,'ratingBasis':('Cook published 2026 rating' if changed and seat.get('rating') else 'No current-boundary forecast' if changed else 'Ervin 2026 House historical/poll model'),'numericModelWithheld':changed,'changed2026Map':changed,'historicalProxy':bounded,'historic':years,'nationalBaselineMargins':{'2022':national[2022],'2024':national[2024]},'generic2026D':round(generic,2),'stateErrorPartialCorrection':round(correction,2),'fundamentalsD':round(fundamental,2),'pollMeanD':round(poll_avg,2) if poll_avg is not None else None,'pollWeight':round(strength,2),'surveys':local,'pollDirectoryLink':POLL_DIR,'methodNote':('2026 MAP REDRAW: Old-number House vote history is not a valid numerical predictor for these voters. The previous numeric margin is WITHHELD; source rating shown only when specifically present in the Cook data. ' if changed else '')+('Uncontested/missing House returns: bounded historical proxy, not a comparable two-party result. ' if bounded else '')+('Recent individual polls shrink toward historical prior; only compatible D/R pairs enter the arithmetic. ' if usable else 'No usable candidate-matched recent district polls; rating is historical/generic-ballot estimate only. ')}
+        obj={
+          'id':id,'state':state,'district':seat['district'],
+          'modelRating':rating,'marginD':round(estimate,1) if estimate is not None else None,
+          'uncertaintySensitivity':width,'pollEvidence':len(usable),
+          'publishedSurveyCount':source.get('publishedCount',archive.get(id,{}).get('count',0)),
+          'sourceRating':seat.get('rating'),'confidence':confidence,
+          'ratingBasis':('Cook qualitative only: special election ballot' if special else
+               'House-only presidential 2026 district lean + dated generic ballot + compatible polls'),
+          'numericModelWithheld':special,'changed2026Map':changed,'historicalProxy':bounded,
+          'historic':years,'nationalBaselineMargins':{'2022':national[2022],'2024':national[2024]},
+          'presidentialBaseline':{'pres2024MarginD':pres['pres24MarginD'],'pres2020MarginD':pres['pres20MarginD'],
+             'national2024MarginD':float(national_pres['2024']),
+             'national2020MarginD':float(national_pres['2020']),
+             'districtLeanD':round(lean,3),
+             'estimatedVoteAllocation':not pres['mapVerified'],
+             'method24':pres['method24'],'method20':pres['method20'],
+             'sourceUrl':pres_archive['sourceUrl']},
+          'historicalModelCoefficient':alpha,
+          'generic2026D':round(generic,2),'stateErrorPartialCorrection':0,
+          'fundamentalsD':round(fundamental,2),
+          'pollMeanD':round(poll_avg,2) if poll_avg is not None else None,
+          'pollWeight':round(strength,2),'surveys':local,'pollDirectoryLink':POLL_DIR,
+          'methodNote':('2026 REDRAW: 2024 presidential votes were RECONSTRUCTED for new district lines from precinct/block allocations, not officially certified as district voting. The 2022/2024 House votes under the same district number describe other voters and are research context only. ' if changed else
+             'District lines correspond to the 2026 ballot, with presidential vote allocations estimated from published historical election data. ')
+          +('Special candidate ballot: Cook qualitative rating only; no comparable D/R contest margin or RCV transfer forecast. ' if special else
+             'The House-only presidential lean coefficient '+str(alpha)+' was trained with 2018/2022 and checked on 2024 held-out contests. ')
+          +'No cross-office Senate/Governor error transfer or untested incumbent bonus; only compatible district polls may modify this baseline.'
+        }
         outputs[id]=obj;rating_count[rating]+=1
     if len(outputs)!=435:raise RuntimeError('House count invalid')
     result={'asOf':TODAY.isoformat(),'label':'Ervin House — provisional district scenario','scope':'435 districts indexed; numerical House model WITHHELD for the 173 redrawn-map districts until current-boundary vote baselines are sourced. Cook ratings are qualitative and never converted to fictional D-R margins.','method':{'formula':'Unchanged districts: House 2022/2024 D-R vs contemporaneous national House margins (40/60); GA/NY use only 2024 because districts changed before 2024; plus a dated national generic ballot and candidate-compatible district surveys. Senate/presidential historical errors are NOT transferred to House. For 173 changed 2026 maps, numeric old-map forecasts are withheld and only documented Cook ratings are used.','genericBallot':{'demMargin':round(generic,2),'asOf':generic_source['asOf'],'inputs':inputs,'note':'This is the dated source snapshot, not a claim the averages were refreshed on build day. Secondary DDHQ remains flagged. No unsourced 270toWin average.'},'historicalReturns':{'source':'MIT Election Data and Science Lab 1976–2024, public domain via electiondata.dev','url':'https://electiondata.dev/datasets/house-results/','years':[2022,2024],'nationalMarginsD':{str(y):national[y] for y in national}},'polling':{'source':'The New York Times CC BY 4.0 polling index as summarized at PeoplesPoll; original linked releases; RCP latest polls','url':POLL_DIR,'note':'Archive shows only subset of all published surveys; a published survey count is not the number of rows displayed.'},'specialCaveat':'Alaska ranked-choice and top-two/all-party California contests require contest-specific interpretation. Margins only compare identifiable D and R survey respondents; model cannot simulate RCV transfer or same-party elections.','redrawnStates':sorted(NEW_MAP),'redrawSource':'https://ballotpedia.org/Redistricting_ahead_of_the_2026_elections','uncertainty':'Sensitivity width in margin points, not calibrated probability/confidence interval.'},'summary':{'districts':435,'modeledCount':sum(isinstance(x['marginD'],(int,float)) for x in outputs.values()),'ratings':dict(rating_count),'districtsWithPollRows':sum(bool(x['surveys']) for x in outputs.values()),'districtsWithComparablePolls':sum(x['pollEvidence']>0 for x in outputs.values()),'indexedPublishedSurveys':sum(x['publishedSurveyCount'] for x in outputs.values()),'changedMapDistricts':sum(x['changed2026Map'] for x in outputs.values()),'redrawnCookRated':sum(x['changed2026Map'] and bool(x['sourceRating']) for x in outputs.values()),'redrawnUnrated':sum(x['changed2026Map'] and not x['sourceRating'] for x in outputs.values()),'historicalProxyDistricts':sum(x['historicalProxy'] for x in outputs.values())},'races':outputs}
