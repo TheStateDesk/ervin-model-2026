@@ -13,14 +13,27 @@ const OFF_CYCLE_GOVERNORS={D:6,R:8};
 const SENATE_BASE={D:47,R:53};
 const DEM_HELD=new Set(['MI','GA','NH','MN']);
 const INDEPENDENT_NONR=new Set(['NE','SD','MT']);
-const total=c=>c.D+c.R+c.T+(c.I||0);
+const total=c=>c.D+c.R+c.T+(c.I||0)+(c.U||0);
 function label(count,denom){return count+' of '+denom}
 function compute(house,senate,governors){
  const rows=Object.values(house?.races||{});
  if(rows.length!==435)throw Error('House balance requires all 435 districts; found '+rows.length);
- const h={D:0,R:0,T:0,denom:435,threshold:218};
+ const h={D:0,R:0,T:0,U:0,denom:435,threshold:218};
  for(const x of rows){
-  if(x.modelRating==='Tossup'||!Number.isFinite(x.marginD)||Math.abs(x.marginD)<0.05)h.T++;
+  // The 173 redrawn districts cannot inherit numerical estimates from the
+  // old district number. Use only separately sourced 2026 ratings; if none,
+  // leave the House seat explicitly unprojected, never a fabricated toss-up.
+  if(x.changed2026Map){
+   if(!x.numericModelWithheld||Number.isFinite(x.marginD))throw Error('Unsafe old-map margin for '+x.id);
+   if(x.modelRating==='Unrated')h.U++;
+   else if(x.modelRating==='Tossup')h.T++;
+   else if(/^(Solid|Likely|Lean|Tilt) D$/.test(x.modelRating))h.D++;
+   else if(/^(Solid|Likely|Lean|Tilt) R$/.test(x.modelRating))h.R++;
+   else throw Error('Unsupported redrawn source rating '+x.id);
+   continue;
+  }
+  if(!Number.isFinite(x.marginD))h.U++;
+  else if(x.modelRating==='Tossup'||Math.abs(x.marginD)<0.05)h.T++;
   else if(x.marginD>0)h.D++;
   else h.R++;
  }
@@ -57,25 +70,26 @@ function compute(house,senate,governors){
 function render(rootEl,projection){
  if(!rootEl)throw Error('Balance-of-power container missing');
  const specs=[
-  {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 districts · 218 seats for a majority · model Tossups remain unassigned'},
+  {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 districts · 218 for a majority · '+projection.house.U+' redrawn districts without current-map ratings remain unprojected; source-rated seats use qualitative Cook labels'},
   {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:projection.senate.D+' D-aligned · '+projection.senate.R+' Republican · '+projection.senate.T+' toss-up seats remain unresolved'+(projection.senate.I?' · '+projection.senate.I+' independent':'')+'. At 50–50 the Republican vice president breaks the tie; Democrats need 51 for control. Unmodeled contests are presumed held.'},
   {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 races · 14 holdovers · margins within 1.5 points treated as toss-ups; missing polls remain unprojected'}
  ];
  rootEl.innerHTML=specs.map(({office,label:headline,data,href,note})=>{
   const partyD=office==='senate'?'D-aligned':'Democratic';
   const other=data.I||0;
-  const hover=partyD+' '+data.D+'; Republican '+data.R+(data.T?'; unresolved '+data.T:'')+(other?'; new independent '+other:'')+' — '+headline;
+  const hover=partyD+' '+data.D+'; Republican '+data.R+(data.T?'; toss-up '+data.T:'')+(data.U?'; without comparable current-map ratings '+data.U:'')+(other?'; new independent '+other:'')+' — '+headline;
   const pct=n=>Number((n/data.denom*100).toFixed(4));
   return '<article class="power-card" data-power-office="'+office+'">'+
    '<div class="power-card-head"><h3>'+headline+'</h3><a href="'+href+'">'+(office==='senate'?'Control outlook':'Choose a state')+'</a></div>'+
    '<div class="power-numbers"><span class="power-d"><strong data-power-d>'+data.D+'</strong><small>'+partyD+'</small></span>'+
    '<span class="power-r"><strong data-power-r>'+data.R+'</strong><small>Republican</small></span>'+
-   (data.T?'<span class="power-t"><strong data-power-t>'+data.T+'</strong><small>'+ (office==='house'?'Toss-up':'Unprojected') +'</small></span>':'')+
+   (data.T?'<span class="power-t"><strong data-power-t>'+data.T+'</strong><small>Toss-up</small></span>':'')+
+   (data.U?'<span class="power-t"><strong data-power-u>'+data.U+'</strong><small>Unprojected</small></span>':'')+
    (other?'<span class="power-t"><strong>'+other+'</strong><small>New independent</small></span>':'')+'</div>'+
    '<div class="power-bar" role="img" aria-label="'+hover+'">'+
    '<div class="power-segment power-segment-d" style="width:'+pct(data.D)+'%" title="'+partyD+' '+label(data.D,data.denom)+'"></div>'+
    '<div class="power-segment power-segment-r" style="width:'+pct(data.R)+'%" title="Republican '+label(data.R,data.denom)+'"></div>'+
-   (data.T+other?'<div class="power-segment power-segment-t" style="width:'+pct(data.T+other)+'%" title="Unallocated '+label(data.T+other,data.denom)+'"></div>':'')+
+   (data.T+other+(data.U||0)?'<div class="power-segment power-segment-t" style="width:'+pct(data.T+other+(data.U||0))+'%" title="Toss-up or unprojected '+label(data.T+other+(data.U||0),data.denom)+'"></div>':'')+
    '<div class="power-majority-tick" style="left:'+pct(data.threshold)+'%" aria-hidden="true"></div></div><div class="power-card-footer"><small>'+note+'</small></div></article>';
  }).join('');
  rootEl.setAttribute('data-power-ready','true');
