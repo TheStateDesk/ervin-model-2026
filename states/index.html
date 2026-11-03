@@ -14,6 +14,7 @@
 <a class="ed-skip-link" href="#watchSection">Skip to content</a><main class="ed-shell"><div class="ed-sectionline"><span class="ed-kicker">2026 / THE AMERICAN ELECTION ATLAS</span><span>50 states · 435 congressional districts</span></div>
 <h1 class="ed-headline">Every state. One clear picture.</h1>
 <p class="ed-standfirst">Explore the races shaping 2026 in a single state edition. Senate and governor polling, all House districts, county-level historical patterns, conditional forecasts and reported votes belong in one place—not a maze of separate race pages.</p>
+<p id="finalPhaseStatus" class="ed-mini" role="status">Pre-election forecast · verified polling sources</p>
 <section id="electionDashboard" class="atlas-shell" aria-labelledby="dashboardTitle" hidden>
 <div class="atlas-heading"><div><div class="ed-kicker">2026 / NATIONAL ELECTION ATLAS</div><h2 id="dashboardTitle">Final predictions · 2026</h2><p id="dashboardIntro">Solid colors show projected party leads, not certified results.</p></div><a href="../election-night/" class="ed-btn outline">Full results desk</a></div>
 <div class="atlas-banner" id="reportingBanner" role="status">Forecasts only · reporting status is checked independently</div>
@@ -33,14 +34,14 @@
   <div class="ed-kicker">THE NATIONAL BOARD / 2026 FORECAST</div>
   <h2 id="powerTitle">Projected balance of power</h2>
   <p>How the model currently allocates the House, Senate and governorships. Forecasts only—not results or race calls.</p>
- </div><span class="power-asof">SNAPSHOT · NOVEMBER 2, 2026</span></div>
+ </div><span class="power-asof">FORECAST · SOURCE-LINKED</span></div>
  <div class="power-legend"><span><i class="power-swatch power-swatch-d"></i>Democratic / D-aligned</span>
  <span><i class="power-swatch power-swatch-r"></i>Republican</span><span><i class="power-swatch power-swatch-t"></i>Toss-up / unprojected</span></div>
- <div id="powerCards" class="power-grid" aria-live="polite"><p>Loading seat forecast...</p></div>
+ <div id="powerCards" class="power-grid" aria-live="polite"><p>Loading seat forecast…</p></div>
  <p class="power-method">435 House districts · 100 senators · 50 governorships. Toss-ups are not assigned to either party; unmodeled Senate races are assumed to retain their current alignment. <a href="../election-night/">See separately attributed election-night results</a>.</p>
 </section>
 <div id="officeFocus" class="ed-office-focus" role="status" hidden></div>
-<div class="ed-band"><label for="stateSearch" class="ed-cap">Find your state <input id="stateSearch" class="ed-control" type="search" placeholder="Type Michigan, Texas, Maine…" style="width:min(370px,82vw);margin-left:10px" autocomplete="off"></label><label class="ed-cap" for="quickSelect">or choose <select class="ed-control" id="quickSelect" style="min-width:150px;margin-left:5px"><option value="">Select a state</option></select></label></div>
+<div class="ed-band"><label for="stateSearch" class="ed-cap">Find your state <input id="stateSearch" class="ed-control" type="search" placeholder="Type Michigan, Texas, Maine…" style="width:min(370px,82vw);margin-left:10px" autocomplete="off"></label><label class="ed-cap" for="quickSelect">or choose <select class="ed-control" id="quickSelect" style="min-width:150px;margin-left:5px"><option value="">Select a state</option></select></label></div><p id="stateSearchStatus" class="ed-mini" role="status" aria-live="polite"></p>
 <div class="ed-columns" id="nationMap">
 <section class="ed-card"><div class="ed-kicker">NATIONWIDE / TAP ANY STATE TO OPEN</div><h2 style="margin:7px 0 13px">The 50-state election map</h2>
 <div class="ed-map-surface"><div id="stateMapTooltip" class="ed-map-tooltip" role="tooltip" hidden></div><svg id="usMap" viewBox="0 0 1080 625" role="group" aria-label="Interactive national election map with fifty selectable states"><text x="540" y="280" text-anchor="middle">Loading geography…</text></svg></div>
@@ -61,7 +62,7 @@
  <p id="allCountyNote" class="atlas-footnote">Conditional county scenarios based on current statewide forecasts and 2020/2024 county results, not 2026 county polls or counted ballots.</p>
  </section>
  <a class="ed-skip-link" href="#stateDirectory">Skip maps, browse states</a><section id="stateDirectory" style="margin-top:32px">
-<div class="ed-sectionline"><span class="ed-kicker">STATE INDEX / ALPHABETICAL</span><span id="directoryCount">50 state editions</span></div>
+<div class="ed-sectionline"><span class="ed-kicker">STATE INDEX / BY REGION</span><span id="directoryCount">50 state editions</span></div>
 <div id="stateRegions"></div></section>
 <section id="editorialNotes" class="ed-columns" style="margin-top:35px">
 <div class="ed-card"><h2>The Ervin editorial standard</h2><p class="ed-mini">Every state gets geographic coverage even where there is no modeled Senate race or gubernatorial election. Candidate ratings and publisher averages are kept separate from independently calculated models, historical county returns, and actual election results.</p>
