@@ -202,8 +202,8 @@ try{
  assert((await governorPage.locator('#govUSMap a[data-code="OH"] path').count())===1,'Ohio governor state geometry must remain visible');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
  assert(/\d+ Ervin-adjusted/.test(await governorPage.locator('#coverage').innerText()),'Governor historical adjustments must be counted');
- await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('4.66')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.23'),null,{timeout:12000});
- assert((await governorPage.locator('#govBacktestRows tr').count())===41,'Governor source-linked backtest missing 6 new sourced historical events');
+ await governorPage.waitForFunction(()=>document.querySelector('#govBacktestN')?.textContent.includes('20 / 57')&&document.querySelector('#govBacktestRaw')?.textContent.includes('4.67')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.11'),null,{timeout:12000});
+ assert((await governorPage.locator('#govBacktestRows tr').count())===57,'Governor-only archive requires all 57 sourced historical events');
  await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
  await ohioCard.screenshot({path:'visual-checks/Ohio-Governor-Ervins-Take-Verified.png'});
  await governorPage.close();
