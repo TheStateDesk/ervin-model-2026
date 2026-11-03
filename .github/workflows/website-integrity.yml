@@ -56,7 +56,7 @@ jobs:
       - run: node scripts/test-live-results-stress.mjs
       - run: node scripts/test-historical-moe.mjs
       - run: node scripts/test-michigan-candidate-effect.mjs
-      - name: Verify CivicAPI 488-contest registry and sampled live v2 response contracts
+      - name: Verify CivicAPI 506-contest registry and sampled live v2 response contracts
         run: |
           python3 -m unittest discover -s tests -p test_civicapi_national.py -v
           python3 -m unittest discover -s tests -p test_civicapi_probe.py -v
