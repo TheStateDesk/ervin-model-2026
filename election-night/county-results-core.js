@@ -14,7 +14,15 @@ const close=(state,office)=>{
  return Number.isFinite(ref)?ref:Date.parse('2026-11-04T07:00:00Z');
 };
 const related=(candidate,authority)=>{
- const a=url(authority),c=url(candidate);return !!(a&&c&&(a.hostname===c.hostname||c.hostname.endsWith('.'+a.hostname)));
+ const a=url(authority),c=url(candidate);
+ if(!a||!c||a.hostname!==c.hostname)return false;
+ // A county link is not permission to ingest unrelated races served under
+ // the same election vendor domain (for example Clarity's other NJ counties).
+ // Case-insensitive percent-decoded normalized path must belong to the
+ // specifically independently listed county's reporting endpoint.
+ const ap=decodeURIComponent(a.pathname).toLowerCase().replace(/\/+$/,''),
+       cp=decodeURIComponent(c.pathname).toLowerCase().replace(/\/+$/,'');
+ return !ap||ap==='/'||cp===ap||cp.startsWith(ap+'/');
 };
 function sourceAllowed(state,county,sourceUrl,registry){
  const record=registry?.states?.[state];
