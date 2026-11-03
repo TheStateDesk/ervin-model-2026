@@ -177,7 +177,8 @@ function updatePhase(){
  const now=Date.now(),preview=new URLSearchParams(location.search).get('preview');
  const override=['forecast','final','closing','live'].includes(phaseConfig.phase)?phaseConfig.phase:null;
  const isFinal=!!lockedAt&&now>=finalAt,closingAt=Date.parse('2026-11-03T17:55:00-05:00');
- const phase=['final','closing','live'].includes(preview)?preview:override||(live?'live':now>=closingAt?'closing':isFinal?'final':'forecast');
+ const archived=new URLSearchParams(location.search).get('view')==='final';
+ const phase=archived?'final':['final','closing','live'].includes(preview)?preview:override||(live?'live':now>=closingAt?'closing':isFinal?'final':'forecast');
  // There is one primary fifty-state forecast map. Detailed results appear as
  // a separate LIVE desk only when verified votes have been accepted.
  const showResults=phase==='live'||phase==='closing',forecastPublished=phase==='final'||phase==='closing'||showResults;
