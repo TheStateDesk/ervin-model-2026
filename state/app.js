@@ -374,7 +374,7 @@ async function loadReturns(force=false){
   const civicCount=inState.filter(r=>r.source.includes('CivicAPI')).length;
   $('resultStatus').className='ed-inline-status'+(inState.length?' live':'');
   $('resultStatus').textContent=inState.length?inState.length+' contests with attributed returns · '+civicCount+' from CivicAPI':'Awaiting attributed current-election results';
-  $('resultUpdated').textContent='Checked '+new Date().toLocaleTimeString()+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
+  $('resultUpdated').textContent='Checked '+(window.ERVIN_AP_DATE?.timestamp(Date.now())||new Date().toLocaleTimeString())+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
  }catch(e){
   $('resultStatus').className='ed-inline-status stale';
   $('resultStatus').textContent='Source audit unavailable: '+String(e.message||e).slice(0,90);
@@ -406,7 +406,7 @@ async function start(){
   const [h,g]=await Promise.all([fetchJSON('../house/data.json'),fetchJSON('../governors/data.json')]);
   house=h.seats||[];governors=g.races||[];
   prepareSelection();initCountyControls();$('houseMapReload').onclick=()=>loadHouseMap(true);$('reloadResults').onclick=()=>loadReturns(true);
-  fetchJSON('../refresh_log.json').then(log=>{if(log.checkedAt){sourceTimeLabel='Updated '+new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});$('headerDate').textContent=sourceTimeLabel;$('editionDate').textContent=sourceTimeLabel}}).catch(()=>{$('headerDate').textContent='Source update time unavailable'});
+  fetchJSON('../refresh_log.json').then(log=>{if(log.checkedAt){sourceTimeLabel='Updated '+(window.ERVIN_AP_DATE?.timestamp(log.checkedAt)||new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}));$('headerDate').textContent=sourceTimeLabel;$('editionDate').textContent=sourceTimeLabel}}).catch(()=>{$('headerDate').textContent='Source update time unavailable'});
   const optionalFiles=[
    fetchJSON('../counties-watch/forecast-baselines.json'),
    window.ERVIN_SCENARIOS.load(),
