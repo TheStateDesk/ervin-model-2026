@@ -70,7 +70,7 @@ function render(){
    const key=String(feature.id||'').padStart(5,'0');
    const est=values?.get(key)?.expected??null;
    const d=pathFor(feature.geometry,code);if(!d)continue;
-   const a=NS('a');a.setAttribute('href','../state/?state='+code+'#stateGeography');a.setAttribute('aria-label',(feature.properties?.name||'County')+', '+code+'. '+office+' '+fmt(est));
+   
    const p=NS('path');p.setAttribute('class','all-county '+color(est));p.setAttribute('d',d);
    p.setAttribute('data-county-id',key);
    if(isNumber(est)){
@@ -79,12 +79,12 @@ function render(){
     p.style.fill='color-mix(in srgb, var(--atlas-'+(est>=0?'d':'r')+') '+Math.round(strength)+'%, var(--atlas-n))';
    }
    const tip=NS('title');tip.textContent=(feature.properties?.name||key)+' County, '+code+(isNumber(est)?' · conditional '+office+' scenario '+fmt(est):' · no 2026 '+office.toLowerCase()+' margin');
-   p.append(tip);a.append(p);group.append(a);shapeCount++;
+   p.append(tip);group.append(p);shapeCount++;
   }
   frag.append(group);
  }
  svg.append(frag);
- status.textContent=raceStates+' states with '+office.toLowerCase()+' estimates · '+colored+' county scenarios · '+shapeCount+' county/borough shapes';
+ status.textContent=raceStates+' states with '+office+' estimates · '+colored+' county scenarios · '+shapeCount+' county/borough shapes';
  $('allCountyNote').textContent='Each colored county is a conditional 2026 '+office+' projection based on 2020/2024 county history shifted to the current statewide margin. No 2026 county polls or votes are inferred. Unmodeled counties stay neutral; third-party voting and changed turnout can alter outcomes.';
  for(const b of document.querySelectorAll('[data-national-county-office]'))b.setAttribute('aria-pressed',String(b.dataset.nationalCountyOffice===office));
 }
@@ -102,12 +102,18 @@ async function start(){
   loaded=true;render();
  }catch(e){console.error(e);el.textContent='County geography could not be loaded; the 50-state map above and state editions remain available.'}
 }
+function observeMap(){
+ const root=$('allCountyNation');if(!root||started||!models)return;
+ if(!('IntersectionObserver'in window)){start();return}
+ const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){io.disconnect();start()}},{rootMargin:'350px 0px'});
+ io.observe(root);
+}
 function initialize(){
  const section=$('allCountyNation');if(!section)return;
  document.querySelectorAll('[data-national-county-office]').forEach(b=>b.addEventListener('click',()=>{office=b.dataset.nationalCountyOffice;render()}));
  models=window.ERVIN_HOME_FORECAST||null;
- window.addEventListener('ervin:forecast-ready',()=>{models=window.ERVIN_HOME_FORECAST;if(loaded)render();else start()});
- if(models)start();
+ window.addEventListener('ervin:forecast-ready',()=>{models=window.ERVIN_HOME_FORECAST;if(loaded)render();else observeMap()});
+ if(models)observeMap();
  else {
   const handle=()=>{if(!models){el.textContent='Waiting for current Senate and governor forecasts…'}};
   const el=$('allCountyStatus');handle();
