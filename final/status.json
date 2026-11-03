@@ -1,0 +1,8 @@
+{
+  "phase": "auto",
+  "finalLockedAt": null,
+  "headline": null,
+  "dek": null,
+  "version": 1,
+  "notes": "Automatic forecast/final/closing/live phases. Set phase only to forecast, final, closing or live to override. Lock occurs only when final/forecast-final.json exists."
+}
