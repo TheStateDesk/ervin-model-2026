@@ -39,7 +39,7 @@ function render(){
  $('controlUnknownBar').style.width=(result.uncertain*100)+'%';
  $('controlBar').setAttribute('aria-label','D-aligned control '+pct(result.partyD)+', Republican control '+pct(result.partyR)+', unresolved '+pct(result.uncertain));
  $('controlRange').textContent='Illustrative 10th–90th percentile seats: Democratic '+result.demRange.join('–')+(result.repRange?' · Republican '+result.repRange.join('–'):' · Republican interval awaits ensemble refresh');
- status.textContent=(isMain?'144,000 reproducible historical-residual scenarios · standard setting':'14,000-draw alternate-width sensitivity preview')+' · 17 tracked Senate states · 18 others held constant · independent caucus choices unresolved; frequencies are conditional, not calibrated odds';
+ status.textContent=(isMain?'Historical-error sensitivity · standard setting':'Alternate uncertainty sensitivity setting')+' · 17 tracked Senate states · 18 others held constant · independent caucus choices unresolved; frequencies are conditional, not calibrated odds';
 }
 async function start(){
  try{
