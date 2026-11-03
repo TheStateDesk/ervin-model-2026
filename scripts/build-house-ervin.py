@@ -171,34 +171,26 @@ def main():
         abs(x['marginD'])<=40 and x.get('asOf') and x.get('url','').startswith('https://')
         and 0<x.get('weight',0)<=1 for x in inputs), 'Generic ballot source contract invalid'
     generic=sum(x['marginD']*x['weight'] for x in inputs)/sum(x['weight'] for x in inputs)
+    pres_archive=load('house/presidential-2026-boundaries.json')
+    selected=load('research/house-presidential-backtest-2026.json')
+    assert len(pres_archive['races'])==435 and selected['training']['n']>=600 and selected['finalHoldout']['n']>=180
+    alpha=float(selected['forward2026']['alpha'])
+    national_pres=selected['forward2026']['presidentialNationalMarginD']
     rating_count=collections.Counter(); outputs={}
     for seat in seats:
         id=seat['id'];state=seat['code'];changed=state in NEW_MAP
         years={str(y):yearly[y].get(id) for y in (2022,2024)}
-        # GA/NY boundaries changed for 2024: never weight 2022 returns for
-        # a different congressional constituency alongside 2024 House votes.
-        usable_years=(2024,) if state in ('GA','NY') else (2022,2024)
-        valid=[(y,yearly[y][id],.40 if y==2022 else .60) for y in usable_years if yearly[y].get(id,{}).get('contested')]
-        # When House returns were uncontested, prefer clearly labeled bounded history signals,
-        # not a fabricated district-level numerical margin.
-        bounded=False
-        if valid:
-            denom=sum(w for _,_,w in valid)
-            normal=sum((v['margin']-national[y])*w for y,v,w in valid)/denom
-            fundamental=generic+normal
-        else:
-            historical=[v for v in years.values() if v]
-            if historical:
-                dominant=sum(v['margin'] for v in historical)/len(historical)
-                fundamental=clamp(dominant,-28,28)
-                bounded=True
-            else:
-                # Explicit prior-proxy: only when neither census-period race is reported.
-                old=seat.get('rating') or ''
-                fundamental=(-17 if ' R' in old else 17 if ' D' in old else 0)
-                bounded=True
-        # Senate/presidential historical errors are federal statewide events,
-        # not evidence of US House district pollster error. Do not pool offices.
+        pres=pres_archive['races'][id]
+        if bool(pres['redrawn2026']) != changed:
+            raise RuntimeError('Incompatible 2026 presidential map status for '+id)
+        if not all(isinstance(pres.get(k),(int,float)) for k in ('pres24MarginD','pres20MarginD')):
+            raise RuntimeError('Unavailable current-map presidential baseline '+id)
+        lean=.75*(pres['pres24MarginD']-float(national_pres['2024']))+.25*(pres['pres20MarginD']-float(national_pres['2020']))
+        fundamental=generic+alpha*lean
+        bounded=not pres['mapVerified']
+        # The House-only prior uses 2026-map presidential votes, not the
+        # prior district-number's 2022/2024 House votes nor statewide Senate
+        # polling errors. Historical House votes remain visible for context.
         correction=0.0
         local=[]
         source=directory.get(id,{})
