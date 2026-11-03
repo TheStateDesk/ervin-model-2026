@@ -15,6 +15,7 @@ import re
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 
 BASE="https://civicapi.org/api/v2"
 DAY="2026-11-03"
@@ -55,6 +56,22 @@ def request(url,timeout=18):
   raw=f.read(7_000_001)
   if len(raw)>7_000_000:raise ValueError("CivicAPI response too large")
  return json.loads(raw)
+def request_with_retry(url,timeout=9,max_attempts=3,deadline=None):
+ """Only retry transient 408/429/5xx and network/timeouts. Do not fabricate votes."""
+ last=None
+ for attempt in range(max_attempts):
+  if deadline is not None and time.monotonic()>=deadline:
+   raise TimeoutError("collection_deadline_reached")
+  try:return request(url,timeout=timeout)
+  except urllib.error.HTTPError as error:
+   if error.code not in (408,429,500,502,503,504):raise
+   last=error
+  except (urllib.error.URLError,TimeoutError,OSError) as error:
+   last=error
+  if attempt+1<max_attempts:
+   time.sleep(min(3.0,0.65*(2**attempt)))
+ raise last
+
 def list_items(data):
  if isinstance(data,list):return data
  if isinstance(data,dict):
@@ -255,11 +272,14 @@ def main():
  eligible={k:v for k,v in registry.items() if now>=after_close(k)}
  issues={}
  fetched=0;added=0
+ deadline=time.monotonic()+11*60
  def get_one(item):
   key,row=item
-  try:return key,request(BASE+"/race/"+str(row["raceId"])),None
+  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=9,max_attempts=3,deadline=deadline),None
+  except urllib.error.HTTPError as e:return key,None,"HTTP_"+str(e.code)
   except Exception as e:return key,None,type(e).__name__
- # One contest = one detail request; six concurrent requests avoid abusive bursts.
+ # One contest = one detail request, with six workers and a bounded retry budget.
+ # An unstable upstream must not hang the 16-minute GitHub workflow.
  with futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
   for key,data,error in pool.map(get_one,sorted(eligible.items())):
    if error:
@@ -282,6 +302,7 @@ def main():
   "targetRaces":len(expected),"registeredRaces":len(registry),"eligibleRaces":len(eligible),
   "fetched":fetched,"publishedRaces":len(stored),"updatedRaces":added,
   "discovery":discovery,"providerConnectivity":provider_connectivity,"errors":dict(list(issues.items())[:80]),
+   "transientApiErrors":sum(v.startswith("fetch_HTTP_5") or v=="fetch_HTTP_429" or v=="fetch_TimeoutError" for v in issues.values()),
   "fallback":"Open America and state clerks only if CivicAPI has no valid current report for the contest",
   "polling":{"state":"not_integrated","note":"No verified CivicAPI polling endpoint; election results never become a pre-election poll."}}
  save(HEALTH,health)
