@@ -176,6 +176,10 @@ def main():
     assert len(pres_archive['races'])==435 and selected['training']['n']>=600 and selected['finalHoldout']['n']>=180
     alpha=float(selected['forward2026']['alpha'])
     national_pres=selected['forward2026']['presidentialNationalMarginD']
+    rho=float(selected['forward2026']['candidateRetentionRho'])
+    actual2024=load('research/house-actual-2016-2024.json')['years']['2024']
+    hist_pres2022=load('research/house-presidential-historical.json')['cycles']['2022']
+    current_roster=load('house/candidates-2026.json')['races']
     rating_count=collections.Counter(); outputs={}
     for seat in seats:
         id=seat['id'];state=seat['code'];changed=state in NEW_MAP
@@ -187,6 +191,26 @@ def main():
             raise RuntimeError('Unavailable current-map presidential baseline '+id)
         lean=.75*(pres['pres24MarginD']-float(national_pres['2024']))+.25*(pres['pres20MarginD']-float(national_pres['2020']))
         fundamental=generic+alpha*lean
+        candidate_term=0.
+        # A candidate-repeat term was fitted in 2018 and verified on the
+        # chronological 2024 holdout. Use ONLY named incumbent candidates
+        # repeating after a comparable previous House election.
+        if not changed and state not in ('GA','NY'):
+            old=actual2024.get(id)
+            oldpres=hist_pres2022.get(id)
+            nominees=current_roster.get(id,{}).get('candidates',[])
+            if old and old['contested'] and oldpres and old['winnerParty'] in ('D','R'):
+                p=old['winnerParty']
+                previous_name=old['candidates'].get(p)
+                repeat=any(c.get('incumbent') and c.get('party')==p
+                  and re.sub(r'[^a-z]+','',c.get('name','').lower())==previous_name
+                  for c in nominees)
+                if repeat:
+                    old_lean=.75*(oldpres['pres20MarginD']-4.54)+.25*(oldpres['pres16MarginD']-2.23)
+                    old_prior=-.3+alpha*old_lean
+                    delta=clamp(old['marginD']-old_prior,-18,18)
+                    candidate_term=round(rho*delta,3)
+                    fundamental+=candidate_term
         bounded=not pres['mapVerified']
         # The House-only prior uses 2026-map presidential votes, not the
         # prior district-number's 2022/2024 House votes nor statewide Senate
@@ -258,6 +282,8 @@ def main():
              'method24':pres['method24'],'method20':pres['method20'],
              'sourceUrl':pres_archive['sourceUrl']},
           'historicalModelCoefficient':alpha,
+          'candidateEffectD':candidate_term,'candidateRetentionRho':rho,
+          'candidateSource':('Returning 2024 winning House candidate, same prior boundaries' if candidate_term else 'No validated comparable candidate residual'),
           'generic2026D':round(generic,2),'stateErrorPartialCorrection':0,
           'fundamentalsD':round(fundamental,2),
           'pollMeanD':round(poll_avg,2) if poll_avg is not None else None,
@@ -266,7 +292,7 @@ def main():
              'District lines correspond to the 2026 ballot, with presidential vote allocations estimated from published historical election data. ')
           +('Special candidate ballot: Cook qualitative rating only; no comparable D/R contest margin or RCV transfer forecast. ' if special else
              'The House-only presidential lean coefficient '+str(alpha)+' was trained with 2018/2022 and checked on 2024 held-out contests. ')
-          +'No cross-office Senate/Governor error transfer or untested incumbent bonus; only compatible district polls may modify this baseline.'
+          +'No cross-office Senate/Governor error transfer; returning incumbent candidate effects enter only when same-line prior House votes and names match the 2018-trained, 2024-validated candidate test. Comparable district polls may modify this baseline.'
         }
         outputs[id]=obj;rating_count[rating]+=1
     if len(outputs)!=435:raise RuntimeError('House count invalid')
