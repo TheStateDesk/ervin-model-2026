@@ -1,0 +1,50 @@
+name: Fetch official 120th congressional district geometry
+on:
+  push:
+    branches:
+      - 2026-house-geography-presidential-backtest-design-20261103
+    paths:
+      - scripts/refresh_cd120_maps.py
+      - .github/workflows/refresh-2026-house-geometry.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: census-cd120-build
+  cancel-in-progress: false
+jobs:
+  maps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download Census-authenticated redrawn 2026 maps (all nine states)
+        run: |
+          python3 -m py_compile scripts/refresh_cd120_maps.py
+          python3 scripts/refresh_cd120_maps.py
+      - name: Verify all 173 new-district geometries and labels
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          states={'AL':7,'CA':52,'FL':28,'LA':6,'NC':14,'OH':15,'TN':9,'TX':38,'UT':4}
+          for state,n in states.items():
+              d=json.loads((Path('geo/districts')/(state+'.json')).read_text())
+              assert d['state']==state and d['boundaryYear']==2026 and d['officialCensusMap'] and len(d['features'])==n
+              assert {f['id'] for f in d['features']}=={str(k).zfill(2) for k in range(1,n+1)}
+              print('GEOMETRY PASS',state,n)
+          assert sum(states.values())==173
+          PY
+      - name: Commit only validated Census geometry to the source branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add geo/districts/AL.json geo/districts/CA.json geo/districts/FL.json geo/districts/LA.json geo/districts/NC.json geo/districts/OH.json geo/districts/TN.json geo/districts/TX.json geo/districts/UT.json
+          if git diff --cached --quiet; then
+            echo 'No changed geometry; already verified.'
+            exit 0
+          fi
+          git commit -m "Census 120th 2026 congressional boundaries for nine redrawn states"
+          git push origin HEAD:2026-house-geography-presidential-backtest-design-20261103
