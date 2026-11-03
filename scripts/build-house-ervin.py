@@ -229,17 +229,17 @@ def main():
         else:
             poll_avg=None;strength=0;estimate=fundamental
         estimate=clamp(estimate,-50,50)
-        # Uncertainty is a sensitivity spread, not a calibrated 80/90/95% confidence interval.
-        width=round((7 if len(usable)>=4 else 10 if len(usable)>=2 else 13 if usable else 17)+(7 if changed else 0)+(5 if bounded else 0),1)
-        rating=score(estimate)
-        confidence='Low' if changed or bounded or not usable else 'Moderate' if len(usable)<3 else 'Higher (relative)'
-        if changed:
-            # Old district-number House returns describe DIFFERENT VOTERS.
-            # Current-boundary Cook ratings may replace the label, but never
-            # transform a qualitative rating into an invented margin.
-            rating=seat.get('rating') or 'Unrated'
-            estimate=None
-            confidence='Cook qualitative (current map)' if seat.get('rating') else 'Current-map evidence unavailable'
+        # Historical 2024 held-out margin error plus extra uncertainty on
+        # reconstructed presidential allocations for redrawn 2026 districts.
+        width=round(max(float(selected['backtested']['holdout2024']['p90AE']),
+            7 if len(usable)>=4 else 10 if len(usable)>=2 else 13 if usable else 17)
+            +(8 if changed else 0),1)
+        special=id in ('AK-01','CA-06')
+        rating=(seat.get('rating') or 'Tossup') if special else score(estimate)
+        confidence=('Qualitative ballot exception' if special else
+            'Low · reconstructed 2026 district' if changed else
+            'Moderate · congressional presidential evidence')
+        if special:estimate=None
         obj={'id':id,'state':state,'district':seat['district'],'modelRating':rating,'marginD':round(estimate,1) if estimate is not None else None,'uncertaintySensitivity':width,'pollEvidence':len(usable),'publishedSurveyCount':source.get('publishedCount',archive.get(id,{}).get('count',0)),'sourceRating':seat.get('rating'),'confidence':confidence,'ratingBasis':('Cook published 2026 rating' if changed and seat.get('rating') else 'No current-boundary forecast' if changed else 'Ervin 2026 House historical/poll model'),'numericModelWithheld':changed,'changed2026Map':changed,'historicalProxy':bounded,'historic':years,'nationalBaselineMargins':{'2022':national[2022],'2024':national[2024]},'generic2026D':round(generic,2),'stateErrorPartialCorrection':round(correction,2),'fundamentalsD':round(fundamental,2),'pollMeanD':round(poll_avg,2) if poll_avg is not None else None,'pollWeight':round(strength,2),'surveys':local,'pollDirectoryLink':POLL_DIR,'methodNote':('2026 MAP REDRAW: Old-number House vote history is not a valid numerical predictor for these voters. The previous numeric margin is WITHHELD; source rating shown only when specifically present in the Cook data. ' if changed else '')+('Uncontested/missing House returns: bounded historical proxy, not a comparable two-party result. ' if bounded else '')+('Recent individual polls shrink toward historical prior; only compatible D/R pairs enter the arithmetic. ' if usable else 'No usable candidate-matched recent district polls; rating is historical/generic-ballot estimate only. ')}
         outputs[id]=obj;rating_count[rating]+=1
     if len(outputs)!=435:raise RuntimeError('House count invalid')
