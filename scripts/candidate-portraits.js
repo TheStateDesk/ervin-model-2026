@@ -9,8 +9,8 @@ const nameOK=(given,title)=>{
  const first=canonical(given.split(' ')[0]),last=canonical(given.split(' ').at(-1));
  return a&&b&&(a===b||(b.startsWith(first)&&b.endsWith(last)&&last.length>3));
 };
-const safe=u=>{try{let v=new URL(u);return v.protocol==='https:'&&/^(upload\.wikimedia\.org|commons\.wikimedia\.org)$/.test(v.hostname)?v.href:null}catch{return null}};
-const source=u=>{try{const x=new URL(u);return x.protocol==='https:'&&x.hostname==='en.wikipedia.org'?x.href:null}catch{return null}};
+const safe=u=>{try{let v=new URL(u);return v.protocol==='https:'&&( /^(upload\.wikimedia\.org|thumb\.wikimedia\.org)$/.test(v.hostname) || (v.hostname==='raw.githubusercontent.com'&&v.pathname.startsWith('/ElectIndex/26_us_forecast_data/main/photos/')) || (v.hostname==='s3.amazonaws.com'&&v.pathname.startsWith('/ballotpedia-api4/files/thumbs/')) )?v.href:null}catch{return null}};
+const source=u=>{try{const x=new URL(u);return x.protocol==='https:'&&(['en.wikipedia.org','ballotpedia.org','github.com'].includes(x.hostname))?x.href:null}catch{return null}};
 function load(){
  if(pending)return pending;
  pending=fetch(DATA_URL,{cache:'no-cache'}).then(x=>x.ok?x.json():null).then(x=>dataset=x?.portraits||{}).catch(()=>dataset={});
