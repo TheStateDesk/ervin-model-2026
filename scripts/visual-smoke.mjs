@@ -188,7 +188,7 @@ try{
  await governorPage.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:20000});
  assert((await governorPage.locator('#govCards .gov-card').count())===36,'Governor board no longer covers all 36 elections');
  const ohioCard=governorPage.locator('#govCards [data-code="OH"]');
- assert((await ohioCard.innerText()).includes('D +4.4'),'Ohio governor forecast must show D +2.6 (not R +0.0)');
+ assert((await ohioCard.innerText()).includes('D +4.4'),'Ohio governor forecast must reflect 2026 reduced-error governor calibration (not R +0.0)');
  assert(await ohioCard.evaluate(el=>el.classList.contains('d')&&!el.classList.contains('tie')),'Ohio must have Democratic map tone, not tie');
  assert((await governorPage.locator('#govUSMap a[data-code="OH"] path.d').count())===1,'Ohio state geometry must match projected winner');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
@@ -200,8 +200,8 @@ try{
  await governorPage.close();
  const ohioDetail=await browser.newPage({viewport:{width:390,height:844}});
  await ohioDetail.goto(root+'/state/?state=OH',{waitUntil:'domcontentloaded'});
- await ohioDetail.waitForFunction(()=>document.querySelector('#heroGovernor')?.textContent==='D +2.6',null,{timeout:30000});
- assert((await ohioDetail.locator('#stateRaceCards').innerText()).includes('D +2.6'),'State dossier and map must use same Ohio forecast');
+ await ohioDetail.waitForFunction(()=>document.querySelector('#heroGovernor')?.textContent==='D +4.4',null,{timeout:30000});
+ assert((await ohioDetail.locator('#stateRaceCards').innerText()).includes('D +4.4'),'State dossier and map must use same Ohio forecast');
  assert(!(await ohioDetail.locator('#heroGovernor').innerText()).includes('R +0.0'),'Negative zero Ohio regression');
  await ohioDetail.screenshot({path:'visual-checks/Ohio-State-Desk-Actual-Mobile.png',fullPage:false});
  await ohioDetail.close();
