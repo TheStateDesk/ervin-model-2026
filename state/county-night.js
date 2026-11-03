@@ -25,7 +25,7 @@ function sanitize(row,kind){
  if(!core.sourceAllowed('MI',county.name,row.sourceUrl,registry))throw Error('Source not independently linked by Michigan election authority');
  return{id:county.id,fips:county.id,name:county.name,dem:row.dem,rep:row.rep,other:row.other,asOf:row.asOf,url:row.sourceUrl,source:kind,status:'unofficial'};
 }
-function precints(data){
+function readPrecinct(data){
  if(data?.version!==1||data.election!==election||data.office!=='US Senate'||!Array.isArray(data.precincts)||data.precincts.length>16000)throw Error('Invalid precinct file');
  const found=new Set(),result=new Map();
  for(const p of data.precincts){
@@ -94,7 +94,7 @@ async function loadMichigan(generation){
  const next=new Map();let ok=0,rejected=0;
  for(let i=0;i<got.length;i++){
   if(got[i].status!=='fulfilled'){rejected++;continue}
-  try{const file=i===0?precints(got[i].value):countySource(got[i].value,i===1?'Automated county clerk':'County clerk');
+  try{const file=i===0?readPrecinct(got[i].value):countySource(got[i].value,i===1?'Automated county clerk':'County clerk');
    for(const [id,val] of file)next.set(id,val);ok++;
   }catch(e){rejected++;console.warn('County file rejected',paths[i],e)}
  }
