@@ -7,7 +7,7 @@
 <title>The State Desk · Ervin Model</title>
 <script>
 /* One public home: the 50-state editorial desk, not the historical research UI. */
-(()=>{const hash=location.hash==='#balanceOfPower'?'#senate-control':location.hash;
+(()=>{const hash=location.hash;
  const dest=new URL('states/',location.href);
  dest.search=location.search;dest.hash=hash;
  location.replace(dest.href);
