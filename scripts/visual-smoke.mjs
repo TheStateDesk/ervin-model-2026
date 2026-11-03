@@ -99,6 +99,7 @@ try{
  assert((await homepage.locator('#researchLab,#advancedPollingDrawer,#races').count())===0,'Legacy forecast lab still present on public State Desk');
  // Validate the entire nationwide county map is real feature geometry and
  // switches from 2026 Senate to governor projections without changing files.
+ await homepage.locator('#allCountyNation').scrollIntoViewIfNeeded();
  await homepage.waitForFunction(()=>document.querySelectorAll('#allCountyMap path.all-county').length>=3000,null,{timeout:45000});
  const countyCount=await homepage.locator('#allCountyMap path.all-county').count();
  assert(countyCount>=3000,'Nationwide conditional county atlas must include at least 3,000 county polygons');
