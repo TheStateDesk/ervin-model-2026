@@ -176,23 +176,23 @@ function updatePhase(){
  if(!model.senate.length)return;
  const now=Date.now(),preview=new URLSearchParams(location.search).get('preview');
  const override=['forecast','final','closing','live'].includes(phaseConfig.phase)?phaseConfig.phase:null;
- const isFinal=!!lockedAt&&now>=finalAt,closingAt=Date.parse('2026-11-03T18:00:00-05:00');
- const phase=['final','live'].includes(preview)?preview:override||(live?'live':now>=closingAt?'closing':isFinal?'final':'forecast');
+ const isFinal=!!lockedAt&&now>=finalAt,closingAt=Date.parse('2026-11-03T17:55:00-05:00');
+ const phase=['final','closing','live'].includes(preview)?preview:override||(live?'live':now>=closingAt?'closing':isFinal?'final':'forecast');
  // There is one primary fifty-state forecast map. Detailed results appear as
  // a separate LIVE desk only when verified votes have been accepted.
- const showResults=phase==='live',forecastPublished=phase==='final'||phase==='closing'||showResults;
+ const showResults=phase==='live'||phase==='closing',forecastPublished=phase==='final'||phase==='closing'||showResults;
  $('electionDashboard').hidden=!showResults;
  const n=Object.keys(returns).length;
- $('dashboardTitle').textContent=showResults?'Election night · reported votes':'Final predictions · 2026';
- $('dashboardIntro').textContent=showResults?'Unofficial reported votes are labeled separately from the locked forecast. Counties without attributable vote reports remain neutral.':'The Ervin forecast is a pre-election estimate.';
- $('reportingBanner').textContent=showResults?('LIVE · UNOFFICIAL RETURNS · '+n+' contest'+(n===1?'':'s')+' with verified reported totals'+(latestFeedAt?' · feed as of '+(window.ERVIN_AP_DATE?.timestamp(latestFeedAt)||new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'})):'')):'';
+ $('dashboardTitle').textContent=showResults?(n?'Election night · reported votes':'Election night · awaiting verified returns'):'Final predictions · 2026';
+ $('dashboardIntro').textContent=showResults?'The first polls close at 6 p.m. ET. Accepted unofficial reported votes are labeled separately from the locked forecast; areas without attributed returns remain gray.':'The Ervin forecast is a pre-election estimate.';
+ $('reportingBanner').textContent=showResults?(n?('UNOFFICIAL RETURNS · '+n+' contest'+(n===1?'':'s')+' with source-validated totals'+(latestFeedAt?' · source update '+(window.ERVIN_AP_DATE?.timestamp(latestFeedAt)||new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'})):'')):'ELECTION NIGHT DESK OPEN · First polls close at 6 p.m. ET · Awaiting accepted vote reports'):'';
  for(const id of ['watchSection','balanceOfPower','stateDirectory','editorialNotes'])if($(id))$(id).hidden=false; // The States / Counties selector owns map visibility.
  const headline=document.querySelector('.ed-headline'),standfirst=document.querySelector('.ed-standfirst');
  const status=window.document.getElementById('finalPhaseStatus');
- if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished&&lockedAt?finalForecastHeadline():preview==='final'?'Rehearsal only · '+finalForecastHeadline():forecastPublished?'Election Day 2026: final forecast awaiting source lock':'Every state. One clear picture.';
+ if(headline)headline.textContent=showResults?(n?'Election Night 2026: The First Returns':'Election Night 2026: The Count Begins'):forecastPublished&&lockedAt?(phaseConfig.headline||finalForecastHeadline()):preview==='final'?'Rehearsal only · '+finalForecastHeadline():forecastPublished?'Election Day 2026: final forecast awaiting source lock':'Every state. One clear picture.';
  if(standfirst){
   const forecast=modelBalance?.house?.U?'House totals include '+modelBalance.house.U+' contests without a comparable two-party numerical margin. ':modelBalance?.house?.D>=218?'Democrats lead in '+modelBalance.house.D+' House districts under the model. ':modelBalance?'House control depends on competitive districts. ':'';
-  standfirst.textContent=showResults?n+' contest'+(n===1?' has':'s have')+' validated unofficial returns. Our pre-election forecast remains below for comparison; there are no projected winners presented as race calls.':forecastPublished?forecast+'Explore the locked Senate and governor estimates, county scenarios and the competitive House districts in the interactive map.':'Explore Senate and governor polling, House districts, county scenarios and attributed results in one state edition.';
+  standfirst.textContent=showResults?(n?n+' contest'+(n===1?' has':'s have')+' accepted unofficial counts. No leader is treated as a projected or certified winner. The frozen 144,000-scenario forecast remains available for comparison.':'Polls begin closing at 6 p.m. Eastern. Our final forecast: about 249 Democratic House seats, 50 Democratic Senate seats, and 27 Democratic governorships. The source-linked results desk is ready, but no returns are counted before they are reported.') :forecastPublished?(phaseConfig.dek||'The final Ervin forecast is locked.')+' Explore the locked election estimates and the interactive county atlas.':'Explore Senate and governor polling, House districts, county scenarios and attributed results in one state edition.';
  }
  if(status){
   status.textContent=forecastPublished?(lockedAt?'Forecast locked '+(window.ERVIN_AP_DATE?.timestamp(lockedAt)||new Date(lockedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}))+' · The forecast is not revised as votes are counted.':'Polls are closing · final source lock has not been verified; estimates remain provisional.'):

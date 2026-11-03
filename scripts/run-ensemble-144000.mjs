@@ -62,7 +62,7 @@ const govRows=G.map(x=>{const count=x.model.calibrationCycles||0;
  return {...x,sigma:total,idio:total?Math.sqrt(total**2-commonSigma**2-govOfficeSigma**2):0};});
 const demHeld=new Set(['MI','GA','NH','MN']),newIndependent=new Set(['NE','SD','MT']);
 const trials={house:[],senateD:[],senateR:[],senateI:[],governorsD:[],governorsR:[]};
-const histByOffice={house:{},senateD:{},governorsD:{}},joint=new Map();
+const histByOffice={house:{},senateD:{},senateR:{},senateI:{},governorsD:{},governorsR:{}},joint=new Map();
 const wins={senate:Object.fromEntries(S.map(x=>[x.code,0])),house:{},governor:{}};
 const outcome={houseDem:0,houseRep:0,senateDem:0,senateRep:0,senateOther:0,governorDem:0,govRep:0,demHouseRepSenate:0,repHouseDemSenate:0};
 const specialHouse=H.filter(x=>!Number.isFinite(x.margin));
@@ -109,7 +109,7 @@ for(let i=0;i<W;i++){
  }
  const seatG_R=50-seatG_D;
  trials.house.push(seatH_D);trials.senateD.push(seatS_D);trials.senateR.push(seatS_R);trials.senateI.push(seatS_I);trials.governorsD.push(seatG_D);trials.governorsR.push(seatG_R);
- for(const [name,n] of [['house',seatH_D],['senateD',seatS_D],['governorsD',seatG_D]])histByOffice[name][n]=(histByOffice[name][n]||0)+1;
+ for(const [name,n] of [['house',seatH_D],['senateD',seatS_D],['senateR',seatS_R],['senateI',seatS_I],['governorsD',seatG_D],['governorsR',seatG_R]])histByOffice[name][n]=(histByOffice[name][n]||0)+1;
  const jointKey=[seatH_D,seatS_D,seatS_I,seatG_D].join('/');
  joint.set(jointKey,(joint.get(jointKey)||0)+1);
  if(seatH_D>=218)outcome.houseDem++;else outcome.houseRep++;
@@ -166,13 +166,14 @@ const summary={
   empiricalResiduals:{senate:senateResiduals.length,house:houseResiduals.length,governor:governorResiduals.length},
   redrawnHouseCount:H.filter(r=>r.changed2026Map).length,unmodeledSenateCount:18,houseNonnumeric:specialHouse.map(r=>r.id),
   limitations:'Simulation percentages are conditional sensitivity frequencies, not externally calibrated election probabilities. Presumed-held, qualitative-rated, statewide common errors, ballot-specific independents, redistricting and single-cycle candidate comparisons add uncertainty.'},
- center:{house:houseStats,senateD:senateStats,governorsD:governorStats},
+ center:{house:houseStats,senateD:senateStats,senateR:stat('senateR'),senateI:stat('senateI'),governorsD:governorStats,governorsR:stat('governorsR')},
  outcomes:Object.fromEntries(Object.entries(outcome).map(([k,v])=>[k,asFraction(v)])),
  modalJoint:Object.entries(Object.fromEntries(joint)).sort((a,b)=>b[1]-a[1]).slice(0,15).map(([key,count])=>({houseD:+key.split('/')[0],senateD:+key.split('/')[1],newIndependent:+key.split('/')[2],governorD:+key.split('/')[3],count,share:asFraction(count)})),
  unusual:{house:outlierBins('house'),senateD:outlierBins('senateD'),governorsD:outlierBins('governorsD')},
  pivotal:{senate:closeSen,house:closeHouse},seatSamplesChecks:{house:W,senate:W,governors:W}
 };
-for(const key of ['house','senateD','governorsD'])assert.equal(summary.center[key].rawBinCountsSum,W);
+for(const key of ['house','senateD','senateR','senateI','governorsD','governorsR'])assert.equal(summary.center[key].rawBinCountsSum,W);
+assert(Math.abs(summary.center.senateD.mean+summary.center.senateR.mean+summary.center.senateI.mean-100)<.005,'Senate expected seat conservation');
 assert(Math.abs(summary.outcomes.houseDem+summary.outcomes.houseRep-1)<.00001);
 assert(Math.abs(summary.outcomes.senateDem+summary.outcomes.senateRep+summary.outcomes.senateOther-1)<.00001);
 fs.mkdirSync('final',{recursive:true});
