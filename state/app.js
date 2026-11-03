@@ -344,7 +344,7 @@ async function display(next){
 }
 async function start(){
  try{
-  const fetchJSON=async p=>{const r=await fetch(p,{cache:'no-cache'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json();};
+  const fetchJSON=async p=>{const fetchRaw=async()=>{const r=await fetch(p,{cache:'no-cache'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};return window.ERVIN_FINAL?window.ERVIN_FINAL.get(p.replace(/^\.\.\//,''),fetchRaw):fetchRaw()};
   // The two small election registries initialize navigation; maps do not
   // depend on the Senate model, poll archives or historical results being reachable.
   const [h,g]=await Promise.all([fetchJSON('../house/data.json'),fetchJSON('../governors/data.json')]);
