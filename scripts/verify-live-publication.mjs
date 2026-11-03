@@ -101,27 +101,38 @@ try{
  const atlasErrors=[];atlas.on('pageerror',e=>atlasErrors.push(e.message));
  await atlas.goto(base+'states/?release='+stamp+'&maps=verify',{waitUntil:'domcontentloaded'});
  await atlas.waitForFunction(expected=>document.querySelector('meta[name="ervin-deploy"]')?.content===expected,stamp,{timeout:20000});
- await atlas.waitForFunction(()=>document.querySelectorAll('#usMap path.ed-state').length>=50
-  &&document.querySelectorAll('#allCountyMap path.all-county').length>=3000
-  &&document.querySelector('#allCountyStatus')?.textContent.includes('county'),null,{timeout:65000});
- const mapAudit=await atlas.evaluate(()=>{
-  const map=document.querySelector('#nationMap'),counties=document.querySelector('#allCountyNation'),shell=document.querySelector('.ed-shell');
-  const a=map.getBoundingClientRect(),b=counties.getBoundingClientRect(),c=shell.getBoundingClientRect();
+
+ // The public atlas intentionally shows only one map at a time. County
+ // polygons are IntersectionObserver-loaded after choosing the Counties tab.
+ await atlas.waitForFunction(()=>document.querySelectorAll('#usMap path.ed-state').length>=50,null,{timeout:30000});
+ const stateMapWidth=await atlas.locator('#nationMap').evaluate(e=>e.getBoundingClientRect().width);
+ await atlas.locator('#nationMap').screenshot({path:'postdeploy-checks/LIVE-State-Map-Full-Width.png'});
+ await atlas.locator('[data-national-atlas-view="counties"]').click();
+ await atlas.waitForFunction(()=>!document.querySelector('#allCountyNation')?.hidden
+   &&document.querySelector('#nationMap')?.hidden,null,{timeout:15000});
+ await atlas.locator('#allCountyNation').scrollIntoViewIfNeeded();
+ await atlas.waitForFunction(()=>document.querySelectorAll('#allCountyMap path.all-county').length>=3000
+   &&document.querySelector('#allCountyStatus')?.textContent.includes('county'),null,{timeout:65000});
+ const mapAudit=await atlas.evaluate((statesWidth)=>{
+  const counties=document.querySelector('#allCountyNation'),shell=document.querySelector('.ed-shell');
   return {states:document.querySelectorAll('#usMap path.ed-state').length,
     counties:document.querySelectorAll('#allCountyMap path.all-county').length,
     coloredCounties:document.querySelectorAll('#allCountyMap path.atlas-D, #allCountyMap path.atlas-R').length,
-    mapWidth:Math.round(a.width),contentWidth:Math.round(c.width),
-    verticalGap:Math.round(b.top-a.bottom),
+    stateMapWidth:Math.round(statesWidth),countyMapWidth:Math.round(counties.getBoundingClientRect().width),
+    contentWidth:Math.round(shell.getBoundingClientRect().width),
+    stateHidden:document.querySelector('#nationMap').hidden,countyHidden:counties.hidden,
+    countyTabSelected:document.querySelector('[data-national-atlas-view="counties"]')?.getAttribute('aria-pressed')==='true',
     stateControls:document.querySelectorAll('[data-map-office]').length,
     countyControls:document.querySelectorAll('[data-national-county-office]').length,
     status:document.querySelector('#allCountyStatus')?.textContent.trim(),
     build:document.querySelector('meta[name="ervin-deploy"]')?.content};
- });
+ },stateMapWidth);
  if(mapAudit.states<50||mapAudit.counties<3000||mapAudit.coloredCounties<100
-  ||mapAudit.mapWidth<mapAudit.contentWidth*.92||mapAudit.verticalGap<0||mapAudit.verticalGap>85
+  ||mapAudit.stateMapWidth<mapAudit.contentWidth*.92
+  ||mapAudit.countyMapWidth<mapAudit.contentWidth*.92
+  ||!mapAudit.stateHidden||mapAudit.countyHidden||!mapAudit.countyTabSelected
   ||mapAudit.stateControls!==3||mapAudit.countyControls!==2||mapAudit.build!==stamp||atlasErrors.length)
-   throw Error('PUBLIC HOMEPAGE MAPS NOT ACTUALLY RENDERED '+JSON.stringify({mapAudit,atlasErrors}));
- await atlas.locator('#nationMap').screenshot({path:'postdeploy-checks/LIVE-State-Map-Full-Width.png'});
+   throw Error('PUBLIC HOMEPAGE ATLAS MAPS NOT ACTUALLY RENDERED '+JSON.stringify({mapAudit,atlasErrors}));
  await atlas.locator('#allCountyNation').screenshot({path:'postdeploy-checks/LIVE-County-Projections-Senate.png'});
  await atlas.locator('[data-national-county-office="Governor"]').click();
  await atlas.waitForFunction(()=>document.querySelector('[data-national-county-office="Governor"]')?.getAttribute('aria-pressed')==='true'
@@ -135,6 +146,9 @@ try{
  await atlas.locator('[data-national-county-view="compare"]').click();
  await atlas.waitForFunction(()=>document.querySelector('[data-national-county-view="compare"]')?.getAttribute('aria-pressed')==='true',null,{timeout:10000});
  await atlas.locator('#allCountyNation').screenshot({path:'postdeploy-checks/LIVE-County-Forecast-Versus-Returns.png'});
+ await atlas.locator('[data-national-atlas-view="states"]').click();
+ await atlas.waitForFunction(()=>!document.querySelector('#nationMap')?.hidden
+   &&document.querySelector('#allCountyNation')?.hidden,null,{timeout:10000});
  await atlas.locator('#themeToggle').click();
  await atlas.waitForFunction(()=>document.documentElement.classList.contains('theme-dark'),null,{timeout:10000});
  await atlas.locator('#nationMap').screenshot({path:'postdeploy-checks/LIVE-State-Map-Dark.png'});
