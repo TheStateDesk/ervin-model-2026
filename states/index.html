@@ -25,7 +25,7 @@
 <div class="atlas-drill__grid"><div><svg id="electionLocalMap" viewBox="0 0 820 520" role="group" aria-label="State county and congressional district geography"></svg><p id="electionLocalStatus" class="atlas-footnote"></p></div><div id="electionDrillSummary" aria-live="polite"></div></div></div>
 </section>
 <section id="watchSection" class="watch-shell" aria-labelledby="watchTitle">
-<div class="watch-head"><div><div class="ed-kicker">THE CLOSEST 2026 CONTESTS / ERVIN MODEL</div><h2 id="watchTitle">Races to watch</h2><p class="ed-mini">Closest modeled Senate and governor elections. House toss-ups are listed separately below.</p></div>
+<div class="watch-head"><div><div class="ed-kicker">CLOSEST 2026 SENATE AND GOVERNOR RACES</div><h2 id="watchTitle">Races to watch</h2><p class="ed-mini">Closest modeled Senate and governor elections. House toss-ups are listed separately below.</p></div>
 <div class="watch-nav"><button type="button" id="watchPrev" aria-label="Previous four races" disabled>Previous</button><span id="watchPosition" aria-live="polite">Loading…</span><button type="button" id="watchNext" aria-label="Next four races">Next</button><button type="button" id="watchPause" aria-pressed="false">Pause rotation</button></div></div>
 <div class="watch-track" id="watchCards" aria-live="polite"><p>Loading closest races…</p></div>
 </section>
@@ -43,9 +43,9 @@
 <div id="officeFocus" class="ed-office-focus" role="status" hidden></div>
 <div class="ed-band"><label for="stateSearch" class="ed-cap">Find your state <input id="stateSearch" class="ed-control" type="search" placeholder="Type Michigan, Texas, Maine…" style="width:min(370px,82vw);margin-left:10px" autocomplete="off"></label><label class="ed-cap" for="quickSelect">or choose <select class="ed-control" id="quickSelect" style="min-width:150px;margin-left:5px"><option value="">Select a state</option></select></label></div><p id="stateSearchStatus" class="ed-mini" role="status" aria-live="polite"></p>
 <div class="ed-columns" id="nationMap">
-<section class="ed-card"><div class="ed-kicker">NATIONWIDE / TAP ANY STATE TO OPEN</div><h2 style="margin:7px 0 13px">The 50-state election map</h2>
+<section class="ed-card"><div class="ed-kicker">NATIONWIDE / TAP ANY STATE TO OPEN</div><h2 style="margin:7px 0 13px">The 50-state election map</h2><div class="atlas-office main-map-office" role="group" aria-label="Choose the election to show on the state map"><button type="button" data-map-office="senate" aria-pressed="true">Senate</button><button type="button" data-map-office="governor" aria-pressed="false">Governor</button><button type="button" data-map-office="house" aria-pressed="false">House</button></div>
 <div class="ed-map-surface"><div id="stateMapTooltip" class="ed-map-tooltip" role="tooltip" hidden></div><svg id="usMap" viewBox="0 0 1080 625" role="group" aria-label="Interactive national election map with fifty selectable states"><text x="540" y="280" text-anchor="middle">Loading geography…</text></svg></div>
-<div class="ed-legend"><span class="ed-pill">A state is a whole election edition</span><span class="ed-mini" id="aggregateLegend">Muted color = balance of provisional party leads. Hover or focus for D–R margins and D/R/T counts; not a winner probability.</span></div>
+<div id="mobileTileMap" class="ed-mobile-tilemap" aria-label="50-state tile map for smaller screens"></div><div class="ed-legend"><span class="ed-pill">A state is a whole election edition</span><span class="ed-mini" id="aggregateLegend">Muted color = balance of provisional party leads. Hover or focus for D–R margins and D/R/T counts; not a winner probability.</span></div>
 </section>
 <aside class="ed-card"><div class="ed-kicker">EDITOR'S MAP KEY</div><h2>How to explore</h2><div class="ed-small-list">
 <article><strong>1. Select a state</strong><small>Tap a map shape, state name, or search result. Your state edition loads directly.</small></article>
