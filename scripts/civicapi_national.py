@@ -29,6 +29,15 @@ STATES={"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"Califo
 LAST_CLOSE={"AK":"01:00","HI":"00:00","CA":"23:00","WA":"23:00","OR":"23:00","ID":"23:00","MT":"22:00","WY":"21:00","ND":"22:00","NV":"22:00","AZ":"21:00","CO":"21:00","UT":"22:00","NM":"21:00","TX":"21:00","KS":"21:00","IA":"21:00","MI":"21:00","MN":"21:00","SD":"21:00","NE":"21:00","WI":"21:00","ME":"20:00","NH":"20:00","MA":"20:00","CT":"20:00","RI":"20:00","NY":"21:00","NJ":"20:00","DE":"20:00","MD":"20:00","PA":"20:00","VT":"19:00","VA":"19:00","WV":"19:30","NC":"19:30","SC":"19:00","GA":"19:00","FL":"20:00","AL":"20:00","MS":"20:00","TN":"20:00","KY":"19:00","OH":"19:30","IN":"19:00","IL":"20:00","MO":"20:00","AR":"20:30","LA":"21:00","OK":"20:00"}
 # Known local House exceptions. Unlisted seats conservatively wait until last state polling place closes.
 EARLIER={"KY-06":"18:00","FL-27":"19:00","TX-18":"20:00","VA-02":"19:00","VA-05":"19:00","AL-07":"20:00","MI-07":"20:00"}
+# Source: 270toWin 2026 poll-closing times, district by district.
+# Accept results only once every polling place in a district has closed.
+EARLIER.update({f"IN-{i:02d}":"18:00" for i in range(2,10) if i!=8})
+EARLIER.update({f"KY-{i:02d}":"18:00" for i in range(3,7)})
+EARLIER.update({f"FL-{i:02d}":"19:00" for i in range(3,29)})
+EARLIER.update({f"KS-{i:02d}":"20:00" for i in range(2,5)})
+EARLIER.update({f"MI-{i:02d}":"20:00" for i in range(2,14)})
+EARLIER.update({f"TX-{i:02d}":"20:00" for i in range(1,39) if i not in (16,23)})
+EARLIER["ID-02"]="22:00"
 MAX_WORKERS=6
 # Nov. 3, 2026: 33 regular Senate races plus Florida and Ohio specials.
 SENATE_2026=set("AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY".split())
