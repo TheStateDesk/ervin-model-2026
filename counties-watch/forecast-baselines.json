@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-03T00:31:59.900Z",
+  "asOf": "2026-11-03T02:55:40.905Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {

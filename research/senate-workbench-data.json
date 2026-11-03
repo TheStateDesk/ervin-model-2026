@@ -1702,38 +1702,13 @@
   "ratings": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1",
   "errorResearch": "https://www.pollingforecast.com/research/us-polling-error",
   "liveMeta": {
-    "checkedAt": "2026-11-03T00:31:59.900114+00:00",
+    "checkedAt": "2026-11-03T02:55:40.905251+00:00",
     "pagesParsed": 15,
     "checkedRaceCount": 17,
-    "changes": 4,
+    "changes": 0,
     "observationsFound": 57,
     "errors": [],
-    "updated": [
-      {
-        "state": "MN",
-        "source": "win270",
-        "margin": 5.6,
-        "published": "Nov 02"
-      },
-      {
-        "state": "MN",
-        "source": "ddhq",
-        "margin": 6.6,
-        "published": "Nov 02"
-      },
-      {
-        "state": "MN",
-        "source": "rcp",
-        "margin": 5.4,
-        "published": "Nov 01"
-      },
-      {
-        "state": "MN",
-        "source": "silver",
-        "margin": 6.6,
-        "published": "Nov 02"
-      }
-    ],
+    "updated": [],
     "sourceCoverage": [
       {
         "state": "ME",
