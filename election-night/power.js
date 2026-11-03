@@ -20,20 +20,21 @@ function compute(house,senate,governors){
  if(rows.length!==435)throw Error('House balance requires all 435 districts; found '+rows.length);
  const h={D:0,R:0,T:0,U:0,denom:435,threshold:218};
  for(const x of rows){
-  // The 173 redrawn districts cannot inherit numerical estimates from the
-  // old district number. Use only separately sourced 2026 ratings; if none,
-  // leave the House seat explicitly unprojected, never a fabricated toss-up.
+  // 2026 map-specific presidential baselines may be reconstructed, but
+  // are never copied from older House races under the same district number.
+  // The only nonnumeric ratings are special AK/CA ballot formats.
   if(x.changed2026Map){
-   if(!x.numericModelWithheld||Number.isFinite(x.marginD))throw Error('Unsafe old-map margin for '+x.id);
-   if(x.modelRating==='Unrated')h.U++;
-   else if(x.modelRating==='Tossup')h.T++;
-   else if(/^(Solid|Likely|Lean|Tilt) D$/.test(x.modelRating))h.D++;
-   else if(/^(Solid|Likely|Lean|Tilt) R$/.test(x.modelRating))h.R++;
-   else throw Error('Unsupported redrawn source rating '+x.id);
-   continue;
+   if(!x.presidentialBaseline?.estimatedVoteAllocation || !Number.isFinite(x.marginD))
+    throw Error('Missing explicitly estimated 2026 district presidential baseline '+x.id);
   }
-  if(!Number.isFinite(x.marginD))h.U++;
-  else if(x.modelRating==='Tossup'||Math.abs(x.marginD)<0.05)h.T++;
+  if(!Number.isFinite(x.marginD)){
+   if(x.numericModelWithheld!==true||!['AK-01','CA-06'].includes(x.id))
+    throw Error('Unattributed nonnumerical House contest '+x.id);
+   if(/ D$/.test(x.modelRating))h.D++;
+   else if(/ R$/.test(x.modelRating))h.R++;
+   else if(x.modelRating==='Tossup')h.T++;
+   else h.U++;
+  }else if(x.modelRating==='Tossup'||Math.abs(x.marginD)<0.05)h.T++;
   else if(x.marginD>0)h.D++;
   else h.R++;
  }
@@ -77,7 +78,7 @@ function compute(house,senate,governors){
 function render(rootEl,projection){
  if(!rootEl)throw Error('Balance-of-power container missing');
  const specs=[
-  {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 districts · 218 for a majority · '+projection.house.U+' redrawn districts without current-map ratings remain unprojected; source-rated seats use qualitative Cook labels'},
+  {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 races · 218 seats to control House · 433 same-office numerical scenarios from 2026 congressional boundaries; 173 redrawn districts use reconstructed presidential vote allocations with wider uncertainty; two special ballots use sourced qualitative ratings'},
   {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:projection.senate.D+' D-aligned · '+projection.senate.R+' Republican · '+projection.senate.T+' toss-up seats remain unresolved'+(projection.senate.I?' · '+projection.senate.I+' independent':'')+'. At 50–50 the Republican vice president breaks the tie; Democrats need 51 for control. Unmodeled contests are presumed held.'},
   {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 races · 14 holdovers · '+projection.governors.sourceRated+' without numeric polls classified by attributed Cook ratings · close margins remain toss-ups'}
  ];
