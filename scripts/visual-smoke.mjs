@@ -241,7 +241,7 @@ try{
  assert((await countyNight.locator('#nightCountyDem').innerText())==='—','Michigan election-night county page shows fictitious ballots');
  assert((await countyNight.locator('#nightCountyRows tr').count())===83,'Michigan county night reporting table incomplete');
  assert(nightPageErrors.length===0,'Michigan state county desk errors: '+nightPageErrors.join(', '));
- await countyNight.locator('.ed-night-county').screenshot({path:'visual-checks/MI-State-Election-Night-83-land-clipped.png'});
+ await countyNight.locator('#stateGeography').screenshot({path:'visual-checks/MI-Unified-Forecast-And-Results-83-Counties.png'});
  await countyNight.goto(root+'/state/?state=TX#stateResults',{waitUntil:'domcontentloaded'});
  await countyNight.waitForFunction(()=>document.querySelectorAll('#countyMap path.county').length===254&&document.querySelectorAll('#countyNightMap').length===0,null,{timeout:27000});
  assert((await countyNight.locator('#nightCountyDem').innerText())==='—','Texas county results invented before election');
