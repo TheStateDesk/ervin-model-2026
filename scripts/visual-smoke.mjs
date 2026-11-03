@@ -89,7 +89,7 @@ try{
   assert((await homepage.locator('#watchCards .watch-card').first().innerText())!==cardBefore,'Races-to-watch next button did not advance');
   await homepage.locator('#watchPrev').click();
   assert((await homepage.locator('#powerCards .power-card').count())===3,'All three office balance cards must render');
- assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='25','Governor projection must include Ohio');
+ assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='26','Governor projection must include new 2022 Oregon governor comparison');
  assert((await homepage.locator('[data-power-office="senate"] [data-power-d]').innerText())==='50','Projected Senate seat balance must include Michigan');
  assert((await homepage.locator('[data-power-office="senate"] [data-power-r]').innerText())==='50','Republican seat total must be 50');
  const links=await homepage.locator('#powerCards .power-card-head a').evaluateAll(a=>a.map(x=>x.href));
@@ -181,9 +181,9 @@ try{
  assert(await ohioCard.evaluate(el=>el.classList.contains('d')&&!el.classList.contains('tie')),'Ohio must have Democratic map tone, not tie');
  assert((await governorPage.locator('#govUSMap a[data-code="OH"] path.d').count())===1,'Ohio state geometry must match projected winner');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
- assert((await governorPage.locator('#coverage').innerText()).includes('19 Ervin-adjusted'),'Expected 19 governor-only corrections');
+ assert((await governorPage.locator('#coverage').innerText()).includes('22 Ervin-adjusted'),'Expected 22 governor-only corrections with published 2026 polling');
  await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('4.66')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.71'),null,{timeout:12000});
- assert((await governorPage.locator('#govBacktestRows tr').count())===35,'Governor source-linked backtest missing historic events');
+ assert((await governorPage.locator('#govBacktestRows tr').count())===39,'Governor source-linked backtest missing 4 new sourced historical events');
  await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
  await ohioCard.screenshot({path:'visual-checks/Ohio-Governor-Ervins-Take-Verified.png'});
  await governorPage.close();
