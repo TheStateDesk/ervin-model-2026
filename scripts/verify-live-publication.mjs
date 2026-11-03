@@ -65,7 +65,9 @@ try{
   const map=document.querySelector('#nationMap')?.getBoundingClientRect();
   return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,
    width:watch?.width,watchCount:document.querySelectorAll('#watchCards .watch-card').length,
-   finalDashboard:!!document.querySelector('#electionDashboard'),officeTabs:document.querySelectorAll('[data-atlas-office]').length,
+   finalDashboard:!!document.querySelector('#electionDashboard'),officeTabs:document.querySelectorAll('[data-map-office]').length,
+   countyViewTabs:document.querySelectorAll('[data-national-county-view]').length,
+   duplicateCountyMaps:document.querySelectorAll('#electionNationalMap,#electionLocalMap').length,
    oldLab:!!document.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),
    badLinks:[...document.querySelectorAll('a')].filter(a=>a.getAttribute('href')==='../').length,
    count:document.querySelectorAll('#powerCards .power-card').length,
@@ -86,7 +88,7 @@ try{
   &&frontModel.width>280&&frontModel.watchCount>=4&&frontModel.finalDashboard&&frontModel.officeTabs===3
   &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow
   &&frontModel.deployedRevision===stamp&&frontModel.visibleBuild?.includes(stamp.slice(0,8))
-  &&frontModel.stateMapOfficeTabs===3&&frontModel.nationalCountyTabs===2&&frontModel.mobileStateLinks===50
+  &&frontModel.stateMapOfficeTabs===3&&frontModel.nationalCountyTabs===2&&frontModel.countyViewTabs===3&&frontModel.duplicateCountyMaps===0&&frontModel.mobileStateLinks===50
   &&frontModel.stampedStyles>=3&&frontModel.stampedScripts>=8))
   throw Error('LIVE MOBILE STATE DESK HOMEPAGE INCORRECT '+JSON.stringify(frontModel));
  await front.locator('#watchSection').screenshot({path:'postdeploy-checks/State-Desk-Races-To-Watch-Mobile.png'});
@@ -125,6 +127,14 @@ try{
  await atlas.waitForFunction(()=>document.querySelector('[data-national-county-office="Governor"]')?.getAttribute('aria-pressed')==='true'
    &&document.querySelector('#allCountyStatus')?.textContent.includes('Governor'),null,{timeout:30000});
  await atlas.locator('#allCountyNation').screenshot({path:'postdeploy-checks/LIVE-County-Projections-Governor.png'});
+ await atlas.locator('[data-national-county-view="reported"]').click();
+ await atlas.waitForFunction(()=>document.querySelector('[data-national-county-view="reported"]')?.getAttribute('aria-pressed')==='true',null,{timeout:12000});
+ const reportedCheck=await atlas.evaluate(()=>({shapes:document.querySelectorAll('#allCountyMap path.all-county').length,unexpectedBeforePolls:Date.now()<Date.parse('2026-11-04T01:00:00Z')&&document.querySelectorAll('#allCountyMap path.all-county[data-reported="true"]').length>0,sourceSummary:document.querySelector('#allCountySourceAudit')?.textContent}));
+ if(reportedCheck.shapes<3000||reportedCheck.unexpectedBeforePolls||!reportedCheck.sourceSummary?.includes('county'))throw Error('LIVE REPORTED COUNTY MAP CONTRADICTS VERIFIED SOURCES '+JSON.stringify(reportedCheck));
+ await atlas.locator('#allCountyNation').screenshot({path:'postdeploy-checks/LIVE-County-Reported-Only.png'});
+ await atlas.locator('[data-national-county-view="compare"]').click();
+ await atlas.waitForFunction(()=>document.querySelector('[data-national-county-view="compare"]')?.getAttribute('aria-pressed')==='true',null,{timeout:10000});
+ await atlas.locator('#allCountyNation').screenshot({path:'postdeploy-checks/LIVE-County-Forecast-Versus-Returns.png'});
  await atlas.locator('#themeToggle').click();
  await atlas.waitForFunction(()=>document.documentElement.classList.contains('theme-dark'),null,{timeout:10000});
  await atlas.locator('#nationMap').screenshot({path:'postdeploy-checks/LIVE-State-Map-Dark.png'});
