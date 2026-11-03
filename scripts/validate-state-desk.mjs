@@ -19,6 +19,7 @@ const homeJS=read('scripts/home-election-2026.js'),countyJS=read('scripts/nation
 new vm.Script(homeJS,{filename:'scripts/home-election-2026.js'});
 new vm.Script(countyJS,{filename:'scripts/national-county-2026.js'});
 assert(indexHTML.includes('id="houseWatchList"')&&homeJS.includes('drawHouseWatch()'),'The closest modeled House districts must render on the homepage');
+assert(indexHTML.includes('id="senate-control"')&&indexHTML.includes('id="controlUncertainty"')&&indexHTML.includes('scripts/home-control.js')&&indexHTML.includes('scripts/senate_control.js'),'The national control simulator must be visible alongside the House/Senate/governor seat bars');
 assert(indexHTML.includes('id="recentStateLink"')&&indexJS.includes('ervin-last-state')&&stateJS.includes('ervin-last-state'),'The recent state shortcut is not connected');
 assert(indexHTML.includes('data-national-atlas-view="states"')&&indexHTML.includes('data-national-atlas-view="counties"'),'Missing nationwide States / Counties map selector');
 assert(indexJS.includes('function setAtlasView(mode)')&&homeJS.includes('The States / Counties selector owns map visibility'),'The national view selector may be overridden on election night');
