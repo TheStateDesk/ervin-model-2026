@@ -9,7 +9,7 @@
 <div class="ed-topline"></div>
 <header class="ed-head"><div class="ed-head-inner"><a class="ed-brand" href="./"><b>E</b> ERVIN MODEL</a>
 <div class="ed-mast"><a href="./">The State Desk</a><small>2026 ELECTIONS · AN INDEPENDENT DATA JOURNAL</small></div>
-<div class="ed-utility"><button type="button" id="themeToggle" class="ed-btn outline ed-theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">Dark mode</button><span class="ed-date" id="todayLabel">2026 Midterms</span><a class="ed-btn outline" href="../election-night/">Election night</a></div></div>
+<div class="ed-utility"><span id="publicBuildLabel" class="ed-public-build" aria-label="Site release version">Build __ERVIN_BUILD__</span><button type="button" id="themeToggle" class="ed-btn outline ed-theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">Dark mode</button><span class="ed-date" id="todayLabel">2026 Midterms</span><a class="ed-btn outline" href="../election-night/">Election night</a></div></div>
 <nav class="ed-nav" aria-label="Election desk sections"><div class="ed-nav-inner"><a href="./" aria-current="page">All States</a><a href="#watchSection">Races to watch</a><a href="#nationMap">Interactive map</a><a href="#stateDirectory">State directory</a><a href="#editorialNotes">Coverage notes</a><a href="../election-night/">Election night</a><a href="../stats-for-nerds/">Stats for Nerds</a></div></nav></header>
 <a class="ed-skip-link" href="#watchSection">Skip to content</a><main class="ed-shell"><div class="ed-sectionline"><span class="ed-kicker">2026 / THE AMERICAN ELECTION ATLAS</span><span>50 states · 435 congressional districts</span></div>
 <h1 class="ed-headline">Every state. One clear picture.</h1>
@@ -42,25 +42,27 @@
  <p class="power-method">435 House districts · 100 senators · 50 governorships. Toss-ups are not assigned to either party; unmodeled Senate races are assumed to retain their current alignment. <a href="../election-night/">See separately attributed election-night results</a>.</p>
 </section>
 <div id="officeFocus" class="ed-office-focus" role="status" hidden></div>
-<div class="ed-columns" id="nationMap">
-<section class="ed-card"><div class="ed-kicker">NATIONWIDE / TAP ANY STATE TO OPEN</div><h2 style="margin:7px 0 13px">The 50-state election map</h2><div class="atlas-office main-map-office" role="group" aria-label="Choose the election to show on the state map"><button type="button" data-map-office="senate" aria-pressed="true">Senate</button><button type="button" data-map-office="governor" aria-pressed="false">Governor</button><button type="button" data-map-office="house" aria-pressed="false">House</button></div>
+<div id="nationMap" class="national-map-stack">
+<section class="ed-card"><div class="ed-kicker">2026 ELECTION ATLAS / CLICK A STATE TO EXPLORE</div><h2 style="margin:7px 0 13px">The 50-state election map</h2><div class="atlas-office main-map-office" role="group" aria-label="Choose the election to show on the state map"><button type="button" data-map-office="senate" aria-pressed="true">Senate</button><button type="button" data-map-office="governor" aria-pressed="false">Governor</button><button type="button" data-map-office="house" aria-pressed="false">House</button></div>
 <div class="ed-map-surface"><div id="stateMapTooltip" class="ed-map-tooltip" role="tooltip" hidden></div><svg id="usMap" viewBox="0 0 1080 625" role="group" aria-label="Interactive national election map with fifty selectable states"><text x="540" y="280" text-anchor="middle">Loading geography…</text></svg></div>
 <div id="mobileTileMap" class="ed-mobile-tilemap" aria-label="50-state tile map for smaller screens"></div><div class="ed-legend"><span class="ed-pill">A state is a whole election edition</span><span class="ed-mini" id="aggregateLegend">Muted color = balance of provisional party leads. Hover or focus for D–R margins and D/R/T counts; not a winner probability.</span></div>
 </section>
-<aside class="ed-card"><div class="ed-kicker">EDITOR'S MAP KEY</div><h2>How to explore</h2><div class="ed-small-list">
-<article><strong>1. Select a state</strong><small>Tap a map shape, state name, or search result. Your state edition loads directly.</small></article>
-<article><strong>2. See the whole ballot picture</strong><small>Senate, governor and all House districts appear together on one continuous page.</small></article>
-<article><strong>3. Dig into local geography</strong><small>Explore historical county margins and conditional 2026 scenarios; switch to clickable congressional districts.</small></article>
-<article><strong>4. Compare polling and returns</strong><small>Each source is labeled. Verified reported votes are never combined with predictions.</small></article></div>
-<div style="margin-top:20px" class="ed-notice">Aggregate rating counts describe the current provisional forecast, not certified vote results or calibrated probabilities. When a same-state historical governor comparison is unavailable, the original publisher polling margin remains visible and clearly identified.</div>
-<div id="featuredStates" class="ed-small-list" style="margin-top:16px"></div></aside></div>
+</div>
 <section id="allCountyNation" class="atlas-shell nationwide-counties" aria-labelledby="allCountyHeading">
- <div class="atlas-heading"><div><div class="ed-kicker">3,000+ COUNTIES / 2026 CONDITIONAL PROJECTION</div><h2 id="allCountyHeading">America, county by county</h2><p class="ed-mini">All modeled 2026 statewide Senate and governor contests in one map. Unmodeled states stay neutral.</p></div>
+ <div class="atlas-heading"><div><div class="ed-kicker">3,000+ COUNTIES / 2026 CONDITIONAL PROJECTION</div><h2 id="allCountyHeading">America, county by county</h2><p class="ed-mini">The 2026 statewide projections, colored county by county. Use the buttons to switch between Senate and governor races. States without a supported estimate remain gray.</p></div>
  <div class="atlas-office" role="group" aria-label="National county projection office"><button data-national-county-office="Senate" aria-pressed="true" type="button">Senate projections</button><button data-national-county-office="Governor" aria-pressed="false" type="button">Governor projections</button></div></div>
  <p id="allCountyStatus" class="atlas-banner" role="status">Preparing county models…</p>
  <div class="atlas-national nationwide-county-surface"><svg id="allCountyMap" role="group" aria-label="Nationwide county boundaries colored by conditional Senate or governor projection" viewBox="0 0 1110 635"><text x="100" y="85">Loading county outlines…</text></svg></div>
  <p id="allCountyNote" class="atlas-footnote">Conditional county scenarios based on current statewide forecasts and 2020/2024 county results, not 2026 county polls or counted ballots.</p>
  </section>
+<section class="ed-card map-guide-bottom" aria-label="How to use the election maps"><div class="ed-kicker">EDITOR'S MAP KEY</div><h2>How to explore</h2><div class="ed-small-list">
+<article><strong>1. Select a state</strong><small>Tap a map shape, state name, or search result. Your state edition loads directly.</small></article>
+<article><strong>2. See the whole ballot picture</strong><small>Senate, governor and all House districts appear together on one continuous page.</small></article>
+<article><strong>3. Dig into local geography</strong><small>Explore historical county margins and conditional 2026 scenarios; switch to clickable congressional districts.</small></article>
+<article><strong>4. Compare polling and returns</strong><small>Each source is labeled. Verified reported votes are never combined with predictions.</small></article></div>
+<div style="margin-top:20px" class="ed-notice">Aggregate rating counts describe the current provisional forecast, not certified vote results or calibrated probabilities. When a same-state historical governor comparison is unavailable, the original publisher polling margin remains visible and clearly identified.</div>
+<div id="featuredStates" class="ed-small-list" style="margin-top:16px"></div></section>
+
  <a class="ed-skip-link" href="#stateDirectory">Skip maps, browse states</a><section id="stateDirectory" style="margin-top:32px">
 <div class="ed-sectionline"><span class="ed-kicker">STATE INDEX / BY REGION</span><span id="directoryCount">50 state editions</span></div>
 <div id="stateRegions"></div></section>
