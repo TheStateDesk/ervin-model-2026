@@ -1,11 +1,862 @@
 {
-  "version": 1,
-  "asOf": "2026-11-02T23:55:47.934463+00:00",
-  "method": "Exact or conservatively matching first+last person name on Wikipedia article and Wikimedia thumbnail. Missing remains initials. Third-party and CivicAPI images handled independently.",
-  "portraits": {},
+  "version": 2,
+  "asOf": "2026-11-02",
+  "method": "2026 office, candidate state and party name match to public ElectIndex candidate_meta.csv. Verified Fredrick/Fred Love, Mike/Michael Minogue and Gregg/Greggory Hull name variants. Maine's Bobby Charles linked to Ballotpedia individual candidate photo. Credit and origin are recorded per photograph; original publisher controls licensing.",
+  "portraits": {
+    "Aaron Ford": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Nevada_Attorney_General_Aaron_Ford_addresses_the_United_Nations_Human_Rights_Committee%2C_October_17-18%2C_2023_1_%28cropped%29.jpg/330px-Nevada_Attorney_General_Aaron_Ford_addresses_the_United_Nations_Human_Rights_Committee%2C_October_17-18%2C_2023_1_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Aaron_Ford_(Nevada_politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Aaron Ford",
+      "office": "GOV",
+      "state": "NV"
+    },
+    "Aaron Guckian": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/RI-GOV-rep.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/RI-GOV-rep.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Aaron Guckian",
+      "office": "GOV",
+      "state": "RI"
+    },
+    "Abdul El-Sayed": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Abdul_El-Sayed_meet-and-greet_by_Conlan_Houston_5_%28cropped%29.jpg/330px-Abdul_El-Sayed_meet-and-greet_by_Conlan_Houston_5_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Abdul_El-Sayed",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Abdul El-Sayed",
+      "office": "SEN",
+      "state": "MI"
+    },
+    "Adam Hamilton": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Rev._Adam_Hamilton_%28cropped%29.jpg/330px-Rev._Adam_Hamilton_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Adam_Hamilton_(pastor)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Adam Hamilton",
+      "office": "SEN",
+      "state": "KS"
+    },
+    "Alan Wilson": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Alan_Wilson_in_August_2025.jpg/330px-Alan_Wilson_in_August_2025.jpg",
+      "page": "https://en.wikipedia.org/wiki/Alan_Wilson_(politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Alan Wilson",
+      "office": "GOV",
+      "state": "SC"
+    },
+    "Amanda Janoo": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/VT-GOV-dem.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/VT-GOV-dem.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Amanda Janoo",
+      "office": "GOV",
+      "state": "VT"
+    },
+    "Amy Acton": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Amy_Acton_2025.jpg/330px-Amy_Acton_2025.jpg",
+      "page": "https://en.wikipedia.org/wiki/Amy_Acton",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Amy Acton",
+      "office": "GOV",
+      "state": "OH"
+    },
+    "Amy Klobuchar": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Amy_Klobuchar%2C_official_portrait%2C_113th_Congress.jpg/330px-Amy_Klobuchar%2C_official_portrait%2C_113th_Congress.jpg",
+      "page": "https://en.wikipedia.org/wiki/Amy_Klobuchar",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Amy Klobuchar",
+      "office": "GOV",
+      "state": "MN"
+    },
+    "Andy Biggs": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Andy_Biggs_portrait_%28118th_Congress%29.jpg/330px-Andy_Biggs_portrait_%28118th_Congress%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Andy_Biggs",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Andy Biggs",
+      "office": "GOV",
+      "state": "AZ"
+    },
+    "Angie Nixon": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Angie_Nixon_official_portrait.jpg/330px-Angie_Nixon_official_portrait.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Angie_Nixon",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Angie Nixon",
+      "office": "SEN",
+      "state": "FL"
+    },
+    "Annie Andrews": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Annie_Andrews_Greenville_%28cropped%29.jpg/330px-Annie_Andrews_Greenville_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Annie_Andrews_(physician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Annie Andrews",
+      "office": "SEN",
+      "state": "SC"
+    },
+    "Ashley Hinson": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Congresswoman_Ashley_Hinson_Official_portrait.jpg/330px-Congresswoman_Ashley_Hinson_Official_portrait.jpg",
+      "page": "https://en.wikipedia.org/wiki/Ashley_Hinson",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Ashley Hinson",
+      "office": "SEN",
+      "state": "IA"
+    },
+    "Ashley Moody": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Senator_Ashley_Moody_Official_Portrait.jpg/330px-Senator_Ashley_Moody_Official_Portrait.jpg",
+      "page": "https://en.wikipedia.org/wiki/Ashley_Moody",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Ashley Moody",
+      "office": "SEN",
+      "state": "FL"
+    },
+    "Bernadette Wilson": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/AK-GOV-rep.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/AK-GOV-rep.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Bernadette Wilson",
+      "office": "GOV",
+      "state": "AK"
+    },
+    "Bobby Charles": {
+      "url": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/100/100/bobbycharles.jpeg",
+      "page": "https://ballotpedia.org/Bobby_Charles",
+      "source": "Ballotpedia candidate profile",
+      "matchedName": "Bobby Charles",
+      "office": "GOV",
+      "state": "ME"
+    },
+    "Brad Little": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Brad_Little_official_photo.jpg/330px-Brad_Little_official_photo.jpg",
+      "page": "https://en.wikipedia.org/wiki/Brad_Little",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Brad Little",
+      "office": "GOV",
+      "state": "ID"
+    },
+    "Brian Bengs": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/SD-SEN-ind.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/SD-SEN-ind.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Brian Bengs",
+      "office": "SEN",
+      "state": "SD"
+    },
+    "Bruce Blakeman": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Blakeman_Profile_Picture.jpg/330px-Blakeman_Profile_Picture.jpg",
+      "page": "https://en.wikipedia.org/wiki/Bruce_Blakeman",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Bruce Blakeman",
+      "office": "GOV",
+      "state": "NY"
+    },
+    "Byron Donalds": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Rep._Byron_Donalds_official_photo%2C_117th_Congress.jpg/330px-Rep._Byron_Donalds_official_photo%2C_117th_Congress.jpg",
+      "page": "https://en.wikipedia.org/wiki/Byron_Donalds",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Byron Donalds",
+      "office": "GOV",
+      "state": "FL"
+    },
+    "Chris Pappas": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Chris_Pappas%2C_official_portrait%2C_116th_Congress.jpg/330px-Chris_Pappas%2C_official_portrait%2C_116th_Congress.jpg",
+      "page": "https://en.wikipedia.org/wiki/Chris_Pappas_(American_politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Chris Pappas",
+      "office": "SEN",
+      "state": "NH"
+    },
+    "Christine Drazan": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Christine_Drazan_in_August_2022_%28cropped%29.jpg/330px-Christine_Drazan_in_August_2022_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Christine_Drazan",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Christine Drazan",
+      "office": "GOV",
+      "state": "OR"
+    },
+    "Cinde Warmington": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/NH-GOV-dem.jpg",
+      "page": "https://en.wikipedia.org/wiki/Cinde_Warmington",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Cinde Warmington",
+      "office": "GOV",
+      "state": "NH"
+    },
+    "Cindy Holscher": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Cindy_Holscher_2026_in_Manhattan_%28cropped%29.jpg/330px-Cindy_Holscher_2026_in_Manhattan_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Cindy_Holscher",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Cindy Holscher",
+      "office": "GOV",
+      "state": "KS"
+    },
+    "Cindy Hyde-Smith": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Official_headshot_of_US_Senator_Cindy_Hyde-Smith.jpg/330px-Official_headshot_of_US_Senator_Cindy_Hyde-Smith.jpg",
+      "page": "https://en.wikipedia.org/wiki/Cindy_Hyde-Smith",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Cindy Hyde-Smith",
+      "office": "SEN",
+      "state": "MS"
+    },
+    "Cyndi Munson": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Cyndi_Munson.jpg/330px-Cyndi_Munson.jpg",
+      "page": "https://en.wikipedia.org/wiki/Cyndi_Munson",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Cyndi Munson",
+      "office": "GOV",
+      "state": "OK"
+    },
+    "Dan Ahlers": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/SD-GOV-dem.jpg",
+      "page": "https://en.wikipedia.org/wiki/Dan_Ahlers",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Dan Ahlers",
+      "office": "GOV",
+      "state": "SD"
+    },
+    "Dan Cox": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Dan_Cox_Mar2020_%2849617550556%29.jpg/330px-Dan_Cox_Mar2020_%2849617550556%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Dan_Cox",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Dan Cox",
+      "office": "GOV",
+      "state": "MD"
+    },
+    "Dan Osborn": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Osborn_Headshot_2_%28cropped%29.jpg/330px-Osborn_Headshot_2_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Dan_Osborn",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Dan Osborn",
+      "office": "SEN",
+      "state": "NE"
+    },
+    "Dan Sullivan": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Senator_Dan_Sullivan_official.jpg/330px-Senator_Dan_Sullivan_official.jpg",
+      "page": "https://en.wikipedia.org/wiki/Dan_Sullivan_(U.S._senator)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Dan Sullivan",
+      "office": "SEN",
+      "state": "AK"
+    },
+    "Darline Graham": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Darline_Graham_official_portrait_%28cropped2%29.jpg/330px-Darline_Graham_official_portrait_%28cropped2%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Darline_Graham",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Darline Graham",
+      "office": "SEN",
+      "state": "SC"
+    },
+    "Darren Bailey": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Darren_Bailey_at_a_2022_Campaign_Event.jpg/330px-Darren_Bailey_at_a_2022_Campaign_Event.jpg",
+      "page": "https://en.wikipedia.org/wiki/Darren_Bailey",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Darren Bailey",
+      "office": "GOV",
+      "state": "IL"
+    },
+    "David Crowley": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Milwaukee_County_Executive_David_Crowley_during_Democratic_Primary_debate_on_July_28%2C_2026.jpg/330px-Milwaukee_County_Executive_David_Crowley_during_Democratic_Primary_debate_on_July_28%2C_2026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/David_Crowley_(Wisconsin_politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "David Crowley",
+      "office": "GOV",
+      "state": "WI"
+    },
+    "David Jolly": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/David_Jolly_%283x4%29.jpg/330px-David_Jolly_%283x4%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/David_Jolly",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "David Jolly",
+      "office": "GOV",
+      "state": "FL"
+    },
+    "Deb Haaland": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Secretary_Deb_Haaland%2C_official_headshot.jpg/330px-Secretary_Deb_Haaland%2C_official_headshot.jpg",
+      "page": "https://en.wikipedia.org/wiki/Deb_Haaland",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Deb Haaland",
+      "office": "GOV",
+      "state": "NM"
+    },
+    "Doug Jones": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Senator_Doug_Jones_official_photo_%281%29.jpg/330px-Senator_Doug_Jones_official_photo_%281%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Doug_Jones_(politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Doug Jones",
+      "office": "GOV",
+      "state": "AL"
+    },
+    "Eric Barlow": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/WY-GOV-rep.jpg",
+      "page": "https://en.wikipedia.org/wiki/Eric_Barlow",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Eric Barlow",
+      "office": "GOV",
+      "state": "WY"
+    },
+    "Fred Love": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Rep_Fredrick_J_Love.jpg/330px-Rep_Fredrick_J_Love.jpg",
+      "page": "https://en.wikipedia.org/wiki/Fredrick_Love",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Fredrick Love",
+      "office": "GOV",
+      "state": "AR"
+    },
+    "Gary Cordery": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/HI-GOV-rep.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/HI-GOV-rep.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Gary Cordery",
+      "office": "GOV",
+      "state": "HI"
+    },
+    "Gina Hinojosa": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Gina_Hinojosa_at_LBJ_Library_Forum_%283x4_cropped%29.jpg/330px-Gina_Hinojosa_at_LBJ_Library_Forum_%283x4_cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Gina_Hinojosa",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Gina Hinojosa",
+      "office": "GOV",
+      "state": "TX"
+    },
+    "Greg Abbott": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Greg_Abbott_at_NASA_2024_%28cropped%29.jpg/330px-Greg_Abbott_at_NASA_2024_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Greg_Abbott",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Greg Abbott",
+      "office": "GOV",
+      "state": "TX"
+    },
+    "Greggory Hull": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/NM-GOV-rep.jpg",
+      "page": "https://en.wikipedia.org/wiki/Gregg_Hull",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Gregg Hull",
+      "office": "GOV",
+      "state": "NM"
+    },
+    "Hannah Pingree": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Headshot_of_Hannah_Pingree_in_February_2026.jpg/330px-Headshot_of_Hannah_Pingree_in_February_2026.jpg",
+      "page": "https://en.wikipedia.org/wiki/Hannah_Pingree",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Hannah Pingree",
+      "office": "GOV",
+      "state": "ME"
+    },
+    "Helena Foulkes": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/HelenaFoulkes_CROP.jpg/330px-HelenaFoulkes_CROP.jpg",
+      "page": "https://en.wikipedia.org/wiki/Helena_Buonanno_Foulkes",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Helena Foulkes",
+      "office": "GOV",
+      "state": "RI"
+    },
+    "James Talarico": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/James_Talarico_Press_Conference_%28cropped%29.jpg/330px-James_Talarico_Press_Conference_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/James_Talarico",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "James Talarico",
+      "office": "SEN",
+      "state": "TX"
+    },
+    "JB Pritzker": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Governor_JB_Pritzker_official_portrait_2019_%28crop%29.jpg/330px-Governor_JB_Pritzker_official_portrait_2019_%28crop%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/JB_Pritzker",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "JB Pritzker",
+      "office": "GOV",
+      "state": "IL"
+    },
+    "Jermaine Johnson": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/SC-GOV-dem.jpg",
+      "page": "https://en.wikipedia.org/wiki/Jermaine_Johnson_(politician)",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Jermaine Johnson",
+      "office": "GOV",
+      "state": "SC"
+    },
+    "Jerri Green": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/TN-GOV-dem.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/TN-GOV-dem.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Jerri Green",
+      "office": "GOV",
+      "state": "TN"
+    },
+    "Jim Pillen": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Jim_Pillen_SelectUSA_%2855251574792%29.jpg/330px-Jim_Pillen_SelectUSA_%2855251574792%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Jim_Pillen",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Jim Pillen",
+      "office": "GOV",
+      "state": "NE"
+    },
+    "Jocelyn Benson": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/SOS_Jocelyn_Benson_web.jpg/330px-SOS_Jocelyn_Benson_web.jpg",
+      "page": "https://en.wikipedia.org/wiki/Jocelyn_Benson",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Jocelyn Benson",
+      "office": "GOV",
+      "state": "MI"
+    },
+    "Joe Lombardo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Joe_Lombardo_by_Gage_Skidmore_%283x4_cropped%29.jpg/330px-Joe_Lombardo_by_Gage_Skidmore_%283x4_cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Joe_Lombardo",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Joe Lombardo",
+      "office": "GOV",
+      "state": "NV"
+    },
+    "John E. Sununu": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/John_E._Sununu.jpg/330px-John_E._Sununu.jpg",
+      "page": "https://en.wikipedia.org/wiki/John_E._Sununu",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "John E. Sununu",
+      "office": "SEN",
+      "state": "NH"
+    },
+    "John James": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Rep._John_James_official_photo%2C_118th_Congress.jpg/330px-Rep._John_James_official_photo%2C_118th_Congress.jpg",
+      "page": "https://en.wikipedia.org/wiki/John_James_(Michigan_politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "John James",
+      "office": "GOV",
+      "state": "MI"
+    },
+    "Jon Husted": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Sen._Jon_Husted_official_portrait%2C_119th_Congress.jpg/330px-Sen._Jon_Husted_official_portrait%2C_119th_Congress.jpg",
+      "page": "https://en.wikipedia.org/wiki/Jon_Husted",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Jon Husted",
+      "office": "SEN",
+      "state": "OH"
+    },
+    "Jon Ossoff": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Jon_Ossoff_Senate_Portrait_2021.jpg/330px-Jon_Ossoff_Senate_Portrait_2021.jpg",
+      "page": "https://en.wikipedia.org/wiki/Jon_Ossoff",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Jon Ossoff",
+      "office": "SEN",
+      "state": "GA"
+    },
+    "Jonathan Kreiss-Tomkins": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/JKTphoto_%28cropped%29.jpg/330px-JKTphoto_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Jonathan_Kreiss-Tomkins",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Jonathan Kreiss-Tomkins",
+      "office": "GOV",
+      "state": "AK"
+    },
+    "Josh Green": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Josh_Green_Official_Photo_2022_%28cropped%29_1cropped%29.jpg/330px-Josh_Green_Official_Photo_2022_%28cropped%29_1cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Josh_Green_(politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Josh Green",
+      "office": "GOV",
+      "state": "HI"
+    },
+    "Josh Shapiro": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Josh_Shapiro_December_2025.jpg/330px-Josh_Shapiro_December_2025.jpg",
+      "page": "https://en.wikipedia.org/wiki/Josh_Shapiro",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Josh Shapiro",
+      "office": "GOV",
+      "state": "PA"
+    },
+    "Josh Turek": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Joshua_Turek_%28cropped_2%29.jpg/330px-Joshua_Turek_%28cropped_2%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Josh_Turek",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Josh Turek",
+      "office": "SEN",
+      "state": "IA"
+    },
+    "Kathy Hochul": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Kathy_Hochul_March_2024.jpg/330px-Kathy_Hochul_March_2024.jpg",
+      "page": "https://en.wikipedia.org/wiki/Kathy_Hochul",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Kathy Hochul",
+      "office": "GOV",
+      "state": "NY"
+    },
+    "Katie Hobbs": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Katie_Hobbs_2026.jpg/330px-Katie_Hobbs_2026.jpg",
+      "page": "https://en.wikipedia.org/wiki/Katie_Hobbs",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Katie Hobbs",
+      "office": "GOV",
+      "state": "AZ"
+    },
+    "Keisha Lance Bottoms": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Keisha_Lance_Bottoms.jpg/330px-Keisha_Lance_Bottoms.jpg",
+      "page": "https://en.wikipedia.org/wiki/Keisha_Lance_Bottoms",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Keisha Lance Bottoms",
+      "office": "GOV",
+      "state": "GA"
+    },
+    "Kelly Ayotte": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Governor_Kelly_Ayotte_receives_a_briefing_from_National_Guard_cyber_operators_%28cropped%29_%28cropped%29.jpg/330px-Governor_Kelly_Ayotte_receives_a_briefing_from_National_Guard_cyber_operators_%28cropped%29_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Kelly_Ayotte",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Kelly Ayotte",
+      "office": "GOV",
+      "state": "NH"
+    },
+    "Ken Paxton": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/K_Paxton.jpg/330px-K_Paxton.jpg",
+      "page": "https://en.wikipedia.org/wiki/Ken_Paxton",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Ken Paxton",
+      "office": "SEN",
+      "state": "TX"
+    },
+    "Kenneth Casner": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/WY-GOV-dem.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/WY-GOV-dem.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Kenneth Casner",
+      "office": "GOV",
+      "state": "WY"
+    },
+    "Kurt Alme": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Kurt_G._Alme_official_photo.jpg/330px-Kurt_G._Alme_official_photo.jpg",
+      "page": "https://en.wikipedia.org/wiki/Kurt_Alme",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Kurt Alme",
+      "office": "SEN",
+      "state": "MT"
+    },
+    "Larry Rhoden": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Larry_Rhoden_2025_%28cropped%29.jpg/330px-Larry_Rhoden_2025_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Larry_Rhoden",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Larry Rhoden",
+      "office": "GOV",
+      "state": "SD"
+    },
+    "Lisa Demuth": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Lisa_Demuth%2C_2026_%28cropped%29.jpg/330px-Lisa_Demuth%2C_2026_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Lisa_Demuth",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Lisa Demuth",
+      "office": "GOV",
+      "state": "MN"
+    },
+    "Lynne Walz": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/NE-GOV-dem.jpg",
+      "page": "https://en.wikipedia.org/wiki/Lynne_Walz",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Lynne Walz",
+      "office": "GOV",
+      "state": "NE"
+    },
+    "Marsha Blackburn": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Sen._Marsha_Blackburn_%28R-TN%29_official_headshot_-_116th_Congress.jpg/330px-Sen._Marsha_Blackburn_%28R-TN%29_official_headshot_-_116th_Congress.jpg",
+      "page": "https://en.wikipedia.org/wiki/Marsha_Blackburn",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Marsha Blackburn",
+      "office": "GOV",
+      "state": "TN"
+    },
+    "Mary Peltola": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Mary_Peltola_Congressional_Member_Portrait_%282%29.jpeg/330px-Mary_Peltola_Congressional_Member_Portrait_%282%29.jpeg",
+      "page": "https://en.wikipedia.org/wiki/Mary_Peltola",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Mary Peltola",
+      "office": "SEN",
+      "state": "AK"
+    },
+    "Maura Healey": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Maura_Healey%2C_official_portrait%2C_governor.jpg/330px-Maura_Healey%2C_official_portrait%2C_governor.jpg",
+      "page": "https://en.wikipedia.org/wiki/Maura_Healey",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Maura Healey",
+      "office": "GOV",
+      "state": "MA"
+    },
+    "Michael Minogue": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/MA-GOV-rep.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/MA-GOV-rep.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Mike Minogue",
+      "office": "GOV",
+      "state": "MA"
+    },
+    "Michael Whatley": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Michael_Whatley_%2854670563614%29_%28cropped%29.jpg/330px-Michael_Whatley_%2854670563614%29_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Michael_Whatley",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Michael Whatley",
+      "office": "SEN",
+      "state": "NC"
+    },
+    "Michele Tafoya": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/MicheleTafoya2023.jpg/330px-MicheleTafoya2023.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Michele_Tafoya",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Michele Tafoya",
+      "office": "SEN",
+      "state": "MN"
+    },
+    "Mike Collins": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Rep._Mike_Collins_official_photo%2C_118th_Congress.jpg/330px-Rep._Mike_Collins_official_photo%2C_118th_Congress.jpg",
+      "page": "https://en.wikipedia.org/wiki/Mike_Collins_(politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Mike Collins",
+      "office": "SEN",
+      "state": "GA"
+    },
+    "Mike Mazzei": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Mike_Mazzei_OK_Senate_Headshot.jpg/330px-Mike_Mazzei_OK_Senate_Headshot.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Mike_Mazzei",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Mike Mazzei",
+      "office": "GOV",
+      "state": "OK"
+    },
+    "Mike Rogers": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Mike-Rogers-Head-Shot-2_%283x4_cropped%29.jpg/330px-Mike-Rogers-Head-Shot-2_%283x4_cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Mike_Rogers_(Michigan_politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Mike Rogers",
+      "office": "SEN",
+      "state": "MI"
+    },
+    "Mike Rounds": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Mike_Rounds_official_Senate_portrait.jpg/330px-Mike_Rounds_official_Senate_portrait.jpg",
+      "page": "https://en.wikipedia.org/wiki/Mike_Rounds",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Mike Rounds",
+      "office": "SEN",
+      "state": "SD"
+    },
+    "Ned Lamont": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Governor_Ned_Lamont_of_Connecticut%2C_official_portrait.jpg/330px-Governor_Ned_Lamont_of_Connecticut%2C_official_portrait.jpg",
+      "page": "https://en.wikipedia.org/wiki/Ned_Lamont",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Ned Lamont",
+      "office": "GOV",
+      "state": "CT"
+    },
+    "Peggy Flanagan": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/2026PeggyFlanagan_%28newcropped%29.jpg/330px-2026PeggyFlanagan_%28newcropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Peggy_Flanagan",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Peggy Flanagan",
+      "office": "SEN",
+      "state": "MN"
+    },
+    "Pete Ricketts": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Sen._Pete_Ricketts_official_portrait%2C_118th_Congress_4x5.jpg/330px-Sen._Pete_Ricketts_official_portrait%2C_118th_Congress_4x5.jpg",
+      "page": "https://en.wikipedia.org/wiki/Pete_Ricketts",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Pete Ricketts",
+      "office": "SEN",
+      "state": "NE"
+    },
+    "Phil Scott": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Phil_Scott_2019.png/330px-Phil_Scott_2019.png",
+      "page": "https://en.wikipedia.org/wiki/Phil_Scott",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Phil Scott",
+      "office": "GOV",
+      "state": "VT"
+    },
+    "Phil Weiser": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/AG_Phil_Weiser.jpg/330px-AG_Phil_Weiser.jpg",
+      "page": "https://en.wikipedia.org/wiki/Phil_Weiser",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Phil Weiser",
+      "office": "GOV",
+      "state": "CO"
+    },
+    "Rick Jackson": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Rick_Jackson_%28cropped%29.png/330px-Rick_Jackson_%28cropped%29.png",
+      "page": "https://en.wikipedia.org/wiki/Rick_Jackson_(businessman)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Rick Jackson",
+      "office": "GOV",
+      "state": "GA"
+    },
+    "Rob Sand": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Rob_Sand_campaign_headshot_%28cropped_2%29.jpg/330px-Rob_Sand_campaign_headshot_%28cropped_2%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Rob_Sand",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Rob Sand",
+      "office": "GOV",
+      "state": "IA"
+    },
+    "Roger Marshall": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Roger_Marshall_117th_Congress_portrait.jpg/330px-Roger_Marshall_117th_Congress_portrait.jpg",
+      "page": "https://en.wikipedia.org/wiki/Roger_Marshall",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Roger Marshall",
+      "office": "SEN",
+      "state": "KS"
+    },
+    "Roy Cooper": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Roy_Cooper_in_November_2023_%28cropped2%29.jpg/330px-Roy_Cooper_in_November_2023_%28cropped2%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Roy_Cooper",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Roy Cooper",
+      "office": "SEN",
+      "state": "NC"
+    },
+    "Ryan Fazio": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Ryan_Fazio%2C_2026_%283x4_headshot%29.jpg/330px-Ryan_Fazio%2C_2026_%283x4_headshot%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Ryan_Fazio",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Ryan Fazio",
+      "office": "GOV",
+      "state": "CT"
+    },
+    "Sarah Huckabee Sanders": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Governor_Sarah_Huckabee_Sanders_2026.jpg/330px-Governor_Sarah_Huckabee_Sanders_2026.jpg",
+      "page": "https://en.wikipedia.org/wiki/Sarah_Huckabee_Sanders",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Sarah Huckabee Sanders",
+      "office": "GOV",
+      "state": "AR"
+    },
+    "Scott Colom": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/MS-SEN-dem.jpg",
+      "page": "https://en.wikipedia.org/wiki/Scott_Colom",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Scott Colom",
+      "office": "SEN",
+      "state": "MS"
+    },
+    "Seth Bodnar": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Seth_Bodnar_-_President_at_University_of_Montana_%28cropped%29.jpg/330px-Seth_Bodnar_-_President_at_University_of_Montana_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Seth_Bodnar",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Seth Bodnar",
+      "office": "SEN",
+      "state": "MT"
+    },
+    "Sherrod Brown": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sherrod_Brown_117th_Congress_%282%29.jpg/330px-Sherrod_Brown_117th_Congress_%282%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Sherrod_Brown",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Sherrod Brown",
+      "office": "SEN",
+      "state": "OH"
+    },
+    "Stacy Garrity": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Stacy_Garrity%2C_2024.jpg/330px-Stacy_Garrity%2C_2024.jpg",
+      "page": "https://en.wikipedia.org/wiki/Stacy_Garrity",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Stacy Garrity",
+      "office": "GOV",
+      "state": "PA"
+    },
+    "Steve Hilton": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Steve_Hilton_%2854233445987_crop%29.jpg/330px-Steve_Hilton_%2854233445987_crop%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Steve_Hilton",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Steve Hilton",
+      "office": "GOV",
+      "state": "CA"
+    },
+    "Susan Collins": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Senator_Susan_Collins_2014_official_portrait.jpg/330px-Senator_Susan_Collins_2014_official_portrait.jpg",
+      "page": "https://en.wikipedia.org/wiki/Susan_Collins",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Susan Collins",
+      "office": "SEN",
+      "state": "ME"
+    },
+    "Terri Pickens": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/ID-GOV-dem.jpg",
+      "page": "https://github.com/ElectIndex/26_us_forecast_data/blob/main/photos/ID-GOV-dem.jpg",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Terri Pickens",
+      "office": "GOV",
+      "state": "ID"
+    },
+    "Tina Kotek": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Tina_Kotek_official_portrait_2021%283x4_cropped%29.jpg/330px-Tina_Kotek_official_portrait_2021%283x4_cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Tina_Kotek",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Tina Kotek",
+      "office": "GOV",
+      "state": "OR"
+    },
+    "Tom Tiffany": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Tom_Tiffany.jpg/330px-Tom_Tiffany.jpg",
+      "page": "https://en.wikipedia.org/wiki/Tom_Tiffany",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Tom Tiffany",
+      "office": "GOV",
+      "state": "WI"
+    },
+    "Tommy Tuberville": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Tommy_tuberville.jpg/330px-Tommy_tuberville.jpg",
+      "page": "https://en.wikipedia.org/wiki/Tommy_Tuberville",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Tommy Tuberville",
+      "office": "GOV",
+      "state": "AL"
+    },
+    "Troy Jackson": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Senate_President_Troy_Jackson_%28cropped%29.png/330px-Senate_President_Troy_Jackson_%28cropped%29.png",
+      "page": "https://en.wikipedia.org/wiki/Troy_Jackson_(politician)",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Troy Jackson",
+      "office": "SEN",
+      "state": "ME"
+    },
+    "Ty Masterson": {
+      "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/KS-GOV-rep.jpg",
+      "page": "https://en.wikipedia.org/wiki/Ty_Masterson",
+      "source": "ElectIndex candidate photo archive",
+      "matchedName": "Ty Masterson",
+      "office": "GOV",
+      "state": "KS"
+    },
+    "Victor Marx": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Victor_Marx_%2852125665777%29_%28cropped%29.jpg/330px-Victor_Marx_%2852125665777%29_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Victor_Marx",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Victor Marx",
+      "office": "GOV",
+      "state": "CO"
+    },
+    "Vivek Ramaswamy": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Vivek_Ramaswamy_%2855241367373%29_%28cropped%29.jpg/330px-Vivek_Ramaswamy_%2855241367373%29_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/Vivek_Ramaswamy",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Vivek Ramaswamy",
+      "office": "GOV",
+      "state": "OH"
+    },
+    "Wes Moore": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Wes_Moore_Official_Governor_Portrait.jpg/330px-Wes_Moore_Official_Governor_Portrait.jpg",
+      "page": "https://en.wikipedia.org/wiki/Wes_Moore",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Wes Moore",
+      "office": "GOV",
+      "state": "MD"
+    },
+    "Xavier Becerra": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/HHS_Xavier_Becerra.jpg/330px-HHS_Xavier_Becerra.jpg",
+      "page": "https://en.wikipedia.org/wiki/Xavier_Becerra",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Xavier Becerra",
+      "office": "GOV",
+      "state": "CA"
+    },
+    "Zach Lahn": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Zach_Lahn_IA_State_Fair_2026.jog.jpg/330px-Zach_Lahn_IA_State_Fair_2026.jog.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "page": "https://en.wikipedia.org/wiki/Zach_Lahn",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "Zach Lahn",
+      "office": "GOV",
+      "state": "IA"
+    }
+  },
   "scope": {
     "trackedNames": 106,
-    "wikiArticlesConfirmedThisRun": 0,
-    "savedPortraits": 0
+    "sourcedImages": 106,
+    "wikimedia": 88,
+    "curatedArchive": 17,
+    "ballotpedia": 1
   }
 }
