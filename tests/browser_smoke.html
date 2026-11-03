@@ -12,12 +12,12 @@
   const until=async fn=>{for(let i=0;i<180;i++){if(fn())return;await new Promise(r=>setTimeout(r,100))}throw Error('Timeout waiting for State Desk models')};
   await until(()=>$('powerCards')?.dataset.powerReady==='true'&&$('watchCards')?.querySelectorAll('.watch-card').length>=4&&$('usMap')?.querySelector('path.ed-state'));
   const heading=d.querySelector('h1.ed-headline')?.textContent||'';
-  check(/Every state|A Blue House|Election Night/.test(heading),'The 50-state editorial State Desk headline must show either the preview, locked forecast, or election-night phase: '+heading);
+  check(/Every state|A Blue House|Election Night|2026/.test(heading),'The 50-state editorial State Desk headline must show either the preview, locked forecast, or election-night phase: '+heading);
   check($('watchSection')&&$('balanceOfPower')&&$('nationMap')&&$('electionDashboard'),'Races to watch, office balance, atlas and automatic election-night dashboard are present');
   check(!d.querySelector('#electionNationalMap,#electionLocalMap'),'Live and forecast maps must not duplicate national/state SVGs');
   check($('watchSection').getBoundingClientRect().top<$('balanceOfPower').getBoundingClientRect().top,'Races to watch precede office balance');
   const nightActive=Date.now()>=Date.parse('2026-11-03T17:55:00-05:00');
-  check(nightActive?$('edNightMapSlot')?.contains($('nationMap')):$('balanceOfPower').getBoundingClientRect().top<$('nationMap').getBoundingClientRect().top,'Pre-election atlas follows balance, or during election night appears prominently in the national results desk');
+  check(nightActive?($('edSimulationPanel')?.dataset.coverageMode==='live'&&$('edFinalHeadline')?.textContent.includes('COVERAGE')&&$('edLiveCommentary')?.hidden===false):$('balanceOfPower').getBoundingClientRect().top<$('nationMap').getBoundingClientRect().top,'Pre-election atlas follows balance; at 5:55 the original lead becomes LIVE ELECTION COVERAGE with commentary');
   check($('powerCards').querySelectorAll('.power-card').length===3,'Three office forecast cards render');
   check(d.querySelectorAll('#usMap path.ed-state').length>=50,'All fifty state shapes accessible');
   check(!d.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),'Retired workbench does not appear');
