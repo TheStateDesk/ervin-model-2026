@@ -85,7 +85,7 @@ function scrutinizeMichigan(geography,raw,source,kind){
  if(!Array.isArray(rows)||rows.length>(kind==='precinct'?16000:83))return null;
  const output=new Map(),seen=new Set(),ct=new Set(['Dickinson','Gogebic','Iron','Menominee']);
  for(const row of rows){
-  const id=allowed.get(C.normalize(row.county));if(!id||(!vote(row.dem)||!vote(row.rep)||!vote(row.other)))return null;
+  const id=allowed.get(C.normalize(row.county));if(!id||(!vote(row.dem)||!vote(row.rep)||!vote(row.other))||row.dem+row.rep+row.other===0)return null;
   const close=ct.has(row.county)?Date.parse('2026-11-04T02:00:00Z'):Date.parse('2026-11-04T01:00:00Z');
   const timestamp=Date.parse(row.asOf||'');
   if(!Number.isFinite(timestamp)||timestamp<close||timestamp>Date.now()+300000||!C.sourceAllowed('MI',row.county,row.sourceUrl,authority))return null;
@@ -111,7 +111,7 @@ async function check(){
   for(const {code,features}of shapes)for(const o of ['Senate','Governor']){
    const old=rows[o]?.[code]||new Map();
    const parsed=C.parse(results,code,o,features,authority,old);
-   if(parsed.available)next[o][code]=parsed.rows;
+   if(parsed.available&&parsed.rows.size){const merged=new Map(old);for(const[id,val]of parsed.rows)merged.set(id,val);next[o][code]=merged;}
   }
   if(mi){
    const geography=shapes.find(x=>x.code==='MI');
@@ -121,7 +121,7 @@ async function check(){
     const checked=scrutinizeMichigan({features:geography.features},got[i],sources[i-1],i===1?'precinct':'county');
     if(checked)for(const[id,row]of checked)county.set(id,row); // later full county source replaces partial precincts.
    }
-   if(county.size)next.Senate.MI=county;
+   if(county.size){const merged=new Map(next.Senate.MI||[]);for(const[id,val]of county){const prior=merged.get(id);if(!prior||val.dem+val.rep+val.other>=prior.dem+prior.rep+prior.other||val.asOf>prior.asOf)merged.set(id,val)}next.Senate.MI=merged;}
   }
   rows=next;
   render();
