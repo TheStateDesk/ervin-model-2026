@@ -63,7 +63,9 @@ const mapHTML=text('states/index.html'),mapJS=text('states/app.js'),stateHTML=te
 assert(stateHTML.includes('id="stateSources"')&&stateHTML.includes('id="stateSourceLedger"')&&stateHTML.includes('source-ledger.js'),'State source ledger not present');
 assert(mapHTML.includes('id="stateMapTooltip"')&&mapHTML.includes('id="aggregateLegend"'),'State map aggregate/hover not installed');
 assert(mapJS.includes('D')&&mapJS.includes('R')&&mapJS.includes('T')&&mapJS.includes('populate()'),'Aggregate rating calculations missing');
-for(const id of ['countyNightMap','nightCountyRows','nightCountyDem','nightCountyRep','nightCountyCount','nightCountyFeedStatus'])assert(stateHTML.includes('id="'+id+'"'),'Missing per-state election-night UI '+id);
+for(const id of ['countyMap','nightCountyRows','nightCountyDem','nightCountyRep','nightCountyCount','nightCountyFeedStatus','countyReportingLedger','countySourceAudit'])assert(stateHTML.includes('id="'+id+'"'),'Missing unified county/return UI '+id);
+ assert(!stateHTML.includes('id="countyNightMap"'),'Forecast and election-night counts must share ONE county SVG');
+ assert(stateHTML.includes('value="reported"')&&stateHTML.includes('value="compare"'),'Unified county map must have reported and comparison modes');
 assert(nightJS.includes('county_auto.json')&&nightJS.includes('county_totals.json')&&nightJS.includes('readPrecinct'),'Michigan clerk sources not present');
 const empty=json('election-night/county-returns.json');assert.equal(Object.keys(empty.states).length,0,'No fabricated county returns allowed');
 const ui=text('elections/overview/index.html');assert(ui.includes('noindex,nofollow')&&ui.includes('location.replace'),'Legacy center not hidden');
