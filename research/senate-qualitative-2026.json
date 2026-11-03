@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "election": "2026-11-03",
+  "asOf": "2026-11-03",
+  "scope": "18 races outside the 17 numerical Ervin Senate forecasts",
+  "note": "All 35 races now have a numerical model or an explicitly source-rated qualitative outlook. These 18 are not numerical Ervin predictions. Do not infer a point spread or probability from qualitative ratings. Party denotes leader, not a called election result.",
+  "races": {
+    "AL": {
+      "state": "Alabama",
+      "featured": "Barry Moore",
+      "opponent": "Everett Wess",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "AR": {
+      "state": "Arkansas",
+      "featured": "Tom Cotton",
+      "opponent": "Hallie Shoffner",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "CO": {
+      "state": "Colorado",
+      "featured": "John Hickenlooper",
+      "opponent": "Mark Baisley",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "DE": {
+      "state": "Delaware",
+      "featured": "Chris Coons",
+      "opponent": "Michael Katz",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "ID": {
+      "state": "Idaho",
+      "featured": "Jim Risch",
+      "opponent": "Todd Achilles (Independent)",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "IL": {
+      "state": "Illinois",
+      "featured": "Juliana Stratton",
+      "opponent": "Don Tracy",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "KY": {
+      "state": "Kentucky",
+      "featured": "Andy Barr",
+      "opponent": "Charles Booker",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "LA": {
+      "state": "Louisiana",
+      "featured": "Julia Letlow",
+      "opponent": "Jamie Davis",
+      "rating": "Likely R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "MA": {
+      "state": "Massachusetts",
+      "featured": "Ed Markey",
+      "opponent": "John Deaton",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "NJ": {
+      "state": "New Jersey",
+      "featured": "Cory Booker",
+      "opponent": "Justin Murphy",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "NM": {
+      "state": "New Mexico",
+      "featured": "Ben Ray Luján",
+      "opponent": "Larry Marker",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "OK": {
+      "state": "Oklahoma",
+      "featured": "Kevin Hern",
+      "opponent": "N'Kiyla Jasmine Thomas",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "OR": {
+      "state": "Oregon",
+      "featured": "Jeff Merkley",
+      "opponent": "David Brock Smith",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "RI": {
+      "state": "Rhode Island",
+      "featured": "Jack Reed",
+      "opponent": "Ray McKay",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "TN": {
+      "state": "Tennessee",
+      "featured": "Bill Hagerty",
+      "opponent": "Marquita Bradshaw",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "VA": {
+      "state": "Virginia",
+      "featured": "Mark Warner",
+      "opponent": "Bert Mizusawa",
+      "rating": "Solid D",
+      "party": "D",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "WV": {
+      "state": "West Virginia",
+      "featured": "Shelley Moore Capito",
+      "opponent": "Rachel Fetty Anderson",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    },
+    "WY": {
+      "state": "Wyoming",
+      "featured": "Harriet Hageman",
+      "opponent": "James Byrd",
+      "rating": "Solid R",
+      "party": "R",
+      "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
+      "ratingSource": "https://insideelections.com/election-year/2026/",
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+    }
+  }
+}
