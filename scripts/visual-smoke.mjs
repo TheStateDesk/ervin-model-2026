@@ -84,9 +84,9 @@ try{
   const [cpos,bpos,mpos]=await Promise.all(['#watchSection','#balanceOfPower','#nationMap'].map(async id=>(await homepage.locator(id).boundingBox()).y));
   assert(cpos<bpos&&bpos<mpos,'Closest races and office forecasts must precede national map');
   assert(cpos<780,'Races-to-watch carousel must appear early on desktop');
-  const cardBefore=await homepage.locator('#watchCards .watch-card').first().innerText();
+  const cardBefore=await homepage.locator('#watchCards .watch-card__name').first().innerText();
   await homepage.locator('#watchNext').click();
-  assert((await homepage.locator('#watchCards .watch-card').first().innerText())!==cardBefore,'Races-to-watch next button did not advance');
+  assert((await homepage.locator('#watchCards .watch-card__name').first().innerText())!==cardBefore,'Races-to-watch next button did not advance');
   await homepage.locator('#watchPrev').click();
   assert((await homepage.locator('#powerCards .power-card').count())===3,'All three office balance cards must render');
  assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='26','Governor projection must include new 2022 Oregon governor comparison');
