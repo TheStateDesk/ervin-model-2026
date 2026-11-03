@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "asOf": "2026-11-02",
-  "method": "2026 office, candidate state and party name match to public ElectIndex candidate_meta.csv. Verified Fredrick/Fred Love, Mike/Michael Minogue and Gregg/Greggory Hull name variants. Maine's Bobby Charles linked to Ballotpedia individual candidate photo. Credit and origin are recorded per photograph; original publisher controls licensing.",
+  "version": 1,
+  "asOf": "2026-11-03T00:04:19.448369+00:00",
+  "method": "Exact or conservatively matching first+last person name on Wikipedia article and Wikimedia thumbnail. Missing remains initials. Third-party and CivicAPI images handled independently.",
   "portraits": {
     "Aaron Ford": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Nevada_Attorney_General_Aaron_Ford_addresses_the_United_Nations_Human_Rights_Committee%2C_October_17-18%2C_2023_1_%28cropped%29.jpg/330px-Nevada_Attorney_General_Aaron_Ford_addresses_the_United_Nations_Human_Rights_Committee%2C_October_17-18%2C_2023_1_%28cropped%29.jpg",
@@ -347,14 +347,6 @@
       "office": "GOV",
       "state": "RI"
     },
-    "James Talarico": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/James_Talarico_Press_Conference_%28cropped%29.jpg/330px-James_Talarico_Press_Conference_%28cropped%29.jpg",
-      "page": "https://en.wikipedia.org/wiki/James_Talarico",
-      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
-      "matchedName": "James Talarico",
-      "office": "SEN",
-      "state": "TX"
-    },
     "JB Pritzker": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Governor_JB_Pritzker_official_portrait_2019_%28crop%29.jpg/330px-Governor_JB_Pritzker_official_portrait_2019_%28crop%29.jpg",
       "page": "https://en.wikipedia.org/wiki/JB_Pritzker",
@@ -362,6 +354,14 @@
       "matchedName": "JB Pritzker",
       "office": "GOV",
       "state": "IL"
+    },
+    "James Talarico": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/James_Talarico_Press_Conference_%28cropped%29.jpg/330px-James_Talarico_Press_Conference_%28cropped%29.jpg",
+      "page": "https://en.wikipedia.org/wiki/James_Talarico",
+      "source": "Wikimedia Commons — via ElectIndex candidate metadata",
+      "matchedName": "James Talarico",
+      "office": "SEN",
+      "state": "TX"
     },
     "Jermaine Johnson": {
       "url": "https://raw.githubusercontent.com/ElectIndex/26_us_forecast_data/main/photos/SC-GOV-dem.jpg",
@@ -854,9 +854,7 @@
   },
   "scope": {
     "trackedNames": 106,
-    "sourcedImages": 106,
-    "wikimedia": 88,
-    "curatedArchive": 17,
-    "ballotpedia": 1
+    "wikiArticlesConfirmedThisRun": 0,
+    "savedPortraits": 106
   }
 }
