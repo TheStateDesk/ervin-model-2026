@@ -1,11 +1,11 @@
 {
   "asOf": "2026-11-02",
   "method": "Only earlier same-state gubernatorial polling-versus-actual errors dated 2018–2024. All 2014 errors excluded. D–R polling margin minus actual D–R result. Latest three eligible prior governor cycles weighted 0.5/0.3/0.2, normalized if fewer than three. Never includes Senate, presidential or future results.",
-  "caveats": "Selective 2018–2024 source-linked governor cohort; 2018 target races have no earlier eligible comparators and cannot be scored. Sparse earlier cycles and nonuniform publishers limit inference. Stale polls excluded. No calibrated win chances. Four newly sourced 2022 CO/MA/NM/OR averages have no earlier same-state comparable governor error, so they expand 2026 history but not the eligible historical holdout.",
+  "caveats": "Selective 2018–2024 source-linked governor cohort; 2018 target races have no earlier eligible comparators and cannot be scored. Sparse earlier cycles and nonuniform publishers limit inference. Stale polls excluded. No calibrated win chances. Four newly sourced 2022 CO/MA/NM/OR averages have no earlier same-state comparable governor error, so they expand 2026 history but not the eligible historical holdout. Oklahoma and South Dakota 2022 added using sourced final governor-only polling averages and official vote shares; 2026 same-state corrections not counted as validated holdouts.",
   "summary": {
-    "observed": 39,
+    "observed": 41,
     "eligible": 15,
-    "notBacktestable": 24,
+    "notBacktestable": 26,
     "n": 15,
     "rawMAE": 4.659,
     "adjustedMAE": 4.705,
@@ -45,7 +45,7 @@
       "adjustedWinners": 1
     },
     "2022": {
-      "observed": 23,
+      "observed": 25,
       "n": 12,
       "rawMAE": 3.554,
       "adjustedMAE": 4.452,
@@ -811,6 +811,25 @@
       "pastOnly": true
     },
     {
+      "state": "OK",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -3.6,
+      "actualMargin": -13.66,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/oklahoma",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?f=0&fips=40&off=5&year=2022",
+      "note": "270toWin average of 5 unique-pollster surveys, Hofmeister (D) 43.6%, Stitt (R) 47.2%, versus official final 41.79 D and 55.45 R; D-R margin convention.",
+      "error": 10.06,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 10.06,
+      "adjustedAbsError": null,
+      "evidence": [],
+      "eligible": false,
+      "pastOnly": true
+    },
+    {
       "state": "OR",
       "year": 2022,
       "office": "Governor",
@@ -877,6 +896,25 @@
           "note": "Latest Trafalgar 10/29–10/31; no published RCP average."
         }
       ],
+      "eligible": false,
+      "pastOnly": true
+    },
+    {
+      "state": "SD",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -11.5,
+      "actualMargin": -26.81,
+      "pollType": "270toWin 2-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/south-dakota",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?f=0&fips=46&off=5&year=2022",
+      "note": "270toWin final two-poll average: Jamie Smith (D) 39%, Kristi Noem (R) 50.5%. Certified 35.17% D and 61.98% R, D-R -26.81. Sparse poll sample, not comparable in reliability to larger multi-poll aggregates.",
+      "error": 15.31,
+      "correction": null,
+      "adjustedMargin": null,
+      "rawAbsError": 15.31,
+      "adjustedAbsError": null,
+      "evidence": [],
       "eligible": false,
       "pastOnly": true
     },
