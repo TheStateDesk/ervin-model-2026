@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-03T16:17:36.395Z",
+  "asOf": "2026-11-03T16:22:06.695Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -41,11 +41,13 @@
         "overstatementD": 9.2,
         "retainedFraction": 0.2,
         "adjustmentD": -1.84,
-        "referenceMarginD": 1.08,
+        "referenceMarginD": 1.18,
         "sourcePolling": "https://www.realclearpolling.com/polls/senate/democratic-primary/2026/michigan",
         "sourceFinal": "https://ballotpedia.org/United_States_Senate_election_in_Michigan,_2026_(August_4_Democratic_primary)",
         "rationale": "Transfers only 20% of the primary polling overstatement to the general-election forecast as a judgmental, candidate-specific weakness marker. A primary is not comparable to the general electorate, and the primary included a withdrawn candidate. It is not a validated religion-related Bradley effect and is not historical statewide Senate error.",
-        "transferVerified": false
+        "transferVerified": false,
+        "archivedReferenceMarginD": 1.08,
+        "referenceBasis": "Fresh general-election publisher blend minus statewide historical Senate correction; archived primary comparison retained independently."
       }
     },
     "OH": {
