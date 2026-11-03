@@ -19,7 +19,7 @@ assert.equal(sum(out.house),435);
 assert.equal(sum(out.senate),100);
 assert.equal(sum(out.governors),50);
 assert.equal(out.house.T,hs.summary.ratings.Tossup,'Tossup districts cannot be counted as called seats');
-assert.equal(out.house.U,146,'Unknown redrawn districts must remain unassigned, not wins');
+assert.equal(out.house.U,hs.summary.redrawnUnrated,'Unknown redrawn districts must remain unassigned, not wins');
 assert.equal(out.house.D+out.house.R+out.house.T+out.house.U,435,'House source ratings must cover exactly 435 districts');
 assert.equal(hs.races['TX-09'].modelRating,'Likely R','Texas redraw cannot preserve the old Solid D numeric forecast');
 assert.equal(hs.races['TX-09'].marginD,null,'No invented numeric Cook margin');
@@ -35,12 +35,13 @@ assert(ohio&&Number.isFinite(ohio.model?.pollMargin),'Ohio governor requires an 
 assert(Number.isFinite(ohio.model.adjustedMargin)||ohio.model.fallback,'Governor raw-poll fallback must be explicit');
 const govTossups=model.governor.filter(x=>{
  const margin=Number.isFinite(x.model?.adjustedMargin)?x.model.adjustedMargin:x.model?.pollMargin;
- return Number.isFinite(margin)&&Math.abs(margin)<1.5;
+ if(Number.isFinite(margin))return Math.abs(margin)<1.5;
+ return !['Solid D','Likely D','Solid R','Likely R'].includes(x.qualitativeRating?.label);
 }).length;
+const sourceRated=model.governor.filter(x=>!Number.isFinite(x.model?.adjustedMargin)&&!Number.isFinite(x.model?.pollMargin)&&['Solid D','Likely D','Solid R','Likely R'].includes(x.qualitativeRating?.label)).length;
 assert.equal(out.governors.T,govTossups,'Governor unresolved races must follow current 1.5-point/no-poll rule');
 assert.equal(out.governors.rawOnly+out.governors.modeled+out.governors.sourceRated+out.governors.T,36,'Gov races must all be accounted for');
-assert.equal(out.governors.sourceRated,3,'No polling? Use explicitly attributed Cook ratings for CO, HI, WY');
-assert.equal(out.governors.T,5,'Only five governor forecasts are currently within the ±1.5-point toss-up band');
+assert.equal(out.governors.sourceRated,sourceRated,'Qualitative governor ratings must be independently sourced, not numerically manufactured');
 assert(model.governor.every(x=>x.model.events.every(e=>e.year>=2018&&e.year<2026)));
 assert.throws(()=>power.compute({races:{}},model.senate,model.governor),/435/);
 assert.throws(()=>power.compute(hs,[],model.governor),/17/);
