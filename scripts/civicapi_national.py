@@ -38,6 +38,10 @@ EARLIER.update({f"KS-{i:02d}":"20:00" for i in range(2,5)})
 EARLIER.update({f"MI-{i:02d}":"20:00" for i in range(2,14)})
 EARLIER.update({f"TX-{i:02d}":"20:00" for i in range(1,39) if i not in (16,23)})
 EARLIER["ID-02"]="22:00"
+# A statewide contest can legitimately receive attributed partial returns once
+# the first polls in that state close. Keep House-specific deadlines unchanged.
+# These are Eastern clock times, independently validated from 2026 poll-close schedules.
+SENATE_FIRST_CLOSE={"KY":"18:00","FL":"19:00","NH":"19:00","KS":"20:00","MI":"20:00","TX":"20:00","ID":"22:00","OR":"22:00","AK":"00:00"}
 MAX_WORKERS=6
 # Nov. 3, 2026: 33 regular Senate races plus Florida and Ohio specials.
 SENATE_2026=set("AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY".split())
@@ -54,7 +58,7 @@ def parsed(value):
  except ValueError:return None
 def after_close(key):
  code=key[:2]
- h=EARLIER.get(key,LAST_CLOSE.get(code,"23:00"))
+ h=SENATE_FIRST_CLOSE.get(code,LAST_CLOSE.get(code,"23:00")) if key.endswith("-SENATE") else EARLIER.get(key,LAST_CLOSE.get(code,"23:00"))
  day=dt.date(2026,11,4) if h in ("00:00","01:00") else dt.date(2026,11,3)
  hr,mn=map(int,h.split(":"))
  return dt.datetime.combine(day,dt.time(hr,mn),ET).astimezone(dt.timezone.utc)
