@@ -8,9 +8,19 @@ const codes='AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI M
 const isN=n=>typeof n==='number'&&Number.isFinite(n),vote=n=>Number.isSafeInteger(n)&&n>=0&&n<=16000000;
 const fmt=m=>!isN(m)?'No available forecast':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)+' pts';
 const iso=n=>new Date(n).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
-let shapes=[],history=null,models=null,office='Senate',view='forecast',loaded=false,started=false,nearViewport=false,authority=null,health=null,results=null,rows={},busy=false,lastFetch=0,runId=0;
+let shapes=[],history=null,models=null,office='Senate',view='forecast',loaded=false,started=false,nearViewport=false,authority=null,health=null,results=null,rows={},busy=false,lastFetch=0,runId=0,loadAttempts=0;
 const el=name=>document.createElementNS(NS,name);
-const fetchJSON=async p=>{const staticGeo=/\/geo\/packs\/p\d\d\.json$/.test(p);let r=await fetch(p,{cache:staticGeo?'force-cache':'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};
+const fetchJSON=async p=>{
+ const staticGeo=/\/geo\/packs\/p\d\d\.json$/.test(p);
+ let lastError;
+ for(let attempt=0;attempt<3;attempt++){
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
+  try{const r=await fetch(p,{cache:staticGeo?'force-cache':'no-store',signal:controller.signal});if(!r.ok)throw Error(p+' HTTP '+r.status);return await r.json()}
+  catch(e){lastError=e;if(attempt<2)await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)))}
+  finally{clearTimeout(timer)}
+ }
+ throw lastError;
+};
 function coords(lon,lat,code){
  if(code==='AK'){const a=lon>0?lon-360:lon;return[Math.max(15,Math.min(280,23+(a+180)*4.8)),Math.max(454,Math.min(615,460+(72-lat)*7.1))]}
  if(code==='HI')return [320+(lon+161.8)*13,530+(23.2-lat)*13];
@@ -39,7 +49,7 @@ const shade=n=>!isN(n)?'atlas-N':n>=0?'atlas-D':'atlas-R';
 function updateSummary(stats){
  const active=health?.summary,asOf=health?.checkedAt?iso(health.checkedAt):'not independently probed';
  const coverage=$('allCountySourceAudit');
- if(coverage)coverage.textContent=(active?.countyEquivalents||3143).toLocaleString()+' county-equivalent boundaries · '+(active?.countySourcesIndependentlyLinked||104)+' authority-listed county sources · '+(active?.countiesWithoutDirectVerifiedSource||3039)+' counties lack independently indexed direct results pages. Source website accessibility last checked: '+asOf+'. An indexed URL is NOT a validated live vote feed.';
+ if(coverage)coverage.textContent=authority?((active?.countyEquivalents||3143).toLocaleString()+' county-equivalent boundaries · '+(active?.countySourcesIndependentlyLinked??104)+' authority-listed county sources · '+(active?.countiesWithoutDirectVerifiedSource??3039)+' counties lack independently indexed direct results pages. Source website accessibility last checked: '+asOf+'. An indexed URL is NOT a validated live vote feed.'):'3,143 county-equivalent boundaries · County results source registry unavailable: no live county counts accepted. Geographic projections remain available.';
  $('allCountyStatus').textContent=stats.states+' states with '+office+' forecast margins · '+stats.forecast+' conditional county scenarios · '+stats.actual+' counties with validated unofficial '+office+' vote leaders · '+stats.polygons+' geographic shapes';
  $('allCountyNote').textContent=view==='reported'?'REPORTED VOTES ONLY: a colored county has a validated, independently attributed 2026 '+office+' result. Gray counties have no accepted feed. No source is treated as zero votes.':
   view==='compare'?'COMPARISON: full-color counties have validated unofficial results; faded, dashed counties show conditional pre-election '+office+' forecasts only. Forecasts are NOT votes.':
@@ -130,15 +140,17 @@ async function check(){
  finally{busy=false;lastFetch=Date.now()}
 }
 async function start(){
- if(started)return;started=true;
+ if(started||loaded)return;started=true;loadAttempts++;
  $('allCountyStatus').textContent='Loading all 50 states of county boundaries and independently registered result sources…';
  try{
   const [packs,countyHistory,registr,sourceHealth]=await Promise.all([
-    Promise.all(FILES.map(fetchJSON)),window.ERVIN_SCENARIOS.load(),fetchJSON('../election-night/county-sources.json'),fetchJSON('../election-night/county-source-health.json').catch(()=>null)]);
+    Promise.all(FILES.map(fetchJSON)),window.ERVIN_SCENARIOS.load(),fetchJSON('../election-night/county-sources.json').catch(()=>null),fetchJSON('../election-night/county-source-health.json').catch(()=>null)]);
   history=countyHistory;authority=registr;health=sourceHealth;
   shapes=codes.map(code=>{const pack=packs.find(p=>p.states?.[code]?.counties);return{code,features:pack?.states?.[code]?.counties?.features||[]}});
   loaded=true;render();check();
- }catch(e){console.error(e);$('allCountyStatus').textContent='County projection geography or evidence registry unavailable. The state directory and individual state maps remain accessible.'}
+ }catch(e){console.error('County atlas attempt '+loadAttempts,e);started=false;
+   if(loadAttempts<4){$('allCountyStatus').textContent='Geographic county data temporarily delayed; retrying (attempt '+loadAttempts+'/4).';setTimeout(()=>{if(!loaded)maybeStart()},1500*loadAttempts)}
+   else $('allCountyStatus').textContent='County atlas unavailable after four attempts. State and district maps remain accessible.'}
 }
 function maybeStart(){if(nearViewport&&models&&!started)start()}
 function init(){
