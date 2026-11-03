@@ -35,10 +35,12 @@ assert(ohio&&Number.isFinite(ohio.model?.pollMargin),'Ohio governor requires an 
 assert(Number.isFinite(ohio.model.adjustedMargin)||ohio.model.fallback,'Governor raw-poll fallback must be explicit');
 const govTossups=model.governor.filter(x=>{
  const margin=Number.isFinite(x.model?.adjustedMargin)?x.model.adjustedMargin:x.model?.pollMargin;
- return !Number.isFinite(margin)||Math.abs(margin)<1.5;
+ return Number.isFinite(margin)&&Math.abs(margin)<1.5;
 }).length;
 assert.equal(out.governors.T,govTossups,'Governor unresolved races must follow current 1.5-point/no-poll rule');
-assert.equal(out.governors.rawOnly+out.governors.modeled+out.governors.T,36,'Gov races must all be accounted for');
+assert.equal(out.governors.rawOnly+out.governors.modeled+out.governors.sourceRated+out.governors.T,36,'Gov races must all be accounted for');
+assert.equal(out.governors.sourceRated,3,'No polling? Use explicitly attributed Cook ratings for CO, HI, WY');
+assert.equal(out.governors.T,5,'Only five governor forecasts are currently within the ±1.5-point toss-up band');
 assert(model.governor.every(x=>x.model.events.every(e=>e.year>=2018&&e.year<2026)));
 assert.throws(()=>power.compute({races:{}},model.senate,model.governor),/435/);
 assert.throws(()=>power.compute(hs,[],model.governor),/17/);
