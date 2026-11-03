@@ -36,7 +36,7 @@ function inspector(){
   html+='<p class="dx-empty">No attributed 2026 votes for '+escapeHTML(r.id)+' in the connected result feeds. Districts without counts remain gray; this is not a zero-vote report.</p>';
  }else{
   html+='<div class="dx-forecast-number">'+escapeHTML(fmtMargin(marginD(r)))+'</div><p class="dx-caption">'+escapeHTML(model?.modelRating||r.rating||'No verified rating')+' · Original Ervin House scenario. A forecast is not a vote count or a race call.</p>';
-  html+='<div class="dx-candidate-list">'+candidateCard({name:r.incumbent||'Incumbent not verified',party:'',votes:null},'historical incumbent; not confirmed 2026 nominee')+'</div>';
+  if(r.incumbent)html+='<div class="dx-candidate-list">'+candidateCard({name:r.incumbent,party:'',votes:null},'historical incumbent; consult 2026 candidate roster above')+'</div>';
   html+='<p class="dx-caption">Candidate portraits and 2026 party affiliations appear only when supported by an attributed roster or results feed. Historical incumbency does not establish the 2026 candidate slate.</p>';
  }
  html+='<div class="dx-links"><a href="../election-night/?state='+encodeURIComponent(r.code)+'&race='+encodeURIComponent(r.id)+'#nationalBoard">Election Night results and sources</a><a href="https://civicapi.org/results" target="_blank" rel="noopener noreferrer">CivicAPI election coverage</a></div>';
