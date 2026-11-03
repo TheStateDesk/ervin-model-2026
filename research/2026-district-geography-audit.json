@@ -1,0 +1,115 @@
+{
+  "asOf": "2026-11-03",
+  "geometrySource": "U.S. Census Bureau 2026 TIGER/Line CD120 (official public domain)",
+  "sourceDirectory": "https://www2.census.gov/geo/tiger/TIGER2026/CD/",
+  "congress": 120,
+  "states": {
+    "AL": {
+      "districts": 7,
+      "zipSha256": "0fff80891184520f63889f24d2dbee39ae3489358399702d8c3470d55ae9a508",
+      "sizeBytes": 32407,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_01_cd120.zip",
+      "new2026Map": true
+    },
+    "CA": {
+      "districts": 52,
+      "zipSha256": "5d441c64cb33ba3f6d8dee1be2ce5f7c1efa502f245ac67c36344de2567d4269",
+      "sizeBytes": 207646,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_06_cd120.zip",
+      "new2026Map": true
+    },
+    "FL": {
+      "districts": 28,
+      "zipSha256": "7d22cba78f6553e192fca414e78f96c07d2a38e96cdd6450e39b9c3ceed9a2f4",
+      "sizeBytes": 47109,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_12_cd120.zip",
+      "new2026Map": true
+    },
+    "GA": {
+      "districts": 14,
+      "zipSha256": "414774fe1cb78cb292816646898b59d1d43b64f3c1312015a85bc57d26b1fca9",
+      "sizeBytes": 62323,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_13_cd120.zip",
+      "new2026Map": false
+    },
+    "LA": {
+      "districts": 6,
+      "zipSha256": "3e614ea60510318c5e30a62f7e33a47e672b335e060b3c8adf6de1d1299e2208",
+      "sizeBytes": 48168,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_22_cd120.zip",
+      "new2026Map": true
+    },
+    "NC": {
+      "districts": 14,
+      "zipSha256": "13f0680937b2fb426c50b07bfd6dd473a541cee69fa39d512759dd03e787b9ef",
+      "sizeBytes": 49894,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_37_cd120.zip",
+      "new2026Map": true
+    },
+    "NY": {
+      "districts": 26,
+      "zipSha256": "42f5efa13be57f0e5f00d3db00086b3bcef704bc3cb833494b0f3e7cbafc4b62",
+      "sizeBytes": 41150,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_36_cd120.zip",
+      "new2026Map": false
+    },
+    "OH": {
+      "districts": 15,
+      "zipSha256": "4c18b9422c82639e078dacc4df32cdfa61689b1e2f92ec5b232b4ba3a2b3421b",
+      "sizeBytes": 33514,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_39_cd120.zip",
+      "new2026Map": true
+    },
+    "TN": {
+      "districts": 9,
+      "zipSha256": "a1f017ae34e3a335492ded7572ec69f3d7e193ffbc144a9269fb7e1b8803d0fe",
+      "sizeBytes": 54528,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_47_cd120.zip",
+      "new2026Map": true
+    },
+    "TX": {
+      "districts": 38,
+      "zipSha256": "3edba357705cbd64be72db0296c8d49d1d5e1fbaa1b3c2b55556c2e633d42c7f",
+      "sizeBytes": 170428,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_48_cd120.zip",
+      "new2026Map": true
+    },
+    "UT": {
+      "districts": 4,
+      "zipSha256": "0222fbf567b75aadcf7c12c43fadf49050ae381fb4e69ae6566c76709d480223",
+      "sizeBytes": 14036,
+      "boundaryYear": 2026,
+      "url": "https://www2.census.gov/geo/tiger/TIGER2026/CD/tl_2026_49_cd120.zip",
+      "new2026Map": true
+    }
+  },
+  "missouriExcluded": true,
+  "missouriReason": "Missouri 2026 Census CD120 files were generated while a subsequently barred map was under litigation; retain the 2024 ballot shape instead.",
+  "redrawnStates": [
+    "AL",
+    "CA",
+    "FL",
+    "LA",
+    "NC",
+    "OH",
+    "TN",
+    "TX",
+    "UT"
+  ],
+  "comparisonStates": [
+    "GA",
+    "NY"
+  ],
+  "simplificationToleranceDegrees": 0.0035,
+  "notes": "Census source polygons are simplified with topology preserved and coordinate rounding; verify district labels/number of expected districts before publication."
+}
