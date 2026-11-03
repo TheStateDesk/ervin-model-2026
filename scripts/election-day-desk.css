@@ -142,3 +142,52 @@ html.ed-election-night #electionDashboard{margin-bottom:0}
  .ed-final-map-scroller{overflow-x:auto}
 }
 @media(prefers-reduced-motion:reduce){.ed-sim-proj-state,.ed-sim-proj-district{transition:none}}
+
+
+/* National election-night lead: the forecast feature becomes the live desk.
+   Pending races must NEVER retain their former forecast shading. */
+#edSimulationPanel.ed-coverage-live{border-top:0}
+.ed-coverage-live .ed-final-mast{border-top-color:var(--ed-gold,#aa824c)}
+.ed-coverage-live .ed-final-headline{font-size:clamp(52px,7.75vw,108px);line-height:.86;letter-spacing:-.053em}
+.ed-coverage-live .ed-final-metadata .ed-live-tag{color:var(--ed-ink);font-weight:850;letter-spacing:.07em}
+.ed-coverage-live .ed-final-metadata .ed-live-tag:first-letter{color:var(--ed-gold,#aa824c)}
+.ed-coverage-live .ed-coverage-layout{display:grid;grid-template-columns:minmax(0,1.83fr) minmax(280px,.71fr);gap:14px;align-items:start;padding:14px clamp(12px,1.75vw,23px) 22px}
+.ed-coverage-live .ed-final-map-pane{padding:13px!important;border:1px solid var(--ed-rule)!important}
+.ed-coverage-live .ed-live-commentary{display:flex;flex-direction:column;position:sticky;top:15px;margin:0;max-height:min(76vh,840px);overflow:auto;min-width:0;padding:17px 15px;border-top:4px solid var(--ed-blue)}
+.ed-coverage-live .ed-live-commentary[hidden]{display:none}
+.ed-live-commentary h3{font:750 clamp(23px,2vw,30px)/1.12 var(--ed-serif,Georgia,serif);color:var(--ed-ink);letter-spacing:-.026em;margin:8px 0 6px}
+.ed-live-commentary .ed-commentary-head{padding-bottom:14px}
+.ed-live-commentary .ed-commentary-entries{max-height:none;overflow:visible;flex:1}
+.ed-live-commentary .ed-commentary-item{padding:14px 0}
+.ed-live-commentary .ed-commentary-item p{font:500 13px/1.6 var(--ed-sans,Arial,sans-serif)}
+.ed-live-commentary .ed-commentary-links{display:flex;flex-wrap:wrap;gap:8px 15px;margin:8px 0 0}
+.ed-live-commentary .ed-commentary-link{font-size:11px;text-decoration:underline;text-underline-offset:3px}
+.ed-live-commentary>.ed-night-action{margin-top:13px;align-self:flex-start}
+.ed-live-legend-i{background:#8066a7}
+.ed-coverage-live #edSimMap .ed-sim-proj-D,
+.ed-coverage-live #edSimMap .ed-sim-proj-R,
+.ed-coverage-live #edSimMap .ed-sim-proj-T,
+.ed-coverage-live #edSimMap .ed-sim-proj-N,
+.ed-coverage-live #edSimMap .ed-live-lead-N{fill:var(--ed-map-neutral,#b7c1c6)}
+.ed-coverage-live #edSimMap .ed-live-lead-D{fill:var(--ed-map-blue,#2f78b5)}
+.ed-coverage-live #edSimMap .ed-live-lead-R{fill:var(--ed-map-red,#b64751)}
+.ed-coverage-live #edSimMap .ed-live-lead-I{fill:#8066a7}
+.ed-coverage-live #edSimMap .ed-live-lead-T{fill:#b89a58}
+.ed-coverage-live #edSimMap a:hover path,.ed-coverage-live #edSimMap a:focus-visible path{stroke:var(--ed-ink);stroke-width:2.5}
+.ed-coverage-live .ed-final-call-totals{font-size:clamp(18px,2.15vw,27px)}
+.ed-coverage-live #edFinalCallSummary{gap:8px 18px}
+.ed-coverage-live #edFinalCallSummary small{color:var(--ed-muted)}
+@media(max-width:1050px){
+ .ed-coverage-live .ed-coverage-layout{grid-template-columns:minmax(0,1fr)}
+ .ed-coverage-live .ed-live-commentary{position:static;max-height:none;overflow:visible}
+ .ed-coverage-live .ed-final-map-pane{padding:11px!important}
+ .ed-live-commentary .ed-commentary-entries{max-height:410px;overflow:auto}
+}
+@media(max-width:650px){
+ .ed-coverage-live .ed-final-headline{font-size:clamp(48px,10.1vw,72px)}
+ .ed-coverage-live .ed-coverage-layout{padding:10px;gap:11px}
+ .ed-coverage-live .ed-live-commentary{padding:13px 12px}
+ .ed-coverage-live #edFinalCallSummary{padding:13px}
+ .ed-coverage-live .ed-final-map-pane{padding:9px!important}
+}
+@media(prefers-reduced-motion:reduce){.ed-coverage-live #edSimMap path{transition:none}}
