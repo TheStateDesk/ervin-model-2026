@@ -32,17 +32,17 @@
       "verified": true
     },
     "IN-03": {
-      "asOf": "2026-11-03T23:48:06.209000Z",
+      "asOf": "2026-11-03T23:57:23.190000Z",
       "candidates": [
         {
           "name": "Kelly Thompson",
           "party": "D",
-          "votes": 40611
+          "votes": 41407
         },
         {
           "name": "Marlin Stutzman",
           "party": "R",
-          "votes": 30934
+          "votes": 31928
         },
         {
           "name": "Phillip D. Beachy (Phil)",
@@ -52,13 +52,13 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 34.4,
+      "precinctsReporting": 35.2,
       "raceId": "87137",
-      "retrievedAt": "2026-11-03T23:47:54.369071Z",
+      "retrievedAt": "2026-11-03T23:56:25.391880Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87137",
       "timestampBasis": "provider_last_updated",
-      "total": 71545,
+      "total": 73335,
       "verified": true
     },
     "IN-04": {
@@ -142,22 +142,22 @@
       "verified": true
     },
     "IN-09": {
-      "asOf": "2026-11-03T23:48:06.791000Z",
+      "asOf": "2026-11-03T23:57:23.707000Z",
       "candidates": [
         {
           "name": "Erin Houchin",
           "party": "R",
-          "votes": 11617
+          "votes": 12494
         },
         {
           "name": "Brad Meyer",
           "party": "D",
-          "votes": 7550
+          "votes": 7745
         },
         {
           "name": "Tonya Hudson",
           "party": "O",
-          "votes": 378
+          "votes": 401
         },
         {
           "name": "Floyd Michael Taylor",
@@ -167,32 +167,32 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 9.4,
+      "precinctsReporting": 9.9,
       "raceId": "87143",
-      "retrievedAt": "2026-11-03T23:47:54.369071Z",
+      "retrievedAt": "2026-11-03T23:56:25.391880Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87143",
       "timestampBasis": "provider_last_updated",
-      "total": 19545,
+      "total": 20640,
       "verified": true
     },
     "KY-04": {
-      "asOf": "2026-11-03T23:54:22.114000Z",
+      "asOf": "2026-11-03T23:57:30.719000Z",
       "candidates": [
         {
           "name": "Ed Gallrein",
           "party": "R",
-          "votes": 4073
+          "votes": 4328
         },
         {
           "name": "Melissa Strange",
           "party": "D",
-          "votes": 2322
+          "votes": 2426
         },
         {
           "name": "Jeremy Todd",
           "party": "O",
-          "votes": 218
+          "votes": 246
         },
         {
           "name": "Write-in",
@@ -202,37 +202,37 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 2.4,
+      "precinctsReporting": 2.0,
       "raceId": "87171",
-      "retrievedAt": "2026-11-03T23:54:02.831553Z",
+      "retrievedAt": "2026-11-03T23:56:25.391880Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87171",
       "timestampBasis": "provider_last_updated",
-      "total": 6613,
+      "total": 7000,
       "verified": true
     },
     "KY-05": {
-      "asOf": "2026-11-03T23:54:22.238000Z",
+      "asOf": "2026-11-03T23:57:30.800000Z",
       "candidates": [
         {
           "name": "Hal Rogers",
           "party": "R",
-          "votes": 14582
+          "votes": 16576
         },
         {
           "name": "Ned Pillersdorf",
           "party": "D",
-          "votes": 6131
+          "votes": 6761
         },
         {
           "name": "Mikel Wein",
           "party": "O",
-          "votes": 496
+          "votes": 551
         },
         {
           "name": "Gerardo Serrano",
           "party": "O",
-          "votes": 266
+          "votes": 301
         },
         {
           "name": "Write-in",
@@ -242,13 +242,13 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 8.0,
+      "precinctsReporting": 45.2,
       "raceId": "87172",
-      "retrievedAt": "2026-11-03T23:54:02.831553Z",
+      "retrievedAt": "2026-11-03T23:56:25.391880Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87172",
       "timestampBasis": "provider_last_updated",
-      "total": 21479,
+      "total": 24193,
       "verified": true
     },
     "KY-06": {
@@ -292,22 +292,22 @@
       "verified": true
     },
     "KY-SENATE": {
-      "asOf": "2026-11-03T23:54:22.662000Z",
+      "asOf": "2026-11-03T23:57:30.992000Z",
       "candidates": [
         {
           "name": "Andy Barr",
           "party": "R",
-          "votes": 33754
+          "votes": 35858
         },
         {
           "name": "Charles Booker",
           "party": "D",
-          "votes": 20484
+          "votes": 21112
         },
         {
           "name": "Christopher Campbell",
           "party": "O",
-          "votes": 1017
+          "votes": 1078
         },
         {
           "name": "Write-in",
@@ -317,13 +317,13 @@
       ],
       "election": "2026-11-03",
       "office": "senate",
-      "precinctsReporting": 3.3,
+      "precinctsReporting": 19.5,
       "raceId": "87174",
-      "retrievedAt": "2026-11-03T23:54:02.831553Z",
+      "retrievedAt": "2026-11-03T23:56:25.391880Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87174",
       "timestampBasis": "provider_last_updated",
-      "total": 55258,
+      "total": 58051,
       "verified": true
     }
   },
