@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-03T02:55:40.905Z",
+  "asOf": "2026-11-03T06:46:03.592Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -151,8 +151,8 @@
       "nonR": "Roy Cooper",
       "rep": "Michael Whatley",
       "party": "D",
-      "pollMargin": 10.77,
-      "adjustedMargin": 9.46,
+      "pollMargin": 10.76,
+      "adjustedMargin": 9.45,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,

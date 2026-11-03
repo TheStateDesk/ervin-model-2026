@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-03T02:55:40.905251+00:00",
+  "checkedAt": "2026-11-03T06:46:03.592182+00:00",
   "source": "Original releases, RCP individual poll listings, and candidate-matched Wikipedia general-election survey tables; source type disclosed per row",
   "polls": {
     "ME": [
@@ -276,9 +276,9 @@
         "dates": "October 31 – November 1, 2026",
         "fieldEnd": "2026-11-01",
         "sample": "930 (LV)",
-        "dem": 46.0,
-        "rep": 48.0,
-        "margin": -2.0,
+        "dem": 48.0,
+        "rep": 46.0,
+        "margin": 2.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       },
@@ -1632,7 +1632,7 @@
       },
       {
         "pollster": "Rasmussen Reports",
-        "dates": "October 31 2026",
+        "dates": "October 31, 2026",
         "fieldEnd": "2026-10-31",
         "sample": "1,028 (LV)",
         "dem": 47.0,
