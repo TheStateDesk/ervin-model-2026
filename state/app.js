@@ -54,8 +54,9 @@ function renderOverview(){
  const cards=$('stateRaceCards').querySelectorAll('.ed-race');
  const potential=[s?{race:s,office:'Senate',margin:Number(s.adjustedMargin)}:null,
   g?{race:g,office:'Governor',margin:Number.isFinite(govEst?.adjustedMargin)?govEst.adjustedMargin:govEst?.pollMargin,cycles:govEst?.calibrationCycles||0}:null].filter(Boolean);
- potential.forEach((entry,i)=>{
-  const forecast=cards[i]?.querySelector('.ed-race-big'),ch=window.ERVIN_ODDS?.estimate(entry.margin,entry.office,{cycles:entry.cycles||0});
+ potential.forEach((entry)=>{
+  const card=[...cards].find(el=>el.querySelector('h3')?.textContent.trim()===(entry.office==='Senate'?'U.S. Senate':'Governor'));
+  const forecast=card?.querySelector('.ed-race-big'),ch=window.ERVIN_ODDS?.estimate(entry.margin,entry.office,{cycles:entry.cycles||0});
   if(!forecast||!ch)return;
   forecast.insertAdjacentHTML('afterend','<div class="ed-win-odds"><span><b>'+window.ERVIN_ODDS.pct(ch.dem)+'</b> D/non-R</span><span><b>'+window.ERVIN_ODDS.pct(ch.rep)+'</b> R</span></div><small class="ed-odds-footnote">Illustrative model win chances · ±'+ch.sigma.toFixed(1)+' pts assumed forecast error; not validated probabilities'+(entry.office==='Governor'&&!Number.isFinite(govEst?.adjustedMargin)?' · publisher average only':'')+'</small>');
  });
