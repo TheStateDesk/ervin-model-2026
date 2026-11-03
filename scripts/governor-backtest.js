@@ -13,8 +13,10 @@ function correction(events,state,targetYear){
  const sum=W.slice(0,eligible.length).reduce((a,b)=>a+b,0);
  const entries=eligible.map((e,i)=>({year:e.year,office:'Governor',poll:e.pollMargin,actual:e.actualMargin,
  error:round(e.pollMargin-e.actualMargin),weight:round(W[i]/sum),pollType:e.pollType,url:e.sourceUrl,resultUrl:e.resultUrl,note:e.note}));
- return {value:round(entries.reduce((v,e)=>v+e.error*e.weight,0)),evidence:entries,years:entries.map(x=>x.year),n:entries.length,
- note:entries.length<3?'Only '+entries.length+' historic gubernatorial comparison(s) available. This is a sparse-sample adjustment.':'Three past gubernatorial cycles; governor-only calibration.'};
+ const rawValue=round(entries.reduce((v,e)=>v+e.error*e.weight,0));
+ const shrink=entries.length===1?1/3:entries.length===2?2/3:1;
+ return {value:round(rawValue*shrink),unshrunkCorrection:rawValue,shrinkFactor:shrink,evidence:entries,years:entries.map(x=>x.year),n:entries.length,
+ note:entries.length<3?'Only '+entries.length+' historic gubernatorial comparison(s) available. Correction shrunk to '+Math.round(shrink*100)+'% to reduce small-sample overfitting.':'Three past gubernatorial cycles; governor-only calibration.'};
 }
 function score(records){
  const eligible=records.filter(x=>x.correction!==null&&Number.isFinite(x.pollMargin)&&Number.isFinite(x.actualMargin));
@@ -35,7 +37,7 @@ function compute(input){
      evidence:past?.evidence||[],eligible:past!==null&&!exclude(r),pastOnly:true};
  });
  const scored=rows.filter(x=>x.eligible),strict=scored.filter(x=>x.pollType==='RCP average');
- return {asOf:input.asOf,method:'Only earlier state governor polls vs actual governor results. D-R error = poll margin minus actual margin. Latest 3 eligible same-state gubernatorial errors weighted 0.5/0.3/0.2, normalized over observed cycles. No federal-election inputs, no future election results.',
+ return {asOf:input.asOf,method:'Only earlier state governor polls vs actual governor results. D-R error = poll margin minus actual margin. Latest 3 same-state governor errors weighted 0.5/0.3/0.2; 1 historical event is shrunk to one-third, 2 events to two-thirds, 3 events to full. No federal-election inputs, no future election results.',
  caveats:'Nonrandom 2018–24 sourced cohort, different candidates and survey sources; sparse states with only one prior election have fragile corrections. Single stale surveys (Aug 2022 South Carolina) are displayed but excluded from calibration and scoring. RCP-only target subset scored separately. No calibrated win chances or exact retrospective recreation of 2026.',
  summary:{observed:rows.length,eligible:scored.length,notBacktestable:rows.length-scored.length,...score(scored)},
  preferredRCP:score(strict),
