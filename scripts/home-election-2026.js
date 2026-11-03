@@ -255,6 +255,7 @@ async function refreshResults(){
 function init(){
  watchInit();
  Promise.all([window.ERVIN_FINAL?.load?.()||Promise.resolve(null),window.ERVIN_FINAL?.status?.()||Promise.resolve({phase:'auto'})]).then(([snap,status])=>{lockedAt=snap?.lockedAt||null;phaseConfig=status||{phase:'auto'};return loadModel()}).catch(e=>{$('watchCards').textContent='Forecast models temporarily unavailable. Open a state edition for saved predictions.';console.error(e)});
+ window.addEventListener('ervin:check-results-now',refreshResults);
  refreshResults();setInterval(()=>{if(!document.hidden)refreshResults()},30000);
  setInterval(()=>{if(model.senate.length)updatePhase()},60000);
 }
