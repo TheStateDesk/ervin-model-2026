@@ -1,29 +1,18 @@
 {
   "version": 1,
   "election": "2026-11-03",
-  "checkedAt": null,
-  "scope": "All 50 state county-equivalent geometries. Official county source directories linked for Michigan and New Jersey. No 2026 reported county data independently validated.",
+  "checkedAt": "2026-11-03T02:01:38.605678+00:00",
+  "scope": "All 50 locally bundled county-equivalent geographies, with independently sourced county election office URLs where available. No actual 2026 results asserted.",
   "summary": {
     "states": 50,
     "countyEquivalents": 3143,
     "countySourcesIndependentlyLinked": 104,
-    "countySourcePagesResponding": 0,
+    "countySourcePagesResponding": 89,
     "countiesWithoutDirectVerifiedSource": 3039,
     "machineReadableCountyFeedsConfirmed": 0,
     "verified2026CountyReturnsBeforePollClose": 0
   },
   "states": {
-    "AK": {
-      "boundaryCount": 30,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 30,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
     "AL": {
       "boundaryCount": 67,
       "linkedCountySources": 0,
@@ -33,7 +22,29 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "AK": {
+      "boundaryCount": 30,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 30,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "AZ": {
+      "boundaryCount": 15,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 15,
+      "stateAuthority": "https://azsos.gov/press",
+      "authorityRole": "county-export-announcement",
+      "authorityConnectivity": "reachable",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "AR": {
       "boundaryCount": 75,
@@ -44,18 +55,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "AZ": {
-      "boundaryCount": 15,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 15,
-      "stateAuthority": "https://azsos.gov/press",
-      "authorityRole": "county-export-announcement",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "CA": {
       "boundaryCount": 58,
@@ -63,10 +63,10 @@
       "notIndependentlyLinked": 58,
       "stateAuthority": "https://electionresults.sos.ca.gov/",
       "authorityRole": "state-results",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "reachable",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "CO": {
       "boundaryCount": 64,
@@ -74,10 +74,10 @@
       "notIndependentlyLinked": 64,
       "stateAuthority": "https://results.enr.clarityelections.com/CO/",
       "authorityRole": "state-results",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "indeterminate",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "CT": {
       "boundaryCount": 9,
@@ -88,7 +88,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "DE": {
       "boundaryCount": 3,
@@ -96,10 +96,10 @@
       "notIndependentlyLinked": 3,
       "stateAuthority": "https://elections.delaware.gov/results/enr/GE2026.html",
       "authorityRole": "county-results",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "reachable",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "FL": {
       "boundaryCount": 67,
@@ -107,10 +107,10 @@
       "notIndependentlyLinked": 67,
       "stateAuthority": "https://floridaelectionwatch.gov/Downloads",
       "authorityRole": "county-extract",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "reachable",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "GA": {
       "boundaryCount": 159,
@@ -118,10 +118,10 @@
       "notIndependentlyLinked": 159,
       "stateAuthority": "https://results.enr.clarityelections.com/GA/",
       "authorityRole": "state-results",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "indeterminate",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "HI": {
       "boundaryCount": 5,
@@ -132,18 +132,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "IA": {
-      "boundaryCount": 99,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 99,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "ID": {
       "boundaryCount": 44,
@@ -154,7 +143,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "IL": {
       "boundaryCount": 102,
@@ -165,7 +154,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "IN": {
       "boundaryCount": 92,
@@ -176,7 +165,18 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "IA": {
+      "boundaryCount": 99,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 99,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "KS": {
       "boundaryCount": 105,
@@ -187,7 +187,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "KY": {
       "boundaryCount": 120,
@@ -198,7 +198,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "LA": {
       "boundaryCount": 64,
@@ -209,29 +209,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "MA": {
-      "boundaryCount": 14,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 14,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "MD": {
-      "boundaryCount": 24,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 24,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "ME": {
       "boundaryCount": 16,
@@ -242,7 +220,29 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "MD": {
+      "boundaryCount": 24,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 24,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "MA": {
+      "boundaryCount": 14,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 14,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "MI": {
       "boundaryCount": 83,
@@ -250,13 +250,13 @@
       "notIndependentlyLinked": 0,
       "stateAuthority": "https://www.michigan.gov/sos/elections/election-results-and-data/candidate-listings-and-election-results-by-county",
       "authorityRole": "county-directory",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "indeterminate",
       "countySources": {
         "26001": {
           "county": "Alcona",
           "sourceUrl": "https://alconacountymi.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -264,8 +264,8 @@
         "26003": {
           "county": "Alger",
           "sourceUrl": "https://www.algercounty.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -273,8 +273,8 @@
         "26005": {
           "county": "Allegan",
           "sourceUrl": "https://www.allegancounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "indeterminate",
+          "note": "HTTP 403 to robot",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -282,8 +282,8 @@
         "26007": {
           "county": "Alpena",
           "sourceUrl": "https://alpenacounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -291,8 +291,8 @@
         "26009": {
           "county": "Antrim",
           "sourceUrl": "https://www.antrimcounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -300,8 +300,8 @@
         "26011": {
           "county": "Arenac",
           "sourceUrl": "https://www.arenaccountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -309,8 +309,8 @@
         "26013": {
           "county": "Baraga",
           "sourceUrl": "https://keweenawbay.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -318,8 +318,8 @@
         "26015": {
           "county": "Barry",
           "sourceUrl": "https://www.barrycounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -327,8 +327,8 @@
         "26017": {
           "county": "Bay",
           "sourceUrl": "https://www.baycountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -336,8 +336,8 @@
         "26019": {
           "county": "Benzie",
           "sourceUrl": "https://www.benzieco.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -345,8 +345,8 @@
         "26021": {
           "county": "Berrien",
           "sourceUrl": "https://www.berriencounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "indeterminate",
+          "note": "HTTP 403 to robot",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -354,8 +354,8 @@
         "26023": {
           "county": "Branch",
           "sourceUrl": "https://www.countyofbranch.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -363,8 +363,8 @@
         "26025": {
           "county": "Calhoun",
           "sourceUrl": "https://www.calhouncountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -372,8 +372,8 @@
         "26027": {
           "county": "Cass",
           "sourceUrl": "https://www.casscountymi.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -381,8 +381,8 @@
         "26029": {
           "county": "Charlevoix",
           "sourceUrl": "https://www.charlevoixcounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -390,8 +390,8 @@
         "26031": {
           "county": "Cheboygan",
           "sourceUrl": "https://www.cheboygancounty.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -399,8 +399,8 @@
         "26033": {
           "county": "Chippewa",
           "sourceUrl": "https://www.chippewacountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -408,8 +408,8 @@
         "26035": {
           "county": "Clare",
           "sourceUrl": "https://www.clareclerkrod.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -417,8 +417,8 @@
         "26037": {
           "county": "Clinton",
           "sourceUrl": "https://www.clinton-county.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -426,8 +426,8 @@
         "26039": {
           "county": "Crawford",
           "sourceUrl": "https://www.crawfordco.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -435,8 +435,8 @@
         "26041": {
           "county": "Delta",
           "sourceUrl": "https://deltacountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -444,8 +444,8 @@
         "26043": {
           "county": "Dickinson",
           "sourceUrl": "https://www.dickinsoncountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -453,8 +453,8 @@
         "26045": {
           "county": "Eaton",
           "sourceUrl": "https://www.eatoncounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -462,8 +462,8 @@
         "26047": {
           "county": "Emmet",
           "sourceUrl": "https://www.emmetcounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -471,8 +471,8 @@
         "26049": {
           "county": "Genesee",
           "sourceUrl": "https://www.geneseecountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -480,8 +480,8 @@
         "26051": {
           "county": "Gladwin",
           "sourceUrl": "https://gladwincounty-mi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -489,8 +489,8 @@
         "26053": {
           "county": "Gogebic",
           "sourceUrl": "https://www.gogebic.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -498,8 +498,8 @@
         "26055": {
           "county": "Grand Traverse",
           "sourceUrl": "https://www.gtcountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -507,8 +507,8 @@
         "26057": {
           "county": "Gratiot",
           "sourceUrl": "https://www.gratiotmi.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -516,8 +516,8 @@
         "26059": {
           "county": "Hillsdale",
           "sourceUrl": "https://www.hillsdalecounty.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -525,8 +525,8 @@
         "26061": {
           "county": "Houghton",
           "sourceUrl": "https://www.houghtoncounty.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -534,8 +534,8 @@
         "26063": {
           "county": "Huron",
           "sourceUrl": "https://www.co.huron.mi.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -543,8 +543,8 @@
         "26065": {
           "county": "Ingham",
           "sourceUrl": "https://clerk.ingham.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -552,8 +552,8 @@
         "26067": {
           "county": "Ionia",
           "sourceUrl": "https://ioniacounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -561,8 +561,8 @@
         "26069": {
           "county": "Iosco",
           "sourceUrl": "https://iosco.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -570,8 +570,8 @@
         "26071": {
           "county": "Iron",
           "sourceUrl": "https://ironmi.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -579,8 +579,8 @@
         "26073": {
           "county": "Isabella",
           "sourceUrl": "https://www.isabellacounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -588,8 +588,8 @@
         "26075": {
           "county": "Jackson",
           "sourceUrl": "https://www.co.jackson.mi.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -597,8 +597,8 @@
         "26077": {
           "county": "Kalamazoo",
           "sourceUrl": "https://www.kalcounty.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "indeterminate",
+          "note": "HTTP 403 to robot",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -606,8 +606,8 @@
         "26079": {
           "county": "Kalkaska",
           "sourceUrl": "https://www.kalkaskacounty.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -615,8 +615,8 @@
         "26081": {
           "county": "Kent",
           "sourceUrl": "https://app.enhancedvoting.com/results/public/kent-county-mi/elections/11032026_20261005115447",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -624,8 +624,8 @@
         "26083": {
           "county": "Keweenaw",
           "sourceUrl": "https://keweenawcountyonline.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -633,8 +633,8 @@
         "26085": {
           "county": "Lake",
           "sourceUrl": "https://lakecountymi.gov/clerk/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -642,8 +642,8 @@
         "26087": {
           "county": "Lapeer",
           "sourceUrl": "https://www.lapeercountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -651,8 +651,8 @@
         "26089": {
           "county": "Leelanau",
           "sourceUrl": "https://www.leelanau.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -660,8 +660,8 @@
         "26091": {
           "county": "Lenawee",
           "sourceUrl": "https://www.electionlenawee.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -669,8 +669,8 @@
         "26093": {
           "county": "Livingston",
           "sourceUrl": "https://milivcounty.gov/elections/election-results/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -678,8 +678,8 @@
         "26095": {
           "county": "Luce",
           "sourceUrl": "https://www.lucecountymi.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -687,8 +687,8 @@
         "26097": {
           "county": "Mackinac",
           "sourceUrl": "https://www.mackinaccounty.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -696,8 +696,8 @@
         "26099": {
           "county": "Macomb",
           "sourceUrl": "https://www.macombgov.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -705,8 +705,8 @@
         "26101": {
           "county": "Manistee",
           "sourceUrl": "https://www.manisteecountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -714,8 +714,8 @@
         "26103": {
           "county": "Marquette",
           "sourceUrl": "https://www.co.marquette.mi.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -723,8 +723,8 @@
         "26105": {
           "county": "Mason",
           "sourceUrl": "https://www.masoncounty.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -732,8 +732,8 @@
         "26107": {
           "county": "Mecosta",
           "sourceUrl": "https://www.mecostacounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -741,8 +741,8 @@
         "26109": {
           "county": "Menominee",
           "sourceUrl": "https://www.menomineecounty.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -750,8 +750,8 @@
         "26111": {
           "county": "Midland",
           "sourceUrl": "https://midlandcountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -759,8 +759,8 @@
         "26113": {
           "county": "Missaukee",
           "sourceUrl": "https://www.missaukee.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -768,8 +768,8 @@
         "26115": {
           "county": "Monroe",
           "sourceUrl": "https://www.co.monroe.mi.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -777,8 +777,8 @@
         "26117": {
           "county": "Montcalm",
           "sourceUrl": "https://www.montcalm.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -786,8 +786,8 @@
         "26119": {
           "county": "Montmorency",
           "sourceUrl": "https://www.montcounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -795,8 +795,8 @@
         "26121": {
           "county": "Muskegon",
           "sourceUrl": "https://co.muskegon.mi.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -804,8 +804,8 @@
         "26123": {
           "county": "Newaygo",
           "sourceUrl": "https://www.newaygocountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -813,8 +813,8 @@
         "26125": {
           "county": "Oakland",
           "sourceUrl": "https://elections.oaklandcountymi.gov/government/clerk-register-of-deeds/elections-voting",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -822,8 +822,8 @@
         "26127": {
           "county": "Oceana",
           "sourceUrl": "https://oceana.mi.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -831,8 +831,8 @@
         "26129": {
           "county": "Ogemaw",
           "sourceUrl": "https://www.ocmi.us",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -840,8 +840,8 @@
         "26131": {
           "county": "Ontonagon",
           "sourceUrl": "https://ontonagoncounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -849,8 +849,8 @@
         "26133": {
           "county": "Osceola",
           "sourceUrl": "https://www.osceola-county.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -858,8 +858,8 @@
         "26135": {
           "county": "Oscoda",
           "sourceUrl": "https://www.oscodacountymi.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -867,8 +867,8 @@
         "26137": {
           "county": "Otsego",
           "sourceUrl": "https://www.otsegocountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -876,8 +876,8 @@
         "26139": {
           "county": "Ottawa",
           "sourceUrl": "https://miottawa.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -885,8 +885,8 @@
         "26141": {
           "county": "Presque Isle",
           "sourceUrl": "https://presqueislecounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -894,8 +894,8 @@
         "26143": {
           "county": "Roscommon",
           "sourceUrl": "https://www.roscommoncounty.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -903,26 +903,8 @@
         "26145": {
           "county": "Saginaw",
           "sourceUrl": "https://www.saginawcounty.com",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "26147": {
-          "county": "St. Clair",
-          "sourceUrl": "https://stclaircountyclerk.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "26149": {
-          "county": "St. Joseph",
-          "sourceUrl": "https://stjosephcountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -930,8 +912,8 @@
         "26151": {
           "county": "Sanilac",
           "sourceUrl": "https://www.sanilaccounty.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -939,8 +921,8 @@
         "26153": {
           "county": "Schoolcraft",
           "sourceUrl": "https://www.schoolcraftcounty.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -948,8 +930,26 @@
         "26155": {
           "county": "Shiawassee",
           "sourceUrl": "https://shiawassee.net",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "26147": {
+          "county": "St. Clair",
+          "sourceUrl": "https://stclaircountyclerk.org",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "26149": {
+          "county": "St. Joseph",
+          "sourceUrl": "https://stjosephcountymi.gov",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -957,8 +957,8 @@
         "26157": {
           "county": "Tuscola",
           "sourceUrl": "https://www.tuscolacounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -966,8 +966,8 @@
         "26159": {
           "county": "Van Buren",
           "sourceUrl": "https://www.vanburencountymi.gov",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -975,8 +975,8 @@
         "26161": {
           "county": "Washtenaw",
           "sourceUrl": "https://www.washtenaw.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -984,8 +984,8 @@
         "26163": {
           "county": "Wayne",
           "sourceUrl": "https://www.waynecounty.com/elected/clerk/election-results.aspx",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -993,15 +993,15 @@
         "26165": {
           "county": "Wexford",
           "sourceUrl": "https://wexfordcounty.org",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
         }
       },
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "MN": {
       "boundaryCount": 87,
@@ -1012,18 +1012,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "MO": {
-      "boundaryCount": 115,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 115,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "MS": {
       "boundaryCount": 82,
@@ -1034,7 +1023,18 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "MO": {
+      "boundaryCount": 115,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 115,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "MT": {
       "boundaryCount": 56,
@@ -1045,29 +1045,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "NC": {
-      "boundaryCount": 100,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 100,
-      "stateAuthority": "https://www.ncsbe.gov/results-data/election-results",
-      "authorityRole": "county-dashboard",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "ND": {
-      "boundaryCount": 53,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 53,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "NE": {
       "boundaryCount": 93,
@@ -1078,230 +1056,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "NH": {
-      "boundaryCount": 10,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 10,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "NJ": {
-      "boundaryCount": 21,
-      "linkedCountySources": 21,
-      "notIndependentlyLinked": 0,
-      "stateAuthority": "https://www.nj.gov/state/elections/election-night-results.shtml",
-      "authorityRole": "county-directory",
-      "authorityConnectivity": "not_checked",
-      "countySources": {
-        "34001": {
-          "county": "Atlantic",
-          "sourceUrl": "https://www.atlanticcountyclerk.org/elections-2/elections-results/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34003": {
-          "county": "Bergen",
-          "sourceUrl": "https://www.bergencountyclerk.gov/Election/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34005": {
-          "county": "Burlington",
-          "sourceUrl": "https://www.burlingtoncountynj.gov/598/Election-Results",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34007": {
-          "county": "Camden",
-          "sourceUrl": "https://www.camdencounty.com/service/voting-and-elections/election-results/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34009": {
-          "county": "Cape May",
-          "sourceUrl": "https://www.capemaycountyvotes.com/election-information/2026-election-results/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34011": {
-          "county": "Cumberland",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Cumberland/127562/web.345435/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34013": {
-          "county": "Essex",
-          "sourceUrl": "https://www.essexclerk.com/Election/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34015": {
-          "county": "Gloucester",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Gloucester/127298/web.345435/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34017": {
-          "county": "Hudson",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Hudson/127495/web.345435/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34019": {
-          "county": "Hunterdon",
-          "sourceUrl": "https://www.co.hunterdon.nj.us/236/County-Clerk",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34021": {
-          "county": "Mercer",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Mercer/127554/web.345435/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34023": {
-          "county": "Middlesex",
-          "sourceUrl": "https://www.middlesexcountynj.gov/government/departments/department-of-community-services/office-of-county-clerk/election-services/election-results",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34025": {
-          "county": "Monmouth",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Monmouth/127586/web.345435/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34027": {
-          "county": "Morris",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Morris/127576/web.345435/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34029": {
-          "county": "Ocean",
-          "sourceUrl": "https://oceancountyclerk.com/frmElectionServices?page=results",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34031": {
-          "county": "Passaic",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Passaic/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34033": {
-          "county": "Salem",
-          "sourceUrl": "https://www.livevoterturnout.com/ENR/salemnjenr/13/en/Index_13.html",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34035": {
-          "county": "Somerset",
-          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Somerset/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34037": {
-          "county": "Sussex",
-          "sourceUrl": "https://www.sussexcountyclerk.org/939/General-Election",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34039": {
-          "county": "Union",
-          "sourceUrl": "https://unioncountyvotes.com/election-results/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        },
-        "34041": {
-          "county": "Warren",
-          "sourceUrl": "https://www.warrencountyvotes.com/elections/past-election-results/",
-          "connectivity": "not_checked",
-          "note": "Source listed by state election office; machine-readable result access and data not yet verified",
-          "authorityListed": true,
-          "machineReadable": false,
-          "resultsVerified": false
-        }
-      },
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "NM": {
-      "boundaryCount": 33,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 33,
-      "stateAuthority": "https://electionresults.sos.nm.gov/",
-      "authorityRole": "county-results",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "NV": {
       "boundaryCount": 17,
@@ -1312,7 +1067,230 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "NH": {
+      "boundaryCount": 10,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 10,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "NJ": {
+      "boundaryCount": 21,
+      "linkedCountySources": 21,
+      "notIndependentlyLinked": 0,
+      "stateAuthority": "https://www.nj.gov/state/elections/election-night-results.shtml",
+      "authorityRole": "county-directory",
+      "authorityConnectivity": "reachable",
+      "countySources": {
+        "34001": {
+          "county": "Atlantic",
+          "sourceUrl": "https://www.atlanticcountyclerk.org/elections-2/elections-results/",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34003": {
+          "county": "Bergen",
+          "sourceUrl": "https://www.bergencountyclerk.gov/Election/",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34005": {
+          "county": "Burlington",
+          "sourceUrl": "https://www.burlingtoncountynj.gov/598/Election-Results",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34007": {
+          "county": "Camden",
+          "sourceUrl": "https://www.camdencounty.com/service/voting-and-elections/election-results/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 403 to robot",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34009": {
+          "county": "Cape May",
+          "sourceUrl": "https://www.capemaycountyvotes.com/election-information/2026-election-results/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34011": {
+          "county": "Cumberland",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Cumberland/127562/web.345435/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34013": {
+          "county": "Essex",
+          "sourceUrl": "https://www.essexclerk.com/Election/",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34015": {
+          "county": "Gloucester",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Gloucester/127298/web.345435/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34017": {
+          "county": "Hudson",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Hudson/127495/web.345435/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34019": {
+          "county": "Hunterdon",
+          "sourceUrl": "https://www.co.hunterdon.nj.us/236/County-Clerk",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34021": {
+          "county": "Mercer",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Mercer/127554/web.345435/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34023": {
+          "county": "Middlesex",
+          "sourceUrl": "https://www.middlesexcountynj.gov/government/departments/department-of-community-services/office-of-county-clerk/election-services/election-results",
+          "connectivity": "indeterminate",
+          "note": "HTTP 403 to robot",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34025": {
+          "county": "Monmouth",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Monmouth/127586/web.345435/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34027": {
+          "county": "Morris",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Morris/127576/web.345435/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34029": {
+          "county": "Ocean",
+          "sourceUrl": "https://oceancountyclerk.com/frmElectionServices?page=results",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34031": {
+          "county": "Passaic",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Passaic/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34033": {
+          "county": "Salem",
+          "sourceUrl": "https://www.livevoterturnout.com/ENR/salemnjenr/13/en/Index_13.html",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34035": {
+          "county": "Somerset",
+          "sourceUrl": "https://results.enr.clarityelections.com/NJ/Somerset/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 202",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34037": {
+          "county": "Sussex",
+          "sourceUrl": "https://www.sussexcountyclerk.org/939/General-Election",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34039": {
+          "county": "Union",
+          "sourceUrl": "https://unioncountyvotes.com/election-results/",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        },
+        "34041": {
+          "county": "Warren",
+          "sourceUrl": "https://www.warrencountyvotes.com/elections/past-election-results/",
+          "connectivity": "indeterminate",
+          "note": "HTTP 403 to robot",
+          "authorityListed": true,
+          "machineReadable": false,
+          "resultsVerified": false
+        }
+      },
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "NM": {
+      "boundaryCount": 33,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 33,
+      "stateAuthority": "https://electionresults.sos.nm.gov/",
+      "authorityRole": "county-results",
+      "authorityConnectivity": "reachable",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "NY": {
       "boundaryCount": 62,
@@ -1323,7 +1301,29 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "NC": {
+      "boundaryCount": 100,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 100,
+      "stateAuthority": "https://www.ncsbe.gov/results-data/election-results",
+      "authorityRole": "county-dashboard",
+      "authorityConnectivity": "reachable",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "ND": {
+      "boundaryCount": 53,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 53,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "OH": {
       "boundaryCount": 88,
@@ -1331,10 +1331,10 @@
       "notIndependentlyLinked": 88,
       "stateAuthority": "https://liveresults.ohiosos.gov/",
       "authorityRole": "state-and-county-results",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "reachable",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "OK": {
       "boundaryCount": 77,
@@ -1345,7 +1345,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "OR": {
       "boundaryCount": 36,
@@ -1356,7 +1356,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "PA": {
       "boundaryCount": 67,
@@ -1364,10 +1364,10 @@
       "notIndependentlyLinked": 67,
       "stateAuthority": "https://www.pa.gov/agencies/vote/elections/election-results",
       "authorityRole": "county-results",
-      "authorityConnectivity": "not_checked",
+      "authorityConnectivity": "reachable",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "RI": {
       "boundaryCount": 5,
@@ -1378,7 +1378,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "SC": {
       "boundaryCount": 46,
@@ -1389,7 +1389,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "SD": {
       "boundaryCount": 66,
@@ -1400,7 +1400,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "TN": {
       "boundaryCount": 95,
@@ -1411,7 +1411,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "TX": {
       "boundaryCount": 254,
@@ -1422,7 +1422,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "UT": {
       "boundaryCount": 29,
@@ -1433,18 +1433,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "VA": {
-      "boundaryCount": 133,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 133,
-      "stateAuthority": "https://enr.elections.virginia.gov/",
-      "authorityRole": "county-locality-results",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "VT": {
       "boundaryCount": 14,
@@ -1455,7 +1444,18 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "VA": {
+      "boundaryCount": 133,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 133,
+      "stateAuthority": "https://enr.elections.virginia.gov/",
+      "authorityRole": "county-locality-results",
+      "authorityConnectivity": "reachable",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "WA": {
       "boundaryCount": 39,
@@ -1466,18 +1466,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
-    },
-    "WI": {
-      "boundaryCount": 72,
-      "linkedCountySources": 0,
-      "notIndependentlyLinked": 72,
-      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
-      "authorityRole": "state-election-authority-directory-only",
-      "authorityConnectivity": "not_checked",
-      "countySources": {},
-      "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "WV": {
       "boundaryCount": 55,
@@ -1488,7 +1477,18 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
+    },
+    "WI": {
+      "boundaryCount": 72,
+      "linkedCountySources": 0,
+      "notIndependentlyLinked": 72,
+      "stateAuthority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "authorityConnectivity": "not_checked",
+      "countySources": {},
+      "verifiedResultFeeds": 0,
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     },
     "WY": {
       "boundaryCount": 23,
@@ -1499,7 +1499,7 @@
       "authorityConnectivity": "not_checked",
       "countySources": {},
       "verifiedResultFeeds": 0,
-      "note": "An authority link does not establish a live county feed"
+      "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
     }
   }
 }
