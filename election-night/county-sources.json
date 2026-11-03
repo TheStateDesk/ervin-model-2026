@@ -1,0 +1,514 @@
+{
+  "version": 1,
+  "election": "2026-11-03",
+  "sourcePolicy": "Authority-linked source URL is not machine-readable results. Connectivity ≠ verified votes. County-level D/R counts only accepted when date, FIPS, office, provenance, and independently listed authority URL pass validation. Missing coverage is not zero.",
+  "nationalElectionAuthorities": "https://www.nass.org/can-I-vote/state-election-officials",
+  "states": {
+    "AL": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "AK": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "AZ": {
+      "authority": "https://azsos.gov/press",
+      "authorityRole": "county-export-announcement",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "AR": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "CA": {
+      "authority": "https://electionresults.sos.ca.gov/",
+      "authorityRole": "state-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "CO": {
+      "authority": "https://results.enr.clarityelections.com/CO/",
+      "authorityRole": "state-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "CT": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "DE": {
+      "authority": "https://elections.delaware.gov/results/enr/GE2026.html",
+      "authorityRole": "county-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "FL": {
+      "authority": "https://floridaelectionwatch.gov/Downloads",
+      "authorityRole": "county-extract",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "GA": {
+      "authority": "https://results.enr.clarityelections.com/GA/",
+      "authorityRole": "state-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "HI": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "ID": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "IL": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "IN": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "IA": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "KS": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "KY": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "LA": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "ME": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "MD": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "MA": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "MI": {
+      "authority": "https://www.michigan.gov/sos/elections/election-results-and-data/candidate-listings-and-election-results-by-county",
+      "authorityRole": "county-directory",
+      "countyLinks": {
+        "Alcona": "https://alconacountymi.com",
+        "Alger": "https://www.algercounty.gov",
+        "Allegan": "https://www.allegancounty.org",
+        "Alpena": "https://alpenacounty.org",
+        "Antrim": "https://www.antrimcounty.org",
+        "Arenac": "https://www.arenaccountymi.gov",
+        "Baraga": "https://keweenawbay.org",
+        "Barry": "https://www.barrycounty.org",
+        "Bay": "https://www.baycountymi.gov",
+        "Benzie": "https://www.benzieco.gov",
+        "Berrien": "https://www.berriencounty.org",
+        "Branch": "https://www.countyofbranch.com",
+        "Calhoun": "https://www.calhouncountymi.gov",
+        "Cass": "https://www.casscountymi.org",
+        "Charlevoix": "https://www.charlevoixcounty.org",
+        "Cheboygan": "https://www.cheboygancounty.net",
+        "Chippewa": "https://www.chippewacountymi.gov",
+        "Clare": "https://www.clareclerkrod.com",
+        "Clinton": "https://www.clinton-county.org",
+        "Crawford": "https://www.crawfordco.org",
+        "Delta": "https://deltacountymi.gov",
+        "Dickinson": "https://www.dickinsoncountymi.gov",
+        "Eaton": "https://www.eatoncounty.org",
+        "Emmet": "https://www.emmetcounty.org",
+        "Genesee": "https://www.geneseecountymi.gov",
+        "Gladwin": "https://gladwincounty-mi.gov",
+        "Gogebic": "https://www.gogebic.gov",
+        "Grand Traverse": "https://www.gtcountymi.gov",
+        "Gratiot": "https://www.gratiotmi.com",
+        "Hillsdale": "https://www.hillsdalecounty.gov",
+        "Houghton": "https://www.houghtoncounty.net",
+        "Huron": "https://www.co.huron.mi.us",
+        "Ingham": "https://clerk.ingham.org",
+        "Ionia": "https://ioniacounty.org",
+        "Iosco": "https://iosco.net",
+        "Iron": "https://ironmi.com",
+        "Isabella": "https://www.isabellacounty.org",
+        "Jackson": "https://www.co.jackson.mi.us",
+        "Kalamazoo": "https://www.kalcounty.gov",
+        "Kalkaska": "https://www.kalkaskacounty.net",
+        "Kent": "https://app.enhancedvoting.com/results/public/kent-county-mi/elections/11032026_20261005115447",
+        "Keweenaw": "https://keweenawcountyonline.org",
+        "Lake": "https://lakecountymi.gov/clerk/",
+        "Lapeer": "https://www.lapeercountymi.gov",
+        "Leelanau": "https://www.leelanau.gov",
+        "Lenawee": "https://www.electionlenawee.com",
+        "Livingston": "https://milivcounty.gov/elections/election-results/",
+        "Luce": "https://www.lucecountymi.com",
+        "Mackinac": "https://www.mackinaccounty.net",
+        "Macomb": "https://www.macombgov.org",
+        "Manistee": "https://www.manisteecountymi.gov",
+        "Marquette": "https://www.co.marquette.mi.us",
+        "Mason": "https://www.masoncounty.net",
+        "Mecosta": "https://www.mecostacounty.org",
+        "Menominee": "https://www.menomineecounty.com",
+        "Midland": "https://midlandcountymi.gov",
+        "Missaukee": "https://www.missaukee.org",
+        "Monroe": "https://www.co.monroe.mi.us",
+        "Montcalm": "https://www.montcalm.us",
+        "Montmorency": "https://www.montcounty.org",
+        "Muskegon": "https://co.muskegon.mi.us",
+        "Newaygo": "https://www.newaygocountymi.gov",
+        "Oakland": "https://elections.oaklandcountymi.gov/government/clerk-register-of-deeds/elections-voting",
+        "Oceana": "https://oceana.mi.us",
+        "Ogemaw": "https://www.ocmi.us",
+        "Ontonagon": "https://ontonagoncounty.org",
+        "Osceola": "https://www.osceola-county.org",
+        "Oscoda": "https://www.oscodacountymi.com",
+        "Otsego": "https://www.otsegocountymi.gov",
+        "Ottawa": "https://miottawa.org",
+        "Presque Isle": "https://presqueislecounty.org",
+        "Roscommon": "https://www.roscommoncounty.net",
+        "Saginaw": "https://www.saginawcounty.com",
+        "Sanilac": "https://www.sanilaccounty.gov",
+        "Schoolcraft": "https://www.schoolcraftcounty.net",
+        "Shiawassee": "https://shiawassee.net",
+        "St. Clair": "https://stclaircountyclerk.org",
+        "St. Joseph": "https://stjosephcountymi.gov",
+        "Tuscola": "https://www.tuscolacounty.org",
+        "Van Buren": "https://www.vanburencountymi.gov",
+        "Washtenaw": "https://www.washtenaw.org",
+        "Wayne": "https://www.waynecounty.com/elected/clerk/election-results.aspx",
+        "Wexford": "https://wexfordcounty.org"
+      },
+      "countyIndexBasis": "Michigan Secretary of State county directory",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "MN": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "MS": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "MO": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "MT": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "NE": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "NV": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "NH": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "NJ": {
+      "authority": "https://www.nj.gov/state/elections/election-night-results.shtml",
+      "authorityRole": "county-directory",
+      "countyLinks": {
+        "Atlantic": "https://www.atlanticcountyclerk.org/elections-2/elections-results/",
+        "Bergen": "https://www.bergencountyclerk.gov/Election/",
+        "Burlington": "https://www.burlingtoncountynj.gov/598/Election-Results",
+        "Camden": "https://www.camdencounty.com/service/voting-and-elections/election-results/",
+        "Cape May": "https://www.capemaycountyvotes.com/election-information/2026-election-results/",
+        "Cumberland": "https://results.enr.clarityelections.com/NJ/Cumberland/127562/web.345435/",
+        "Essex": "https://www.essexclerk.com/Election/",
+        "Gloucester": "https://results.enr.clarityelections.com/NJ/Gloucester/127298/web.345435/",
+        "Hudson": "https://results.enr.clarityelections.com/NJ/Hudson/127495/web.345435/",
+        "Hunterdon": "https://www.co.hunterdon.nj.us/236/County-Clerk",
+        "Mercer": "https://results.enr.clarityelections.com/NJ/Mercer/127554/web.345435/",
+        "Middlesex": "https://www.middlesexcountynj.gov/government/departments/department-of-community-services/office-of-county-clerk/election-services/election-results",
+        "Monmouth": "https://results.enr.clarityelections.com/NJ/Monmouth/127586/web.345435/",
+        "Morris": "https://results.enr.clarityelections.com/NJ/Morris/127576/web.345435/",
+        "Ocean": "https://oceancountyclerk.com/frmElectionServices?page=results",
+        "Passaic": "https://results.enr.clarityelections.com/NJ/Passaic/",
+        "Salem": "https://www.livevoterturnout.com/ENR/salemnjenr/13/en/Index_13.html",
+        "Somerset": "https://results.enr.clarityelections.com/NJ/Somerset/",
+        "Sussex": "https://www.sussexcountyclerk.org/939/General-Election",
+        "Union": "https://unioncountyvotes.com/election-results/",
+        "Warren": "https://www.warrencountyvotes.com/elections/past-election-results/"
+      },
+      "countyIndexBasis": "New Jersey Division of Elections 2026 county websites",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "NM": {
+      "authority": "https://electionresults.sos.nm.gov/",
+      "authorityRole": "county-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "NY": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "NC": {
+      "authority": "https://www.ncsbe.gov/results-data/election-results",
+      "authorityRole": "county-dashboard",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "ND": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "OH": {
+      "authority": "https://liveresults.ohiosos.gov/",
+      "authorityRole": "state-and-county-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "OK": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "OR": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "PA": {
+      "authority": "https://www.pa.gov/agencies/vote/elections/election-results",
+      "authorityRole": "county-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "RI": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "SC": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "SD": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "TN": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "TX": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "UT": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "VT": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "VA": {
+      "authority": "https://enr.elections.virginia.gov/",
+      "authorityRole": "county-locality-results",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "WA": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "WV": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "WI": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    },
+    "WY": {
+      "authority": "https://www.nass.org/can-I-vote/state-election-officials",
+      "authorityRole": "state-election-authority-directory-only",
+      "countyLinks": {},
+      "countyIndexBasis": "No county-specific result source independently verified",
+      "countyFeedStatus": "not-verified",
+      "machineReadableCountyResults": false
+    }
+  }
+}
