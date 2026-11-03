@@ -61,9 +61,30 @@ try{
  await rootPage.waitForURL(/\/states\//,{timeout:18000});
  await rootPage.close();
  const front=await browser.newPage({viewport:{width:390,height:844}});
+ const frontJsErrors=[],frontRequestFailures=[];
+ front.on('pageerror',e=>frontJsErrors.push(e.message));
+ front.on('requestfailed',r=>{if(/\/geo\/districts\/|\/scripts\/election-day-desk/.test(r.url()))frontRequestFailures.push({url:r.url(),reason:r.failure()?.errorText});});
  await front.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
  await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#watchCards')?.querySelectorAll('.watch-card').length>=4&&document.querySelectorAll('#usMap path.ed-state').length>=50&&document.querySelector('#edFinalHeadline')?.textContent.includes('PREDICTION'),null,{timeout:35000});
- await front.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:65000});
+ try{
+  await front.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:85000});
+ }catch(error){
+  const status=await front.evaluate(()=>({
+   url:location.href,meta:document.querySelector('meta[name="ervin-deploy"]')?.content,
+   headline:document.querySelector('#edFinalHeadline')?.textContent,
+   tabs:[...document.querySelectorAll('#edSimTabs button')].map(x=>x.textContent),
+   mapOffice:document.querySelector('#edSimMap')?.dataset.simOffice,
+   mapText:document.querySelector('#edSimMap')?.textContent?.slice(0,300),
+   mapDetail:document.querySelector('#edSimMapReadout')?.textContent?.slice(0,1400),
+   mapNote:document.querySelector('#edSimMapNote')?.textContent?.slice(0,500),
+   finalTally:document.querySelector('#edFinalCallSummary')?.textContent?.slice(0,500),
+   houseRows:window.ERVIN_HOME_FORECAST?.house?.length,
+   forecastReady:!!window.ERVIN_HOME_FORECAST,
+   districtPaths:document.querySelectorAll('#edSimMap [data-sim-district]').length,
+   fileRequests:performance.getEntriesByType('resource').filter(x=>x.name.includes('/geo/districts/')).length
+  }));
+  throw Error('LIVE FINAL PREDICTION HOUSE GEOMETRY LOAD FAILURE '+JSON.stringify({status,frontJsErrors,frontRequestFailures:frontRequestFailures.slice(0,16)})+'; '+error.message);
+ }
  try{
   await front.waitForFunction(expected=>document.querySelector('meta[name="ervin-deploy"]')?.content===expected,stamp,{timeout:20000});
  }catch(err){
