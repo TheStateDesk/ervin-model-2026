@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "asOf": "2026-11-02",
+  "election": "2026-11-03",
+  "sourceChecked": "2026-11-02",
+  "note": "Publisher-specific observed averages; 2026-11-03 final sweep must recheck source dates. An unchanged archive should never be relabeled as fresh. No manual adjustment is inferred from 2026 actual results.",
+  "inputs": [
+    {
+      "publisher": "RealClearPolling",
+      "marginD": 8.9,
+      "weight": 0.4,
+      "asOf": "2026-11-02",
+      "fieldEnd": "2026-11-01",
+      "url": "https://www2.realclearpolitics.com/epolls/other/2026_generic_congressional_vote-8670.html",
+      "status": "verified published average"
+    },
+    {
+      "publisher": "Decision Desk HQ",
+      "marginD": 8.9,
+      "weight": 0.29,
+      "asOf": "2026-10-30",
+      "url": "https://electionsinusa.com/2026/house/forecasts/",
+      "status": "secondary compilation, not independently verified current DDHQ publisher output",
+      "secondary": true
+    },
+    {
+      "publisher": "Silver Bulletin",
+      "marginD": 8.9,
+      "weight": 0.1,
+      "asOf": "2026-11-02",
+      "url": "https://www.natesilver.net/p/generic-ballot-average-2026-nate-silver-bulletin-congress-polls",
+      "status": "verified Silver Bulletin average, not likely-voter adjusted 9.2",
+      "secondary": false
+    }
+  ]
+}
