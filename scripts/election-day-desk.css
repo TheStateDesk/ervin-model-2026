@@ -191,3 +191,6 @@ html.ed-election-night #electionDashboard{margin-bottom:0}
  .ed-coverage-live .ed-final-map-pane{padding:9px!important}
 }
 @media(prefers-reduced-motion:reduce){.ed-coverage-live #edSimMap path{transition:none}}
+
+/* Never display even a transient forecast allocation after the live handoff. */
+#edSimulationPanel.ed-coverage-live[data-live-ready="false"] #edFinalCallSummary{visibility:hidden}
