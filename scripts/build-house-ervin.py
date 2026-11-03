@@ -158,22 +158,27 @@ def main():
     assert len(seatmap)==435
     archive=load('house/research-polls.json').get('polls',{})
     verified=load('polling/house-verified-2026-11-02.json').get('races',{})
-    history=load('counties-watch/forecast-baselines.json')['states']
     yearly={};national={}
     for y in (2022,2024):yearly[y],national[y]=house_year(y,seatmap)
     directory=poll_directory(seatmap)
     house_poll_questions(seatmap)
-    # National publisher-weighted generic ballot: source shares renormalized over verified inputs.
-    # 270-to-Win excluded because we do not have a separately verified comparable average.
-    inputs=[{'publisher':'RealClearPolling','marginD':8.5,'weight':.40,'url':'https://www2.realclearpolitics.com/epolls/other/2026_generic_congressional_vote-8670.html'},
-            {'publisher':'Decision Desk HQ','marginD':8.9,'weight':.29,'url':'https://electionsinusa.com/2026/house/forecasts/','secondary':True},
-            {'publisher':'Silver Bulletin','marginD':8.9,'weight':.10,'url':'https://electionsinusa.com/2026/house/forecasts/','secondary':True}]
+    # External, dated publisher-specific election-day input: never silently
+    # relabel yesterday's averages as today's or manufacture an absent source.
+    generic_source=load('polling/generic-ballot-2026.json')
+    assert generic_source.get('election')=='2026-11-03' and generic_source.get('asOf')
+    inputs=generic_source['inputs']
+    assert len(inputs)>=2 and all(isinstance(x.get('marginD'),(int,float)) and
+        abs(x['marginD'])<=40 and x.get('asOf') and x.get('url','').startswith('https://')
+        and 0<x.get('weight',0)<=1 for x in inputs), 'Generic ballot source contract invalid'
     generic=sum(x['marginD']*x['weight'] for x in inputs)/sum(x['weight'] for x in inputs)
     rating_count=collections.Counter(); outputs={}
     for seat in seats:
         id=seat['id'];state=seat['code'];changed=state in NEW_MAP
         years={str(y):yearly[y].get(id) for y in (2022,2024)}
-        valid=[(y,yearly[y][id],.40 if y==2022 else .60) for y in (2022,2024) if yearly[y].get(id,{}).get('contested')]
+        # GA/NY boundaries changed for 2024: never weight 2022 returns for
+        # a different congressional constituency alongside 2024 House votes.
+        usable_years=(2024,) if state in ('GA','NY') else (2022,2024)
+        valid=[(y,yearly[y][id],.40 if y==2022 else .60) for y in usable_years if yearly[y].get(id,{}).get('contested')]
         # When House returns were uncontested, prefer clearly labeled bounded history signals,
         # not a fabricated district-level numerical margin.
         bounded=False
@@ -192,12 +197,9 @@ def main():
                 old=seat.get('rating') or ''
                 fundamental=(-17 if ' R' in old else 17 if ' D' in old else 0)
                 bounded=True
-        stateRecord=history.get(state,{})
-        error=(float(stateRecord.get('pollMargin',0))-float(stateRecord.get('adjustedMargin',0))) if stateRecord else 0
-        error=clamp(error,-10,10)
-        # Transfer only a small share of statewide Senate calibration into House office.
-        correction=-.20*error if stateRecord else 0
-        fundamental+=correction
+        # Senate/presidential historical errors are federal statewide events,
+        # not evidence of US House district pollster error. Do not pool offices.
+        correction=0.0
         local=[]
         source=directory.get(id,{})
         if id in archive:
@@ -239,10 +241,17 @@ def main():
         width=round((7 if len(usable)>=4 else 10 if len(usable)>=2 else 13 if usable else 17)+(7 if changed else 0)+(5 if bounded else 0),1)
         rating=score(estimate)
         confidence='Low' if changed or bounded or not usable else 'Moderate' if len(usable)<3 else 'Higher (relative)'
-        obj={'id':id,'state':state,'district':seat['district'],'modelRating':rating,'marginD':round(estimate,1),'uncertaintySensitivity':width,'pollEvidence':len(usable),'publishedSurveyCount':source.get('publishedCount',archive.get(id,{}).get('count',0)),'sourceRating':seat.get('rating'),'confidence':confidence,'changed2026Map':changed,'historicalProxy':bounded,'historic':years,'nationalBaselineMargins':{'2022':national[2022],'2024':national[2024]},'generic2026D':round(generic,2),'stateErrorPartialCorrection':round(correction,2),'fundamentalsD':round(fundamental,2),'pollMeanD':round(poll_avg,2) if poll_avg is not None else None,'pollWeight':round(strength,2),'surveys':local,'pollDirectoryLink':POLL_DIR,'methodNote':('Redrawn district: historical returns describe prior maps; substantial geographic mismatch risk. ' if changed else '')+('Uncontested/missing House returns: bounded historical proxy, not a comparable two-party result. ' if bounded else '')+('Recent individual polls shrink toward historical prior; only compatible D/R pairs enter the arithmetic. ' if usable else 'No usable candidate-matched recent district polls; rating is historical/generic-ballot estimate only. ')}
+        if changed:
+            # Old district-number House returns describe DIFFERENT VOTERS.
+            # Current-boundary Cook ratings may replace the label, but never
+            # transform a qualitative rating into an invented margin.
+            rating=seat.get('rating') or 'Unrated'
+            estimate=None
+            confidence='Cook qualitative (current map)' if seat.get('rating') else 'Current-map evidence unavailable'
+        obj={'id':id,'state':state,'district':seat['district'],'modelRating':rating,'marginD':round(estimate,1) if estimate is not None else None,'uncertaintySensitivity':width,'pollEvidence':len(usable),'publishedSurveyCount':source.get('publishedCount',archive.get(id,{}).get('count',0)),'sourceRating':seat.get('rating'),'confidence':confidence,'ratingBasis':('Cook published 2026 rating' if changed and seat.get('rating') else 'No current-boundary forecast' if changed else 'Ervin 2026 House historical/poll model'),'numericModelWithheld':changed,'changed2026Map':changed,'historicalProxy':bounded,'historic':years,'nationalBaselineMargins':{'2022':national[2022],'2024':national[2024]},'generic2026D':round(generic,2),'stateErrorPartialCorrection':round(correction,2),'fundamentalsD':round(fundamental,2),'pollMeanD':round(poll_avg,2) if poll_avg is not None else None,'pollWeight':round(strength,2),'surveys':local,'pollDirectoryLink':POLL_DIR,'methodNote':('2026 MAP REDRAW: Old-number House vote history is not a valid numerical predictor for these voters. The previous numeric margin is WITHHELD; source rating shown only when specifically present in the Cook data. ' if changed else '')+('Uncontested/missing House returns: bounded historical proxy, not a comparable two-party result. ' if bounded else '')+('Recent individual polls shrink toward historical prior; only compatible D/R pairs enter the arithmetic. ' if usable else 'No usable candidate-matched recent district polls; rating is historical/generic-ballot estimate only. ')}
         outputs[id]=obj;rating_count[rating]+=1
     if len(outputs)!=435:raise RuntimeError('House count invalid')
-    result={'asOf':TODAY.isoformat(),'label':'Ervin House — provisional district scenario','scope':'435 districts. Model outputs are heuristic sensitivity estimates, not validated race calls or win probabilities. Changed 2026 district maps use older returns as imperfect reference only.','method':{'formula':'House 2022/2024 D-R vs respective national House margin (40/60 weight), plus 2026 publisher-weighted generic ballot; subtract 20% of applicable statewide Senate-style error (when present), shrink any available compatible district surveys toward history by observed evidence, bound data-poor and uncontested proxies.','genericBallot':{'demMargin':round(generic,2),'inputs':inputs,'note':'Refreshed '+TODAY.isoformat()+'; secondary DDHQ/Silver values from attributed October 30 summary. 270toWin omitted rather than invent an average.'},'historicalReturns':{'source':'MIT Election Data and Science Lab 1976–2024, public domain via electiondata.dev','url':'https://electiondata.dev/datasets/house-results/','years':[2022,2024],'nationalMarginsD':{str(y):national[y] for y in national}},'polling':{'source':'The New York Times CC BY 4.0 polling index as summarized at PeoplesPoll; original linked releases; RCP latest polls','url':POLL_DIR,'note':'Archive shows only subset of all published surveys; a published survey count is not the number of rows displayed.'},'specialCaveat':'Alaska ranked-choice and top-two/all-party California contests require contest-specific interpretation. Margins only compare identifiable D and R survey respondents; model cannot simulate RCV transfer or same-party elections.','redrawnStates':sorted(NEW_MAP),'redrawSource':'https://ballotpedia.org/Redistricting_ahead_of_the_2026_elections','uncertainty':'Sensitivity width in margin points, not calibrated probability/confidence interval.'},'summary':{'districts':435,'modeledCount':len(outputs),'ratings':dict(rating_count),'districtsWithPollRows':sum(bool(x['surveys']) for x in outputs.values()),'districtsWithComparablePolls':sum(x['pollEvidence']>0 for x in outputs.values()),'indexedPublishedSurveys':sum(x['publishedSurveyCount'] for x in outputs.values()),'changedMapDistricts':sum(x['changed2026Map'] for x in outputs.values()),'historicalProxyDistricts':sum(x['historicalProxy'] for x in outputs.values())},'races':outputs}
+    result={'asOf':TODAY.isoformat(),'label':'Ervin House — provisional district scenario','scope':'435 districts indexed; numerical House model WITHHELD for the 173 redrawn-map districts until current-boundary vote baselines are sourced. Cook ratings are qualitative and never converted to fictional D-R margins.','method':{'formula':'Unchanged districts: House 2022/2024 D-R vs contemporaneous national House margins (40/60); GA/NY use only 2024 because districts changed before 2024; plus a dated national generic ballot and candidate-compatible district surveys. Senate/presidential historical errors are NOT transferred to House. For 173 changed 2026 maps, numeric old-map forecasts are withheld and only documented Cook ratings are used.','genericBallot':{'demMargin':round(generic,2),'asOf':generic_source['asOf'],'inputs':inputs,'note':'This is the dated source snapshot, not a claim the averages were refreshed on build day. Secondary DDHQ remains flagged. No unsourced 270toWin average.'},'historicalReturns':{'source':'MIT Election Data and Science Lab 1976–2024, public domain via electiondata.dev','url':'https://electiondata.dev/datasets/house-results/','years':[2022,2024],'nationalMarginsD':{str(y):national[y] for y in national}},'polling':{'source':'The New York Times CC BY 4.0 polling index as summarized at PeoplesPoll; original linked releases; RCP latest polls','url':POLL_DIR,'note':'Archive shows only subset of all published surveys; a published survey count is not the number of rows displayed.'},'specialCaveat':'Alaska ranked-choice and top-two/all-party California contests require contest-specific interpretation. Margins only compare identifiable D and R survey respondents; model cannot simulate RCV transfer or same-party elections.','redrawnStates':sorted(NEW_MAP),'redrawSource':'https://ballotpedia.org/Redistricting_ahead_of_the_2026_elections','uncertainty':'Sensitivity width in margin points, not calibrated probability/confidence interval.'},'summary':{'districts':435,'modeledCount':sum(isinstance(x['marginD'],(int,float)) for x in outputs.values()),'ratings':dict(rating_count),'districtsWithPollRows':sum(bool(x['surveys']) for x in outputs.values()),'districtsWithComparablePolls':sum(x['pollEvidence']>0 for x in outputs.values()),'indexedPublishedSurveys':sum(x['publishedSurveyCount'] for x in outputs.values()),'changedMapDistricts':sum(x['changed2026Map'] for x in outputs.values()),'redrawnCookRated':sum(x['changed2026Map'] and bool(x['sourceRating']) for x in outputs.values()),'redrawnUnrated':sum(x['changed2026Map'] and not x['sourceRating'] for x in outputs.values()),'historicalProxyDistricts':sum(x['historicalProxy'] for x in outputs.values())},'races':outputs}
     write('house/ervin-forecast-2026-11-02.json',result)
     print('HOUSE FORECAST COMPLETE',json.dumps(result['summary']),flush=True)
     for id in ('MI-07','MI-10','TX-34','CA-22','NY-17','AK-01'):
