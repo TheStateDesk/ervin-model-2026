@@ -1,0 +1,47 @@
+name: Build official 2026 congressional district geography
+on:
+  push:
+    branches: [2026-house-geography-presidential-backtest-design-20261103]
+    paths:
+      - 'scripts/build_2026_district_geography.py'
+      - '.github/workflows/build-census-2026-districts.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: official-2026-census-geography
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install shapefile and topology libraries
+        run: python3 -m pip install pyshp==2.3.1 shapely==2.1.2
+      - name: Verify source code and current ballot registry
+        run: |
+          python3 -m py_compile scripts/build_2026_district_geography.py
+          python3 -c "import json;d=json.load(open('house/data.json'));assert len(d['seats'])==435"
+      - name: Download official 2026 TIGER congressional boundaries, rebuild 11 states and verify counts
+        run: python3 scripts/build_2026_district_geography.py
+      - name: Commit built source geography only to development branch
+        env:
+          TARGET_BRANCH: 2026-house-geography-presidential-backtest-design-20261103
+        run: |
+          if test "$GITHUB_REF_NAME" != "$TARGET_BRANCH"; then
+            echo "Branch-only import; refusing to mutate $GITHUB_REF_NAME"; exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add geo/districts/{AL,CA,FL,GA,LA,NC,NY,OH,TN,TX,UT}.json research/2026-district-geography-audit.json
+          if git diff --staged --quiet; then
+            echo 'Official Census files already match current branch'; exit 0
+          fi
+          git commit -m 'Import U.S. Census 2026 120th-Congress congressional shapes for changed districts'
+          git push origin "HEAD:$TARGET_BRANCH"
