@@ -17,7 +17,7 @@ const today=()=>Date.now();
 function record(r){return live[raceId(r)]||null}
 function validateCandidates(rows,total){if(!Array.isArray(rows)||!rows.length||rows.length>15||!goodVote(total)||total<1)return null;const c=rows.map(x=>({name:String(x?.name||x?.n||'').trim(),party:party(x),votes:x?.votes??x?.v,photo:safeHTTPS(x?.photo||'')}));if(c.some(x=>!x.name||x.name.length>140||!goodVote(x.votes)))return null;if(Math.abs(c.reduce((n,x)=>n+x.votes,0)-total)>Math.max(10,total*.005))return null;return c}
 function marginD(r){const m=forecast?.[r.id]?.marginD;return Number.isFinite(m)?m:null}
-function fmtMargin(m){return !Number.isFinite(m)?'Not estimated':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)}
+function fmtMargin(m){return !Number.isFinite(m)?'Not estimated':Math.abs(m)>=49.999?(m>0?'D +50 or more':'R +50 or more')+' (cap)':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)}
 function modelTone(r){const m=marginD(r);if(m!==null)return Math.abs(m)<=1.5?'#b9a783':m>0?'#579ac5':'#be7180';const rating=String(r.rating||'').toLowerCase();return rating.includes('toss')?'#b9a783':/\b(?:tilt|lean|likely|solid) d\b/.test(rating)?'#579ac5':/\b(?:tilt|lean|likely|solid) r\b/.test(rating)?'#be7180':'#b5c0c7'}
 function resultTone(r){const x=record(r);if(!x)return '#c9ced5';const dem=x.candidates.filter(c=>c.party==='D').reduce((n,c)=>n+c.votes,0),rep=x.candidates.filter(c=>c.party==='R').reduce((n,c)=>n+c.votes,0);return !dem&&!rep?'#c9ced5':dem>rep?'#4a88cf':rep>dem?'#c45058':'#b1a085'}
 function selected(){const code=KEY(),district=String($('districtSelect')?.value||'').padStart(2,'0');return registry.find(x=>x.code===code&&String(x.district).padStart(2,'0')===district)||registry.find(x=>x.code===code)||null}
