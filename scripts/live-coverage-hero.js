@@ -21,7 +21,7 @@ function senateWaitingMessage(){
  const core=window.ERVIN_RETURNS;
  const closes=core?[...SENATE_STATES_2026].map(code=>core.closeAt(code+'-SENATE','Senate')).filter(Number.isFinite):[];
  const first=closes.length?Math.min(...closes):NaN;
- if(Number.isFinite(first)&&Date.now()<first)return 'First statewide Senate polls close at 7:00 p.m. ET; some House districts finish earlier';
+ if(Number.isFinite(first)&&Date.now()<first)return 'First Senate polls begin closing at 6:00 p.m. ET in Kentucky; regional returns appear when accepted by a reporting source';
  return 'Senate polls have begun closing; awaiting the first accepted unofficial Senate report';
 }
 function raceHref(id){
