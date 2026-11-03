@@ -121,7 +121,8 @@ async function refreshNational(){
   if(!core){$('feedStatus').textContent='Results validator unavailable; no unverified votes displayed';return}
   const offices=['Senate','Governor','House'];
   const urls=['../civicapi/races.json','../civicapi/discovery.json',...offices.map(x=>resultAPI+x)];
-  const responses=await Promise.allSettled(urls.map(x=>fetchJSON(x,13000)));
+  const responses=await Promise.allSettled(urls.map(x=>x.startsWith('https://openamerica.io/')
+   &&window.ERVIN_EXTERNAL_FEED?window.ERVIN_EXTERNAL_FEED.json(x,{timeout:13000}):fetchJSON(x,13000)));
   const civic=responses[0].status==='fulfilled'?core.civic(responses[0].value):{};
   const metadata=responses[1].status==='fulfilled'?responses[1].value:null;
   const fallback={};
