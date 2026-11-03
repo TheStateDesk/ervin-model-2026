@@ -195,6 +195,15 @@ try{
  if(liveErrors.length)throw Error('PUBLIC LIVE COVERAGE JS ERRORS '+liveErrors.join(' | '));
  console.log('PUBLIC 5:55 LIVE COVERAGE ACCEPTANCE PASS · 435 race links · no fake votes · commentary');
  await liveHero.close();
+ const archive=await browser.newPage({viewport:{width:1220,height:900}});
+ await archive.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-04T06:00:00Z')});
+ await archive.goto(base+'states/?view=final&release='+stamp+'#edSimulationPanel',{waitUntil:'domcontentloaded'});
+ await archive.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&
+  document.querySelector('#edFinalHeadline')?.textContent.includes('PREDICTION'),null,{timeout:85000});
+ if((await archive.locator('#edSimMap path.ed-sim-proj-D,#edSimMap path.ed-sim-proj-R').count())!==435)throw Error('PUBLIC ARCHIVED FINAL PREDICTION MUST PRESERVE ALL 435 CALLS AFTER HANDOFF');
+ if(!(await archive.locator('#edLiveCommentary').isHidden()))throw Error('PUBLIC ARCHIVE SHOULD NOT SHOW LIVE COMMENTARY');
+ await archive.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Archived-Final-Prediction-After-5-55.png'});
+ await archive.close();
  // CRITICAL: inspection must prove BOTH new full-width maps are actually
  // rendered on the LIVE public page, not merely present in repository HTML.
  const atlas=await browser.newPage({viewport:{width:1440,height:940},deviceScaleFactor:1});
