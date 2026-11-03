@@ -5,7 +5,7 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const siteRoot=new URL('../',document.currentScript?.src||new URL('../scripts/home-control.js',location.href));
-const read=async path=>{const r=await fetch(new URL(path,siteRoot),{cache:'no-store'});if(!r.ok)throw Error(path+' HTTP '+r.status);return r.json()};
+const read=async path=>{const raw=async()=>{const r=await fetch(new URL(path,siteRoot),{cache:'no-store'});if(!r.ok)throw Error(path+' HTTP '+r.status);return r.json()};return window.ERVIN_FINAL?window.ERVIN_FINAL.get(path,raw):raw()};
 const pct=n=>Math.round(n*100)+'%';
 let baseline=null, historical=null, last=null;
 const stateCodes=['ME','MI','OH','TX','IA','KS','MN','AK','GA','NC','NH','NE','SC','MS','FL','SD','MT'];
@@ -33,7 +33,7 @@ function render(){
  $('controlUnknownBar').style.width=(result.uncertain*100)+'%';
  $('controlBar').setAttribute('aria-label','D-aligned control '+pct(result.partyD)+', Republican control '+pct(result.partyR)+', unresolved '+pct(result.uncertain));
  $('controlRange').textContent='Illustrative 10th–90th percentile seats: D-aligned '+result.demRange.join('–')+' · Republican '+result.repRange.join('–');
- status.textContent='14,000 simulations · Ervin’s Take (17 states) · '+(historical?'Senate errors anchored to 61 historical comparisons':'Provisional historical error assumption')+' · unmodeled seats assumed unchanged';
+ status.textContent='14,000 illustrative simulations · 17 tracked states · '+(historical?'historic error sample used':'conservative uncertainty floor used')+' · unmodeled Senate seats assumed unchanged; independent caucus choices may be unresolved';
 }
 async function start(){
  try{
