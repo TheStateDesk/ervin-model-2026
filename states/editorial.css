@@ -213,3 +213,21 @@ html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180
 .senate-candidate-avatar img{width:100%;height:100%;object-fit:cover}
 .senate-candidate-avatar small{display:none}
 .senate-candidate-portrait:hover .senate-portrait-label{text-decoration:underline}
+
+/* Site audit: remove letterboxing, independent column heights and keyboard focus. */
+#nationMap{align-items:start}
+#nationMap > .ed-card:first-child{align-self:start}
+#nationMap .ed-map-surface{min-height:0}
+#nationMap .ed-map-surface svg{display:block;width:100%;height:auto!important;min-height:0!important;aspect-ratio:1080/625}
+.ed-columns{align-items:start}
+.ed-state-link:focus-visible > path.ed-state{stroke:#e8af50!important;stroke-width:3!important;filter:brightness(1.12)}
+.ed-headline,.ed-mast a{letter-spacing:-.015em}
+.ed-map-tooltip{pointer-events:none}
+.ed-nav-inner{scrollbar-width:thin}
+@media(max-width:600px){
+ .ed-map-surface{min-height:0!important}
+ .ed-sectionline{align-items:start;flex-wrap:wrap}
+ .ed-sectionline span:last-child{flex-basis:100%;text-align:left}
+ .ed-mast a{font-size:23px}
+ .ed-map-race-list{max-height:200px}
+}
