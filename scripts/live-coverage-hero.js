@@ -17,6 +17,13 @@ const on=(e,fn)=>window.addEventListener(e,fn);
 const officeFor=k=>k==='house'?'House':k==='senateD'?'Senate':'Governor';
 const idFor=(code,k)=>code+'-'+(k==='senateD'?'SENATE':'GOVERNOR');
 const safeSource=u=>{try{const x=new URL(u);return x.protocol==='https:'&&!x.username&&!x.password?x.href:null}catch{return null}};
+function senateWaitingMessage(){
+ const core=window.ERVIN_RETURNS;
+ const closes=core?[...SENATE_STATES_2026].map(code=>core.closeAt(code+'-SENATE','Senate')).filter(Number.isFinite):[];
+ const first=closes.length?Math.min(...closes):NaN;
+ if(Number.isFinite(first)&&Date.now()<first)return 'First statewide Senate polls close at 7:00 p.m. ET; some House districts finish earlier';
+ return 'Senate polls have begun closing; awaiting the first accepted unofficial Senate report';
+}
 function raceHref(id){
  if(!/^[A-Z]{2}-(?:[0-9]{2}|SENATE|GOVERNOR)$/.test(String(id)))return null;
  return '../election-night/?state='+id.slice(0,2)+'&race='+id+'#nationalBoard';
@@ -70,11 +77,11 @@ function summary(k,results){
  }
  const minor=document.createElement('small');
  minor.textContent=n?fmt(n)+' races with accepted unofficial totals'+(other?' · '+other+' independent/other leader'+(other===1?'':'s'):'')+(ties?' · '+ties+' tie'+(ties===1?'':'s'):'')+' · no race call inferred':
-  'Awaiting source-validated unofficial returns · unreported contests remain gray';
+  (k==='senateD'?senateWaitingMessage():'Awaiting source-validated unofficial returns · unreported contests remain gray');
  minor.textContent+=(k==='house'?' · 435 House districts':k==='senateD'?' · 35 Senate elections':' · 36 governor elections');
  holder.append(meta,stats,minor);holder.dataset.liveReports=String(n);
  const status=$('edCommentaryStatus');
- if(status)status.textContent=n?fmt(n)+' reporting race'+(n===1?'':'s')+' · checking every 30 seconds':'Waiting for the first accepted reports · checks every 30 seconds';
+ if(status)status.textContent=n?fmt(n)+' reporting race'+(n===1?'':'s')+' · checking every 30 seconds':(k==='senateD'?senateWaitingMessage():'Waiting for the first accepted reports')+' · checks every 30 seconds';
 }
 function paint(){
  paintQueued=false;
