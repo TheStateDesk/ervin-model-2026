@@ -1702,115 +1702,36 @@
   "ratings": "https://www.cookpolitical.com/ratings/senate-race-ratings?check_logged_in=1",
   "errorResearch": "https://www.pollingforecast.com/research/us-polling-error",
   "liveMeta": {
-    "checkedAt": "2026-11-03T16:16:56.859130+00:00",
+    "checkedAt": "2026-11-03T16:17:36.395990+00:00",
     "pagesParsed": 15,
     "checkedRaceCount": 17,
-    "changes": 29,
+    "changes": 8,
     "observationsFound": 57,
     "errors": [],
     "updated": [
       {
-        "state": "ME",
+        "state": "OH",
         "source": "win270",
-        "margin": 5.0,
-        "published": "Nov 03"
+        "margin": 1.7,
+        "published": "Nov 02"
       },
       {
-        "state": "ME",
-        "source": "ddhq",
-        "margin": 5.3,
-        "published": "Nov 03"
-      },
-      {
-        "state": "ME",
-        "source": "rcp",
-        "margin": 3.6,
-        "published": "Nov 03"
-      },
-      {
-        "state": "ME",
-        "source": "silver",
-        "margin": 4.0,
-        "published": "Nov 03"
-      },
-      {
-        "state": "IA",
+        "state": "TX",
         "source": "win270",
-        "margin": 0.9,
+        "margin": 3.4,
         "published": "Nov 02"
       },
       {
-        "state": "IA",
-        "source": "ddhq",
-        "margin": -0.3,
-        "published": "Nov 03"
-      },
-      {
-        "state": "IA",
-        "source": "rcp",
-        "margin": 0.0,
-        "published": "Nov 03"
-      },
-      {
-        "state": "IA",
-        "source": "silver",
-        "margin": 1.0,
-        "published": "Nov 02"
-      },
-      {
-        "state": "AK",
-        "source": "silver",
-        "margin": 2.4,
-        "published": "Nov 03"
-      },
-      {
-        "state": "SC",
+        "state": "KS",
         "source": "win270",
-        "margin": -2.2,
+        "margin": 4.6,
         "published": "Nov 02"
       },
       {
-        "state": "SC",
-        "source": "ddhq",
-        "margin": 0.1,
-        "published": "Nov 02"
-      },
-      {
-        "state": "SC",
-        "source": "rcp",
-        "margin": -2.6,
-        "published": "Nov 02"
-      },
-      {
-        "state": "SC",
-        "source": "silver",
-        "margin": -1.1,
-        "published": "Nov 03"
-      },
-      {
-        "state": "FL",
+        "state": "MN",
         "source": "win270",
-        "margin": -6.3,
+        "margin": 5.6,
         "published": "Nov 02"
-      },
-      {
-        "state": "FL",
-        "source": "ddhq",
-        "margin": -5.6,
-        "published": "Nov 02"
-      },
-      {
-        "state": "FL",
-        "source": "silver",
-        "margin": -6.1,
-        "published": "Nov 03"
-      },
-      {
-        "state": "MI",
-        "source": "win270",
-        "margin": 5.9,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
       },
       {
         "state": "OH",
@@ -1827,13 +1748,6 @@
         "evidence": "Direct named publisher average"
       },
       {
-        "state": "IA",
-        "source": "win270",
-        "margin": 0.9,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
         "state": "KS",
         "source": "win270",
         "margin": 5.0,
@@ -1844,55 +1758,6 @@
         "state": "MN",
         "source": "win270",
         "margin": 5.4,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
-        "state": "AK",
-        "source": "win270",
-        "margin": 3.5,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
-        "state": "GA",
-        "source": "win270",
-        "margin": 9.6,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
-        "state": "NC",
-        "source": "win270",
-        "margin": 11.4,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
-        "state": "NH",
-        "source": "win270",
-        "margin": 8.2,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
-        "state": "NE",
-        "source": "win270",
-        "margin": -2.6,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
-        "state": "SC",
-        "source": "win270",
-        "margin": -2.2,
-        "published": "2026-11-02",
-        "evidence": "Direct named publisher average"
-      },
-      {
-        "state": "FL",
-        "source": "win270",
-        "margin": -6.3,
         "published": "2026-11-02",
         "evidence": "Direct named publisher average"
       }
