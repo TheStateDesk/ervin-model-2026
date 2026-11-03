@@ -286,3 +286,59 @@ html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180
 .theme-dark .ed-map-county path.county[data-county-reported="false"]{stroke:#203647}
 .ed-map-county path.county:hover{stroke:#f7d586!important;stroke-width:2.5!important}
 @media(max-width:720px){.unified-county-returns .ed-stat-grid{grid-template-columns:1fr 1fr}.unified-county-returns .ed-stat:last-child{grid-column:1/-1}.ed-unified-mode{width:100%}.ed-unified-mode button{flex:1 1 auto}}
+
+/* Audit follow-up: calmer newspaper typography and office-specific directory ledgers.
+   The branded E mark is retained and the existing dark palette remains intact. */
+:root{
+ --ed-display:"Newsreader",Georgia,serif;
+ --ed-serif:Georgia,"Times New Roman",serif;
+ --ed-sans:"Libre Franklin","Helvetica Neue",Arial,sans-serif;
+ --ed-paper:#fff;
+ --ed-white:#fff;
+ --ed-ink:#18232d;
+ --ed-muted:#536270;
+ --ed-rule:#d8dcdf;
+}
+.ed-headline,.ed-mast a,.ed-card h2,.ed-band h2,.ed-house-watch h2{font-family:var(--ed-display)}
+.ed-body .ed-headline,.ed-body .ed-mast a{letter-spacing:-.015em}
+.ed-body .ed-mini{font-size:12px!important}
+.ed-body .ed-kicker,.ed-body .ed-cap{font-size:12px;letter-spacing:.08em}
+.ed-body .ed-state-chip small{display:block;font-size:12px;margin:6px 0 0;line-height:1.5;opacity:.92}
+.ed-body .ed-state-chip{font-size:13px;white-space:normal}
+.ed-directory-region{margin:23px 0 30px}
+.ed-region-heading{margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--ed-rule)}
+.ed-region-heading h2{font-family:var(--ed-display);font-size:27px}
+.ed-directory-chips{flex-wrap:wrap;overflow:visible}
+.ed-body .ed-map-tooltip{font-size:12px}
+.ed-body .ed-map-race,.ed-body .ed-map-tooltip>small{font-size:12px}
+.ed-recent-state{display:inline-block;margin:0 0 8px;font-size:13px;font-weight:700}
+.ed-house-watch{margin:18px 0 27px}
+.ed-house-watch h2{font-size:clamp(24px,3vw,34px);margin:5px 0 13px}
+.ed-house-watch-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--ed-rule);border-top:1px solid var(--ed-rule);border-bottom:1px solid var(--ed-rule)}
+.ed-house-watch-row{display:flex;flex-direction:column;gap:2px;padding:13px 14px;min-width:0;background:var(--ed-white);color:var(--ed-ink)!important;text-decoration:none!important}
+.ed-house-watch-row:hover,.ed-house-watch-row:focus-visible{background:var(--ed-blue-light)}
+.ed-house-watch-row strong{font:700 18px var(--ed-sans)}
+.ed-house-watch-row span{font-size:12px;color:var(--ed-muted)}
+.ed-house-watch-row b{font-size:18px;font-variant-numeric:tabular-nums}
+.ed-house-watch-row b.d{color:var(--ed-blue)}.ed-house-watch-row b.r{color:var(--ed-red)}
+.ed-house-watch-row small{font-size:12px;color:var(--ed-muted)}
+.theme-dark .ed-house-watch-list{background:var(--ed-rule)}
+.theme-dark .ed-house-watch-row{background:var(--ed-white);color:var(--ed-ink)!important}
+.theme-dark .ed-house-watch-row:hover,.theme-dark .ed-house-watch-row:focus-visible{background:#2a4154}
+.theme-dark .ed-house-watch-row span,.theme-dark .ed-house-watch-row small{color:#afc2ce}
+@media(max-width:900px){.ed-house-watch-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){
+ .ed-house-watch-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ed-directory-chips .ed-state-chip{flex:1 1 45%;min-width:140px}
+ .ed-head-inner{grid-template-columns:auto minmax(0,1fr) auto}
+ .ed-utility{flex-wrap:wrap}
+ .ed-nav-inner{scrollbar-width:thin}
+}
+
+/* A single national atlas surface: state outlines or county detail, never stacked atlases. */
+.ed-atlas-switch{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:24px 0 13px;padding:11px 0;border-top:1px solid var(--ed-rule);border-bottom:1px solid var(--ed-rule)}
+.ed-atlas-switch button{border:1px solid var(--ed-rule);padding:10px 18px;min-height:43px;font:750 13px var(--ed-sans);color:var(--ed-ink);background:var(--ed-white);cursor:pointer}
+.ed-atlas-switch button[aria-pressed="true"]{background:var(--ed-ink);border-color:var(--ed-ink);color:var(--ed-white)}
+.theme-dark .ed-atlas-switch button[aria-pressed="true"]{background:#dce7ed;color:#172633;border-color:#dce7ed}
+.ed-atlas-switch .ed-mini{margin-left:auto}
+@media(max-width:600px){.ed-atlas-switch .ed-mini{flex-basis:100%;margin-left:0}}

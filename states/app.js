@@ -19,7 +19,17 @@ function summarize(){
  }
  byState=all;
 }
-function stateTitle(s){const row=byState[s.code];return row?s.name+' — '+row.D+'D-'+row.R+'R-'+row.T+'T':s.name+' — loading forecasts';}
+function officeTotals(row,office){
+ const counts={D:0,R:0,T:0};
+ if(!row)return counts;
+ for(const race of row.races||[]){
+  const eligible=office==='house'?race.label.includes(' · House '):office==='governor'?race.label.startsWith('Governor'):race.label.startsWith('U.S. Senate');
+  if(eligible){const type=rank(race.margin);if(type)counts[type]++;}
+ }
+ return counts;
+}
+function totalsText(c){return c.D+'D–'+c.R+'R–'+c.T+'T'}
+function stateTitle(s){const row=byState[s.code];return row?s.name+' — '+mapOffice+' '+totalsText(officeTotals(row,mapOffice)):s.name+' — loading forecasts';}
 function officeRaces(r){
  if(!r)return [];
  return r.races.filter(x=>mapOffice==='house'?x.label.includes(' · House '):mapOffice==='governor'?x.label.startsWith('Governor'):x.label.startsWith('U.S. Senate'));
@@ -98,7 +108,7 @@ function show(code,event){
  const displayed=featured.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+(x.type==='summary'?'':esc(MARGIN(x.margin)))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
  const live=liveLead(code);
  const liveText=mapView==='forecast'?'':live?'<p class="ed-mini"><strong>UNOFFICIAL counted '+esc(live.office)+' contests: '+live.matched+'</strong> · '+esc(live.records.map(row=>row.candidates.slice().sort((a,b)=>b.votes-a.votes).slice(0,2).map(c=>c.party+' '+c.votes.toLocaleString()).join(' / ')).join('; '))+'</p>':'<p class="ed-mini">No validated 2026 reported vote totals for this state and office.</p>';
- tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+r.D+'D–'+r.R+'R–'+r.T+'T</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div>'+liveText+'<small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
+ tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+esc(mapOffice)+' '+totalsText(officeTotals(r,mapOffice))+'</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div>'+liveText+'<small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
  tooltip.hidden=false;locate(event);
 }
 function locate(event){
@@ -110,8 +120,15 @@ function locate(event){
 }
 function hide(){const tooltip=$('stateMapTooltip');if(tooltip)tooltip.hidden=true}
 function directory(){
- $('stateRegions').innerHTML=Object.entries(REGION).map(([reg,values])=>{const set=new Set(values.split(' ')),arr=states.filter(s=>set.has(s.code));return '<div style="margin:18px 0 23px"><div class="ed-band" style="border-bottom:1px solid #bcc8cc;padding-bottom:7px;margin:0 0 11px"><h2 style="font:700 24px Georgia,serif;margin:0">'+esc(reg)+'</h2><span class="ed-mini">'+arr.length+' states</span></div><div class="ed-scrollrow" style="flex-wrap:wrap;overflow:visible">'+arr.map(s=>{const r=byState[s.code];return '<a class="ed-state-chip" href="'+href(s.code)+'" data-search-name="'+esc(s.name.toLowerCase())+'" data-state-code="'+s.code+'" data-state-code="'+s.code+'">'+esc(s.name)+(r?' <small>'+r.D+'D-'+r.R+'R-'+r.T+'T</small>':'')+'</a>'}).join('')+'</div></div>'}).join('');
- $('directoryCount').textContent=states.length+' state editions · modeled race aggregation';
+ $('stateRegions').innerHTML=Object.entries(REGION).map(([reg,values])=>{
+  const set=new Set(values.split(' ')),arr=states.filter(s=>set.has(s.code));
+  return '<section class="ed-directory-region"><div class="ed-band ed-region-heading"><h2>'+esc(reg)+'</h2><span class="ed-mini">'+arr.length+' states</span></div><div class="ed-scrollrow ed-directory-chips">'+arr.map(s=>{
+   const r=byState[s.code],sen=officeTotals(r,'senate'),gov=officeTotals(r,'governor'),house=officeTotals(r,'house');
+   const mark=c=>(c.D+c.R+c.T)?totalsText(c):'—';
+   return '<a class="ed-state-chip" href="'+href(s.code)+'" data-search-name="'+esc(s.name.toLowerCase())+'" data-state-code="'+s.code+'"><strong>'+esc(s.name)+'</strong><small>Sen '+mark(sen)+' · Gov '+mark(gov)+' · House '+mark(house)+'</small></a>';
+  }).join('')+'</div></section>';
+ }).join('');
+ $('directoryCount').textContent=states.length+' state editions · figures grouped by office (— = no modeled margin)';
 }
 function search(){
  const status=$('stateSearchStatus');if(status)status.textContent='';const q=$('stateSearch').value.trim().toLowerCase(),matches=states.filter(s=>s.name.toLowerCase().includes(q)||s.code.toLowerCase()===q);
@@ -145,14 +162,25 @@ async function populate(){
  drawMap();directory();search();for(const code of ['MI','TX','PA','GA','AZ','ME']){const el=document.querySelector('[data-quick-offices="'+code+'"]');if(el)el.textContent=[byState[code]?.races.some(x=>x.label.startsWith('U.S. Senate'))?'Senate':null,byState[code]?.races.some(x=>x.label.startsWith('Governor'))?'Governor':null,'House','Counties'].filter(Boolean).join(' · ');}
  }catch(e){console.error(e);$('aggregateLegend').textContent='Forecast aggregate unavailable; state links still work.'}
 }
+function setAtlasView(mode){
+ const showCounties=mode==='counties';
+ const statesMap=$('nationMap'),countyMap=$('allCountyNation');
+ if(statesMap)statesMap.hidden=showCounties;
+ if(countyMap)countyMap.hidden=!showCounties;
+ for(const b of document.querySelectorAll('[data-national-atlas-view]')){
+  b.setAttribute('aria-pressed',String(b.dataset.nationalAtlasView===mode));
+ }
+}
 function init(){
+ for(const b of document.querySelectorAll('[data-national-atlas-view]'))b.addEventListener('click',()=>setAtlasView(b.dataset.nationalAtlasView));
+ setAtlasView('states');
  if(focusedOffice){
   const heading=focusedOffice==='house'?'U.S. House districts':'Governor elections';
   const cta=focusedOffice==='house'?'House candidates, polls and district maps':'Governor candidates, polls and statewide forecasts';
   const panel=$('officeFocus');
   if(panel){
    panel.hidden=false;
-   panel.innerHTML='<strong>'+heading+'</strong><span>Choose any state using the map or search. Its consolidated State Desk edition opens directly to '+cta+'. The map colors remain aggregated across offices.</span><a href="./#nationMap">Show all offices</a>';
+   panel.innerHTML='<strong>'+heading+'</strong><span>Choose any state using the map or search. Its consolidated State Desk edition opens directly to '+cta+'. The map colors reflect the office selected above.</span><a href="./#nationMap">Show all offices</a>';
   }
  }
  drawMap();directory();
@@ -164,6 +192,17 @@ function init(){
  $('quickSelect').innerHTML='<option value="">Choose a state…</option>'+states.map(s=>'<option value="'+s.code+'">'+esc(s.name)+'</option>').join('');
  $('quickSelect').onchange=e=>{if(names[e.target.value])location.href=href(e.target.value)};
  $('stateSearch').addEventListener('input',search);
+ document.addEventListener('keydown',e=>{
+  const el=e.target,editing=el?.matches?.('input, textarea, select, [contenteditable="true"]');
+  if(e.key==='/'&&!editing&&!e.altKey&&!e.ctrlKey&&!e.metaKey){e.preventDefault();$('stateSearch').focus();}
+ });
+ try{
+  const recent=localStorage.getItem('ervin-last-state');
+  if(recent&&names[recent]){
+   const link=$('recentStateLink');
+   if(link){link.href=href(recent);link.textContent='Back to '+names[recent]+' →';link.hidden=false;}
+  }
+ }catch(_){};
  $('stateSearch').addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=e.target.value.trim().toLowerCase(),match=states.find(s=>s.name.toLowerCase()===q||s.code.toLowerCase()===q)||states.find(s=>s.name.toLowerCase().startsWith(q));if(match)location.href=href(match.code);else {const status=$('stateSearchStatus');if(status)status.textContent='No state matches “'+e.target.value.trim()+'”';}});
  fetch('../refresh_log.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(log=>{if(log?.checkedAt)$('todayLabel').textContent='Polls checked '+new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});else $('todayLabel').textContent='Update time unavailable'}).catch(()=>{$('todayLabel').textContent='Update time unavailable'});
  $('featuredStates').innerHTML='<div class="ed-kicker" style="margin-top:12px">Quick editions</div>'+['MI','TX','PA','GA','AZ','ME'].map(code=>'<article><a href="'+href(code)+'"><strong>'+esc(names[code]||code)+'</strong></a><small data-quick-offices="'+code+'">House · Counties</small></article>').join('');

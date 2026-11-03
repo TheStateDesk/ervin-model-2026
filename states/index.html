@@ -3,6 +3,8 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg"><meta property="og:type" content="website"><meta property="og:site_name" content="The Ervin Model"><meta property="og:title" content="The State Desk | The Ervin Model"><meta property="og:description" content="Senate, governor and U.S. House forecasts, county maps and attributed election-night reporting."><meta name="twitter:card" content="summary"><meta name="twitter:title" content="The Ervin Model State Desk"><meta name="theme-color" content="#f5f3ee">
 <meta name="description" content="The Ervin Model State Desk: open an entire state election picture, with statewide races, every House district, county maps and polling in one place.">
 <title>The State Desk | Ervin Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <script src="./theme.js?v=20261102-theme-fix-3"></script>
 <link rel="stylesheet" href="./editorial.css?v=20261102-theme-map-fix-3"><link rel="stylesheet" href="../scripts/home-election-2026.css?v=20261102-contrast" /><link rel="stylesheet" href="../scripts/home-power.css?v=20261102-desk-power-1"><link rel="stylesheet" href="./control.css?v=20261102-senate-outlook-1">
 </head><body class="ed-body">
@@ -16,7 +18,7 @@
 <p class="ed-standfirst">Explore the races shaping 2026 in a single state edition. Senate and governor polling, all House districts, county-level historical patterns, conditional forecasts and reported votes belong in one place—not a maze of separate race pages.</p>
 <p id="finalPhaseStatus" class="ed-mini" role="status">Pre-election forecast · verified polling sources</p>
 <div class="homepage-search-top"><div class="ed-band"><label for="stateSearch" class="ed-cap">Find your state <input id="stateSearch" class="ed-control" type="search" placeholder="Type Michigan, Texas, Maine…" style="width:min(370px,82vw);margin-left:10px" autocomplete="off"></label><label class="ed-cap" for="quickSelect">or choose <select class="ed-control" id="quickSelect" style="min-width:150px;margin-left:5px"><option value="">Select a state</option></select></label></div><p id="stateSearchStatus" class="ed-mini" role="status" aria-live="polite"></p>
-</div><section id="electionDashboard" class="atlas-shell live-dashboard-banner" aria-labelledby="dashboardTitle" hidden>
+<a id="recentStateLink" class="ed-recent-state" href="../state/?state=MI" hidden>Back to your last state</a></div><section id="electionDashboard" class="atlas-shell live-dashboard-banner" aria-labelledby="dashboardTitle" hidden>
  <div class="atlas-heading"><div><div class="ed-kicker">LIVE / UNOFFICIAL REPORTED VOTES</div>
  <h2 id="dashboardTitle">Election night 2026</h2><p id="dashboardIntro">The maps below now have a Reported mode. Forecasts remain available for comparison, but are not counted votes.</p></div>
  <a href="../election-night/" class="ed-btn outline">Full source-linked results board</a></div>
@@ -27,6 +29,12 @@
 <div class="watch-head"><div><div class="ed-kicker">CLOSEST 2026 SENATE AND GOVERNOR RACES</div><h2 id="watchTitle">Races to watch</h2><p class="ed-mini">Closest modeled Senate and governor elections. House toss-ups are listed separately below.</p></div>
 <div class="watch-nav"><button type="button" id="watchPrev" aria-label="Previous four races" disabled>Previous</button><span id="watchPosition" aria-live="polite">Loading…</span><button type="button" id="watchNext" aria-label="Next four races">Next</button><button type="button" id="watchPause" aria-pressed="false">Pause rotation</button></div></div>
 <div class="watch-track" id="watchCards" aria-live="polite"><p>Loading closest races…</p></div>
+</section>
+<section id="houseWatch" class="ed-house-watch" aria-labelledby="houseWatchHeading">
+<div class="ed-sectionline"><span class="ed-kicker">U.S. HOUSE / THE CLOSEST DISTRICTS</span><span id="houseWatchCount">Ranked by modeled margin</span></div>
+<h2 id="houseWatchHeading">House races to watch</h2>
+<div id="houseWatchList" class="ed-house-watch-list"><p class="ed-mini">Loading the closest districts…</p></div>
+<p class="ed-mini">Margins are provisional House estimates, not reported votes or called races. Open a state to inspect candidates, individual surveys and ratings.</p>
 </section>
 <section id="balanceOfPower" class="power-panel desk-balance" aria-labelledby="powerTitle">
  <div class="power-heading"><div>
@@ -39,14 +47,38 @@
  <div id="powerCards" class="power-grid" aria-live="polite"><p>Loading seat forecast…</p></div>
  <p class="power-method">435 House districts · 100 senators · 50 governorships. Toss-ups are not assigned to either party; unmodeled Senate races are assumed to retain their current alignment. <a href="../election-night/">See separately attributed election-night results</a>.</p>
 </section>
+<section class="desk-control" id="senate-control" aria-labelledby="controlTitle">
+  <div class="desk-control__intro"><div><div class="ed-kicker">SENATE CONTROL / SCENARIO MODEL</div>
+  <h2 id="controlTitle">Who is favored to control the Senate?</h2>
+  <p>14,000 shared-swing simulations use the current 17-state Ervin margins and historical error estimates. These are illustrative scenario frequencies, <strong>not empirically calibrated election probabilities</strong>.</p></div>
+  <label class="desk-control__choice" for="controlUncertainty">Assumed uncertainty
+  <select id="controlUncertainty"><option value="1">Standard range</option><option value="1.3">Wider range (+30%)</option><option value="1.6">Very wide (+60%)</option><option value=".8">Narrower range (−20%)</option></select></label></div>
+  <div class="desk-control__outcomes">
+   <div class="desk-control__party desk-control__party--d"><span class="desk-control__party-name">Democratic control</span><strong class="desk-control__chance" id="controlDemChance">—</strong><span class="desk-control__seat">Mean D-aligned seats: <b id="controlDemSeats">—</b></span></div>
+   <div class="desk-control__majority"><strong>51 seats</strong>for Democrats to control<br>50–50 favors Republicans via the vice president</div>
+   <div class="desk-control__party desk-control__party--r"><span class="desk-control__party-name">Republican control</span><strong class="desk-control__chance" id="controlRepChance">—</strong><span class="desk-control__seat">Mean Republican seats: <b id="controlRepSeats">—</b></span></div>
+  </div>
+  <div class="desk-control__bar" id="controlBar" role="img" aria-label="Illustrative Senate control scenario shares">
+    <span class="desk-control__bar--d" id="controlDemBar" style="width:0%"></span><span class="desk-control__bar--r" id="controlRepBar" style="width:0%"></span><span class="desk-control__bar--u" id="controlUnknownBar" style="width:0%"></span>
+  </div>
+  <div class="desk-control__legend"><span><i class="d"></i> Democratic scenarios</span><span><i class="r"></i> Republican scenarios</span><span><i></i> Unresolved independent-caucus scenarios: <b id="controlUnknownChance">—</b></span></div>
+  <p class="desk-control__evidence" id="controlRange">Seat uncertainty ranges will appear after the model loads.</p>
+  <p class="desk-control__evidence" id="controlStatus" role="status">Loading sourced Senate-control sensitivity analysis…</p>
+</section>
 <div id="officeFocus" class="ed-office-focus" role="status" hidden></div>
+<div class="ed-atlas-switch" role="group" aria-label="National map detail level">
+<span class="ed-kicker">NATIONAL MAP / VIEW</span>
+<button type="button" data-national-atlas-view="states" aria-pressed="true">States</button>
+<button type="button" data-national-atlas-view="counties" aria-pressed="false">Counties</button>
+<span class="ed-mini">Choose a view, then select its election office.</span>
+</div>
 <div id="nationMap" class="national-map-stack">
 <section class="ed-card"><div class="ed-kicker">2026 ELECTION ATLAS / CLICK A STATE TO EXPLORE</div><h2 style="margin:7px 0 13px">The 50-state election map</h2><div class="atlas-office main-map-office" role="group" aria-label="Choose the election to show on the state map"><button type="button" data-map-office="senate" aria-pressed="true">Senate</button><button type="button" data-map-office="governor" aria-pressed="false">Governor</button><button type="button" data-map-office="house" aria-pressed="false">House</button></div><div class="atlas-office national-map-views" role="group" aria-label="National map forecast or reported results"><button type="button" data-state-map-view="forecast" aria-pressed="true">Forecast</button><button type="button" data-state-map-view="reported" aria-pressed="false">Reported votes</button><button type="button" data-state-map-view="compare" aria-pressed="false">Compare</button></div>
 <div class="ed-map-surface"><div id="stateMapTooltip" class="ed-map-tooltip" role="tooltip" hidden></div><svg id="usMap" viewBox="0 0 1080 625" role="group" aria-label="Interactive national election map with fifty selectable states"><text x="540" y="280" text-anchor="middle">Loading geography…</text></svg></div>
 <div id="mobileTileMap" class="ed-mobile-tilemap" aria-label="50-state tile map for smaller screens"></div><div class="ed-legend"><span class="ed-pill">A state is a whole election edition</span><span class="ed-mini" id="aggregateLegend">Muted color = balance of provisional party leads. Hover or focus for D–R margins and D/R/T counts; not a winner probability.</span></div>
 </section>
 </div>
-<section id="allCountyNation" class="atlas-shell nationwide-counties" aria-labelledby="allCountyHeading">
+<section id="allCountyNation" class="atlas-shell nationwide-counties" hidden aria-labelledby="allCountyHeading">
  <div class="atlas-heading"><div><div class="ed-kicker">3,000+ COUNTIES / 2026 CONDITIONAL PROJECTION</div><h2 id="allCountyHeading">America, county by county</h2><p class="ed-mini">The 2026 statewide projections, colored county by county. Use the buttons to switch between Senate and governor races. States without a supported estimate remain gray.</p></div>
  <div class="atlas-office" role="group" aria-label="National county projection office"><button data-national-county-office="Senate" aria-pressed="true" type="button">Senate projections</button><button data-national-county-office="Governor" aria-pressed="false" type="button">Governor</button></div><div class="atlas-office" role="group" aria-label="Nationwide county map view"><button type="button" data-national-county-view="forecast" aria-pressed="true">Forecast</button><button type="button" data-national-county-view="reported" aria-pressed="false">Reported votes</button><button type="button" data-national-county-view="compare" aria-pressed="false">Compare</button></div></div>
  <p id="allCountyStatus" class="atlas-banner" role="status">Preparing county models…</p><p id="allCountySourceAudit" class="atlas-footnote" role="status">Checking the source registry for all 3,143 county equivalents…</p>
@@ -69,5 +101,5 @@
 <div class="ed-link-list"><a href="https://github.com/geervin/ervin-model-2026/blob/main/research/ALL_50_STATE_GEOGRAPHY_AUDIT_2026-11-01.md">All-state geography audit</a><a href="https://github.com/geervin/ervin-model-2026/blob/main/research/EXPANDED_BACKTEST_2018_2024.md">Historical test record</a><a href="../stats-for-nerds/#evidence">Historical model evidence</a></div></div>
 <div class="ed-card"><h2>What is not inferred</h2><p class="ed-mini">The existence of a House district on a map does not certify the applicable 2026 boundary. A county scenario is not independently collected county polling. No nationwide real-time turnout estimate, calibrated House win probability, or unverified race call is silently manufactured.</p></div>
 </section>
-<footer class="ed-footer"><span>ERVIN MODEL · 2026 independent political analysis</span><div class="ed-link-list"><a href="./">The State Desk</a><a href="./?office=house#nationMap">House by state</a><a href="./?office=governor#nationMap">Governors by state</a></div></footer></main>
-<script src="../scripts/final-forecast.js?v=20261102-lock-1"></script><script src="../election-night/power.js?v=20261102-public-links-2"></script><script src="../scripts/us-geography.js"></script><script src="../scripts/governor-backtest.js?v=20261102-no2014-1"></script><script src="../scripts/statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2"></script><script defer src="../election-night/returns-core.js?v=20261102-live"></script><script defer src="../election-night/county-results-core.js?v=20261102-unified-1"></script><script defer src="../scripts/win-odds.js?v=20261102-1"></script><script defer src="../scripts/candidate-portraits.js?v=20261102-1"></script><script defer src="../scripts/county-scenarios.js?v=20261102-1"></script><script defer src="./app.js?v=20261102-contrast-v2"></script><script defer src="../scripts/national-county-2026.js?v=20261102-1"></script><script defer src="../scripts/home-election-2026.js?v=20261102-dashboard-v1"></script><script defer src="../scripts/home-power.js?v=20261102-public-links-2"></script></body></html>
+<footer class="ed-footer"><span>ERVIN MODEL · 2026 independent political analysis</span><div class="ed-link-list"><a href="./">The State Desk</a><a href="../stats-for-nerds/">Methodology and backtests</a><a href="https://github.com/geervin/ervin-model-2026/issues">Corrections / contact</a><a href="./?office=house#nationMap">House by state</a><a href="./?office=governor#nationMap">Governors by state</a></div></footer></main>
+<script src="../scripts/final-forecast.js?v=20261102-lock-1"></script><script src="../election-night/power.js?v=20261102-public-links-2"></script><script src="../scripts/us-geography.js"></script><script src="../scripts/governor-backtest.js?v=20261102-no2014-1"></script><script src="../scripts/statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2"></script><script defer src="../election-night/returns-core.js?v=20261102-live"></script><script defer src="../election-night/county-results-core.js?v=20261102-unified-1"></script><script defer src="../scripts/win-odds.js?v=20261102-1"></script><script defer src="../scripts/candidate-portraits.js?v=20261102-1"></script><script defer src="../scripts/county-scenarios.js?v=20261102-1"></script><script defer src="./app.js?v=20261102-contrast-v2"></script><script defer src="../scripts/national-county-2026.js?v=20261102-1"></script><script defer src="../scripts/home-election-2026.js?v=20261102-dashboard-v1"></script><script defer src="../scripts/senate_control.js?v=20261102-control-1"></script><script defer src="../scripts/home-control.js?v=20261102-control-2"></script><script defer src="../scripts/home-power.js?v=20261102-public-links-2"></script></body></html>

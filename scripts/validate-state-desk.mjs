@@ -14,6 +14,21 @@ for(const [html,js,name] of [[indexHTML,indexJS,'national state directory'],[sta
  for(const m of js.matchAll(/\$\(['"]([^'"]+)['"]\)/g))assert(ids.has(m[1]),name+': missing UI id '+m[1]);
 }
 assert(indexHTML.includes('id="usMap"')&&indexHTML.includes('./app.js'), 'National map is not installed');
+/* Audit follow-up: interactive features must be wired end-to-end before publication. */
+const homeJS=read('scripts/home-election-2026.js'),countyJS=read('scripts/national-county-2026.js');
+new vm.Script(homeJS,{filename:'scripts/home-election-2026.js'});
+new vm.Script(countyJS,{filename:'scripts/national-county-2026.js'});
+assert(indexHTML.includes('id="houseWatchList"')&&homeJS.includes('drawHouseWatch()'),'The closest modeled House districts must render on the homepage');
+assert(indexHTML.includes('id="senate-control"')&&indexHTML.includes('id="controlUncertainty"')&&indexHTML.includes('scripts/home-control.js')&&indexHTML.includes('scripts/senate_control.js'),'The national control simulator must be visible alongside the House/Senate/governor seat bars');
+assert(indexHTML.includes('id="recentStateLink"')&&indexJS.includes('ervin-last-state')&&stateJS.includes('ervin-last-state'),'The recent state shortcut is not connected');
+assert(indexHTML.includes('data-national-atlas-view="states"')&&indexHTML.includes('data-national-atlas-view="counties"'),'Missing nationwide States / Counties map selector');
+assert(indexJS.includes('function setAtlasView(mode)')&&homeJS.includes('The States / Counties selector owns map visibility'),'The national view selector may be overridden on election night');
+assert(countyJS.includes('IntersectionObserver')&&countyJS.includes('maybeStart()'),'National county geography must load only when close to the viewport');
+assert(!countyJS.includes('tabindex="0"'),'County polygons must not each add a tab stop');
+assert(indexJS.includes("officeTotals(r,'senate')")&&indexJS.includes("officeTotals(r,'governor')")&&indexJS.includes("officeTotals(r,'house')"),'State directory must not aggregate incompatible offices');
+assert(read('state/source-ledger.js').includes('a.id.localeCompare(b.id)'),'Source-ledger House district sort crash regressed');
+assert(read('election-night/power.js').includes('projection.senate.D'),'Balance explanatory note must reflect current Senate estimates');
+
 assert(stateHTML.includes('id="countyMap"')&&stateHTML.includes('id="districtMap"'),'State requires both clickable maps');
 for(const p of ['states/editorial.css','state/app.js','states/app.js','scripts/us-geography.js','scripts/geo-engine.js','scripts/county-scenarios.js'])assert(fs.existsSync(p),'Missing State Desk dependency '+p);
 const geoContext={window:{}};new vm.Script(read('scripts/us-geography.js')).runInNewContext(geoContext);

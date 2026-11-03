@@ -63,13 +63,24 @@ function watchInit(){
   rotateTimer=setInterval(()=>{if(!document.hidden&&!hover&&!focus&&!paused&&!live&&watched.length>4&&cycles<Math.ceil(watched.length/4)){advance(4);cycles++}},7000);
  }
 }
+function drawHouseWatch(){
+ const list=$('houseWatchList'),label=$('houseWatchCount');if(!list)return;
+ const nearest=model.house.filter(r=>isValid(r.margin)).sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin)).slice(0,12);
+ const tossups=model.house.filter(r=>isValid(r.margin)&&Math.abs(r.margin)<=1.5).length;
+ if(label)label.textContent=tossups+' toss-up districts within ±1.5 points';
+ list.innerHTML=nearest.length?nearest.map(r=>{
+  const to='../state/?state='+encodeURIComponent(r.code)+'#stateHouse';
+  const rating=Math.abs(r.margin)<=1.5?'Toss-up':r.rating||'Competitive';
+  return '<a class="ed-house-watch-row" href="'+to+'"><strong>'+esc(r.id)+'</strong><span>'+esc(r.state)+'</span><b class="'+party(r.margin)+'">'+esc(margin(r.margin))+'</b><small>'+esc(rating)+'</small></a>';
+ }).join(''):'<p class="ed-mini">The House model is temporarily unavailable; browse districts by state.</p>';
+}
 async function loadModel(){
  const [sen,gov,house,history]=await Promise.all([read('counties-watch/forecast-baselines.json'),read('governors/data.json'),read('house/ervin-forecast-2026-11-02.json'),read('research/governor-same-office-2014-2024.json')]);
  const applied=window.ERVIN_STATEWIDE.apply(history,gov,sen);
  model.senate=applied.senate.map(x=>({id:x.code+'-SENATE',code:x.code,state:x.state||stateName[x.code],office:'Senate',margin:x.model.adjustedMargin,dem:x.nonR,rep:x.rep,kind:'model',odds:window.ERVIN_ODDS?.estimate(x.model.adjustedMargin,'Senate')}));
  model.governor=applied.governor.map(x=>{const adjusted=isValid(x.model.adjustedMargin),m=adjusted?x.model.adjustedMargin:x.model.pollMargin;return{id:x.code+'-GOVERNOR',code:x.code,state:x.state||stateName[x.code],office:'Governor',margin:m,dem:x.dem,rep:x.rep,kind:adjusted?'model':'poll',odds:window.ERVIN_ODDS?.estimate(m,'Governor',{cycles:x.model?.calibrationCycles||0})}});
- model.house=Object.values(house.races||{}).map(x=>({id:x.id,code:x.state,state:stateName[x.state]||x.state,office:'House',margin:x.marginD,kind:'model'}));
- modelBalance=window.ERVIN_POWER?.compute?.(house,applied.senate,applied.governor)||null;watched=races();window.ERVIN_HOME_FORECAST=model;window.dispatchEvent(new CustomEvent('ervin:forecast-ready',{detail:{asOf:sen.asOf||gov.asOf}}));drawWatch();updatePhase();
+ model.house=Object.values(house.races||{}).map(x=>({id:x.id,code:x.state,state:stateName[x.state]||x.state,office:'House',margin:x.marginD,kind:'model',rating:x.modelRating}));
+ modelBalance=window.ERVIN_POWER?.compute?.(house,applied.senate,applied.governor)||null;watched=races();window.ERVIN_HOME_FORECAST=model;window.dispatchEvent(new CustomEvent('ervin:forecast-ready',{detail:{asOf:sen.asOf||gov.asOf}}));drawWatch();drawHouseWatch();updatePhase();
 }
 function byState(code,off){return model[off.toLowerCase()].filter(r=>r.code===code)}
 function raceFor(code,off){return byState(code,off)[0]||null}
@@ -151,6 +162,16 @@ function paintCounties(){
  }
 }
 function chooseState(code){selected=code;drill()}
+function finalForecastHeadline(){
+ const b=modelBalance;if(!b)return 'Final Ervin forecast · 2026';
+ const h=b.house.D>=218?'Democrats favored to flip the House':b.house.R>=218?'Republicans favored to keep the House':'House control depends on the competitive districts';
+ const senate=b.senate;
+ const toss=model.senate.filter(r=>isValid(r.margin)&&Math.abs(r.margin)<1.5).map(r=>r.state||stateName[r.code]||r.code);
+ const names=toss.length===1?toss[0]:toss.length===2?toss.join(' and '):toss.length>2?toss.slice(0,-1).join(', ')+' and '+toss.at(-1):'the remaining toss-ups';
+ const d=senate.D+(senate.I||0);
+ const s=d>=51?'Democrats favored to win the Senate':senate.R>=50?'Republicans favored to keep the Senate':'Senate control comes down to '+names;
+ return h+'; '+s;
+}
 function updatePhase(){
  if(!model.senate.length)return;
  const now=Date.now(),preview=new URLSearchParams(location.search).get('preview');
@@ -165,10 +186,10 @@ function updatePhase(){
  $('dashboardTitle').textContent=showResults?'Election night · reported votes':'Final predictions · 2026';
  $('dashboardIntro').textContent=showResults?'Unofficial reported votes are labeled separately from the locked forecast. Counties without attributable vote reports remain neutral.':'The Ervin forecast is a pre-election estimate.';
  $('reportingBanner').textContent=showResults?('LIVE · UNOFFICIAL RETURNS · '+n+' contests with verified reported totals'+(latestFeedAt?' · feed as of '+new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'}):'')):'';
- for(const id of ['nationMap','watchSection','balanceOfPower','stateDirectory','editorialNotes','allCountyNation'])if($(id))$(id).hidden=false;
+ for(const id of ['watchSection','balanceOfPower','stateDirectory','editorialNotes'])if($(id))$(id).hidden=false; // The States / Counties selector owns map visibility.
  const headline=document.querySelector('.ed-headline'),standfirst=document.querySelector('.ed-standfirst');
  const status=window.document.getElementById('finalPhaseStatus');
- if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished?'The final Ervin forecast for 2026':'Every state. One clear picture.';
+ if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished&&lockedAt?finalForecastHeadline():forecastPublished?'Election Day 2026: final forecast awaiting source lock':'Every state. One clear picture.';
  if(standfirst){
   const forecast=(modelBalance?.house?.D>=218?'Democrats lead in '+modelBalance.house.D+' House districts. ':modelBalance?'House control depends on the remaining competitive districts. ':'');
   standfirst.textContent=showResults?n+' contests have validated unofficial returns. Our pre-election forecast remains below for comparison; there are no projected winners presented as race calls.':forecastPublished?forecast+'Explore the locked Senate and governor estimates, county scenarios and the competitive House districts in the interactive map.':'Explore Senate and governor polling, House districts, county scenarios and attributed results in one state edition.';
