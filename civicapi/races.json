@@ -1,6 +1,36 @@
 {
   "election": "2026-11-03",
   "races": {
+    "IN-02": {
+      "asOf": "2026-11-03T23:54:30.546000Z",
+      "candidates": [
+        {
+          "name": "Rudy Yakym",
+          "party": "R",
+          "votes": 2523
+        },
+        {
+          "name": "Jamee Decio",
+          "party": "D",
+          "votes": 1866
+        },
+        {
+          "name": "William Henry",
+          "party": "O",
+          "votes": 74
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 2.2,
+      "raceId": "87136",
+      "retrievedAt": "2026-11-03T23:54:02.831553Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87136",
+      "timestampBasis": "provider_last_updated",
+      "total": 4463,
+      "verified": true
+    },
     "IN-03": {
       "asOf": "2026-11-03T23:48:06.209000Z",
       "candidates": [
@@ -147,22 +177,22 @@
       "verified": true
     },
     "KY-04": {
-      "asOf": "2026-11-03T23:47:50.956000Z",
+      "asOf": "2026-11-03T23:54:22.114000Z",
       "candidates": [
         {
           "name": "Ed Gallrein",
           "party": "R",
-          "votes": 1069
+          "votes": 4073
         },
         {
           "name": "Melissa Strange",
           "party": "D",
-          "votes": 797
+          "votes": 2322
         },
         {
           "name": "Jeremy Todd",
           "party": "O",
-          "votes": 52
+          "votes": 218
         },
         {
           "name": "Write-in",
@@ -172,37 +202,37 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 0.7,
+      "precinctsReporting": 2.4,
       "raceId": "87171",
-      "retrievedAt": "2026-11-03T23:47:54.369071Z",
+      "retrievedAt": "2026-11-03T23:54:02.831553Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87171",
       "timestampBasis": "provider_last_updated",
-      "total": 1918,
+      "total": 6613,
       "verified": true
     },
     "KY-05": {
-      "asOf": "2026-11-03T23:48:18.829000Z",
+      "asOf": "2026-11-03T23:54:22.238000Z",
       "candidates": [
         {
           "name": "Hal Rogers",
           "party": "R",
-          "votes": 9700
+          "votes": 14582
         },
         {
           "name": "Ned Pillersdorf",
           "party": "D",
-          "votes": 4514
+          "votes": 6131
         },
         {
           "name": "Mikel Wein",
           "party": "O",
-          "votes": 355
+          "votes": 496
         },
         {
           "name": "Gerardo Serrano",
           "party": "O",
-          "votes": 155
+          "votes": 266
         },
         {
           "name": "Write-in",
@@ -212,13 +242,13 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 5.5,
+      "precinctsReporting": 8.0,
       "raceId": "87172",
-      "retrievedAt": "2026-11-03T23:47:54.369071Z",
+      "retrievedAt": "2026-11-03T23:54:02.831553Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87172",
       "timestampBasis": "provider_last_updated",
-      "total": 14728,
+      "total": 21479,
       "verified": true
     },
     "KY-06": {
@@ -262,22 +292,22 @@
       "verified": true
     },
     "KY-SENATE": {
-      "asOf": "2026-11-03T23:47:51.398000Z",
+      "asOf": "2026-11-03T23:54:22.662000Z",
       "candidates": [
         {
           "name": "Andy Barr",
           "party": "R",
-          "votes": 22909
+          "votes": 33754
         },
         {
           "name": "Charles Booker",
           "party": "D",
-          "votes": 15615
+          "votes": 20484
         },
         {
           "name": "Christopher Campbell",
           "party": "O",
-          "votes": 674
+          "votes": 1017
         },
         {
           "name": "Write-in",
@@ -287,13 +317,13 @@
       ],
       "election": "2026-11-03",
       "office": "senate",
-      "precinctsReporting": 2.4,
+      "precinctsReporting": 3.3,
       "raceId": "87174",
-      "retrievedAt": "2026-11-03T23:47:54.369071Z",
+      "retrievedAt": "2026-11-03T23:54:02.831553Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87174",
       "timestampBasis": "provider_last_updated",
-      "total": 39201,
+      "total": 55258,
       "verified": true
     }
   },

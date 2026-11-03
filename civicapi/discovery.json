@@ -1,10 +1,10 @@
 {
-  "checkedAt": "2026-11-03T23:47:54.369071Z",
+  "checkedAt": "2026-11-03T23:54:02.831553Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
     "statusSample": {
-      "VT-01": "source_TimeoutError",
+      "VT-01": "source_HTTPError",
       "WY-SENATE": "source_TimeoutError"
     },
     "unmapped": 2
@@ -12,12 +12,13 @@
   "election": "2026-11-03",
   "eligibleRaces": 12,
   "errors": {
-    "IN-02": "no_valid_reported_votes",
+    "IN-03": "fetch_TimeoutError",
+    "IN-06": "fetch_TimeoutError",
     "IN-07": "no_valid_reported_votes",
     "KY-03": "no_valid_reported_votes"
   },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
-  "fetched": 12,
+  "fetched": 10,
   "polling": {
     "note": "No verified CivicAPI polling endpoint; election results never become a pre-election poll.",
     "state": "not_integrated"
@@ -52,8 +53,8 @@
       "identityMatches": true,
       "payloadType": "dict",
       "positiveCandidateTotals": true,
-      "providerTimestamp": "2026-11-03T23:47:51.213Z",
-      "responseMs": 48
+      "providerTimestamp": "2026-11-03T23:53:53.700Z",
+      "responseMs": 766
     },
     "MI-SENATE": {
       "candidateRows": 11,
@@ -84,7 +85,7 @@
       "payloadType": "dict",
       "positiveCandidateTotals": false,
       "providerTimestamp": "2026-11-03T03:44:10.357Z",
-      "responseMs": 1765
+      "responseMs": 12781
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -93,13 +94,13 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 1525
+      "responseMs": 5410
     }
   },
-  "publishedRaces": 9,
+  "publishedRaces": 10,
   "registeredRaces": 504,
   "targetRaces": 506,
-  "transientApiErrors": 0,
-  "updatedRaces": 7,
+  "transientApiErrors": 2,
+  "updatedRaces": 4,
   "version": 2
 }
