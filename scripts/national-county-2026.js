@@ -69,7 +69,7 @@ function render(){
   for(const feature of features){
    const key=String(feature.id||'').padStart(5,'0');
    const est=values?.get(key)?.expected??null;
-   const d=pathFor(feature.geometry,code);if(!d)continue;
+   const d=feature._ervinPath||(feature._ervinPath=pathFor(feature.geometry,code));if(!d)continue;
    
    const p=NS('path');p.setAttribute('class','all-county '+color(est));p.setAttribute('d',d);
    p.setAttribute('data-county-id',key);
@@ -90,7 +90,7 @@ function render(){
 }
 async function start(){
  if(started)return;started=true;
- const el=$('allCountyStatus');el.textContent='Loading 50 states of locally sourced county geography…';
+ const el=$('allCountyStatus');el.textContent='Loading the nationwide 2026 Senate and governor county projection…';
  try{
   const results=await Promise.all([...FILES.map(p=>fetch(p,{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('Map package '+p+' '+r.status);return r.json()})),
     window.ERVIN_SCENARIOS.load()]);
@@ -102,21 +102,14 @@ async function start(){
   loaded=true;render();
  }catch(e){console.error(e);el.textContent='County geography could not be loaded; the 50-state map above and state editions remain available.'}
 }
-function observeMap(){
- const root=$('allCountyNation');if(!root||started||!models)return;
- if(!('IntersectionObserver'in window)){start();return}
- const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){io.disconnect();start()}},{rootMargin:'350px 0px'});
- io.observe(root);
-}
 function initialize(){
  const section=$('allCountyNation');if(!section)return;
  document.querySelectorAll('[data-national-county-office]').forEach(b=>b.addEventListener('click',()=>{office=b.dataset.nationalCountyOffice;render()}));
  models=window.ERVIN_HOME_FORECAST||null;
- window.addEventListener('ervin:forecast-ready',()=>{models=window.ERVIN_HOME_FORECAST;if(loaded)render();else observeMap()});
- if(models)observeMap();
+ window.addEventListener('ervin:forecast-ready',()=>{models=window.ERVIN_HOME_FORECAST;if(loaded)render();else start()});
+ if(models)start();
  else {
-  const handle=()=>{if(!models){el.textContent='Waiting for current Senate and governor forecasts…'}};
-  const el=$('allCountyStatus');handle();
+  const el=$('allCountyStatus');if(el)el.textContent='Preparing national county map from the current state forecasts…';
  }
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize);else initialize();
