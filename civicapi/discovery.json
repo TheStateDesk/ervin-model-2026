@@ -1,12 +1,30 @@
 {
-  "checkedAt": "2026-11-03T16:29:59.841806Z",
+  "checkedAt": "2026-11-03T20:53:55.342341Z",
   "discovery": {
-    "found": 487,
-    "lookups": 1,
+    "found": 498,
+    "lookups": 19,
     "statusSample": {
-      "VT-01": "source_HTTPError"
+      "AL-SENATE": "mapped",
+      "AR-SENATE": "mapped",
+      "CO-SENATE": "mapped",
+      "DE-SENATE": "mapped",
+      "ID-SENATE": "mapped",
+      "IL-SENATE": "mapped",
+      "KY-SENATE": "source_HTTPError",
+      "LA-SENATE": "source_HTTPError",
+      "MA-SENATE": "source_HTTPError",
+      "NJ-SENATE": "source_HTTPError",
+      "NM-SENATE": "source_HTTPError",
+      "OK-SENATE": "source_HTTPError",
+      "OR-SENATE": "mapped",
+      "RI-SENATE": "mapped",
+      "TN-SENATE": "mapped",
+      "VA-SENATE": "mapped",
+      "VT-01": "unavailable: ",
+      "WV-SENATE": "mapped",
+      "WY-SENATE": "source_HTTPError"
     },
-    "unmapped": 1
+    "unmapped": 8
   },
   "election": "2026-11-03",
   "eligibleRaces": 0,
@@ -19,8 +37,8 @@
   },
   "provider": "civicAPI v2",
   "publishedRaces": 0,
-  "registeredRaces": 487,
-  "targetRaces": 488,
+  "registeredRaces": 498,
+  "targetRaces": 506,
   "updatedRaces": 0,
   "version": 2
 }

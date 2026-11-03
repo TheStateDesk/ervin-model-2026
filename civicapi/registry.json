@@ -185,6 +185,22 @@
         "type": "Governor"
       }
     },
+    "AL-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Alabama US Senate",
+      "office": "senate",
+      "raceId": "86907",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Alabama US Senate",
+        "election_type": "General",
+        "id": 86907,
+        "province": "AL",
+        "type": "US Senate"
+      }
+    },
     "AR-01": {
       "election": "2026-11-03",
       "identifiedAt": "2026-11-02T19:56:40.448850Z",
@@ -267,6 +283,22 @@
         "id": 86938,
         "province": "AR",
         "type": "Governor"
+      }
+    },
+    "AR-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Arkansas US Senate",
+      "office": "senate",
+      "raceId": "86949",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Arkansas US Senate",
+        "election_type": "General",
+        "id": 86949,
+        "province": "AR",
+        "type": "US Senate"
       }
     },
     "AZ-01": {
@@ -1491,6 +1523,22 @@
         "type": "Governor"
       }
     },
+    "CO-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Colorado US Senate",
+      "office": "senate",
+      "raceId": "87022",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Colorado US Senate",
+        "election_type": "General",
+        "id": 87022,
+        "province": "CO",
+        "type": "US Senate"
+      }
+    },
     "CT-01": {
       "election": "2026-11-03",
       "identifiedAt": "2026-11-02T19:56:40.448850Z",
@@ -1607,6 +1655,22 @@
         "id": 87035,
         "province": "DE",
         "type": "House of Representatives"
+      }
+    },
+    "DE-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Delaware US Senate",
+      "office": "senate",
+      "raceId": "87036",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Delaware US Senate",
+        "election_type": "General",
+        "id": 87036,
+        "province": "DE",
+        "type": "US Senate"
       }
     },
     "FL-01": {
@@ -2587,6 +2651,22 @@
         "type": "Governor"
       }
     },
+    "ID-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Idaho US Senate",
+      "office": "senate",
+      "raceId": "87103",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Idaho US Senate",
+        "election_type": "General",
+        "id": 87103,
+        "province": "ID",
+        "type": "US Senate"
+      }
+    },
     "IL-01": {
       "election": "2026-11-03",
       "identifiedAt": "2026-11-02T19:56:40.448850Z",
@@ -2890,6 +2970,22 @@
         "id": 87130,
         "province": "IL",
         "type": "Governor"
+      }
+    },
+    "IL-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Illinois US Senate",
+      "office": "senate",
+      "raceId": "87129",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Illinois US Senate",
+        "election_type": "General",
+        "id": 87129,
+        "province": "IL",
+        "type": "US Senate"
       }
     },
     "IN-01": {
@@ -6166,6 +6262,22 @@
         "type": "Governor"
       }
     },
+    "OR-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Oregon US Senate",
+      "office": "senate",
+      "raceId": "87374",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Oregon US Senate",
+        "election_type": "General",
+        "id": 87374,
+        "province": "OR",
+        "type": "US Senate"
+      }
+    },
     "PA-01": {
       "election": "2026-11-03",
       "identifiedAt": "2026-11-02T19:56:40.448850Z",
@@ -6519,6 +6631,22 @@
         "id": 87397,
         "province": "RI",
         "type": "Governor"
+      }
+    },
+    "RI-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Rhode Island US Senate",
+      "office": "senate",
+      "raceId": "87396",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Rhode Island US Senate",
+        "election_type": "General",
+        "id": 87396,
+        "province": "RI",
+        "type": "US Senate"
       }
     },
     "SC-01": {
@@ -6888,6 +7016,22 @@
         "id": 87476,
         "province": "TN",
         "type": "Governor"
+      }
+    },
+    "TN-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Tennessee US Senate",
+      "office": "senate",
+      "raceId": "87475",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Tennessee US Senate",
+        "election_type": "General",
+        "id": 87475,
+        "province": "TN",
+        "type": "US Senate"
       }
     },
     "TX-01": {
@@ -7823,6 +7967,22 @@
         "type": "House of Representatives"
       }
     },
+    "VA-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "Virginia US Senate",
+      "office": "senate",
+      "raceId": "87472",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Virginia US Senate",
+        "election_type": "General",
+        "id": 87472,
+        "province": "VA",
+        "type": "US Senate"
+      }
+    },
     "VT-GOVERNOR": {
       "election": "2026-11-03",
       "identifiedAt": "2026-11-02T19:56:40.448850Z",
@@ -8193,6 +8353,22 @@
         "id": 87474,
         "province": "WV",
         "type": "House of Representatives"
+      }
+    },
+    "WV-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-03T20:53:55.342341Z",
+      "name": "West Virginia US Senate",
+      "office": "senate",
+      "raceId": "87477",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "West Virginia US Senate",
+        "election_type": "General",
+        "id": 87477,
+        "province": "WV",
+        "type": "US Senate"
       }
     },
     "WY-01": {
