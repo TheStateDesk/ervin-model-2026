@@ -85,14 +85,34 @@ try{
   assert(Math.abs(controlSum-100)<=2,'Control simulation should allocate nearly 100% of illustrative outcomes');
   assert((await homepage.locator('#stateDirectory').count())===1,'State directory must remain');
   assert((await homepage.locator('#electionDashboard').count())===1,'Scheduled national election dashboard is missing');
+  // The frozen 144,000-run distribution must be the first editorial panel below the byline.
+  await homepage.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-state]').length===50&&document.querySelector('#edSimSummary')?.textContent.includes('249'),null,{timeout:35000});
+  const headingBottom=await homepage.locator('.ed-byline').evaluate(el=>el.getBoundingClientRect().bottom);
+  const simTop=await homepage.locator('#edSimulationPanel').evaluate(el=>el.getBoundingClientRect().top);
+  const deckTop=await homepage.locator('.ed-standfirst').evaluate(el=>el.getBoundingClientRect().top);
+  assert(simTop>=headingBottom-2&&simTop<deckTop,'Simulation and maps must appear immediately beneath the page title and byline');
+  for(const [office,label,covered] of [['house','House',50],['senateD','Senate',17],['governorsD','Governors',36]]){
+   await homepage.locator('#edSimTabs button').filter({hasText:label}).click();
+   await homepage.waitForFunction(o=>document.querySelector('#edSimMap')?.dataset.simOffice===o&&document.querySelectorAll('#edSimMap a[data-sim-state]').length===50,office,{timeout:12000});
+   const mapCount=await homepage.locator('#edSimMap path.ed-sim-proj-state').count();
+   const projected=await homepage.locator('#edSimMap path.ed-sim-proj-state:not(.ed-sim-proj-N)').count();
+   assert(mapCount===50&&projected===covered,office+' must show 50 real states and '+covered+' state models, not live results');
+   assert((await homepage.locator('#edSimMap a[data-sim-state="MI"]').getAttribute('href')).includes('/state/?state=MI'),office+' map must open the consolidated state edition');
+   await homepage.locator('#edSimMap a[data-sim-state="MI"]').focus();
+   assert((await homepage.locator('#edSimMapReadout').innerText()).includes('Michigan'),office+' state hover/focus details missing');
+   await homepage.locator('#edSimulationPanel').screenshot({path:'visual-checks/Forecast-144000-'+label+'-Map-And-Histogram.png'});
+  }
+  await homepage.locator('#edSimTabs button').filter({hasText:'House'}).click();
+  assert((await homepage.locator('#edSimMapNote').innerText()).includes('435 individual district forecasts'),'House map needs clear district-level plurality disclosure');
   const [cpos,bpos,mpos]=await Promise.all(['#watchSection','#balanceOfPower','#nationMap'].map(async id=>(await homepage.locator(id).boundingBox()).y));
   const liveStage=await homepage.locator('#edResultsStage').isVisible();
+  assert(simTop<cpos,'Headline projection must remain ahead of races-to-watch in every election phase');
   if(liveStage){
    assert(mpos<cpos&&cpos<bpos,'Election night must place the reported national map ahead of forecasts');
    assert((await homepage.locator('#edCommentaryTitle').innerText())==='Live commentary','Visible verified-count commentary rail missing from active desk');
   }else{
    assert(cpos<bpos&&bpos<mpos,'Before election night, closest races and office forecasts must precede national map');
-   assert(cpos<780,'Before election night, races-to-watch carousel must appear early on desktop');
+   assert(simTop<cpos,'The headline forecast and three projection maps must precede races-to-watch on desktop');
   }
   const cardBefore=await homepage.locator('#watchCards .watch-card__name').first().innerText();
   await homepage.locator('#watchNext').click();
@@ -335,6 +355,7 @@ try{
  const deskErrors=[];electionDesk.on('pageerror',e=>deskErrors.push(e.message));
  await electionDesk.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
  await electionDesk.waitForFunction(()=>document.querySelector('#edResultsStage')?.hidden===false&&document.querySelector('#edNightMapSlot #nationMap')&&document.querySelector('#edSimSummary')?.textContent.includes('House')&&document.querySelector('[data-state-map-view="reported"]')?.getAttribute('aria-pressed')==='true',null,{timeout:32000});
+ assert((await electionDesk.locator('#edSimMap path.ed-sim-proj-state').count())===50,'Frozen projection map must coexist with live-results atlas');
  assert((await electionDesk.locator('#edCommentaryEntries').innerText()).includes('5:55 p.m.'),'Election-night desk fails to introduce the scheduled handoff');
  assert((await electionDesk.locator('#controlStatus').innerText()).includes('144,000'),'Public Senate control card must reference the final ensemble');
  assert((await electionDesk.locator('#edCommentaryEntries .ed-commentary-item').count())===1,'Site invented an unofficial early vote commentary');
