@@ -40,31 +40,35 @@ function drawMap(){
 }
 function show(code,event){
  const r=byState[code],tooltip=$('stateMapTooltip');if(!r||!tooltip)return;
- const displayed=r.races.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+esc(MARGIN(x.margin))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
+ const statewides=r.races.filter(x=>!x.label.includes(' · House '));
+ const houses=r.races.filter(x=>x.label.includes(' · House ')).sort((a,b)=>Math.abs(a.margin??999)-Math.abs(b.margin??999));
+ const houseCounts={D:0,R:0,T:0};for(const x of houses){const k=rank(x.margin);if(k)houseCounts[k]++}
+ const featured=[...statewides,...(houses.length?[{label:'House: '+houseCounts.D+' D · '+houseCounts.R+' R · '+houseCounts.T+' toss-ups',margin:null,type:'summary'},...houses.slice(0,3)]:[])];
+ const displayed=featured.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+(x.type==='summary'?'':esc(MARGIN(x.margin)))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
  tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+r.D+'D–'+r.R+'R–'+r.T+'T</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div><small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
  tooltip.hidden=false;locate(event);
 }
 function locate(event){
  const surface=document.querySelector('.ed-map-surface'),tooltip=$('stateMapTooltip');if(tooltip.hidden)return;
- if(!event){tooltip.style.left='10px';tooltip.style.top='10px';return}
+ if(!event){const focus=document.activeElement?.querySelector?.('path.ed-state');const p=focus?.getBoundingClientRect(),b=surface.getBoundingClientRect();tooltip.style.left=Math.max(4,Math.min(p?p.left-b.left:10,b.width-tooltip.offsetWidth-7))+'px';tooltip.style.top=Math.max(4,Math.min(p?p.bottom-b.top+8:10,b.height-tooltip.offsetHeight-7))+'px';return}
  const box=surface.getBoundingClientRect(),x=event.clientX-box.left+15,y=event.clientY-box.top+15;
  tooltip.style.left=Math.min(Math.max(x,4),Math.max(4,box.width-tooltip.offsetWidth-7))+'px';
  tooltip.style.top=Math.min(Math.max(y,4),Math.max(4,box.height-tooltip.offsetHeight-7))+'px';
 }
 function hide(){const tooltip=$('stateMapTooltip');if(tooltip)tooltip.hidden=true}
 function directory(){
- $('stateRegions').innerHTML=Object.entries(REGION).map(([reg,values])=>{const set=new Set(values.split(' ')),arr=states.filter(s=>set.has(s.code));return '<div style="margin:18px 0 23px"><div class="ed-band" style="border-bottom:1px solid #bcc8cc;padding-bottom:7px;margin:0 0 11px"><h2 style="font:700 24px Georgia,serif;margin:0">'+esc(reg)+'</h2><span class="ed-mini">'+arr.length+' states</span></div><div class="ed-scrollrow" style="flex-wrap:wrap;overflow:visible">'+arr.map(s=>{const r=byState[s.code];return '<a class="ed-state-chip" href="'+href(s.code)+'" data-search-name="'+esc(s.name.toLowerCase())+'">'+esc(s.name)+(r?' <small>'+r.D+'D-'+r.R+'R-'+r.T+'T</small>':'')+'</a>'}).join('')+'</div></div>'}).join('');
+ $('stateRegions').innerHTML=Object.entries(REGION).map(([reg,values])=>{const set=new Set(values.split(' ')),arr=states.filter(s=>set.has(s.code));return '<div style="margin:18px 0 23px"><div class="ed-band" style="border-bottom:1px solid #bcc8cc;padding-bottom:7px;margin:0 0 11px"><h2 style="font:700 24px Georgia,serif;margin:0">'+esc(reg)+'</h2><span class="ed-mini">'+arr.length+' states</span></div><div class="ed-scrollrow" style="flex-wrap:wrap;overflow:visible">'+arr.map(s=>{const r=byState[s.code];return '<a class="ed-state-chip" href="'+href(s.code)+'" data-search-name="'+esc(s.name.toLowerCase())+'" data-state-code="'+s.code+'" data-state-code="'+s.code+'">'+esc(s.name)+(r?' <small>'+r.D+'D-'+r.R+'R-'+r.T+'T</small>':'')+'</a>'}).join('')+'</div></div>'}).join('');
  $('directoryCount').textContent=states.length+' state editions · modeled race aggregation';
 }
 function search(){
- const q=$('stateSearch').value.trim().toLowerCase(),matches=states.filter(s=>s.name.toLowerCase().includes(q)||s.code.toLowerCase()===q);
- for(const el of document.querySelectorAll('.ed-state-chip[data-search-name]'))el.hidden=!!q&&!el.dataset.searchName.includes(q)&&!el.textContent.toLowerCase().startsWith(q);
+ const status=$('stateSearchStatus');if(status)status.textContent='';const q=$('stateSearch').value.trim().toLowerCase(),matches=states.filter(s=>s.name.toLowerCase().includes(q)||s.code.toLowerCase()===q);
+ for(const el of document.querySelectorAll('.ed-state-chip[data-search-name]'))el.hidden=!!q&&!el.dataset.searchName.includes(q)&&el.dataset.stateCode.toLowerCase()!==q;
  for(const p of document.querySelectorAll('path[data-state]')){
   const match=matches.some(s=>s.code===p.dataset.state);
   p.style.opacity=q&&!match?'.16':'1';
   p.style.filter=q&&match?'brightness(.87)':'';
  }
- $('directoryCount').textContent=q?matches.length+' states matching "'+q+'"':states.length+' state editions';
+ $('directoryCount').textContent=q?matches.length+(matches.length===1?' state':' states')+' matching "'+q+'"':states.length+' state editions';
 }
 async function populate(){
  const read=async url=>{const res=await fetch(url,{cache:'no-cache'});if(!res.ok)throw Error('Data '+url+' '+res.status);return res.json()};
@@ -82,10 +86,10 @@ async function populate(){
  for(const g of G.governor){
   if(byState[g.code])byState[g.code].races.push({label:'Governor · '+(Number.isFinite(g.model.adjustedMargin)?'Ervin’s Take':'publisher poll · no verified governor history'),margin:Number.isFinite(g.model.adjustedMargin)?g.model.adjustedMargin:g.model.pollMargin,type:Number.isFinite(g.model.adjustedMargin)?'model':'poll'});
  }
- for(const r of Object.values(byState)){for(const x of r.races){const side=rank(x.margin);if(side)r[side]++}r.races.sort((a,b)=>a.label.localeCompare(b.label))}
+ for(const r of Object.values(byState)){for(const x of r.races){const side=rank(x.margin);if(side)r[side]++}r.races.sort((a,b)=>(a.label.startsWith('U.S. Senate')?0:a.label.startsWith('Governor')?1:2)-(b.label.startsWith('U.S. Senate')?0:b.label.startsWith('Governor')?1:2)||a.label.localeCompare(b.label))}
  const has=[...Object.values(byState)].filter(r=>r.D+r.R+r.T>0).length;
  $('aggregateLegend').textContent=has+' states with aggregate ratings · D/R/T counts include all modeled House districts and available statewide margins';
- drawMap();directory();search();
+ drawMap();directory();search();for(const code of ['MI','TX','PA','GA','AZ','ME']){const el=document.querySelector('[data-quick-offices="'+code+'"]');if(el)el.textContent=[byState[code]?.races.some(x=>x.label.startsWith('U.S. Senate'))?'Senate':null,byState[code]?.races.some(x=>x.label.startsWith('Governor'))?'Governor':null,'House','Counties'].filter(Boolean).join(' · ');}
  }catch(e){console.error(e);$('aggregateLegend').textContent='Forecast aggregate unavailable; state links still work.'}
 }
 function init(){
@@ -102,9 +106,9 @@ function init(){
  $('quickSelect').innerHTML='<option value="">Choose a state…</option>'+states.map(s=>'<option value="'+s.code+'">'+esc(s.name)+'</option>').join('');
  $('quickSelect').onchange=e=>{if(names[e.target.value])location.href=href(e.target.value)};
  $('stateSearch').addEventListener('input',search);
- $('stateSearch').addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=e.target.value.trim().toLowerCase(),match=states.find(s=>s.name.toLowerCase()===q||s.code.toLowerCase()===q)||states.find(s=>s.name.toLowerCase().startsWith(q));if(match)location.href=href(match.code)});
+ $('stateSearch').addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=e.target.value.trim().toLowerCase(),match=states.find(s=>s.name.toLowerCase()===q||s.code.toLowerCase()===q)||states.find(s=>s.name.toLowerCase().startsWith(q));if(match)location.href=href(match.code);else {const status=$('stateSearchStatus');if(status)status.textContent='No state matches “'+e.target.value.trim()+'”';}});
  $('todayLabel').textContent=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
- $('featuredStates').innerHTML='<div class="ed-kicker" style="margin-top:12px">Quick editions</div>'+['MI','TX','PA','GA','AZ','ME'].map(code=>'<article><a href="'+href(code)+'"><strong>'+esc(names[code]||code)+'</strong></a><small>Senate · Governor · House · Counties · Returns</small></article>').join('');
+ $('featuredStates').innerHTML='<div class="ed-kicker" style="margin-top:12px">Quick editions</div>'+['MI','TX','PA','GA','AZ','ME'].map(code=>'<article><a href="'+href(code)+'"><strong>'+esc(names[code]||code)+'</strong></a><small data-quick-offices="'+code+'">House · Counties</small></article>').join('');
  populate();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
