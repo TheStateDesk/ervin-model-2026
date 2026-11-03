@@ -45,4 +45,14 @@ jobs:
             echo 'Official Census files already match current branch'; exit 0
           fi
           git commit -m 'Import U.S. Census 2026 120th-Congress congressional shapes for changed districts'
-          git push origin "HEAD:$TARGET_BRANCH"
+          for attempt in 1 2 3; do
+            git fetch origin "$TARGET_BRANCH"
+            git rebase "origin/$TARGET_BRANCH" || exit 1
+            if git push origin "HEAD:$TARGET_BRANCH"; then
+              echo "Published all 11 verified Census TIGER/Line district files."
+              exit 0
+            fi
+            sleep "$attempt"
+          done
+          echo "Concurrent updates blocked verified geography publishing"
+          exit 1
