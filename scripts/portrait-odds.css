@@ -12,3 +12,5 @@
 .gov-winning-chances span:last-child b,.ed-win-odds span:last-child b{color:var(--ed-red,#c66b7b)}
 .gov-odds-note,.ed-odds-footnote{display:block;font-size:11px;line-height:1.45;color:var(--ed-muted,#8495a5);margin:7px 0 14px}
 .theme-dark .gov-face{background:#264055;color:#eef5fa}
+
+.candidate-photo-credit{font-size:10px!important;font-weight:650;color:var(--ed-muted,#7990a1)!important;text-decoration:underline;text-underline-offset:2px;margin-top:1px}
