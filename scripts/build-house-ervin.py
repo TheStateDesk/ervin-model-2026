@@ -270,7 +270,46 @@ def main():
         }
         outputs[id]=obj;rating_count[rating]+=1
     if len(outputs)!=435:raise RuntimeError('House count invalid')
-    result={'asOf':TODAY.isoformat(),'label':'Ervin House — provisional district scenario','scope':'435 districts indexed; numerical House model WITHHELD for the 173 redrawn-map districts until current-boundary vote baselines are sourced. Cook ratings are qualitative and never converted to fictional D-R margins.','method':{'formula':'Unchanged districts: House 2022/2024 D-R vs contemporaneous national House margins (40/60); GA/NY use only 2024 because districts changed before 2024; plus a dated national generic ballot and candidate-compatible district surveys. Senate/presidential historical errors are NOT transferred to House. For 173 changed 2026 maps, numeric old-map forecasts are withheld and only documented Cook ratings are used.','genericBallot':{'demMargin':round(generic,2),'asOf':generic_source['asOf'],'inputs':inputs,'note':'This is the dated source snapshot, not a claim the averages were refreshed on build day. Secondary DDHQ remains flagged. No unsourced 270toWin average.'},'historicalReturns':{'source':'MIT Election Data and Science Lab 1976–2024, public domain via electiondata.dev','url':'https://electiondata.dev/datasets/house-results/','years':[2022,2024],'nationalMarginsD':{str(y):national[y] for y in national}},'polling':{'source':'The New York Times CC BY 4.0 polling index as summarized at PeoplesPoll; original linked releases; RCP latest polls','url':POLL_DIR,'note':'Archive shows only subset of all published surveys; a published survey count is not the number of rows displayed.'},'specialCaveat':'Alaska ranked-choice and top-two/all-party California contests require contest-specific interpretation. Margins only compare identifiable D and R survey respondents; model cannot simulate RCV transfer or same-party elections.','redrawnStates':sorted(NEW_MAP),'redrawSource':'https://ballotpedia.org/Redistricting_ahead_of_the_2026_elections','uncertainty':'Sensitivity width in margin points, not calibrated probability/confidence interval.'},'summary':{'districts':435,'modeledCount':sum(isinstance(x['marginD'],(int,float)) for x in outputs.values()),'ratings':dict(rating_count),'districtsWithPollRows':sum(bool(x['surveys']) for x in outputs.values()),'districtsWithComparablePolls':sum(x['pollEvidence']>0 for x in outputs.values()),'indexedPublishedSurveys':sum(x['publishedSurveyCount'] for x in outputs.values()),'changedMapDistricts':sum(x['changed2026Map'] for x in outputs.values()),'redrawnCookRated':sum(x['changed2026Map'] and bool(x['sourceRating']) for x in outputs.values()),'redrawnUnrated':sum(x['changed2026Map'] and not x['sourceRating'] for x in outputs.values()),'historicalProxyDistricts':sum(x['historicalProxy'] for x in outputs.values())},'races':outputs}
+    result={
+      'asOf':TODAY.isoformat(),
+      'label':'Ervin House · 2026 congressional district evidence',
+      'scope':'All 435 districts with current 2026 voting boundaries where changed. 433 comparable congressional D/R numerical scenarios; AK ranked-choice and CA-06 independent contest show only sourced Cook ratings. The 173 new-map presidential allocations are reconstructed estimates and have extra uncertainty, not certified 2026 election counts.',
+      'method':{
+        'formula':'House D−R estimate = dated national generic House polling + past-only selected alpha × [0.75 × (2024 district presidential D−R − national 2024 D−R) + 0.25 × (2020 district presidential D−R − national 2020 D−R)], blended only with candidate-compatible House district surveys. Same office, same formula scored on 2018/2022, chronological 2024 holdout. No Senate/Governor historical errors.',
+        'office':'House only','pastOnlyAlpha':alpha,
+        'backtestSource':'research/house-presidential-backtest-2026.json',
+        'holdout2024':selected['backtested']['holdout2024'],
+        'genericBallot':{
+            'demMargin':round(generic,2),'asOf':generic_source['asOf'],'inputs':inputs,
+            'note':'Source dates independently retained. A build is NOT proof of a new publisher reading; unattributed secondary DDHQ remains flagged.'},
+        'historicalReturns':{
+            'source':'MIT Election Data and Science Lab House results via electiondata.dev, public-domain source records',
+            'url':'https://electiondata.dev/datasets/house-results/',
+            'years':[2022,2024],'nationalMarginsD':{str(y):national[y] for y in national}},
+        'presidentialCurrentMap':{
+            'source':pres_archive['source'],'url':pres_archive['sourceUrl'],
+            'notes':pres_archive['notes']},
+        'polling':{
+            'source':'NYT-compiled district index at PeoplesPoll and independently sourced RealClearPolling listings',
+            'url':POLL_DIR},
+        'redrawnStates':sorted(NEW_MAP),
+        'redrawSource':'https://www.census.gov/programs-surveys/decennial-census/about/rdo/congressional-districts.html',
+        'uncertainty':'Sensitivity width. 2024 heldout empirical MAE and P90 apply to comparable contested districts; new-map reconstructed presidential vote allocations have additional uncertainty and do NOT constitute a calibrated 2026 CI.',
+        'specialCaveat':'AK ranked-choice and CA-06 independent/same-party contests require different ballot modeling. Cook qualitative only for these, no invented two-party margin.'},
+      'summary':{
+        'districts':435,'modeledCount':sum(isinstance(x['marginD'],(float,int)) for x in outputs.values()),
+        'ratings':dict(rating_count),
+        'districtsWithPollRows':sum(bool(x['surveys']) for x in outputs.values()),
+        'districtsWithComparablePolls':sum(x['pollEvidence']>0 for x in outputs.values()),
+        'indexedPublishedSurveys':sum(x['publishedSurveyCount'] for x in outputs.values()),
+        'changedMapDistricts':sum(x['changed2026Map'] for x in outputs.values()),
+        'redrawnCookRated':sum(x['changed2026Map'] and bool(x['sourceRating']) for x in outputs.values()),
+        'redrawnUnrated':0,
+        'presidentialEstimatedDistricts':sum(x['presidentialBaseline']['estimatedVoteAllocation'] for x in outputs.values()),
+        'qualitativeOnly':sum(x['marginD'] is None for x in outputs.values()),
+        'historicalProxyDistricts':sum(x['historicalProxy'] for x in outputs.values())},
+      'races':outputs
+    }
     write('house/ervin-forecast-2026-11-02.json',result)
     print('HOUSE FORECAST COMPLETE',json.dumps(result['summary']),flush=True)
     for id in ('MI-07','MI-10','TX-34','CA-22','NY-17','AK-01'):
