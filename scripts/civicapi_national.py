@@ -197,12 +197,24 @@ def targets():
   if k in STATES:out[k+"-GOVERNOR"]={"state":k,"office":"governor"}
  return out
 def discover(code,office):
- q="House" if office=="house" else "Senate" if office=="senate" else "Governor"
+ # A narrow federal-office query avoids fetching hundreds of state legislative
+ # records and timing out on Wyoming or at-large House lookups.
+ q="US House" if office=="house" else "US Senate" if office=="senate" else "Governor"
  params={"query":q,"country":"US","province":code,"start_date":DAY,"end_date":DAY,"limit":600}
- rows=list_items(request(BASE+"/race/search?"+urllib.parse.urlencode(params)))
- if office=="house" and not any("us house" in text(r).lower() for r in rows if isinstance(r,dict)):
-  params["query"]="US House"
-  rows+=list_items(request(BASE+"/race/search?"+urllib.parse.urlencode(params)))
+ def retrieve(query):
+  params["query"]=query
+  return list_items(request_with_retry(BASE+"/race/search?"+urllib.parse.urlencode(params),timeout=10,max_attempts=3))
+ broad="House" if office=="house" else "Senate" if office=="senate" else None
+ try:rows=retrieve(q)
+ except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError,OSError):
+  if not broad:raise
+  rows=retrieve(broad)
+ if broad:
+  wanted="us house" if office=="house" else "us senate"
+  if not any(wanted in text(r).lower().replace("u.s.","us") for r in rows if isinstance(r,dict)):
+   extra=retrieve(broad) if params["query"]!=broad else []
+   seen={str(r.get("id") or r.get("race_id") or r.get("raceId") or "") for r in rows if isinstance(r,dict)}
+   rows += [r for r in extra if isinstance(r,dict) and str(r.get("id") or r.get("race_id") or r.get("raceId") or "") not in seen]
  return rows[:1000]
 def resolve_registry(expected,registry,now,limit_states=50):
  current_items=registry.get("races",{})
