@@ -206,6 +206,9 @@ function districtGeometry(){
     }
     if(!data){errors.push(code+': '+last?.message);continue}
     for(const f of data.features){
+     // Local district files include a few non-electoral 'ZZ' water/territory shapes.
+     // Match the site's district engine: only numbered congressional districts count.
+     if(!/^\d{1,2}$/.test(String(f.id)))continue;
      const id=code+'-'+String(f.id).padStart(2,'0');
      records.push({code,id,geometry:f.geometry});
     }
