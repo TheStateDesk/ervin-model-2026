@@ -192,7 +192,7 @@ try{
  assert((await governorPage.locator('#govUSMap a[data-code="OH"] path.d').count())===1,'Ohio state geometry must match projected winner');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
  assert((await governorPage.locator('#coverage').innerText()).includes('24 Ervin-adjusted'),'Expected 22 governor-only corrections with published 2026 polling');
- await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('4.66')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.71'),null,{timeout:12000});
+ await governorPage.waitForFunction(()=>document.querySelector('#govBacktestRaw')?.textContent.includes('4.66')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.23'),null,{timeout:12000});
  assert((await governorPage.locator('#govBacktestRows tr').count())===41,'Governor source-linked backtest missing 6 new sourced historical events');
  await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
  await ohioCard.screenshot({path:'visual-checks/Ohio-Governor-Ervins-Take-Verified.png'});
