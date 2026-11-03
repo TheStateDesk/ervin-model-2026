@@ -80,7 +80,7 @@ try{
   assert((await homepage.locator('#watchSection').count())===1,'Closest races carousel must appear on State Desk');
   assert((await homepage.locator('#balanceOfPower').count())===1,'Office balance not placed on State Desk');
   assert((await homepage.locator('#senate-control').count())===1,'Public Senate control scenario panel missing');
-  await homepage.waitForFunction(()=>/\\d+%/.test(document.querySelector('#controlDemChance')?.textContent||'')&&/\\d+%/.test(document.querySelector('#controlRepChance')?.textContent||''),null,{timeout:20000});
+  await homepage.waitForFunction(()=>/\d+%/.test(document.querySelector('#controlDemChance')?.textContent||'')&&/\d+%/.test(document.querySelector('#controlRepChance')?.textContent||''),null,{timeout:20000});
   const controlSum=(await homepage.locator('#controlDemChance,#controlRepChance,#controlUnknownChance').allTextContents()).reduce((n,x)=>n+Number.parseInt(x,10),0);
   assert(Math.abs(controlSum-100)<=2,'Control simulation should allocate nearly 100% of illustrative outcomes');
   assert((await homepage.locator('#stateDirectory').count())===1,'State directory must remain');
