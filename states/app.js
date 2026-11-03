@@ -125,7 +125,7 @@ function init(){
  $('quickSelect').onchange=e=>{if(names[e.target.value])location.href=href(e.target.value)};
  $('stateSearch').addEventListener('input',search);
  $('stateSearch').addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=e.target.value.trim().toLowerCase(),match=states.find(s=>s.name.toLowerCase()===q||s.code.toLowerCase()===q)||states.find(s=>s.name.toLowerCase().startsWith(q));if(match)location.href=href(match.code);else {const status=$('stateSearchStatus');if(status)status.textContent='No state matches “'+e.target.value.trim()+'”';}});
- $('todayLabel').textContent=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+ fetch('../refresh_log.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(log=>{if(log?.checkedAt)$('todayLabel').textContent='Polls checked '+new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});else $('todayLabel').textContent='Update time unavailable'}).catch(()=>{$('todayLabel').textContent='Update time unavailable'});
  $('featuredStates').innerHTML='<div class="ed-kicker" style="margin-top:12px">Quick editions</div>'+['MI','TX','PA','GA','AZ','ME'].map(code=>'<article><a href="'+href(code)+'"><strong>'+esc(names[code]||code)+'</strong></a><small data-quick-offices="'+code+'">House · Counties</small></article>').join('');
  populate();
 }
