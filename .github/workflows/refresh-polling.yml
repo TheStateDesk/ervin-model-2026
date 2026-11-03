@@ -27,16 +27,25 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Check immutable election-day lock
+        id: lock
+        run: |
+          if test -f final/forecast-final.json; then echo 'skip=true' >> "$GITHUB_OUTPUT"; echo 'Final forecast locked: polling refresh suspended'; else echo 'skip=false' >> "$GITHUB_OUTPUT"; fi
       - run: python -m pip install beautifulsoup4
       - name: Test strict individual-poll extraction
+        if: steps.lock.outputs.skip == 'false'
         run: python -m unittest discover -s tests -p test_recent_poll_parser.py -v
       - name: Check verified general-election aggregates
+        if: steps.lock.outputs.skip == 'false'
         run: python scripts/refresh_polling.py
       - name: Refresh county watch model vote targets
+        if: steps.lock.outputs.skip == 'false'
         run: python scripts/build_county_watch_forecast.py
       - name: Validate and preserve audit
+        if: steps.lock.outputs.skip == 'false'
         run: python scripts/validate_data.py
       - name: Commit verified changes and refresh log
+        if: steps.lock.outputs.skip == 'false'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
