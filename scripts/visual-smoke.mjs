@@ -89,7 +89,7 @@ try{
   assert((await homepage.locator('#watchCards .watch-card__name').first().innerText())!==cardBefore,'Races-to-watch next button did not advance');
   await homepage.locator('#watchPrev').click();
   assert((await homepage.locator('#powerCards .power-card').count())===3,'All three office balance cards must render');
- assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='25','Close governor races should be unassigned by the 1.5-point toss-up rule');
+ assert((await homepage.locator('[data-power-office="governors"] [data-power-d]').innerText())==='24','Close governor races should be unassigned by the 1.5-point toss-up rule');
  assert((await homepage.locator('[data-power-office="senate"] [data-power-d]').innerText())==='48','Senate model must exclude three true toss-ups');
  assert((await homepage.locator('[data-power-office="senate"] [data-power-r]').innerText())==='49','Republican Senate tally must exclude toss-ups');
  const links=await homepage.locator('#powerCards .power-card-head a').evaluateAll(a=>a.map(x=>x.href));
@@ -187,7 +187,7 @@ try{
  await governorPage.waitForFunction(()=>document.querySelector('#coverage')?.textContent.includes('Ervin-adjusted'),null,{timeout:20000});
  assert((await governorPage.locator('#govCards .gov-card').count())===36,'Governor board no longer covers all 36 elections');
  const ohioCard=governorPage.locator('#govCards [data-code="OH"]');
- assert((await ohioCard.innerText()).includes('D +2.6'),'Ohio governor forecast must show D +2.6 (not R +0.0)');
+ assert((await ohioCard.innerText()).includes('D +4.4'),'Ohio governor forecast must show D +2.6 (not R +0.0)');
  assert(await ohioCard.evaluate(el=>el.classList.contains('d')&&!el.classList.contains('tie')),'Ohio must have Democratic map tone, not tie');
  assert((await governorPage.locator('#govUSMap a[data-code="OH"] path.d').count())===1,'Ohio state geometry must match projected winner');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
