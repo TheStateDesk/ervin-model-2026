@@ -1,4 +1,4 @@
-/* House district explorer: accessible map-first selection using locally hosted 118th Congress reference geometry. */
+/* Accessible House district explorer: 2026 Census CD120 geography for redrawn states, unchanged earlier lines elsewhere. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id),escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const path=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
@@ -33,8 +33,13 @@ async function update(){
    el.addEventListener('pointerenter',()=>{$('districtMapStatus').textContent=(r?.id||'District')+' · '+(window.ERVIN_HOUSE_DATA?.races?.[r?.id]?.modelRating||r?.rating||'No provisional model rating')+' · click for individual election page';});
    el.addEventListener('focus',()=>{$('districtMapStatus').textContent=(r?.id||'District')+' · '+(r?.rating||'No published rating entered')+' · Enter to open';});
   }
-  $('districtMapStatus').textContent=count+' reference shapes loaded · colored by the provisional Ervin House rating (not election results) · click any shape to open its race';
-  $('districtMapPicker').textContent='The labeled polygons are 2022 Census (118th Congress) reference geography. If 2026 redistricting changed this state, shapes may be outdated. District links use the 2026 House race index; geographic references are not certified 2026 ballot boundaries.';
+  const verified2026=Number(data.boundaryYear)===2026;
+  $('districtMapStatus').textContent=count+' '+(verified2026?'official Census 2026 CD120':'unchanged reference')+' district outlines · colored by provisional House scenarios (NOT reported election results) · select any race';
+  const url=verified2026&&/^https:\/\//.test(data.sourceUrl||'')?data.sourceUrl:'https://www.census.gov/programs-surveys/decennial-census/about/rdo/congressional-districts.html';
+  $('districtMapPicker').innerHTML=(verified2026?
+   'Official <strong>2026 voting boundaries (120th Congress)</strong> from the U.S. Census Bureau. Polygon lines are simplified for display, not property-level surveying.':
+   'Census 118th district geography, retained because these district boundaries were not changed for the 2026 election. Missouri’s later redistricting proposal was blocked.')+
+   ' <a target="_blank" rel="noopener noreferrer" href="'+escape(url)+'">Geographic source</a>. Presidential voting on these maps may still be a reconstructed estimate, not a certified district return.';
  }catch(e){if(gen!==generation)return;fallback(all,'District map unavailable: '+e.message+'.');}
 }
 async function init(){
