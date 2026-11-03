@@ -164,7 +164,7 @@ function paintCounties(){
 function chooseState(code){selected=code;drill()}
 function finalForecastHeadline(){
  const b=modelBalance;if(!b)return 'Final Ervin forecast · 2026';
- const h=b.house.U?'House balance remains uncertain where redrawn districts lack verified current-map ratings':b.house.D>=218?'Democrats favored to flip the House':b.house.R>=218?'Republicans favored to keep the House':'House control depends on the competitive districts';
+ const h=b.house.U?'House outlook includes '+b.house.U+' non-numeric House ballot exception(s)':b.house.D>=218?'Democrats favored to flip the House':b.house.R>=218?'Republicans favored to keep the House':'House control depends on the competitive districts';
  const senate=b.senate;
  const toss=model.senate.filter(r=>isValid(r.margin)&&Math.abs(r.margin)<1.5).map(r=>r.state||stateName[r.code]||r.code);
  const names=toss.length===1?toss[0]:toss.length===2?toss.join(' and '):toss.length>2?toss.slice(0,-1).join(', ')+' and '+toss.at(-1):'the remaining toss-ups';
@@ -191,7 +191,7 @@ function updatePhase(){
  const status=window.document.getElementById('finalPhaseStatus');
  if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished&&lockedAt?finalForecastHeadline():preview==='final'?'Rehearsal only · '+finalForecastHeadline():forecastPublished?'Election Day 2026: final forecast awaiting source lock':'Every state. One clear picture.';
  if(standfirst){
-  const forecast=modelBalance?.house?.U?'House totals include '+modelBalance.house.U+' unprojected redrawn districts; no party is assigned those seats. ':modelBalance?.house?.D>=218?'Democrats lead in '+modelBalance.house.D+' House districts. ':modelBalance?'House control depends on the remaining competitive districts. ':'';
+  const forecast=modelBalance?.house?.U?'House totals include '+modelBalance.house.U+' contests without a comparable two-party numerical margin. ':modelBalance?.house?.D>=218?'Democrats lead in '+modelBalance.house.D+' House districts under the model. ':modelBalance?'House control depends on competitive districts. ':'';
   standfirst.textContent=showResults?n+' contest'+(n===1?' has':'s have')+' validated unofficial returns. Our pre-election forecast remains below for comparison; there are no projected winners presented as race calls.':forecastPublished?forecast+'Explore the locked Senate and governor estimates, county scenarios and the competitive House districts in the interactive map.':'Explore Senate and governor polling, House districts, county scenarios and attributed results in one state edition.';
  }
  if(status){
