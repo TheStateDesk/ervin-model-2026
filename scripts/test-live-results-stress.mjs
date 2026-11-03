@@ -54,6 +54,10 @@ const OA={api:1,year:2026,office:'Senate',as_of:'2026-11-04T02:05:00Z',
  races:{MI:{total:190,cands:[{n:'Dem candidate',v:100,p:'D'},{n:'Rep candidate',v:90,p:'R'}]}}};
 const od=engine.openAmerica(OA,'Senate',now);
 assert.equal(od['MI-SENATE']?.total,190,'Accept attributed source once polls close');
+const special={...OA,races:{'FL-special':{total:200,cands:[{n:'Angie Nixon',v:85,p:'D'},{n:'Ashley Moody',v:115,p:'R'}]},'OH-special':{total:150,cands:[{n:'Sherrod Brown',v:70,p:'D'},{n:'Jon Husted',v:80,p:'R'}]}}};
+const specialResults=engine.openAmerica(special,'Senate',now);
+assert.equal(specialResults['FL-SENATE']?.total,200,'Florida special Senate seat must be recognized by backup source');
+assert.equal(specialResults['OH-SENATE']?.total,150,'Ohio special Senate seat must be recognized by backup source');
 const cid=engine.civic(make(),now);
 const civicPreferred=engine.preferCivic(cid,od);
 assert.equal(civicPreferred.races['MI-SENATE'].source,'CivicAPI (provider-verified schema)','Fresh Civic should be primary');
