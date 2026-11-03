@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T20:07:59.200468+00:00",
+  "updatedAt": "2026-11-03T22:50:52.725867+00:00",
   "events": [
     {
       "at": "2026-10-26T14:19:02.019910+00:00",
@@ -368,6 +368,27 @@
         }
       ],
       "sourceUrl": "https://www.vanburencountymi.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-03T22:50:52.725867+00:00",
+      "county": "Leelanau",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "November 03 November 3, 2026 - General Election - Unofficial Results",
+          "url": "https://www.leelanau.gov/news_detail_T5_R192.php"
+        }
+      ],
+      "sourceUrl": "https://www.leelanau.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-03T22:50:52.725867+00:00",
+      "county": "Livingston",
+      "kind": "page_modified",
+      "newLinks": [],
+      "sourceUrl": "https://milivcounty.gov/elections/election-results/",
       "notice": "Source change is not an election return"
     }
   ]
