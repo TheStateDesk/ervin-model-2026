@@ -184,6 +184,7 @@ try{
   if((await liveHero.locator('#edSimMap path.ed-live-lead-N').count())!==50)throw Error('PUBLIC '+label+' LIVE MAP SHOWS UNVALIDATED COUNTS');
   const href=await liveHero.locator('#edSimMap a[data-sim-state="MI"]').getAttribute('href');
   if(!href?.includes('race='+race))throw Error('PUBLIC '+label+' MUST LINK TO PRECISE RACE '+href);
+  if(office==='senateD'&&!((await liveHero.locator('#edSimMap a[data-sim-state="CO"]').getAttribute('href'))||'').includes('race=CO-SENATE'))throw Error('PUBLIC SENATE MAP MISSING UNMODELED CO RACE LINK');
  }
  if((await liveHero.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth))>5)throw Error('PUBLIC LIVE MOBILE OVERFLOW');
  await liveHero.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/LIVE-5-55-Mobile.png'});
