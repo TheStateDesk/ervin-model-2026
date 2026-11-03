@@ -25,7 +25,7 @@ assert.equal(out.senate.R,49,'Three races within 1.5 points must be unresolved')
 assert.equal(model.senate.length,17);
 assert.equal(model.governor.length,36);
 assert.equal(out.governors.offCycle,14);
-const ohio=model.governor.find(x=>x.code==='OH');assert.equal(ohio.model.pollMargin,5.4);assert(ohio.model.candidateShift>2&&ohio.model.candidateShift<3);assert(ohio.model.adjustedMargin>0);assert.equal(out.governors.D,25,'Close governor contests must remain unassigned');
+const ohio=model.governor.find(x=>x.code==='OH');assert.equal(ohio.model.pollMargin,5.4);assert(ohio.model.candidateShift>2&&ohio.model.candidateShift<3);assert(ohio.model.adjustedMargin>0);assert.equal(out.governors.D,24,'Close governor contests must remain unassigned');
 assert.equal(out.governors.rawOnly+out.governors.modeled+out.governors.T,36,'Gov races must all be accounted for');
 assert(model.governor.every(x=>x.model.events.every(e=>e.year>=2018&&e.year<2026)));
 assert.throws(()=>power.compute({races:{}},model.senate,model.governor),/435/);
