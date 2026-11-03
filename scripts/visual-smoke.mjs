@@ -97,6 +97,16 @@ try{
  assert(!links.some(x=>/\/(house|governors)\/$/.test(x)),'Retired research boards must not be linked by public balance cards');
  assert((await homepage.locator('a[href="../"],a[href*="#researchLab"],a[href*="#tabs"]').count())===0,'State Desk must not link to retired research home');
  assert((await homepage.locator('#researchLab,#advancedPollingDrawer,#races').count())===0,'Legacy forecast lab still present on public State Desk');
+ // Validate the entire nationwide county map is real feature geometry and
+ // switches from 2026 Senate to governor projections without changing files.
+ await homepage.waitForFunction(()=>document.querySelectorAll('#allCountyMap path.all-county').length>=3000,null,{timeout:45000});
+ const countyCount=await homepage.locator('#allCountyMap path.all-county').count();
+ assert(countyCount>=3000,'Nationwide conditional county atlas must include at least 3,000 county polygons');
+ assert((await homepage.locator('#allCountyMap path.all-county.atlas-D, #allCountyMap path.all-county.atlas-R').count())>=100,'Senate forecast county map cannot be just neutral boundaries');
+ await homepage.locator('[data-national-county-office="Governor"]').click();
+ assert((await homepage.locator('[data-national-county-office="Governor"]').getAttribute('aria-pressed'))==='true','Governor national county projection toggle failed');
+ await homepage.locator('[data-national-county-office="Senate"]').click();
+ assert((await homepage.locator('#allCountyStatus').innerText()).includes('senate'),'County projection map did not return to Senate');
  assert(homepageErrors.length===0,'State Desk browser errors: '+homepageErrors.join(', '));
  await homepage.locator('#watchSection').screenshot({path:'visual-checks/State-Desk-Races-To-Watch-Desktop.png'});
  await homepage.locator('#balanceOfPower').screenshot({path:'visual-checks/State-Desk-National-Balance-Desktop.png'});
