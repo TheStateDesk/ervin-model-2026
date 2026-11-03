@@ -2,10 +2,21 @@
  * Forecasts and vote returns are separate datasets. No synthetic votes or calls. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const root='../', finalAt=Date.parse('2026-11-03T12:00:00-05:00'), read=async(p)=>{const fetchRaw=async()=>{const r=await fetch(root+p,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};return window.ERVIN_FINAL?window.ERVIN_FINAL.get(p,fetchRaw):fetchRaw()};
+// Forecast files are locked and may be cached. Election-night snapshots NEVER are.
+const LIVE_FILES=new Set(['civicapi/races.json','civicapi/discovery.json','election-night/county-returns.json']);
+const root='../', finalAt=Date.parse('2026-11-03T12:00:00-05:00'), read=async(p)=>{
+ const mutable=LIVE_FILES.has(p);
+ const fetchRaw=async()=>{
+  const url=new URL(root+p,location.href);
+  if(mutable)url.searchParams.set('live',String(Math.floor(Date.now()/30000)));
+  const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);
+  return r.json();
+ };
+ return mutable?fetchRaw():window.ERVIN_FINAL?window.ERVIN_FINAL.get(p,fetchRaw):fetchRaw();
+};
 const margin=n=>!Number.isFinite(n)?'No numerical forecast':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
 const states=window.ERVIN_US_GEOGRAPHY?.states||[], stateName=Object.fromEntries(states.map(s=>[s.code,s.name]));
-let paused=false,cycles=0,model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null,lockedAt=null,phaseConfig={phase:'auto'},latestFeedAt=null,lastExternalFetch=0,modelBalance=null,phaseLast='forecast';
+let providerHealth=null,paused=false,cycles=0,model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null,lockedAt=null,phaseConfig={phase:'auto'},latestFeedAt=null,lastExternalFetch=0,modelBalance=null,phaseLast='forecast';
 const isValid=n=>typeof n==='number'&&Number.isFinite(n), party=n=>!isValid(n)?'N':n>0?'D':n<0?'R':'T';
 function label(x){return x.state+' · '+x.office+(x.office==='House'?' '+x.id:'')}
 function races(){
@@ -186,7 +197,14 @@ function updatePhase(){
  const n=Object.keys(returns).length;
  $('dashboardTitle').textContent=showResults?(n?'Election night · reported votes':'Election night · awaiting verified returns'):'Final predictions · 2026';
  $('dashboardIntro').textContent=showResults?'The first polls close at 6 p.m. ET. Accepted unofficial reported votes are labeled separately from the locked forecast; areas without attributed returns remain gray.':'The Ervin forecast is a pre-election estimate.';
- $('reportingBanner').textContent=showResults?(n?('UNOFFICIAL RETURNS · '+n+' contest'+(n===1?'':'s')+' with source-validated totals'+(latestFeedAt?' · source update '+(window.ERVIN_AP_DATE?.timestamp(latestFeedAt)||new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'})):'')):'ELECTION NIGHT DESK OPEN · First polls close at 6 p.m. ET · Awaiting accepted vote reports'):'';
+ const sourceTime=Date.parse(providerHealth?.checkedAt||'');
+  const sourceAge=Number.isFinite(sourceTime)?Math.round((now-sourceTime)/60000):null;
+  const upstreamConnected=providerHealth?.providerConnectivity?.networkReachable===true;
+  const upstreamDisconnected=providerHealth?.providerConnectivity?.networkReachable===false;
+  const statusText=!providerHealth?'CivicAPI collection status pending':upstreamConnected?'CivicAPI connection verified':upstreamDisconnected?'CivicAPI connectivity problem':'CivicAPI connection not yet checked';
+  const freshness=sourceAge===null?'':sourceAge>20?' · Last collector check '+sourceAge+' min ago (delayed)':' · Collector checked '+sourceAge+' min ago';
+  $('reportingBanner').textContent=showResults?(n?('UNOFFICIAL RETURNS · '+n+' contest'+(n===1?'':'s')+' with source-validated totals'+(latestFeedAt?' · source update '+(window.ERVIN_AP_DATE?.timestamp(latestFeedAt)||new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'})):'')+' · '+statusText+freshness):
+   'LIVE RESULTS DESK · Awaiting accepted unofficial votes · '+statusText+freshness):'';
  for(const id of ['watchSection','balanceOfPower','stateDirectory','editorialNotes'])if($(id))$(id).hidden=false; // The States / Counties selector owns map visibility.
  const headline=document.querySelector('.ed-headline'),standfirst=document.querySelector('.ed-standfirst');
  const status=window.document.getElementById('finalPhaseStatus');
@@ -209,15 +227,17 @@ async function refreshResults(){
   const core=window.ERVIN_RETURNS,of=['Senate','Governor','House'];
   const checkExternal=Date.now()-lastExternalFetch>300000;
   if(checkExternal)lastExternalFetch=Date.now();
-  const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),...of.map(x=>checkExternal&&window.ERVIN_EXTERNAL_FEED
+  const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),read('civicapi/discovery.json'),...of.map(x=>checkExternal&&window.ERVIN_EXTERNAL_FEED
    ?window.ERVIN_EXTERNAL_FEED.json('https://openamerica.io/elections/results.json?year=2026&office='+x,{timeout:11000})
    :Promise.resolve(null))]);
   const civic=all[0].status==='fulfilled'?core.civic(all[0].value):{};
   if(all[1].status==='fulfilled')countyReports=all[1].value;
-  const secondary={};of.forEach((x,i)=>{if(all[i+2].status==='fulfilled'&&all[i+2].value)Object.assign(secondary,core.openAmerica(all[i+2].value,x))});
+   if(all[2].status==='fulfilled'&&all[2].value?.election==='2026-11-03')providerHealth=all[2].value;
+  const secondary={};of.forEach((x,i)=>{if(all[i+3].status==='fulfilled'&&all[i+3].value)Object.assign(secondary,core.openAmerica(all[i+3].value,x))});
   const merged=core.reconcile([core.preferCivic(civic,secondary).races],returns);
   returns=merged.races;const prev=live;live=Object.keys(returns).length>0;lastResults=Date.now();
   window.ERVIN_HOME_RESULTS={races:returns,checkedAt:lastResults,source:'Validated civicAPI or explicitly attributed fallback'};
+   window.ERVIN_HOME_FEED_HEALTH=providerHealth;
   window.dispatchEvent(new CustomEvent('ervin:home-results-update',{detail:{count:Object.keys(returns).length}}));const timestamps=Object.values(returns).map(x=>Date.parse(x.asOf||x.updatedAt||'')).filter(Number.isFinite);if(timestamps.length)latestFeedAt=Math.max(...timestamps);
   if(live||prev!==live)updatePhase();
   else if(model.senate.length)updatePhase();
