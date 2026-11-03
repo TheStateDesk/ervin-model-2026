@@ -1,15 +1,33 @@
 {
-  "checkedAt": "2026-11-02T21:43:38.076481+00:00",
+  "checkedAt": "2026-11-03T00:31:59.900114+00:00",
   "pagesParsed": 15,
   "checkedRaceCount": 17,
-  "changes": 1,
+  "changes": 4,
   "observationsFound": 57,
   "errors": [],
   "updated": [
     {
-      "state": "NE",
+      "state": "MN",
+      "source": "win270",
+      "margin": 5.6,
+      "published": "Nov 02"
+    },
+    {
+      "state": "MN",
+      "source": "ddhq",
+      "margin": 6.6,
+      "published": "Nov 02"
+    },
+    {
+      "state": "MN",
+      "source": "rcp",
+      "margin": 5.4,
+      "published": "Nov 01"
+    },
+    {
+      "state": "MN",
       "source": "silver",
-      "margin": -0.9,
+      "margin": 6.6,
       "published": "Nov 02"
     }
   ],

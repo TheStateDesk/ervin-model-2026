@@ -1,13 +1,13 @@
 {
-  "checkedAt": "2026-11-02T21:43:38.076481+00:00",
+  "checkedAt": "2026-11-03T00:31:59.900114+00:00",
   "source": "Original releases, RCP individual poll listings, and candidate-matched Wikipedia general-election survey tables; source type disclosed per row",
   "polls": {
     "ME": [
       {
-        "pollster": "Survey160",
+        "pollster": "Survey 160",
         "dates": "October 27 – November 1, 2026",
         "fieldEnd": "2026-11-01",
-        "sample": "1,322 (LV)",
+        "sample": "1,323 (LV)",
         "dem": 50.0,
         "rep": 47.0,
         "margin": 3.0,
@@ -294,6 +294,17 @@
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       },
       {
+        "pollster": "Survey 160",
+        "dates": "October 27 – November 1, 2026",
+        "fieldEnd": "2026-11-01",
+        "sample": "1,122 (LV)",
+        "dem": 50.0,
+        "rep": 46.0,
+        "margin": 4.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
         "pollster": "New York Times / Siena University",
         "dates": "October 26 – November 1, 2026",
         "fieldEnd": "2026-11-01",
@@ -391,20 +402,20 @@
         "margin": 3.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Echelon Insights (R)",
-        "dates": "October 16–23, 2026",
-        "fieldEnd": "2026-10-23",
-        "sample": "508 (LV)",
-        "dem": 47.0,
-        "rep": 47.0,
-        "margin": 0.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Ohio",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "TX": [
+      {
+        "pollster": "Research Co.",
+        "dates": "October 31 – November 2, 2026",
+        "fieldEnd": "2026-11-02",
+        "sample": "450 (LV)",
+        "dem": 49.0,
+        "rep": 46.0,
+        "margin": 3.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "Trafalgar Group (R)",
         "dates": "October 31 – November 1, 2026",
@@ -525,17 +536,6 @@
         "margin": 5,
         "url": "https://www.realclearpolling.com/latest-polls/senate",
         "sourceKind": "RealClearPolling individual-poll listing (not original release)"
-      },
-      {
-        "pollster": "A2 Insights",
-        "dates": "October 23–27, 2026",
-        "fieldEnd": "2026-10-27",
-        "sample": "631 (LV)",
-        "dem": 50.0,
-        "rep": 47.0,
-        "margin": 3.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Texas",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "IA": [
@@ -1080,6 +1080,17 @@
     ],
     "GA": [
       {
+        "pollster": "Research Co.",
+        "dates": "October 31 – November 2, 2026",
+        "fieldEnd": "2026-11-02",
+        "sample": "450 (LV)",
+        "dem": 52.0,
+        "rep": 42.0,
+        "margin": 10.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Georgia",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
         "pollster": "InsiderAdvantage (R)",
         "dates": "October 31 – November 2, 2026",
         "fieldEnd": "2026-11-02",
@@ -1197,17 +1208,6 @@
         "dem": 48.0,
         "rep": 44.0,
         "margin": 4.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Georgia",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Rasmussen Reports (R)",
-        "dates": "September 14, 2026",
-        "fieldEnd": "2026-09-14",
-        "sample": "1,019 (LV)",
-        "dem": 51.0,
-        "rep": 42.0,
-        "margin": 9.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Georgia",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
@@ -1620,6 +1620,17 @@
     ],
     "SC": [
       {
+        "pollster": "Resonance Media poll (R?)",
+        "dates": "October 30, 2026",
+        "fieldEnd": "2026-10-30",
+        "sample": "600 (LV)",
+        "dem": 46.0,
+        "rep": 45.0,
+        "margin": 1.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
+      {
         "pollster": "Patinkin Research Strategies (D)",
         "dates": "October 27–29, 2026",
         "fieldEnd": "2026-10-29",
@@ -1739,17 +1750,6 @@
         "margin": -1.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Trafalgar Group (R)",
-        "dates": "September 23–25, 2026",
-        "fieldEnd": "2026-09-25",
-        "sample": "1,087 (LV)",
-        "dem": 42.0,
-        "rep": 43.0,
-        "margin": -1.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_South_Carolina",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }
     ],
     "MS": [
@@ -1801,6 +1801,17 @@
       }
     ],
     "FL": [
+      {
+        "pollster": "Research Co.",
+        "dates": "October 31 – November 2, 2026",
+        "fieldEnd": "2026-11-02",
+        "sample": "450 (LV)",
+        "dem": 44.0,
+        "rep": 51.0,
+        "margin": -7.0,
+        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
+        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
+      },
       {
         "pollster": "Big Data Poll",
         "dates": "October 26–30, 2026",
@@ -1919,17 +1930,6 @@
         "dem": 43.0,
         "rep": 51.0,
         "margin": -8.0,
-        "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
-        "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
-      },
-      {
-        "pollster": "Workbench Strategy (D)",
-        "dates": "October 18–22, 2026",
-        "fieldEnd": "2026-10-22",
-        "sample": "800 (LV)",
-        "dem": 47.0,
-        "rep": 49.0,
-        "margin": -2.0,
         "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Florida",
         "sourceKind": "Wikipedia candidate-matched survey table (not original release)"
       }

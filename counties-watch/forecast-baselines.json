@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asOf": "2026-11-02T21:43:38.076Z",
+  "asOf": "2026-11-03T00:31:59.900Z",
   "source": "National 2026 Ervin polling dashboard; Original Ervin default",
   "method": "Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
   "states": {
@@ -109,8 +109,8 @@
       "nonR": "Peggy Flanagan",
       "rep": "Michele Tafoya",
       "party": "D",
-      "pollMargin": 5.91,
-      "adjustedMargin": 6.02,
+      "pollMargin": 5.92,
+      "adjustedMargin": 6.03,
       "mode": "Original Ervin",
       "publisherInputs": 4,
       "proxyOrSingleInput": false,
@@ -137,14 +137,14 @@
       "nonR": "Jon Ossoff",
       "rep": "Mike Collins",
       "party": "D",
-      "pollMargin": 9.92,
-      "adjustedMargin": 9.6,
+      "pollMargin": 8.5,
+      "adjustedMargin": 8.18,
       "mode": "Original Ervin",
-      "publisherInputs": 2,
-      "proxyOrSingleInput": false,
-      "source": "Ervin's Take · recent publisher blend (7-day limit)",
-      "stale": false,
-      "note": "Model-based statewide margin from recent attributed publisher averages, not a county poll."
+      "publisherInputs": 0,
+      "proxyOrSingleInput": true,
+      "source": "OLDER REFERENCE · no recent qualifying publisher average",
+      "stale": true,
+      "note": "Model-based statewide non-R minus R margin. Historic proxy, not current polling."
     },
     "NC": {
       "state": "North Carolina",
