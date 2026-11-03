@@ -154,7 +154,8 @@ def save(file,data):
  file.write_text(serialized);return True
 def targets():
  house=json.loads((ROOT/"house/data.json").read_text())["seats"]
- senate=json.loads((ROOT/"counties-watch/forecast-baselines.json").read_text())["states"]
+ senate_data=json.loads((ROOT/"counties-watch/forecast-baselines.json").read_text())
+ senate={**senate_data["states"],**senate_data.get("sourceRated",{})}
  governors=json.loads((ROOT/"governors/data.json").read_text())
  if isinstance(governors,dict):governors=governors.get("races",governors.get("governors",[]))
  out={r["id"]:{"state":r["code"],"office":"house"} for r in house}

@@ -9,7 +9,7 @@ const NON_SENATE_2026=new Set('AZ CA CT HI IN MD MO NV NY ND PA UT VT WA WI'.spl
 const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:'Northeast',VT:'Northeast',NJ:'Northeast',NY:'Northeast',PA:'Northeast',MI:'Midwest',WI:'Midwest',OH:'Midwest',IN:'Midwest',IL:'Midwest',IA:'Midwest',MN:'Midwest',MO:'Midwest',KS:'Midwest',NE:'Midwest',ND:'Midwest',SD:'Midwest'};
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
-let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
+let house=[],governors=[],baselines={},ratedSenate={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
 let sourceTimeLabel='Source update time unavailable';let historicalError=null;let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
 let countyChosenByUser=false; for(const b of document.querySelectorAll('[data-county-view]'))b.setAttribute('aria-pressed',String(b.dataset.countyView==='forecast'));let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
@@ -18,6 +18,7 @@ function sourceItem(text,url,detail=''){return '<article><strong><a href="'+safe
 const pick=r=>r?.office==='Governor'?'governor':'senate';
 function getGov(){return governors.find(x=>x.code===code);}
 function getSen(){return baselines[code]||null;}
+function getRatedSen(){return ratedSenate[code]||null;}
 function getDistrict(id){return stateHouse.find(x=>String(x.district).padStart(2,'0')===String(id).padStart(2,'0'));}
 function stateRoute(c){return '?state='+encodeURIComponent(c)}
 function prepareSelection(){
@@ -26,17 +27,17 @@ function prepareSelection(){
  window.addEventListener('popstate',()=>display(new URLSearchParams(location.search).get('state')||'MI'));
 }
 function renderLead(){
- const gov=getGov(),sen=getSen();
+ const gov=getGov(),sen=getSen(),rated=getRatedSen();
  $('stateSelect').value=code;
  document.title=stateName(code)+' Elections 2026 | The Ervin State Desk';
  $('stateTitle').textContent=stateName(code)+', all in one place.';
- $('stateDeck').textContent='Your complete '+stateName(code)+' election notebook: '+(sen?'a modeled Senate contest, ':'')+(gov?'a governor election, ':'')+stateHouse.length+' House district'+(stateHouse.length!==1?'s':'')+', county history and verified reporting sources.';
+ $('stateDeck').textContent='Your complete '+stateName(code)+' election notebook: '+(sen?'a modeled Senate contest, ':rated?'a source-rated Senate contest, ':'')+(gov?'a governor election, ':'')+stateHouse.length+' House district'+(stateHouse.length!==1?'s':'')+', county history and verified reporting sources.';
  const n=r=>r===1?'One district':fmt(r)+' districts';
  $('heroHouse').textContent=fmt(stateHouse.length);
  $('heroHouseSub').textContent=stateHouse.filter(r=>r.rating).length+' published competitiveness ratings indexed';
  const senateIndex=coverage.senate?.states?.[code];
- $('heroSenate').textContent=sen?margin(Number(sen.adjustedMargin)):senateIndex?fmt(senateIndex.count)+' polls indexed':'No modeled race';
- $('heroSenateSub').textContent=sen?(code==='MI'?'Ervin’s Take · candidate-strength context · ':'Original Ervin adjustment · ')+fmt(sen.publisherInputs)+' publisher inputs':senateIndex?'Public Senate poll index · not an Ervin prediction':NON_SENATE_2026.has(code)?'No U.S. Senate election in 2026':'2026 Senate contest outside the numerical model';
+ $('heroSenate').textContent=sen?margin(Number(sen.adjustedMargin)):rated?rated.rating:senateIndex?fmt(senateIndex.count)+' polls indexed':'No modeled race';
+ $('heroSenateSub').textContent=sen?(code==='MI'?'Ervin’s Take · candidate-strength context · ':'Original Ervin adjustment · ')+fmt(sen.publisherInputs)+' publisher inputs':rated?'Inside Elections qualitative rating · not a numerical Ervin forecast':senateIndex?'Public Senate poll index · not an Ervin prediction':NON_SENATE_2026.has(code)?'No U.S. Senate election in 2026':'2026 Senate contest outside the numerical model';
  $('heroGovernor').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?margin(governorErvin[code].model.adjustedMargin):Number.isFinite(governorErvin[code]?.model?.pollMargin)?margin(governorErvin[code].model.pollMargin):'No poll input'):'No election';
  $('heroGovSub').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?'Ervin’s Take · governor calibration':governorErvin[code]?.model?'Published poll · comparable state history not yet verified':'Loading Ervin correction'):'No governor contest in the 2026 registry';
  $('houseCoverage').textContent=n(stateHouse.length)+' · '+stateName(code);
@@ -46,8 +47,8 @@ function statewideCard(title,sub,candidates,forecast,explain,source,href){
  return '<article class="ed-race"><div class="ed-race-h"><div><div class="ed-kicker">'+esc(sub)+'</div><h3>'+esc(title)+'</h3><p>'+esc(candidates)+'</p></div><div class="ed-race-big">'+esc(forecast)+'</div></div><p>'+esc(explain)+'</p><div class="ed-link-list"><a href="'+safeURL(source)+'" target="_blank" rel="noopener noreferrer">Polling/source reference</a><a href="'+esc(href)+'">Detailed methodology</a></div></article>';
 }
 function renderOverview(){
- const s=getSen(),g=getGov(),indexedSenate=coverage.senate?.states?.[code];
- const senate=s?statewideCard('U.S. Senate',code==='MI'?'Ervin’s Take · candidate-strength context':'Original Ervin adjustment',s.nonR+' vs. '+s.rep+(code==='MT'?' · Alani Bankhead (D) also on ballot':''),margin(Number(s.adjustedMargin)),'Historical partisan polling correction applied to sourced statewide averages. '+(s.candidateStrength?'The candidate-specific, discounted primary-overpolling comparison is also applied; methodology in the source ledger. ':'')+'Forecast margin; not counted votes. '+(s.stale?'Publisher inputs may be outdated.':''),'https://www.realclearpolling.com/latest-polls/senate','../elections/?office=senate&state='+code+'#pollSection'):'<article class="ed-race"><div class="ed-kicker">U.S. Senate</div><h3>'+(indexedSenate?'Senate polling indexed':'No Ervin-modeled Senate contest')+'</h3><p>'+(indexedSenate?'A separate public polling index lists '+fmt(indexedSenate.count)+' published surveys and displays '+esc(indexedSenate.summary)+'. This index is not an Ervin forecast or a verified candidate-matched polling average.':NON_SENATE_2026.has(code)?'No U.S. Senate election in '+stateName(code)+' in 2026.':'A Senate election is scheduled but is outside the numerical Ervin model; this does not mean it is uncontested.')+'</p>'+(indexedSenate?'<a href="'+safeURL(coverage.senate.source)+'" target="_blank" rel="noopener noreferrer">Review all Senate polls at publisher</a>':'')+'</article>';
+ const s=getSen(),g=getGov(),rated=getRatedSen(),indexedSenate=coverage.senate?.states?.[code];
+ const senate=s?statewideCard('U.S. Senate',code==='MI'?'Ervin’s Take · candidate-strength context':'Original Ervin adjustment',s.nonR+' vs. '+s.rep+(code==='MT'?' · Alani Bankhead (D) also on ballot':''),margin(Number(s.adjustedMargin)),'Historical partisan polling correction applied to sourced statewide averages. '+(s.candidateStrength?'The candidate-specific, discounted primary-overpolling comparison is also applied; methodology in the source ledger. ':'')+'Forecast margin; not counted votes. '+(s.stale?'Publisher inputs may be outdated.':''),'https://www.realclearpolling.com/latest-polls/senate','../elections/?office=senate&state='+code+'#pollSection'):rated?statewideCard('U.S. Senate','INSIDE ELECTIONS · PUBLISHER RATING',rated.nonR+' ('+rated.party+') vs. '+rated.rep+' (R)',rated.rating,'Qualitative publisher outlook, not an Ervin numeric margin or win probability. '+(rated.party==='I'?'Independent challenger: D–R polling correction does not apply. ':'')+'Do not extrapolate historical polling errors from other states or office types.',rated.sourceUrl,'../elections/?office=senate&state='+code+'#pollSection'):'<article class="ed-race"><div class="ed-kicker">U.S. Senate</div><h3>'+(indexedSenate?'Senate polling indexed':'No Ervin-modeled Senate contest')+'</h3><p>'+(indexedSenate?'A separate public polling index lists '+fmt(indexedSenate.count)+' published surveys and displays '+esc(indexedSenate.summary)+'. This index is not an Ervin forecast or a verified candidate-matched polling average.':NON_SENATE_2026.has(code)?'No U.S. Senate election in '+stateName(code)+' in 2026.':'A Senate election is scheduled but is outside the numerical Ervin model; this does not mean it is uncontested.')+'</p>'+(indexedSenate?'<a href="'+safeURL(coverage.senate.source)+'" target="_blank" rel="noopener noreferrer">Review all Senate polls at publisher</a>':'')+'</article>';
  const govEst=governorErvin[code]?.model;const governor=g?statewideCard('Governor',Number.isFinite(govEst?.adjustedMargin)?'Ervin’s Take':'Published polling average',g.dem+' vs. '+g.rep,govEst&&Number.isFinite(govEst.adjustedMargin)?margin(govEst.adjustedMargin):Number.isFinite(govEst?.pollMargin)?margin(govEst.pollMargin)+' · published average':(g.qualitativeRating?'Cook '+g.qualitativeRating.label+' · no numeric poll':'No comparable public poll average'),govEst?'Published poll: '+(Number.isFinite(govEst.pollMargin)?margin(govEst.pollMargin):'unavailable')+'; 2018–24 governor-only error correction '+(govEst.correction===null?'not available':govEst.correction.toFixed(2)+' points')+'. '+(govEst.candidateShift?'Candidate-performance context +'+govEst.candidateShift.toFixed(2)+' D points (included in Ervin’s Take). ':'')+(govEst.fallback?'No verified same-state governor polling error available; the displayed publisher margin is not a modeled Ervin forecast. ':'Same-state governor history included. ')+'The small-sample governor adjustment is evaluated in 20 strictly past-only governor election-years; compare the raw and adjusted error in the linked source.': 'Awaiting historical calibration inputs.',g.poll?.url||g.qualitativeRating?.url||g.nomineesSource,'../governors/?state='+code):'<article class="ed-race"><div class="ed-kicker">Governor</div><h3>No 2026 gubernatorial contest</h3><p>The governorship is not up for election in this registry.</p></article>';
  $('stateRaceCards').innerHTML=senate+governor;
  if(code==='MI'&&s?.candidateStrength){
@@ -68,7 +69,7 @@ function renderOverview(){
  });
 
  const withPolls=stateHouse.filter(x=>housePolls[x.id]||houseVerified.races?.[x.id]?.length||coverage.house?.districts?.[x.id]).length,withRatings=stateHouse.filter(x=>x.rating).length;
- $('stateNotebook').innerHTML='<article><strong>State contests</strong><small>'+(s?'Senate model available · ':'No Senate model · ')+(g?'Governor polling indexed':'No governor election')+'</small></article>'+
+ $('stateNotebook').innerHTML='<article><strong>State contests</strong><small>'+(s?'Numerical Senate model · ':rated?'Source-rated Senate outlook · ':'No Senate model · ')+(g?'Governor polling indexed':'No governor election')+'</small></article>'+
  '<article><strong>'+withRatings+' of '+stateHouse.length+' House ratings sourced</strong><small>Ratings are qualitative; missing ratings are not Safe D or Safe R predictions.</small></article>'+
  '<article><strong>'+withPolls+' House districts with documented public polling</strong><small>Latest indexed survey only; no House polling average manufactured.</small></article>'+
  '<article><strong>Locally hosted county geography</strong><small>2022 Census reference boundaries and 2020/2024 presidential results, not certified 2026 voting totals.</small></article>';
@@ -438,7 +439,7 @@ async function start(){
     fetchJSON('../research/election-night-historical-moe-2026.json')];
   const updated=Promise.allSettled(optionalFiles).then(results=>{
    const values=results.map((r,i)=>{if(r.status==='fulfilled')return r.value;console.warn('Optional State Desk data unavailable',i,r.reason);return null;});
-   baselines=values[0]?.states||{};historical=values[1]||{counties:{}};
+   baselines=values[0]?.states||{};ratedSenate=values[0]?.sourceRated||{};historical=values[1]||{counties:{}};
    senatePolls=values[2]?.polls||{};govPolls=values[3]?.states||{};housePolls=values[4]?.polls||{};
    coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;houseRoster=values[14]||houseRoster;historicalError=values[15]?.version===1?values[15]:null;
    if(values[13]&&window.ERVIN_STATEWIDE){const cal=window.ERVIN_STATEWIDE.apply(values[13],{races:governors},{states:baselines});governorErvin=Object.fromEntries(cal.governor.map(g=>[g.code,g]));}

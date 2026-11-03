@@ -73,9 +73,12 @@ def build(data):
       "stale":not bool(vals),
       "note":("Ervin’s Take: Original Michigan Senate historical correction plus an unvalidated, heavily discounted candidate-primary error context; not a religious/poll-mode penalty." if candidate_strength else ("Model-based statewide non-R minus R margin. Historic proxy, not current polling." if not vals else "Model-based statewide margin from recent attributed publisher averages, not a county poll.")),
       **({"candidateStrength":candidate_strength} if candidate_strength else {})}
+ rated=json.loads((ROOT/"research/senate-qualitative-coverage-2026.json").read_text(encoding="utf-8"))["ratings"]
+ if len(rated)!=18 or set(rated)&set(out):
+  raise ValueError("2026 Senate rated coverage must contain 18 nonoverlapping contests")
  return {"version":1,"asOf":now.isoformat(timespec="milliseconds").replace("+00:00","Z"),"source":"National 2026 Ervin polling dashboard; Original Ervin default",
          "method":"Four-source weight/freshness blend minus Original Ervin correction; independent races do not transfer D/R error",
-         "states":out}
+         "states":out,"sourceRated":rated}
 def main():
  payload=build(parse())
  rendered=json.dumps(payload,ensure_ascii=False,indent=2)+"\n"

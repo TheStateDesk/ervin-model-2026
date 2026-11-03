@@ -156,12 +156,12 @@ try{
  assert(JSON.stringify(navTargets)===JSON.stringify(['../states/','#nationalBoard','#michiganSpotlight','../stats-for-nerds/']),'Election Night links to retired dedicated pages');
  assert((await nationalNight.locator('.night-links a[href="../state/?state=MI#stateGeography"]').count())===1,'Michigan historical county link must be clearly distinct from live board');
  await nationalNight.locator('#nightStateFilter').selectOption('MI');
- await nationalNight.waitForFunction(()=>document.querySelectorAll('#raceList .race-row').length>0&&document.querySelectorAll('#raceList .race-row').length<488,null,{timeout:12000});
+ await nationalNight.waitForFunction(()=>document.querySelectorAll('#raceList .race-row').length>0&&document.querySelectorAll('#raceList .race-row').length<506,null,{timeout:12000});
  assert((await nationalNight.locator('#raceList').innerText()).includes('Michigan'),'State-specific live filter failed');
  await nationalNight.locator('#nightStateFilter').selectOption('all');
 
  await nationalNight.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
- await nationalNight.waitForFunction(()=>document.querySelector('#nationalCount')?.textContent.includes('488 indexed races'),null,{timeout:30000});
+ await nationalNight.waitForFunction(()=>document.querySelector('#nationalCount')?.textContent.includes('506 indexed races'),null,{timeout:30000});
  assert((await nationalNight.locator('#balanceOfPower').count())===0,'Election Night must not display pre-election power bars');
 
  assert((await nationalNight.locator('#miCounties').innerText())==='0 / 83','Fake Michigan county counts before polls close');
@@ -175,7 +175,7 @@ try{
  await nationalNight.waitForFunction(()=>document.querySelectorAll('#raceList .race-row').length===435,null,{timeout:12000});
  await nationalNight.locator('[data-office="All"]').click();
  await nationalNight.screenshot({path:'visual-checks/National-Election-Night-Full-Desk.png',fullPage:true});
- console.log('NATIONAL NIGHT QA PASS',JSON.stringify({counties:83,contests:488,gov:36,house:435,errors:nightErrors}));
+ console.log('NATIONAL NIGHT QA PASS',JSON.stringify({counties:83,contests:506,senate:35,gov:36,house:435,errors:nightErrors}));
  await nationalNight.close();
  const nightMobile=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
  await nightMobile.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});

@@ -29,8 +29,16 @@ function apply(archive,govs,senate){
      currentPollingSource:r.poll?.url||null}};
  });
  const currentSenate=Object.entries(senate?.states||{}).map(([code,r])=>({code,...r,office:'Senate',model:{pollMargin:Number.isFinite(r.pollMargin)?r.pollMargin:null,adjustedMargin:Number.isFinite(r.adjustedMargin)?r.adjustedMargin:null,asOf:senate.asOf||'2026-11-02',method:'Original Ervin federal Senate forecast unchanged',source:r.source||'Existing Senate forecast'}}));
+ const sourceRated=Object.entries(senate?.sourceRated||{}).map(([code,r])=>({
+  code,...r,office:'Senate',sourceRated:true,
+  model:{pollMargin:null,adjustedMargin:null,rating:r.rating,sourceRated:true,source:r.sourceUrl,
+    method:'Inside Elections publisher rating; NOT a numerical Ervin forecast',asOf:r.asOf||'2026-11-03'}
+ }));
+ const allSenate=[...currentSenate,...sourceRated];
+ if(allSenate.length!==35||new Set(allSenate.map(r=>r.code)).size!==35)
+  throw Error('Expected 17 Original Ervin Senate estimates plus 18 separate publisher ratings');
  return {asOf:archive?.asOf||'2026-11-02',method:'Governor-only historical state errors (2018–2024), strictly separate from the existing original federal Senate model',historicalSources:archive?.sourcesScope||'Archived governor polling averages and governor election results',
- governor,senate:currentSenate,summary:{governorRaces:governor.length,withPublishedPolling:governor.filter(x=>x.model.pollMargin!==null).length,adjustedGovernorRaces:governor.filter(x=>x.model.adjustedMargin!==null).length,stateErrorHistory:governor.filter(x=>!x.model.fallback).length,senateRaces:currentSenate.length}};
+ governor,senate:allSenate,summary:{governorRaces:governor.length,withPublishedPolling:governor.filter(x=>x.model.pollMargin!==null).length,adjustedGovernorRaces:governor.filter(x=>x.model.adjustedMargin!==null).length,stateErrorHistory:governor.filter(x=>!x.model.fallback).length,senateRaces:allSenate.length,senateNumerical:currentSenate.length,senateSourceRated:sourceRated.length}};
 }
 const formatMargin=x=>x===null||!Number.isFinite(x)?'Not estimated':Math.abs(x)<.05?'Even':(x>0?'D +':'R +')+Math.abs(x).toFixed(1);
 const api={apply,formatMargin};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.ERVIN_STATEWIDE=api;
