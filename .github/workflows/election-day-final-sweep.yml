@@ -4,9 +4,7 @@ on:
   schedule:
     # GitHub Actions uses UTC. Nov 3 2026 is on Eastern Standard Time.
     - cron: '35 14 3 11 *'  # 09:35 EST
-    - cron: '43 16 3 11 *'  # 11:43 EST: comprehensive final sweep
-    - cron: '5 17 3 11 *'   # 12:05 EST: final predictions update
-    - cron: '24 19 3 11 *'  # 14:24 EST: late publisher changes before votes
+    - cron: '45 15 3 11 *'  # 10:45 EST: final polling sweep and immutable lock
 permissions:
   contents: write
 concurrency:
@@ -27,6 +25,9 @@ jobs:
         run: python3 -m pip install beautifulsoup4
       - name: Verify strict governor source parser
         run: python3 -m unittest discover -s tests -p test_refresh_governors.py -v
+      - name: Do not alter an existing final forecast
+        run: |
+          if test -f final/forecast-final.json; then echo 'Forecast already locked; no further polling mutation'; exit 1; fi
       - name: Fetch and validate all available 2026 Senate publisher aggregates
         run: python3 scripts/refresh_polling.py
       - name: Refresh candidate-matched gubernatorial averages
@@ -48,11 +49,14 @@ jobs:
           assert all('marginD' in r for r in h['races'].values())
           print('Verified 435 House + 36 governor + 17 Senate forecasts')
           PY
+      - name: Lock validated final snapshot before noon
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 15 3 11 *'
+        run: python3 scripts/lock_forecast.py
       - name: Publish only source-linked model changes with latest main revision
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+          git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
           if git diff --staged --quiet; then
             echo 'No verified new polling or modeled forecast changes.'
             exit 0
@@ -69,7 +73,7 @@ jobs:
               python3 scripts/build-house-ervin.py
               python3 scripts/build_county_watch_forecast.py
               python3 scripts/validate_data.py
-              git add governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+              git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
               if git diff --staged --quiet; then exit 0; fi
               git commit -m 'Election Day verified publisher polling sweep and final forecast'
             }
