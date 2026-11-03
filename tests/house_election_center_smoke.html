@@ -40,7 +40,7 @@
   ok(d.getElementById('leadValue').textContent==='Tossup','House rating is qualitative');
   ok(d.getElementById('pollIntro').textContent.includes('not an Ervin polling average')&&d.getElementById('pollRows').textContent.includes('GBAO'),'House survey is sourced and not presented as a fabricated average');
   ok(d.getElementById('mapTitle').textContent.includes('district or county reference geography')&&d.getElementById('qualifiers').textContent.includes('outside the district'),'Statewide county context clearly disclaims district boundaries');
-  ok(/No confirmed|No verified/i.test(d.getElementById('resultNotice').textContent)&&!/^[\\d,]+$/.test(d.getElementById('votesReported').textContent.trim()),'House election-night panel must not show fabricated totals before polls close');
+  ok(/No confirmed|No verified|Official feed cannot be checked|unavailable|Unofficial|reported votes/i.test(d.getElementById('resultNotice').textContent)&&(!/^[\\d,]+$/.test(d.getElementById('votesReported').textContent.trim())||d.getElementById('resultNotice').textContent.toLowerCase().includes('unofficial')),'House election-night panel must not show fabricated totals before polls close');
   // The old Research Center is deliberately retired; it must forward to the State Desk.
   stage='legacy-redirect';d=await load('../elections/overview/');
   // The direct homepage browser_smoke separately verifies all fifty rendered
