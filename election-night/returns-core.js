@@ -82,7 +82,10 @@
  function openAmerica(data,office,nowMs=Date.now()){
   if(data?.api!==1||data.year!==2026||data.office!==office||typeof data.races!=='object'||Object.keys(data.races).length>1200)return {};
   const result={};for(const [key,r] of Object.entries(data.races)){
-   const id=canonical(office==='House'?key:(key.endsWith('-'+office.toUpperCase())?key:key+'-'+office.toUpperCase()),office);
+   // Open America's Senate special elections are keyed FL-special / OH-special.
+    // Normalize those to the site's single 2026 U.S. Senate contest per state.
+    const raceKey=office==='Senate'&&/^[A-Z]{2}-special$/i.test(key)?key.slice(0,2)+'-SENATE':key;
+    const id=canonical(office==='House'?raceKey:(raceKey.endsWith('-'+office.toUpperCase())?raceKey:raceKey+'-'+office.toUpperCase()),office);
    if(!id)continue;
    const row=build(id,office,r?.total,r?.cands,data.as_of,'Open America / state reporting mirror',data.source_url||null,r?.pct_in,nowMs);
    if(row)result[id]=row;
