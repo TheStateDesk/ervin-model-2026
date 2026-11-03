@@ -4,7 +4,7 @@ const val=(n)=>Number.isFinite(n)?n.toLocaleString('en-US'):'—';
 const fmt=x=>window.ERVIN_STATEWIDE.formatMargin(x);
 let races=[],calibrated=null,selected='MI',sort='closest';
 const color=r=>{const m=Number.isFinite(r.model?.adjustedMargin)?r.model.adjustedMargin:r.model?.pollMargin;return !Number.isFinite(m)||Math.abs(m)<.05?'neutral':m>0?'d':'r';};
-function grade(r){return Number.isFinite(r.model?.adjustedMargin)?fmt(r.model.adjustedMargin):Number.isFinite(r.model?.pollMargin)?fmt(r.model.pollMargin)+' · raw poll only':'No numeric public poll'}
+function grade(r){return Number.isFinite(r.model?.adjustedMargin)?fmt(r.model.adjustedMargin):Number.isFinite(r.model?.pollMargin)?fmt(r.model.pollMargin)+' · publisher poll':r.qualitativeRating?'Cook '+r.qualitativeRating.label+' · rating only':'No numeric public poll'}
 function card(r){const m=r.model,history=m?.events||[];
  const margin=Number.isFinite(m?.adjustedMargin)?m.adjustedMargin:m?.pollMargin;
  const odds=window.ERVIN_ODDS?.estimate(margin,'Governor',{cycles:m?.calibrationCycles||0});
