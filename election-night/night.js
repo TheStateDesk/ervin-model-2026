@@ -174,7 +174,7 @@ async function refreshNational(){
    const checked=Date.parse(metadata?.checkedAt||'');
    const age=Number.isFinite(checked)?Math.round((Date.now()-checked)/60000):null;
    const eligible=Number(metadata?.registeredRaces)||0;
-   status.textContent='PRIMARY: civicAPI v2 · '+eligible+' of 488 indexed races matched to provider IDs'+
+   status.textContent='PRIMARY: civicAPI v2 · '+eligible+' of 488 provider-targeted contests matched to provider IDs'+
       (age!==null?' · snapshot checked '+Math.max(0,age)+' min ago':' · collector status pending')+
       ' · '+acceptedCivic+' usable results · '+acceptedFallback+' fallback results'+
       (age!==null&&age>30?' · WARNING: published collector snapshot is stale':'')+
