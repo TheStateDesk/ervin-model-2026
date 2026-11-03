@@ -116,7 +116,7 @@ def attributed_source_type(item):
 
 def pollster_fingerprint(name):
     """Strip common sponsor annotations; do not merge differently named pollsters."""
-    text=re.sub(r"\\s*\\((?:D|R|I)(?:[- ]sponsored)?\\)\\s*","",str(name),flags=re.I)
+    text=re.sub(r"\s*\((?:D|R|I)(?:[- ]sponsored)?\)\s*","",str(name),flags=re.I)
     return re.sub(r"[^a-z0-9]+","",text.lower())
 
 def survey_fingerprint(item):
