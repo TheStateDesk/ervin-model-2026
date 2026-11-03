@@ -22,13 +22,13 @@ function draw(){
  const governorEvents=(governorHistory.races||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year>=2018&&e.year<2026&&e.pollType!=='single stale poll').sort((a,b)=>b.year-a.year).slice(0,3);
  const senate=senateHistory.senateStates?.[state];
  const baseline=senateBaseline.states?.[state],senIndex=coverage.senate?.states?.[state],govIndex=coverage.governor?.states?.[state];
- const districts=(houseRegistry.seats||[]).filter(r=>r.code===state).sort((a,b)=>r.id.localeCompare(b.id));
+ const districts=(houseRegistry.seats||[]).filter(r=>r.code===state).sort((a,b)=>a.id.localeCompare(b.id));
  const entries=[];
  if(gov){
   const m=gov.poll;
   let body='<p>2026 publisher polling input: <strong>'+fmt(m?.margin)+'</strong> · '+esc(m?.count??'Unknown')+' listed surveys · as of '+esc(m?.asOf||'undated')+'. '+link(m?.url,'Open source polling average')+'.</p>';
-  body+='<p class="ed-mini">Historical adjustment excludes 2014 and uses the newest three available 2018–2024 same-state governor elections, weighted 50/30/20 (renormalized when fewer than three). No Senate or presidential polling errors are included. Ohio also contains a small, separate same-day statewide candidate-performance comparison within Ervin’s Take. Individual polls and publisher averages are not interchangeable.</p>';
-  if(gov.candidatePerformance?.comparisons?.length){
+  body+='<p class="ed-mini">Historical adjustment excludes 2014 and uses the newest three available 2018–2024 same-state governor elections, weighted 50/30/20 (renormalized when fewer than three). No Senate or presidential polling errors are included. Individual polls and publisher averages are not interchangeable.</p>';
+  if(state==='OH'&&gov.candidatePerformance?.comparisons?.length){
    const comparisons=gov.candidatePerformance.comparisons;
    const delta=comparisons.reduce((sum,x)=>sum+(x.referenceRepublicanMargin-x.comparisonRepublicanMargin)*x.weight,0);
    body+='<details open><summary>Ervin’s Take · Ohio candidate-performance shift +'+delta.toFixed(2)+' D points</summary><p class="ed-mini">'+esc(gov.candidatePerformance.method)+'</p><ol class="ed-evidence-list">'+comparisons.map(x=>'<li><strong>'+esc(x.year)+'</strong> · '+esc(x.reference)+' · Republican performance gap '+(x.referenceRepublicanMargin-x.comparisonRepublicanMargin).toFixed(2)+' points; '+Math.round(x.weight*100)+'% retained = +'+((x.referenceRepublicanMargin-x.comparisonRepublicanMargin)*x.weight).toFixed(2)+' D points<div class="ed-mini">'+link(x.referenceUrl,'Reference result')+' · '+link(x.comparisonUrl,'Comparison result')+'</div></li>').join('')+'</ol><p class="ed-mini">These are actual race-margin comparisons, not imported federal polling errors, and are not covered by the governor-only backtest.</p></details>';
