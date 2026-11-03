@@ -17,6 +17,15 @@
  };
  // House district may finish earlier than split-zone statewide deadline.
  const districtClose={'KY-06':'18:00','VA-02':'19:00','VA-05':'19:00','FL-27':'19:00','AL-07':'20:00','MI-07':'20:00','TX-18':'20:00'};
+ // All district deadlines are last polling-place closes, not the first county
+ // report. 270toWin's November 2026 district-specific closing table.
+ for(let i=2;i<=9;i++)if(i!==8)districtClose['IN-'+String(i).padStart(2,'0')]='18:00';
+ for(let i=3;i<=6;i++)districtClose['KY-'+String(i).padStart(2,'0')]='18:00';
+ for(let i=3;i<=28;i++)districtClose['FL-'+String(i).padStart(2,'0')]='19:00';
+ for(let i=2;i<=4;i++)districtClose['KS-'+String(i).padStart(2,'0')]='20:00';
+ for(let i=2;i<=13;i++)districtClose['MI-'+String(i).padStart(2,'0')]='20:00';
+ for(let i=1;i<=38;i++)if(i!==16&&i!==23)districtClose['TX-'+String(i).padStart(2,'0')]='20:00';
+ districtClose['ID-02']='22:00';
  const numeric=n=>typeof n==='number'&&Number.isSafeInteger(n)&&n>=0&&n<=30000000;
  const canonical=(key,office)=>{
   const s=String(key||'').toUpperCase().trim().replace(/_/g,'-');
