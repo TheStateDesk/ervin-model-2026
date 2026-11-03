@@ -11,6 +11,7 @@ const href=code=>'../state/?state='+encodeURIComponent(code)+(focusedOffice==="h
 const REGION={Northeast:'CT ME MA NH NJ NY PA RI VT',Midwest:'IL IN IA KS MI MN MO NE ND OH SD WI',South:'AL AR DE FL GA KY LA MD MS NC OK SC TN TX VA WV',West:'AK AZ CA CO HI ID MT NV NM OR UT WA WY'};
 const MARGIN=n=>!Number.isFinite(n)?'No comparable margin':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
 const rank=n=>!Number.isFinite(n)?null:Math.abs(n)<=1.5?'T':n>0?'D':'R';
+const rankRace=r=>Number.isFinite(r?.margin)?rank(r.margin):r?.type==='rating'&&/^(?:Solid|Likely|Lean|Tilt) [DR]$/.test(r.rating||'')?r.rating.slice(-1):r?.type==='rating'&&r.rating==='Toss-up'?'T':null;
 let byState={},stateScenarios={};
 function summarize(){
  const all=Object.fromEntries(states.map(x=>[x.code,{name:x.name,code:x.code,races:[],D:0,R:0,T:0}]));
@@ -24,7 +25,7 @@ function officeTotals(row,office){
  if(!row)return counts;
  for(const race of row.races||[]){
   const eligible=office==='house'?race.label.includes(' · House '):office==='governor'?race.label.startsWith('Governor'):race.label.startsWith('U.S. Senate');
-  if(eligible){const type=rank(race.margin);if(type)counts[type]++;}
+  if(eligible){const type=rankRace(race);if(type)counts[type]++;}
  }
  return counts;
 }
@@ -51,17 +52,22 @@ function liveLead(code){
  return {party,matched:matched.length,records:matched,office};
 }
 function forecastTone(r){
- const races=officeRaces(r),valid=races.filter(x=>Number.isFinite(x.margin));
+ const races=officeRaces(r),valid=races.filter(x=>rankRace(x));
  if(!valid.length)return 'var(--ed-map-neutral)';
  if(valid.length===1){
   const m=valid[0].margin;
+   if(valid[0].type==='rating'){
+    const q=valid[0].rating;if(q==='Toss-up')return 'var(--ed-grade-toss)';
+    const tier=q.startsWith('Solid')?'solid':q.startsWith('Likely')?'likely':'lean';
+    return 'var(--ed-grade-'+tier+'-'+rankRace(valid[0]).toLowerCase()+')';
+   }
   if(Math.abs(m)<1.5)return 'var(--ed-grade-toss)';
   const party=m>0?'d':'r';
   const tier=Math.abs(m)>=17?'solid':Math.abs(m)>=9?'likely':'lean';
   return 'var(--ed-grade-'+tier+'-'+party+')';
  }
  const counts={D:0,R:0,T:0};
- for(const x of valid){const k=rank(x.margin);if(k)counts[k]++}
+ for(const x of valid){const k=rankRace(x);if(k)counts[k]++}
  if(counts.T===valid.length)return 'var(--ed-map-even)';
  const net=(counts.D-counts.R)/valid.length;
  if(Math.abs(net)<.025)return 'var(--ed-map-even)';
@@ -112,7 +118,7 @@ function show(code,event){
  const houses=r.races.filter(x=>x.label.includes(' · House ')).sort((a,b)=>Math.abs(a.margin??999)-Math.abs(b.margin??999));
  const houseCounts={D:0,R:0,T:0};for(const x of houses){const k=rank(x.margin);if(k)houseCounts[k]++}
  const featured=[...statewides,...(houses.length?[{label:'House: '+houseCounts.D+' D · '+houseCounts.R+' R · '+houseCounts.T+' toss-ups',margin:null,type:'summary'},...houses.slice(0,3)]:[])];
- const displayed=featured.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+(x.type==='summary'?'':esc(MARGIN(x.margin)))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
+ const displayed=featured.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+(x.type==='summary'?'':x.type==='rating'?esc(x.rating+' · publisher rating'):esc(MARGIN(x.margin)))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
  const live=liveLead(code);
  const liveText=mapView==='forecast'?'':live?'<p class="ed-mini"><strong>UNOFFICIAL counted '+esc(live.office)+' contests: '+live.matched+'</strong> · '+esc(live.records.map(row=>row.candidates.slice().sort((a,b)=>b.votes-a.votes).slice(0,2).map(c=>c.party+' '+c.votes.toLocaleString()).join(' / ')).join('; '))+'</p>':'<p class="ed-mini">No validated 2026 reported vote totals for this state and office.</p>';
  const raceHeader=mapOffice==='senate'&&officeTotals(r,'senate').D+officeTotals(r,'senate').R+officeTotals(r,'senate').T===0?'No Senate race in 2026':(mapOffice==='senate'?'Senate':mapOffice==='governor'?'Governor':'House')+' '+totalsText(officeTotals(r,mapOffice));
@@ -136,7 +142,7 @@ function directory(){
    return '<a class="ed-state-chip" href="'+href(s.code)+'" data-search-name="'+esc(s.name.toLowerCase())+'" data-state-code="'+s.code+'"><strong>'+esc(s.name)+'</strong><small>Sen '+mark(sen)+' · Gov '+mark(gov)+' · House '+mark(house)+'</small></a>';
   }).join('')+'</div></section>';
  }).join('');
- $('directoryCount').textContent=states.length+' state editions · figures grouped by office (— = no modeled margin)';
+ $('directoryCount').textContent=states.length+' state editions · numerical forecasts and separately rated Senate races (— = no election)';
 }
 function search(){
  const status=$('stateSearchStatus');if(status)status.textContent='';const q=$('stateSearch').value.trim().toLowerCase(),matches=states.filter(s=>s.name.toLowerCase().includes(q)||s.code.toLowerCase()===q);
@@ -159,12 +165,12 @@ async function populate(){
   state.races.push({label:r.id+' · House '+r.modelRating,margin:Number.isFinite(r.marginD)?r.marginD:null,type:'model'});
  }
  for(const s of G.senate){
-  if(byState[s.code])byState[s.code].races.push({label:'U.S. Senate · '+(s.code==='MI'?'Ervin’s Take':'Original Ervin'),margin:s.model.adjustedMargin,type:'model'});
+  if(byState[s.code])byState[s.code].races.push({label:'U.S. Senate · '+(s.model.sourceRated?'Inside Elections source rating':s.code==='MI'?'Ervin’s Take':'Original Ervin'),margin:s.model.adjustedMargin,rating:s.model.rating||null,type:s.model.sourceRated?'rating':'model'});
  }
  for(const g of G.governor){
   if(byState[g.code])byState[g.code].races.push({label:'Governor · '+(Number.isFinite(g.model.adjustedMargin)?'Ervin’s Take':'publisher poll · no verified governor history'),margin:Number.isFinite(g.model.adjustedMargin)?g.model.adjustedMargin:g.model.pollMargin,type:Number.isFinite(g.model.adjustedMargin)?'model':'poll'});
  }
- for(const r of Object.values(byState)){for(const x of r.races){const side=rank(x.margin);if(side)r[side]++}r.races.sort((a,b)=>(a.label.startsWith('U.S. Senate')?0:a.label.startsWith('Governor')?1:2)-(b.label.startsWith('U.S. Senate')?0:b.label.startsWith('Governor')?1:2)||a.label.localeCompare(b.label))}
+ for(const r of Object.values(byState)){for(const x of r.races){const side=rankRace(x);if(side)r[side]++}r.races.sort((a,b)=>(a.label.startsWith('U.S. Senate')?0:a.label.startsWith('Governor')?1:2)-(b.label.startsWith('U.S. Senate')?0:b.label.startsWith('Governor')?1:2)||a.label.localeCompare(b.label))}
  const has=[...Object.values(byState)].filter(r=>r.D+r.R+r.T>0).length;
  $('aggregateLegend').textContent=has+' states with forecasts · select Senate, Governor or House for office-specific ratings';
  drawMap();directory();search();for(const code of ['MI','TX','PA','GA','AZ','ME']){const el=document.querySelector('[data-quick-offices="'+code+'"]');if(el)el.textContent=[byState[code]?.races.some(x=>x.label.startsWith('U.S. Senate'))?'Senate':null,byState[code]?.races.some(x=>x.label.startsWith('Governor'))?'Governor':null,'House','Counties'].filter(Boolean).join(' · ');}
