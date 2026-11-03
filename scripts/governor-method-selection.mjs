@@ -36,7 +36,7 @@ function correction(state,year,p,source=events){
  if(!selected.length)return null;
  const weights=p.weight.slice(0,selected.length),total=weights.reduce((a,b)=>a+b,0);
  if(total<=0)throw Error('No nonzero policy weights');
- const average=round(selected.reduce((v,e,i)=>v+round(e.pollMargin-e.actualMargin)*weights[i]/total,0));
+ const average=round(selected.reduce((v,e,i)=>v+round(e.pollMargin-e.actualMargin)*round(weights[i]/total),0));
  const unbounded=round(average*p.shrink[selected.length-1]);
  return p.cap===null?unbounded:round(Math.max(-p.cap,Math.min(p.cap,unbounded)));
 }

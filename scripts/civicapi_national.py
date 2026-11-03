@@ -131,10 +131,11 @@ def normalize(key,search,detail,seen_at,provider_id):
  people=candidates(detail)
  if not people:return None
  stamp=parsed(detail.get("last_updated"))
- # API may return stale pre-election event metadata while reporting actual updated totals.
- # Use fetch observation time only when official provider did not supply usable last_updated.
- if stamp and stamp>seen_at+dt.timedelta(minutes=5):return None
- if stamp and stamp<after_close(key):stamp=None
+ # A stale, explicit pre-close timestamp cannot certify election-night votes.
+ # Never "freshen" a known pre-election provider timestamp by replacing it
+ # with the collector's later observation time. Missing timestamps are
+ # separately marked as collector_observed, not provider_last_updated.
+ if stamp and (stamp>seen_at+dt.timedelta(minutes=5) or stamp<after_close(key)):return None
  observed=stamp or seen_at
  total=sum(x["votes"] for x in people)
  rate=detail.get("percent_reporting")

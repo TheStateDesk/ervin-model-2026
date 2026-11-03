@@ -40,6 +40,12 @@ class ElectionReporting(unittest.TestCase):
  def test_no_zeros(self):
   d={**self.detail,"candidates":[{"name":"D","votes":0},{"name":"R","votes":0}]}
   self.assertIsNone(m.normalize("MI-SENATE",self.search,d,self.now,87214))
+ def test_preclose_provider_timestamp_never_relabelled_as_fresh(self):
+  stale={**self.detail,"last_updated":"2026-11-03T19:00:00Z"}
+  self.assertIsNone(m.normalize("MI-SENATE",self.search,stale,self.now,87214))
+ def test_future_provider_timestamp_is_rejected(self):
+  future={**self.detail,"last_updated":"2026-11-04T03:10:00Z"}
+  self.assertIsNone(m.normalize("MI-SENATE",self.search,future,self.now,87214))
  def test_seen_at_when_last_updated_missing(self):
   row=m.normalize("MI-SENATE",self.search,{**self.detail,"last_updated":None},self.now,87214)
   self.assertEqual(row["timestampBasis"],"collector_observed")
