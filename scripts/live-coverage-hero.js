@@ -52,7 +52,8 @@ function mapOffice(){
  return $('edSimMap')?.dataset.simOffice||office;
 }
 function knownStateRace(code,k){
- return (k==='senateD'?window.ERVIN_HOME_FORECAST?.senate:window.ERVIN_HOME_FORECAST?.governor)?.some(r=>r.code===code)||false;
+ return !!(k==='senateD'?window.ERVIN_HOME_FORECAST?.senate:window.ERVIN_HOME_FORECAST?.governor)?.some(r=>r.code===code)||
+  !!accepted(idFor(code,k),officeFor(k));
 }
 function summary(k,results){
  const holder=$('edFinalCallSummary');if(!holder)return;
