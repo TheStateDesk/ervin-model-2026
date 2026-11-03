@@ -177,6 +177,8 @@ jobs:
       - name: Remove temporary browser test dependencies before Pages upload
         run: |
           rm -rf node_modules package-lock.json visual-checks
+      - name: Stamp actual published build and cache-bust scripts / styles
+        run: python3 scripts/stamp-public-release.py "$GITHUB_SHA"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
