@@ -13,6 +13,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: civicapi-2026-results
   cancel-in-progress: false
@@ -39,6 +40,8 @@ jobs:
           node --check election-night/returns-core.js
           node scripts/test-live-results-stress.mjs
       - name: Commit validated race roster and reporting snapshots
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -52,7 +55,15 @@ jobs:
             git commit -m "Refresh CivicAPI v2 national race registry and results"
             git pull --rebase origin main
             git push
+            # GitHub suppresses push-triggered workflows from the default
+            # GITHUB_TOKEN. Explicit workflow_dispatch is permitted and
+            # guarantees a Pages refresh for genuine new vote or race records.
+            # A status-only discovery.json timestamp need not redeploy the site.
+            if git diff --name-only HEAD^ HEAD | grep -Eq '^civicapi/(races|registry)\.json
+; then
+              gh workflow run deploy-pages.yml --ref main
+              echo "Started Pages publish for updated validated election results"
+            fi
           fi
-      # The existing "Publish Ervin Model website" workflow publishes
-      # any new committed civicapi/*.json snapshot. Do not deploy Pages
-      # twice from competing workflows; GitHub Actions timing is best effort.
+      # The collector has no browser-side credentials. New accepted totals
+      # publish through the regular Pages workflow and its visual checks.
