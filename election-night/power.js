@@ -24,7 +24,11 @@ function compute(house,senate,governors){
   // are never copied from older House races under the same district number.
   // The only nonnumeric ratings are special AK/CA ballot formats.
   if(x.changed2026Map){
-   if(!x.presidentialBaseline?.estimatedVoteAllocation || !Number.isFinite(x.marginD))
+   // CA-06 has a non-comparable independent-candidate ballot. Its 2026-map
+   // presidential evidence is available, but no two-party House margin is
+   // fabricated. The other redrawn contests must have numeric map priors.
+   if(!x.presidentialBaseline?.estimatedVoteAllocation ||
+      (!Number.isFinite(x.marginD)&&x.id!=='CA-06'))
     throw Error('Missing explicitly estimated 2026 district presidential baseline '+x.id);
   }
   if(!Number.isFinite(x.marginD)){
