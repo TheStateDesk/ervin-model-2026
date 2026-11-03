@@ -56,8 +56,8 @@ function render(){
    const current=report(code,fips),actual=current?100*(current.dem-current.rep)/(current.dem+current.rep+current.other):null;
    const val=view==='reported'?actual:view==='compare'?(isN(actual)?actual:estimate):estimate;
    const d=f._ervinPath||(f._ervinPath=geometryPath(f.geometry,code));if(!d)continue;
-   const a=el('a');a.setAttribute('href','../state/?state='+code+'&county='+fips+'#stateGeography');a.setAttribute('aria-label',(f.properties?.name||'County')+', '+code+', '+(current?'unofficial '+office+' results available':view==='reported'?'no validated results':'conditional forecast'));
-   const p=el('path');p.setAttribute('class','all-county '+shade(val));p.setAttribute('d',d);p.dataset.countyId=fips;
+   const p=el('path');p.setAttribute('class','all-county '+shade(val));p.setAttribute('d',d);p.dataset.countyId=fips;p.dataset.countyState=code;
+   p.setAttribute('aria-label',(f.properties?.name||'County')+', '+code+', '+(current?'unofficial '+office+' results available':view==='reported'?'no validated results':'conditional forecast'));
    p.dataset.reported=current?'true':'false';
    if(isN(val)){
     const strength=Math.min(96,Math.max(48,47+Math.abs(val)*.9));
@@ -68,7 +68,7 @@ function render(){
    title.textContent=(f.properties?.name||fips)+' County, '+code+' · '+office+(current?' · UNOFFICIAL D '+current.dem.toLocaleString()+' / R '+current.rep.toLocaleString()+' · source '+current.url+(isN(estimate)?' · pre-election '+fmt(estimate):''):
      view==='reported'?' · no independently verified 2026 results':
      isN(estimate)?' · conditional forecast '+fmt(estimate):' · no 2026 forecast');
-   p.append(title);a.append(p);grp.append(a);
+   p.append(title);grp.append(p);
    if(isN(estimate))nForecast++;if(current)nActual++;n++;
   }
   fragment.append(grp);
@@ -142,6 +142,7 @@ async function start(){
 }
 function init(){
  if(!$('allCountyNation'))return;
+ $('allCountyMap').addEventListener('click',e=>{const p=e.target.closest('path.all-county[data-county-id]');if(p)location.href='../state/?state='+encodeURIComponent(p.dataset.countyState)+'&county='+encodeURIComponent(p.dataset.countyId)+'#stateGeography'});
  document.querySelectorAll('[data-national-county-office]').forEach(b=>b.addEventListener('click',()=>{office=b.dataset.nationalCountyOffice;render()}));
  document.querySelectorAll('[data-national-county-view]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.nationalCountyView;render()}));
  models=window.ERVIN_HOME_FORECAST||null;
