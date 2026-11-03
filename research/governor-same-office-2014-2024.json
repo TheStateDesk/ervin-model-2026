@@ -1,10 +1,10 @@
 {
   "asOf": "2026-11-02",
-  "revision": "governor-same-office-2018-2024-extended-2022",
+  "revision": "governor-same-office-2018-2024-extended-six",
   "method": "Only gubernatorial races within the same state: D-minus-R final published polling margin vs certified or archived D-minus-R election margin. No Senate or presidential elections contribute. Active calibration window begins in 2018; 2014 and earlier governor errors excluded.",
-  "sourcesScope": "39 source-linked 2018–2024 governor polling-average versus governor-result comparisons, including 4 newly verified 270toWin 2022 multisurvey averages for CO, MA, NM and OR; no 2014, Senate or presidential polling errors.",
+  "sourcesScope": "41 sourced governor polling-to-election-result comparisons for 2018–24; extended 2022 multisurvey 270toWin comparisons include CO, MA, NM, OR, OK, SD. 2014, federal polling errors excluded.",
   "signConvention": "Democratic share minus Republican share; third parties and undecided are not reassigned. Poll errors = published D–R polling margin minus actual D–R result.",
-  "qualityWarning": "Poll publishers and periods differ; original RCP rows and the added independently published 270toWin averages are not interchangeable. Single stale surveys excluded. First-cycle backtests cannot validate previously unseen-state corrections. Four added 2022 states each have only ONE historical comparable cycle.",
+  "qualityWarning": "Poll publishers and periods differ; original RCP rows and the added independently published 270toWin averages are not interchangeable. Single stale surveys excluded. First-cycle backtests cannot validate previously unseen-state corrections. Four added 2022 states each have only ONE historical comparable cycle. The SD 2022 comparison is a two-poll aggregate only, and cannot imply a precise 2026 prediction.",
   "races": [
     {
       "state": "FL",
@@ -348,6 +348,17 @@
       "note": "Final published D–R poll margin and general-election result on the same archived page."
     },
     {
+      "state": "OK",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -3.6,
+      "actualMargin": -13.66,
+      "pollType": "270toWin 5-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/oklahoma",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?f=0&fips=40&off=5&year=2022",
+      "note": "270toWin average of 5 unique-pollster surveys, Hofmeister (D) 43.6%, Stitt (R) 47.2%, versus official final 41.79 D and 55.45 R; D-R margin convention."
+    },
+    {
       "state": "OR",
       "year": 2022,
       "office": "Governor",
@@ -379,6 +390,17 @@
       "sourceUrl": "https://www.realclearpolling.com/polls/governor/general/2022/south-carolina/mcmaster-vs-cunningham",
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/south-carolina/mcmaster-vs-cunningham",
       "note": "Latest listed Trafalgar survey fielded Aug 25–28, 2022; several months before Election Day. Exclude from preferred backtest."
+    },
+    {
+      "state": "SD",
+      "year": 2022,
+      "office": "Governor",
+      "pollMargin": -11.5,
+      "actualMargin": -26.81,
+      "pollType": "270toWin 2-poll average",
+      "sourceUrl": "https://www.270towin.com/2022-governor-polls/south-dakota",
+      "resultUrl": "https://uselectionatlas.org/RESULTS/state.php?f=0&fips=46&off=5&year=2022",
+      "note": "270toWin final two-poll average: Jamie Smith (D) 39%, Kristi Noem (R) 50.5%. Certified 35.17% D and 61.98% R, D-R -26.81. Sparse poll sample, not comparable in reliability to larger multi-poll aggregates."
     },
     {
       "state": "TX",
