@@ -1,30 +1,74 @@
 {
-  "checkedAt": "2026-11-03T21:02:18.565278Z",
+  "checkedAt": "2026-11-03T23:14:22.771635Z",
   "discovery": {
     "found": 504,
-    "lookups": 8,
+    "lookups": 2,
     "statusSample": {
-      "KY-SENATE": "mapped",
-      "LA-SENATE": "mapped",
-      "MA-SENATE": "mapped",
-      "NJ-SENATE": "mapped",
-      "NM-SENATE": "mapped",
-      "OK-SENATE": "mapped",
       "VT-01": "source_TimeoutError",
       "WY-SENATE": "source_TimeoutError"
     },
     "unmapped": 2
   },
   "election": "2026-11-03",
-  "eligibleRaces": 0,
-  "errors": {},
+  "eligibleRaces": 1,
+  "errors": {
+    "KY-06": "no_valid_reported_votes"
+  },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
-  "fetched": 0,
+  "fetched": 1,
   "polling": {
     "note": "No verified CivicAPI polling endpoint; election results never become a pre-election poll.",
     "state": "not_integrated"
   },
   "provider": "civicAPI v2",
+  "providerConnectivity": {
+    "KY-06": {
+      "connected": false,
+      "detail": "The read operation timed out",
+      "failure": "TimeoutError",
+      "responseMs": 15018
+    },
+    "MI-SENATE": {
+      "candidateRows": 11,
+      "connected": true,
+      "fields": [
+        "election_name",
+        "election_type",
+        "election_scope",
+        "election_date",
+        "country",
+        "province",
+        "district",
+        "municipality",
+        "polls_open",
+        "polls_close",
+        "is_disputed",
+        "has_map",
+        "registered_voters",
+        "percent_reporting",
+        "test_data",
+        "last_updated",
+        "round",
+        "maps",
+        "candidates",
+        "region_results"
+      ],
+      "identityMatches": true,
+      "payloadType": "dict",
+      "positiveCandidateTotals": false,
+      "providerTimestamp": "2026-11-03T03:44:10.357Z",
+      "responseMs": 1498
+    },
+    "networkReachable": true,
+    "statusEndpoint": {
+      "connected": true,
+      "fields": [
+        "status"
+      ],
+      "payloadType": "dict",
+      "responseMs": 13495
+    }
+  },
   "publishedRaces": 0,
   "registeredRaces": 504,
   "targetRaces": 506,
