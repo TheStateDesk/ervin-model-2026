@@ -1,10 +1,10 @@
 {
-  "checkedAt": "2026-11-03T03:36:29.644072Z",
+  "checkedAt": "2026-11-03T16:29:59.841806Z",
   "discovery": {
     "found": 487,
     "lookups": 1,
     "statusSample": {
-      "VT-01": "unavailable: "
+      "VT-01": "source_HTTPError"
     },
     "unmapped": 1
   },
