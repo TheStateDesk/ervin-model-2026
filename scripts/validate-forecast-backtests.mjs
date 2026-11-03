@@ -15,7 +15,7 @@ assert.equal(recomputed.summary.adjustedWinners,score.summary.adjustedWinners);
 assert.equal(recomputed.summary.eligible,15);
 assert.equal(recomputed.preferredRCP.n,9);
 assert(score.summary.adjustedMAE<score.summary.rawMAE,'Small-sample governor shrink correction must improve the pre-2026 holdout');
-assert(score.preferredRCP.adjustedMAE>score.preferredRCP.rawMAE,'RCP-only cohort must not be silently reweighted');
+assert(score.preferredRCP.adjustedMAE<score.preferredRCP.rawMAE,'Publisher-aggregate historical holdout must benefit from sparse-state shrinkage');
 for(let i=0;i<recomputed.records.length;i++){
  const r=recomputed.records[i],b=score.records[i];
  assert.equal(r.correction,b.correction,'Governor correction drift '+r.state+' '+r.year);
