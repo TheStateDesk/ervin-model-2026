@@ -270,7 +270,7 @@ try{
  // live returns must not be required to display fictional D/R/T forecasts.
  await stateAtlas.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const atlasErrors=[];stateAtlas.on('pageerror',e=>atlasErrors.push(e.message));
- await stateAtlas.goto(root+'/states/',{waitUntil:'domcontentloaded'});
+ await stateAtlas.goto(root+'/states/?view=final',{waitUntil:'domcontentloaded'});
  await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('states with forecasts'),null,{timeout:27000});
  await stateAtlas.locator('#usMap a[data-state-link="MI"]').focus();
  await stateAtlas.waitForFunction(()=>document.querySelector('#stateMapTooltip')&&!document.querySelector('#stateMapTooltip').hidden,null,{timeout:8000});
