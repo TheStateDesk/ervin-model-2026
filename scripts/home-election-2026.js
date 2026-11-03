@@ -5,7 +5,7 @@ const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g
 const root='../', finalAt=Date.parse('2026-11-03T12:00:00-05:00'), read=async(p)=>{const fetchRaw=async()=>{const r=await fetch(root+p,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};return window.ERVIN_FINAL?window.ERVIN_FINAL.get(p,fetchRaw):fetchRaw()};
 const margin=n=>!Number.isFinite(n)?'No numerical forecast':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
 const states=window.ERVIN_US_GEOGRAPHY?.states||[], stateName=Object.fromEntries(states.map(s=>[s.code,s.name]));
-let paused=false,cycles=0,model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null;
+let paused=false,cycles=0,model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null,lockedAt=null,phaseConfig={phase:'auto'},latestFeedAt=null,lastExternalFetch=0,modelBalance=null;
 const isValid=n=>typeof n==='number'&&Number.isFinite(n), party=n=>!isValid(n)?'N':n>0?'D':n<0?'R':'T';
 function label(x){return x.state+' · '+x.office+(x.office==='House'?' '+x.id:'')}
 function races(){
@@ -69,7 +69,7 @@ async function loadModel(){
  model.senate=applied.senate.map(x=>({id:x.code+'-SENATE',code:x.code,state:x.state||stateName[x.code],office:'Senate',margin:x.model.adjustedMargin,dem:x.nonR,rep:x.rep,kind:'model',odds:window.ERVIN_ODDS?.estimate(x.model.adjustedMargin,'Senate')}));
  model.governor=applied.governor.map(x=>{const adjusted=isValid(x.model.adjustedMargin),m=adjusted?x.model.adjustedMargin:x.model.pollMargin;return{id:x.code+'-GOVERNOR',code:x.code,state:x.state||stateName[x.code],office:'Governor',margin:m,dem:x.dem,rep:x.rep,kind:adjusted?'model':'poll',odds:window.ERVIN_ODDS?.estimate(m,'Governor',{cycles:x.model?.calibrationCycles||0})}});
  model.house=Object.values(house.races||{}).map(x=>({id:x.id,code:x.state,state:stateName[x.state]||x.state,office:'House',margin:x.marginD,kind:'model'}));
- watched=races();window.ERVIN_HOME_FORECAST=model;window.dispatchEvent(new CustomEvent('ervin:forecast-ready',{detail:{asOf:sen.asOf||gov.asOf}}));drawWatch();updatePhase();
+ modelBalance=window.ERVIN_POWER?.compute?.(house,applied.senate,applied.governor)||null;watched=races();window.ERVIN_HOME_FORECAST=model;window.dispatchEvent(new CustomEvent('ervin:forecast-ready',{detail:{asOf:sen.asOf||gov.asOf}}));drawWatch();updatePhase();
 }
 function byState(code,off){return model[off.toLowerCase()].filter(r=>r.code===code)}
 function raceFor(code,off){return byState(code,off)[0]||null}
@@ -153,37 +153,49 @@ function paintCounties(){
 function chooseState(code){selected=code;drill()}
 function updatePhase(){
  if(!model.senate.length)return;
- const shouldShow=Date.now()>=finalAt||live;
- $('electionDashboard').hidden=!shouldShow;
- $('dashboardTitle').textContent=live?'Election night · America votes':'Final predictions · 2026';
- $('dashboardIntro').textContent=live?'Verified, unofficial vote leaders are displayed where reporting exists. Unreported geography retains the forecast shading, which is not a race call.':'Solid colors designate projected party leads by the Ervin Model; not race calls or certified results. Select a state to inspect each race.';
- $('reportingBanner').textContent=live?'LIVE / VERIFIED RETURNS · '+Object.keys(returns).length+' races reporting · checked '+new Date(lastResults||Date.now()).toLocaleTimeString():'FINAL FORECAST VIEW · NOV 3, 2026 · BASED ON LATEST PUBLISHED POLLING SNAPSHOT';
- $('nationMap').hidden=live;
- $('watchSection').hidden=live;
- $('balanceOfPower').hidden=live;
- $('stateDirectory').hidden=live;
- $('editorialNotes').hidden=live;
+ const now=Date.now(),preview=new URLSearchParams(location.search).get('preview');
+ const override=['forecast','final','closing','live'].includes(phaseConfig.phase)?phaseConfig.phase:null;
+ const isFinal=!!lockedAt&&now>=finalAt,closingAt=Date.parse('2026-11-03T18:00:00-05:00');
+ const phase=['final','live'].includes(preview)?preview:override||(live?'live':now>=closingAt?'closing':isFinal?'final':'forecast');
+ // There is one primary fifty-state forecast map. Detailed results appear as
+ // a separate LIVE desk only when verified votes have been accepted.
+ const showResults=phase==='live',forecastPublished=phase==='final'||phase==='closing'||showResults;
+ $('electionDashboard').hidden=!showResults;
+ const n=Object.keys(returns).length;
+ $('dashboardTitle').textContent=showResults?'Election night · reported votes':'Final predictions · 2026';
+ $('dashboardIntro').textContent=showResults?'Unofficial reported votes are labeled separately from the locked forecast. Counties without attributable vote reports remain neutral.':'The Ervin forecast is a pre-election estimate.';
+ $('reportingBanner').textContent=showResults?('LIVE · UNOFFICIAL RETURNS · '+n+' contests with verified reported totals'+(latestFeedAt?' · feed as of '+new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'}):'')):'';
+ for(const id of ['nationMap','watchSection','balanceOfPower','stateDirectory','editorialNotes','allCountyNation'])if($(id))$(id).hidden=false;
  const headline=document.querySelector('.ed-headline'),standfirst=document.querySelector('.ed-standfirst');
- if(headline)headline.textContent=live?'Election night 2026':'Every state. One clear picture.';
- if(standfirst)standfirst.textContent=live?'Verified, unofficial election returns from CivicAPI and attributed state sources. Select a state for statewide totals, county geography and congressional districts. Projections stay separate from counted votes.':'Explore the races shaping 2026 in a single state edition. Senate and governor polling, all House districts, county-level historical patterns, conditional forecasts and reported votes belong in one place.';
- if(shouldShow&&!live&&!watched.some(r=>r.id==='final-predictions')){
-  watched.unshift({id:'final-predictions',office:'Final',state:'National atlas',code:'US',margin:null,kind:'feature'});
-  position=0;drawWatch();
+ const status=window.document.getElementById('finalPhaseStatus');
+ if(headline)headline.textContent=showResults?'Election night 2026: votes are being reported':forecastPublished?'The final Ervin forecast for 2026':'Every state. One clear picture.';
+ if(standfirst){
+  const forecast=(modelBalance?.house?.D>=218?'Democrats lead in '+modelBalance.house.D+' House districts. ':modelBalance?'House control depends on the remaining competitive districts. ':'');
+  standfirst.textContent=showResults?n+' contests have validated unofficial returns. Our pre-election forecast remains below for comparison; there are no projected winners presented as race calls.':forecastPublished?forecast+'Explore the locked Senate and governor estimates, county scenarios and the competitive House districts in the interactive map.':'Explore Senate and governor polling, House districts, county scenarios and attributed results in one state edition.';
  }
- map();drill();
+ if(status){
+  status.textContent=forecastPublished?(lockedAt?'Forecast locked '+new Date(lockedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})+' · The forecast is not revised as votes are counted.':'Polls are closing · final source lock has not been verified; estimates remain provisional.'):
+    'Pre-election forecasting · final release requires a verified, immutable data snapshot.';
+ }
+ if((forecastPublished||showResults)&&rotateTimer){clearInterval(rotateTimer);rotateTimer=null;const pause=$('watchPause');if(pause){pause.textContent='Rotation stopped';pause.disabled=true}}
+ const countyNote=$('allCountyNote');
+ if(countyNote&&showResults)countyNote.textContent='LOCKED PRE-ELECTION COUNTY SCENARIOS — NOT REPORTED VOTES. View the live results desk above for verified returns.';
+ if(showResults){map();drill();}
 }
 async function refreshResults(){
  if(busy||!window.ERVIN_RETURNS)return;busy=true;
  try{
   const core=window.ERVIN_RETURNS,of=['Senate','Governor','House'];
-  const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),...of.map(x=>fetch('https://openamerica.io/elections/results.json?year=2026&office='+x,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('API '+r.status);return r.json()}))]);
+  const checkExternal=Date.now()-lastExternalFetch>300000;
+  if(checkExternal)lastExternalFetch=Date.now();
+  const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),...of.map(x=>checkExternal?fetch('https://openamerica.io/elections/results.json?year=2026&office='+x,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('API '+r.status);return r.json()}):Promise.resolve(null))]);
   const civic=all[0].status==='fulfilled'?core.civic(all[0].value):{};
   if(all[1].status==='fulfilled')countyReports=all[1].value;
-  const secondary={};of.forEach((x,i)=>{if(all[i+2].status==='fulfilled')Object.assign(secondary,core.openAmerica(all[i+2].value,x))});
+  const secondary={};of.forEach((x,i)=>{if(all[i+2].status==='fulfilled'&&all[i+2].value)Object.assign(secondary,core.openAmerica(all[i+2].value,x))});
   const merged=core.reconcile([core.preferCivic(civic,secondary).races],returns);
-  returns=merged.races;const prev=live;live=Object.keys(returns).length>0;lastResults=Date.now();
+  returns=merged.races;const prev=live;live=Object.keys(returns).length>0;lastResults=Date.now();const timestamps=Object.values(returns).map(x=>Date.parse(x.asOf||x.updatedAt||'')).filter(Number.isFinite);if(timestamps.length)latestFeedAt=Math.max(...timestamps);
   if(live||prev!==live)updatePhase();
-  else if(Date.now()>=finalAt&&model.senate.length)updatePhase();
+  else if(model.senate.length)updatePhase();
  }catch(e){console.warn('Live homepage check failed; saved verified data preserved',e)}
  finally{busy=false}
 }
@@ -194,9 +206,9 @@ function init(){
  $('electionStateSelect').innerHTML=states.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(s=>'<option value="'+s.code+'">'+esc(s.name)+'</option>').join('');
  $('electionStateSelect').value=selected;
  $('electionNationalMap')?.addEventListener('click',e=>{const a=e.target.closest('[data-choose-state]');if(a){$('electionStateSelect').value=a.dataset.chooseState}});
- loadModel().catch(e=>{$('watchCards').textContent='Forecast models temporarily unavailable. Open a state edition for saved predictions.';console.error(e)});
+ Promise.all([window.ERVIN_FINAL?.load?.()||Promise.resolve(null),window.ERVIN_FINAL?.status?.()||Promise.resolve({phase:'auto'})]).then(([snap,status])=>{lockedAt=snap?.lockedAt||null;phaseConfig=status||{phase:'auto'};return loadModel()}).catch(e=>{$('watchCards').textContent='Forecast models temporarily unavailable. Open a state edition for saved predictions.';console.error(e)});
  refreshResults();setInterval(()=>{if(!document.hidden)refreshResults()},30000);
- setInterval(()=>{if(model.senate.length&&Date.now()>=finalAt&&!live&&!$('electionDashboard').hidden){}else if(model.senate.length&&Date.now()>=finalAt&&!live)updatePhase()},60000);
+ setInterval(()=>{if(model.senate.length)updatePhase()},60000);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
