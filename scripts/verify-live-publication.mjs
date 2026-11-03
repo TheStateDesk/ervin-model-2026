@@ -58,6 +58,7 @@ try{
  const front=await browser.newPage({viewport:{width:390,height:844}});
  await front.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
  await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#watchCards')?.querySelectorAll('.watch-card').length>=4&&document.querySelectorAll('#usMap path.ed-state').length>=50,null,{timeout:35000});
+ await front.waitForFunction(expected=>document.querySelector('meta[name="ervin-deploy"]')?.content===expected,stamp,{timeout:20000});
  const frontModel=await front.evaluate(()=>{
   const balance=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
   const watch=document.querySelector('#watchSection')?.getBoundingClientRect();
@@ -71,17 +72,64 @@ try{
    governors:document.querySelector('[data-power-office="governors"]')?.textContent,
    senateD:Number(document.querySelector('[data-power-office="senate"] [data-power-d]')?.textContent),
    senateR:Number(document.querySelector('[data-power-office="senate"] [data-power-r]')?.textContent),
-   overflow:document.documentElement.scrollWidth>window.innerWidth+4};
+   overflow:document.documentElement.scrollWidth>window.innerWidth+4,
+   deployedRevision:document.querySelector('meta[name="ervin-deploy"]')?.content,
+   visibleBuild:document.querySelector('#publicBuildLabel')?.textContent?.trim(),
+   stateMapOfficeTabs:document.querySelectorAll('[data-map-office]').length,
+   nationalCountyTabs:document.querySelectorAll('[data-national-county-office]').length,
+   mobileStateLinks:document.querySelectorAll('#mobileTileMap a').length,
+   stampedStyles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(e=>e.getAttribute('href')?.includes('build=')).length,
+   stampedScripts:[...document.querySelectorAll('script[src]')].filter(e=>e.getAttribute('src')?.includes('build=')).length};
  });
  if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.watchTop<850
   &&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop
   &&frontModel.width>280&&frontModel.watchCount>=4&&frontModel.finalDashboard&&frontModel.officeTabs===3
-  &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow))
+  &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow
+  &&frontModel.deployedRevision===stamp&&frontModel.visibleBuild?.includes(stamp.slice(0,8))
+  &&frontModel.stateMapOfficeTabs===3&&frontModel.nationalCountyTabs===2&&frontModel.mobileStateLinks===50
+  &&frontModel.stampedStyles>=3&&frontModel.stampedScripts>=8))
   throw Error('LIVE MOBILE STATE DESK HOMEPAGE INCORRECT '+JSON.stringify(frontModel));
  await front.locator('#watchSection').screenshot({path:'postdeploy-checks/State-Desk-Races-To-Watch-Mobile.png'});
  await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
  console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
  await front.close();
+ // CRITICAL: inspection must prove BOTH new full-width maps are actually
+ // rendered on the LIVE public page, not merely present in repository HTML.
+ const atlas=await browser.newPage({viewport:{width:1440,height:940},deviceScaleFactor:1});
+ const atlasErrors=[];atlas.on('pageerror',e=>atlasErrors.push(e.message));
+ await atlas.goto(base+'states/?release='+stamp+'&maps=verify',{waitUntil:'domcontentloaded'});
+ await atlas.waitForFunction(expected=>document.querySelector('meta[name="ervin-deploy"]')?.content===expected,stamp,{timeout:20000});
+ await atlas.waitForFunction(()=>document.querySelectorAll('#usMap path.ed-state').length>=50
+  &&document.querySelectorAll('#allCountyMap path.all-county').length>=3000
+  &&document.querySelector('#allCountyStatus')?.textContent.includes('county'),null,{timeout:65000});
+ const mapAudit=await atlas.evaluate(()=>{
+  const map=document.querySelector('#nationMap'),counties=document.querySelector('#allCountyNation'),shell=document.querySelector('.ed-shell');
+  const a=map.getBoundingClientRect(),b=counties.getBoundingClientRect(),c=shell.getBoundingClientRect();
+  return {states:document.querySelectorAll('#usMap path.ed-state').length,
+    counties:document.querySelectorAll('#allCountyMap path.all-county').length,
+    coloredCounties:document.querySelectorAll('#allCountyMap path.atlas-D, #allCountyMap path.atlas-R').length,
+    mapWidth:Math.round(a.width),contentWidth:Math.round(c.width),
+    verticalGap:Math.round(b.top-a.bottom),
+    stateControls:document.querySelectorAll('[data-map-office]').length,
+    countyControls:document.querySelectorAll('[data-national-county-office]').length,
+    status:document.querySelector('#allCountyStatus')?.textContent.trim(),
+    build:document.querySelector('meta[name="ervin-deploy"]')?.content};
+ });
+ if(mapAudit.states<50||mapAudit.counties<3000||mapAudit.coloredCounties<100
+  ||mapAudit.mapWidth<mapAudit.contentWidth*.92||mapAudit.verticalGap<0||mapAudit.verticalGap>85
+  ||mapAudit.stateControls!==3||mapAudit.countyControls!==2||mapAudit.build!==stamp||atlasErrors.length)
+   throw Error('PUBLIC HOMEPAGE MAPS NOT ACTUALLY RENDERED '+JSON.stringify({mapAudit,atlasErrors}));
+ await atlas.locator('#nationMap').screenshot({path:'postdeploy-checks/LIVE-State-Map-Full-Width.png'});
+ await atlas.locator('#allCountyNation').screenshot({path:'postdeploy-checks/LIVE-County-Projections-Senate.png'});
+ await atlas.locator('[data-national-county-office="Governor"]').click();
+ await atlas.waitForFunction(()=>document.querySelector('[data-national-county-office="Governor"]')?.getAttribute('aria-pressed')==='true'
+   &&document.querySelector('#allCountyStatus')?.textContent.includes('Governor'),null,{timeout:30000});
+ await atlas.locator('#allCountyNation').screenshot({path:'postdeploy-checks/LIVE-County-Projections-Governor.png'});
+ await atlas.locator('#themeToggle').click();
+ await atlas.waitForFunction(()=>document.documentElement.classList.contains('theme-dark'),null,{timeout:10000});
+ await atlas.locator('#nationMap').screenshot({path:'postdeploy-checks/LIVE-State-Map-Dark.png'});
+ console.log('LIVE TWO-MAP DESKTOP VISUAL PASS '+JSON.stringify(mapAudit));
+ await atlas.close();
  const oh=await browser.newPage({viewport:{width:390,height:844}});
  await oh.goto(base+'state/?state=OH&release='+stamp,{waitUntil:'domcontentloaded'});
  await oh.waitForFunction(()=>/^(?:D|R) \+\d+\.\d|Even$/.test(document.querySelector('#heroGovernor')?.textContent||''),null,{timeout:35000});
