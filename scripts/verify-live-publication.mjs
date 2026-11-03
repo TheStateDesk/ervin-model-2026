@@ -61,6 +61,7 @@ try{
  await rootPage.waitForURL(/\/states\//,{timeout:18000});
  await rootPage.close();
  const front=await browser.newPage({viewport:{width:390,height:844}});
+ await front.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const frontJsErrors=[],frontRequestFailures=[];
  front.on('pageerror',e=>frontJsErrors.push(e.message));
  front.on('requestfailed',r=>{if(/\/geo\/districts\/|\/scripts\/election-day-desk/.test(r.url()))frontRequestFailures.push({url:r.url(),reason:r.failure()?.errorText});});
@@ -160,6 +161,39 @@ try{
  await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
  console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
  await front.close();
+
+ // Independently verify the real deployed live feature with a controlled
+ // pre-poll-close clock, ensuring no votes can appear by accident.
+ const liveHero=await browser.newPage({viewport:{width:390,height:844}});
+ const liveErrors=[];liveHero.on('pageerror',e=>liveErrors.push(e.message));
+ await liveHero.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
+ await liveHero.goto(base+'states/?preview=closing&release='+stamp,{waitUntil:'domcontentloaded'});
+ await liveHero.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live'&&
+  document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&
+  document.querySelector('#edFinalHeadline')?.textContent.includes('COVERAGE')&&
+  document.querySelector('#edLiveCommentary')?.hidden===false&&
+  document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:85000});
+ if(await liveHero.locator('#edResultsStage').count())throw Error('PUBLIC LIVE HOMEPAGE HAS DUPLICATE RESULTS STAGE');
+ if((await liveHero.locator('#edSimMap path.ed-live-lead-N').count())!==435)throw Error('PUBLIC LIVE HOUSE MAP SHOWS UNSOURCED RETURNS OR OLD FORECAST');
+ const houseLink=await liveHero.locator('#edSimMap a[data-sim-district="MI-09"]').getAttribute('href');
+ if(!houseLink?.includes('/election-night/?state=MI&race=MI-09#nationalBoard'))throw Error('PUBLIC MI-09 LINK INVALID '+houseLink);
+ if((await liveHero.locator('#edCommentaryEntries .ed-commentary-item').count())!==1)throw Error('PUBLIC COMMENTARY INVENTED UNSOURCED REPORTS');
+ for(const [label,office,race] of [['Senate','senateD','MI-SENATE'],['Governors','governorsD','MI-GOVERNOR']]){
+  await liveHero.locator('#edSimTabs button').filter({hasText:label}).click();
+  await liveHero.waitForFunction(o=>document.querySelector('#edSimMap')?.dataset.simOffice===o&&document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true',office,{timeout:30000});
+  if((await liveHero.locator('#edSimMap path.ed-live-lead-N').count())!==50)throw Error('PUBLIC '+label+' LIVE MAP SHOWS UNVALIDATED COUNTS');
+  const href=await liveHero.locator('#edSimMap a[data-sim-state="MI"]').getAttribute('href');
+  if(!href?.includes('race='+race))throw Error('PUBLIC '+label+' MUST LINK TO PRECISE RACE '+href);
+ }
+ if((await liveHero.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth))>5)throw Error('PUBLIC LIVE MOBILE OVERFLOW');
+ await liveHero.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/LIVE-5-55-Mobile.png'});
+ await liveHero.setViewportSize({width:1440,height:940});
+ await liveHero.locator('#edSimTabs button').filter({hasText:'House'}).click();
+ await liveHero.waitForFunction(()=>document.querySelector('#edSimMap')?.dataset.simOffice==='house'&&document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true',null,{timeout:30000});
+ await liveHero.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/LIVE-5-55-Desktop.png'});
+ if(liveErrors.length)throw Error('PUBLIC LIVE COVERAGE JS ERRORS '+liveErrors.join(' | '));
+ console.log('PUBLIC 5:55 LIVE COVERAGE ACCEPTANCE PASS · 435 race links · no fake votes · commentary');
+ await liveHero.close();
  // CRITICAL: inspection must prove BOTH new full-width maps are actually
  // rendered on the LIVE public page, not merely present in repository HTML.
  const atlas=await browser.newPage({viewport:{width:1440,height:940},deviceScaleFactor:1});
