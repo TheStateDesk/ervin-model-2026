@@ -3,7 +3,13 @@
 const $=id=>document.getElementById(id),escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const path=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
 let seats=[],selectState='MI',generation=0;
-function tone(r){let c=(window.ERVIN_HOUSE_DATA?.races?.[r?.id]?.modelRating||r?.rating||'').toLowerCase();return c.includes('tossup')?'#bca481':/\b(tilt|lean|likely|solid) d\b/.test(c)?'#5194c4':/\b(tilt|lean|likely|solid) r\b/.test(c)?'#b96172':'#89a1b4';}
+function tone(r){
+ const c=String(window.ERVIN_HOUSE_DATA?.races?.[r?.id]?.modelRating||r?.rating||'').toLowerCase();
+ const grade=/^(solid|likely|lean|tilt) ([dr])$/.exec(c);
+ if(!grade)return c==='tossup'?'var(--ed-grade-toss)':'var(--ed-map-neutral,#9cacb8)';
+ const tier=grade[1]==='tilt'?'lean':grade[1];
+ return 'var(--ed-grade-'+tier+'-'+grade[2]+')';
+}
 function fallback(races,msg){
  $('districtMapSvg').replaceChildren();
  $('districtMapStatus').textContent=msg+' Select any district below to open its election dashboard.';
