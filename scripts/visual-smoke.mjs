@@ -85,12 +85,13 @@ try{
   assert(Math.abs(controlSum-100)<=2,'Control simulation should allocate nearly 100% of illustrative outcomes');
   assert((await homepage.locator('#stateDirectory').count())===1,'State directory must remain');
   assert((await homepage.locator('#electionDashboard').count())===1,'Scheduled national election dashboard is missing');
-  // The frozen 144,000-run distribution must be the first editorial panel below the byline.
-  await homepage.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&document.querySelector('#edSimSummary')?.textContent.includes('249')&&document.querySelector('#edFinalHeadline')?.textContent.includes('FINAL'),null,{timeout:65000});
+  // The final prediction must lead the page, without a competing simulation chart.
+  await homepage.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&!document.querySelector('#edSimulationPanel .ed-final-distribution')&&document.querySelector('#edFinalHeadline')?.textContent.includes('FINAL'),null,{timeout:65000});
   const headingBottom=await homepage.locator('.ed-byline').evaluate(el=>el.getBoundingClientRect().bottom);
   const simTop=await homepage.locator('#edSimulationPanel').evaluate(el=>el.getBoundingClientRect().top);
   const deckTop=await homepage.locator('.ed-standfirst').evaluate(el=>el.getBoundingClientRect().top);
-  assert(simTop>=headingBottom-2&&simTop<deckTop,'Simulation and maps must appear immediately beneath the page title and byline');
+  assert(simTop>=headingBottom-2&&simTop<deckTop,'Final prediction maps must appear immediately beneath the page title and byline');
+  assert(!(await homepage.locator('#edSimulationPanel').innerText()).includes('144,000')&&!await homepage.locator('#edSimulationPanel .ed-final-distribution').count(),'The final prediction hero must not expose the old simulation chart or its numerical scenario language');
   for(const [office,label,covered] of [['house','House',435],['senateD','Senate',17],['governorsD','Governors',36]]){
    await homepage.locator('#edSimTabs button').filter({hasText:label}).click();
    await homepage.waitForFunction(o=>document.querySelector('#edSimMap')?.dataset.simOffice===o,office,{timeout:65000});
@@ -99,6 +100,17 @@ try{
    const projected=await homepage.locator(selector+':not(.ed-sim-proj-N)').count();
    assert(mapCount===(office==='house'?435:50)&&projected===covered,office+' must show '+covered+' definitive calls on actual district or state shapes');
    assert((await homepage.locator('#edSimMap path.ed-sim-proj-T').count())===0,'Final map must not show toss-up calls');
+   if(office!=='house'){
+    const positions=await homepage.evaluate(()=>['AK','HI'].map((code,i)=>{
+     const path=document.querySelector('#edSimMap g[data-sim-inset="'+code+'"] path');
+     const group=path?.parentElement?.parentElement;
+     const frame=document.querySelectorAll('#edSimMap .ed-sim-map-insets rect')[i];
+     const a=path?.getBoundingClientRect(),b=frame?.getBoundingClientRect();
+     return {code,transform:group?.getAttribute('transform'),valid:!!(a&&b&&a.width>10&&a.height>8&&a.left>=b.left-2&&a.top>=b.top-2&&a.right<=b.right+2&&a.bottom<=b.bottom+2)};
+    }));
+    assert(positions.length===2&&positions.every(x=>x.valid&&x.transform?.startsWith('translate(')),office+' Alaska and Hawaii must use House-aligned geographic inset frames: '+JSON.stringify(positions));
+   }
+
    assert((await homepage.locator('#edFinalCallSummary').innerText()).includes(' D'),'Each map must show its final call tally');
    const target=office==='house'?'#edSimMap a[data-sim-district="MI-09"]':'#edSimMap a[data-sim-state="MI"]';
    assert((await homepage.locator(target).first().getAttribute('href')).includes(office==='house'?'#house-09':'#stateOverview'),office+' map must link into the appropriate race');
@@ -362,11 +374,11 @@ try{
  const electionDesk=await browser.newPage({viewport:{width:1440,height:940}});
  const deskErrors=[];electionDesk.on('pageerror',e=>deskErrors.push(e.message));
  await electionDesk.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
- await electionDesk.waitForFunction(()=>document.querySelector('#edResultsStage')?.hidden===false&&document.querySelector('#edNightMapSlot #nationMap')&&document.querySelector('#edSimSummary')?.textContent.includes('House')&&document.querySelector('[data-state-map-view="reported"]')?.getAttribute('aria-pressed')==='true',null,{timeout:32000});
+ await electionDesk.waitForFunction(()=>document.querySelector('#edResultsStage')?.hidden===false&&document.querySelector('#edNightMapSlot #nationMap')&&document.querySelector('#edFinalHeadline')?.textContent.includes('PREDICTION')&&document.querySelector('[data-state-map-view="reported"]')?.getAttribute('aria-pressed')==='true',null,{timeout:32000});
  await electionDesk.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:65000});
  assert((await electionDesk.locator('#edSimMap path.ed-sim-proj-district').count())===435,'Frozen 435-district map must coexist with live atlas');
  assert((await electionDesk.locator('#edCommentaryEntries').innerText()).includes('5:55 p.m.'),'Election-night desk fails to introduce the scheduled handoff');
- assert((await electionDesk.locator('#controlStatus').innerText()).includes('144,000'),'Public Senate control card must reference the final ensemble');
+ assert((await electionDesk.locator('#controlStatus').innerText()).includes('Historical-error sensitivity'),'Public Senate control card must display the documented model setting');
  assert((await electionDesk.locator('#edCommentaryEntries .ed-commentary-item').count())===1,'Site invented an unofficial early vote commentary');
  assert(deskErrors.length===0,'Election-night desk JavaScript errors: '+deskErrors.join(' | '));
  await electionDesk.screenshot({path:'visual-checks/Election-Night-5-55-Desktop.png',fullPage:true});
