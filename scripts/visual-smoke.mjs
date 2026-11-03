@@ -266,6 +266,9 @@ try{
  await ohioDetail.close();
  // Verify all-state aggregate ratings, hover D/R/T counts and each race margin.
  const stateAtlas=await browser.newPage({viewport:{width:1440,height:940}});
+ // Keep forecast-only state hover checks on a controlled pre-close clock;
+ // live returns must not be required to display fictional D/R/T forecasts.
+ await stateAtlas.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const atlasErrors=[];stateAtlas.on('pageerror',e=>atlasErrors.push(e.message));
  await stateAtlas.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('states with forecasts'),null,{timeout:27000});
