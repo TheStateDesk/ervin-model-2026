@@ -245,7 +245,18 @@ async function loadSenate(){
  const response=await fetch('../research/senate-workbench-data.json');if(!response.ok)throw Error('Senate source file unavailable');
  const data=await response.json();
  if(!Array.isArray(data.states)||data.states.length!==17)throw Error('Preserved Senate model record invalid');
- return (data.states||[]).map(r=>({...r,office:'Senate'}));
+ const numeric=(data.states||[]).map(r=>({...r,office:'Senate'}));
+ const response=await fetch('../counties-watch/forecast-baselines.json',{cache:'no-cache'});
+ if(!response.ok)throw Error('Senate source rating snapshot unavailable');
+ const snapshot=await response.json();
+ const rated=Object.entries(snapshot.sourceRated||{}).map(([code,r])=>({
+  code,state:r.state,office:'Senate',dem:r.nonR,rep:r.rep,party:r.party,
+  sourceRating:r.rating,sourceUrl:r.sourceUrl,candidateSource:r.candidateSource,
+  sources:{},history_mode:'not_comparable',correction:null
+ }));
+ if(numeric.length!==17||rated.length!==18||new Set([...numeric,...rated].map(x=>x.code)).size!==35)
+  throw Error('Required 17 numeric and 18 source-rated 2026 Senate races');
+ return [...numeric,...rated];
 }
 async function start(){
  try{
