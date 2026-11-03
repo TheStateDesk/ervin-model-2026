@@ -294,7 +294,10 @@ def main():
  # One contest = one detail request, with six workers and a bounded retry budget.
  # An unstable upstream must not hang the 16-minute GitHub workflow.
  with futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
-  for key,data,error in pool.map(get_one,sorted(eligible.items())):
+  # Prioritize statewide Senate returns ahead of the larger House queue.
+  # Slow or timed-out district endpoints must not starve Senate results.
+  ordered=sorted(eligible.items(),key=lambda item:(0 if item[0].endswith("-SENATE") else 1 if item[0].endswith("-GOVERNOR") else 2,item[0]))
+  for key,data,error in pool.map(get_one,ordered):
    if error:
     issues[key]="fetch_"+error;continue
    fetched+=1
