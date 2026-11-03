@@ -236,14 +236,14 @@ try{
  await countyNight.waitForFunction(()=>document.querySelector('#heroSenate')?.textContent==='R +0.8',null,{timeout:20000});
  assert((await countyNight.locator('#stateRaceCards').innerText()).includes('R +0.8'),'Michigan state hero and model card disagree');
  await countyNight.locator('#stateOverview').screenshot({path:'visual-checks/MI-Ervins-Take-Candidate-Strength.png'});
- await countyNight.waitForFunction(()=>document.querySelectorAll('#countyNightMap path.night-county').length===83,null,{timeout:26000});
+ await countyNight.waitForFunction(()=>document.querySelectorAll('#countyMap path.county').length===83&&document.querySelectorAll('#countyNightMap').length===0,null,{timeout:26000});
  await countyNight.waitForFunction(()=>document.querySelector('#nightCountyCount')?.textContent.includes('0 / 83'),null,{timeout:8000});
  assert((await countyNight.locator('#nightCountyDem').innerText())==='—','Michigan election-night county page shows fictitious ballots');
  assert((await countyNight.locator('#nightCountyRows tr').count())===83,'Michigan county night reporting table incomplete');
  assert(nightPageErrors.length===0,'Michigan state county desk errors: '+nightPageErrors.join(', '));
  await countyNight.locator('.ed-night-county').screenshot({path:'visual-checks/MI-State-Election-Night-83-land-clipped.png'});
  await countyNight.goto(root+'/state/?state=TX#stateResults',{waitUntil:'domcontentloaded'});
- await countyNight.waitForFunction(()=>document.querySelectorAll('#countyNightMap path.night-county').length===254,null,{timeout:27000});
+ await countyNight.waitForFunction(()=>document.querySelectorAll('#countyMap path.county').length===254&&document.querySelectorAll('#countyNightMap').length===0,null,{timeout:27000});
  assert((await countyNight.locator('#nightCountyDem').innerText())==='—','Texas county results invented before election');
  await countyNight.close();
  console.log('ALL STATE NIGHT & AGGREGATE QA PASS',JSON.stringify({hover:'MI all races',states:50,miCounties:83,txCounties:254,errors:atlasErrors.concat(nightPageErrors)}));
