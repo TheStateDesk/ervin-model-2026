@@ -1,0 +1,65 @@
+/* State Desk editorial typography / interaction bridge for the classic
+   House, Governors and election-dossier interiors. This stylesheet does NOT
+   change photographs, credits, or rights metadata. */
+body:not(.ed-body){
+  font-family:'Libre Franklin','Helvetica Neue',Arial,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+body:not(.ed-body) :is(.race-title,.race-lede h1,.race-panel h2,.house-title,.gov-map h2){
+  font-family:'Newsreader',Georgia,'Iowan Old Style',serif !important;
+  letter-spacing:-.035em;
+}
+body:not(.ed-body) :is(.race-description,.race-muted,.gov-candidates,.house-filter-note){
+  line-height:1.6;
+}
+body:not(.ed-body) .race-kicker{
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+body:not(.ed-body) .site-emblem{
+  border-radius:3px!important;
+  font-family:'Newsreader',Georgia,serif!important;
+}
+body:not(.ed-body) :is(.race-panel,.gov-card,.gov-map,.house-model-metrics>div){
+  border-radius:8px!important;
+  box-shadow:none!important;
+}
+body:not(.ed-body) .gov-card{
+  transition:background-color .15s ease,border-color .15s ease;
+}
+body:not(.ed-body) .gov-card:hover{
+  transform:none!important;
+  border-color:var(--accent,#416f8b)!important;
+}
+body:not(.ed-body) :is(.gov-card,.gov-map path[tabindex],.race-ribbon a,.race-list a,
+  .district-map-frame path[tabindex],.house-overview-map path[tabindex]):focus-visible{
+  outline:3px solid #cb9650!important;
+  outline-offset:3px;
+}
+body:not(.ed-body) :is(.race-panel,.house-model-metrics,.house-filters,.gov-card){
+  min-width:0;
+}
+body:not(.ed-body) :is(.race-panel,.gov-card,.ed-coverage){
+  overflow-wrap:anywhere;
+}
+body:not(.ed-body) :is(.race-shell,.gov-grid,.house-overview-map){
+  max-width:100%;
+}
+body:not(.ed-body) :is(.race-shell section[id],.gov-map[id],.gov-card[id]){
+  scroll-margin-top:105px;
+}
+body:not(.ed-body) .race-description a{
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+@media (max-width:760px){
+  body:not(.ed-body) :is(.race-panel,.gov-card){padding:16px!important}
+  body:not(.ed-body) .race-title{font-size:clamp(32px,8vw,48px)!important;line-height:1.05!important}
+  body:not(.ed-body) .race-shell{overflow-x:clip;}
+}
+@media(prefers-reduced-motion:reduce){
+  body:not(.ed-body) :is(.gov-card,.race-ribbon a,.site-nav a){transition:none!important;animation:none!important}
+  body:not(.ed-body){scroll-behavior:auto}
+}
