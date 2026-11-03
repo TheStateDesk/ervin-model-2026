@@ -208,7 +208,9 @@ async function refreshResults(){
   const core=window.ERVIN_RETURNS,of=['Senate','Governor','House'];
   const checkExternal=Date.now()-lastExternalFetch>300000;
   if(checkExternal)lastExternalFetch=Date.now();
-  const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),...of.map(x=>checkExternal?fetch('https://openamerica.io/elections/results.json?year=2026&office='+x,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('API '+r.status);return r.json()}):Promise.resolve(null))]);
+  const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),...of.map(x=>checkExternal&&window.ERVIN_EXTERNAL_FEED
+   ?window.ERVIN_EXTERNAL_FEED.json('https://openamerica.io/elections/results.json?year=2026&office='+x,{timeout:11000})
+   :Promise.resolve(null))]);
   const civic=all[0].status==='fulfilled'?core.civic(all[0].value):{};
   if(all[1].status==='fulfilled')countyReports=all[1].value;
   const secondary={};of.forEach((x,i)=>{if(all[i+2].status==='fulfilled'&&all[i+2].value)Object.assign(secondary,core.openAmerica(all[i+2].value,x))});
