@@ -11,7 +11,7 @@
 const TOSSUP_MARGIN=1.5;
 const OFF_CYCLE_GOVERNORS={D:6,R:8};
 const SENATE_BASE={D:47,R:53};
-const DEM_HELD=new Set(['MI','GA','NH','MN']);
+const DEM_HELD=new Set(['MI','GA','NH','MN','CO','DE','IL','MA','NJ','NM','OR','RI','VA']);
 const INDEPENDENT_NONR=new Set(['NE','SD','MT']);
 const total=c=>c.D+c.R+c.T+(c.I||0)+(c.U||0);
 function label(count,denom){return count+' of '+denom}
@@ -42,20 +42,26 @@ function compute(house,senate,governors){
   else if(x.marginD>0)h.D++;
   else h.R++;
  }
- const s={D:SENATE_BASE.D,R:SENATE_BASE.R,T:0,I:0,denom:100,threshold:51};
+ const s={D:SENATE_BASE.D,R:SENATE_BASE.R,T:0,I:0,denom:100,threshold:51,modeled:0,sourceRated:0};
  const seen=new Set();
- if(!Array.isArray(senate)||senate.length!==17)throw Error('Senate balance needs 17 Original Ervin states');
+ if(!Array.isArray(senate)||senate.length!==35)throw Error('Senate balance needs all 35 contests, including 18 source-rated races');
  for(const r of senate){
   if(seen.has(r.code))throw Error('Duplicate Senate race '+r.code);
   seen.add(r.code);
-  const margin=r.model?.adjustedMargin;
-  if(!Number.isFinite(margin))throw Error('Senate margin not available for '+r.code);
-  if(Math.abs(margin)<TOSSUP_MARGIN){
-   if(DEM_HELD.has(r.code))s.D--;else s.R--;
-   s.T++;continue;
+  const margin=r.model?.adjustedMargin,q=r.model?.rating;
+  let leader=null;
+  if(Number.isFinite(margin)){
+   s.modeled++;
+   leader=Math.abs(margin)<TOSSUP_MARGIN?'T':margin>0?'D':'R';
+  }else{
+   if(!r.model?.sourceRated||!['Solid D','Likely D','Lean D','Tilt D','Solid R','Likely R','Lean R','Tilt R','Toss-up'].includes(q))
+    throw Error('Senate contest lacks a validated source rating or numerical model '+r.code);
+   s.sourceRated++;
+   leader=q==='Toss-up'?'T':q.slice(-1);
   }
-  if(DEM_HELD.has(r.code)){if(margin<0){s.D--;s.R++;}}
-  else if(margin>0){s.R--;if(INDEPENDENT_NONR.has(r.code))s.I++;else s.D++;}
+  if(leader==='T'){if(DEM_HELD.has(r.code))s.D--;else s.R--;s.T++;continue;}
+  if(DEM_HELD.has(r.code)){if(leader==='R'){s.D--;s.R++;}}
+  else if(leader==='D'){s.R--;if(INDEPENDENT_NONR.has(r.code))s.I++;else s.D++;}
  }
  const g={D:OFF_CYCLE_GOVERNORS.D,R:OFF_CYCLE_GOVERNORS.R,T:0,denom:50,threshold:26,rawOnly:0,modeled:0,sourceRated:0,offCycle:14};
  if(!Array.isArray(governors)||governors.length!==36)throw Error('Governor balance needs all 36 contests');
@@ -83,7 +89,7 @@ function render(rootEl,projection){
  if(!rootEl)throw Error('Balance-of-power container missing');
  const specs=[
   {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 races · 218 seats to control House · 433 same-office numerical scenarios from 2026 congressional boundaries; 173 redrawn districts use reconstructed presidential vote allocations with wider uncertainty; two special ballots use sourced qualitative ratings'},
-  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:projection.senate.D+' D-aligned · '+projection.senate.R+' Republican · '+projection.senate.T+' toss-up seats remain unresolved'+(projection.senate.I?' · '+projection.senate.I+' independent':'')+'. At 50–50 the Republican vice president breaks the tie; Democrats need 51 for control. Unmodeled contests are presumed held.'},
+  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:projection.senate.D+' D-aligned · '+projection.senate.R+' Republican · '+projection.senate.T+' toss-up seats remain unresolved'+(projection.senate.I?' · '+projection.senate.I+' independent':'')+'. At 50–50 the Republican vice president breaks the tie; Democrats need 51 for control. 17 numerical Senate estimates plus 18 explicitly identified publisher ratings. Publisher ratings are not Ervin numerical forecasts.'},
   {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 races · 14 holdovers · '+projection.governors.sourceRated+' without numeric polls classified by attributed Cook ratings · close margins remain toss-ups'}
  ];
  rootEl.innerHTML=specs.map(({office,label:headline,data,href,note})=>{
