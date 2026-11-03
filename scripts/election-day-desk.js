@@ -335,7 +335,7 @@ function renderProjectionMap(office){
 }
 
 function enter(){
- if(active)return;
+ if(active||new URLSearchParams(location.search).get('view')==='final')return;
  active=true;
  document.documentElement.classList.add('ed-election-night');
  window.ERVIN_LIVE_HERO?.activate?.();
