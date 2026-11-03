@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-03T23:20:33.593127Z",
+  "checkedAt": "2026-11-03T23:21:54.765902Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
@@ -50,8 +50,8 @@
       "identityMatches": true,
       "payloadType": "dict",
       "positiveCandidateTotals": false,
-      "providerTimestamp": "2026-11-03T23:20:52.895Z",
-      "responseMs": 1474
+      "providerTimestamp": "2026-11-03T23:21:47.388Z",
+      "responseMs": 387
     },
     "MI-SENATE": {
       "candidateRows": 11,
@@ -82,16 +82,14 @@
       "payloadType": "dict",
       "positiveCandidateTotals": false,
       "providerTimestamp": "2026-11-03T03:44:10.357Z",
-      "responseMs": 2168
+      "responseMs": 4792
     },
     "networkReachable": true,
     "statusEndpoint": {
-      "connected": true,
-      "fields": [
-        "status"
-      ],
-      "payloadType": "dict",
-      "responseMs": 8271
+      "connected": false,
+      "detail": "HTTP Error 502: Bad Gateway",
+      "failure": "HTTPError",
+      "responseMs": 184
     }
   },
   "publishedRaces": 0,
