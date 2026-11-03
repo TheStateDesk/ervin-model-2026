@@ -8,9 +8,9 @@ const historical=read('research/calibration_events_2016_2024.json');
 const out=engine.apply(archive,governors,senate);
 assert.equal(out.governor.length,36);assert.equal(out.senate.length,17);
 assert.equal(out.summary.withPublishedPolling,33);
-assert.equal(out.summary.adjustedGovernorRaces,24,'Only sourced 2026 governor margins with like-for-like historical comparisons are adjusted');
-assert.equal(archive.races.length,41);
-assert(archive.races.every(e=>e.year>=2018),'2014 governor rows still active');
+assert.equal(out.summary.adjustedGovernorRaces,33,'All 33 publisher-polled governors have same-state historical comparisons; three without 2026 polls remain unadjusted');
+assert.equal(archive.races.length,57);
+assert(archive.races.every(e=>e.office==='Governor'&&e.year>=2018),'2014 or cross-office governor rows still active');
 assert(historical.events.some(e=>e.year===2016)&&historical.events.some(e=>e.year===2024),'Historical scope must include 2016–24');
 for(const r of out.governor){
  const c=prior.correction(archive.races,r.code,2026);
