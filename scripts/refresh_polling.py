@@ -20,6 +20,7 @@ MODEL=ROOT/"research/senate-workbench-data.json"
 AUDIT=ROOT/"refresh_log.json"
 RECENT=ROOT/"recent_polls.json"
 CURATED=ROOT/"research/curated_individual_polls_2026.json"
+DIRECT_270=ROOT/"research/verified-270towin-senate-2026-11-03.json"
 CSV=ROOT/"source_snapshot.csv"
 SOURCES={
     "rcp": ("realclearpolling","realclearpolitics"),
@@ -163,6 +164,61 @@ def merge_survey_evidence(curated, verified):
                   key=lambda p:str(p.get("fieldEnd") or p.get("publishedAt") or ""),
                   reverse=True)[:12]
 
+def apply_direct_270_snapshot(data, report, today):
+    """Use a dated, human-verified direct publisher snapshot for the final sweep.
+
+    Only the named 2026 general-election pairing is eligible. A three-way poll
+    does not become a two-way average; Alaska uses its explicit head-to-head
+    table. The latest underlying poll date is a recency proxy, NOT an invented
+    publisher update time. This is a publisher average, never an additional poll.
+    """
+    if not DIRECT_270.exists() or today != dt.date(2026, 11, 3):
+        return
+    snapshot=json.loads(DIRECT_270.read_text(encoding="utf-8"))
+    if snapshot.get("schema")!=1 or snapshot.get("auditedOn")!="2026-11-03":
+        raise ValueError("Unsupported verified 270toWin pre-election audit")
+    rows=snapshot.get("states") or {}
+    if len(rows)!=15 or "MT" in rows or "MS" in rows:
+        raise ValueError("Direct 270toWin audit must explicitly exclude incomparable MT/MS")
+    report["directPublisherAudits"]=[]
+    for race in data["states"]:
+        code=race["code"]
+        if code not in rows:
+            continue
+        row=rows[code]
+        if row["nonR"]!=race["dem"] or row["rep"]!=race["rep"]:
+            raise ValueError("Direct 270toWin candidate pair changed for "+code)
+        expected="https://www.270towin.com/2026-senate-polls/"+race["state"].lower().replace(" ","-")
+        if row["sourceUrl"]!=expected:
+            raise ValueError("Direct 270toWin publisher URL mismatch for "+code)
+        try:
+            day=dt.date.fromisoformat(row["latestConstituentPollEnd"])
+            non_r=float(row["averageNonRShare"])
+            republican=float(row["averageRepublicanShare"])
+            lead=round(float(row["pollMarginNonRMinusR"]),1)
+        except (ValueError,KeyError,TypeError) as e:
+            raise ValueError("Invalid direct publisher row for "+code) from e
+        if day<dt.date(2026,9,1) or day>today or not (10<=non_r<=90 and 10<=republican<=90 and non_r+republican<=102):
+            raise ValueError("Outdated or invalid 270toWin source for "+code)
+        if abs(round(non_r-republican,1)-lead)>0.01:
+            raise ValueError("Publisher candidate shares differ from reported margin for "+code)
+        old=race["sources"]["win270"]
+        try:
+            old_day=dt.datetime.strptime(str(old.get("date","")).strip()+" 2026","%b %d %Y").date()
+        except ValueError:
+            old_day=dt.date(2026,1,1)
+        if day<old_day:
+            report["directPublisherAudits"].append({"state":code,"result":"archived newer source retained"})
+            continue
+        report["directPublisherAudits"].append({"state":code,"result":"direct 270toWin candidate match","margin":lead,"latestUnderlyingPoll":str(day)})
+        if round(float(old.get("value",9999)),1)==lead and old_day==day and old.get("origin")=="270toWin" and old.get("url")==expected and not old.get("proxy"):
+            continue
+        old.update({"value":lead,"date":day.strftime("%b %d"),"origin":"270toWin",
+                    "url":expected,"proxy":False,
+                    "note":"Direct 270toWin named general-election publisher average; latest constituent-poll date shown, NOT treated as a separate survey."})
+        report["changes"]+=1
+        report["updated"].append({"state":code,"source":"win270","margin":lead,"published":str(day),"evidence":"Direct named publisher average"})
+
 def main():
     data=json.loads(MODEL.read_text(encoding="utf-8"))
     checked=dt.datetime.now(dt.timezone.utc)
@@ -208,6 +264,7 @@ def main():
             recent_polls[race["code"]]=merge_survey_evidence(curated_polls.get(race["code"],[]),previous_polls.get(race["code"],[]))
             report["errors"].append(race["code"]+": "+str(exc)[:180])
             report["sourceCoverage"].append({"state":race["code"],"verifiedPublisherRows":0,"result":"source check failed"})
+    apply_direct_270_snapshot(data,report,checked.date())
     # The source-check time and actual published-aggregate dates are different.
     # Expose stale rows and missing sources without silently assigning current dates.
     for race in data["states"]:
