@@ -44,6 +44,7 @@ jobs:
       - run: node scripts/audit-internal-links.mjs
       - run: node scripts/validate-state-desk.mjs
       - run: node scripts/validate-house-forecast.mjs
+      - run: python3 -m py_compile scripts/build-house-ervin.py scripts/refresh_generic_ballot.py tests/test_generic_ballot_refresh.py
       - run: node scripts/validate-house-model.mjs
       - run: node scripts/validate-statewide-night.mjs
       - run: |
