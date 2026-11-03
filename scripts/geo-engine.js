@@ -30,14 +30,14 @@ async function get(code,kind="counties",options={}){
      let last=null;
      for(let attempt=0;attempt<2;attempt++){
        try{
-         const response=await fetch(url,{cache:"no-cache",signal:typeof AbortSignal?.timeout==="function"?AbortSignal.timeout(16000):undefined});
+         const response=await fetch(url,{cache:"no-cache",signal:typeof AbortSignal!=="undefined"&&typeof AbortSignal.timeout==="function"?AbortSignal.timeout(16000):undefined});
          if(!response.ok)throw Error("state asset HTTP "+response.status);
          const parsed=await response.json();
          if(parsed.type!=="FeatureCollection"||parsed.state!==code||!Array.isArray(parsed.features)||!parsed.features.length)throw Error("State asset invalid");
          if(kind==="districts"&&CURRENT_MAP_STATES.has(code)&&Number(parsed.boundaryYear)!==2026)throw Error("Stale congressional district geometry for "+code);
          data=parsed;
          break;
-       }catch(e){last=e;if(attempt===0)await new Promise(resolve=>setTimeout(resolve,320));}
+       }catch(e){last=e;if(attempt===0&&typeof setTimeout==="function")await new Promise(resolve=>setTimeout(resolve,320));}
      }
      if(!data)throw last||Error("State geography unavailable");
    }catch(e){primaryError=e;}
