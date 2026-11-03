@@ -5,6 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
 from recent_poll_parser import parse_recent_polls,extract_end_date
+from refresh_polling import dedupe_survey_evidence, merge_survey_evidence
 
 RACE={"dem":"Abdul El-Sayed","rep":"Mike Rogers"}
 HTML="""<html>
@@ -37,6 +38,18 @@ class RecentPollParserTest(unittest.TestCase):
  def test_never_accept_wrong_matchup(self):
   other={"dem":"Graham Platner","rep":"Susan Collins"}
   self.assertEqual(parse_recent_polls(HTML,other,dt.date(2026,10,30)),[])
+ def test_duplicate_wikipedia_and_original_release_not_double_counted(self):
+  primary={"pollster":"co/efficient","fieldEnd":"2026-10-28","dem":46,"rep":48,"url":"https://battlegrounds.coefficient.org/ia/"}
+  secondary={"pollster":"co/efficient (R)","fieldEnd":"2026-10-28","dem":46,"rep":48,"url":"https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa"}
+  distinct={"pollster":"co/efficient","fieldEnd":"2026-10-19","dem":45,"rep":48,"url":"https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa"}
+  dedup=dedupe_survey_evidence([secondary,primary,distinct])
+  self.assertEqual(len(dedup),2)
+  self.assertEqual(next(x for x in dedup if x["fieldEnd"]=="2026-10-28")["url"],primary["url"])
+  self.assertEqual(len(merge_survey_evidence([primary],[secondary,distinct])),2)
+ def test_never_dedupe_different_matchup_shares(self):
+  a={"pollster":"Acme (D-sponsored)","fieldEnd":"2026-10-28","dem":46,"rep":48,"url":"https://example.com/a"}
+  b={**a,"pollster":"Acme (D)","dem":49,"url":"https://example.com/b"}
+  self.assertEqual(len(dedupe_survey_evidence([a,b])),2)
  def test_reject_stale(self):
   self.assertEqual(parse_recent_polls(HTML,RACE,dt.date(2027,3,1)),[])
 
