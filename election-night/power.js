@@ -52,7 +52,7 @@ function compute(house,senate,governors){
   if(DEM_HELD.has(r.code)){if(margin<0){s.D--;s.R++;}}
   else if(margin>0){s.R--;if(INDEPENDENT_NONR.has(r.code))s.I++;else s.D++;}
  }
- const g={D:OFF_CYCLE_GOVERNORS.D,R:OFF_CYCLE_GOVERNORS.R,T:0,denom:50,threshold:26,rawOnly:0,modeled:0,offCycle:14};
+ const g={D:OFF_CYCLE_GOVERNORS.D,R:OFF_CYCLE_GOVERNORS.R,T:0,denom:50,threshold:26,rawOnly:0,modeled:0,sourceRated:0,offCycle:14};
  if(!Array.isArray(governors)||governors.length!==36)throw Error('Governor balance needs all 36 contests');
  const governorSeen=new Set();
  for(const r of governors){
@@ -60,7 +60,14 @@ function compute(house,senate,governors){
   governorSeen.add(r.code);
   const modeled=r.model?.adjustedMargin,poll=r.model?.pollMargin;
   const margin=Number.isFinite(modeled)?modeled:Number.isFinite(poll)?poll:null;
-  if(!Number.isFinite(margin)||Math.abs(margin)<TOSSUP_MARGIN){g.T++;continue;}
+  if(!Number.isFinite(margin)){
+   // Qualitative Cook ratings are party outlooks, not fictional poll margins.
+   const q=r.qualitativeRating?.label;
+   if(q==='Solid D'||q==='Likely D'){g.D++;g.sourceRated++;continue}
+   if(q==='Solid R'||q==='Likely R'){g.R++;g.sourceRated++;continue}
+   g.T++;continue;
+  }
+  if(Math.abs(margin)<TOSSUP_MARGIN){g.T++;continue;}
   if(!Number.isFinite(modeled))g.rawOnly++;else g.modeled++;
   if(margin>0)g.D++;else g.R++;
  }
@@ -72,7 +79,7 @@ function render(rootEl,projection){
  const specs=[
   {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 districts · 218 for a majority · '+projection.house.U+' redrawn districts without current-map ratings remain unprojected; source-rated seats use qualitative Cook labels'},
   {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:projection.senate.D+' D-aligned · '+projection.senate.R+' Republican · '+projection.senate.T+' toss-up seats remain unresolved'+(projection.senate.I?' · '+projection.senate.I+' independent':'')+'. At 50–50 the Republican vice president breaks the tie; Democrats need 51 for control. Unmodeled contests are presumed held.'},
-  {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 races · 14 holdovers · margins within 1.5 points treated as toss-ups; missing polls remain unprojected'}
+  {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 races · 14 holdovers · '+projection.governors.sourceRated+' without numeric polls classified by attributed Cook ratings · close margins remain toss-ups'}
  ];
  rootEl.innerHTML=specs.map(({office,label:headline,data,href,note})=>{
   const partyD=office==='senate'?'D-aligned':'Democratic';
