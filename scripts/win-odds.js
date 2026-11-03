@@ -17,7 +17,7 @@ function estimate(margin,office,meta={}){
  return {dem,rep:1-dem,sigma,margin,conditional:true,
   explanation:'Illustrative normal-error scenario with '+sigma.toFixed(1)+'-point D–R margin uncertainty; not an empirically calibrated 2026 win probability.'};
 }
-const pct=p=>p===null||!Number.isFinite(p)?'—':(100*p).toFixed(1)+'%';
+const pct=p=>p===null||!Number.isFinite(p)?'—':p<.01?'<1%':p>.99?'>99%':Math.round(100*p)+'%';
 const api={estimate,pct,cdf};
 if(typeof module==='object'&&module.exports)module.exports=api;
 root.ERVIN_ODDS=api;
