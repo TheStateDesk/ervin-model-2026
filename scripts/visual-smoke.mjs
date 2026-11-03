@@ -164,7 +164,10 @@ try{
  const mobileErrors=[];homeMobile.on('pageerror',e=>mobileErrors.push(e.message));
  await homeMobile.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  await homeMobile.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelectorAll('#watchCards .watch-card').length>0,null,{timeout:30000});
-  assert((await homeMobile.locator('#watchSection').boundingBox()).y<850,'Races-to-watch must appear early on mobile');
+  await homeMobile.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-state]').length===50,null,{timeout:30000});
+  const mobileSimTop=(await homeMobile.locator('#edSimulationPanel').boundingBox()).y;
+  const mobileWatchTop=(await homeMobile.locator('#watchSection').boundingBox()).y;
+  assert(mobileSimTop<mobileWatchTop&&mobileSimTop>0,'Final forecast maps must appear above races to watch on mobile');
   assert(await homeMobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+4),'State Desk homepage must not scroll sideways on phone');
   assert((await homeMobile.locator('#watchCards .watch-card').count())>=1,'Mobile races carousel missing');
   assert((await homeMobile.locator('#powerCards .power-card').count())===3,'Mobile projected office balance missing');
