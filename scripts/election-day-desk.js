@@ -159,7 +159,7 @@ function districtGeometry(){
   if(codes.length!==50)throw Error('50-state geography has not loaded');
   const records=[],errors=[];
   let cursor=0;
-  await Promise.all(Array.from({length:9},async()=>{
+  await Promise.all(Array.from({length:12},async()=>{
    while(cursor<codes.length){
     const code=codes[cursor++];let data=null,last;
     for(let attempt=0;attempt<2&&!data;attempt++){
@@ -253,7 +253,7 @@ function fillStateMap(office,rows,revision){
  for(const layer of insetLayers)el.append(layer);
 }
 
-async function fillHouseMap(rows,revision){
+async function fillHouseMap(rows,revision,attempt=0){
  const el=$('edSimMap'),summary=$('edSimMapReadout');
  el.dataset.simOffice='house-loading';
  summary.textContent='Assembling 435 congressional district boundaries from locally hosted 2026-compatible map files…';
@@ -292,6 +292,11 @@ async function fillHouseMap(rows,revision){
   summary.textContent='Every one of 435 U.S. House districts has a final predicted winner. Select a district to open its state dossier.';
  }catch(error){
   if(revision!==mapRevision)return;
+  if(attempt<2){
+   summary.textContent='Refreshing the congressional map after a temporary geography loading error…';
+   setTimeout(()=>{if(mapRevision===revision)fillHouseMap(rows,revision,attempt+1)},2000+attempt*2500);
+   return;
+  }
   el.replaceChildren(makeSvg('text',{x:540,y:310,'text-anchor':'middle'}));
   el.firstElementChild.textContent='District geography temporarily unavailable';
   el.dataset.simOffice='house-error';
