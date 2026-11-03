@@ -26,7 +26,12 @@ try{
    await page.waitForFunction(({n,h})=>document.querySelectorAll('#countyMap path.county').length===n&&document.querySelectorAll('#districtMap path.geo-district').length===h,{n:expect,h:house},{timeout:25000});
    // County geometry is loaded independently of the optional House model/poll archives.
    // Wait for both before assessing published content; DOMContentLoaded is too early.
-   await page.waitForFunction(()=>document.querySelector('#districtDetail')?.textContent.includes('ERVIN HOUSE'),null,{timeout:30000});
+   await page.waitForFunction(expectedState=>{
+    const txt=document.querySelector('#districtDetail')?.textContent||'';
+    return expectedState==='TX'
+      ?txt.includes('2026 MAP · SOURCE RATING')&&txt.includes('Numerical 2026 House margin withheld')
+      :txt.includes('ERVIN HOUSE');
+   },code,{timeout:30000});
    if(code==='TX'&&mode==='light'){
     try{
      await page.waitForFunction(()=>{
