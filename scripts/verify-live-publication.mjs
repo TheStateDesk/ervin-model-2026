@@ -232,6 +232,11 @@ try{
    network:performance.getEntriesByType('resource').filter(x=>/geo\/packs|county-history|county-sources/.test(x.name)).slice(-15).map(x=>({url:x.name.split('/').pop(),duration:Math.round(x.duration)}))}));
   throw Error('LIVE NATIONAL COUNTY DIAGNOSTIC '+JSON.stringify({diag,atlasErrors})+' · '+err.message);
  }
+ // At/after 5:55 the reported layer is correctly gray until source
+ // reports arrive. Check the separate forecast layer for projection colors.
+ await atlas.locator('[data-national-county-view="forecast"]').click();
+ await atlas.waitForFunction(()=>document.querySelector('[data-national-county-view="forecast"]')?.getAttribute('aria-pressed')==='true'&&
+  document.querySelectorAll('#allCountyMap path.atlas-D, #allCountyMap path.atlas-R').length>=100,null,{timeout:25000});
  const mapAudit=await atlas.evaluate((statesWidth)=>{
   const counties=document.querySelector('#allCountyNation'),shell=document.querySelector('.ed-shell');
   return {states:document.querySelectorAll('#usMap path.ed-state').length,
