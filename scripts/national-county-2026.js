@@ -8,9 +8,9 @@ const codes='AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI M
 const isN=n=>typeof n==='number'&&Number.isFinite(n),vote=n=>Number.isSafeInteger(n)&&n>=0&&n<=16000000;
 const fmt=m=>!isN(m)?'No available forecast':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)+' pts';
 const iso=n=>new Date(n).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
-let shapes=[],history=null,models=null,office='Senate',view='forecast',loaded=false,started=false,authority=null,health=null,results=null,rows={},busy=false,lastFetch=0,runId=0;
+let shapes=[],history=null,models=null,office='Senate',view='forecast',loaded=false,started=false,nearViewport=false,authority=null,health=null,results=null,rows={},busy=false,lastFetch=0,runId=0;
 const el=name=>document.createElementNS(NS,name);
-const fetchJSON=async p=>{let r=await fetch(p,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};
+const fetchJSON=async p=>{const staticGeo=/\/geo\/packs\/p\d\d\.json$/.test(p);let r=await fetch(p,{cache:staticGeo?'force-cache':'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};
 function coords(lon,lat,code){
  if(code==='AK'){const a=lon>0?lon-360:lon;return[Math.max(15,Math.min(280,23+(a+180)*4.8)),Math.max(454,Math.min(615,460+(72-lat)*7.1))]}
  if(code==='HI')return [320+(lon+161.8)*13,530+(23.2-lat)*13];
@@ -140,15 +140,21 @@ async function start(){
   loaded=true;render();check();
  }catch(e){console.error(e);$('allCountyStatus').textContent='County projection geography or evidence registry unavailable. The state directory and individual state maps remain accessible.'}
 }
+function maybeStart(){if(nearViewport&&models&&!started)start()}
 function init(){
  if(!$('allCountyNation'))return;
+ const section=$('allCountyNation');
+ if('IntersectionObserver' in window){
+  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer.disconnect();nearViewport=true;maybeStart()}},{rootMargin:'900px 0px'});
+  observer.observe(section);
+ }else nearViewport=true;
  $('allCountyMap').addEventListener('click',e=>{const p=e.target.closest('path.all-county[data-county-id]');if(p)location.href='../state/?state='+encodeURIComponent(p.dataset.countyState)+'&county='+encodeURIComponent(p.dataset.countyId)+'#stateGeography'});
  document.querySelectorAll('[data-national-county-office]').forEach(b=>b.addEventListener('click',()=>{office=b.dataset.nationalCountyOffice;render()}));
  document.querySelectorAll('[data-national-county-view]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.nationalCountyView;render()}));
  models=window.ERVIN_HOME_FORECAST||null;
- window.addEventListener('ervin:forecast-ready',()=>{models=window.ERVIN_HOME_FORECAST;if(loaded)render();else start()});
+ window.addEventListener('ervin:forecast-ready',()=>{models=window.ERVIN_HOME_FORECAST;if(loaded)render();else maybeStart()});
  window.addEventListener('ervin:home-live',()=>{if(view==='forecast'){view='reported';render()}});
- if(models)start();
+ if(models)maybeStart();
  setInterval(()=>{if(!document.hidden&&loaded&&Date.now()-lastFetch>=30000)check()},30000);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
