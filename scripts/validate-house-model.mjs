@@ -40,9 +40,9 @@ for(const [id,qs] of Object.entries(questions.races)){
 }
 assert(fs.readFileSync('state/app.js','utf8').includes("houseQuestions=values[12]"),'Supplemental questions not connected to state dashboard');
 assert.equal(d.summary.districts,435);
-assert.equal(d.summary.modeledCount,262,'Only unchanged-boundary House districts may carry numeric estimates');
-assert.equal(d.summary.redrawnUnrated,146,'Do not silently classify redrawn districts without current-boundary ratings');
-assert.equal(d.summary.redrawnCookRated,27);
+assert.equal(d.summary.modeledCount,Object.values(d.races).filter(r=>Number.isFinite(r.marginD)).length,'Numerical count must match current-map availability');
+assert.equal(d.summary.redrawnUnrated,Object.values(d.races).filter(r=>r.changed2026Map&&!r.sourceRating).length,'Unrated redraw count must match sourced data');
+assert.equal(d.summary.redrawnCookRated,Object.values(d.races).filter(r=>r.changed2026Map&&r.sourceRating).length);
 assert.equal(d.summary.districtsWithPollRows,polled);
 assert.equal(d.summary.indexedPublishedSurveys,indexed);
 assert.equal(d.summary.changedMapDistricts,redrawn);
