@@ -213,24 +213,41 @@ try{
   const accepted=window.ERVIN_RETURNS?.civic(json)||{};
   return {raw:Object.keys(json.races||{}).length,accepted:Object.keys(accepted)};
  });
- if(publishedCivic.accepted.length){
+ const publishedHouse=publishedCivic.accepted.filter(id=>/^([A-Z]{2})-[0-9]{2}$/.test(id));
+ const publishedSenate=publishedCivic.accepted.filter(id=>id.endsWith('-SENATE'));
+ if(publishedHouse.length){
   await actualVotes.waitForFunction(expected=>{
    const results=window.ERVIN_HOME_RESULTS?.races||{};
    const paths=[...document.querySelectorAll('#edSimMap a[data-sim-district]')];
    return expected.every(id=>results[id]&&paths.some(a=>a.dataset.simDistrict===id&&
     a.querySelector('path')?.classList.contains('ed-live-lead-'+(results[id].candidates.slice().sort((a,b)=>b.votes-a.votes)[0].party))));
-  },publishedCivic.accepted,{timeout:40000});
+  },publishedHouse,{timeout:40000});
   const actual=await actualVotes.evaluate(()=>({
    visibleLeaders:document.querySelectorAll('#edSimMap path.ed-live-lead-D,#edSimMap path.ed-live-lead-R,#edSimMap path.ed-live-lead-I').length,
    liveTotal:document.querySelector('#edFinalCallSummary')?.dataset.liveReports,
    commentary:document.querySelectorAll('#edCommentaryEntries .ed-commentary-item').length,
    ids:Object.keys(window.ERVIN_HOME_RESULTS?.races||{})
   }));
-  if(actual.visibleLeaders<publishedCivic.accepted.length||actual.commentary<2)
+  if(actual.visibleLeaders<publishedHouse.length||actual.commentary<2)
    throw Error('PUBLIC ACTUAL CIVICAPI VOTES NOT PRESENTED ON LIVE HOMEPAGE '+JSON.stringify({actual,publishedCivic}));
   await actualVotes.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Actual-Reported-House-Votes.png'});
   console.log('PUBLIC REAL CIVICAPI VOTE DELIVERY PASS '+JSON.stringify({published:publishedCivic.raw,verified:publishedCivic.accepted.length,visible:actual.visibleLeaders,commentary:actual.commentary}));
- }else console.log('PUBLIC REAL CIVICAPI VOTE DELIVERY: no accepted post-close vote records in public snapshot; no unverified votes displayed');
+ }
+ if(publishedSenate.length){
+  await actualVotes.locator('#edSimTabs button').filter({hasText:'Senate'}).click();
+  await actualVotes.waitForFunction(expected=>{
+   if(document.querySelector('#edSimMap')?.dataset.simOffice!=='senateD')return false;
+   const results=window.ERVIN_HOME_RESULTS?.races||{};
+   return expected.every(id=>{
+    const row=results[id],leader=row?.candidates?.slice().sort((a,b)=>b.votes-a.votes)[0];
+    const anchor=[...document.querySelectorAll('#edSimMap a[data-sim-state]')].find(a=>a.dataset.simState===id.slice(0,2));
+    return !!row&&!!leader&&anchor?.querySelector('path')?.classList.contains('ed-live-lead-'+leader.party);
+   });
+  },publishedSenate,{timeout:40000});
+  await actualVotes.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Actual-Reported-Senate-Votes.png'});
+  console.log('PUBLIC REAL SENATE CIVICAPI VOTE DELIVERY PASS '+JSON.stringify({reportedSenate:publishedSenate}));
+ }
+ if(!publishedCivic.accepted.length)console.log('PUBLIC REAL CIVICAPI VOTE DELIVERY: no accepted post-close vote records in public snapshot; no unverified votes displayed');
  if(voteErrors.length)throw Error('PUBLIC LIVE ACTUAL RESULTS PAGE JS ERRORS '+voteErrors.join(' | '));
  await actualVotes.close();
 
