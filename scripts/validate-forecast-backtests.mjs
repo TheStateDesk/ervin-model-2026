@@ -4,7 +4,7 @@ const req=createRequire(import.meta.url),json=p=>JSON.parse(fs.readFileSync(p,'u
 const g=req('./governor-backtest.js'),govData=json('research/governor-same-office-2014-2024.json'),
  score=json('research/governor-same-office-backtest-2026-11-02.json');
 const recomputed=g.compute(govData);
-assert.equal(govData.races.length,39);
+assert.equal(govData.races.length,41);
 assert(govData.races.every(e=>e.year>=2018),'2014 gubernatorial error must not enter active source archive');
 assert.equal(g.correction([{state:'MI',year:2014,office:'Governor',pollMargin:3,actualMargin:1}], 'MI',2026),null,'2014 governor errors must never enter 2026 adjustment');
 assert.equal(recomputed.summary.n,score.summary.n);
