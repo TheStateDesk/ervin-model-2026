@@ -437,6 +437,37 @@ try{
  await electionDesk.locator('#edSimulationPanel').screenshot({path:'visual-checks/Election-Night-Governors-Verified-Local-Fixture.png'});
  assert(deskErrors.length===0,'Election-night hero JavaScript errors: '+deskErrors.join(' | '));
  await electionDesk.close();
+
+ // Regression: a new valid file must update the already-open page.
+ // Fixtures are intercepted locally and never written to any published file.
+ const refreshPage=await browser.newPage({viewport:{width:1100,height:800}});
+ await refreshPage.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-04T06:00:00Z')});
+ let refreshBody={version:1,election:'2026-11-03',races:{}},refreshFetches=0;
+ await refreshPage.route('**/civicapi/races.json*',async route=>{
+  refreshFetches++;
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(refreshBody)});
+ });
+ await refreshPage.route('https://openamerica.io/elections/results.json?**',async route=>{
+  await route.fulfill({status:200,contentType:'application/json',body:'{}'});
+ });
+ await refreshPage.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
+ await refreshPage.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&
+  document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&
+  !!window.ERVIN_HOME_RESULTS,null,{timeout:85000});
+ assert((await refreshPage.locator('#edSimMap path.ed-live-lead-N').count())===435,'The first empty vote snapshot must not assign a party leader');
+ refreshBody={version:1,election:'2026-11-03',races:{
+  'MI-09':{office:'house',source:'civicAPI',verified:true,election:'2026-11-03',
+   total:6200,asOf:'2026-11-04T05:30:00Z',
+   sourceUrl:'https://example.org/browser-only-fixture',precinctsReporting:12.5,
+   candidates:[{name:'Fixture Democrat',votes:3200,party:'D'},{name:'Fixture Republican',votes:3000,party:'R'}]}
+ }};
+ await refreshPage.evaluate(()=>window.dispatchEvent(new Event('ervin:check-results-now')));
+ await refreshPage.waitForFunction(()=>document.querySelector('#edSimMap a[data-sim-district="MI-09"] path')?.classList.contains('ed-live-lead-D')&&
+  window.ERVIN_HOME_RESULTS?.races?.['MI-09']?.total===6200,null,{timeout:35000});
+ assert(refreshFetches>=2,'Live results request was cached and did not refetch after newly published results');
+ assert((await refreshPage.locator('#edSimMap path.ed-live-lead-N').count())===434,'Unreported districts must remain neutral after one live update');
+ await refreshPage.close();
+ console.log('LIVE RESULTS REFRESH CACHE REGRESSION PASS · already-open page accepts source-validated updates without reload');
  const electionMobile=await browser.newPage({viewport:{width:390,height:844}});
  await electionMobile.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  await electionMobile.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
