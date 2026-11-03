@@ -138,11 +138,12 @@ function renderProjectionMap(office){
  if(counts!==expected){summary.textContent='Source coverage changed: '+counts+' of '+expected+' expected contests. Map withheld to avoid a misleading display.';el.replaceChildren();return}
  el.replaceChildren();el.setAttribute('viewBox',window.ERVIN_US_GEOGRAPHY.viewBox||'0 0 1080 625');
  el.dataset.simOffice=office;
+ el.setAttribute('aria-label',(isHouse?'House district model leaders by state':isSen?'2026 Senate model projections':'2026 governor model projections')+' — 50 clickable states, frozen November 3 forecast.');
  const defaultText=isHouse?'House: '+counts+' districts grouped by their state; click or focus any state for projected leaders.':
   (isSen?'Senate: '+filled+' numerically modeled races (17 in all).':'Governors: '+filled+' races, including three publisher-rated contests.')+' Click or focus a state for its forecast.';
  summary.textContent=defaultText;
  const descriptor=s=>{
-  if(!s.rows.length)return s.name+': no numerically or qualitatively modeled 2026 '+(isHouse?'House':'Senate')+(isSen?' Senate':' governor')+' contest on this map.';
+  if(!s.rows.length)return s.name+': '+(isHouse?'no modeled House districts available':isSen?'no numerically modeled 2026 Senate contest':'no governor election in 2026')+'.';
   if(isHouse)return s.name+': '+s.D+' Democratic-leading districts, '+s.R+' Republican-leading districts, '+s.T+' toss-ups (within ±1.5 pts)'+(s.rows.some(r=>r.sourceRated)?'; nonnumeric races use source ratings':'')+'. State shading reflects which party leads in more districts, not a statewide vote prediction.';
   const r=s.rows[0],what=isSen?'U.S. Senate':'governor';
   return s.name+' '+what+': '+(r.sourceRated?(r.rating+' · publisher rating, no numeric margin'):(marginLabel(r.margin)+(r.kind==='T'?' · toss-up':'')))+'. Pre-election estimate, not counted votes.';
