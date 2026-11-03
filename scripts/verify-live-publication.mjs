@@ -195,6 +195,45 @@ try{
  if(liveErrors.length)throw Error('PUBLIC LIVE COVERAGE JS ERRORS '+liveErrors.join(' | '));
  console.log('PUBLIC 5:55 LIVE COVERAGE ACCEPTANCE PASS · 435 race links · no fake votes · commentary');
  await liveHero.close();
+
+ // Independently verify that REAL published CivicAPI votes—not a mock and
+ // not the pre-close fixture—flow through the real live homepage. This
+ // pass condition is conditional on the public snapshot having accepted
+ // votes: early deployments with zero verified reports remain valid.
+ const actualVotes=await browser.newPage({viewport:{width:1440,height:900}});
+ const voteErrors=[];actualVotes.on('pageerror',e=>voteErrors.push(e.message));
+ await actualVotes.goto(base+'states/?preview=closing&source-check='+stamp,{waitUntil:'domcontentloaded'});
+ await actualVotes.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&
+  document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:85000});
+ const publishedCivic=await actualVotes.evaluate(async()=>{
+  const url=new URL('../civicapi/races.json?actual-delivery='+Date.now(),location.href);
+  const response=await fetch(url,{cache:'no-store'});
+  if(!response.ok)throw Error('PUBLIC CivicAPI JSON HTTP '+response.status);
+  const json=await response.json();
+  const accepted=window.ERVIN_RETURNS?.civic(json)||{};
+  return {raw:Object.keys(json.races||{}).length,accepted:Object.keys(accepted)};
+ });
+ if(publishedCivic.accepted.length){
+  await actualVotes.waitForFunction(expected=>{
+   const results=window.ERVIN_HOME_RESULTS?.races||{};
+   const paths=[...document.querySelectorAll('#edSimMap a[data-sim-district]')];
+   return expected.every(id=>results[id]&&paths.some(a=>a.dataset.simDistrict===id&&
+    a.querySelector('path')?.classList.contains('ed-live-lead-'+(results[id].candidates.slice().sort((a,b)=>b.votes-a.votes)[0].party))));
+  },publishedCivic.accepted,{timeout:40000});
+  const actual=await actualVotes.evaluate(()=>({
+   visibleLeaders:document.querySelectorAll('#edSimMap path.ed-live-lead-D,#edSimMap path.ed-live-lead-R,#edSimMap path.ed-live-lead-I').length,
+   liveTotal:document.querySelector('#edFinalCallSummary')?.dataset.liveReports,
+   commentary:document.querySelectorAll('#edCommentaryEntries .ed-commentary-item').length,
+   ids:Object.keys(window.ERVIN_HOME_RESULTS?.races||{})
+  }));
+  if(actual.visibleLeaders<publishedCivic.accepted.length||actual.commentary<2)
+   throw Error('PUBLIC ACTUAL CIVICAPI VOTES NOT PRESENTED ON LIVE HOMEPAGE '+JSON.stringify({actual,publishedCivic}));
+  await actualVotes.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Actual-Reported-House-Votes.png'});
+  console.log('PUBLIC REAL CIVICAPI VOTE DELIVERY PASS '+JSON.stringify({published:publishedCivic.raw,verified:publishedCivic.accepted.length,visible:actual.visibleLeaders,commentary:actual.commentary}));
+ }else console.log('PUBLIC REAL CIVICAPI VOTE DELIVERY: no accepted post-close vote records in public snapshot; no unverified votes displayed');
+ if(voteErrors.length)throw Error('PUBLIC LIVE ACTUAL RESULTS PAGE JS ERRORS '+voteErrors.join(' | '));
+ await actualVotes.close();
+
  const archive=await browser.newPage({viewport:{width:1220,height:900}});
  await archive.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-04T06:00:00Z')});
  await archive.goto(base+'states/?view=final&release='+stamp+'#edSimulationPanel',{waitUntil:'domcontentloaded'});
