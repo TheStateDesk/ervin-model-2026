@@ -335,17 +335,10 @@ function renderProjectionMap(office){
 }
 
 function enter(){
- if(active)return;active=true;
- const stage=$('edResultsStage'),map=$('nationMap'),slot=$('edNightMapSlot'),dashboard=$('electionDashboard');
- if(!stage||!map||!slot)return;
- stage.hidden=false;dashboard.hidden=false;slot.append(map);document.documentElement.classList.add('ed-election-night');
- addEntry('The national results desk opened at 5:55 p.m. Eastern, five minutes before the first polls closed. Unreported contests stay neutral until source-attributed unofficial returns arrive.',SWITCH_AT,null,'Election-night desk',false);
- const btns=document.querySelectorAll('[data-state-map-view="reported"]');
- let switched=false,attempts=0;
- const setReported=()=>{if(switched||!btns.length||attempts++>20)return;const btn=btns[0];if(btn.getAttribute('aria-pressed')==='true'){switched=true;return;}btn.click();switched=btn.getAttribute('aria-pressed')==='true';};
- setReported();const interval=setInterval(()=>{setReported();if(switched||attempts>20)clearInterval(interval);},1000);
- const ctx=$('edNightContext');if(ctx)ctx.textContent='Source-attributed, unofficial returns update as they are published. Gray means no accepted report; a vote leader is not an election call. Switch the map to Forecast or Compare at any time.';
- const status=$('edCommentaryStatus');if(status)status.textContent='Checks every 30 seconds · new commentary when verified counts change';
+ if(active)return;
+ active=true;
+ document.documentElement.classList.add('ed-election-night');
+ window.ERVIN_LIVE_HERO?.activate?.();
  window.dispatchEvent(new Event('ervin:election-night-open'));
 }
 function pollPhase(){
@@ -358,6 +351,7 @@ function storyScore(r){
  return (office==='Senate'?500:office==='Governor'?300:100)+(important<0?0:110-important*8)+Math.log10(Math.max(1,r.total))*10+(Number.isFinite(r.precincts)?r.precincts/10:0);
 }
 function enqueue(){
+ if(window.ERVIN_LIVE_HERO)return;
  if(!active)return;
  const rows=window.ERVIN_HOME_RESULTS?.races||{};
  for(const [id,r] of Object.entries(rows)){
@@ -369,6 +363,7 @@ function enqueue(){
  flush(false);
 }
 function flush(force){
+ if(window.ERVIN_LIVE_HERO)return;
  if(!active||!pending.size||(!force&&lastPost&&Date.now()-lastPost<150000))return;
  const ranked=[...pending.values()].sort((a,b)=>storyScore(b)-storyScore(a));
  const r=ranked[0];pending.delete(r.id);
