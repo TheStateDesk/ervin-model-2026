@@ -54,3 +54,5 @@ html.theme-dark{--atlas-d:#398fc8;--atlas-r:#c76774;--atlas-t:#a99b7f;--atlas-n:
 .theme-dark .all-county{stroke:#162c3b}
 .theme-dark .watch-photo{background:#233c50;color:#ecf5fc}
 @media(max-width:690px){.watch-card__people--pair{min-height:96px}.nationwide-county-surface svg{min-width:540px;height:385px}}
+
+.candidate-photo-credit{font-size:10px!important;font-weight:650;color:var(--ed-muted,#7990a1)!important;text-decoration:underline;text-underline-offset:2px;margin-top:1px}
