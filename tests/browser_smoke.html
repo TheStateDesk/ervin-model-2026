@@ -19,9 +19,9 @@
   check(d.querySelectorAll('#usMap path.ed-state').length>=50,'All fifty state shapes accessible');
   check(!d.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),'Retired workbench does not appear');
   check(!d.querySelector('a[href="../"]'),'Homepage does not link back to retired root');
-  const first=$('watchCards').querySelector('.watch-card').textContent;
-  $('watchNext').click();check($('watchCards').querySelector('.watch-card').textContent!==first,'Races to watch carousel advances');
-  $('watchPrev').click();check($('watchCards').querySelector('.watch-card').textContent===first,'Races to watch carousel reverses');
+  const first=$('watchCards').querySelector('.watch-card__name').textContent;
+  $('watchNext').click();check($('watchCards').querySelector('.watch-card__name').textContent!==first,'Races to watch carousel advances');
+  $('watchPrev').click();check($('watchCards').querySelector('.watch-card__name').textContent===first,'Races to watch carousel reverses');
   check(d.querySelectorAll('[data-atlas-office]').length===3,'Senate governor and House map tabs available');
   const wasDark=d.documentElement.classList.contains('theme-dark');
   $('themeToggle').click();check(d.documentElement.classList.contains('theme-dark')!==wasDark,'Appearance toggle switches contrast theme');
