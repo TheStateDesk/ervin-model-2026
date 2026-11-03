@@ -53,7 +53,7 @@ function render(rootEl,projection){
  if(!rootEl)throw Error('Balance-of-power container missing');
  const specs=[
   {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 districts · 218 seats for a majority · model Tossups remain unassigned'},
-  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#senate-control',note:'100 seats · 17 races modeled · 18 unmodeled 2026 contests presumed held'},
+  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#balanceOfPower',note:'100 seats · 17 races modeled · 18 unmodeled 2026 contests presumed held · 50–50 means Republican control when the vice president is Republican'},
   {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 elections, 14 holdovers · unavailable polling left unprojected'}
  ];
  rootEl.innerHTML=specs.map(({office,label:headline,data,href,note})=>{
