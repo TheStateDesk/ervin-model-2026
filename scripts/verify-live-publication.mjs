@@ -146,7 +146,8 @@ try{
  await michiganAudit.waitForFunction(()=>document.querySelector('#miCandidateEffect')?.textContent.includes('not applied'),null,{timeout:35000});
  const michiganEvidence=await michiganAudit.locator('#miCandidateEffect').innerText();
  if(!michiganEvidence.includes('In 9 matched Michigan survey samples')||!michiganEvidence.includes('not applied')||!michiganEvidence.includes('−1.84'))throw Error('LIVE MI CANDIDATE-EFFECT AUDIT MISSING '+michiganEvidence.slice(0,400));
- const liveMISenate=await michiganAudit.locator('#heroSenate').innerText();
+ await michiganAudit.waitForFunction(()=>/^(?:D|R) \+\d+\.\d|Even$/.test(document.querySelector('#heroSenate')?.textContent?.trim()||''),null,{timeout:35000});
+ const liveMISenate=(await michiganAudit.locator('#heroSenate').innerText()).trim();
  if(!/^(?:D|R) \+\d+\.\d|Even$/.test(liveMISenate))throw Error('LIVE MI SENATE MARGIN UNAVAILABLE');
  const cardDetails=await michiganAudit.locator('#stateRaceCards').innerText();
  if(!cardDetails.includes(liveMISenate))throw Error('LIVE MI SENATE RACE CARD NOT UPDATED');
