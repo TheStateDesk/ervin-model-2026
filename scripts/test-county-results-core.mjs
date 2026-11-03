@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const ctx={module:{exports:{}},URL,Date,Map,Set,Number,String,Array,Object};
+vm.runInNewContext(fs.readFileSync('election-night/county-results-core.js','utf8'),ctx);
+const core=ctx.module.exports;
+assert.equal(core.sourceAllowed('MI','Kent','https://app.enhancedvoting.com/results/public/kent-county-mi/2026',
+ {states:{MI:{countyLinks:{Kent:'https://app.enhancedvoting.com/results/public/kent-county-mi/2026'}}}}),true);
+assert.equal(core.sourceAllowed('MI','Kent','https://bad-news.example.org/2026',
+ {states:{MI:{countyLinks:{Kent:'https://app.enhancedvoting.com/results/public/kent-county-mi/2026'}}}}),false);
+const reg={states:{MI:{authorityRole:'county-directory',countyLinks:{Kent:'https://kentcounty.gov/elections'}}}};
+const geo=[{id:'26081',properties:{name:'Kent'}},{id:'26163',properties:{name:'Wayne'}}];
+const date='2026-11-04T03:15:00Z',now=Date.parse('2026-11-04T03:15:01Z');
+const wrap=rows=>({version:1,election:'2026-11-03',states:{MI:{races:{Senate:{counties:rows}}}}});
+const sample={fips:'26081',county:'Kent',dem:1200,rep:1100,other:100,asOf:date,sourceUrl:'https://kentcounty.gov/elections/2026'};
+const old=ctx.module.exports.close;
+const expected=core.parse(wrap([sample]),'MI','Senate',geo,reg,{},now);
+assert.equal(expected.rows.size,1);assert.equal(expected.rejected.length,0);
+const early=core.parse(wrap([{...sample,asOf:'2026-11-03T20:00:00Z'}]),'MI','Senate',geo,reg,{},now);
+assert.equal(early.rows.size,0);assert.equal(early.rejected[0].reason,'invalid_or_early_timestamp');
+const duplicate=core.parse(wrap([sample,sample]),'MI','Senate',geo,reg,{},now);
+assert.equal(duplicate.rows.size,1);assert.equal(duplicate.rejected[0].reason,'duplicate_county');
+const fips=core.parse(wrap([{...sample,fips:'99999'}]),'MI','Senate',geo,reg,{},now);
+assert.equal(fips.rows.size,0);assert.equal(fips.rejected[0].reason,'unknown_county_fips');
+const source=core.parse(wrap([{...sample,sourceUrl:'https://synthetic.example.com/counts'}]),'MI','Senate',geo,reg,{},now);
+assert.equal(source.rows.size,0);assert.equal(source.rejected[0].reason,'source_not_authority_listed');
+const prev=new Map([['26081',{...sample,asOf:'2026-11-04T03:10:00Z'}]]);
+const lower=core.parse(wrap([{...sample,dem:1,rep:2}]),'MI','Senate',geo,reg,prev,now);
+assert.equal(lower.rows.size,0);assert.equal(lower.rejected[0].reason,'decreasing_total_without_official_correction');
+assert.equal(core.parse(wrap([]),'MI','Senate',geo,reg,{},now).rows.size,0);
+console.log('Unified county schema: 10 source/fips/time/no-double-count checks passed');
