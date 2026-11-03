@@ -199,9 +199,17 @@ function updatePhase(){
  $('dashboardIntro').textContent=showResults?'The first polls close at 6 p.m. ET. Accepted unofficial reported votes are labeled separately from the locked forecast; areas without attributed returns remain gray.':'The Ervin forecast is a pre-election estimate.';
  const sourceTime=Date.parse(providerHealth?.checkedAt||'');
   const sourceAge=Number.isFinite(sourceTime)?Math.round((now-sourceTime)/60000):null;
-  const upstreamConnected=providerHealth?.providerConnectivity?.networkReachable===true;
-  const upstreamDisconnected=providerHealth?.providerConnectivity?.networkReachable===false;
-  const statusText=!providerHealth?'CivicAPI collection status pending':upstreamConnected?'CivicAPI connection verified':upstreamDisconnected?'CivicAPI connectivity problem':'CivicAPI connection not yet checked';
+  const connectivity=providerHealth?.providerConnectivity;
+  const apiReachable=connectivity?.statusEndpoint?.connected===true;
+  const raceProbes=['KY-06','MI-SENATE'].map(key=>connectivity?.[key]).filter(Boolean);
+  const raceErrors=raceProbes.filter(x=>x.connected===false);
+  const badGateways=raceErrors.map(x=>String(x.detail||'')).filter(x=>/50[234]|Bad Gateway|timed out/i.test(x));
+  const statusText=!providerHealth?'CivicAPI collection status pending':
+   badGateways.length?'CivicAPI race feed errors ('+badGateways.map(x=>x.match(/50[234]/)?.[0]||'timeout').join(', ')+')':
+   raceErrors.length?'CivicAPI race endpoint unavailable':
+   raceProbes.some(x=>x.connected===true)?'CivicAPI race connection verified':
+   apiReachable?'CivicAPI status reachable · race results pending':
+   'CivicAPI connectivity problem';
   const freshness=sourceAge===null?'':sourceAge>20?' · Last collector check '+sourceAge+' min ago (delayed)':' · Collector checked '+sourceAge+' min ago';
   $('reportingBanner').textContent=showResults?(n?('UNOFFICIAL RETURNS · '+n+' contest'+(n===1?'':'s')+' with source-validated totals'+(latestFeedAt?' · source update '+(window.ERVIN_AP_DATE?.timestamp(latestFeedAt)||new Date(latestFeedAt).toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'})):'')+' · '+statusText+freshness):
    'LIVE RESULTS DESK · Awaiting accepted unofficial votes · '+statusText+freshness):'';
