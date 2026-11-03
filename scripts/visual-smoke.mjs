@@ -445,6 +445,15 @@ try{
  assert(nightOverflow<6,'Live coverage creates horizontal phone overflow '+nightOverflow+'px');
  await electionMobile.locator('#edSimulationPanel').screenshot({path:'visual-checks/Election-Night-5-55-Mobile.png'});
  await electionMobile.close();
+ const archive=await browser.newPage({viewport:{width:1240,height:900}});
+ await archive.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-04T06:00:00Z')});
+ await archive.goto(root+'/states/?view=final#edSimulationPanel',{waitUntil:'domcontentloaded'});
+ await archive.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&
+  document.querySelector('#edFinalHeadline')?.textContent.includes('PREDICTION'),null,{timeout:85000});
+ assert((await archive.locator('#edSimMap path.ed-sim-proj-D,#edSimMap path.ed-sim-proj-R').count())===435,'The frozen final election prediction must remain accessible after 5:55');
+ assert(await archive.locator('#edLiveCommentary').isHidden(),'Archived pre-election forecast should not pretend to be live');
+ await archive.locator('#edSimulationPanel').screenshot({path:'visual-checks/Archived-Final-Prediction-After-5-55.png'});
+ await archive.close();
  console.log('ELECTION NIGHT LIVE HERO PASS · 435 precise links · AK/HI aligned · zero invented votes');
  const directory=await browser.newPage({viewport:{width:1280,height:900}});
  await directory.goto(root+'/states/',{waitUntil:'domcontentloaded'});
