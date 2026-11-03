@@ -100,7 +100,7 @@ async function loadMichigan(generation){
  }
  // Strongest source last: county clerk count supersedes automated portal,
  // which supersedes partial precincts. NEVER sum overlapping reports.
- rows=next;
+ if(next.size){const combined=new Map(rows);for(const[id,val]of next){const old=combined.get(id);if(!old||val.dem+val.rep+val.other>=old.dem+old.rep+old.other)combined.set(id,val)}rows=combined;}
  status=ok+' of 3 official-source input files structurally accepted · '+rows.size+' counties reporting · '+rejected+' unavailable/rejected. A valid empty file is not a verified live result.';
  redraw();
 }
@@ -109,7 +109,7 @@ async function loadOther(generation){
   const data=await fetchJSON('../election-night/county-returns.json');if(generation!==req)return;
   const result=core.parse(data,code,office,counties.map(c=>({id:c.id,properties:{name:c.name}})),registry,rows);
   if(!result.available)status='No separately attributed '+office+' county return file for '+code+'. '+(health?.states?.[code]?.linkedCountySources||0)+' authority-listed county sites; no totals inferred.';
-  else{rows=result.rows;status=result.checked+' rows checked, '+result.rows.size+' valid county returns, '+result.rejected.length+' rejected. '+(result.rejected.length?'Some reporting was not accepted as authoritative.':'')}
+  else{const combined=new Map(rows);for(const[id,v]of result.rows)combined.set(id,v);rows=combined;status=result.checked+' rows checked, '+result.rows.size+' valid county returns, '+result.rejected.length+' rejected. '+(result.rejected.length?'Some reporting was not accepted as authoritative.':'')}
  }catch(e){status='County results unavailable or rejected: '+e.message+' · earlier validated counts retained';}
  redraw();
 }
