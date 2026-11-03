@@ -1,8 +1,8 @@
 {
   "phase": "auto",
-  "finalLockedAt": null,
-  "headline": null,
-  "dek": null,
-  "version": 1,
-  "notes": "Automatic forecast/final/closing/live phases. Set phase only to forecast, final, closing or live to override. Lock occurs only when final/forecast-final.json exists."
+  "finalLockedAt": "2026-11-03T16:42:53.117Z",
+  "headline": "A Blue House. A Senate Cliffhanger.",
+  "dek": "The 144,000-scenario Ervin Model centers on roughly 249 Democratic House seats, 50 Democratic-aligned Senate seats, and 27 Democratic governorships. Republicans have the narrower but meaningful Senate-control edge; simulations are sensitivity tests, not calibrated probabilities.",
+  "version": 2,
+  "notes": "2026 forecast locked. Election-night homepage handoff at 17:55 Eastern; only verified unofficial returns may populate live mode. Forecast data is frozen."
 }
