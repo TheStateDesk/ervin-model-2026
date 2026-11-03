@@ -13,7 +13,7 @@ function fetchRaces(){
 function portraitPair(data){
  if(!data)return null;
  const parent=document.createElement('div');parent.className='senate-candidate-pair';parent.setAttribute('aria-label','2026 candidate photographs from credited sources');
- for(const [name,kind]of [[data.dem||data.nonR,'Democratic / non-Republican'],[data.rep,'Republican']]){
+ for(const [name,kind]of [[data.dem||data.nonR,data.office==='Senate'&&['MT','NE','SD'].includes(data.code)?'Independent':'Democrat'],[data.rep,'Republican']]){
   if(!name)continue;
   const anchor=document.createElement('a');anchor.className='senate-candidate-portrait';anchor.href='https://en.wikipedia.org/wiki/'+encodeURIComponent(name.replaceAll(' ','_'));anchor.target='_blank';anchor.rel='noopener noreferrer';
   const face=document.createElement('span');face.className='senate-candidate-avatar';face.textContent=name.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('');
@@ -26,7 +26,7 @@ function portraitPair(data){
 async function display(){
  const target=document.querySelector('#stateRaceCards');if(!target)return;
  await fetchRaces();const c=code(),cards=[...target.querySelectorAll('.ed-race')];
- const races=[senate?.[c]?{...senate[c],office:'Senate'}:null,governors?.[c]?{...governors[c],office:'Governor'}:null].filter(Boolean);
+ const races=[senate?.[c]?{...senate[c],code:c,office:'Senate'}:null,governors?.[c]?{...governors[c],office:'Governor'}:null].filter(Boolean);
  for(const record of races){
   const card=cards.find(x=>x.querySelector('h3')?.textContent.trim()===(record.office==='Senate'?'U.S. Senate':'Governor'));
   if(!card||card.querySelector('.senate-candidate-pair'))continue;
