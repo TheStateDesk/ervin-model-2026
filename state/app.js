@@ -11,7 +11,7 @@ const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
 let historicalError=null;let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
-let countyChosenByUser=false;let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
+let countyChosenByUser=false; for(const b of document.querySelectorAll('[data-county-view]'))b.setAttribute('aria-pressed',String(b.dataset.countyView==='forecast'));let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
 function sourceItem(text,url,detail=''){return '<article><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(text)+'</a></strong>'+(detail?'<small>'+esc(detail)+'</small>':'')+'</article>';}
@@ -191,7 +191,10 @@ function initCountyControls(){
  $('countyZoomIn').onclick=()=>countyZoom(1.65);
  $('countyZoomOut').onclick=()=>countyZoom(1/1.65);
  $('countyZoomReset').onclick=()=>{mapZoom=1;mapCenter={x:450,y:290};updateCountyViewport();};
- $('countyLayer').onchange=()=>{countyChosenByUser=true;const v=$('countyLayer').value,o=$('nightCountyOffice');if(o&&['senate','governor'].includes(v)&&o.value!==v[0].toUpperCase()+v.slice(1)){o.value=v[0].toUpperCase()+v.slice(1);o.dispatchEvent(new Event('change'))}drawCounties()};
+ const updateMode=()=>{const v=$('countyLayer').value;for(const b of document.querySelectorAll('[data-county-view]'))b.setAttribute('aria-pressed',String(b.dataset.countyView===(v==='reported'?'reported':v==='compare'?'compare':'forecast')))};
+ $('countyLayer').onchange=()=>{countyChosenByUser=true;const v=$('countyLayer').value,o=$('nightCountyOffice');if(o&&['senate','governor'].includes(v)&&o.value!==v[0].toUpperCase()+v.slice(1)){o.value=v[0].toUpperCase()+v.slice(1);o.dispatchEvent(new Event('change'))}updateMode();drawCounties()};
+ for(const b of document.querySelectorAll('[data-county-view]'))b.addEventListener('click',()=>{const view=b.dataset.countyView;const layer=$('countyLayer');layer.value=view==='forecast'?($('nightCountyOffice')?.value||'Senate').toLowerCase():view;layer.dispatchEvent(new Event('change',{bubbles:true}));});
+ updateMode();
  $('countyTableFind').oninput=renderCountyTable;
  $('countyCSV').onclick=countyCSV;
  $('countyRetry').onclick=()=>loadCountyMap(true);
