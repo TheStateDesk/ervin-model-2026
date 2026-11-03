@@ -27,7 +27,7 @@
   ok(d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House district cards are indexed');
   ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
   ok(d.getElementById('ratingsCount').textContent==='68','68 sourced House ratings are explicitly identified');
-  ok(d.getElementById('houseModelSummary').textContent.includes('Comparable-map numerical estimates')&&d.getElementById('houseModelSummary').textContent.includes('not a calibrated seat probability'),'House numerical estimates are limited to compatible maps and visibly provisional');
+  ok(d.getElementById('houseModelSummary').textContent.includes('Numerical House scenarios')&&d.getElementById('houseModelSummary').textContent.includes('not a calibrated seat probability'),'House numerical margins use 2026 congressional boundaries with rebuilt-vote caveats');
   ok(!d.getElementById('houseCards').textContent.includes('No model loaded')&&d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House cards include provisional model ratings rather than blank placeholders');
   const search=d.getElementById('houseSearch');search.value='MI-04';search.dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));
   ok(d.querySelectorAll('#houseCards .gov-card').length===1&&d.getElementById('houseCards').textContent.includes('Tossup'),'House search and Cook rating work');
