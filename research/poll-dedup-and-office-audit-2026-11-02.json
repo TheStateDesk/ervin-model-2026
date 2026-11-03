@@ -2,7 +2,7 @@
   "asOf": "2026-11-02",
   "rules": {
     "governor": "Same state, Governor only, 2018–2024; keep one event for each state/year. No 2014 historical error.",
-    "federal": "Senate & President same-state only for general federal correction. Alaska House candidate-repeat context remains separately flagged legacy evidence.",
+    "federal": "Senate/President only in general federal calibration, candidate-repeat House evidence is isolated under separate Alaska candidateRepeatContext. Original Alaska legacy correction not silently changed.",
     "house": "Excluded from statewide historical calibration; Cook, other published ratings, and attributed House polls are separate evidence.",
     "duplicate": "One selected historical governor aggregate per state-year; never double count 538/270toWin/RCP variants of the same contest. Identical current survey fingerprints flagged for review, not silently removed."
   },
@@ -17,11 +17,12 @@
     "historicalArchiveRaces": 57,
     "historicalDuplicateKeys": 0,
     "currentIndexedPollRows": {
-      "senate": 196,
+      "senate": 191,
       "governor": 42
     },
-    "exactCurrentDuplicateGroups": 5,
-    "possibleCurrentSamePollGroups": 19
+    "exactCurrentDuplicateGroups": 0,
+    "possibleCurrentSamePollGroups": 19,
+    "originalExactDuplicateGroupsRemoved": 5
   },
   "governors": [
     {
@@ -1350,13 +1351,13 @@
           "year": 2024,
           "office": "House",
           "source": "https://en.wikipedia.org/wiki/2024_United_States_House_of_Representatives_election_in_Alaska",
-          "warning": "Prior original-model candidate-repeat context; not a general federal error family."
+          "warning": "Alaska-specific previous House race context, segregated from the general Senate/President error family; the original archived correction still contains this context."
         },
         {
           "year": 2022,
           "office": "House",
           "source": "https://alaskawatchman.com/wp-content/uploads/2022/09/aarp-alaska-2022-elections-voter-survey.doi_.10.26419-2Fres.00550.009.pdf",
-          "warning": "Prior original-model candidate-repeat context; not a general federal error family."
+          "warning": "Alaska-specific previous House race context, segregated from the general Senate/President error family; the original archived correction still contains this context."
         }
       ],
       "archiveCorrection": -2.783,
@@ -1617,118 +1618,7 @@
   ],
   "duplication": {
     "historicalDuplicateKeys": [],
-    "exactCurrentGroups": [
-      {
-        "id": "senate|IA|coefficient|2026-10-28|-2",
-        "count": 2,
-        "rows": [
-          {
-            "office": "senate",
-            "state": "IA",
-            "pollster": "co/efficient",
-            "date": "2026-10-28",
-            "margin": -2,
-            "url": "https://battlegrounds.coefficient.org/ia/"
-          },
-          {
-            "office": "senate",
-            "state": "IA",
-            "pollster": "co/efficient (R)",
-            "date": "2026-10-28",
-            "margin": -2,
-            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa"
-          }
-        ]
-      },
-      {
-        "id": "senate|NE|concordpublicopinionpartners|2026-10-18|7",
-        "count": 2,
-        "rows": [
-          {
-            "office": "senate",
-            "state": "NE",
-            "pollster": "Concord Public Opinion Partners (D-sponsored)",
-            "date": "2026-10-18",
-            "margin": 7,
-            "url": "https://www.callthemap.com/polls/SEN-NE"
-          },
-          {
-            "office": "senate",
-            "state": "NE",
-            "pollster": "Concord Public Opinion Partners (D)",
-            "date": "2026-10-18",
-            "margin": 7,
-            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska"
-          }
-        ]
-      },
-      {
-        "id": "senate|MS|change|2026-10-22|-3",
-        "count": 2,
-        "rows": [
-          {
-            "office": "senate",
-            "state": "MS",
-            "pollster": "Change Research (D-sponsored)",
-            "date": "2026-10-22",
-            "margin": -3,
-            "url": "https://www.callthemap.com/polls/SEN-MS"
-          },
-          {
-            "office": "senate",
-            "state": "MS",
-            "pollster": "Change Research (D)",
-            "date": "2026-10-22",
-            "margin": -3,
-            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Mississippi"
-          }
-        ]
-      },
-      {
-        "id": "senate|MT|concordpublicopinionpartners|2026-10-23|1",
-        "count": 2,
-        "rows": [
-          {
-            "office": "senate",
-            "state": "MT",
-            "pollster": "Concord Public Opinion Partners",
-            "date": "2026-10-23",
-            "margin": 1,
-            "url": "https://www.mtpolling.com/"
-          },
-          {
-            "office": "senate",
-            "state": "MT",
-            "pollster": "Concord Public Opinion Partners (D)",
-            "date": "2026-10-23",
-            "margin": 1,
-            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana"
-          }
-        ]
-      },
-      {
-        "id": "senate|MT|concordpublicopinionpartners|2026-10-08|2",
-        "count": 2,
-        "rows": [
-          {
-            "office": "senate",
-            "state": "MT",
-            "pollster": "Concord Public Opinion Partners",
-            "date": "2026-10-08",
-            "margin": 2,
-            "url": "https://concordpublicopinionpartners.org/polls/montana-ge-2026"
-          },
-          {
-            "office": "senate",
-            "state": "MT",
-            "pollster": "Concord Public Opinion Partners (D)",
-            "date": "2026-10-08",
-            "margin": 2,
-            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana"
-          }
-        ]
-      }
-    ],
+    "exactCurrentGroups": [],
     "possibleSamePollGroups": [
       {
         "id": "senate|ME|trafalgar|0",
@@ -2156,6 +2046,119 @@
           }
         ]
       }
-    ]
+    ],
+    "removedExactCurrentGroups": [
+      {
+        "id": "senate|IA|coefficient|2026-10-28|-2",
+        "count": 2,
+        "rows": [
+          {
+            "office": "senate",
+            "state": "IA",
+            "pollster": "co/efficient",
+            "date": "2026-10-28",
+            "margin": -2,
+            "url": "https://battlegrounds.coefficient.org/ia/"
+          },
+          {
+            "office": "senate",
+            "state": "IA",
+            "pollster": "co/efficient (R)",
+            "date": "2026-10-28",
+            "margin": -2,
+            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Iowa"
+          }
+        ]
+      },
+      {
+        "id": "senate|NE|concordpublicopinionpartners|2026-10-18|7",
+        "count": 2,
+        "rows": [
+          {
+            "office": "senate",
+            "state": "NE",
+            "pollster": "Concord Public Opinion Partners (D-sponsored)",
+            "date": "2026-10-18",
+            "margin": 7,
+            "url": "https://www.callthemap.com/polls/SEN-NE"
+          },
+          {
+            "office": "senate",
+            "state": "NE",
+            "pollster": "Concord Public Opinion Partners (D)",
+            "date": "2026-10-18",
+            "margin": 7,
+            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Nebraska"
+          }
+        ]
+      },
+      {
+        "id": "senate|MS|change|2026-10-22|-3",
+        "count": 2,
+        "rows": [
+          {
+            "office": "senate",
+            "state": "MS",
+            "pollster": "Change Research (D-sponsored)",
+            "date": "2026-10-22",
+            "margin": -3,
+            "url": "https://www.callthemap.com/polls/SEN-MS"
+          },
+          {
+            "office": "senate",
+            "state": "MS",
+            "pollster": "Change Research (D)",
+            "date": "2026-10-22",
+            "margin": -3,
+            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Mississippi"
+          }
+        ]
+      },
+      {
+        "id": "senate|MT|concordpublicopinionpartners|2026-10-23|1",
+        "count": 2,
+        "rows": [
+          {
+            "office": "senate",
+            "state": "MT",
+            "pollster": "Concord Public Opinion Partners",
+            "date": "2026-10-23",
+            "margin": 1,
+            "url": "https://www.mtpolling.com/"
+          },
+          {
+            "office": "senate",
+            "state": "MT",
+            "pollster": "Concord Public Opinion Partners (D)",
+            "date": "2026-10-23",
+            "margin": 1,
+            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana"
+          }
+        ]
+      },
+      {
+        "id": "senate|MT|concordpublicopinionpartners|2026-10-08|2",
+        "count": 2,
+        "rows": [
+          {
+            "office": "senate",
+            "state": "MT",
+            "pollster": "Concord Public Opinion Partners",
+            "date": "2026-10-08",
+            "margin": 2,
+            "url": "https://concordpublicopinionpartners.org/polls/montana-ge-2026"
+          },
+          {
+            "office": "senate",
+            "state": "MT",
+            "pollster": "Concord Public Opinion Partners (D)",
+            "date": "2026-10-08",
+            "margin": 2,
+            "url": "https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Montana"
+          }
+        ]
+      }
+    ],
+    "note": "Five exact duplicate 2026 Senate survey identifiers were removed from recent_polls.json (196→191 rows), preserving the more original source in each pair. The 19 possible same-poll groups involve differing date descriptors and are flagged, NOT blindly merged. Refresh code now deduplicates by pollster+field-end+both candidate shares."
   }
 }
