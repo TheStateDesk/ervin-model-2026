@@ -8,8 +8,8 @@ on:
       - '.github/workflows/civicapi-probe.yml'
   schedule:
     - cron: '37 2,8,14,20 * * *'
-    - cron: '*/10 0-9 4 11 *'
-    - cron: '*/10 23 3 11 *'
+    - cron: '3,13,23,33,43,53 0-9 4 11 *'
+    - cron: '3,13,23,33,43,53 23 3 11 *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -58,8 +58,9 @@ jobs:
             # GitHub suppresses push-triggered workflows from the default
             # GITHUB_TOKEN. Explicit workflow_dispatch is permitted and
             # guarantees a Pages refresh for genuine new vote or race records.
-            # A status-only discovery.json timestamp need not redeploy the site.
-            if git diff --name-only HEAD^ HEAD | grep -Eq '^civicapi/(races|registry)[.]json'; then
+            # Publish health updates, too, so readers see live 502 errors or stale
+            # collection times even when no vote tally passes validation.
+            if git diff --name-only HEAD^ HEAD | grep -Eq '^civicapi/(races|registry|discovery)[.]json'; then
               gh workflow run deploy-pages.yml --ref main
               echo "Started Pages publish for updated validated election results"
             fi
