@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "createdAt": "2026-11-03T05:29:55.108085+00:00",
+  "createdAt": "2026-11-03T05:37:34.391367+00:00",
   "type": "House-only pre-election polling environment and same-line presidential district history",
   "source": {
     "houseResults": "MIT Election Data and Science Lab public-domain election returns via electiondata.dev",
@@ -32,23 +32,15 @@
   },
   "finalHoldout": {
     "year": 2024,
-    "n": 203,
+    "n": 356,
     "excludedMapChanges": [
-      "AL",
-      "CA",
-      "FL",
       "GA",
-      "LA",
-      "NC",
-      "NY",
-      "OH",
-      "TN",
-      "TX",
-      "UT"
+      "NY"
     ]
   },
-  "formulation": "D-R House margin = final pre-election generic House poll margin + alpha × [0.75 × (prior presidential two-party district margin − same-year national margin) + 0.25 × (preceding presidential district margin − same-year national margin)].",
-  "alpha": 1,
+  "formulation": "D-R House margin = final pre-election generic House poll margin + alpha \u00d7 [0.75 \u00d7 (prior presidential two-party district margin \u2212 same-year national margin) + 0.25 \u00d7 (preceding presidential district margin \u2212 same-year national margin)].",
+  "alpha": 1.0,
+  "candidateRetentionRho": 0.35,
   "rawAlphaOne": {
     "training": {
       "n": 793,
@@ -58,11 +50,11 @@
       "winnerAgreement": 0.9458
     },
     "holdout2024": {
-      "n": 203,
-      "MAE": 3.978,
-      "medianAE": 2.943,
-      "p90AE": 8.687,
-      "winnerAgreement": 0.9704
+      "n": 356,
+      "MAE": 5.108,
+      "medianAE": 3.496,
+      "p90AE": 10.992,
+      "winnerAgreement": 0.9663
     }
   },
   "backtested": {
@@ -74,11 +66,11 @@
       "winnerAgreement": 0.9458
     },
     "holdout2024": {
-      "n": 203,
-      "MAE": 3.978,
-      "medianAE": 2.943,
-      "p90AE": 8.687,
-      "winnerAgreement": 0.9704
+      "n": 356,
+      "MAE": 5.108,
+      "medianAE": 3.496,
+      "p90AE": 10.992,
+      "winnerAgreement": 0.9663
     }
   },
   "byYear": {
@@ -115,7 +107,46 @@
       }
     }
   },
-  "candidateRetention": "A candidate-level incumbency bonus is NOT included unless a separate same-candidate cross-election backtest validates it. Qualitative incumbent/candidate and polling data are displayed separately.",
+  "candidateRetention": {
+    "rho": 0.35,
+    "capPriorResidual": 18,
+    "selection": "Choose returning candidate residual carryover using only 2018 same-candidate matches, excluding Pennsylvania's incompatible 2016/18 geography.",
+    "training2018": {
+      "raw": {
+        "n": 210,
+        "MAE": 5.249,
+        "winnerAgreement": 0.9429
+      },
+      "adjusted": {
+        "n": 210,
+        "MAE": 4.333,
+        "winnerAgreement": 0.9333
+      }
+    },
+    "chronological2024": {
+      "retainedRaw": {
+        "n": 264,
+        "MAE": 4.677,
+        "winnerAgreement": 0.9735
+      },
+      "retainedAdjusted": {
+        "n": 264,
+        "MAE": 3.726,
+        "winnerAgreement": 0.9811
+      },
+      "allRaw": {
+        "n": 333,
+        "MAE": 4.915,
+        "winnerAgreement": 0.967
+      },
+      "allAdjusted": {
+        "n": 333,
+        "MAE": 4.161,
+        "winnerAgreement": 0.973
+      }
+    },
+    "method": "When named winning candidate from prior House general election returns and the same candidate is certified/rostered in current cycle, add rho times the prior district House-versus-predicted residual, capped at \u00b118 before rho. On 2026 redrawn House districts candidate residual is zero, because the prior seat-number's population changed. No Senate/Governor error correction."
+  },
   "warnings": [
     "Some historical district presidential splits are estimated from precincts and block allocations.",
     "Contest qualification requires both major-party candidates to have at least 3.5% of the two-party vote; excludes uncontested or same-party elections.",
@@ -123,20 +154,7 @@
     "A generic-ballot poll average is a national survey signal; election-day errors and candidate effects remain unmodeled.",
     "2018 and 2022 House maps differ from one another; each historical district is matched only with its own election-year presidential reference lines.",
     "2026 redrawn maps use reconstructed presidential baseline values with extra uncertainty; existing old-number House returns are not used as if they were the new electorate.",
-    "The 2026 roster of incumbents is known but candidate strength should not be added without a trustworthy matched sample."
-  ],
-  "forward2026": {
-    "presidentialNationalMarginD": {
-      "2020": 4.54,
-      "2024": -1.51
-    },
-    "presidentialWeights": {
-      "2020": 0.25,
-      "2024": 0.75
-    },
-    "alpha": 1,
-    "source": "2026 district presidential splits in house/presidential-2026-boundaries.json; historical national two-party presidential vote totals",
-    "futureDataExcluded": true,
-    "notes": "Presidential lean is relative to each presidential election's national D-R two-party margin, then added to 2026 generic House polling; selected alpha from 2018/2022, checked on 2024. Candidate-specific bonus not validated."
-  }
+    "Candidate historical matching is exact normalized name plus prior winning party; near-name variants can reduce sample size but cannot create a false repetition.",
+    "The 2024 House residual for a returning 2026 incumbent is drawn only from same-boundary previous House results; redrawn districts receive no transplanted candidate strength."
+  ]
 }
