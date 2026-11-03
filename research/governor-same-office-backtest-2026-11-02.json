@@ -1,27 +1,27 @@
 {
   "asOf": "2026-11-02",
-  "method": "Only earlier same-state gubernatorial polling-versus-actual errors dated 2018–2024. All 2014 errors excluded. D–R polling margin minus actual D–R result. Latest three eligible prior governor cycles weighted 0.5/0.3/0.2, normalized if fewer than three. Never includes Senate, presidential or future results.",
-  "caveats": "Selective 2018–2024 source-linked governor cohort; 2018 target races have no earlier eligible comparators and cannot be scored. Sparse earlier cycles and nonuniform publishers limit inference. Stale polls excluded. No calibrated win chances. Four newly sourced 2022 CO/MA/NM/OR averages have no earlier same-state comparable governor error, so they expand 2026 history but not the eligible historical holdout. Oklahoma and South Dakota 2022 added using sourced final governor-only polling averages and official vote shares; 2026 same-state corrections not counted as validated holdouts.",
+  "method": "Only earlier state governor polls vs actual governor results. D-R error = poll margin minus actual margin. Latest 3 same-state governor errors weighted 0.5/0.3/0.2; 1 historical event is shrunk to one-third, 2 events to two-thirds, 3 events to full. No federal-election inputs, no future election results.",
+  "caveats": "Nonrandom 2018–24 sourced cohort, different candidates and survey sources; sparse states with only one prior election have fragile corrections. Single stale surveys (Aug 2022 South Carolina) are displayed but excluded from calibration and scoring. RCP-only target subset scored separately. No calibrated win chances or exact retrospective recreation of 2026. Corrections from a single prior governor election are applied at one-third, from two at two-thirds; as selected using 2018–24 past-only gubernatorial backtest. Small sample and multiple-testing caution.",
   "summary": {
     "observed": 41,
     "eligible": 15,
     "notBacktestable": 26,
     "n": 15,
     "rawMAE": 4.659,
-    "adjustedMAE": 4.705,
+    "adjustedMAE": 4.226,
     "rawRMSE": 5.771,
-    "adjustedRMSE": 5.651,
+    "adjustedRMSE": 5.144,
     "rawWinners": 15,
-    "adjustedWinners": 14
+    "adjustedWinners": 15
   },
   "preferredRCP": {
     "n": 9,
     "rawMAE": 3.804,
-    "adjustedMAE": 4.772,
+    "adjustedMAE": 3.661,
     "rawRMSE": 4.908,
-    "adjustedRMSE": 5.734,
+    "adjustedRMSE": 4.753,
     "rawWinners": 9,
-    "adjustedWinners": 8
+    "adjustedWinners": 9
   },
   "byYear": {
     "2018": {
@@ -38,9 +38,9 @@
       "observed": 1,
       "n": 1,
       "rawMAE": 7.8,
-      "adjustedMAE": 4.8,
+      "adjustedMAE": 6.8,
       "rawRMSE": 7.8,
-      "adjustedRMSE": 4.8,
+      "adjustedRMSE": 6.8,
       "rawWinners": 1,
       "adjustedWinners": 1
     },
@@ -48,19 +48,19 @@
       "observed": 25,
       "n": 12,
       "rawMAE": 3.554,
-      "adjustedMAE": 4.452,
+      "adjustedMAE": 3.551,
       "rawRMSE": 4.409,
-      "adjustedRMSE": 5.592,
+      "adjustedRMSE": 4.492,
       "rawWinners": 12,
-      "adjustedWinners": 11
+      "adjustedWinners": 12
     },
     "2024": {
       "observed": 2,
       "n": 2,
       "rawMAE": 9.72,
-      "adjustedMAE": 6.169,
+      "adjustedMAE": 6.988,
       "rawRMSE": 10.138,
-      "adjustedRMSE": 6.353,
+      "adjustedRMSE": 7.368,
       "rawWinners": 2,
       "adjustedWinners": 2
     }
@@ -324,10 +324,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2020/new-hampshire/sununu-vs-feltes",
       "note": "Custom unweighted late three-distinct-pollster average: St Anselm R+25, UNH R+24, UMass Lowell R+23. Not a published RCP average; actual R+31.8.",
       "error": 7.8,
-      "correction": 3,
-      "adjustedMargin": -27,
+      "correction": 1,
+      "adjustedMargin": -25,
       "rawAbsError": 7.8,
-      "adjustedAbsError": 4.8,
+      "adjustedAbsError": 6.8,
       "evidence": [
         {
           "year": 2018,
@@ -413,10 +413,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/florida/desantis-vs-crist",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": 7.2,
-      "correction": 4,
-      "adjustedMargin": -16.2,
+      "correction": 1.333,
+      "adjustedMargin": -13.533,
       "rawAbsError": 7.2,
-      "adjustedAbsError": 3.2,
+      "adjustedAbsError": 5.867,
       "evidence": [
         {
           "year": 2018,
@@ -445,10 +445,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/georgia/kemp-vs-abrams",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": -0.8,
-      "correction": -1.6,
-      "adjustedMargin": -6.7,
+      "correction": -0.533,
+      "adjustedMargin": -7.767,
       "rawAbsError": 0.8,
-      "adjustedAbsError": 0.8,
+      "adjustedAbsError": 0.267,
       "evidence": [
         {
           "year": 2018,
@@ -477,10 +477,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/iowa/reynolds-vs-dejear",
       "note": "Three most recent distinct 270toWin polls (D39 R55).",
       "error": 2.5,
-      "correction": 3.7,
-      "adjustedMargin": -19.7,
+      "correction": 1.233,
+      "adjustedMargin": -17.233,
       "rawAbsError": 2.5,
-      "adjustedAbsError": 1.2,
+      "adjustedAbsError": 1.267,
       "evidence": [
         {
           "year": 2018,
@@ -528,10 +528,10 @@
       "resultUrl": "https://sos.ks.gov/elections/22elec/2022-General-Official-Vote-Totals.pdf",
       "note": "FiveThirtyEight public archived aggregate (D48.6 R43.5).",
       "error": 2.89,
-      "correction": -5.5,
-      "adjustedMargin": 10.6,
+      "correction": -1.833,
+      "adjustedMargin": 6.933,
       "rawAbsError": 2.89,
-      "adjustedAbsError": 8.39,
+      "adjustedAbsError": 4.723,
       "evidence": [
         {
           "year": 2018,
@@ -579,10 +579,10 @@
       "resultUrl": "https://mainepoliticaldata.com/historical-polling/",
       "note": "270toWin three-poll average (D50 R42).",
       "error": -5,
-      "correction": 0.4,
-      "adjustedMargin": 7.6,
+      "correction": 0.133,
+      "adjustedMargin": 7.867,
       "rawAbsError": 5,
-      "adjustedAbsError": 5.4,
+      "adjustedAbsError": 5.133,
       "evidence": [
         {
           "year": 2018,
@@ -611,10 +611,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/michigan/dixon-vs-whitmer",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": -9.6,
-      "correction": 1.5,
-      "adjustedMargin": -0.5,
+      "correction": 0.5,
+      "adjustedMargin": 0.5,
       "rawAbsError": 9.6,
-      "adjustedAbsError": 11.1,
+      "adjustedAbsError": 10.1,
       "evidence": [
         {
           "year": 2018,
@@ -643,10 +643,10 @@
       "resultUrl": "https://sos.mn.gov/elections-voting/election-results/2022/2022-general-election-results/",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": -3.4,
-      "correction": -3.5,
-      "adjustedMargin": 7.8,
+      "correction": -1.167,
+      "adjustedMargin": 5.467,
       "rawAbsError": 3.4,
-      "adjustedAbsError": 0.1,
+      "adjustedAbsError": 2.233,
       "evidence": [
         {
           "year": 2018,
@@ -675,10 +675,10 @@
       "resultUrl": "https://www.realclearpolitics.com/epolls/2022/governor/NewHampshire.html",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": -1.5,
-      "correction": 6,
-      "adjustedMargin": -23,
+      "correction": 4,
+      "adjustedMargin": -21,
       "rawAbsError": 1.5,
-      "adjustedAbsError": 7.5,
+      "adjustedAbsError": 5.5,
       "evidence": [
         {
           "year": 2020,
@@ -757,10 +757,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/new-york/zeldin-vs-hochul",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": 1.3,
-      "correction": -4.2,
-      "adjustedMargin": 11.2,
+      "correction": -1.4,
+      "adjustedMargin": 8.4,
       "rawAbsError": 1.3,
-      "adjustedAbsError": 5.5,
+      "adjustedAbsError": 2.7,
       "evidence": [
         {
           "year": 2018,
@@ -789,10 +789,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/ohio/dewine-vs-whaley",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": 3.1,
-      "correction": 9.3,
-      "adjustedMargin": -31.7,
+      "correction": 3.1,
+      "adjustedMargin": -25.5,
       "rawAbsError": 3.1,
-      "adjustedAbsError": 6.2,
+      "adjustedAbsError": 0,
       "evidence": [
         {
           "year": 2018,
@@ -878,10 +878,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/south-carolina/mcmaster-vs-cunningham",
       "note": "Latest listed Trafalgar survey fielded Aug 25–28, 2022; several months before Election Day. Exclude from preferred backtest.",
       "error": 9.3,
-      "correction": -7,
-      "adjustedMargin": -1,
+      "correction": -2.333,
+      "adjustedMargin": -5.667,
       "rawAbsError": 9.3,
-      "adjustedAbsError": 16.3,
+      "adjustedAbsError": 11.633,
       "evidence": [
         {
           "year": 2018,
@@ -929,10 +929,10 @@
       "resultUrl": "https://www.realclearpolling.com/polls/governor/general/2022/texas/abbott-vs-orourke",
       "note": "Final published D–R poll margin and general-election result on the same archived page.",
       "error": 0.5,
-      "correction": -3.4,
-      "adjustedMargin": -7,
+      "correction": -1.133,
+      "adjustedMargin": -9.267,
       "rawAbsError": 0.5,
-      "adjustedAbsError": 3.9,
+      "adjustedAbsError": 1.633,
       "evidence": [
         {
           "year": 2018,
@@ -961,10 +961,10 @@
       "resultUrl": "https://outside.vermont.gov/dept/sos/Elections_Division/election_info_resources/elections_results_data/2022_general_election_official_report_canvassing_committee_vermont_statewide_public_questions.pdf",
       "note": "Data for Progress Nov 1 2022, D24 R65.",
       "error": 4.86,
-      "correction": 5,
-      "adjustedMargin": -46,
+      "correction": 1.667,
+      "adjustedMargin": -42.667,
       "rawAbsError": 4.86,
-      "adjustedAbsError": 0.14,
+      "adjustedAbsError": 3.193,
       "evidence": [
         {
           "year": 2018,
@@ -1068,10 +1068,10 @@
       "resultUrl": "https://en.wikipedia.org/wiki/2024_Vermont_gubernatorial_election",
       "note": "Late UNH Oct29–Nov2: Scott R65 Charlestin D26; final official-sourced candidate percentages Scott R73.43 Charlestin D21.83. Not an RCP average.",
       "error": 12.6,
-      "correction": 4.912,
-      "adjustedMargin": -43.912,
+      "correction": 3.275,
+      "adjustedMargin": -42.275,
       "rawAbsError": 12.6,
-      "adjustedAbsError": 7.688,
+      "adjustedAbsError": 9.325,
       "evidence": [
         {
           "year": 2022,
