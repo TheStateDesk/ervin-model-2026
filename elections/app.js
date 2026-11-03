@@ -54,13 +54,13 @@ function renderHeader(r){
  }
  document.title=r.state+' '+r.office+' 2026 · Ervin Model';
  $('raceTitle').textContent=r.state+' '+r.office+' election';
- $('raceDeck').textContent=r.dem+' (D'+(r.party==='I'?'-aligned independent':'')+') vs '+r.rep+' (R) · November 3, 2026. Source-attributed polling, county geography, and documented election results.';
+ $('raceDeck').textContent=r.dem+' ('+(r.party==='I'?'Independent':'D')+') vs '+r.rep+' (R) · November 3, 2026. Source-attributed polling, county geography, and documented election results.';
  $('topKicker').textContent='2026 elections / '+r.office.toLowerCase()+' / '+r.code;
  $('backLink').href=r.office==='Governor'?'../governors/':'../?race='+encodeURIComponent(r.code)+'#map-area';
  $('backLink').textContent=r.office==='Governor'?'← All governor races':'← National Senate forecast';
  $('mapTitle').textContent=r.state+' county boundaries';
  $('matchupTitle').textContent=r.state+' '+r.office;
- $('candidates').innerHTML='<div class="race-candidate"><small>Democratic'+(r.party==='I'?' aligned independent':' ticket')+'</small><strong>'+esc(r.dem)+'</strong><div class="race-party">'+(r.party==='I'?'Independent':'Democrat')+'</div></div><div class="race-candidate r"><small>Republican ticket</small><strong>'+esc(r.rep)+'</strong><div class="race-party">Republican</div></div>';
+ $('candidates').innerHTML='<div class="race-candidate"><small>'+(r.party==='I'?'Independent candidate':'Democratic ticket')+'</small><strong>'+esc(r.dem)+'</strong><div class="race-party">'+(r.party==='I'?'Independent':'Democrat')+'</div></div><div class="race-candidate r"><small>Republican ticket</small><strong>'+esc(r.rep)+'</strong><div class="race-party">Republican</div></div>';
 }
 function renderForecast(r){
  if(r.office==='House'){
@@ -79,6 +79,22 @@ function renderForecast(r){
   return;
  }
  const isSen=r.office==='Senate';
+ if(isSen&&r.sourceRating){
+  $('leadLabel').textContent='Inside Elections · publisher qualitative Senate rating';
+  $('leadValue').textContent=r.sourceRating;
+  $('leadValue').className='';
+  $('leadExplanation').textContent='Independent source rating, not a numerical Ervin forecast or a polling average.';
+  $('repBar').style.width='0%';$('demBar').style.width='0%';
+  $('modelStatus').textContent='Publisher rating';$('pollCount').textContent='No numerical average';
+  $('pollDate').textContent='Nov. 3, 2026';
+  $('raceSources').innerHTML='<a href="'+esc(r.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Inside Elections ratings</a><a href="'+esc(r.candidateSource)+'" target="_blank" rel="noopener noreferrer">Candidate sources</a>';
+  $('certainty').textContent='This contest does not have a historically calibrated Original Ervin numerical margin. Idaho features a Republican and an independent, not a Democratic-versus-Republican matchup.';
+  $('qualifiers').textContent='The qualitative rating is attributed to its publisher. No numerical probability, polling bias adjustment or vote share has been inferred.';
+  $('methodology').textContent='Inside Elections 2026 rating: separate from 17 Original Ervin numerical Senate estimates. No unrelated state or governor historical errors are transferred.';
+  $('methodLinks').innerHTML='<a href="../research/senate-qualitative-coverage-2026.json">Source provenance</a>';
+  $('resultLinks').innerHTML='<a href="https://www.nass.org/can-I-vote/state-election-officials" target="_blank" rel="noopener noreferrer">State election offices</a>';
+  return;
+ }
  const poll=isSen?senateAggregate(r):null;
  const raw=isSen?poll.raw:r.poll?.margin??null;
  const correction=isSen&&r.history_mode!=='not_comparable'?Number(r.correction)||0:0;
@@ -120,7 +136,7 @@ function renderPolls(r){
   const avg=senateAggregate(r);
   rows=Object.entries(r.sources||{}).filter(([key])=>sourceLabels[key]).map(([key,q])=>({name:sourceLabels[key],value:+q.value,source:q.origin,kind:q.proxy?'Reference/proxy — excluded from blend':'Publisher average; overlaps possible',date:q.date,url:q.url}));
   polls=pollArchive[r.code]||[];
-  $('pollIntro').textContent='Publisher averages used for the Senate model are shown first. The separate recent-polls archive is listed below; a shared poll may appear inside several publishers’ aggregates.';
+  $('pollIntro').textContent='Publisher surveys are separately indexed; a publisher qualitative Senate rating does not constitute a numerical Ervin forecast. The archive can contain overlapping polls.';
  }else{
   if(r.poll)rows=[{name:'On Point Politics polling average',value:r.poll.margin,kind:r.poll.count+' underlying public surveys; publisher own methodology',date:r.poll.asOf,source:r.poll.source,url:r.poll.url}];
   polls=[...(r.recentPolls||[]).map(p=>({pollster:p.pollster,margin:p.margin,dates:p.date,sample:p.note,url:p.url,sourceKind:p.source})),...(governorPolls[r.code]||[]).map(p=>({...p,dates:p.date}))];
