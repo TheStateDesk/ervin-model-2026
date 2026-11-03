@@ -65,7 +65,16 @@ def build(data):
    shifted=float(candidate_strength["adjustmentD"])
    if not math.isfinite(shifted) or abs(shifted)>3:
     raise ValueError("MI candidate-strength adjustment out of source boundaries")
-   adjusted=round(adjusted+shifted,2)
+   # The primary-election comparison is archived at the original polling
+   # baseline. Update the displayed general-election reference from TODAY'S
+   # verified publisher blend so the public arithmetic stays consistent.
+   archived_reference=float(candidate_strength["referenceMarginD"])
+   corrected_reference=round(margin-bias,2)
+   candidate_strength={**candidate_strength,
+       "archivedReferenceMarginD":archived_reference,
+       "referenceMarginD":corrected_reference,
+       "referenceBasis":"Fresh general-election publisher blend minus statewide historical Senate correction; archived primary comparison retained independently."}
+   adjusted=round(corrected_reference+shifted,2)
   # Osborn's 2024 Fischer contest is the repeat-CANDIDATE federal comparison.
   # It already supplies Nebraska's 5.07-point polling-error correction above.
   # Expose it visibly, but never apply the same historical miss a second time.
