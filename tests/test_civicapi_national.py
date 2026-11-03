@@ -29,10 +29,21 @@ class ElectionReporting(unittest.TestCase):
  def test_first_poll_closings_are_district_specific(self):
   first=dt.datetime(2026,11,3,23,0,tzinfo=UTC)
   second=dt.datetime(2026,11,4,0,0,tzinfo=UTC)
-  for key in ["IN-02","IN-03","IN-04","IN-05","IN-06","IN-07","IN-09","KY-03","KY-04","KY-05","KY-06"]:
+  for key in ["IN-02","IN-03","IN-04","IN-05","IN-06","IN-07","IN-09","KY-03","KY-04","KY-05","KY-06","KY-SENATE"]:
    self.assertEqual(m.after_close(key),first,key)
-  for key in ["IN-01","IN-08","KY-01","KY-02","KY-SENATE"]:
+  for key in ["IN-01","IN-08","KY-01","KY-02"]:
    self.assertEqual(m.after_close(key),second,key)
+ def test_split_zone_senate_partial_returns(self):
+  # Real partial statewide counts may publish once eastern/earliest precincts close.
+  for key,hour in [("FL-SENATE",0),("NH-SENATE",0),("MI-SENATE",1),("TX-SENATE",1),("ID-SENATE",3),("AK-SENATE",5)]:
+   actual=m.after_close(key)
+   wanted=dt.datetime(2026,11,4,hour,0,tzinfo=UTC)
+   self.assertEqual(actual,wanted,key)
+  # No Senate contest should publish an attributed vote before its first closing.
+  search={"province":"KY","country":"US","election_name":"Kentucky US Senate","election_type":"US Senate","election_scope":"General","election_date":"2026-11-03"}
+  detail={**search,"last_updated":"2026-11-03T23:05:00Z","candidates":[{"name":"D","party":"Democratic","votes":100},{"name":"R","party":"Republican","votes":200}]}
+  self.assertIsNotNone(m.normalize("KY-SENATE",search,detail,dt.datetime(2026,11,3,23,12,tzinfo=UTC),87174))
+  self.assertIsNone(m.normalize("KY-SENATE",search,detail,dt.datetime(2026,11,3,22,58,tzinfo=UTC),87174))
  def test_registry_506(self):
   x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)
@@ -58,7 +69,7 @@ class ElectionReporting(unittest.TestCase):
   self.assertIsNone(m.normalize("MI-SENATE",self.search,{**self.detail,"election_date":"2024-11-05"},self.now,87214))
   self.assertIsNone(m.normalize("MI-SENATE",self.search,{**self.detail,"province":"TX"},self.now,87214))
  def test_no_before_close(self):
-  early=dt.datetime(2026,11,4,1,58,tzinfo=UTC)
+  early=dt.datetime(2026,11,3,23,58,tzinfo=UTC)
   self.assertIsNone(m.normalize("MI-SENATE",self.search,self.detail,early,87214))
  def test_no_zeros(self):
   d={**self.detail,"candidates":[{"name":"D","votes":0},{"name":"R","votes":0}]}
