@@ -231,3 +231,11 @@ html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180
  .ed-mast a{font-size:23px}
  .ed-map-race-list{max-height:200px}
 }
+
+/* Same state atlas, now toggled by election office; equal-size mobile tiles. */
+.ed-mobile-tilemap{display:none;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;margin-top:9px}
+.ed-mobile-tilemap a{display:grid;place-items:center;text-decoration:none!important;color:#132535!important;font-size:12px;font-weight:850;min-height:37px;border:1px solid #526478;border-radius:3px}
+.ed-mobile-tilemap a:hover,.ed-mobile-tilemap a:focus-visible{outline:3px solid #f0b85e;outline-offset:1px}
+.ed-skip-link{position:absolute;left:10px;top:-80px;z-index:1000;padding:8px 15px;background:var(--ed-white);color:var(--ed-ink)}
+.ed-skip-link:focus{top:7px}
+@media(max-width:600px){#nationMap .ed-map-surface{display:none}#nationMap .ed-mobile-tilemap{display:grid}.main-map-office{margin:8px 0}}
