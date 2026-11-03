@@ -6,7 +6,7 @@ const states=(window.ERVIN_US_GEOGRAPHY?.states||[]).slice().sort((a,b)=>a.name.
 const names=Object.fromEntries(states.map(x=>[x.code,x.name]));
 const selectedOffice=new URLSearchParams(location.search).get('office');
 const focusedOffice=['house','governor'].includes(selectedOffice)?selectedOffice:null;
-let mapOffice=['house','governor','senate'].includes(selectedOffice)?selectedOffice:'senate';
+let mapOffice=['house','governor','senate'].includes(selectedOffice)?selectedOffice:'senate',mapView='forecast';
 const href=code=>'../state/?state='+encodeURIComponent(code)+(focusedOffice==="house"?'#stateHouse':focusedOffice==="governor"?'#stateOverview':'');
 const REGION={Northeast:'CT ME MA NH NJ NY PA RI VT',Midwest:'IL IN IA KS MI MN MO NE ND OH SD WI',South:'AL AR DE FL GA KY LA MD MS NC OK SC TN TX VA WV',West:'AK AZ CA CO HI ID MT NV NM OR UT WA WY'};
 const MARGIN=n=>!Number.isFinite(n)?'No comparable margin':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
@@ -24,7 +24,23 @@ function officeRaces(r){
  if(!r)return [];
  return r.races.filter(x=>mapOffice==='house'?x.label.includes(' · House '):mapOffice==='governor'?x.label.startsWith('Governor'):x.label.startsWith('U.S. Senate'));
 }
-function tone(r){
+function liveLead(code){
+ const raw=window.ERVIN_HOME_RESULTS?.races;
+ if(!raw)return null;
+ const office=mapOffice==='house'?'House':mapOffice==='governor'?'Governor':'Senate';
+ const matched=Object.values(raw).filter(x=>x.id?.startsWith(code+'-')&&x.office===office&&x.total>0);
+ if(!matched.length)return null;
+ const leader=(row)=>{
+  const sorted=(row.candidates||[]).slice().sort((a,b)=>b.votes-a.votes);
+  if(!sorted.length)return null;
+  if(sorted.length>1&&sorted[0].votes===sorted[1].votes)return'T';
+  return ['D','R'].includes(sorted[0].party)?sorted[0].party:'T';
+ };
+ const count={D:0,R:0,T:0};for(const row of matched){const p=leader(row);if(p)count[p]++}
+ const party=matched.length===1?leader(matched[0]):count.D>count.R?'D':count.R>count.D?'R':'T';
+ return {party,matched:matched.length,records:matched,office};
+}
+function forecastTone(r){
  const races=officeRaces(r),valid=races.filter(x=>Number.isFinite(x.margin));
  if(!valid.length)return 'var(--ed-map-neutral)';
  const counts={D:0,R:0,T:0};
@@ -35,6 +51,22 @@ function tone(r){
  const strength=Math.min(.88,Math.max(.45,Math.abs(net)*.4+.48));
  return 'color-mix(in srgb, var(--ed-map-'+(net>0?'blue':'red')+') '+Math.round(strength*100)+'%, var(--ed-map-base))';
 }
+function tone(r){
+ if(mapView==='forecast')return forecastTone(r);
+ const code=r?.code,live=liveLead(code);
+ if(!live)return mapView==='reported'?'var(--ed-map-neutral)':forecastTone(r);
+ const base=live.party==='D'?'var(--ed-map-blue)':live.party==='R'?'var(--ed-map-red)':'var(--ed-map-even)';
+ return mapView==='compare'?'color-mix(in srgb, '+base+' 83%, '+forecastTone(r)+')':base;
+}
+function setMapView(which){
+ mapView=which;
+ for(const b of document.querySelectorAll('[data-state-map-view]'))b.setAttribute('aria-pressed',String(b.dataset.stateMapView===which));
+ const label=$('aggregateLegend');
+ if(label)label.textContent=mapView==='reported'?'UNOFFICIAL reported 2026 vote leaders only. Gray states have no accepted result for this office. Independents are not automatically labeled Democratic.':
+  mapView==='compare'?'Reported vote leaders shown in stronger colors; faded states remain pre-election projections. No race calls or missing vote totals are inferred.':
+  'Pre-election '+mapOffice+' forecasts; gold denotes estimated toss-ups, gray means no supported forecast.';
+ drawMap();
+}
 function drawTileMap(){
  const target=$('mobileTileMap');if(!target)return;
  target.innerHTML=states.map(s=>'<a href="'+href(s.code)+'" aria-label="'+esc(s.name)+' state edition" title="'+esc(s.name)+'" style="background:'+tone(byState[s.code])+'">'+s.code+'</a>').join('');
@@ -42,13 +74,14 @@ function drawTileMap(){
 function setOffice(which){
  mapOffice=which;
  for(const button of document.querySelectorAll('[data-map-office]'))button.setAttribute('aria-pressed',String(button.dataset.mapOffice===mapOffice));
- const text=$('aggregateLegend');if(text)text.textContent='2026 '+(mapOffice==='house'?'House districts':mapOffice==='governor'?'governor':'Senate')+' lead by state · gold indicates toss-up (within 1.5 points) · gray indicates no supported estimate.';
+ const text=$('aggregateLegend');if(text)text.textContent=mapView==='reported'?'Verified 2026 reported vote leaders only · gray is unreported':mapView==='compare'?'Reported results compared with faded forecasts':'2026 '+(mapOffice==='house'?'House districts':mapOffice==='governor'?'governor':'Senate')+' forecasts · gold: estimated toss-up';
  drawMap();drawTileMap();
 }
 function drawMap(){
  const svg=$('usMap'),geo=window.ERVIN_US_GEOGRAPHY;
  if(!geo?.states?.length){svg.textContent='State map unavailable. Use the index below.';return}
- svg.innerHTML=geo.states.map(s=>'<a href="'+href(s.code)+'" data-state-link="'+s.code+'" tabindex="0" aria-label="'+esc(stateTitle(s))+' — open state" class="ed-state-link"><path class="ed-state" data-state="'+s.code+'" d="'+s.d+'" style="fill:'+tone(byState[s.code])+'"><title>'+esc(stateTitle(s))+'</title></path></a>').join('');
+ svg.innerHTML=geo.states.map(s=>{const actual=liveLead(s.code),fade=mapView==='compare'&&!actual;
+ return '<a href="'+href(s.code)+'" data-state-link="'+s.code+'" tabindex="0" aria-label="'+esc(stateTitle(s))+' — open state" class="ed-state-link"><path class="ed-state" data-state="'+s.code+'" data-report-status="'+(actual?'reported':'unreported')+'" d="'+s.d+'" style="fill:'+tone(byState[s.code])+';'+(fade?'opacity:.45;stroke-dasharray:3 2;':'')+'"><title>'+esc(stateTitle(s))+(mapView==='reported'?' · '+(actual?'UNOFFICIAL reported leader':'no verified vote return'):mapView==='compare'?' · '+(actual?'reported vs forecast':'forecast only'):'')+'</title></path></a>'}).join('');
  svg.setAttribute('viewBox',geo.viewBox||'0 0 1080 625');
  drawTileMap();
  for(const a of svg.querySelectorAll('a[data-state-link]')){
@@ -63,7 +96,9 @@ function show(code,event){
  const houseCounts={D:0,R:0,T:0};for(const x of houses){const k=rank(x.margin);if(k)houseCounts[k]++}
  const featured=[...statewides,...(houses.length?[{label:'House: '+houseCounts.D+' D · '+houseCounts.R+' R · '+houseCounts.T+' toss-ups',margin:null,type:'summary'},...houses.slice(0,3)]:[])];
  const displayed=featured.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+(x.type==='summary'?'':esc(MARGIN(x.margin)))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
- tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+r.D+'D–'+r.R+'R–'+r.T+'T</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div><small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
+ const live=liveLead(code);
+ const liveText=mapView==='forecast'?'':live?'<p class="ed-mini"><strong>UNOFFICIAL counted '+esc(live.office)+' contests: '+live.matched+'</strong> · '+esc(live.records.map(row=>row.candidates.slice().sort((a,b)=>b.votes-a.votes).slice(0,2).map(c=>c.party+' '+c.votes.toLocaleString()).join(' / ')).join('; '))+'</p>':'<p class="ed-mini">No validated 2026 reported vote totals for this state and office.</p>';
+ tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+r.D+'D–'+r.R+'R–'+r.T+'T</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div>'+liveText+'<small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
  tooltip.hidden=false;locate(event);
 }
 function locate(event){
@@ -121,6 +156,11 @@ function init(){
   }
  }
  drawMap();directory();
+ for(const button of document.querySelectorAll('[data-map-office]'))button.addEventListener('click',()=>setOffice(button.dataset.mapOffice));
+ for(const button of document.querySelectorAll('[data-state-map-view]'))button.addEventListener('click',()=>setMapView(button.dataset.stateMapView));
+ window.addEventListener('ervin:home-results-update',()=>{if(mapView!=='forecast')drawMap()});
+ window.addEventListener('ervin:home-live',()=>setMapView('reported'));
+ setMapView('forecast');
  $('quickSelect').innerHTML='<option value="">Choose a state…</option>'+states.map(s=>'<option value="'+s.code+'">'+esc(s.name)+'</option>').join('');
  $('quickSelect').onchange=e=>{if(names[e.target.value])location.href=href(e.target.value)};
  $('stateSearch').addEventListener('input',search);
