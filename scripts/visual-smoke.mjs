@@ -210,6 +210,7 @@ try{
 
  await nationalNight.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
  await nationalNight.waitForFunction(()=>document.querySelector('#nationalCount')?.textContent.includes('506 indexed races'),null,{timeout:30000});
+ assert((await nationalNight.locator('#raceList .race-row[id$="-SENATE"]').count())===35,'National election-night board must index all 35 Senate contests, not only 17 forecast races');
  assert((await nationalNight.locator('#balanceOfPower').count())===0,'Election Night must not display pre-election power bars');
 
  assert((await nationalNight.locator('#miCounties').innerText())==='0 / 83','Fake Michigan county counts before polls close');
@@ -392,6 +393,7 @@ try{
   await electionDesk.waitForFunction(o=>document.querySelector('#edSimMap')?.dataset.simOffice===o&&document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true',office,{timeout:30000});
   assert((await electionDesk.locator('#edSimMap path.ed-live-lead-N').count())===50,label+' must remain gray before accepted reporting');
   assert((await electionDesk.locator('#edSimMap a[data-sim-state="MI"]').getAttribute('href')).includes('race='+race),label+' map must link to the precise race');
+  if(office==='senateD')assert((await electionDesk.locator('#edSimMap a[data-sim-state="CO"]').getAttribute('href')).includes('race=CO-SENATE'),'Unmodeled but scheduled Colorado Senate race must have its exact live link');
   const insets=await electionDesk.evaluate(()=>['AK','HI'].map((code,i)=>{
    const p=document.querySelector('#edSimMap g[data-sim-inset="'+code+'"] path')?.getBoundingClientRect();
    const b=document.querySelectorAll('#edSimMap .ed-sim-map-insets rect')[i]?.getBoundingClientRect();
