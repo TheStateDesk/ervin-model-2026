@@ -12,8 +12,8 @@ class ElectionReporting(unittest.TestCase):
   self.now=dt.datetime(2026,11,4,3,tzinfo=UTC)
   self.search={"id":87214,"province":"MI","country":"US","election_name":"Michigan US Senate","election_type":"US Senate","election_scope":"General","election_date":"2026-11-03"}
   self.detail={"election_name":"Michigan US Senate","election_type":"US Senate","election_scope":"General","election_date":"2026-11-03","province":"MI","country":"US","last_updated":"2026-11-04T02:30:00Z","test_data":False,"candidates":[{"name":"Candidate D","party":"Democratic","votes":12000},{"name":"Candidate R","party":"Republican","votes":11000}],"percent_reporting":25.0}
- def test_registry_488(self):
-  x=m.targets();self.assertEqual(len(x),488)
+ def test_registry_506(self):
+  x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)
   self.assertEqual(sum(v["office"]=="senate" for v in x.values()),17)
   self.assertEqual(sum(v["office"]=="governor" for v in x.values()),36)
