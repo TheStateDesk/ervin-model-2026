@@ -13,7 +13,17 @@
       "party": "R",
       "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
       "ratingSource": "https://insideelections.com/election-year/2026/",
-      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate",
+      "publisherAverage": {
+        "publisher": "270toWin",
+        "sourceUrl": "https://www.270towin.com/2026-senate-polls/alabama",
+        "nonRShare": 36,
+        "repShare": 52.7,
+        "marginNonRMinusR": -16.7,
+        "averagePollCount": 3,
+        "latestPollEnd": "2026-10-28",
+        "note": "Candidate-matched general-election publisher average, not an Ervin historical-error-adjusted estimate, a new individual poll, or a race call."
+      }
     },
     "AR": {
       "state": "Arkansas",
@@ -33,7 +43,17 @@
       "party": "D",
       "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
       "ratingSource": "https://insideelections.com/election-year/2026/",
-      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate",
+      "publisherAverage": {
+        "publisher": "270toWin",
+        "sourceUrl": "https://www.270towin.com/2026-senate-polls/colorado",
+        "nonRShare": 59,
+        "repShare": 38,
+        "marginNonRMinusR": 21,
+        "averagePollCount": 2,
+        "latestPollEnd": "2026-11-02",
+        "note": "Candidate-matched general-election publisher average, not an Ervin historical-error-adjusted estimate, a new individual poll, or a race call."
+      }
     },
     "DE": {
       "state": "Delaware",
@@ -63,7 +83,17 @@
       "party": "D",
       "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
       "ratingSource": "https://insideelections.com/election-year/2026/",
-      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate",
+      "publisherAverage": {
+        "publisher": "270toWin",
+        "sourceUrl": "https://www.270towin.com/2026-senate-polls/illinois",
+        "nonRShare": 53.7,
+        "repShare": 41,
+        "marginNonRMinusR": 12.7,
+        "averagePollCount": 3,
+        "latestPollEnd": "2026-11-02",
+        "note": "Candidate-matched general-election publisher average, not an Ervin historical-error-adjusted estimate, a new individual poll, or a race call."
+      }
     },
     "KY": {
       "state": "Kentucky",
@@ -93,7 +123,17 @@
       "party": "D",
       "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
       "ratingSource": "https://insideelections.com/election-year/2026/",
-      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate",
+      "publisherAverage": {
+        "publisher": "270toWin",
+        "sourceUrl": "https://www.270towin.com/2026-senate-polls/massachusetts",
+        "nonRShare": 56,
+        "repShare": 29.8,
+        "marginNonRMinusR": 26.2,
+        "averagePollCount": 4,
+        "latestPollEnd": "2026-11-01",
+        "note": "Candidate-matched general-election publisher average, not an Ervin historical-error-adjusted estimate, a new individual poll, or a race call."
+      }
     },
     "NJ": {
       "state": "New Jersey",
@@ -113,7 +153,17 @@
       "party": "D",
       "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
       "ratingSource": "https://insideelections.com/election-year/2026/",
-      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate",
+      "publisherAverage": {
+        "publisher": "270toWin",
+        "sourceUrl": "https://www.270towin.com/2026-senate-polls/new-mexico",
+        "nonRShare": 57,
+        "repShare": 38,
+        "marginNonRMinusR": 19,
+        "averagePollCount": 2,
+        "latestPollEnd": "2026-11-02",
+        "note": "Candidate-matched general-election publisher average, not an Ervin historical-error-adjusted estimate, a new individual poll, or a race call."
+      }
     },
     "OK": {
       "state": "Oklahoma",
@@ -143,7 +193,17 @@
       "party": "D",
       "method": "Independent publisher qualitative rating; no verified same-state federal historical polling correction, no numerical Ervin margin",
       "ratingSource": "https://insideelections.com/election-year/2026/",
-      "candidateSource": "https://theballotbrief.com/candidates/us-senate"
+      "candidateSource": "https://theballotbrief.com/candidates/us-senate",
+      "publisherAverage": {
+        "publisher": "270toWin",
+        "sourceUrl": "https://www.270towin.com/2026-senate-polls/rhode-island",
+        "nonRShare": 59,
+        "repShare": 29.7,
+        "marginNonRMinusR": 29.3,
+        "averagePollCount": 3,
+        "latestPollEnd": "2026-11-01",
+        "note": "Candidate-matched general-election publisher average, not an Ervin historical-error-adjusted estimate, a new individual poll, or a race call."
+      }
     },
     "TN": {
       "state": "Tennessee",
@@ -185,5 +245,7 @@
       "ratingSource": "https://insideelections.com/election-year/2026/",
       "candidateSource": "https://theballotbrief.com/candidates/us-senate"
     }
-  }
+  },
+  "checkedPublisherPollsOn": "2026-11-03",
+  "publisherCoverageNote": "Direct 270toWin audit also checked other qualitative-rated races; some had no current candidate-matched aggregate, and Louisiana's displayed Letlow/Fleming aggregate was a different pairing. Do not repurpose those polls."
 }
