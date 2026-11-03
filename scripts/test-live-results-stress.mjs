@@ -13,7 +13,8 @@ const make=(key='MI-SENATE',time='2026-11-04T02:04:00Z',d=100,r=90)=>({version:1
 assert.equal(Object.keys(engine.closeByState).length,50,'Every state must have a race deadline');
 assert.equal(engine.closeAt('GA-SENATE','Senate'),Date.parse('2026-11-04T00:00:00Z'),'Georgia 7 pm ET');
 assert.equal(engine.closeAt('FL-27','House'),Date.parse('2026-11-04T00:00:00Z'),'Florida Miami-Dade congressional 7 pm ET');
-assert.equal(engine.closeAt('MI-SENATE','Senate'),Date.parse('2026-11-04T02:00:00Z'),'Michigan last closing at 9 pm ET');
+assert.equal(engine.closeAt('MI-SENATE','Senate'),Date.parse('2026-11-04T01:00:00Z'),'Michigan first statewide reporting begins at 8 pm ET');
+assert.equal(engine.closeAt('KY-SENATE','Senate'),Date.parse('2026-11-03T23:00:00Z'),'Kentucky first statewide reporting begins at 6 pm ET');
 assert.equal(engine.closeAt('TX-18','House'),Date.parse('2026-11-04T01:00:00Z'),'Texas Houston 7pm CST = 8pm ET');
 assert.equal(engine.closeAt('KY-06','House'),Date.parse('2026-11-03T23:00:00Z'),'Eastern KY 6pm');
 for(const id of ['IN-02','IN-03','IN-04','IN-05','IN-06','IN-07','IN-09','KY-03','KY-04','KY-05','KY-06'])
@@ -24,7 +25,7 @@ for(const id of ['IN-01','IN-08','KY-01','KY-02'])
 assert.equal(engine.canonical('AK-AL','House'),'AK-01');
 assert.equal(engine.canonical('CA-11','Senate'),null);
 assert.equal(engine.canonical('AA-06','House'),null);
-const early=make();early.races['MI-SENATE'].asOf='2026-11-04T01:58:00Z';
+const early=make();early.races['MI-SENATE'].asOf='2026-11-04T00:58:00Z';
 assert.equal(Object.keys(engine.civic(early,now)).length,0,'No preclose votes from CivicAPI');
 assert.equal(Object.keys(engine.civic(make(),now)).length,1,'Accept normalized after close result');
 assert.equal(Object.keys(engine.civic(make('FL-27','2026-11-03T23:59:59Z'),now)).length,0,'Reject early Florida source');
