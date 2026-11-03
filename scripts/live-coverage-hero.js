@@ -9,6 +9,8 @@ const fmt=n=>Number(n).toLocaleString('en-US');
 const et=t=>new Date(t).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
 const stateNames=Object.fromEntries((window.ERVIN_US_GEOGRAPHY?.states||[]).map(s=>[s.code,s.name]));
 const important=['MI','OH','TX','ME','GA','NC','IA','AK','NE','KS','MN'];
+// USPS Nov. 3 federal ballot schedule: 33 regular plus FL/OH special Senate elections.
+const SENATE_STATES_2026=new Set('AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY'.split(' '));
 const watched=new Map(),previous=new Map(),pending=new Map(),published=new Set();
 let active=false,lastPost=0,observed=null,office='house',lastSync=0,paintQueued=false;
 const on=(e,fn)=>window.addEventListener(e,fn);
@@ -52,8 +54,8 @@ function mapOffice(){
  return $('edSimMap')?.dataset.simOffice||office;
 }
 function knownStateRace(code,k){
- return !!(k==='senateD'?window.ERVIN_HOME_FORECAST?.senate:window.ERVIN_HOME_FORECAST?.governor)?.some(r=>r.code===code)||
-  !!accepted(idFor(code,k),officeFor(k));
+ if(k==='senateD')return SENATE_STATES_2026.has(code);
+ return !!window.ERVIN_HOME_FORECAST?.governor?.some(r=>r.code===code)||!!accepted(idFor(code,k),officeFor(k));
 }
 function summary(k,results){
  const holder=$('edFinalCallSummary');if(!holder)return;
@@ -69,6 +71,7 @@ function summary(k,results){
  const minor=document.createElement('small');
  minor.textContent=n?fmt(n)+' races with accepted unofficial totals'+(other?' · '+other+' independent/other leader'+(other===1?'':'s'):'')+(ties?' · '+ties+' tie'+(ties===1?'':'s'):'')+' · no race call inferred':
   'Awaiting source-validated unofficial returns · unreported contests remain gray';
+ minor.textContent+=(k==='house'?' · 435 House districts':k==='senateD'?' · 35 Senate elections':' · 36 governor elections');
  holder.append(meta,stats,minor);holder.dataset.liveReports=String(n);
  const status=$('edCommentaryStatus');
  if(status)status.textContent=n?fmt(n)+' reporting race'+(n===1?'':'s')+' · checking every 30 seconds':'Waiting for the first accepted reports · checks every 30 seconds';
