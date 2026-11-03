@@ -44,6 +44,22 @@ for(const code of geographicStates.keys()){
  assert(c.features.every(f=>meta.countyIds.has(String(f.id))),code+' direct county FIPS mismatch');
  assert(genuineDs.every(f=>meta.districtIds.has(String(f.id).padStart(2,'0'))),code+' direct district IDs mismatch');
 }
+// All nine 2026-redrawn states and the two later-boundary comparators must
+// have the official 2026 Census files; the regional 2022 fallback is unsafe.
+const census2026={AL:7,CA:52,FL:28,GA:14,LA:6,NC:14,NY:26,OH:15,TN:9,TX:38,UT:4};
+const officialAudit=json('research/2026-district-geography-audit.json');
+for(const [code,n] of Object.entries(census2026)){
+ const g=json('geo/districts/'+code+'.json');
+ assert.equal(Number(g.boundaryYear),2026,'Do not ship obsolete district polygons for '+code);
+ assert.equal(g.congress,120,'Source must be 120th congressional district geometry for '+code);
+ assert(g.sourceUrl?.includes('census.gov/geo/tiger/TIGER2026/CD/'),'Missing official Census provenance '+code);
+ assert.equal(g.features.length,n,'2026 district count mismatch for '+code);
+ assert.equal(officialAudit.states[code]?.districts,n,'Census source audit count mismatch '+code);
+ assert(/^[0-9a-f]{64}$/.test(officialAudit.states[code]?.zipSha256||''),'Official download SHA-256 missing '+code);
+}
+assert.equal(Object.keys(census2026).reduce((a,c)=>a+census2026[c],0),213);
+const missouri=json('geo/districts/MO.json');
+assert(Number(missouri.boundaryYear)!==2026,'Missouri court-blocked map cannot be shown as 2026 geography');
 const house=json('house/data.json'),seats=house.seats||[];
 assert.equal(seats.length,435,'House directory must contain 435 seats');
 const byState=new Map(),ids=new Set();
@@ -110,10 +126,11 @@ const documentStub={
  createDocumentFragment:()=>new TestElement('fragment')
 };
 const browserWindow={};
-let simulateAlaskaPrimaryOutage=false;
+let simulateAlaskaPrimaryOutage=false,simulateTexasPrimaryOutage=false;
 const fetchStub=async url=>{
  const parsed=new URL(url);
  if(simulateAlaskaPrimaryOutage&&/\/geo\/(counties|districts)\/AK\.json$/.test(parsed.pathname))return {ok:false,status:503};
+ if(simulateTexasPrimaryOutage&&/\/geo\/districts\/TX\.json$/.test(parsed.pathname))return {ok:false,status:503};
  const marker='/ervin-model-2026/';
  assert(parsed.pathname.startsWith(marker),'Geography escaped site base path: '+parsed.pathname);
  const local=path.join(root,parsed.pathname.slice(marker.length));
@@ -150,6 +167,10 @@ for(const kind of ['counties','districts']){
  assert.equal(backup.features.length,kind==='counties'?30:1,'Alaska fallback bundle failed when direct file is unavailable');
 }
 report.alaskaBundleFallback='PASS';
+simulateTexasPrimaryOutage=true;
+await assert.rejects(browserWindow.ERVIN_GEO.reload('TX','districts'),/2026 congressional boundaries unavailable/,
+  'When a 2026-redrawn map is unavailable, never fall back to a geometrically incompatible old district pack');
+report.redrawnDistrictFallback='FAIL_CLOSED';
 report.directStateCountyAssets=50;
 report.directStateDistrictAssets=50;
 
