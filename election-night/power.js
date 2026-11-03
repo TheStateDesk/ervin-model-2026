@@ -8,6 +8,7 @@
  * ballotpedia.org/Election_results,_2026:_Governors
  */
 (function(root){'use strict';
+const TOSSUP_MARGIN=1.5;
 const OFF_CYCLE_GOVERNORS={D:6,R:8};
 const SENATE_BASE={D:47,R:53};
 const DEM_HELD=new Set(['MI','GA','NH','MN']);
@@ -30,7 +31,11 @@ function compute(house,senate,governors){
   if(seen.has(r.code))throw Error('Duplicate Senate race '+r.code);
   seen.add(r.code);
   const margin=r.model?.adjustedMargin;
-  if(!Number.isFinite(margin)||Math.abs(margin)<0.0001)throw Error('Senate margin not available for '+r.code);
+  if(!Number.isFinite(margin))throw Error('Senate margin not available for '+r.code);
+  if(Math.abs(margin)<TOSSUP_MARGIN){
+   if(DEM_HELD.has(r.code))s.D--;else s.R--;
+   s.T++;continue;
+  }
   if(DEM_HELD.has(r.code)){if(margin<0){s.D--;s.R++;}}
   else if(margin>0){s.R--;if(INDEPENDENT_NONR.has(r.code))s.I++;else s.D++;}
  }
@@ -42,7 +47,7 @@ function compute(house,senate,governors){
   governorSeen.add(r.code);
   const modeled=r.model?.adjustedMargin,poll=r.model?.pollMargin;
   const margin=Number.isFinite(modeled)?modeled:Number.isFinite(poll)?poll:null;
-  if(!Number.isFinite(margin)||Math.abs(margin)<0.05){g.T++;continue;}
+  if(!Number.isFinite(margin)||Math.abs(margin)<TOSSUP_MARGIN){g.T++;continue;}
   if(!Number.isFinite(modeled))g.rawOnly++;else g.modeled++;
   if(margin>0)g.D++;else g.R++;
  }
@@ -53,8 +58,8 @@ function render(rootEl,projection){
  if(!rootEl)throw Error('Balance-of-power container missing');
  const specs=[
   {office:'house',label:'U.S. House',data:projection.house,href:'states/?office=house#nationMap',note:'435 districts · 218 seats for a majority · model Tossups remain unassigned'},
-  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#balanceOfPower',note:'100 seats · 17 races modeled · 18 unmodeled 2026 contests presumed held · 50–50 means Republican control when the vice president is Republican'},
-  {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 elections, 14 holdovers · unavailable polling left unprojected'}
+  {office:'senate',label:'U.S. Senate',data:projection.senate,href:'#balanceOfPower',note:'48–49–3 means three competitive seats are unassigned. At 50–50, the Republican vice president breaks the tie; 51 is a Democratic majority. 18 unmodeled contests presumed held.'},
+  {office:'governors',label:'Governorships',data:projection.governors,href:'states/?office=governor#nationMap',note:'50 states · 36 races · 14 holdovers · margins within 1.5 points treated as toss-ups; missing polls remain unprojected'}
  ];
  rootEl.innerHTML=specs.map(({office,label:headline,data,href,note})=>{
   const partyD=office==='senate'?'D-aligned':'Democratic';
@@ -71,7 +76,7 @@ function render(rootEl,projection){
    '<div class="power-segment power-segment-d" style="width:'+pct(data.D)+'%" title="'+partyD+' '+label(data.D,data.denom)+'"></div>'+
    '<div class="power-segment power-segment-r" style="width:'+pct(data.R)+'%" title="Republican '+label(data.R,data.denom)+'"></div>'+
    (data.T+other?'<div class="power-segment power-segment-t" style="width:'+pct(data.T+other)+'%" title="Unallocated '+label(data.T+other,data.denom)+'"></div>':'')+
-   '</div><div class="power-card-footer"><small>'+note+'</small></div></article>';
+   '<div class="power-majority-tick" style="left:'+pct(data.threshold)+'%" aria-hidden="true"></div></div><div class="power-card-footer"><small>'+note+'</small></div></article>';
  }).join('');
  rootEl.setAttribute('data-power-ready','true');
 }
