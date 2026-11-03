@@ -361,6 +361,8 @@ async function loadReturns(force=false){
   if(!core)throw Error('Result validator not initialized');
   const urls=['../civicapi/races.json',...['Senate','Governor','House'].map(o=>'https://openamerica.io/elections/results.json?year=2026&office='+o)];
   const response=await Promise.allSettled(urls.map(async u=>{
+   if(u.startsWith('https://openamerica.io/')&&window.ERVIN_EXTERNAL_FEED)
+     return window.ERVIN_EXTERNAL_FEED.json(u,{timeout:11000});
    const v=await fetch(u,{cache:'no-store',signal:ctrl.signal});
    if(!v.ok)throw Error(u+' HTTP '+v.status);
    return v.json();
