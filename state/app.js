@@ -96,7 +96,10 @@ function countyInformation(row){
  return '<strong>'+esc(row.name)+' County</strong> · FIPS '+esc(row.id)+
  '<div class="ed-split" style="margin-top:8px;gap:8px;font-size:12px"><div>2020 presidential: <strong>'+esc(format(row.m20))+'</strong><div>2024 presidential: <strong>'+esc(format(row.m24))+'</strong></div></div>'+
  '<div>2026 Senate scenario: <strong>'+esc(format(row.senate))+'</strong><div>2026 governor scenario: <strong>'+esc(format(row.governor))+'</strong></div></div></div>'+
- '<p class="ed-mini">Scenario figures allocate a statewide estimated margin using 2020/2024 presidential voting. These are not separate county surveys or reported 2026 returns.</p>';
+ '<p class="ed-mini">Scenario figures allocate a statewide estimated margin using 2020/2024 presidential voting. They are not county surveys or counted 2026 votes.</p>'+
+  (()=>{const o=$('nightCountyOffice')?.value||'Senate',v=window.ERVIN_COUNTY_DATA?.get(code,o)?.get(row.id);
+  return v?'<p><strong>UNOFFICIAL '+esc(o)+' votes:</strong> D '+fmt(v.dem)+' · R '+fmt(v.rep)+' · Other '+fmt(v.other)+' · '+esc(v.asOf)+'</p><a href="'+safeURL(v.url)+'" target="_blank" rel="noopener noreferrer">Original reported county source</a>':
+   '<p class="ed-mini"><strong>2026 '+esc(o)+' votes:</strong> No independently verified county returns. Missing results are not zero votes.</p><a href="'+safeURL(window.ERVIN_COUNTY_DATA?.source(row.id))+'" target="_blank" rel="noopener noreferrer">Original election authority</a>'})();
 }
 function updateCountyViewport(){
  const w=900/mapZoom,h=580/mapZoom,cx=Math.max(w/2,Math.min(900-w/2,mapCenter.x)),cy=Math.max(h/2,Math.min(580-h/2,mapCenter.y));
@@ -104,24 +107,48 @@ function updateCountyViewport(){
 }
 function countyZoom(factor){mapZoom=Math.max(1,Math.min(7,mapZoom*factor));updateCountyViewport();}
 function drawCounties(){
- const layer=$('countyLayer').value;
+ const layer=$('countyLayer').value,reportView=layer==='reported'||layer==='compare',
+  office=$('nightCountyOffice')?.value||(''+layer==='governor'?'Governor':'Senate'),
+  returns=window.ERVIN_COUNTY_DATA?.get(code,office)||new Map();
  const surface=$('countyMap'),data=countyShape;
  if(!data){$('countyStatus').textContent='County geography unavailable · Reload map';$('countyStatus').classList.add('is-warning');surface.replaceChildren();return;}
  const byId=new Map(cachedCountyRows.map(r=>[r.id,r]));
- window.ERVIN_GEO.draw(surface,data,{kind:'counties',className:'county',onSelect:(el,f)=>{const id=String(f.id).padStart(5,'0');selectedCounty=id;for(const x of surface.querySelectorAll('path.county'))x.classList.toggle('is-selected',x.dataset.fips===id);$('countyInspector').innerHTML=countyInformation(byId.get(id));}});
+ window.ERVIN_GEO.draw(surface,data,{kind:'counties',className:'county',onSelect:(el,f)=>{
+  const id=String(f.id).padStart(5,'0');selectedCounty=id;
+  for(const x of surface.querySelectorAll('path.county'))x.classList.toggle('is-selected',x.dataset.fips===id);
+  $('countyInspector').innerHTML=countyInformation(byId.get(id));
+  window.ERVIN_COUNTY_DATA?.inspect?.(id);
+ }});
  updateCountyViewport();
  const visiblePaths=surface.querySelectorAll('path.county').length;
- $('countyStatus').textContent=visiblePaths+' county outlines · '+stateName(code);
+ $('countyStatus').textContent=visiblePaths+' county outlines · '+stateName(code)+(reportView?' · '+returns.size+' counties with reported results':'');
  $('countyStatus').classList.toggle('is-warning',visiblePaths!==data.features.length);
- let colored=0;
+ let colored=0,reported=0,projected=0;
  for(const p of surface.querySelectorAll('path.county')){
-  const r=byId.get(String(p.dataset.fips).padStart(5,'0')),v=r?activeCountyMargin(r,layer):null;
+  const id=String(p.dataset.fips).padStart(5,'0'),r=byId.get(id),row=returns.get(id);
+  const actual=row&&row.dem+row.rep+row.other>0?100*(row.dem-row.rep)/(row.dem+row.rep+row.other):null;
+  const scenario=r?activeCountyMargin(r,office==='Senate'?'senate':'governor'):null;
+  const v=layer==='reported'?actual:layer==='compare'?(Number.isFinite(actual)?actual:scenario):r?activeCountyMargin(r,layer):null;
   p.style.fill=Number.isFinite(v)?v>=0?(Math.abs(v)>=15?'#3b82ac':'#9bbfd6'):(Math.abs(v)>=15?'#b45463':'#dca0a4'):'#cfd7da';
+  p.style.fillOpacity=layer==='compare'&&!Number.isFinite(actual)?'.45':'1';
+  p.style.strokeDasharray=layer==='compare'&&!Number.isFinite(actual)?'3 2':'';
+  p.dataset.countyReported=Number.isFinite(actual)?'true':'false';
   if(Number.isFinite(v))colored++;
-  p.setAttribute('aria-label',String(p.dataset.name)+' County, '+(Number.isFinite(v)?margin(v)+' points':"no comparable figure"));
-  p.classList.toggle('is-selected',selectedCounty===String(p.dataset.fips).padStart(5,'0'));
+  if(reportView&&Number.isFinite(actual))reported++;
+  if(layer==='compare'&&!Number.isFinite(actual)&&Number.isFinite(scenario))projected++;
+  p.setAttribute('aria-label',String(p.dataset.name)+' County · '+(reportView?
+   Number.isFinite(actual)?'UNOFFICIAL reported '+margin(actual)+' · projected '+margin(scenario):
+   layer==='compare'?'No verified votes; faded conditional forecast '+margin(scenario):'Awaiting independently verified counts':
+   Number.isFinite(v)?margin(v)+' forecast / historical points':'No comparable figure'));
+  const title=p.querySelector('title');if(title)title.textContent=p.getAttribute('aria-label');
+  p.classList.toggle('is-selected',selectedCounty===id);
  }
- $('countySourceLabel').textContent=layer==='senate'?'Conditional Ervin Senate scenario · '+colored+' counties':layer==='governor'?'Conditional governor margin scenario · '+colored+' counties':layer==='neutral'?'Geographic outlines only':layer==='swing'?'Change in two-party presidential margin · '+colored+' counties':layer+' presidential results · '+colored+' counties';
+ $('countySourceLabel').textContent=layer==='reported'?'UNOFFICIAL reported '+office+' results · '+reported+' counties; gray means awaiting verified data':
+  layer==='compare'?'Reported '+office+' results '+reported+' counties · '+projected+' counties show faded conditional forecasts':
+  layer==='senate'?'Conditional Ervin Senate scenario · '+colored+' counties':
+  layer==='governor'?'Conditional governor scenario · '+colored+' counties':
+  layer==='neutral'?'Geographic outlines only':layer==='swing'?'Change in two-party presidential margin · '+colored+' counties':
+  layer+' presidential results · '+colored+' counties';
  $('countyInspector').innerHTML=countyInformation(cachedCountyRows.find(r=>r.id===selectedCounty));
  renderCountyTable();
 }
@@ -129,8 +156,10 @@ function renderCountyTable(){
  const query=$('countyTableFind').value.trim().toLowerCase(),layer=$('countyLayer').value;
  const rows=cachedCountyRows.filter(r=>r.name.toLowerCase().includes(query)).sort((a,b)=>a.name.localeCompare(b.name));
  const preferred=layer==='senate'?'senate':layer==='governor'?'governor':getSen()?'senate':getGov()?'governor':null;
- $('scenarioExplanation').textContent=preferred==='senate'?'Conditional county scenario anchored to the Original Ervin Senate statewide margin. Not independent county polling.':preferred==='governor'?'Conditional county scenario anchored to the available governor margin (historically adjusted where sourced, otherwise publisher poll). Not independent county polling.':'No comparable statewide 2026 margin to allocate; showing presidential history only.';
- $('countyTableBody').innerHTML=rows.map(r=>'<tr><td>'+esc(r.name)+'</td><td>'+esc(margin(r.m24))+'</td><td>'+esc(margin(preferred?r[preferred]:null))+'</td></tr>').join('')||'<tr><td colspan="3">No matching counties.</td></tr>';
+ $('scenarioExplanation').textContent=layer==='reported'?'Reported mode contains only validated unofficial county vote totals linked to an election authority. Missing source data stays blank.':layer==='compare'?'Comparison displays verified vote leaders over the pre-election county scenarios. Unreported counties remain faded, never counted.':preferred==='senate'?'Conditional Senate county scenario from the Ervin statewide margin; not independent county polling.':preferred==='governor'?'Conditional governor scenario (state historical adjustment where supported, publisher margin otherwise); not independent county polling.':'No comparable statewide 2026 margin to allocate; showing presidential history only.';
+ const office=$('nightCountyOffice')?.value||'Senate',counted=window.ERVIN_COUNTY_DATA?.get(code,office)||new Map();
+ $('countyTableBody').innerHTML=rows.map(r=>{const actual=counted.get(r.id),u=actual?.url||window.ERVIN_COUNTY_DATA?.source(r.id);
+  return '<tr><td>'+esc(r.name)+'</td><td>'+esc(margin(r.m24))+'</td><td>'+esc(margin(r[office.toLowerCase()]))+'</td><td>'+(actual?fmt(actual.dem)+' / '+fmt(actual.rep):'Unreported')+'</td><td><a href="'+safeURL(u)+'" target="_blank" rel="noopener noreferrer">'+(actual?'Original report':'Election office')+'</a></td></tr>'}).join('')||'<tr><td colspan="5">No matching counties.</td></tr>';
  $('countyCount').textContent=fmt(cachedCountyRows.length)+' county-equivalent geographic shapes';
 }
 function countyCSV(){
@@ -162,10 +191,11 @@ function initCountyControls(){
  $('countyZoomIn').onclick=()=>countyZoom(1.65);
  $('countyZoomOut').onclick=()=>countyZoom(1/1.65);
  $('countyZoomReset').onclick=()=>{mapZoom=1;mapCenter={x:450,y:290};updateCountyViewport();};
- $('countyLayer').onchange=()=>{countyChosenByUser=true;drawCounties()};
+ $('countyLayer').onchange=()=>{countyChosenByUser=true;const v=$('countyLayer').value,o=$('nightCountyOffice');if(o&&['senate','governor'].includes(v)&&o.value!==v[0].toUpperCase()+v.slice(1)){o.value=v[0].toUpperCase()+v.slice(1);o.dispatchEvent(new Event('change'))}drawCounties()};
  $('countyTableFind').oninput=renderCountyTable;
  $('countyCSV').onclick=countyCSV;
  $('countyRetry').onclick=()=>loadCountyMap(true);
+ window.addEventListener('ervin:county-results-update',e=>{if(e.detail.code===code&&countyShape)drawCounties()});
  $('countySearch').oninput=e=>{const input=e.target.value.trim().toLowerCase().replace(/ county$/,'');const hit=cachedCountyRows.find(x=>x.name.toLowerCase()===input);if(hit){selectedCounty=hit.id;drawCounties();const path=$('countyMap').querySelector('path[data-fips="'+hit.id+'"]');if(path){const box=path.getBBox?.();if(box&&box.width>0&&box.height>0){mapZoom=Math.min(6,Math.max(1,Math.min(900/Math.max(box.width*4,15),580/Math.max(box.height*4,15))));mapCenter={x:box.x+box.width/2,y:box.y+box.height/2};updateCountyViewport();}}}};
 }
 function toneRating(r){const t=String(getModel(r)?.modelRating||r?.rating||'').toLowerCase();return t.includes('tossup')?'#b2a080':/\b(?:tilt|lean|likely|solid) d\b/.test(t)?'#4b89ac':/\b(?:tilt|lean|likely|solid) r\b/.test(t)?'#b25e6e':'#b8c7cd';}
