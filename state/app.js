@@ -243,7 +243,17 @@ async function loadHouseMap(reload=false){
   const requested=location.hash.match(/^#house-(\d{1,2})$/)?.[1];renderDistrictDetail(getDistrict(requested)||selectedDistrict&&getDistrict(selectedDistrict.district)||stateHouse[0]);
  }catch(e){$('districtMapStatus').classList.add('is-warning');$('districtMapStatus').textContent='District map unavailable — use district selector';$('districtDetail').textContent='Map failed: '+e.message+'. Choose a district by number above.';}
 }
-function listPolls(data,asOf,limit=12){const clean=Array.isArray(data)?data.filter(p=>Number.isFinite(+p.margin)):[];
+function listPolls(data,asOf,limit=12){
+ const entries=Array.isArray(data)?data.filter(p=>Number.isFinite(+p.margin)):[];
+ const seen=new Set(),clean=[];
+ for(const p of entries){
+  const pollster=String(p.pollster||'').toLowerCase().replace(/(new york times|nyt|cbs news|cnn|\bssrs\b|\bresearch\b|siena|mitchell|\/)/g,' ').trim();
+  const family=/siena/i.test(p.pollster||'')?'siena':/ssrs/i.test(p.pollster||'')?'ssrs':/mitchell/i.test(p.pollster||'')?'mitchell':pollster;
+  const end=String(p.fieldEnd||p.date||p.dates||p.publishedAt||'');
+  const key=family+'|'+end+'|'+Number(p.margin).toFixed(2);
+  if(seen.has(key))continue;seen.add(key);clean.push(p);
+ }
+
  return clean.sort((a,b)=>Date.parse(b.fieldEnd||b.publishedAt||b.date||0)-Date.parse(a.fieldEnd||a.publishedAt||a.date||0)).slice(0,limit).map(p=>'<article class="ed-coverage"><div><strong><a href="'+safeURL(p.url)+'" target="_blank" rel="noopener noreferrer">'+esc(p.pollster||'Survey')+'</a></strong><small>'+esc(p.date||p.dates||'Field date unknown')+' · '+esc(p.sample||'Sample details unverified')+'</small></div><strong>'+esc(margin(+p.margin))+'</strong></article>').join('');
 }
 function renderTexasGovernorSources(){
