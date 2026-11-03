@@ -139,6 +139,16 @@ async function refreshNational(){
   sourceWarnings=[...chosen.warnings,...merged.warnings];
   live={House:{races:{}},Senate:{races:{}},Governor:{races:{}}};
   for(const [id,row] of Object.entries(merged.races))if(live[row.office])live[row.office].races[id]=row;
+  // Source-validated Senate totals can cover states outside the 17 numerical
+  // forecast contests. Add an actual race row only when a verified report exists.
+  const indexed=new Set(races.map(r=>r.id));
+  for(const row of Object.values(merged.races)){
+   if(row.office!=='Senate'||indexed.has(row.id)||!/^[A-Z]{2}-SENATE$/.test(row.id))continue;
+   const code=row.id.slice(0,2),state=races.find(x=>x.code===code)?.state||code;
+   const label=row.candidates.map(c=>c.name+' ('+c.party+')').join(' vs. ');
+   races.push({id:row.id,code,state,office:'Senate',label,margin:null,modelText:'No standalone numerical forecast'});
+   indexed.add(row.id);
+  }
   const acceptedCivic=Object.values(merged.races).filter(r=>r.source?.includes('CivicAPI')).length;
   const acceptedFallback=Object.values(merged.races).filter(r=>!r.source?.includes('CivicAPI')).length;
   const count=acceptedCivic+acceptedFallback;
