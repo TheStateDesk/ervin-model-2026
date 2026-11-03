@@ -43,9 +43,17 @@ function attach(container,name,options={}){
   const img=document.createElement('img');img.src=info.url;img.alt=label;img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';
   img.onerror=()=>{img.remove();container.textContent=fallBack;};
   container.replaceChildren(img);
-  container.title='Portrait source: '+info.source+'. Click the candidate name for attribution.';
+  container.title='Portrait source: '+info.source;
   const anchor=container.closest('a');
   if(anchor&&info.page){anchor.href=info.page;anchor.target='_blank';anchor.rel='noopener noreferrer'}
+  else if(info.page){
+   const parent=container.closest('.watch-person,.gov-photo-item');
+   if(parent&&!parent.querySelector('.candidate-photo-credit')){
+    const credit=document.createElement('a');credit.href=info.page;credit.target='_blank';credit.rel='noopener noreferrer';
+    credit.className='candidate-photo-credit';credit.textContent='Photo source';
+    credit.title=info.source+' · '+name;parent.append(credit);
+   }
+  }
  }).catch(()=>{});
 }
 root.ERVIN_PORTRAITS={attach,resolve,load};
