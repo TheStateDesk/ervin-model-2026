@@ -85,7 +85,7 @@ try{
   const map=document.querySelector('#nationMap')?.getBoundingClientRect();
   const lead=document.querySelector('#edSimulationPanel')?.getBoundingClientRect();
   const byline=document.querySelector('.ed-byline')?.getBoundingClientRect();
-  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,simTop:lead?.top,bylineBottom:byline?.bottom,simMapCount:document.querySelectorAll('#edSimMap path.ed-sim-proj-district').length,heroTitle:document.querySelector('#edFinalHeadline')?.textContent?.replace(/\s+/g,' ').trim(),nightActive:!!document.querySelector('#edResultsStage')&&!document.querySelector('#edResultsStage').hidden,
+  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,simTop:lead?.top,bylineBottom:byline?.bottom,simMapCount:document.querySelectorAll('#edSimMap path.ed-sim-proj-district').length,retiredScenarios:!!document.querySelector('#edSimulationPanel .ed-final-distribution')||document.querySelector('#edSimulationPanel')?.textContent?.includes('144,000'),heroTitle:document.querySelector('#edFinalHeadline')?.textContent?.replace(/\s+/g,' ').trim(),nightActive:!!document.querySelector('#edResultsStage')&&!document.querySelector('#edResultsStage').hidden,
    width:watch?.width,watchCount:document.querySelectorAll('#watchCards .watch-card').length,
    finalDashboard:!!document.querySelector('#electionDashboard'),officeTabs:document.querySelectorAll('[data-map-office]').length,
    countyViewTabs:document.querySelectorAll('[data-national-county-view]').length,
@@ -107,7 +107,7 @@ try{
  });
  const orderValid=frontModel.nightActive?(frontModel.mapTop<frontModel.watchTop&&frontModel.watchTop<frontModel.powerTop):
   (frontModel.simTop<frontModel.watchTop&&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop);
- if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.simTop>=frontModel.bylineBottom-2&&frontModel.simTop<frontModel.watchTop&&frontModel.simMapCount===435&&frontModel.heroTitle?.includes('FINAL')&&frontModel.heroTitle?.includes('PREDICTION')&&orderValid
+ if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.simTop>=frontModel.bylineBottom-2&&frontModel.simTop<frontModel.watchTop&&frontModel.simMapCount===435&&!frontModel.retiredScenarios&&frontModel.heroTitle?.includes('FINAL')&&frontModel.heroTitle?.includes('PREDICTION')&&orderValid
   &&frontModel.width>280&&frontModel.watchCount>=4&&frontModel.finalDashboard&&frontModel.officeTabs===3
   &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow
   &&frontModel.deployedRevision===stamp&&frontModel.visibleBuild?.includes(stamp.slice(0,8))
@@ -122,6 +122,17 @@ try{
   const total=await front.locator(selector).count();
   if(nonNeutral!==coverage||total!==(office==='house'?435:50))throw Error('PUBLIC FINAL PREDICTION MAP CALLS INCORRECT '+JSON.stringify({office,coverage,nonNeutral,total}));
   if((await front.locator('#edSimMap path.ed-sim-proj-T').count())!==0)throw Error('PUBLIC FINAL MAP MUST NOT SHOW TOSS-UP SHADING');
+  if(office!=='house'){
+   const insets=await front.evaluate(()=>['AK','HI'].map((code,i)=>{
+    const path=document.querySelector('#edSimMap g[data-sim-inset="'+code+'"] path');
+    const group=path?.parentElement?.parentElement;
+    const border=document.querySelectorAll('#edSimMap .ed-sim-map-insets rect')[i];
+    const p=path?.getBoundingClientRect(),b=border?.getBoundingClientRect();
+    return {code,moved:group?.getAttribute('transform')?.startsWith('translate('),inFrame:!!(p&&b&&p.width>10&&p.height>8&&p.left>=b.left-2&&p.right<=b.right+2&&p.top>=b.top-2&&p.bottom<=b.bottom+2)};
+   }));
+   if(insets.some(x=>!x.moved||!x.inFrame))throw Error('PUBLIC '+label+' ALASKA/HAWAII INSET ALIGNMENT FAILED '+JSON.stringify(insets));
+  }
+
   await front.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/FINAL-PREDICTION-'+label+'-Mobile.png'});
  }
  await front.locator('#watchSection').screenshot({path:'postdeploy-checks/State-Desk-Races-To-Watch-Mobile.png'});
