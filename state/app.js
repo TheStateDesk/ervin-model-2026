@@ -10,7 +10,7 @@ const regionMap={CT:'Northeast',ME:'Northeast',MA:'Northeast',NH:'Northeast',RI:
 const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
-let historicalError=null;let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
+let sourceTimeLabel='Source update time unavailable';let historicalError=null;let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
 let countyChosenByUser=false; for(const b of document.querySelectorAll('[data-county-view]'))b.setAttribute('aria-pressed',String(b.dataset.countyView==='forecast'));let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
@@ -40,7 +40,7 @@ function renderLead(){
  $('heroGovernor').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?margin(governorErvin[code].model.adjustedMargin):Number.isFinite(governorErvin[code]?.model?.pollMargin)?margin(governorErvin[code].model.pollMargin):'No poll input'):'No election';
  $('heroGovSub').textContent=gov?(Number.isFinite(governorErvin[code]?.model?.adjustedMargin)?'Ervin’s Take · governor calibration':governorErvin[code]?.model?'Published poll · comparable state history not yet verified':'Loading Ervin correction'):'No governor contest in the 2026 registry';
  $('houseCoverage').textContent=n(stateHouse.length)+' · '+stateName(code);
- $('editionDate').textContent='Research snapshot · November 2026';
+ $('editionDate').textContent=sourceTimeLabel;
 }
 function statewideCard(title,sub,candidates,forecast,explain,source,href){
  return '<article class="ed-race"><div class="ed-race-h"><div><div class="ed-kicker">'+esc(sub)+'</div><h3>'+esc(title)+'</h3><p>'+esc(candidates)+'</p></div><div class="ed-race-big">'+esc(forecast)+'</div></div><p>'+esc(explain)+'</p><div class="ed-link-list"><a href="'+safeURL(source)+'" target="_blank" rel="noopener noreferrer">Polling/source reference</a><a href="'+esc(href)+'">Detailed methodology</a></div></article>';
@@ -380,7 +380,7 @@ function officialLinks(){
  $('officialStateLinks').innerHTML=links;
 }
 async function display(next){
- const c=String(next||'MI').toUpperCase();code=byCode[c]?c:'MI';document.querySelectorAll('[data-election-night-state]').forEach(link=>link.href='../election-night/?state='+encodeURIComponent(code)+'#nationalBoard');window.dispatchEvent(new CustomEvent('ervin:state-edition',{detail:{code}}));
+ const c=String(next||'MI').toUpperCase();code=byCode[c]?c:'MI';try{localStorage.setItem('ervin-last-state',code)}catch(_){};document.querySelectorAll('[data-election-night-state]').forEach(link=>link.href='../election-night/?state='+encodeURIComponent(code)+'#nationalBoard');window.dispatchEvent(new CustomEvent('ervin:state-edition',{detail:{code}}));
  selectedDistrict=null;countyShape=null;districtShape=null;cachedCountyRows=[];selectedCounty=null;countyToken++;houseToken++;
  stateHouse=house.filter(x=>x.code===code).sort((a,b)=>String(a.district).localeCompare(String(b.district)));
  renderLead();renderOverview();initDistrictButtons();renderPolls();officialLinks();
@@ -398,7 +398,7 @@ async function start(){
   const [h,g]=await Promise.all([fetchJSON('../house/data.json'),fetchJSON('../governors/data.json')]);
   house=h.seats||[];governors=g.races||[];
   prepareSelection();initCountyControls();$('houseMapReload').onclick=()=>loadHouseMap(true);$('reloadResults').onclick=()=>loadReturns(true);
-  fetchJSON('../refresh_log.json').then(log=>{if(log.checkedAt)$('headerDate').textContent='Polling checked '+new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})}).catch(()=>{$('headerDate').textContent='Source update time unavailable'});
+  fetchJSON('../refresh_log.json').then(log=>{if(log.checkedAt){sourceTimeLabel='Updated '+new Date(log.checkedAt).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});$('headerDate').textContent=sourceTimeLabel;$('editionDate').textContent=sourceTimeLabel}}).catch(()=>{$('headerDate').textContent='Source update time unavailable'});
   const optionalFiles=[
    fetchJSON('../counties-watch/forecast-baselines.json'),
    window.ERVIN_SCENARIOS.load(),
