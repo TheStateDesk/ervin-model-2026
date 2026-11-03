@@ -27,7 +27,7 @@ function draw(){
  if(gov){
   const m=gov.poll;
   let body='<p>2026 publisher polling input: <strong>'+fmt(m?.margin)+'</strong> · '+esc(m?.count??'Unknown')+' listed surveys · as of '+esc(m?.asOf||'undated')+'. '+link(m?.url,'Open source polling average')+'.</p>';
-  body+='<p class="ed-mini">Historical adjustment excludes 2014 and uses the newest three available 2018–2024 same-state governor elections, weighted 50/30/20 (renormalized when fewer than three). No Senate or presidential polling errors are included. Individual polls and publisher averages are not interchangeable.</p>';
+  body+='<p class="ed-mini">Historical adjustment excludes 2014 and uses the newest three available 2018–2024 same-state governor elections, weighted 50/30/20, with one-cycle corrections reduced to one-third and two-cycle corrections to two-thirds. No Senate or presidential polling errors are included. Individual polls and publisher averages are not interchangeable.</p>';
   if(state==='OH'&&gov.candidatePerformance?.comparisons?.length){
    const comparisons=gov.candidatePerformance.comparisons;
    const delta=comparisons.reduce((sum,x)=>sum+(x.referenceRepublicanMargin-x.comparisonRepublicanMargin)*x.weight,0);
