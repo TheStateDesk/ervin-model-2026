@@ -151,10 +151,11 @@ function outlierBins(name){
 }
 const senateStats=stat('senateD'),houseStats=stat('house'),governorStats=stat('governorsD');
 const raceProb=(races,field)=>races.map(r=>({id:r.id||r.code,name:r.state||r.id,margin:Number.isFinite(r.margin)?r.margin:null,modelInputs:r.publisherInputs??r.pollEvidence??r.model?.calibrationCycles??null,
- pctNonR:field[r.id||r.code]===undefined?null:asFraction(field[r.id||r.code]/W)}));
+ pctNonR:field[r.id||r.code]===undefined?null:asFraction(field[r.id||r.code])}));
 const closeSen=raceProb(senRows,wins.senate).sort((a,b)=>Math.abs(a.pctNonR-.5)-Math.abs(b.pctNonR-.5)).slice(0,10);
 const closeHouse=raceProb(houseRows.filter(x=>Number.isFinite(x.margin)),wins.house).map(x=>({...x,pctNonR:x.pctNonR??0}))
  .sort((a,b)=>Math.abs(a.pctNonR-.5)-Math.abs(b.pctNonR-.5)).slice(0,15);
+assert(closeSen.some(x=>x.pctNonR>.1&&x.pctNonR<.9),'Race probabilities must not be divided by trials twice');
 const summary={
  schema:1,title:'The Ervin Model · 144,000 pre-election scenarios',asOf:'2026-11-03',trials:W,seed:SEED,
  sourceFiles:['counties-watch/forecast-baselines.json','house/ervin-forecast-2026-11-02.json','governors/data.json','research/governor-same-office-2014-2024.json','research/senate_2018_2024_walk_forward.csv','research/house-holdout-baseline-2022-2024.json','research/governor-same-office-backtest-2026-11-02.json'],
