@@ -1,0 +1,1295 @@
+{
+  "schema": 1,
+  "title": "The Ervin Model · 144,000 pre-election scenarios",
+  "asOf": "2026-11-03",
+  "trials": 144000,
+  "seed": 20261103,
+  "sourceFiles": [
+    "counties-watch/forecast-baselines.json",
+    "house/ervin-forecast-2026-11-02.json",
+    "governors/data.json",
+    "research/governor-same-office-2014-2024.json",
+    "research/senate_2018_2024_walk_forward.csv",
+    "research/house-holdout-baseline-2022-2024.json",
+    "research/governor-same-office-backtest-2026-11-02.json"
+  ],
+  "method": {
+    "commonNationalSigma": 2.4,
+    "officeSigma": {
+      "senate": 1,
+      "house": 1,
+      "governor": 1
+    },
+    "senate": "17 corrected Senate margins, 61 centered historical Senate walkforward residuals sampled with replacement, common national and office shocks. Other Senate races assumed to retain current alignment. New independent winner caucus unknown.",
+    "house": "433 numerical 2026-map House margins, 232 comparable past House residuals sampled with replacement; the 173 redrawn district allocations have wider uncertainty. Two nonnumeric exceptions assigned their sourced qualitative party rating.",
+    "governor": "36 governor contests, only same-state governor calibration, 20 eligible historical governor residuals sampled within office; 14 off-cycle governors held and 3 nonnumeric governor races use cited qualitative ratings.",
+    "empiricalResiduals": {
+      "senate": 61,
+      "house": 232,
+      "governor": 20
+    },
+    "redrawnHouseCount": 173,
+    "unmodeledSenateCount": 18,
+    "houseNonnumeric": [
+      "AK-01",
+      "CA-06"
+    ],
+    "limitations": "Simulation percentages are conditional sensitivity frequencies, not externally calibrated election probabilities. Presumed-held, qualitative-rated, statewide common errors, ballot-specific independents, redistricting and single-cycle candidate comparisons add uncertainty."
+  },
+  "center": {
+    "house": {
+      "mean": 249.629,
+      "median": 249,
+      "mode": 247,
+      "modeShare": 0.027681,
+      "sd": 14.144,
+      "skewness": 0.119,
+      "excessKurtosis": -0.012,
+      "p05": 227,
+      "p10": 232,
+      "p25": 240,
+      "p75": 259,
+      "p90": 268,
+      "p95": 273,
+      "localPeaks": [
+        {
+          "seats": 247,
+          "count": 3986,
+          "pct": 0.027681
+        },
+        {
+          "seats": 249,
+          "count": 3961,
+          "pct": 0.027507
+        },
+        {
+          "seats": 245,
+          "count": 3959,
+          "pct": 0.027493
+        },
+        {
+          "seats": 251,
+          "count": 3952,
+          "pct": 0.027444
+        },
+        {
+          "seats": 243,
+          "count": 3797,
+          "pct": 0.026368
+        },
+        {
+          "seats": 240,
+          "count": 3443,
+          "pct": 0.02391
+        },
+        {
+          "seats": 259,
+          "count": 3219,
+          "pct": 0.022354
+        },
+        {
+          "seats": 269,
+          "count": 1643,
+          "pct": 0.01141
+        }
+      ],
+      "histogram": [
+        {
+          "seats": 190,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 193,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 194,
+          "count": 3,
+          "pct": 0.000021
+        },
+        {
+          "seats": 196,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 197,
+          "count": 2,
+          "pct": 0.000014
+        },
+        {
+          "seats": 198,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 200,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 201,
+          "count": 6,
+          "pct": 0.000042
+        },
+        {
+          "seats": 202,
+          "count": 10,
+          "pct": 0.000069
+        },
+        {
+          "seats": 203,
+          "count": 6,
+          "pct": 0.000042
+        },
+        {
+          "seats": 204,
+          "count": 6,
+          "pct": 0.000042
+        },
+        {
+          "seats": 205,
+          "count": 7,
+          "pct": 0.000049
+        },
+        {
+          "seats": 206,
+          "count": 22,
+          "pct": 0.000153
+        },
+        {
+          "seats": 207,
+          "count": 30,
+          "pct": 0.000208
+        },
+        {
+          "seats": 208,
+          "count": 44,
+          "pct": 0.000306
+        },
+        {
+          "seats": 209,
+          "count": 50,
+          "pct": 0.000347
+        },
+        {
+          "seats": 210,
+          "count": 50,
+          "pct": 0.000347
+        },
+        {
+          "seats": 211,
+          "count": 71,
+          "pct": 0.000493
+        },
+        {
+          "seats": 212,
+          "count": 87,
+          "pct": 0.000604
+        },
+        {
+          "seats": 213,
+          "count": 110,
+          "pct": 0.000764
+        },
+        {
+          "seats": 214,
+          "count": 142,
+          "pct": 0.000986
+        },
+        {
+          "seats": 215,
+          "count": 156,
+          "pct": 0.001083
+        },
+        {
+          "seats": 216,
+          "count": 189,
+          "pct": 0.001313
+        },
+        {
+          "seats": 217,
+          "count": 256,
+          "pct": 0.001778
+        },
+        {
+          "seats": 218,
+          "count": 288,
+          "pct": 0.002
+        },
+        {
+          "seats": 219,
+          "count": 361,
+          "pct": 0.002507
+        },
+        {
+          "seats": 220,
+          "count": 444,
+          "pct": 0.003083
+        },
+        {
+          "seats": 221,
+          "count": 518,
+          "pct": 0.003597
+        },
+        {
+          "seats": 222,
+          "count": 572,
+          "pct": 0.003972
+        },
+        {
+          "seats": 223,
+          "count": 692,
+          "pct": 0.004806
+        },
+        {
+          "seats": 224,
+          "count": 776,
+          "pct": 0.005389
+        },
+        {
+          "seats": 225,
+          "count": 877,
+          "pct": 0.00609
+        },
+        {
+          "seats": 226,
+          "count": 981,
+          "pct": 0.006812
+        },
+        {
+          "seats": 227,
+          "count": 1160,
+          "pct": 0.008056
+        },
+        {
+          "seats": 228,
+          "count": 1304,
+          "pct": 0.009056
+        },
+        {
+          "seats": 229,
+          "count": 1370,
+          "pct": 0.009514
+        },
+        {
+          "seats": 230,
+          "count": 1597,
+          "pct": 0.01109
+        },
+        {
+          "seats": 231,
+          "count": 1754,
+          "pct": 0.012181
+        },
+        {
+          "seats": 232,
+          "count": 1950,
+          "pct": 0.013542
+        },
+        {
+          "seats": 233,
+          "count": 2165,
+          "pct": 0.015035
+        },
+        {
+          "seats": 234,
+          "count": 2273,
+          "pct": 0.015785
+        },
+        {
+          "seats": 235,
+          "count": 2509,
+          "pct": 0.017424
+        },
+        {
+          "seats": 236,
+          "count": 2748,
+          "pct": 0.019083
+        },
+        {
+          "seats": 237,
+          "count": 2909,
+          "pct": 0.020201
+        },
+        {
+          "seats": 238,
+          "count": 3077,
+          "pct": 0.021368
+        },
+        {
+          "seats": 239,
+          "count": 3297,
+          "pct": 0.022896
+        },
+        {
+          "seats": 240,
+          "count": 3443,
+          "pct": 0.02391
+        },
+        {
+          "seats": 241,
+          "count": 3440,
+          "pct": 0.023889
+        },
+        {
+          "seats": 242,
+          "count": 3562,
+          "pct": 0.024736
+        },
+        {
+          "seats": 243,
+          "count": 3797,
+          "pct": 0.026368
+        },
+        {
+          "seats": 244,
+          "count": 3745,
+          "pct": 0.026007
+        },
+        {
+          "seats": 245,
+          "count": 3959,
+          "pct": 0.027493
+        },
+        {
+          "seats": 246,
+          "count": 3955,
+          "pct": 0.027465
+        },
+        {
+          "seats": 247,
+          "count": 3986,
+          "pct": 0.027681
+        },
+        {
+          "seats": 248,
+          "count": 3924,
+          "pct": 0.02725
+        },
+        {
+          "seats": 249,
+          "count": 3961,
+          "pct": 0.027507
+        },
+        {
+          "seats": 250,
+          "count": 3923,
+          "pct": 0.027243
+        },
+        {
+          "seats": 251,
+          "count": 3952,
+          "pct": 0.027444
+        },
+        {
+          "seats": 252,
+          "count": 3946,
+          "pct": 0.027403
+        },
+        {
+          "seats": 253,
+          "count": 3822,
+          "pct": 0.026542
+        },
+        {
+          "seats": 254,
+          "count": 3784,
+          "pct": 0.026278
+        },
+        {
+          "seats": 255,
+          "count": 3629,
+          "pct": 0.025201
+        },
+        {
+          "seats": 256,
+          "count": 3603,
+          "pct": 0.025021
+        },
+        {
+          "seats": 257,
+          "count": 3490,
+          "pct": 0.024236
+        },
+        {
+          "seats": 258,
+          "count": 3195,
+          "pct": 0.022187
+        },
+        {
+          "seats": 259,
+          "count": 3219,
+          "pct": 0.022354
+        },
+        {
+          "seats": 260,
+          "count": 3022,
+          "pct": 0.020986
+        },
+        {
+          "seats": 261,
+          "count": 2895,
+          "pct": 0.020104
+        },
+        {
+          "seats": 262,
+          "count": 2677,
+          "pct": 0.01859
+        },
+        {
+          "seats": 263,
+          "count": 2573,
+          "pct": 0.017868
+        },
+        {
+          "seats": 264,
+          "count": 2379,
+          "pct": 0.016521
+        },
+        {
+          "seats": 265,
+          "count": 2225,
+          "pct": 0.015451
+        },
+        {
+          "seats": 266,
+          "count": 2024,
+          "pct": 0.014056
+        },
+        {
+          "seats": 267,
+          "count": 1829,
+          "pct": 0.012701
+        },
+        {
+          "seats": 268,
+          "count": 1605,
+          "pct": 0.011146
+        },
+        {
+          "seats": 269,
+          "count": 1643,
+          "pct": 0.01141
+        },
+        {
+          "seats": 270,
+          "count": 1464,
+          "pct": 0.010167
+        },
+        {
+          "seats": 271,
+          "count": 1272,
+          "pct": 0.008833
+        },
+        {
+          "seats": 272,
+          "count": 1174,
+          "pct": 0.008153
+        },
+        {
+          "seats": 273,
+          "count": 1019,
+          "pct": 0.007076
+        },
+        {
+          "seats": 274,
+          "count": 882,
+          "pct": 0.006125
+        },
+        {
+          "seats": 275,
+          "count": 858,
+          "pct": 0.005958
+        },
+        {
+          "seats": 276,
+          "count": 716,
+          "pct": 0.004972
+        },
+        {
+          "seats": 277,
+          "count": 672,
+          "pct": 0.004667
+        },
+        {
+          "seats": 278,
+          "count": 522,
+          "pct": 0.003625
+        },
+        {
+          "seats": 279,
+          "count": 495,
+          "pct": 0.003438
+        },
+        {
+          "seats": 280,
+          "count": 435,
+          "pct": 0.003021
+        },
+        {
+          "seats": 281,
+          "count": 357,
+          "pct": 0.002479
+        },
+        {
+          "seats": 282,
+          "count": 336,
+          "pct": 0.002333
+        },
+        {
+          "seats": 283,
+          "count": 260,
+          "pct": 0.001806
+        },
+        {
+          "seats": 284,
+          "count": 231,
+          "pct": 0.001604
+        },
+        {
+          "seats": 285,
+          "count": 209,
+          "pct": 0.001451
+        },
+        {
+          "seats": 286,
+          "count": 169,
+          "pct": 0.001174
+        },
+        {
+          "seats": 287,
+          "count": 128,
+          "pct": 0.000889
+        },
+        {
+          "seats": 288,
+          "count": 142,
+          "pct": 0.000986
+        },
+        {
+          "seats": 289,
+          "count": 100,
+          "pct": 0.000694
+        },
+        {
+          "seats": 290,
+          "count": 90,
+          "pct": 0.000625
+        },
+        {
+          "seats": 291,
+          "count": 52,
+          "pct": 0.000361
+        },
+        {
+          "seats": 292,
+          "count": 55,
+          "pct": 0.000382
+        },
+        {
+          "seats": 293,
+          "count": 53,
+          "pct": 0.000368
+        },
+        {
+          "seats": 294,
+          "count": 39,
+          "pct": 0.000271
+        },
+        {
+          "seats": 295,
+          "count": 32,
+          "pct": 0.000222
+        },
+        {
+          "seats": 296,
+          "count": 26,
+          "pct": 0.000181
+        },
+        {
+          "seats": 297,
+          "count": 26,
+          "pct": 0.000181
+        },
+        {
+          "seats": 298,
+          "count": 19,
+          "pct": 0.000132
+        },
+        {
+          "seats": 299,
+          "count": 17,
+          "pct": 0.000118
+        },
+        {
+          "seats": 300,
+          "count": 19,
+          "pct": 0.000132
+        },
+        {
+          "seats": 301,
+          "count": 6,
+          "pct": 0.000042
+        },
+        {
+          "seats": 302,
+          "count": 10,
+          "pct": 0.000069
+        },
+        {
+          "seats": 303,
+          "count": 7,
+          "pct": 0.000049
+        },
+        {
+          "seats": 304,
+          "count": 5,
+          "pct": 0.000035
+        },
+        {
+          "seats": 305,
+          "count": 4,
+          "pct": 0.000028
+        },
+        {
+          "seats": 306,
+          "count": 6,
+          "pct": 0.000042
+        },
+        {
+          "seats": 307,
+          "count": 4,
+          "pct": 0.000028
+        },
+        {
+          "seats": 309,
+          "count": 3,
+          "pct": 0.000021
+        },
+        {
+          "seats": 310,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 312,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 313,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 314,
+          "count": 1,
+          "pct": 0.000007
+        },
+        {
+          "seats": 316,
+          "count": 1,
+          "pct": 0.000007
+        }
+      ],
+      "rawBinCountsSum": 144000
+    },
+    "senateD": {
+      "mean": 49.83,
+      "median": 50,
+      "mode": 50,
+      "modeShare": 0.194069,
+      "sd": 2.028,
+      "skewness": -0.026,
+      "excessKurtosis": -0.159,
+      "p05": 46,
+      "p10": 47,
+      "p25": 48,
+      "p75": 51,
+      "p90": 52,
+      "p95": 53,
+      "localPeaks": [
+        {
+          "seats": 50,
+          "count": 27946,
+          "pct": 0.194069
+        }
+      ],
+      "histogram": [
+        {
+          "seats": 43,
+          "count": 47,
+          "pct": 0.000326
+        },
+        {
+          "seats": 44,
+          "count": 402,
+          "pct": 0.002792
+        },
+        {
+          "seats": 45,
+          "count": 1768,
+          "pct": 0.012278
+        },
+        {
+          "seats": 46,
+          "count": 5046,
+          "pct": 0.035042
+        },
+        {
+          "seats": 47,
+          "count": 11048,
+          "pct": 0.076722
+        },
+        {
+          "seats": 48,
+          "count": 18596,
+          "pct": 0.129139
+        },
+        {
+          "seats": 49,
+          "count": 25354,
+          "pct": 0.176069
+        },
+        {
+          "seats": 50,
+          "count": 27946,
+          "pct": 0.194069
+        },
+        {
+          "seats": 51,
+          "count": 24092,
+          "pct": 0.167306
+        },
+        {
+          "seats": 52,
+          "count": 16401,
+          "pct": 0.113896
+        },
+        {
+          "seats": 53,
+          "count": 8615,
+          "pct": 0.059826
+        },
+        {
+          "seats": 54,
+          "count": 3480,
+          "pct": 0.024167
+        },
+        {
+          "seats": 55,
+          "count": 985,
+          "pct": 0.00684
+        },
+        {
+          "seats": 56,
+          "count": 198,
+          "pct": 0.001375
+        },
+        {
+          "seats": 57,
+          "count": 22,
+          "pct": 0.000153
+        }
+      ],
+      "rawBinCountsSum": 144000
+    },
+    "governorsD": {
+      "mean": 26.853,
+      "median": 27,
+      "mode": 27,
+      "modeShare": 0.145396,
+      "sd": 2.721,
+      "skewness": -0.003,
+      "excessKurtosis": -0.096,
+      "p05": 22,
+      "p10": 23,
+      "p25": 25,
+      "p75": 29,
+      "p90": 30,
+      "p95": 31,
+      "localPeaks": [
+        {
+          "seats": 27,
+          "count": 20937,
+          "pct": 0.145396
+        }
+      ],
+      "histogram": [
+        {
+          "seats": 16,
+          "count": 5,
+          "pct": 0.000035
+        },
+        {
+          "seats": 17,
+          "count": 26,
+          "pct": 0.000181
+        },
+        {
+          "seats": 18,
+          "count": 94,
+          "pct": 0.000653
+        },
+        {
+          "seats": 19,
+          "count": 284,
+          "pct": 0.001972
+        },
+        {
+          "seats": 20,
+          "count": 852,
+          "pct": 0.005917
+        },
+        {
+          "seats": 21,
+          "count": 2098,
+          "pct": 0.014569
+        },
+        {
+          "seats": 22,
+          "count": 4341,
+          "pct": 0.030146
+        },
+        {
+          "seats": 23,
+          "count": 7975,
+          "pct": 0.055382
+        },
+        {
+          "seats": 24,
+          "count": 12543,
+          "pct": 0.087104
+        },
+        {
+          "seats": 25,
+          "count": 16621,
+          "pct": 0.115424
+        },
+        {
+          "seats": 26,
+          "count": 19682,
+          "pct": 0.136681
+        },
+        {
+          "seats": 27,
+          "count": 20937,
+          "pct": 0.145396
+        },
+        {
+          "seats": 28,
+          "count": 18948,
+          "pct": 0.131583
+        },
+        {
+          "seats": 29,
+          "count": 15571,
+          "pct": 0.108132
+        },
+        {
+          "seats": 30,
+          "count": 11073,
+          "pct": 0.076896
+        },
+        {
+          "seats": 31,
+          "count": 6894,
+          "pct": 0.047875
+        },
+        {
+          "seats": 32,
+          "count": 3529,
+          "pct": 0.024507
+        },
+        {
+          "seats": 33,
+          "count": 1605,
+          "pct": 0.011146
+        },
+        {
+          "seats": 34,
+          "count": 638,
+          "pct": 0.004431
+        },
+        {
+          "seats": 35,
+          "count": 215,
+          "pct": 0.001493
+        },
+        {
+          "seats": 36,
+          "count": 51,
+          "pct": 0.000354
+        },
+        {
+          "seats": 37,
+          "count": 17,
+          "pct": 0.000118
+        },
+        {
+          "seats": 38,
+          "count": 1,
+          "pct": 0.000007
+        }
+      ],
+      "rawBinCountsSum": 144000
+    }
+  },
+  "outcomes": {
+    "houseDem": 0.991306,
+    "houseRep": 0.008694,
+    "senateDem": 0.373563,
+    "senateRep": 0.556535,
+    "senateOther": 0.069903,
+    "governorDem": 0.688618,
+    "govRep": 0.311382,
+    "demHouseRepSenate": 0.547937,
+    "repHouseDemSenate": 0.000076
+  },
+  "modalJoint": [
+    {
+      "houseD": 251,
+      "senateD": 50,
+      "newIndependent": 0,
+      "governorD": 27,
+      "count": 133,
+      "share": 0.000924
+    },
+    {
+      "houseD": 246,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 129,
+      "share": 0.000896
+    },
+    {
+      "houseD": 240,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 125,
+      "share": 0.000868
+    },
+    {
+      "houseD": 245,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 122,
+      "share": 0.000847
+    },
+    {
+      "houseD": 244,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 25,
+      "count": 121,
+      "share": 0.00084
+    },
+    {
+      "houseD": 245,
+      "senateD": 50,
+      "newIndependent": 0,
+      "governorD": 27,
+      "count": 119,
+      "share": 0.000826
+    },
+    {
+      "houseD": 239,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 25,
+      "count": 117,
+      "share": 0.000812
+    },
+    {
+      "houseD": 242,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 116,
+      "share": 0.000806
+    },
+    {
+      "houseD": 247,
+      "senateD": 50,
+      "newIndependent": 0,
+      "governorD": 27,
+      "count": 116,
+      "share": 0.000806
+    },
+    {
+      "houseD": 247,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 115,
+      "share": 0.000799
+    },
+    {
+      "houseD": 248,
+      "senateD": 50,
+      "newIndependent": 0,
+      "governorD": 28,
+      "count": 114,
+      "share": 0.000792
+    },
+    {
+      "houseD": 243,
+      "senateD": 50,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 114,
+      "share": 0.000792
+    },
+    {
+      "houseD": 238,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 113,
+      "share": 0.000785
+    },
+    {
+      "houseD": 247,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 25,
+      "count": 112,
+      "share": 0.000778
+    },
+    {
+      "houseD": 244,
+      "senateD": 49,
+      "newIndependent": 0,
+      "governorD": 26,
+      "count": 112,
+      "share": 0.000778
+    }
+  ],
+  "unusual": {
+    "house": [
+      {
+        "seats": 239,
+        "count": 3297,
+        "normalExpected": 3062,
+        "zVsRoundedNormal": 4.289,
+        "reason": "Discrete seat-frequency departure from matched normal comparison; not a significance test against an independently fitted theory"
+      }
+    ],
+    "senateD": [
+      {
+        "seats": 56,
+        "count": 198,
+        "normalExpected": 300,
+        "zVsRoundedNormal": -5.909,
+        "reason": "Discrete seat-frequency departure from matched normal comparison; not a significance test against an independently fitted theory"
+      },
+      {
+        "seats": 43,
+        "count": 47,
+        "normalExpected": 108,
+        "zVsRoundedNormal": -5.87,
+        "reason": "Discrete seat-frequency departure from matched normal comparison; not a significance test against an independently fitted theory"
+      },
+      {
+        "seats": 55,
+        "count": 985,
+        "normalExpected": 1160,
+        "zVsRoundedNormal": -5.168,
+        "reason": "Discrete seat-frequency departure from matched normal comparison; not a significance test against an independently fitted theory"
+      }
+    ],
+    "governorsD": []
+  },
+  "pivotal": {
+    "senate": [
+      {
+        "id": "MN",
+        "name": "Minnesota",
+        "margin": 5.98,
+        "modelInputs": 4,
+        "pctNonR": 0.000006
+      },
+      {
+        "id": "GA",
+        "name": "Georgia",
+        "margin": 9.28,
+        "modelInputs": 1,
+        "pctNonR": 0.000006
+      },
+      {
+        "id": "NC",
+        "name": "North Carolina",
+        "margin": 9.42,
+        "modelInputs": 4,
+        "pctNonR": 0.000006
+      },
+      {
+        "id": "NH",
+        "name": "New Hampshire",
+        "margin": 9.54,
+        "modelInputs": 1,
+        "pctNonR": 0.000006
+      },
+      {
+        "id": "AK",
+        "name": "Alaska",
+        "margin": 4.56,
+        "modelInputs": 4,
+        "pctNonR": 0.000005
+      },
+      {
+        "id": "OH",
+        "name": "Ohio",
+        "margin": 0.32,
+        "modelInputs": 4,
+        "pctNonR": 0.000004
+      },
+      {
+        "id": "TX",
+        "name": "Texas",
+        "margin": 1.15,
+        "modelInputs": 4,
+        "pctNonR": 0.000004
+      },
+      {
+        "id": "ME",
+        "name": "Maine",
+        "margin": -2.38,
+        "modelInputs": 4,
+        "pctNonR": 0.000003
+      },
+      {
+        "id": "MI",
+        "name": "Michigan",
+        "margin": -0.66,
+        "modelInputs": 4,
+        "pctNonR": 0.000003
+      },
+      {
+        "id": "KS",
+        "name": "Kansas",
+        "margin": -4.71,
+        "modelInputs": 4,
+        "pctNonR": 0.000002
+      }
+    ],
+    "house": [
+      {
+        "id": "AL-07",
+        "name": "AL",
+        "margin": 25.3,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "AZ-03",
+        "name": "AZ",
+        "margin": 50,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "AZ-04",
+        "name": "AZ",
+        "margin": 17.7,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "AZ-07",
+        "name": "AZ",
+        "margin": 33.7,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-01",
+        "name": "CA",
+        "margin": 17.5,
+        "modelInputs": 2,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-02",
+        "name": "CA",
+        "margin": 35,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-03",
+        "name": "CA",
+        "margin": 20.3,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-04",
+        "name": "CA",
+        "margin": 25.6,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-07",
+        "name": "CA",
+        "margin": 23.5,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-08",
+        "name": "CA",
+        "margin": 45.5,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-09",
+        "name": "CA",
+        "margin": 25.7,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-10",
+        "name": "CA",
+        "margin": 44.3,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-11",
+        "name": "CA",
+        "margin": 50,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-12",
+        "name": "CA",
+        "margin": 50,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      },
+      {
+        "id": "CA-14",
+        "name": "CA",
+        "margin": 47.9,
+        "modelInputs": 0,
+        "pctNonR": 0.000007
+      }
+    ]
+  },
+  "seatSamplesChecks": {
+    "house": 144000,
+    "senate": 144000,
+    "governors": 144000
+  }
+}
