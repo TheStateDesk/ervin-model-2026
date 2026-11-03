@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """CivicAPI v2 national election-night collector. Honest, fail-closed results.
 
-Source search is scheduled (not browser-side). Cached provider IDs avoid 488
+Source search is scheduled (not browser-side). Cached provider IDs avoid 506
 separate search requests each refresh. Source API https://civicapi.org/api-documentation.
 No counts are created from polling, forecasts, historical results, or test_data.
 """
@@ -29,6 +29,8 @@ LAST_CLOSE={"AK":"01:00","HI":"00:00","CA":"23:00","WA":"23:00","OR":"23:00","ID
 # Known local House exceptions. Unlisted seats conservatively wait until last state polling place closes.
 EARLIER={"KY-06":"18:00","FL-27":"19:00","TX-18":"20:00","VA-02":"19:00","VA-05":"19:00","AL-07":"20:00","MI-07":"20:00"}
 MAX_WORKERS=6
+# Nov. 3, 2026: 33 regular Senate races plus Florida and Ohio specials.
+SENATE_2026=set("AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY".split())
 
 def current():
  return dt.datetime.now(dt.timezone.utc)
@@ -158,7 +160,8 @@ def targets():
  governors=json.loads((ROOT/"governors/data.json").read_text())
  if isinstance(governors,dict):governors=governors.get("races",governors.get("governors",[]))
  out={r["id"]:{"state":r["code"],"office":"house"} for r in house}
- out.update({k+"-SENATE":{"state":k,"office":"senate"} for k in senate})
+ assert len(SENATE_2026)==35 and set(senate).issubset(SENATE_2026), "Published Senate model must be within the 35 contest roster"
+ out.update({k+"-SENATE":{"state":k,"office":"senate"} for k in SENATE_2026})
  for r in governors:
   k=str(r.get("code") or r.get("state_code") or "")
   if k in STATES:out[k+"-GOVERNOR"]={"state":k,"office":"governor"}
