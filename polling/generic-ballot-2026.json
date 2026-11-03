@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "asOf": "2026-11-02",
+  "asOf": "2026-11-03",
   "election": "2026-11-03",
-  "sourceChecked": "2026-11-02",
-  "note": "Publisher-specific observed averages; 2026-11-03 final sweep must recheck source dates. An unchanged archive should never be relabeled as fresh. No manual adjustment is inferred from 2026 actual results.",
+  "sourceChecked": "2026-11-03",
+  "note": "RCP (Nov 2) D+8.9, DDHQ direct published candidate shares (Nov 3) D+8.8, Silver Bulletin (Nov 2) D+8.9. Publisher dates retained individually; no estimates inferred from 2026 counted votes.",
   "inputs": [
     {
       "publisher": "RealClearPolling",
@@ -16,12 +16,12 @@
     },
     {
       "publisher": "Decision Desk HQ",
-      "marginD": 8.9,
+      "marginD": 8.8,
       "weight": 0.29,
-      "asOf": "2026-10-30",
-      "url": "https://electionsinusa.com/2026/house/forecasts/",
-      "status": "secondary compilation, not independently verified current DDHQ publisher output",
-      "secondary": true
+      "asOf": "2026-11-03",
+      "url": "https://votes.decisiondeskhq.com/polls/generic-ballot/national",
+      "status": "Primary publisher page; Democrat 51.50%, Republican 42.70%, published aggregate, direct source checked November 3, 2026",
+      "secondary": false
     },
     {
       "publisher": "Silver Bulletin",
