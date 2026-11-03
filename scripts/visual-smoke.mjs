@@ -202,8 +202,9 @@ try{
  assert((await governorPage.locator('#govUSMap a[data-code="OH"] path').count())===1,'Ohio governor state geometry must remain visible');
  assert((await governorPage.locator('#govCards .er-hist-table').count())>0,'No governor historical error evidence on new board');
  assert(/\d+ Ervin-adjusted/.test(await governorPage.locator('#coverage').innerText()),'Governor historical adjustments must be counted');
- await governorPage.waitForFunction(()=>document.querySelector('#govBacktestN')?.textContent.includes('20 / 57')&&document.querySelector('#govBacktestRaw')?.textContent.includes('4.67')&&document.querySelector('#govBacktestAdjusted')?.textContent.includes('4.11'),null,{timeout:12000});
- assert((await governorPage.locator('#govBacktestRows tr').count())===57,'Governor-only archive requires all 57 sourced historical events');
+ assert((await governorPage.locator('#govBacktestN, #govBacktestRaw, #govBacktestRows').count())===0,'Long historical comparison metrics must not clutter the governor board');
+ assert((await governorPage.locator('a[href="../research/governor-same-office-backtest-2026-11-02.json"]').count())>0,'Archived full governor backtest must remain available by direct research link');
+ assert((await governorPage.locator('#govCards .er-hist-table').count())===36,'State-specific governor source comparisons should still be retained');
  await governorPage.screenshot({path:'visual-checks/Governor-Ervin-Corrections.png',fullPage:true});
  await ohioCard.screenshot({path:'visual-checks/Ohio-Governor-Ervins-Take-Verified.png'});
  await governorPage.close();

@@ -162,6 +162,7 @@ jobs:
           node scripts/validate-house-forecast.mjs
           node scripts/validate-statewide-night.mjs
           node scripts/validate-forecast-backtests.mjs
+          node scripts/governor-method-selection.mjs
           node scripts/test-election-night-balance.mjs
           node scripts/test-michigan-candidate-effect.mjs
           node scripts/validate-house-model.mjs
