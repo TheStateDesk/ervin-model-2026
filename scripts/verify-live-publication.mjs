@@ -82,7 +82,7 @@ try{
   const balance=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
   const watch=document.querySelector('#watchSection')?.getBoundingClientRect();
   const map=document.querySelector('#nationMap')?.getBoundingClientRect();
-  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,
+  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,nightActive:!!document.querySelector('#edResultsStage')&&!document.querySelector('#edResultsStage').hidden,
    width:watch?.width,watchCount:document.querySelectorAll('#watchCards .watch-card').length,
    finalDashboard:!!document.querySelector('#electionDashboard'),officeTabs:document.querySelectorAll('[data-map-office]').length,
    countyViewTabs:document.querySelectorAll('[data-national-county-view]').length,
@@ -102,8 +102,9 @@ try{
    stampedStyles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(e=>e.getAttribute('href')?.includes('build=')).length,
    stampedScripts:[...document.querySelectorAll('script[src]')].filter(e=>e.getAttribute('src')?.includes('build=')).length};
  });
- if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.watchTop<850
-  &&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop
+ const orderValid=frontModel.nightActive?(frontModel.mapTop<frontModel.watchTop&&frontModel.watchTop<frontModel.powerTop):
+  (frontModel.watchTop<850&&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop);
+ if(!(frontModel.count===3&&frontModel.watchTop>=0&&orderValid
   &&frontModel.width>280&&frontModel.watchCount>=4&&frontModel.finalDashboard&&frontModel.officeTabs===3
   &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow
   &&frontModel.deployedRevision===stamp&&frontModel.visibleBuild?.includes(stamp.slice(0,8))

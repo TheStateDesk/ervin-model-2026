@@ -76,7 +76,7 @@ try{
  const homepageErrors=[];homepage.on('pageerror',e=>homepageErrors.push(e.message));
  await homepage.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  await homepage.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelectorAll('#watchCards .watch-card').length>0,null,{timeout:30000});
-  assert(/Every state|final|Election night/i.test(await homepage.locator('h1.ed-headline').innerText()),'State Desk must keep its public heading through forecast and live phases');
+  assert(/Every state|A Blue House|Election Night|final/i.test(await homepage.locator('h1.ed-headline').innerText()),'State Desk must keep its public heading through forecast and live phases');
   assert((await homepage.locator('#watchSection').count())===1,'Closest races carousel must appear on State Desk');
   assert((await homepage.locator('#balanceOfPower').count())===1,'Office balance not placed on State Desk');
   assert((await homepage.locator('#senate-control').count())===1,'Public Senate control scenario panel missing');
@@ -86,8 +86,14 @@ try{
   assert((await homepage.locator('#stateDirectory').count())===1,'State directory must remain');
   assert((await homepage.locator('#electionDashboard').count())===1,'Scheduled national election dashboard is missing');
   const [cpos,bpos,mpos]=await Promise.all(['#watchSection','#balanceOfPower','#nationMap'].map(async id=>(await homepage.locator(id).boundingBox()).y));
-  assert(cpos<bpos&&bpos<mpos,'Closest races and office forecasts must precede national map');
-  assert(cpos<780,'Races-to-watch carousel must appear early on desktop');
+  const liveStage=await homepage.locator('#edResultsStage').isVisible();
+  if(liveStage){
+   assert(mpos<cpos&&cpos<bpos,'Election night must place the reported national map ahead of forecasts');
+   assert((await homepage.locator('#edCommentaryTitle').innerText())==='Live commentary','Visible verified-count commentary rail missing from active desk');
+  }else{
+   assert(cpos<bpos&&bpos<mpos,'Before election night, closest races and office forecasts must precede national map');
+   assert(cpos<780,'Before election night, races-to-watch carousel must appear early on desktop');
+  }
   const cardBefore=await homepage.locator('#watchCards .watch-card__name').first().innerText();
   await homepage.locator('#watchNext').click();
   assert((await homepage.locator('#watchCards .watch-card__name').first().innerText())!==cardBefore,'Races-to-watch next button did not advance');

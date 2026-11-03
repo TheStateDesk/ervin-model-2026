@@ -46,7 +46,7 @@
   // The direct homepage browser_smoke separately verifies all fifty rendered
   // polygons. A retired redirect must only prove the canonical new location and
   // page shell; delayed network-fed map data must not block this smoke suite.
-  await until(()=>frame.contentWindow.location.pathname.endsWith('/states/')&&frame.contentDocument?.querySelector('h1.ed-headline')?.textContent.includes('Every state.'));
+  await until(()=>frame.contentWindow.location.pathname.endsWith('/states/')&&/Every state|A Blue House|Election Night/.test(frame.contentDocument?.querySelector('h1.ed-headline')?.textContent||''));
   d=frame.contentDocument;
   ok(frame.contentWindow.location.pathname.endsWith('/states/'),'Legacy Research Center forwards to State Desk');
   ok(!!d.getElementById('usMap'),'Geographic states are accessible through the canonical State Desk');
