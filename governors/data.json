@@ -118,7 +118,13 @@
       "poll": null,
       "otherCandidates": null,
       "recentPolls": [],
-      "nomineesSource": "https://www.nga.org/governors/elections/"
+      "nomineesSource": "https://www.nga.org/governors/elections/",
+      "qualitativeRating": {
+        "label": "Solid D",
+        "source": "Cook Political Report · October 29, 2026",
+        "url": "https://www.cookpolitical.com/ratings/governor-race-ratings",
+        "method": "Publisher qualitative race rating only, not a numeric polling margin or calibrated 2026 win probability."
+      }
     },
     {
       "code": "CT",
@@ -212,7 +218,13 @@
       "poll": null,
       "otherCandidates": null,
       "recentPolls": [],
-      "nomineesSource": "https://www.nga.org/governors/elections/"
+      "nomineesSource": "https://www.nga.org/governors/elections/",
+      "qualitativeRating": {
+        "label": "Solid D",
+        "source": "Cook Political Report · October 29, 2026",
+        "url": "https://www.cookpolitical.com/ratings/governor-race-ratings",
+        "method": "Publisher qualitative race rating only, not a numeric polling margin or calibrated 2026 win probability."
+      }
     },
     {
       "code": "ID",
@@ -807,7 +819,13 @@
       "poll": null,
       "otherCandidates": null,
       "recentPolls": [],
-      "nomineesSource": "https://www.nga.org/governors/elections/"
+      "nomineesSource": "https://www.nga.org/governors/elections/",
+      "qualitativeRating": {
+        "label": "Solid R",
+        "source": "Cook Political Report · October 29, 2026",
+        "url": "https://www.cookpolitical.com/ratings/governor-race-ratings",
+        "method": "Publisher qualitative race rating only, not a numeric polling margin or calibrated 2026 win probability."
+      }
     }
   ]
 }
