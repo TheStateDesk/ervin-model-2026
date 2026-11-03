@@ -154,6 +154,8 @@ jobs:
           python3 -c 'from pathlib import Path; import re,sys; h=Path("/tmp/ervin-theme-smoke.html").read_text(); m=re.search(r"<pre[^>]*data-status=.(PASS|FAIL).[^>]*>(.*?)</pre>",h,re.S); print((re.sub(r"<[^>]*>","",m.group(2)) if m else "Missing theme smoke result")[:8000]); sys.exit(0 if m and m.group(1)=="PASS" else 1)'
       - name: Pre-publish state and county integrity
         run: |
+          node scripts/test-county-results-core.mjs
+          python3 -m unittest discover -s tests -p test_national_county_sources.py -v
           node scripts/validate-election-site.mjs
           node scripts/audit-internal-links.mjs
           node scripts/validate-state-desk.mjs
