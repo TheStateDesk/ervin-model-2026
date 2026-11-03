@@ -7,12 +7,15 @@ const seats=new Set(h.seats.map(x=>x.id)),keys=Object.keys(d.races);
 assert.equal(keys.length,435,'House model must index 435 distinct districts');
 assert.equal(seats.size,435);
 assert.deepEqual(new Set(keys),seats);
-const validGrades=new Set(['Solid D','Likely D','Lean D','Tilt D','Tossup','Tilt R','Lean R','Likely R','Solid R']);
+const validGrades=new Set(['Solid D','Likely D','Lean D','Tilt D','Tossup','Tilt R','Lean R','Likely R','Solid R','Unrated']);
 let polled=0,rows=0,indexed=0,redrawn=0,proxy=0;
 for(const [id,r] of Object.entries(d.races)){
  assert(validGrades.has(r.modelRating),'Missing grade '+id+' '+r.modelRating);
  assert(r.id===id&&r.state===id.slice(0,2),'Mismatched district '+id);
- assert(Number.isFinite(r.marginD)&&Math.abs(r.marginD)<=50,'Out-of-bounds estimate '+id);
+ if(r.changed2026Map){
+  assert(r.marginD===null&&r.numericModelWithheld===true,'Redrawn district must not publish old-map numeric margin '+id);
+  assert.equal(r.modelRating,r.sourceRating||'Unrated','2026 source rating only '+id);
+ }else assert(Number.isFinite(r.marginD)&&Math.abs(r.marginD)<=50,'Out-of-bounds estimate '+id);
  assert(r.confidence&&r.methodNote&&Number.isFinite(r.uncertaintySensitivity),'Unlabeled uncertainty '+id);
  assert(r.historic&&r.historic['2022']!==undefined&&r.historic['2024']!==undefined);
  assert(Array.isArray(r.surveys),'Missing survey array '+id);
@@ -37,6 +40,9 @@ for(const [id,qs] of Object.entries(questions.races)){
 }
 assert(fs.readFileSync('state/app.js','utf8').includes("houseQuestions=values[12]"),'Supplemental questions not connected to state dashboard');
 assert.equal(d.summary.districts,435);
+assert.equal(d.summary.modeledCount,Object.values(d.races).filter(r=>Number.isFinite(r.marginD)).length,'Numerical count must match current-map availability');
+assert.equal(d.summary.redrawnUnrated,Object.values(d.races).filter(r=>r.changed2026Map&&!r.sourceRating).length,'Unrated redraw count must match sourced data');
+assert.equal(d.summary.redrawnCookRated,Object.values(d.races).filter(r=>r.changed2026Map&&r.sourceRating).length);
 assert.equal(d.summary.districtsWithPollRows,polled);
 assert.equal(d.summary.indexedPublishedSurveys,indexed);
 assert.equal(d.summary.changedMapDistricts,redrawn);

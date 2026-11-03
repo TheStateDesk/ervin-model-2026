@@ -25,18 +25,40 @@ jobs:
         run: python3 -m pip install beautifulsoup4
       - name: Verify strict governor source parser
         run: python3 -m unittest discover -s tests -p test_refresh_governors.py -v
-      - name: Do not alter an existing final forecast
+      - name: Check immutable final forecast (no-op if already locked)
+        id: lock_status
         run: |
-          if test -f final/forecast-final.json; then echo 'Forecast already locked; no further polling mutation'; exit 1; fi
+          if test -f final/forecast-final.json; then
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+          j=json.loads(Path('final/forecast-final.json').read_text())
+          assert j.get('lockedAt') and len(j.get('data',{}))==4, 'Existing lock is invalid'
+          print('Existing final forecast remains immutable:',j['lockedAt'])
+          PY
+            echo "already_locked=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_locked=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Fetch and validate all available 2026 Senate publisher aggregates
+        if: steps.lock_status.outputs.already_locked != 'true'
         run: python3 scripts/refresh_polling.py
       - name: Refresh candidate-matched gubernatorial averages
+        if: steps.lock_status.outputs.already_locked != 'true'
         run: python3 scripts/refresh_governors.py
+      - name: Verify and refresh dated generic-ballot publisher input
+        if: steps.lock_status.outputs.already_locked != 'true'
+        run: |
+          python3 -m unittest discover -s tests -p test_generic_ballot_refresh.py -v
+          python3 scripts/refresh_generic_ballot.py
       - name: Refresh the 435-district House model with current public surveys
+        if: steps.lock_status.outputs.already_locked != 'true'
         run: python3 scripts/build-house-ervin.py
       - name: Update Senate forecast county baselines
+        if: steps.lock_status.outputs.already_locked != 'true'
         run: python3 scripts/build_county_watch_forecast.py
       - name: Reject structurally incomplete updated forecasts
+        if: steps.lock_status.outputs.already_locked != 'true'
         run: |
           python3 scripts/validate_data.py
           python3 - <<'PY'
@@ -50,13 +72,17 @@ jobs:
           print('Verified 435 House + 36 governor + 17 Senate forecasts')
           PY
       - name: Lock validated final snapshot before noon
-        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 15 3 11 *'
+        if: steps.lock_status.outputs.already_locked != 'true' && (github.event_name == 'workflow_dispatch' || github.event.schedule == '45 15 3 11 *')
         run: python3 scripts/lock_forecast.py
       - name: Publish only source-linked model changes with latest main revision
+        if: steps.lock_status.outputs.already_locked != 'true'
+        env:
+          LOCK_FORECAST: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '45 15 3 11 *' }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+          git add final/status.json governors/data.json polling/governor_refresh_log.json polling/generic-ballot-2026.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+          if test -f final/forecast-final.json; then git add final/forecast-final.json; fi
           if git diff --staged --quiet; then
             echo 'No verified new polling or modeled forecast changes.'
             exit 0
@@ -70,10 +96,15 @@ jobs:
               git reset --hard origin/main
               python3 scripts/refresh_polling.py
               python3 scripts/refresh_governors.py
+              python3 scripts/refresh_generic_ballot.py
               python3 scripts/build-house-ervin.py
               python3 scripts/build_county_watch_forecast.py
               python3 scripts/validate_data.py
-              git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+              if test "${LOCK_FORECAST}" = "true"; then
+                python3 scripts/lock_forecast.py
+              fi
+              git add final/status.json governors/data.json polling/governor_refresh_log.json polling/generic-ballot-2026.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+              if test -f final/forecast-final.json; then git add final/forecast-final.json; fi
               if git diff --staged --quiet; then exit 0; fi
               git commit -m 'Election Day verified publisher polling sweep and final forecast'
             }

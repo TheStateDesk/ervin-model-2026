@@ -219,7 +219,7 @@ try{
  const stateAtlas=await browser.newPage({viewport:{width:1440,height:940}});
  const atlasErrors=[];stateAtlas.on('pageerror',e=>atlasErrors.push(e.message));
  await stateAtlas.goto(root+'/states/',{waitUntil:'domcontentloaded'});
- await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('50 states with'),null,{timeout:27000});
+ await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('states with forecasts'),null,{timeout:27000});
  await stateAtlas.locator('#usMap a[data-state-link="MI"]').focus();
  await stateAtlas.waitForFunction(()=>document.querySelector('#stateMapTooltip')&&!document.querySelector('#stateMapTooltip').hidden,null,{timeout:8000});
  const tipText=await stateAtlas.locator('#stateMapTooltip').innerText();
@@ -260,9 +260,9 @@ try{
  // Verify all 435 House model ratings and a genuinely interactive district-level geographic page.
  const nationalHouse=await browser.newPage({viewport:{width:1440,height:940}});
  await nationalHouse.goto(root+'/house/',{waitUntil:'domcontentloaded'});
- await nationalHouse.waitForFunction(()=>document.querySelector('#houseModelSummary')?.textContent.includes('Every House district, modeled'),null,{timeout:25000});
+ await nationalHouse.waitForFunction(()=>document.querySelector('#houseModelSummary')?.textContent.includes('House ratings and district evidence'),null,{timeout:25000});
  const nationalSummary=await nationalHouse.locator('#houseModelSummary').innerText();
- assert(nationalSummary.includes('435 / 435'),'House model has incomplete race coverage');
+ assert(nationalSummary.includes('Comparable-map numerical estimates')&&nationalSummary.includes('Unrated / no 2026-map evidence'),'House forecast must distinguish comparable numerical models from unclassified redrawn districts');
  assert(nationalSummary.includes('underlying')||nationalSummary.includes('indexed'),'House model fails to attribute polling');
  await nationalHouse.locator('#houseMapSvg path[data-code="TX"]').click({force:true});
  await nationalHouse.waitForFunction(()=>document.querySelectorAll('#districtMapSvg path.geo-district').length===38,null,{timeout:25000});
@@ -297,7 +297,7 @@ try{
    assert(details.counties>=3,'Counties missing '+code+' '+theme+': '+JSON.stringify(details));
    assert(details.visible>=Math.max(3,Math.floor(details.counties*.9)),'Invisible county shapes '+code+' '+theme+': '+JSON.stringify(details));
    assert(details.house>0,'House selector blank '+code+' '+theme);
-   await page.waitForFunction(()=>document.querySelector('#districtDetail')?.textContent.includes('ERVIN HOUSE'),null,{timeout:25000});
+   await page.waitForFunction(state=>{const txt=document.querySelector('#districtDetail')?.textContent||'';return ['TX','CA'].includes(state)?txt.includes('2026 MAP · SOURCE RATING')&&txt.includes('Numerical 2026 House margin withheld'):txt.includes('ERVIN HOUSE');},code,{timeout:25000});
    assert(details.dark===(theme==='dark'),'Wrong theme '+code+' '+theme);
    assert(!errors.length,'JS errors '+code+': '+errors.join(' | '));
    await page.screenshot({path:'visual-checks/'+code+'-'+theme+'-county.png',fullPage:true});

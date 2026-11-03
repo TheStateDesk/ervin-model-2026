@@ -2,12 +2,12 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let seats=[],scenario=null,houseRoster={races:{}};
+let seats=[],scenario=null,cookNational=null,houseRoster={races:{}};
 const href=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
 const pick=r=>scenario?.races?.[r.id]||null;
 const margin=m=>!Number.isFinite(m)?'No estimate':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1);
 const candidateText=r=>{const people=houseRoster.races?.[r.id]?.candidates||[];return people.length?people.map(c=>c.party+': '+c.name).join(' · '):'2026 roster not confirmed';};
-const rank=r=>{const x=pick(r);return x?Math.abs(x.marginD):100};
+const rank=r=>{const x=pick(r);return x&&Number.isFinite(x.marginD)?Math.abs(x.marginD):100};
 function draw(){
  const q=$('houseSearch').value.trim().toLowerCase(),code=$('houseState').value,cat=$('houseRating').value;
  // Respect existing advanced categories, now filtering the visible model grade.
@@ -22,28 +22,32 @@ function draw(){
  $('houseCards').innerHTML=arr.map(r=>{
   const x=pick(r);return '<a class="gov-card" href="'+href(r)+'"><div class="gov-heading"><h3 class="house-card-title">'+esc(r.id)+'</h3><span class="race-flag">'+esc(r.code)+'</span></div>'+
   '<p class="gov-candidates">'+esc(r.state)+'<br><strong>2026 candidates:</strong> '+esc(candidateText(r))+'</p>'+
-  '<div class="gov-lead">'+esc(x?.modelRating||r.rating||'No model loaded')+(x?' · '+esc(margin(x.marginD)):'')+' ↗</div>'+
-  '<small>'+(x?'Ervin House · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls'+(x.changed2026Map?' · redrawn geography warning':''):'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
+  '<div class="gov-lead">'+esc(x?.modelRating||r.rating||'No model loaded')+(x&&Number.isFinite(x.marginD)?' · '+esc(margin(x.marginD)):'')+' ↗</div>'+
+  '<small>'+(x?(x.changed2026Map?'2026 redrawn map · '+(x.sourceRating?'Cook qualitative rating':'current-map rating unavailable'):'Ervin House model')+' · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls':'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
  }).join('')||'<p class="race-muted">No districts match your filters.</p>';
 }
 function outlook(){
  if(!$('houseModelSummary'))return;
  if(!scenario){$('houseModelSummary').innerHTML='<p class="race-muted">House-wide model file unavailable. The published Cook rating archive and geographic race links remain accessible.</p>';return}
  const summary=scenario.summary;const all=Object.values(scenario.races);
- const d=all.filter(r=>r.marginD>1.5).length,rep=all.filter(r=>r.marginD< -1.5).length,toss=435-d-rep;
+ const d=all.filter(r=>r.modelRating?.endsWith(' D')).length,rep=all.filter(r=>r.modelRating?.endsWith(' R')).length,
+  toss=all.filter(r=>r.modelRating==='Tossup').length,unrated=all.filter(r=>r.modelRating==='Unrated').length;
  const changing=summary.changedMapDistricts;
- $('houseModelSummary').innerHTML='<div class="race-kicker">ERVIN HOUSE · SCENARIO · NOVEMBER 2</div><h2 style="margin:5px 0">Every House district, modeled</h2>'+
-  '<div class="house-model-metrics"><div><strong>435 / 435</strong><small>Districts rated</small></div><div><strong>'+d+'</strong><small>D-leaning scenarios</small></div><div><strong>'+rep+'</strong><small>R-leaning scenarios</small></div><div><strong>'+toss+'</strong><small>Within ±1.5 points</small></div></div>'+
-  '<p class="race-muted">A provisional 2026 House adaptation of the Ervin model, not a calibrated seat probability. Uses 2022/2024 House voting patterns, a <b>Democratic +'+scenario.method.genericBallot.demMargin.toFixed(1)+'</b> generic-ballot input, a limited historical Ervin state correction, and district surveys where compatible. <b>'+summary.districtsWithPollRows+' districts</b> have individual poll rows indexed in this edition, with <b>'+summary.indexedPublishedSurveys+' publicly indexed surveys</b> in the source directory (not all reproduced individually). <b>'+changing+' districts</b> are in states with changed 2026 maps, where the historical comparisons are less reliable.</p>'+
+ $('houseModelSummary').innerHTML='<div class="race-kicker">ERVIN HOUSE · SCENARIO · NOVEMBER 2</div><h2 style="margin:5px 0">House ratings and district evidence</h2>'+
+  '<div class="house-model-metrics"><div><strong>'+summary.modeledCount+' / 435</strong><small>Comparable-map numerical estimates</small></div><div><strong>'+d+'</strong><small>Democratic-rated</small></div><div><strong>'+rep+'</strong><small>Republican-rated</small></div><div><strong>'+toss+'</strong><small>Toss-up</small></div><div><strong>'+unrated+'</strong><small>Unrated / no 2026-map evidence</small></div></div>'+
+  '<p class="race-muted">A provisional House adaptation of the Ervin model, not a calibrated seat probability. Numerical historical House estimates are <b>withheld for all 173 redrawn districts</b>; those show sourced Cook qualitative ratings or Unrated, not old-map voting margins. Other districts use 2022/2024 House voting patterns and a <b>Democratic +'+scenario.method.genericBallot.demMargin.toFixed(1)+'</b> generic-ballot input (source dated '+esc(scenario.method.genericBallot.asOf||'not verified')+'), plus comparable district surveys where available. Statewide Senate/presidential polling errors are not transferred to House. <b>'+summary.districtsWithPollRows+' districts</b> have individual poll rows indexed in this edition, with <b>'+summary.indexedPublishedSurveys+' publicly indexed surveys</b> in the source directory (not all reproduced individually). <b>'+changing+' districts</b> are in states with changed 2026 maps, where old-map voting margins are not published as 2026 forecasts.</p>'+
   '<p class="race-muted"><strong>Historical House evidence:</strong> 232 comparable 2022→2024 districts had a 4.22-point mean absolute D−R margin error, with a 90th-percentile absolute error of 8.35 points. Another 203 districts were excluded; changed 2026 maps do not qualify for that empirical envelope. <a href="../research/election-night-historical-moe-2026.json">Review source and method</a>. This is not a calibrated 2026 Ervin House model interval.</p>'+
+  (cookNational?'<p class="race-muted"><strong>Independent Cook Political Report · '+esc(cookNational.asOf)+':</strong> '+(cookNational.solidD+cookNational.likelyD+cookNational.leanD)+' seats rated Democratic, '+(cookNational.solidR+cookNational.likelyR+cookNational.leanR)+' seats rated Republican, '+cookNational.tossup+' toss-ups nationwide. This is Cook’s separately published all-435 outlook, not Ervin’s count of numerical forecasts. <a href="'+esc(cookNational.source)+'" target="_blank" rel="noopener noreferrer">Cook ratings source</a>.</p>':'')+
   '<p class="race-muted">The margins are heuristic model outputs; the sensitivity widths are <b>not</b> calibrated confidence intervals. The 2026 House ballot, redistricted boundary and sponsorship of each underlying survey should be checked before using the estimate. <a href="https://electiondata.dev/datasets/house-results/" target="_blank" rel="noopener noreferrer">MIT House historical returns</a> · <a href="https://peoplespoll.com/house" target="_blank" rel="noopener noreferrer">Underlying poll directory</a> · <a href="../state/?state=MI" >District map and details</a></p>';
 }
 function map(){
  const geo=window.ERVIN_US_GEOGRAPHY?.states||[];
- const sums={};for(const r of seats){const x=pick(r);if(!x)continue;const s=sums[r.code]||{d:0,rep:0,toss:0};if(x.marginD>1.5)s.d++;else if(x.marginD< -1.5)s.rep++;else s.toss++;sums[r.code]=s}
+ const sums={};for(const r of seats){const x=pick(r);if(!x)continue;const s=sums[r.code]||{d:0,rep:0,toss:0,u:0};
+ if(x.modelRating?.endsWith(' D'))s.d++;else if(x.modelRating?.endsWith(' R'))s.rep++;
+ else if(x.modelRating==='Tossup')s.toss++;else s.u++;sums[r.code]=s}
  $('houseMapSvg').innerHTML=geo.map(g=>{
   const s=sums[g.code]||{d:0,rep:0,toss:0};const flavor=s.d>s.rep?'model-d':s.rep>s.d?'model-r':'model-mix';
-  return '<g><path role="button" tabindex="0" data-code="'+g.code+'" class="gov-state election '+flavor+'" d="'+g.d+'" aria-label="Filter '+esc(g.name)+' House districts"><title>'+esc(g.name+' · Ervin scenario D '+s.d+' / R '+s.rep+' / Toss '+s.toss)+'</title></path></g>';
+  return '<g><path role="button" tabindex="0" data-code="'+g.code+'" class="gov-state election '+flavor+'" d="'+g.d+'" aria-label="Filter '+esc(g.name)+' House districts"><title>'+esc(g.name+' · Ervin scenario D '+s.d+' / R '+s.rep+' / Toss '+s.toss+' / Unrated '+s.u)+'</title></path></g>';
  }).join('');
  const choose=code=>{$('houseState').value=code;$('houseState').dispatchEvent(new Event('change'));$('districtExplorer').scrollIntoView({behavior:'smooth',block:'start'});};
  $('houseMapSvg').querySelectorAll('path[data-code]').forEach(p=>{p.addEventListener('click',()=>choose(p.dataset.code));p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(p.dataset.code)}})});
@@ -51,7 +55,7 @@ function map(){
 async function init(){
  try{
   const a=await fetch('./data.json');if(!a.ok)throw Error('House registry unavailable');
-  seats=(await a.json()).seats||[];
+  const raw=await a.json();seats=raw.seats||[];cookNational=raw.nationalCookSnapshot||null;
   const b=await fetch('./ervin-forecast-2026-11-02.json',{cache:'no-cache'}).catch(()=>null);scenario=b?.ok?await b.json():null;
   window.ERVIN_HOUSE_DATA=scenario;
   const roster=await fetch('./candidates-2026.json',{cache:'no-cache'}).catch(()=>null);
