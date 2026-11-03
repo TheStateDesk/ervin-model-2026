@@ -13,6 +13,7 @@
   await until(()=>$('powerCards')?.dataset.powerReady==='true'&&$('watchCards')?.querySelectorAll('.watch-card').length>=4&&$('usMap')?.querySelector('path.ed-state'));
   check(d.querySelector('h1.ed-headline')?.textContent.includes('Every state'),'The 50-state editorial State Desk remains homepage');
   check($('watchSection')&&$('balanceOfPower')&&$('nationMap')&&$('electionDashboard'),'Races to watch, office balance, atlas and automatic election-night dashboard are present');
+  check(!d.querySelector('#electionNationalMap,#electionLocalMap'),'Live and forecast maps must not duplicate national/state SVGs');
   check($('watchSection').getBoundingClientRect().top<$('balanceOfPower').getBoundingClientRect().top,'Races to watch precede office balance');
   check($('balanceOfPower').getBoundingClientRect().top<$('nationMap').getBoundingClientRect().top,'Office balance forecasts precede state geography');
   check($('powerCards').querySelectorAll('.power-card').length===3,'Three office forecast cards render');
@@ -22,7 +23,7 @@
   const first=$('watchCards').querySelector('.watch-card__name').textContent;
   $('watchNext').click();check($('watchCards').querySelector('.watch-card__name').textContent!==first,'Races to watch carousel advances');
   $('watchPrev').click();check($('watchCards').querySelector('.watch-card__name').textContent===first,'Races to watch carousel reverses');
-  check(d.querySelectorAll('[data-atlas-office]').length===3,'Senate governor and House map tabs available');
+  check(d.querySelectorAll('[data-map-office]').length===3&&d.querySelectorAll('[data-national-county-view]').length===3,'Senate governor and House office buttons, with one forecast/report county map available');
   const wasDark=d.documentElement.classList.contains('theme-dark');
   $('themeToggle').click();check(d.documentElement.classList.contains('theme-dark')!==wasDark,'Appearance toggle switches contrast theme');
   $('themeToggle').click();check(d.documentElement.classList.contains('theme-dark')===wasDark,'Appearance toggle switches back');
