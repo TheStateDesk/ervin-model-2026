@@ -162,7 +162,18 @@ async function populate(){
  drawMap();directory();search();for(const code of ['MI','TX','PA','GA','AZ','ME']){const el=document.querySelector('[data-quick-offices="'+code+'"]');if(el)el.textContent=[byState[code]?.races.some(x=>x.label.startsWith('U.S. Senate'))?'Senate':null,byState[code]?.races.some(x=>x.label.startsWith('Governor'))?'Governor':null,'House','Counties'].filter(Boolean).join(' · ');}
  }catch(e){console.error(e);$('aggregateLegend').textContent='Forecast aggregate unavailable; state links still work.'}
 }
+function setAtlasView(mode){
+ const showCounties=mode==='counties';
+ const statesMap=$('nationMap'),countyMap=$('allCountyNation');
+ if(statesMap)statesMap.hidden=showCounties;
+ if(countyMap)countyMap.hidden=!showCounties;
+ for(const b of document.querySelectorAll('[data-national-atlas-view]')){
+  b.setAttribute('aria-pressed',String(b.dataset.nationalAtlasView===mode));
+ }
+}
 function init(){
+ for(const b of document.querySelectorAll('[data-national-atlas-view]'))b.addEventListener('click',()=>setAtlasView(b.dataset.nationalAtlasView));
+ setAtlasView('states');
  if(focusedOffice){
   const heading=focusedOffice==='house'?'U.S. House districts':'Governor elections';
   const cta=focusedOffice==='house'?'House candidates, polls and district maps':'Governor candidates, polls and statewide forecasts';
