@@ -71,7 +71,7 @@ function search(){
  $('directoryCount').textContent=q?matches.length+(matches.length===1?' state':' states')+' matching "'+q+'"':states.length+' state editions';
 }
 async function populate(){
- const read=async url=>{const res=await fetch(url,{cache:'no-cache'});if(!res.ok)throw Error('Data '+url+' '+res.status);return res.json()};
+ const read=async url=>{const fetchRaw=async()=>{const res=await fetch(url,{cache:'no-cache'});if(!res.ok)throw Error('Data '+url+' '+res.status);return res.json()};return window.ERVIN_FINAL?window.ERVIN_FINAL.get(url.replace(/^\.\.\//,''),fetchRaw):fetchRaw()};
  try{
  const [house,gov,sen,archive]=await Promise.all([read('../house/ervin-forecast-2026-11-02.json'),read('../governors/data.json'),read('../counties-watch/forecast-baselines.json'),read('../research/governor-same-office-2014-2024.json')]);
  const G=window.ERVIN_STATEWIDE.apply(archive,gov,sen);
