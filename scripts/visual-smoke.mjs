@@ -219,7 +219,7 @@ try{
  const stateAtlas=await browser.newPage({viewport:{width:1440,height:940}});
  const atlasErrors=[];stateAtlas.on('pageerror',e=>atlasErrors.push(e.message));
  await stateAtlas.goto(root+'/states/',{waitUntil:'domcontentloaded'});
- await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('50 states with'),null,{timeout:27000});
+ await stateAtlas.waitForFunction(()=>document.querySelectorAll('#usMap path[data-state]').length===50&&document.querySelector('#aggregateLegend')?.textContent.includes('states with forecasts'),null,{timeout:27000});
  await stateAtlas.locator('#usMap a[data-state-link="MI"]').focus();
  await stateAtlas.waitForFunction(()=>document.querySelector('#stateMapTooltip')&&!document.querySelector('#stateMapTooltip').hidden,null,{timeout:8000});
  const tipText=await stateAtlas.locator('#stateMapTooltip').innerText();
