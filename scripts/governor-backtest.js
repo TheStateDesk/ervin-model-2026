@@ -5,13 +5,18 @@
  */
 (function(root){'use strict';
 const W=[.5,.3,.2],exclude=r=>r.pollType==='single stale poll';
+function uniqueGovernorYears(events){
+ const seen=new Set();
+ return events.filter(e=>{const key=e.state+'|'+e.year;if(seen.has(key))return false;seen.add(key);return true});
+}
 const round=n=>+n.toFixed(3);
 function correction(events,state,targetYear){
  const eligible=(events||[]).filter(e=>e.state===state&&e.office==='Governor'&&e.year<targetYear&&e.year>=2018&&Number.isFinite(e.pollMargin)&&Number.isFinite(e.actualMargin)&&!exclude(e))
- .sort((a,b)=>b.year-a.year).slice(0,3);
- if(!eligible.length)return null;
- const sum=W.slice(0,eligible.length).reduce((a,b)=>a+b,0);
- const entries=eligible.map((e,i)=>({year:e.year,office:'Governor',poll:e.pollMargin,actual:e.actualMargin,
+ .sort((a,b)=>b.year-a.year);
+ const selected=uniqueGovernorYears(eligible).slice(0,3);
+ if(!selected.length)return null;
+ const sum=W.slice(0,selected.length).reduce((a,b)=>a+b,0);
+ const entries=selected.map((e,i)=>({year:e.year,office:'Governor',poll:e.pollMargin,actual:e.actualMargin,
  error:round(e.pollMargin-e.actualMargin),weight:round(W[i]/sum),pollType:e.pollType,url:e.sourceUrl,resultUrl:e.resultUrl,note:e.note}));
  const rawValue=round(entries.reduce((v,e)=>v+e.error*e.weight,0));
  const shrink=entries.length===1?1/3:entries.length===2?2/3:1;
@@ -27,7 +32,7 @@ function score(records){
  return {n,rawMAE:mae(x=>x.pollMargin-x.actualMargin),adjustedMAE:mae(x=>x.adjustedMargin-x.actualMargin),rawRMSE:rms(x=>x.pollMargin-x.actualMargin),adjustedRMSE:rms(x=>x.adjustedMargin-x.actualMargin),rawWinners:wins(x=>x.pollMargin),adjustedWinners:wins(x=>x.adjustedMargin)};
 }
 function compute(input){
- const races=(input?.races||[]).filter(e=>e.year>=2018).sort((a,b)=>a.year-b.year||a.state.localeCompare(b.state));
+ const races=uniqueGovernorYears((input?.races||[]).filter(e=>e.year>=2018&&e.office==='Governor').sort((a,b)=>a.year-b.year||a.state.localeCompare(b.state)));
  const rows=races.map(r=>{
    const past=correction(races,r.state,r.year);
    const adjusted=past?round(r.pollMargin-past.value):null;
@@ -38,7 +43,7 @@ function compute(input){
  });
  const scored=rows.filter(x=>x.eligible),strict=scored.filter(x=>x.pollType==='RCP average');
  return {asOf:input.asOf,method:'Only earlier state governor polls vs actual governor results. D-R error = poll margin minus actual margin. Latest 3 same-state governor errors weighted 0.5/0.3/0.2; 1 historical event is shrunk to one-third, 2 events to two-thirds, 3 events to full. No federal-election inputs, no future election results.',
- caveats:'Nonrandom 2018–24 sourced cohort, different candidates and survey sources; sparse states with only one prior election have fragile corrections. Single stale surveys (Aug 2022 South Carolina) are displayed but excluded from calibration and scoring. RCP-only target subset scored separately. No calibrated win chances or exact retrospective recreation of 2026.',
+ caveats:'Nonrandom 2018–24 sourced cohort with heterogeneous poll coverage and ballot designs. Single late and 41-day-old polling is weak evidence, particularly Nebraska; 270toWin multi-poll reconstructions are not published publisher averages. Alaska candidate shares are first-choice in multi-candidate elections, not final RCV rounds. Single stale surveys are excluded. A race with one historical cycle can receive a shrunk 2026 correction but does not provide a past-only holdout score. No calibrated 2026 win chances.',
  summary:{observed:rows.length,eligible:scored.length,notBacktestable:rows.length-scored.length,...score(scored)},
  preferredRCP:score(strict),
  byYear:Object.fromEntries([...new Set(rows.map(x=>x.year))].map(year=>[year,{observed:rows.filter(x=>x.year===year).length,...score(scored.filter(x=>x.year===year))}])),
