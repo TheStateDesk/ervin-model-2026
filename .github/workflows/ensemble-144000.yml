@@ -1,0 +1,48 @@
+name: Build 144,000-election-scenario evidence
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/run-ensemble-144000.mjs'
+      - '.github/workflows/ensemble-144000.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: final-ensemble-2026
+  cancel-in-progress: false
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate and run seeded 144000-trial ensemble
+        run: |
+          node --check scripts/run-ensemble-144000.mjs
+          node scripts/run-ensemble-144000.mjs
+      - name: Publish audited scenario histogram, not fabricated votes
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3; do
+            git fetch origin main
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+              git reset --hard origin/main
+              node scripts/run-ensemble-144000.mjs
+            fi
+            git add final/ensemble-144000.json
+            if git diff --cached --quiet; then
+              echo 'Ensemble already published'
+              exit 0
+            fi
+            git commit -m 'Publish reproducible 144,000-draw House Senate governor evidence'
+            if git push origin HEAD:main; then exit 0; fi
+            test "$i" -ne 3
+          done
