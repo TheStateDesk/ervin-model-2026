@@ -3,7 +3,7 @@
 const target=document.getElementById('powerCards');
 if(!target)return;
 const siteRoot=new URL('../',document.currentScript?.src||new URL('../scripts/home-power.js',location.href));
-const read=async path=>{const response=await fetch(new URL(path,siteRoot),{cache:'no-cache'});if(!response.ok)throw Error(path+' HTTP '+response.status);return response.json()};
+const read=async path=>{const fetchRaw=async()=>{const response=await fetch(new URL(path,siteRoot),{cache:'no-cache'});if(!response.ok)throw Error(path+' HTTP '+response.status);return response.json()};return window.ERVIN_FINAL?window.ERVIN_FINAL.get(path,fetchRaw):fetchRaw()};
 async function start(){
  try{
   const [house,governor,senate,history]=await Promise.all([
