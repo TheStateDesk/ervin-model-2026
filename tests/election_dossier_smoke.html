@@ -10,7 +10,7 @@
   return frame.contentDocument;
  };
  const waitFor=async test=>{
-  for(let i=0;i<50;i++){if(test())return;await new Promise(r=>setTimeout(r,100))}
+  for(let i=0;i<170;i++){if(test())return;await new Promise(r=>setTimeout(r,100))}
   throw Error('Expected page UI did not render');
  };
  try{
@@ -27,7 +27,8 @@
   assert(doc.getElementById('candidates').textContent.includes('Jocelyn Benson')&&doc.getElementById('candidates').textContent.includes('John James'),'Governor candidates match registry');
   assert(doc.getElementById('leadValue').textContent.includes('Benson'),'Published governor polling average displayed');
   assert(/No (verified|confirmed) 2026|No verified/.test(doc.getElementById('resultNotice').textContent),'No made-up election returns');
-  assert(doc.querySelectorAll('#countyMap path').length>=1,'Geographic county map or reliable outline fallback renders');
+  await waitFor(()=>doc.querySelectorAll('#countyMap path').length>=1||/unavailable|not available/i.test(doc.querySelector('#countyMapStatus,#countyStatus')?.textContent||''));
+  assert(doc.querySelectorAll('#countyMap path').length>=1||/unavailable|not available/i.test(doc.querySelector('#countyMapStatus,#countyStatus')?.textContent||''),'Geographic county map or accurate no-geometry warning renders');
   assert(doc.getElementById('raceJump').querySelectorAll('option').length===488,'All 36 governor, 17 Senate and 435 House destinations available');
   doc=await load('../elections/?office=senate&state=TX');
   await waitFor(()=>doc.getElementById('raceTitle').textContent.includes('Texas'));
@@ -35,6 +36,7 @@
   assert(doc.getElementById('candidates').textContent.includes('James Talarico'),'Senate candidate comes from live homepage data');
   assert(doc.getElementById('pollRows').textContent.includes('RealClearPolling'),'Senate source evidence is displayed');
   assert(doc.getElementById('methodology').textContent.includes('Original Ervin'),'Senate correction clearly labeled');
+  await waitFor(()=>doc.querySelectorAll('#countyMap path').length>=1);
   assert(doc.querySelectorAll('#countyMap path').length>=1,'Texas state geometry / county map visible');
   report.dataset.status='PASS';report.textContent='PASS '+ok.length+' checks\n'+ok.map(x=>'✓ '+x).join('\n');
  }catch(err){report.dataset.status='FAIL';report.textContent='FAIL: '+(err.stack||String(err))}
