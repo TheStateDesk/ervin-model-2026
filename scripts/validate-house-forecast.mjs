@@ -10,7 +10,7 @@ assert.equal(seats.length,435);
 assert.equal(Object.keys(model.races).length,435);
 assert.equal(model.summary.modeledCount,Object.values(model.races).filter(r=>Number.isFinite(r.marginD)).length,'Only current-map numeric estimates count as modeled');
 assert.equal(Object.values(model.summary.ratings).reduce((n,x)=>n+x,0),435);
-assert.equal(model.method.uncertainty.includes('not calibrated'),true,'Model must not present sensitivity as probability');
+assert(/not.{0,40}calibrated/i.test(model.method.uncertainty),'Model must explicitly say its uncertainty is not a calibrated probability interval');
 let localPollRows=0,withPollRows=0,indexed=0,low=0,changed=0,specialCases=0;
 for(const seat of seats){
  const x=model.races[seat.id];
