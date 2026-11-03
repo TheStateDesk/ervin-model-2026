@@ -63,13 +63,24 @@ function watchInit(){
   rotateTimer=setInterval(()=>{if(!document.hidden&&!hover&&!focus&&!paused&&!live&&watched.length>4&&cycles<Math.ceil(watched.length/4)){advance(4);cycles++}},7000);
  }
 }
+function drawHouseWatch(){
+ const list=$('houseWatchList'),label=$('houseWatchCount');if(!list)return;
+ const nearest=model.house.filter(r=>isValid(r.margin)).sort((a,b)=>Math.abs(a.margin)-Math.abs(b.margin)).slice(0,12);
+ const tossups=model.house.filter(r=>isValid(r.margin)&&Math.abs(r.margin)<=1.5).length;
+ if(label)label.textContent=tossups+' toss-up districts within ±1.5 points';
+ list.innerHTML=nearest.length?nearest.map(r=>{
+  const to='../state/?state='+encodeURIComponent(r.code)+'#stateHouse';
+  const rating=Math.abs(r.margin)<=1.5?'Toss-up':r.rating||'Competitive';
+  return '<a class="ed-house-watch-row" href="'+to+'"><strong>'+esc(r.id)+'</strong><span>'+esc(r.state)+'</span><b class="'+party(r.margin)+'">'+esc(margin(r.margin))+'</b><small>'+esc(rating)+'</small></a>';
+ }).join(''):'<p class="ed-mini">The House model is temporarily unavailable; browse districts by state.</p>';
+}
 async function loadModel(){
  const [sen,gov,house,history]=await Promise.all([read('counties-watch/forecast-baselines.json'),read('governors/data.json'),read('house/ervin-forecast-2026-11-02.json'),read('research/governor-same-office-2014-2024.json')]);
  const applied=window.ERVIN_STATEWIDE.apply(history,gov,sen);
  model.senate=applied.senate.map(x=>({id:x.code+'-SENATE',code:x.code,state:x.state||stateName[x.code],office:'Senate',margin:x.model.adjustedMargin,dem:x.nonR,rep:x.rep,kind:'model',odds:window.ERVIN_ODDS?.estimate(x.model.adjustedMargin,'Senate')}));
  model.governor=applied.governor.map(x=>{const adjusted=isValid(x.model.adjustedMargin),m=adjusted?x.model.adjustedMargin:x.model.pollMargin;return{id:x.code+'-GOVERNOR',code:x.code,state:x.state||stateName[x.code],office:'Governor',margin:m,dem:x.dem,rep:x.rep,kind:adjusted?'model':'poll',odds:window.ERVIN_ODDS?.estimate(m,'Governor',{cycles:x.model?.calibrationCycles||0})}});
- model.house=Object.values(house.races||{}).map(x=>({id:x.id,code:x.state,state:stateName[x.state]||x.state,office:'House',margin:x.marginD,kind:'model'}));
- modelBalance=window.ERVIN_POWER?.compute?.(house,applied.senate,applied.governor)||null;watched=races();window.ERVIN_HOME_FORECAST=model;window.dispatchEvent(new CustomEvent('ervin:forecast-ready',{detail:{asOf:sen.asOf||gov.asOf}}));drawWatch();updatePhase();
+ model.house=Object.values(house.races||{}).map(x=>({id:x.id,code:x.state,state:stateName[x.state]||x.state,office:'House',margin:x.marginD,kind:'model',rating:x.modelRating}));
+ modelBalance=window.ERVIN_POWER?.compute?.(house,applied.senate,applied.governor)||null;watched=races();window.ERVIN_HOME_FORECAST=model;window.dispatchEvent(new CustomEvent('ervin:forecast-ready',{detail:{asOf:sen.asOf||gov.asOf}}));drawWatch();drawHouseWatch();updatePhase();
 }
 function byState(code,off){return model[off.toLowerCase()].filter(r=>r.code===code)}
 function raceFor(code,off){return byState(code,off)[0]||null}
