@@ -47,7 +47,7 @@ const css=fs.readFileSync('scripts/home-power.css','utf8');
 const browser=fs.readFileSync('scripts/home-power.js','utf8');
 assert(html.includes('id="balanceOfPower"')&&html.includes('id="powerCards"')&&html.includes('id="nationMap"'));
 assert(html.indexOf('id="watchSection"')<html.indexOf('id="balanceOfPower"'),'Public races-to-watch feature must appear before office-level seat totals');
-assert(html.includes('scripts/home-election-2026.js')&&!html.includes('scripts/home-control.js'),'Races-to-watch hero must replace public Senate control simulator');
+assert(html.includes('scripts/home-election-2026.js')&&html.includes('scripts/home-control.js')&&html.includes('scripts/senate_control.js'),'Races to watch and public Senate-control sensitivity model must both be available');
 assert(!html.includes('id="researchLab"')&&!html.includes('window.ERVIN_DATA'),'Retired research dashboard still exposed on the public homepage');
 assert(html.includes('../election-night/power.js')&&html.includes('../scripts/home-power.js'),'State Desk balance module missing');
 assert(root.includes('location.replace')&&root.includes('states/'),'Site root must send visitors to actual homepage');
