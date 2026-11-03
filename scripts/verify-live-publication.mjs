@@ -82,7 +82,9 @@ try{
   const balance=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
   const watch=document.querySelector('#watchSection')?.getBoundingClientRect();
   const map=document.querySelector('#nationMap')?.getBoundingClientRect();
-  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,nightActive:!!document.querySelector('#edResultsStage')&&!document.querySelector('#edResultsStage').hidden,
+  const lead=document.querySelector('#edSimulationPanel')?.getBoundingClientRect();
+  const byline=document.querySelector('.ed-byline')?.getBoundingClientRect();
+  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,simTop:lead?.top,bylineBottom:byline?.bottom,simMapCount:document.querySelectorAll('#edSimMap path.ed-sim-proj-state').length,nightActive:!!document.querySelector('#edResultsStage')&&!document.querySelector('#edResultsStage').hidden,
    width:watch?.width,watchCount:document.querySelectorAll('#watchCards .watch-card').length,
    finalDashboard:!!document.querySelector('#electionDashboard'),officeTabs:document.querySelectorAll('[data-map-office]').length,
    countyViewTabs:document.querySelectorAll('[data-national-county-view]').length,
@@ -103,14 +105,21 @@ try{
    stampedScripts:[...document.querySelectorAll('script[src]')].filter(e=>e.getAttribute('src')?.includes('build=')).length};
  });
  const orderValid=frontModel.nightActive?(frontModel.mapTop<frontModel.watchTop&&frontModel.watchTop<frontModel.powerTop):
-  (frontModel.watchTop<850&&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop);
- if(!(frontModel.count===3&&frontModel.watchTop>=0&&orderValid
+  (frontModel.simTop<frontModel.watchTop&&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop);
+ if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.simTop>=frontModel.bylineBottom-2&&frontModel.simTop<frontModel.watchTop&&frontModel.simMapCount===50&&orderValid
   &&frontModel.width>280&&frontModel.watchCount>=4&&frontModel.finalDashboard&&frontModel.officeTabs===3
   &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow
   &&frontModel.deployedRevision===stamp&&frontModel.visibleBuild?.includes(stamp.slice(0,8))
   &&frontModel.stateMapOfficeTabs===3&&frontModel.nationalCountyTabs===2&&frontModel.countyViewTabs===3&&frontModel.duplicateCountyMaps===0&&frontModel.mobileStateLinks===50
   &&frontModel.stampedStyles>=3&&frontModel.stampedScripts>=8))
   throw Error('LIVE MOBILE STATE DESK HOMEPAGE INCORRECT '+JSON.stringify(frontModel));
+ for(const [office,label,coverage] of [['house','House',50],['senateD','Senate',17],['governorsD','Governors',36]]){
+  await front.locator('#edSimTabs button').filter({hasText:label}).click();
+  await front.waitForFunction(office=>document.querySelector('#edSimMap')?.dataset.simOffice===office,office,{timeout:12000});
+  const nonNeutral=await front.locator('#edSimMap path.ed-sim-proj-state:not(.ed-sim-proj-N)').count();
+  if(nonNeutral!==coverage)throw Error('PUBLIC FORECAST MAP OFFICE COVERAGE INCORRECT '+JSON.stringify({office,coverage,nonNeutral}));
+ }
+ await front.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/State-Desk-144000-Simulation-Mobile.png'});
  await front.locator('#watchSection').screenshot({path:'postdeploy-checks/State-Desk-Races-To-Watch-Mobile.png'});
  await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
  console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
