@@ -246,6 +246,7 @@ function activate(){
  const legend=panel.querySelector('.ed-sim-map-legend');
  if(legend)legend.innerHTML='<span><i class="ed-sim-legend-d"></i> Democratic vote leader</span><span><i class="ed-sim-legend-r"></i> Republican vote leader</span><span><i class="ed-live-legend-i"></i> Independent / other</span><span><i class="ed-sim-legend-n"></i> Awaiting accepted results</span>';
  const rail=$('edLiveCommentary');if(rail)rail.hidden=false;
+ const tally=$('edFinalCallSummary');if(tally)tally.textContent='Checking source-validated election-night vote reports…';
  const scroller=panel.querySelector('.ed-final-map-scroller');if(scroller)scroller.setAttribute('aria-label','Scroll the 435 House districts or state outlines, each linking to its election-night race');
  const start=Date.now()<SWITCH_AT?Date.now():SWITCH_AT;
  post('The live national results desk opens at 5:55 p.m. Eastern. Races will remain neutral until source-validated unofficial vote totals arrive.',start,'Election-night desk',null,null);
@@ -258,6 +259,9 @@ function init(){
  on('ervin:election-night-open',activate);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(Date.now()>=SWITCH_AT)activate();sync();}});
  const map=$('edSimMap');if(map)observeMap();
+ const panel=$('edSimulationPanel');if(panel)panel.addEventListener('click',e=>{
+  if(active&&e.target.closest('#edSimTabs button'))panel.dataset.liveReady='false';
+ },true);
  const preview=new URLSearchParams(location.search).get('preview');
  if(Date.now()>=SWITCH_AT||preview==='closing'||preview==='live')activate();
  else {
