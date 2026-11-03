@@ -26,6 +26,13 @@ class ElectionReporting(unittest.TestCase):
    with self.assertRaises(urllib.error.HTTPError):m.request_with_retry("https://civicapi.org/api/v2/race/123")
    self.assertEqual(req.call_count,1)
    pause.assert_not_called()
+ def test_first_poll_closings_are_district_specific(self):
+  first=dt.datetime(2026,11,3,23,0,tzinfo=UTC)
+  second=dt.datetime(2026,11,4,0,0,tzinfo=UTC)
+  for key in ["IN-02","IN-03","IN-04","IN-05","IN-06","IN-07","IN-09","KY-03","KY-04","KY-05","KY-06"]:
+   self.assertEqual(m.after_close(key),first,key)
+  for key in ["IN-01","IN-08","KY-01","KY-02","KY-SENATE"]:
+   self.assertEqual(m.after_close(key),second,key)
  def test_registry_506(self):
   x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)
