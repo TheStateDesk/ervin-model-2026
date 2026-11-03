@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-const ctx={module:{exports:{}},URL,Date,Map,Set,Number,String,Array,Object};
+const ctx={module:{exports:{}},URL,Date,Map,Set,Number,String,Array,Object,ERVIN_RETURNS:{closeAt:()=>Date.parse('2026-11-04T01:00:00Z')}};
 vm.runInNewContext(fs.readFileSync('election-night/county-results-core.js','utf8'),ctx);
 const core=ctx.module.exports;
 assert.equal(core.sourceAllowed('MI','Kent','https://app.enhancedvoting.com/results/public/kent-county-mi/2026',
