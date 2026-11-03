@@ -400,6 +400,39 @@ try{
   assert(insets.every(Boolean),label+' insets must match the House layout');
   await electionDesk.locator('#edSimulationPanel').screenshot({path:'visual-checks/Election-Night-'+label+'-5-55-Desktop.png'});
  }
+
+ // Test only in this browser memory. No fake returns are written to any file.
+ await electionDesk.locator('#edSimTabs button').filter({hasText:'House'}).click();
+ await electionDesk.waitForFunction(()=>document.querySelector('#edSimMap')?.dataset.simOffice==='house'&&
+   document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true',null,{timeout:35000});
+ await electionDesk.evaluate(()=>{
+  Date.now=()=>Date.parse('2026-11-04T06:00:00Z');
+  const timestamp='2026-11-04T05:30:00Z',source='CivicAPI (controlled local fixture)';
+  const row=(id,office,d,r)=>({id,office,total:d+r,asOf:timestamp,source,
+   sourceURL:'https://example.org/local-test-only',precincts:12.5,
+   candidates:[{name:'Fixture Democrat',votes:d,party:'D'},{name:'Fixture Republican',votes:r,party:'R'}]});
+  window.ERVIN_HOME_RESULTS={races:{
+   'MI-09':row('MI-09','House',3200,3000),
+   'MI-SENATE':row('MI-SENATE','Senate',55000,51000),
+   'MI-GOVERNOR':row('MI-GOVERNOR','Governor',45000,47000)
+  }};
+  window.dispatchEvent(new Event('ervin:home-results-update'));
+ });
+ await electionDesk.waitForFunction(()=>document.querySelector('#edSimMap a[data-sim-district="MI-09"] path')?.classList.contains('ed-live-lead-D')&&
+   document.querySelector('#edFinalCallSummary')?.dataset.liveReports==='1'&&
+   document.querySelectorAll('#edCommentaryEntries .ed-commentary-item').length>=2,null,{timeout:25000});
+ assert((await electionDesk.locator('#edSimMap path.ed-live-lead-N').count())===434,'Unreported House districts must stay neutral while only MI-09 is reporting');
+ assert((await electionDesk.locator('#edCommentaryEntries .ed-commentary-item').first().innerText()).includes('unofficial'),'New vote commentary must distinguish reported totals from a winner call');
+ assert((await electionDesk.locator('#edCommentaryEntries .ed-commentary-item').first().locator('a[href*="race="]').count())===1,'Commentary must link directly to the race that changed');
+ await electionDesk.locator('#edSimTabs button').filter({hasText:'Senate'}).click();
+ await electionDesk.waitForFunction(()=>document.querySelector('#edSimMap')?.dataset.simOffice==='senateD'&&
+   document.querySelector('#edSimMap a[data-sim-state="MI"] path')?.classList.contains('ed-live-lead-D')&&
+   document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true',null,{timeout:25000});
+ await electionDesk.locator('#edSimTabs button').filter({hasText:'Governors'}).click();
+ await electionDesk.waitForFunction(()=>document.querySelector('#edSimMap')?.dataset.simOffice==='governorsD'&&
+   document.querySelector('#edSimMap a[data-sim-state="MI"] path')?.classList.contains('ed-live-lead-R')&&
+   document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true',null,{timeout:25000});
+ await electionDesk.locator('#edSimulationPanel').screenshot({path:'visual-checks/Election-Night-Governors-Verified-Local-Fixture.png'});
  assert(deskErrors.length===0,'Election-night hero JavaScript errors: '+deskErrors.join(' | '));
  await electionDesk.close();
  const electionMobile=await browser.newPage({viewport:{width:390,height:844}});
