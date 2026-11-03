@@ -131,8 +131,18 @@ try{
  await atlas.waitForFunction(()=>!document.querySelector('#allCountyNation')?.hidden
    &&document.querySelector('#nationMap')?.hidden,null,{timeout:15000});
  await atlas.locator('#allCountyNation').scrollIntoViewIfNeeded();
- await atlas.waitForFunction(()=>document.querySelectorAll('#allCountyMap path.all-county').length>=3000
+ try{
+  await atlas.waitForFunction(()=>document.querySelectorAll('#allCountyMap path.all-county').length>=3000
    &&document.querySelector('#allCountyStatus')?.textContent.includes('county'),null,{timeout:65000});
+ }catch(err){
+  const diag=await atlas.evaluate(()=>({count:document.querySelectorAll('#allCountyMap path.all-county').length,
+   visible:!document.querySelector('#allCountyNation')?.hidden,
+   status:document.querySelector('#allCountyStatus')?.textContent,
+   forecastReady:!!window.ERVIN_HOME_FORECAST,
+   countyRegistry:document.querySelector('#allCountySourceAudit')?.textContent,
+   network:performance.getEntriesByType('resource').filter(x=>/geo\/packs|county-history|county-sources/.test(x.name)).slice(-15).map(x=>({url:x.name.split('/').pop(),duration:Math.round(x.duration)}))}));
+  throw Error('LIVE NATIONAL COUNTY DIAGNOSTIC '+JSON.stringify({diag,atlasErrors})+' · '+err.message);
+ }
  const mapAudit=await atlas.evaluate((statesWidth)=>{
   const counties=document.querySelector('#allCountyNation'),shell=document.querySelector('.ed-shell');
   return {states:document.querySelectorAll('#usMap path.ed-state').length,
