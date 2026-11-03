@@ -18,7 +18,7 @@ OUT_HISTORY=ROOT/"research/house-actual-2016-2024.json"
 OUT_POLICY=ROOT/"research/house-presidential-backtest-2026.json"
 PRES_NATIONAL={2012:3.93,2016:2.23,2020:4.54,2024:-1.51}
 GENERIC={2016:0.6,2018:7.3,2022:-2.5,2024:-0.3}
-SAME_MAP_2024_EXCLUSIONS=set("AL CA FL GA LA NC NY OH TN TX UT".split())
+SAME_MAP_2024_EXCLUSIONS={"GA","NY"}  # only these changed boundaries between 2022 and 2024
 PREV_PRES={2018:(2016,2012),2022:(2020,2016),2024:(2020,2016)}
 HEADERS={"User-Agent":"Ervin-House-Research/1.0","Accept":"application/json"}
 def full_id(state,district):
@@ -109,6 +109,22 @@ def score(rows,alpha):
     return {"n":len(errors),"MAE":round(sum(errors)/len(errors),3),
       "medianAE":round(errors[len(errors)//2],3),"p90AE":round(errors[int((len(errors)-1)*.90)],3),
       "winnerAgreement":round(right/len(errors),4)}
+def returning(prior,current):
+    who=prior.get("winnerParty")
+    return bool(who in ("D","R") and prior["candidates"].get(who)
+        and prior["candidates"].get(who)==current["candidates"].get(who))
+def prior_candidate_residual(prev,reference_margin,reference_generic,reference_national,alpha):
+    return max(-18,min(18,prev["marginD"]-(reference_generic+alpha*(reference_margin-reference_national))))
+def candidate_scores(rows,rho):
+    errs=[]
+    agreed=0
+    for r in rows:
+        pred=r["base"]+(rho*r["priorResidual"] if r["returning"] else 0)
+        errs.append(abs(pred-r["actual"]))
+        agreed+=int((pred>0)==(r["actual"]>0))
+    if not rows:return {"n":0,"MAE":None}
+    return {"n":len(rows),"MAE":round(sum(errs)/len(errs),3),"winnerAgreement":round(agreed/len(errs),4)}
+
 def main():
     hist=json.loads(HIST.read_text())
     pres=json.loads(PRES.read_text())
@@ -120,6 +136,34 @@ def main():
     choices=[round(.60+k*.025,3) for k in range(33)]
     selection=sorted(((score(train,a)["MAE"],abs(a-1),a) for a in choices))
     alpha=selection[0][2]
+    # Candidate-specific prior residual only when the SAME named candidate
+    # returns AND prior House vote geography is comparable. Test the
+    # coefficient using 2018; evaluate unchanged 2024 cases independently.
+    retained2018=[]
+    for entry in train:
+        if entry["year"]!=2018 or entry["seat"].startswith("PA-"):continue
+        seat=entry["seat"]
+        prior=actual[2016].get(seat);cur=actual[2018].get(seat)
+        h=hist["cycles"]["2018"].get(seat)
+        if not (prior and cur and h and prior["contested"] and returning(prior,cur)):continue
+        dev=prior_candidate_residual(prior,h["pres16MarginD"],GENERIC[2016],PRES_NATIONAL[2016],alpha)
+        retained2018.append({"seat":seat,"base":GENERIC[2018]+alpha*entry["lean"],
+            "actual":entry["target"],"priorResidual":dev,"returning":True})
+    if len(retained2018)<170:raise RuntimeError(f"2018 candidate repetition training sample too small: {len(retained2018)}")
+    rhos=[round(i*.05,2) for i in range(13)]
+    rho=sorted((candidate_scores(retained2018,r)["MAE"],r) for r in rhos)[0][1]
+    retained2024=[];all2024=[]
+    for entry in valid:
+        seat=entry["seat"];p=actual[2022].get(seat);cur=actual[2024].get(seat)
+        if not (p and cur and p["contested"]):continue
+        is_return=returning(p,cur)
+        base=GENERIC[2024]+alpha*entry["lean"]
+        dev=max(-18,min(18,p["marginD"]-(GENERIC[2022]+alpha*entry["lean"])))
+        item={"seat":seat,"base":base,"actual":entry["target"],
+            "priorResidual":dev,"returning":is_return}
+        all2024.append(item)
+        if is_return:retained2024.append(item)
+    if len(retained2024)<190:raise RuntimeError("2024 retained-candidate chronological check too small")
     result={"schema":1,"createdAt":dt.datetime.now(dt.timezone.utc).isoformat(),
      "type":"House-only pre-election polling environment and same-line presidential district history",
      "source":{"houseResults":"MIT Election Data and Science Lab public-domain election returns via electiondata.dev",
@@ -129,17 +173,25 @@ def main():
      "training":{"years":[2018,2022],"selectionMethod":"Minimize unweighted absolute district margin error for contested 2018 and 2022 races, using only historical presidential votes and FINAL PRE-ELECTION RCP generic ballot averages, no 2024 election results and no statewide Senate errors.","n":len(train)},
      "finalHoldout":{"year":2024,"n":len(valid),"excludedMapChanges":sorted(SAME_MAP_2024_EXCLUSIONS)},
      "formulation":"D-R House margin = final pre-election generic House poll margin + alpha × [0.75 × (prior presidential two-party district margin − same-year national margin) + 0.25 × (preceding presidential district margin − same-year national margin)].",
-     "alpha":alpha,"rawAlphaOne":{"training":score(train,1),"holdout2024":score(valid,1)},
+     "alpha":alpha,"candidateRetentionRho":rho,"rawAlphaOne":{"training":score(train,1),"holdout2024":score(valid,1)},
      "backtested":{"training":score(train,alpha),"holdout2024":score(valid,alpha)},
      "byYear":{str(y):{"raw":score([x for x in train if x["year"]==y],1),"adjusted":score([x for x in train if x["year"]==y],alpha)} for y in (2018,2022)},
-     "candidateRetention":"A candidate-level incumbency bonus is NOT included unless a separate same-candidate cross-election backtest validates it. Qualitative incumbent/candidate and polling data are displayed separately.",
+     "candidateRetention":{"rho":rho,"capPriorResidual":18,
+       "selection":"Choose returning candidate residual carryover using only 2018 same-candidate matches, excluding Pennsylvania's incompatible 2016/18 geography.",
+       "training2018":{"raw":candidate_scores(retained2018,0),"adjusted":candidate_scores(retained2018,rho)},
+       "chronological2024":{"retainedRaw":candidate_scores(retained2024,0),
+         "retainedAdjusted":candidate_scores(retained2024,rho),
+         "allRaw":candidate_scores(all2024,0),
+         "allAdjusted":candidate_scores(all2024,rho)},
+       "method":"When named winning candidate from prior House general election returns and the same candidate is certified/rostered in current cycle, add rho times the prior district House-versus-predicted residual, capped at ±18 before rho. On 2026 redrawn House districts candidate residual is zero, because the prior seat-number's population changed. No Senate/Governor error correction."},
      "warnings":["Some historical district presidential splits are estimated from precincts and block allocations.",
        "Contest qualification requires both major-party candidates to have at least 3.5% of the two-party vote; excludes uncontested or same-party elections.",
        "2024 is a chronological held-out validation of a policy trained on 2018 and 2022, not a new training cycle.",
        "A generic-ballot poll average is a national survey signal; election-day errors and candidate effects remain unmodeled.",
        "2018 and 2022 House maps differ from one another; each historical district is matched only with its own election-year presidential reference lines.",
        "2026 redrawn maps use reconstructed presidential baseline values with extra uncertainty; existing old-number House returns are not used as if they were the new electorate.",
-       "The 2026 roster of incumbents is known but candidate strength should not be added without a trustworthy matched sample."]}
+       "Candidate historical matching is exact normalized name plus prior winning party; near-name variants can reduce sample size but cannot create a false repetition.",
+       "The 2024 House residual for a returning 2026 incumbent is drawn only from same-boundary previous House results; redrawn districts receive no transplanted candidate strength."]}
     OUT_HISTORY.write_text(json.dumps({"schema":1,"source":SOURCE,"years":actual},separators=(",",":"))+"\n")
     OUT_POLICY.write_text(json.dumps(result,indent=2)+"\n")
     print("HOUSE PRE-ELECTION OFFICE BACKTEST",json.dumps({"alpha":alpha,"training":result["backtested"]["training"],"holdout":result["backtested"]["holdout2024"],"raw":result["rawAlphaOne"]["holdout2024"]}),flush=True)
