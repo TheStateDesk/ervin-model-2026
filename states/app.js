@@ -108,7 +108,8 @@ function show(code,event){
  const displayed=featured.map(x=>'<div class="ed-map-race"><span>'+esc(x.label)+'</span><b>'+(x.type==='summary'?'':esc(MARGIN(x.margin)))+(x.type==='poll'?'<i> poll</i>':'')+'</b></div>').join('');
  const live=liveLead(code);
  const liveText=mapView==='forecast'?'':live?'<p class="ed-mini"><strong>UNOFFICIAL counted '+esc(live.office)+' contests: '+live.matched+'</strong> · '+esc(live.records.map(row=>row.candidates.slice().sort((a,b)=>b.votes-a.votes).slice(0,2).map(c=>c.party+' '+c.votes.toLocaleString()).join(' / ')).join('; '))+'</p>':'<p class="ed-mini">No validated 2026 reported vote totals for this state and office.</p>';
- tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+esc(mapOffice)+' '+totalsText(officeTotals(r,mapOffice))+'</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div>'+liveText+'<small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
+ const raceHeader=mapOffice==='senate'&&officeTotals(r,'senate').D+officeTotals(r,'senate').R+officeTotals(r,'senate').T===0?'No Senate race in 2026':(mapOffice==='senate'?'Senate':mapOffice==='governor'?'Governor':'House')+' '+totalsText(officeTotals(r,mapOffice));
+ tooltip.innerHTML='<div class="ed-map-tip-head"><strong>'+esc(r.name)+'</strong><b>'+esc(raceHeader)+'</b></div><div class="ed-map-race-list">'+(displayed||'<span>No race estimates available</span>')+'</div>'+liveText+'<small>House: provisional Ervin. Governor historical correction applied only where comparable same-state results are sourced. Uncorrected publisher polls are distinctly identified. No race calls.</small>';
  tooltip.hidden=false;locate(event);
 }
 function locate(event){
