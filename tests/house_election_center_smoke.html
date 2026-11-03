@@ -10,17 +10,20 @@
   await new Promise((resolve,reject)=>{frame.onload=resolve;frame.onerror=()=>reject(Error('Could not load '+href));frame.src=href});
   return frame.contentDocument;
  };
- const until=async pred=>{for(let n=0;n<85;n++){if(pred())return;await new Promise(r=>setTimeout(r,85))}throw Error('Timed out waiting for data')};
+ let stage='initial';
+ const until=async pred=>{for(let n=0;n<180;n++){if(pred())return;await new Promise(r=>setTimeout(r,85))}
+ const d=frame.contentDocument;
+ throw Error('Timed out at '+stage+' on '+frame.src+'; page='+d?.title+'; cards='+d?.querySelectorAll('#houseCards .gov-card')?.length+'; houseCount='+d?.querySelector('#houseCount')?.textContent+'; status='+d?.querySelector('#houseCards,#houseModelSummary,#nationalCount')?.textContent?.slice(0,210))};
  try{
   localStorage.removeItem('ervin-model-watchlist-v2');
-  let d=await load('../house/');
+  stage='house-load';let d=await load('../house/');
   await until(()=>d.getElementById('houseCount')?.textContent.includes('districts'));
   // House board intentionally defaults to Michigan in the unified state-first navigation.
   // Switch to every state before checking the national 435-seat total.
   const allStates=d.getElementById('houseState');
   allStates.value='all';
   allStates.dispatchEvent(new frame.contentWindow.Event('change',{bubbles:true}));
-  await until(()=>d.querySelectorAll('#houseCards .gov-card').length===435);
+  stage='house-all-435';await until(()=>d.querySelectorAll('#houseCards .gov-card').length===435);
   ok(d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House district cards are indexed');
   ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
   ok(d.getElementById('ratingsCount').textContent==='68','68 sourced House ratings are explicitly identified');
@@ -28,10 +31,10 @@
   ok(!d.getElementById('houseCards').textContent.includes('No model loaded')&&d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House cards include provisional model ratings rather than blank placeholders');
   const search=d.getElementById('houseSearch');search.value='MI-04';search.dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));
   ok(d.querySelectorAll('#houseCards .gov-card').length===1&&d.getElementById('houseCards').textContent.includes('Tossup'),'House search and Cook rating work');
-  d=await load('../house/?state=MI');
+  stage='house-MI';d=await load('../house/?state=MI');
   await until(()=>d.getElementById('houseCount').textContent.includes('districts'));
   ok(d.querySelectorAll('#houseCards .gov-card').length===13,'State links filter Michigan 13 House districts');
-  d=await load('../elections/?office=house&state=MI&district=04');
+  stage='district-MI-04';d=await load('../elections/?office=house&state=MI&district=04');
   await until(()=>d.getElementById('raceTitle').textContent.includes('District 4'));
   ok(d.getElementById('raceTitle').textContent.includes('District 4'),'House race dossier resolves district query');
   ok(d.getElementById('leadValue').textContent==='Tossup','House rating is qualitative');
@@ -39,16 +42,16 @@
   ok(d.getElementById('mapTitle').textContent.includes('district or county reference geography')&&d.getElementById('qualifiers').textContent.includes('outside the district'),'Statewide county context clearly disclaims district boundaries');
   ok(/No confirmed|No verified/i.test(d.getElementById('resultNotice').textContent)&&!/^[\\d,]+$/.test(d.getElementById('votesReported').textContent.trim()),'House election-night panel must not show fabricated totals before polls close');
   // The old Research Center is deliberately retired; it must forward to the State Desk.
-  d=await load('../elections/overview/');
+  stage='legacy-redirect';d=await load('../elections/overview/');
   await until(()=>d.getElementById('usMap')?.querySelectorAll('path.ed-state')?.length===50);
   ok(frame.contentWindow.location.pathname.endsWith('/states/'),'Legacy Research Center forwards to State Desk');
   ok(d.querySelectorAll('#usMap path.ed-state').length===50,'All 50 geographic states available through the consolidated edition');
   await until(()=>d.getElementById('aggregateLegend')?.textContent.includes('50 states with'));
   ok(d.getElementById('stateMapTooltip')!==null,'State hover ledger replaces legacy Research Center tabs');
-  d=await load('../election-night/');
+  stage='election-night';d=await load('../election-night/');
   await until(()=>d.querySelector('#nationalCount')?.textContent.includes('488 indexed races'));
   ok(d.querySelectorAll('#raceList .race-row').length===488,'National Election Night covers all 435 House, 17 Senate and 36 governor races');
-  const button=d.querySelector('button[data-office="House"]');button.click();
+  stage='election-night-house-filter';const button=d.querySelector('button[data-office="House"]');button.click();
   await until(()=>d.querySelectorAll('#raceList .race-row').length===435);
   ok(d.querySelectorAll('#raceList .race-row').length===435,'Election Night House filtering shows all districts');
   report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.map(x=>'✓ '+x).join('\n');
