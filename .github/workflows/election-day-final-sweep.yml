@@ -46,6 +46,11 @@ jobs:
       - name: Refresh candidate-matched gubernatorial averages
         if: steps.lock_status.outputs.already_locked != 'true'
         run: python3 scripts/refresh_governors.py
+      - name: Verify and refresh dated generic-ballot publisher input
+        if: steps.lock_status.outputs.already_locked != 'true'
+        run: |
+          python3 -m unittest discover -s tests -p test_generic_ballot_refresh.py -v
+          python3 scripts/refresh_generic_ballot.py
       - name: Refresh the 435-district House model with current public surveys
         if: steps.lock_status.outputs.already_locked != 'true'
         run: python3 scripts/build-house-ervin.py
@@ -74,7 +79,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+          git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json polling/generic-ballot-2026.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
           if git diff --staged --quiet; then
             echo 'No verified new polling or modeled forecast changes.'
             exit 0
@@ -88,10 +93,11 @@ jobs:
               git reset --hard origin/main
               python3 scripts/refresh_polling.py
               python3 scripts/refresh_governors.py
+              python3 scripts/refresh_generic_ballot.py
               python3 scripts/build-house-ervin.py
               python3 scripts/build_county_watch_forecast.py
               python3 scripts/validate_data.py
-              git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
+              git add final/forecast-final.json final/status.json governors/data.json polling/governor_refresh_log.json polling/generic-ballot-2026.json house/ervin-forecast-2026-11-02.json house/poll-questions-2026-11-02.json house/research-polls.json counties-watch/forecast-baselines.json research/senate-workbench-data.json source_snapshot.csv refresh_log.json recent_polls.json
               if git diff --staged --quiet; then exit 0; fi
               git commit -m 'Election Day verified publisher polling sweep and final forecast'
             }
