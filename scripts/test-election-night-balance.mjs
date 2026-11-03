@@ -19,7 +19,7 @@ assert.equal(sum(out.house),435);
 assert.equal(sum(out.senate),100);
 assert.equal(sum(out.governors),50);
 assert.equal(out.house.T,hs.summary.ratings.Tossup,'Tossup districts cannot be counted as called seats');
-assert.equal(out.senate.D+out.senate.R+out.senate.I,100);
+assert.equal(out.senate.D+out.senate.R+out.senate.I,100-out.senate.T,'Unassigned toss-up seats are neither Democratic nor Republican seats');
 assert.equal(out.senate.D,48,'Three races within 1.5 points must be unresolved');
 assert.equal(out.senate.R,49,'Three races within 1.5 points must be unresolved');
 assert.equal(model.senate.length,17);
