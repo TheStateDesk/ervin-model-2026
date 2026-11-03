@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-01",
+  "generated": "2026-11-02",
   "senate": {
     "n": 61,
     "rawMAE": 4.085639344262296,
@@ -192,6 +192,29 @@
     {
       "path": "counties-watch/history.json",
       "sha": "cd0ece23f72657f4ec9d7e1dcbd79f7a696b7be4"
+    },
+    {
+      "path": "research/governor-same-office-backtest-2026-11-02.json"
     }
-  ]
+  ],
+  "governorSameOffice": {
+    "historicalArchive": 57,
+    "n": 20,
+    "rawMAE": 4.667,
+    "adjustedMAE": 4.105,
+    "rawRMSE": 5.76,
+    "adjustedRMSE": 5.075,
+    "rawWinners": 20,
+    "adjustedWinners": 20,
+    "RCPOnly": {
+      "n": 10,
+      "rawMAE": 3.658,
+      "adjustedMAE": 3.816
+    },
+    "method": "Governor only: earlier same-state 2018–24 governor poll errors, one event per election year; no Senate/presidential inputs. 57 historical records do not equal 57 scored holdout tests."
+  },
+  "limitations": {
+    "governors": "57 distinct same-office 2018–2024 governor historical comparisons cover 36 states, but only 20 historical elections across 17 states can be scored past-only. Full-sample 20-event MAE improves; strictly RCP-target subset worsens. 2026 outcome is not yet backtestable.",
+    "house": "435 House ratings remain explicitly separate from federal/governor historical error pools, using Cook and existing attributed sources; changed boundaries and incomparable polling prevent interpreting statewide corrections as district probabilities."
+  }
 }
