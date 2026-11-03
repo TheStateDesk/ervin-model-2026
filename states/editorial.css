@@ -334,3 +334,11 @@ html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180
  .ed-utility{flex-wrap:wrap}
  .ed-nav-inner{scrollbar-width:thin}
 }
+
+/* A single national atlas surface: state outlines or county detail, never stacked atlases. */
+.ed-atlas-switch{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:24px 0 13px;padding:11px 0;border-top:1px solid var(--ed-rule);border-bottom:1px solid var(--ed-rule)}
+.ed-atlas-switch button{border:1px solid var(--ed-rule);padding:10px 18px;min-height:43px;font:750 13px var(--ed-sans);color:var(--ed-ink);background:var(--ed-white);cursor:pointer}
+.ed-atlas-switch button[aria-pressed="true"]{background:var(--ed-ink);border-color:var(--ed-ink);color:var(--ed-white)}
+.theme-dark .ed-atlas-switch button[aria-pressed="true"]{background:#dce7ed;color:#172633;border-color:#dce7ed}
+.ed-atlas-switch .ed-mini{margin-left:auto}
+@media(max-width:600px){.ed-atlas-switch .ed-mini{flex-basis:100%;margin-left:0}}
