@@ -65,17 +65,26 @@ def compute():
         return {"n":n,"baselineMAE":sum(x["baseline"] for x in items)/n,"trendMAE":sum(x["trend"] for x in items)/n}
     counties=county_stat(county_rows)
     counties["byState"]={k:county_stat(v) for k,v in by_state.items()}
-    return {"generated":"2026-11-01","senate":base,"pooled":pool,"publishers":source_summary,
+    governor=json.loads((ROOT/"research/governor-same-office-backtest-2026-11-02.json").read_text(encoding="utf-8"))
+    g_summary=governor["summary"]
+    g_rcp=governor["preferredRCP"]
+    governor_office={"historicalArchive":g_summary["observed"],"n":g_summary["n"],
+        "rawMAE":g_summary["rawMAE"],"adjustedMAE":g_summary["adjustedMAE"],
+        "rawRMSE":g_summary["rawRMSE"],"adjustedRMSE":g_summary["adjustedRMSE"],
+        "rawWinners":g_summary["rawWinners"],"adjustedWinners":g_summary["adjustedWinners"],
+        "RCPOnly":{"n":g_rcp["n"],"rawMAE":g_rcp["rawMAE"],"adjustedMAE":g_rcp["adjustedMAE"]},
+        "method":"Governor only: earlier same-state 2018–24 governor poll errors, one event per election year; no Senate/presidential inputs. 57 historical records do not equal 57 scored holdout tests."}
+    return {"generated":"2026-11-02","senate":base,"pooled":pool,"governorSameOffice":governor_office,"publishers":source_summary,
       "counties":counties,"provenance":[{"path":p} for p in (
       "research/senate_2018_2024_walk_forward.csv",
       "research/calibration_walkforward_2016_2024.csv","blend_backtest_2024.csv",
-      "counties-watch/history.json")],
+      "counties-watch/history.json", "research/governor-same-office-backtest-2026-11-02.json")],
       "limitations":{
       "senateRaw":"61 retrospective equal-pollster raw polling reconstructions; not the displayed Ervin's Take publisher-average blend",
       "pooled":"63 Senate/President records. No winner correctness established because stored calibration is absolute-error-only",
       "county":"160 selected watch counties. Predicted 2024 using pre-2024 margins, but 2024-dependent sample selection causes bias.",
-      "governors":"No historical matched governor archive; no governor Ervin validation claimed.",
-      "house":"No validated district-level model; boundary changes and unmatched candidate/poll archives block numeric House accuracy."
+      "governors":"57 distinct same-office 2018–2024 governor historical comparisons cover 36 states, but only 20 historical elections across 17 states can be scored past-only. Full-sample 20-event MAE improves; strictly RCP-target subset worsens. 2026 outcome is not yet backtestable.",
+      "house":"435 House ratings remain explicitly separate from federal/governor historical error pools, using Cook and existing attributed sources; changed boundaries and incomparable polling prevent interpreting statewide corrections as district probabilities."
       }}
 
 def equal_stat(a,b,path="root"):
@@ -105,5 +114,8 @@ def main():
         assert stored["senate"]["n"]==61
         assert stored["pooled"]["n"]==63
         assert stored["counties"]["n"]==160
+        assert stored["governorSameOffice"]["n"]==20
+        assert stored["governorSameOffice"]["historicalArchive"]==57
+        assert set(stored.keys())>=set(current.keys()),"Published scorecard missing latest office-specific sections"
     print(f"PASS: Senate {current['senate']['n']}, pooled {current['pooled']['n']}, county {current['counties']['n']} historical records (source scorecard only; not universal forecast validation)")
 if __name__=="__main__":main()
