@@ -260,9 +260,9 @@ try{
  // Verify all 435 House model ratings and a genuinely interactive district-level geographic page.
  const nationalHouse=await browser.newPage({viewport:{width:1440,height:940}});
  await nationalHouse.goto(root+'/house/',{waitUntil:'domcontentloaded'});
- await nationalHouse.waitForFunction(()=>document.querySelector('#houseModelSummary')?.textContent.includes('Every House district, modeled'),null,{timeout:25000});
+ await nationalHouse.waitForFunction(()=>document.querySelector('#houseModelSummary')?.textContent.includes('House ratings and district evidence'),null,{timeout:25000});
  const nationalSummary=await nationalHouse.locator('#houseModelSummary').innerText();
- assert(nationalSummary.includes('435 / 435'),'House model has incomplete race coverage');
+ assert(nationalSummary.includes('Comparable-map numerical estimates')&&nationalSummary.includes('Unrated / no 2026-map evidence'),'House forecast must distinguish comparable numerical models from unclassified redrawn districts');
  assert(nationalSummary.includes('underlying')||nationalSummary.includes('indexed'),'House model fails to attribute polling');
  await nationalHouse.locator('#houseMapSvg path[data-code="TX"]').click({force:true});
  await nationalHouse.waitForFunction(()=>document.querySelectorAll('#districtMapSvg path.geo-district').length===38,null,{timeout:25000});
