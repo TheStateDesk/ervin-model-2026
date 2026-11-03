@@ -56,3 +56,13 @@ html.theme-dark{--atlas-d:#398fc8;--atlas-r:#c76774;--atlas-t:#a99b7f;--atlas-n:
 @media(max-width:690px){.watch-card__people--pair{min-height:96px}.nationwide-county-surface svg{min-width:540px;height:385px}}
 
 .candidate-photo-credit{font-size:10px!important;font-weight:650;color:var(--ed-muted,#7990a1)!important;text-decoration:underline;text-underline-offset:2px;margin-top:1px}
+
+/* Audit: interactive, swipeable single-row carousel on phones. */
+@media(max-width:690px){
+ .watch-track{display:flex!important;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:10px;padding-bottom:12px;overscroll-behavior-x:contain}
+ .watch-card{flex:0 0 min(82vw,340px);scroll-snap-align:start}
+ .watch-head{align-items:flex-start}
+ .watch-nav{justify-content:flex-start;flex-wrap:wrap}
+ .homepage-search-top .ed-band{display:flex;align-items:stretch;flex-wrap:wrap}
+ .homepage-search-top .ed-control{margin-left:0!important;width:min(100%,360px)!important}
+}
