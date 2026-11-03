@@ -82,95 +82,237 @@ function renderEnsemble(selected){
  $('edSimAnomalies').textContent='Distribution audit: The House is approximately bell-shaped (skew '+ensemble.center.house.skewness+'); individual one-seat bumps are not separate forecasts. '+(house?'The '+house.seats+'-seat bin occurs '+fmt(house.count)+' times versus '+fmt(house.normalExpected)+' under a matched normal curve. ':'')+(sen.length?'Senate tail bins, including '+sen[0].seats+' seats, also differ from a rounded normal approximation. ':'')+'These are descriptive diagnostics, not proof of a second mode or a reason to alter the forecast. *Independent-caucus assignments can affect Senate control.';
 }
 
-/* Each distribution tab has its own frozen, interactive 50-state projection map.
- * House colors show the plurality of district-level model leads in a state,
- * NOT a forecast of statewide popular vote; Senate/governor only color contests
- * actually modeled for 2026. Live returns never modify this map. */
+/* The final election prediction explicitly calls every modeled contest D or R.
+ * The 144k simulation histogram is an uncertainty distribution and is not
+ * reverse-engineered into district calls. Nothing here reads election returns. */
 const SVG_NS='http://www.w3.org/2000/svg';
 const IS_FINITE=n=>typeof n==='number'&&Number.isFinite(n);
-function projectedCategory(r,office){
- if(IS_FINITE(r?.margin))return Math.abs(r.margin)<=1.5?'T':r.margin>0?'D':'R';
- const rating=office==='house'?r?.rating:r?.qualitativeRating;
- return /\bD$/.test(rating||'')?'D':/\bR$/.test(rating||'')?'R':'N';
+let mapRevision=0,districtShapes=null,districtPromise=null;
+const CURRENT_CD120=new Set('AL CA FL GA LA NC NY OH TN TX UT'.split(' '));
+const deg=Math.PI/180;
+function finalParty(r){
+ if(IS_FINITE(r?.margin)&&r.margin!==0)return r.margin>0?'D':'R';
+ const rating=String(r?.rating||r?.qualitativeRating||'');
+ if(/(?:^|\s)D$/.test(rating))return 'D';
+ if(/(?:^|\s)R$/.test(rating))return 'R';
+ return 'N';
 }
-const marginLabel=m=>!IS_FINITE(m)?'qualitative source rating only':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)+' pts';
-function buildProjectionRows(office,model){
- const out={};
- const geo=window.ERVIN_US_GEOGRAPHY?.states||[];
- for(const g of geo)out[g.code]={code:g.code,name:g.name,rows:[],D:0,R:0,T:0,N:0,kind:'N'};
+function marginText(m){
+ return !IS_FINITE(m)?'qualitative published rating':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(2)+' pts';
+}
+function makeSvg(tag,attrs){
+ const el=document.createElementNS(SVG_NS,tag);
+ for(const [k,v] of Object.entries(attrs||{}))el.setAttribute(k,String(v));
+ return el;
+}
+function projectedRows(office,model){
+ const states=window.ERVIN_US_GEOGRAPHY?.states||[];
+ const out=Object.fromEntries(states.map(s=>[s.code,{code:s.code,name:s.name,entries:[],D:0,R:0,N:0}]));
  const entries=office==='house'?model.house:office==='senateD'?model.senate:model.governor;
  for(const r of entries||[]){
-  const state=out[r.code];
-  if(!state)continue;
-  const kind=projectedCategory(r,office==='house'?'house':'state');
-  state[kind]++;
-  state.rows.push({id:r.id,margin:r.margin,kind,sourceRated:!IS_FINITE(r.margin),rating:r.rating||r.qualitativeRating||''});
- }
- for(const s of Object.values(out)){
-  if(!s.rows.length)continue;
-  if(office==='house'){
-   // A state's House color represents the most numerous party-leading districts.
-   s.kind=s.D===s.R?'T':s.D>s.R?'D':'R';
-  }else s.kind=s.rows[0].kind;
+  const state=out[r.code];if(!state)continue;
+  const kind=finalParty(r),row={...r,kind};
+  state.entries.push(row);state[kind]++;
  }
  return out;
 }
-function renderProjectionMap(office){
- const el=$('edSimMap'),summary=$('edSimMapReadout'),note=$('edSimMapNote');
- if(!el||!summary||!note)return;
- const isHouse=office==='house',isSen=office==='senateD';
- const title=$('edSimMapTitle');
- title.textContent=isHouse?'House · district leaders by state':isSen?'Senate · 2026 races':'Governors · 2026 races';
- const geo=window.ERVIN_US_GEOGRAPHY?.states||[];
- const model=window.ERVIN_HOME_FORECAST;
- if(!geo.length||!model||!model.house?.length||!model.senate?.length||!model.governor?.length){
-  el.replaceChildren();const t=document.createElementNS(SVG_NS,'text');
-  t.setAttribute('x','540');t.setAttribute('y','315');t.setAttribute('text-anchor','middle');
-  t.textContent='Loading frozen state-by-state projections…';el.append(t);
-  summary.textContent='Projection geography is loading. The seat distribution remains available.';
-  note.textContent='Forecast maps will use the locked election-day data, not live returns.';
-  return;
+function renderCallTally(office,rows){
+ const node=$('edFinalCallSummary');if(!node)return;
+ const n=Object.values(rows).reduce((v,s)=>v+s.entries.length,0);
+ const d=Object.values(rows).reduce((v,s)=>v+s.D,0);
+ const r=Object.values(rows).reduce((v,s)=>v+s.R,0);
+ const unknown=Object.values(rows).reduce((v,s)=>v+s.N,0);
+ const expected=office==='house'?435:office==='senateD'?17:36;
+ if(n!==expected||unknown){
+  node.textContent='Cannot make a full set of final calls: '+n+' of '+expected+' contests, '+unknown+' without a supported call.';
+  return false;
  }
- const rows=buildProjectionRows(office,model);
- const filled=Object.values(rows).filter(x=>x.rows.length).length;
- const counts=Object.values(rows).reduce((total,x)=>total+x.rows.length,0);
- const expected=isHouse?435:isSen?17:36;
- if(counts!==expected){summary.textContent='Source coverage changed: '+counts+' of '+expected+' expected contests. Map withheld to avoid a misleading display.';el.replaceChildren();return}
- el.replaceChildren();el.setAttribute('viewBox',window.ERVIN_US_GEOGRAPHY.viewBox||'0 0 1080 625');
+ const label=office==='house'?'U.S. HOUSE':office==='senateD'?'U.S. SENATE':'GOVERNORS';
+ const scope=office==='house'?'All 435 congressional districts':office==='senateD'?'17 modeled Senate contests; holdover seats excluded':'36 gubernatorial contests; 14 off-cycle states excluded';
+ node.replaceChildren();
+ const name=make('span','ed-final-call-name',label+' / PROJECTED WINNERS');
+ const score=make('div','ed-final-call-totals');
+ const dScore=make('strong','ed-final-call-d',fmt(d)+' D'),sep=make('span','ed-final-call-sep','—'),rScore=make('strong','ed-final-call-r',fmt(r)+' R');
+ score.append(dScore,sep,rScore);
+ node.append(name,score,make('small','',scope+' · no toss-up calls'));
+ return true;
+}
+function shapeRings(g){
+ if(!g)return [];
+ if(g.type==='Polygon')return g.coordinates;
+ if(g.type==='MultiPolygon')return g.coordinates.flat();
+ return [];
+}
+function rawAlbers(pt){
+ const phi1=29.5*deg,phi2=45.5*deg,phi0=38*deg;
+ const n=(Math.sin(phi1)+Math.sin(phi2))/2;
+ const c=Math.cos(phi1)**2+2*n*Math.sin(phi1);
+ const rho0=Math.sqrt(c-2*n*Math.sin(phi0))/n;
+ const rho=Math.sqrt(Math.max(0,c-2*n*Math.sin(pt[1]*deg)))/n;
+ const theta=n*(pt[0]+96)*deg;
+ return [rho*Math.sin(theta),rho0-rho*Math.cos(theta)];
+}
+function rawInset(pt,code){
+ let lon=pt[0];if(code==='AK'&&lon>0)lon-=360;
+ return [lon*Math.cos((code==='AK'?60:20)*deg),pt[1]];
+}
+function fitProjectedFeatures(features){
+ const regions={CONUS:[],AK:[],HI:[]};
+ for(const row of features){
+  const code=row.code,region=code==='AK'?'AK':code==='HI'?'HI':'CONUS';
+  const fn=region==='CONUS'?rawAlbers:pt=>rawInset(pt,code);
+  const rings=shapeRings(row.geometry).filter(r=>r.length>=3).map(r=>r.filter(p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(p[0])&&Number.isFinite(p[1])).map(fn)).filter(r=>r.length>=3);
+  regions[region].push({...row,rings});
+ }
+ const frames={CONUS:{x:20,y:18,w:1040,h:540},AK:{x:56,y:436,w:245,h:163},HI:{x:310,y:525,w:165,h:73}};
+ const output=[];
+ for(const [region,rows] of Object.entries(regions)){
+  const all=rows.flatMap(r=>r.rings.flat());
+  if(!all.length)throw Error('The '+region+' region contains no district coordinates');
+  const bx=[Math.min(...all.map(p=>p[0])),Math.max(...all.map(p=>p[0]))];
+  const by=[Math.min(...all.map(p=>p[1])),Math.max(...all.map(p=>p[1]))];
+  const frame=frames[region],dx=Math.max(.0001,bx[1]-bx[0]),dy=Math.max(.0001,by[1]-by[0]);
+  const scale=Math.min(frame.w/dx,frame.h/dy);
+  const ox=frame.x+(frame.w-dx*scale)/2,oy=frame.y+(frame.h-dy*scale)/2;
+  for(const row of rows){
+   const d=row.rings.map(ring=>ring.map((point,i)=>(i?'L':'M')+(ox+(point[0]-bx[0])*scale).toFixed(2)+' '+(oy+(by[1]-point[1])*scale).toFixed(2)).join('')+'Z').join('');
+   if(!d)throw Error(row.code+' '+row.id+' has no projected geometry');
+   output.push({id:row.id,code:row.code,d,region});
+  }
+ }
+ return output;
+}
+function districtGeometry(){
+ if(districtShapes)return Promise.resolve(districtShapes);
+ if(districtPromise)return districtPromise;
+ districtPromise=(async()=>{
+  const codes=(window.ERVIN_US_GEOGRAPHY?.states||[]).map(s=>s.code);
+  if(codes.length!==50)throw Error('50-state geography has not loaded');
+  const records=[],errors=[];
+  let cursor=0;
+  await Promise.all(Array.from({length:9},async()=>{
+   while(cursor<codes.length){
+    const code=codes[cursor++];let data=null,last;
+    for(let attempt=0;attempt<2&&!data;attempt++){
+     try{
+      const response=await fetch('../geo/districts/'+code+'.json',{cache:'force-cache',signal:typeof AbortSignal!=='undefined'&&typeof AbortSignal.timeout==='function'?AbortSignal.timeout(18000):undefined});
+      if(!response.ok)throw Error(code+' district HTTP '+response.status);
+      const candidate=await response.json();
+      if(candidate.type!=='FeatureCollection'||candidate.state!==code||!Array.isArray(candidate.features)||!candidate.features.length)throw Error(code+' district data invalid');
+      if(CURRENT_CD120.has(code)&&candidate.boundaryYear!==2026)throw Error(code+' congressional geography is not the current 2026 map');
+      data=candidate;
+     }catch(e){last=e}
+    }
+    if(!data){errors.push(code+': '+last?.message);continue}
+    for(const f of data.features){
+     const id=code+'-'+String(f.id).padStart(2,'0');
+     records.push({code,id,geometry:f.geometry});
+    }
+   }
+  }));
+  if(errors.length)throw Error('Could not validate every congressional district: '+errors.join('; '));
+  if(records.length!==435||new Set(records.map(r=>r.id)).size!==435)throw Error('District geometry does not contain exactly 435 unique seats');
+  districtShapes=fitProjectedFeatures(records);
+  return districtShapes;
+ })().catch(e=>{districtPromise=null;throw e});
+ return districtPromise;
+}
+function fillStateMap(office,rows,revision){
+ if(revision!==mapRevision)return;
+ const el=$('edSimMap'),summary=$('edSimMapReadout');
+ const geo=window.ERVIN_US_GEOGRAPHY?.states||[];
+ el.replaceChildren();el.setAttribute('viewBox',window.ERVIN_US_GEOGRAPHY?.viewBox||'0 0 1080 625');
  el.dataset.simOffice=office;
- el.setAttribute('aria-label',(isHouse?'House district model leaders by state':isSen?'2026 Senate model projections':'2026 governor model projections')+' — 50 clickable states, frozen November 3 forecast.');
- const defaultText=isHouse?'House: '+counts+' districts grouped by their state; click or focus any state for projected leaders.':
-  (isSen?'Senate: '+filled+' numerically modeled races (17 in all).':'Governors: '+filled+' races, including three publisher-rated contests.')+' Click or focus a state for its forecast.';
+ el.setAttribute('aria-label',office==='senateD'?'Final Senate forecast: 17 called contests on 50 state outlines':'Final governor forecast: 36 called contests on 50 state outlines');
+ const what=office==='senateD'?'U.S. Senate':'governor';
+ const defaultText=office==='senateD'?'All 17 modeled Senate contests have final winner calls. Gray states have no Senate race in this forecast.':'All 36 governor contests have final winner calls. Gray states have no governor election in 2026.';
  summary.textContent=defaultText;
- const descriptor=s=>{
-  if(!s.rows.length)return s.name+': '+(isHouse?'no modeled House districts available':isSen?'no numerically modeled 2026 Senate contest':'no governor election in 2026')+'.';
-  if(isHouse)return s.name+': '+s.D+' Democratic-leading districts, '+s.R+' Republican-leading districts, '+s.T+' toss-ups (within ±1.5 pts)'+(s.rows.some(r=>r.sourceRated)?'; nonnumeric races use source ratings':'')+'. State shading reflects which party leads in more districts, not a statewide vote prediction.';
-  const r=s.rows[0],what=isSen?'U.S. Senate':'governor';
-  return s.name+' '+what+': '+(r.sourceRated?(r.rating+' · publisher rating, no numeric margin'):(marginLabel(r.margin)+(r.kind==='T'?' · toss-up':'')))+'. Pre-election estimate, not counted votes.';
- };
- for(const g of geo){
-  const s=rows[g.code],link=document.createElementNS(SVG_NS,'a');
-  const to='../state/?state='+encodeURIComponent(g.code)+(isHouse?'#stateHouse':'#stateOverview');
-  link.setAttribute('href',to);link.setAttribute('tabindex','0');
-  link.dataset.simState=g.code;
-  link.setAttribute('aria-label',descriptor(s)+' Open state edition.');
-  const path=document.createElementNS(SVG_NS,'path');
-  path.setAttribute('d',g.d);path.setAttribute('class','ed-sim-proj-state ed-sim-proj-'+s.kind);
-  path.dataset.simKind=s.kind;
-  const tooltip=document.createElementNS(SVG_NS,'title');tooltip.textContent=descriptor(s);
-  path.append(tooltip);link.append(path);
-  link.addEventListener('pointerenter',()=>summary.textContent=descriptor(s));
-  link.addEventListener('focus',()=>summary.textContent=descriptor(s));
+ for(const geoState of geo){
+  const s=rows[geoState.code],r=s.entries[0]||null,kind=r?.kind||'N';
+  const candidate=kind==='D'?r?.dem:kind==='R'?r?.rep:null;
+  const detail=r?s.name+' '+what+': projected '+(kind==='D'?'Democratic':'Republican')+' winner'+(candidate?' '+candidate:'')+' ('+(IS_FINITE(r.margin)?marginText(r.margin):r.rating||r.qualitativeRating||'publisher rating')+').':
+   s.name+': no 2026 '+what+' election modeled on this map.';
+  const link=makeSvg('a',{href:'../state/?state='+encodeURIComponent(s.code)+'#stateOverview','data-sim-state':s.code,'aria-label':detail+' Open state.',tabindex:0});
+  const path=makeSvg('path',{d:geoState.d,class:'ed-sim-proj-state ed-sim-proj-'+kind,'data-sim-kind':kind});
+  const tip=makeSvg('title');tip.textContent=detail;path.append(tip);link.append(path);
+  link.addEventListener('pointerenter',()=>summary.textContent=detail);
+  link.addEventListener('focus',()=>summary.textContent=detail);
   link.addEventListener('pointerleave',()=>summary.textContent=defaultText);
   link.addEventListener('blur',()=>summary.textContent=defaultText);
   el.append(link);
  }
- note.textContent=isHouse?
-  'House shading summarizes 435 individual district forecasts by state (including two publisher-rated exceptions). It is not a statewide House popular-vote estimate or a forced allocation of the national median seat count. Gold indicates equal D/R leads or an all-toss-up state.':
-  isSen?
-  'Only the 17 Senate contests with modeled margins are colored; other Senate states are gray, not projected Republican or Democratic wins. Gold indicates a margin within ±1.5 points. Independent candidates may not caucus with Democrats.':
-  'All 36 governor contests are shown. Three without numeric polling use attributed publisher ratings; the other 14 states have no 2026 governor race and remain gray. Gold indicates a margin within ±1.5 points.';
 }
+async function fillHouseMap(rows,revision){
+ const el=$('edSimMap'),summary=$('edSimMapReadout');
+ el.dataset.simOffice='house-loading';
+ summary.textContent='Assembling 435 congressional district boundaries from locally hosted 2026-compatible map files…';
+ try{
+  const shapes=await districtGeometry();
+  if(revision!==mapRevision)return;
+  const calls=new Map();
+  for(const s of Object.values(rows))for(const row of s.entries)calls.set(row.id,row);
+  const missing=shapes.filter(s=>!calls.has(s.id));
+  if(missing.length||calls.size!==435)throw Error('Final House forecast and congressional boundaries do not agree ('+missing.length+' unmatched shapes)');
+  const geo=window.ERVIN_US_GEOGRAPHY?.states||[];
+  const names=Object.fromEntries(geo.map(s=>[s.code,s.name]));
+  const frag=document.createDocumentFragment();
+  for(const shape of shapes){
+   const r=calls.get(shape.id),detail=names[shape.code]+' '+shape.id+': projected '+(r.kind==='D'?'Democratic':'Republican')+' winner ('+(IS_FINITE(r.margin)?marginText(r.margin):r.rating+' source rating')+').';
+   const district=String(Number(shape.id.slice(3))).padStart(2,'0');
+   const link=makeSvg('a',{href:'../state/?state='+encodeURIComponent(shape.code)+'#house-'+district,'data-sim-district':shape.id,'data-sim-state':shape.code,'aria-label':detail+' Open district details.',tabindex:0});
+   const path=makeSvg('path',{d:shape.d,class:'ed-sim-proj-district ed-sim-proj-'+r.kind,'data-sim-kind':r.kind,'fill-rule':'evenodd'});
+   const title=makeSvg('title');title.textContent=detail;path.append(title);link.append(path);
+   link.addEventListener('pointerenter',()=>summary.textContent=detail);
+   link.addEventListener('focus',()=>summary.textContent=detail);
+   link.addEventListener('pointerleave',()=>summary.textContent='Each of 435 districts carries an individual final predicted winner. Select a district to open its state dossier.');
+   link.addEventListener('blur',()=>summary.textContent='Each of 435 districts carries an individual final predicted winner. Select a district to open its state dossier.');
+   frag.append(link);
+  }
+  const ak=makeSvg('g',{class:'ed-sim-map-insets','aria-hidden':'true','pointer-events':'none'});
+  for(const [code,x,y,w,h] of [['AK',45,427,262,183],['HI',303,518,187,88]]){
+   ak.append(makeSvg('rect',{x,y,width:w,height:h,rx:2}));
+   const label=makeSvg('text',{x:x+9,y:y+18});label.textContent=code;ak.append(label);
+  }
+  // Insets sit behind district paths so they never conceal the projected calls.
+  el.replaceChildren(ak,frag);
+  el.setAttribute('viewBox','0 0 1080 625');
+  el.setAttribute('aria-label','Final House projection: 435 clickable congressional districts, each assigned a Democratic or Republican winner');
+  el.dataset.simOffice='house';
+  summary.textContent='Every one of 435 U.S. House districts has a final predicted winner. Select a district to open its state dossier.';
+ }catch(error){
+  if(revision!==mapRevision)return;
+  el.replaceChildren(makeSvg('text',{x:540,y:310,'text-anchor':'middle'}));
+  el.firstElementChild.textContent='District geography temporarily unavailable';
+  el.dataset.simOffice='house-error';
+  summary.textContent='Cannot validate the entire 435-district map: '+error.message+'. The final call totals and chart remain available.';
+ }
+}
+function renderProjectionMap(office){
+ const el=$('edSimMap'),summary=$('edSimMapReadout'),note=$('edSimMapNote'),title=$('edSimMapTitle');
+ if(!el||!summary||!note||!title)return;
+ const revision=++mapRevision;
+ const isHouse=office==='house',isSen=office==='senateD';
+ title.textContent=isHouse?'House · final prediction by congressional district':isSen?'Senate · final prediction by state':'Governors · final prediction by state';
+ const model=window.ERVIN_HOME_FORECAST,geo=window.ERVIN_US_GEOGRAPHY?.states||[];
+ if(!model||!geo.length||!model.house?.length||!model.senate?.length||!model.governor?.length){
+  el.replaceChildren(makeSvg('text',{x:540,y:315,'text-anchor':'middle'}));
+  el.firstElementChild.textContent='Loading locked election-day forecast…';
+  summary.textContent='Assembling the frozen final election forecasts.';
+  return;
+ }
+ const rows=projectedRows(office,model);
+ if(!renderCallTally(office,rows)){el.replaceChildren();return}
+ if(isHouse){
+  note.textContent='435 district-by-district predictions, including two contests assigned by sourced Cook ratings rather than a numeric poll. This point-call map can differ from the 144,000-run national median; it does not revise the locked model or display reported votes.';
+  fillHouseMap(rows,revision);
+ }else{
+  note.textContent=isSen?
+   '17 modeled 2026 Senate races are called Democratic or Republican; gray marks states without a modeled Senate contest, not toss-ups. All Republican-vs-independent races in this forecast favor the Republican candidate. Holdover senators are excluded.':
+   'All 36 2026 governor elections have a winner call, including three based on attributed Cook ratings. Gray states have no gubernatorial contest in 2026, not an undecided forecast.';
+  fillStateMap(office,rows,revision);
+ }
+}
+
 function enter(){
  if(active)return;active=true;
  const stage=$('edResultsStage'),map=$('nationMap'),slot=$('edNightMapSlot'),dashboard=$('electionDashboard');
