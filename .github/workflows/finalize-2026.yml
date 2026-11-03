@@ -1,0 +1,48 @@
+name: Freeze immutable 2026 final predictions
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/finalize-2026.mjs'
+      - '.github/workflows/finalize-2026.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: final-lock-2026
+  cancel-in-progress: false
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate 144k-run data and create one immutable pre-election snapshot
+        run: |
+          node --check scripts/finalize-2026.mjs
+          node scripts/finalize-2026.mjs
+      - name: Push frozen forecasts and editorial headline
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3; do
+            git fetch origin main
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+              git reset --hard origin/main
+              node scripts/finalize-2026.mjs
+            fi
+            git add final/forecast-final.json final/status.json
+            if git diff --cached --quiet; then
+              echo 'Forecast lock already committed'
+              exit 0
+            fi
+            git commit -m 'LOCK final 2026 pre-election House Senate governor forecast'
+            if git push origin HEAD:main; then exit 0; fi
+            test "$i" -ne 3
+          done
