@@ -47,8 +47,8 @@
       "UT"
     ]
   },
-  "formulation": "D-R House margin = final pre-election generic House poll margin + alpha \u00d7 [0.75 \u00d7 (prior presidential two-party district margin \u2212 same-year national margin) + 0.25 \u00d7 (preceding presidential district margin \u2212 same-year national margin)].",
-  "alpha": 1.0,
+  "formulation": "D-R House margin = final pre-election generic House poll margin + alpha × [0.75 × (prior presidential two-party district margin − same-year national margin) + 0.25 × (preceding presidential district margin − same-year national margin)].",
+  "alpha": 1,
   "rawAlphaOne": {
     "training": {
       "n": 793,
@@ -124,5 +124,19 @@
     "2018 and 2022 House maps differ from one another; each historical district is matched only with its own election-year presidential reference lines.",
     "2026 redrawn maps use reconstructed presidential baseline values with extra uncertainty; existing old-number House returns are not used as if they were the new electorate.",
     "The 2026 roster of incumbents is known but candidate strength should not be added without a trustworthy matched sample."
-  ]
+  ],
+  "forward2026": {
+    "presidentialNationalMarginD": {
+      "2020": 4.54,
+      "2024": -1.51
+    },
+    "presidentialWeights": {
+      "2020": 0.25,
+      "2024": 0.75
+    },
+    "alpha": 1,
+    "source": "2026 district presidential splits in house/presidential-2026-boundaries.json; historical national two-party presidential vote totals",
+    "futureDataExcluded": true,
+    "notes": "Presidential lean is relative to each presidential election's national D-R two-party margin, then added to 2026 generic House polling; selected alpha from 2018/2022, checked on 2024. Candidate-specific bonus not validated."
+  }
 }
