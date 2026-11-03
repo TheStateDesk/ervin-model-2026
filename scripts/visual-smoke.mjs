@@ -297,7 +297,7 @@ try{
    assert(details.counties>=3,'Counties missing '+code+' '+theme+': '+JSON.stringify(details));
    assert(details.visible>=Math.max(3,Math.floor(details.counties*.9)),'Invisible county shapes '+code+' '+theme+': '+JSON.stringify(details));
    assert(details.house>0,'House selector blank '+code+' '+theme);
-   await page.waitForFunction(()=>document.querySelector('#districtDetail')?.textContent.includes('ERVIN HOUSE'),null,{timeout:25000});
+   await page.waitForFunction(state=>{const txt=document.querySelector('#districtDetail')?.textContent||'';return ['TX','CA'].includes(state)?txt.includes('2026 MAP · SOURCE RATING')&&txt.includes('Numerical 2026 House margin withheld'):txt.includes('ERVIN HOUSE');},code,{timeout:25000});
    assert(details.dark===(theme==='dark'),'Wrong theme '+code+' '+theme);
    assert(!errors.length,'JS errors '+code+': '+errors.join(' | '));
    await page.screenshot({path:'visual-checks/'+code+'-'+theme+'-county.png',fullPage:true});
