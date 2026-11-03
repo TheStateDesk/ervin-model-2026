@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap');
 /* Ervin Model / The State Desk — editorial interface, not a replica of any publisher */
-:root{--ed-paper:#f5f3ee;--ed-white:#fffefa;--ed-ink:#182634;--ed-muted:#576775;--ed-rule:#cdd2d2;--ed-rule-dark:#73818b;--ed-blue:#2c6689;--ed-blue-light:#e4edf3;--ed-red:#b94f58;--ed-sand:#efeadf;--ed-gold:#b18a53;--ed-serif:Georgia,'Iowan Old Style','Palatino Linotype',serif;--ed-sans:Inter,'Helvetica Neue',Arial,system-ui,sans-serif}
+:root{--ed-paper:#f5f3ee;--ed-white:#fffefa;--ed-ink:#182634;--ed-muted:#576775;--ed-rule:#cdd2d2;--ed-rule-dark:#73818b;--ed-blue:#2c6689;--ed-blue-light:#e4edf3;--ed-red:#b94f58;--ed-sand:#efeadf;--ed-gold:#b18a53;--ed-serif:'Newsreader',Georgia,'Iowan Old Style',serif;--ed-sans:'Libre Franklin',Inter,'Helvetica Neue',Arial,system-ui,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body.ed-body{margin:0;background:var(--ed-paper)!important;color:var(--ed-ink)!important;font:15px/1.53 var(--ed-sans)!important}
 .ed-body button,.ed-body input,.ed-body select{font:inherit}.ed-body button{cursor:pointer}
 .ed-body a{color:var(--ed-blue);text-underline-offset:3px}.ed-body [hidden]{display:none!important}
@@ -342,3 +343,33 @@ html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180
 .theme-dark .ed-atlas-switch button[aria-pressed="true"]{background:#dce7ed;color:#172633;border-color:#dce7ed}
 .ed-atlas-switch .ed-mini{margin-left:auto}
 @media(max-width:600px){.ed-atlas-switch .ed-mini{flex-basis:100%;margin-left:0}}
+
+/* 2026 editor's desk typography / common seven-rank election language.
+   Use hairline section separators, not floating dashboard containers. */
+:root{
+ --ed-grade-solid-d:#185d92;--ed-grade-likely-d:#438ab7;--ed-grade-lean-d:#86bbd7;
+ --ed-grade-toss:#c1aa7a;--ed-grade-lean-r:#e0a1a8;--ed-grade-likely-r:#c86c78;--ed-grade-solid-r:#a13a4e;
+}
+html.theme-dark{
+ --ed-grade-solid-d:#367ca9;--ed-grade-likely-d:#5399bd;--ed-grade-lean-d:#83bed8;
+ --ed-grade-toss:#b5a077;--ed-grade-lean-r:#dea4aa;--ed-grade-likely-r:#d57f8d;--ed-grade-solid-r:#bc5365;
+}
+body.ed-body{font-family:var(--ed-sans)!important;line-height:1.58}
+.ed-body .ed-headline,.ed-body h1,.ed-body h2,.ed-body .ed-mast a{font-family:var(--ed-serif)}
+.ed-body .ed-kicker,.ed-body .ed-cap,.ed-mast small{font-size:12px!important;letter-spacing:.08em}
+.ed-mast small{margin-top:6px!important;line-height:1.4}
+.ed-body .ed-date,.ed-public-build{font-size:12px}
+.ed-body .ed-card{border-left:0;border-right:0;border-radius:0;box-shadow:none;background:transparent;border-color:var(--ed-rule);padding-left:0;padding-right:0}
+.ed-body .ed-nav{border-top:1px solid var(--ed-rule);border-bottom:1px solid var(--ed-rule)}
+.ed-body .ed-nav a{font-size:12px}
+.ed-byline{font-family:var(--ed-sans);color:var(--ed-muted);font-size:12px;font-weight:650;letter-spacing:.01em;margin:1px 0 12px}
+.ed-body .ed-sectionline{border-bottom:1px solid var(--ed-rule);padding-bottom:8px}
+@media(max-width:600px){
+ .ed-mast a{font-size:clamp(19px,5.2vw,25px)!important;letter-spacing:-.025em;white-space:nowrap}
+ .ed-mast{min-width:0;text-align:center}
+ .ed-head-inner{grid-template-columns:32px minmax(0,1fr) auto;gap:5px;padding:12px 10px}
+ .ed-utility{gap:4px}
+ .ed-utility .ed-btn{padding:7px 8px;font-size:12px}
+ .ed-shell{width:calc(100% - 26px)}
+ .ed-body .ed-card{padding:17px 0}
+}
