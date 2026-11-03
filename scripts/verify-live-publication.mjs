@@ -58,7 +58,21 @@ try{
  const front=await browser.newPage({viewport:{width:390,height:844}});
  await front.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
  await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#watchCards')?.querySelectorAll('.watch-card').length>=4&&document.querySelectorAll('#usMap path.ed-state').length>=50,null,{timeout:35000});
- await front.waitForFunction(expected=>document.querySelector('meta[name="ervin-deploy"]')?.content===expected,stamp,{timeout:20000});
+ try{
+  await front.waitForFunction(expected=>document.querySelector('meta[name="ervin-deploy"]')?.content===expected,stamp,{timeout:20000});
+ }catch(err){
+  const diag=await front.evaluate(()=>({
+   meta:document.querySelector('meta[name="ervin-deploy"]')?.content,
+   build:document.querySelector('#publicBuildLabel')?.textContent?.trim(),
+   title:document.title,
+   version:document.querySelector('h1.ed-headline')?.textContent,
+   selectors:[...document.querySelectorAll('[data-national-atlas-view]')].map(e=>e.dataset.nationalAtlasView),
+   atlas:!!document.querySelector('#allCountyNation'),
+   href:location.href,
+   htmlLength:document.documentElement.outerHTML.length
+  }));
+  throw Error('LIVE BUILD MARKER MISMATCH before county atlas, expected '+stamp+' got '+JSON.stringify(diag));
+ }
  const frontModel=await front.evaluate(()=>{
   const balance=document.querySelector('#balanceOfPower')?.getBoundingClientRect();
   const watch=document.querySelector('#watchSection')?.getBoundingClientRect();
