@@ -2,6 +2,8 @@
 const $=id=>document.getElementById(id),esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Number(n).toLocaleString('en-US');
 const closeEastern=Date.parse('2026-11-03T20:00:00-05:00');
+// Source: USPS October 2026 key elections · 35 Senate ballots.
+const SENATE_STATES_2026='AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY'.split(' ');
 const closeCentral=Date.parse('2026-11-03T21:00:00-05:00');
 const centralCounties=new Set(['Dickinson','Gogebic','Iron','Menominee']);
 const countyDirectory='https://www.michigan.gov/sos/elections/election-results-and-data/candidate-listings-and-election-results-by-county';
@@ -149,6 +151,14 @@ async function refreshNational(){
    races.push({id:row.id,code,state,office:'Senate',label,margin:null,modelText:'No standalone numerical forecast'});
    indexed.add(row.id);
   }
+  // Newly accepted vote sources supply candidate names for otherwise
+  // unmodeled Senate contests, without manufacturing a pre-election margin.
+  for(const row of Object.values(merged.races)){
+   if(row.office!=='Senate')continue;
+   const entry=races.find(x=>x.id===row.id);
+   if(entry&&entry.modelText==='No numerical Ervin estimate')
+    entry.label=row.candidates.map(c=>c.name+' ('+c.party+')').join(' vs. ');
+  }
   const acceptedCivic=Object.values(merged.races).filter(r=>r.source?.includes('CivicAPI')).length;
   const acceptedFallback=Object.values(merged.races).filter(r=>!r.source?.includes('CivicAPI')).length;
   const count=acceptedCivic+acceptedFallback;
@@ -221,9 +231,15 @@ async function loadRaces(){
   if(selectedState!=='all')region.value=selectedState;
  }
  const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:ballotNames(h),margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
- races=[...senRaces,...govRaces,...houseRaces];
+ const modeled=new Set(senRaces.map(x=>x.code));
+ const additionalSenate=SENATE_STATES_2026.filter(code=>!modeled.has(code)).map(code=>({
+  id:code+'-SENATE',code,state:house.seats.find(h=>h.code===code)?.state||code,
+  office:'Senate',label:'Awaiting attributed candidate and vote report',margin:null,modelText:'No numerical Ervin estimate'
+ }));
+ if(senRaces.length!==17||additionalSenate.length!==18)throw Error('2026 Senate roster not 35 distinct states');
+ races=[...senRaces,...additionalSenate,...govRaces,...houseRaces];
  $('miForecast').textContent=window.ERVIN_STATEWIDE.formatMargin(sen.states?.MI?.adjustedMargin??null);
- $('nightHorizon').textContent='Source coverage: 17 modeled Senate contests, 36 governor elections, all 435 House districts. The governor calibration uses 2018–2024 same-state governor-only polling errors; county counts below are verified separately.';
+ $('nightHorizon').textContent='Source coverage: 35 Senate races (17 with numerical forecasts), 36 governor elections, all 435 House districts. The governor calibration uses 2018–2024 same-state governor-only polling errors; county counts below are verified separately.';
  drawRaces();
 }
 async function init(){
