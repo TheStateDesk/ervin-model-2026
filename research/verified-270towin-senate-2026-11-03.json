@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "auditedOn": "2026-11-03",
+  "publisher": "270toWin",
+  "scope": "Direct published general-election aggregate as checked on Nov 3, 2026, before polls close",
+  "sourceType": "Direct publisher average, not independently de-duplicated individual surveys",
+  "method": "Share subtraction, named candidate-matched table, latest poll row date retained as recency proxy; never copy four-way averages to a two-way candidate pair",
+  "excluded": {
+    "MS": "No candidate-matched 270toWin polling page (404 at audit)",
+    "MT": "Current 270toWin average is a three-way Bankhead/Bodnar/Alme race; not comparable to source workbook's Bodnar-Alme two-way matchup"
+  },
+  "states": {
+    "ME": {
+      "nonR": "Troy Jackson",
+      "rep": "Susan Collins",
+      "pollMarginNonRMinusR": 5,
+      "averageNonRShare": 50.9,
+      "averageRepublicanShare": 45.9,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/maine",
+      "matchup": "Explicit named general-election pair"
+    },
+    "MI": {
+      "nonR": "Abdul El-Sayed",
+      "rep": "Mike Rogers",
+      "pollMarginNonRMinusR": 5.9,
+      "averageNonRShare": 50.8,
+      "averageRepublicanShare": 44.9,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/michigan",
+      "matchup": "Explicit named general-election pair"
+    },
+    "OH": {
+      "nonR": "Sherrod Brown",
+      "rep": "Jon Husted",
+      "pollMarginNonRMinusR": 1.9,
+      "averageNonRShare": 48.7,
+      "averageRepublicanShare": 46.8,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/ohio",
+      "matchup": "Explicit named general-election pair"
+    },
+    "TX": {
+      "nonR": "James Talarico",
+      "rep": "Ken Paxton",
+      "pollMarginNonRMinusR": 3.2,
+      "averageNonRShare": 49.6,
+      "averageRepublicanShare": 46.4,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/texas",
+      "matchup": "Explicit named general-election pair"
+    },
+    "IA": {
+      "nonR": "Josh Turek",
+      "rep": "Ashley Hinson",
+      "pollMarginNonRMinusR": 0.9,
+      "averageNonRShare": 47.7,
+      "averageRepublicanShare": 46.8,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/iowa",
+      "matchup": "Explicit named general-election pair"
+    },
+    "KS": {
+      "nonR": "Adam Hamilton",
+      "rep": "Roger Marshall",
+      "pollMarginNonRMinusR": 5,
+      "averageNonRShare": 50.2,
+      "averageRepublicanShare": 45.2,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/kansas",
+      "matchup": "Explicit named general-election pair"
+    },
+    "MN": {
+      "nonR": "Peggy Flanagan",
+      "rep": "Michele Tafoya",
+      "pollMarginNonRMinusR": 5.4,
+      "averageNonRShare": 50.2,
+      "averageRepublicanShare": 44.8,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/minnesota",
+      "matchup": "Explicit named general-election pair"
+    },
+    "AK": {
+      "nonR": "Mary Peltola",
+      "rep": "Dan Sullivan",
+      "pollMarginNonRMinusR": 3.5,
+      "averageNonRShare": 49,
+      "averageRepublicanShare": 45.5,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/alaska",
+      "matchup": "Published Peltola vs Sullivan head-to-head table; not the separate four-way average"
+    },
+    "GA": {
+      "nonR": "Jon Ossoff",
+      "rep": "Mike Collins",
+      "pollMarginNonRMinusR": 9.6,
+      "averageNonRShare": 54,
+      "averageRepublicanShare": 44.4,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/georgia",
+      "matchup": "Explicit named general-election pair"
+    },
+    "NC": {
+      "nonR": "Roy Cooper",
+      "rep": "Michael Whatley",
+      "pollMarginNonRMinusR": 11.4,
+      "averageNonRShare": 54.2,
+      "averageRepublicanShare": 42.8,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/north-carolina",
+      "matchup": "Explicit named general-election pair"
+    },
+    "NH": {
+      "nonR": "Chris Pappas",
+      "rep": "John E. Sununu",
+      "pollMarginNonRMinusR": 8.2,
+      "averageNonRShare": 50.8,
+      "averageRepublicanShare": 42.6,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/new-hampshire",
+      "matchup": "Explicit named general-election pair"
+    },
+    "NE": {
+      "nonR": "Dan Osborn",
+      "rep": "Pete Ricketts",
+      "pollMarginNonRMinusR": -2.6,
+      "averageNonRShare": 45,
+      "averageRepublicanShare": 47.6,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/nebraska",
+      "matchup": "Explicit named general-election pair"
+    },
+    "SC": {
+      "nonR": "Annie Andrews",
+      "rep": "Darline Graham",
+      "pollMarginNonRMinusR": -2.2,
+      "averageNonRShare": 45.2,
+      "averageRepublicanShare": 47.4,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/south-carolina",
+      "matchup": "Explicit named general-election pair"
+    },
+    "FL": {
+      "nonR": "Angie Nixon",
+      "rep": "Ashley Moody",
+      "pollMarginNonRMinusR": -6.3,
+      "averageNonRShare": 44.5,
+      "averageRepublicanShare": 50.8,
+      "latestConstituentPollEnd": "2026-11-02",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/florida",
+      "matchup": "Explicit named general-election pair"
+    },
+    "SD": {
+      "nonR": "Brian Bengs",
+      "rep": "Mike Rounds",
+      "pollMarginNonRMinusR": -15,
+      "averageNonRShare": 39.5,
+      "averageRepublicanShare": 54.5,
+      "latestConstituentPollEnd": "2026-10-22",
+      "sourceUrl": "https://www.270towin.com/2026-senate-polls/south-dakota",
+      "matchup": "Explicit named general-election pair"
+    }
+  },
+  "lastElectionEvidenceNE": {
+    "candidate": "Dan Osborn",
+    "office": "Senate",
+    "electionYear": 2024,
+    "previousOpponent": "Deb Fischer",
+    "pollMarginNonRMinusR": -1.6,
+    "resultMarginNonRMinusR": -6.67,
+    "underestimatedRepublicanMargin": 5.07,
+    "finalAggregateSource": "https://en.wikipedia.org/wiki/2024_United_States_Senate_election_in_Nebraska",
+    "certifiedOutcomeSource": "https://election.org/election/2024/us-senate/nebraska/full-term",
+    "currentOpponent": "Pete Ricketts",
+    "warning": "One candidate-matched prior election, but a different Republican opponent. Apply exactly once; do not add presidential polling errors to this case."
+  }
+}
