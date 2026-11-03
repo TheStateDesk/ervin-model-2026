@@ -62,7 +62,8 @@ try{
  await rootPage.close();
  const front=await browser.newPage({viewport:{width:390,height:844}});
  await front.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
- await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#watchCards')?.querySelectorAll('.watch-card').length>=4&&document.querySelectorAll('#usMap path.ed-state').length>=50,null,{timeout:35000});
+ await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#watchCards')?.querySelectorAll('.watch-card').length>=4&&document.querySelectorAll('#usMap path.ed-state').length>=50&&document.querySelector('#edFinalHeadline')?.textContent.includes('PREDICTION'),null,{timeout:35000});
+ await front.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:65000});
  try{
   await front.waitForFunction(expected=>document.querySelector('meta[name="ervin-deploy"]')?.content===expected,stamp,{timeout:20000});
  }catch(err){
@@ -84,7 +85,7 @@ try{
   const map=document.querySelector('#nationMap')?.getBoundingClientRect();
   const lead=document.querySelector('#edSimulationPanel')?.getBoundingClientRect();
   const byline=document.querySelector('.ed-byline')?.getBoundingClientRect();
-  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,simTop:lead?.top,bylineBottom:byline?.bottom,simMapCount:document.querySelectorAll('#edSimMap path.ed-sim-proj-state').length,nightActive:!!document.querySelector('#edResultsStage')&&!document.querySelector('#edResultsStage').hidden,
+  return {watchTop:watch?.top,powerTop:balance?.top,mapTop:map?.top,simTop:lead?.top,bylineBottom:byline?.bottom,simMapCount:document.querySelectorAll('#edSimMap path.ed-sim-proj-district').length,heroTitle:document.querySelector('#edFinalHeadline')?.textContent?.replace(/\s+/g,' ').trim(),nightActive:!!document.querySelector('#edResultsStage')&&!document.querySelector('#edResultsStage').hidden,
    width:watch?.width,watchCount:document.querySelectorAll('#watchCards .watch-card').length,
    finalDashboard:!!document.querySelector('#electionDashboard'),officeTabs:document.querySelectorAll('[data-map-office]').length,
    countyViewTabs:document.querySelectorAll('[data-national-county-view]').length,
@@ -106,20 +107,23 @@ try{
  });
  const orderValid=frontModel.nightActive?(frontModel.mapTop<frontModel.watchTop&&frontModel.watchTop<frontModel.powerTop):
   (frontModel.simTop<frontModel.watchTop&&frontModel.watchTop<frontModel.powerTop&&frontModel.powerTop<frontModel.mapTop);
- if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.simTop>=frontModel.bylineBottom-2&&frontModel.simTop<frontModel.watchTop&&frontModel.simMapCount===50&&orderValid
+ if(!(frontModel.count===3&&frontModel.watchTop>=0&&frontModel.simTop>=frontModel.bylineBottom-2&&frontModel.simTop<frontModel.watchTop&&frontModel.simMapCount===435&&frontModel.heroTitle?.includes('FINAL')&&frontModel.heroTitle?.includes('PREDICTION')&&orderValid
   &&frontModel.width>280&&frontModel.watchCount>=4&&frontModel.finalDashboard&&frontModel.officeTabs===3
   &&!frontModel.oldLab&&!frontModel.badLinks&&!frontModel.overflow
   &&frontModel.deployedRevision===stamp&&frontModel.visibleBuild?.includes(stamp.slice(0,8))
   &&frontModel.stateMapOfficeTabs===3&&frontModel.nationalCountyTabs===2&&frontModel.countyViewTabs===3&&frontModel.duplicateCountyMaps===0&&frontModel.mobileStateLinks===50
   &&frontModel.stampedStyles>=3&&frontModel.stampedScripts>=8))
   throw Error('LIVE MOBILE STATE DESK HOMEPAGE INCORRECT '+JSON.stringify(frontModel));
- for(const [office,label,coverage] of [['house','House',50],['senateD','Senate',17],['governorsD','Governors',36]]){
+ for(const [office,label,coverage] of [['house','House',435],['senateD','Senate',17],['governorsD','Governors',36]]){
   await front.locator('#edSimTabs button').filter({hasText:label}).click();
-  await front.waitForFunction(office=>document.querySelector('#edSimMap')?.dataset.simOffice===office,office,{timeout:12000});
-  const nonNeutral=await front.locator('#edSimMap path.ed-sim-proj-state:not(.ed-sim-proj-N)').count();
-  if(nonNeutral!==coverage)throw Error('PUBLIC FORECAST MAP OFFICE COVERAGE INCORRECT '+JSON.stringify({office,coverage,nonNeutral}));
+  await front.waitForFunction(office=>document.querySelector('#edSimMap')?.dataset.simOffice===office,office,{timeout:65000});
+  const selector=office==='house'?'#edSimMap path.ed-sim-proj-district':'#edSimMap path.ed-sim-proj-state';
+  const nonNeutral=await front.locator(selector+':not(.ed-sim-proj-N)').count();
+  const total=await front.locator(selector).count();
+  if(nonNeutral!==coverage||total!==(office==='house'?435:50))throw Error('PUBLIC FINAL PREDICTION MAP CALLS INCORRECT '+JSON.stringify({office,coverage,nonNeutral,total}));
+  if((await front.locator('#edSimMap path.ed-sim-proj-T').count())!==0)throw Error('PUBLIC FINAL MAP MUST NOT SHOW TOSS-UP SHADING');
+  await front.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/FINAL-PREDICTION-'+label+'-Mobile.png'});
  }
- await front.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/State-Desk-144000-Simulation-Mobile.png'});
  await front.locator('#watchSection').screenshot({path:'postdeploy-checks/State-Desk-Races-To-Watch-Mobile.png'});
  await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
  console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
