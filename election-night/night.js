@@ -154,7 +154,7 @@ async function refreshNational(){
    const checked=Date.parse(metadata?.checkedAt||'');
    const age=Number.isFinite(checked)?Math.round((Date.now()-checked)/60000):null;
    const eligible=Number(metadata?.registeredRaces)||0;
-   status.textContent='PRIMARY: civicAPI v2 · '+eligible+' of 488 indexed races matched to provider IDs'+
+   status.textContent='PRIMARY: civicAPI v2 · '+eligible+' of 506 indexed races matched to provider IDs'+
       (age!==null?' · snapshot checked '+Math.max(0,age)+' min ago':' · collector status pending')+
       ' · '+acceptedCivic+' usable results · '+acceptedFallback+' fallback results'+
       (age!==null&&age>30?' · WARNING: published collector snapshot is stale':'')+
@@ -203,7 +203,7 @@ async function loadRaces(){
  const houseRoster=await fetchJSON('../house/candidates-2026.json').catch(()=>null);
  const ballotNames=h=>{const a=houseRoster?.races?.[h.id]?.candidates||[];return a.length?a.map(c=>c.name+' ('+c.party+')').join(' · '):'2026 candidate roster not confirmed'};
  senate=sen.states||{};
- const senRaces=report.senate.map(s=>({id:s.code+'-SENATE',code:s.code,state:s.state,office:'Senate',label:(s.nonR||'Independent/Democrat')+' vs. '+s.rep,margin:s.model.adjustedMargin,modelText:window.ERVIN_STATEWIDE.formatMargin(s.model.adjustedMargin)}));
+ const senRaces=report.senate.map(s=>({id:s.code+'-SENATE',code:s.code,state:s.state,office:'Senate',label:(s.nonR||'Independent/Democrat')+' ('+(s.party||'D')+') vs. '+s.rep+' (R)',margin:s.model.adjustedMargin,modelText:s.model.sourceRated?s.model.rating+' · Inside Elections (qualitative)':window.ERVIN_STATEWIDE.formatMargin(s.model.adjustedMargin)}));
  const govRaces=report.governor.map(g=>({id:g.code+'-GOVERNOR',code:g.code,state:g.state,office:'Governor',label:g.dem+' vs. '+g.rep,margin:g.model.adjustedMargin,modelText:Number.isFinite(g.model.adjustedMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.adjustedMargin):Number.isFinite(g.model.pollMargin)?window.ERVIN_STATEWIDE.formatMargin(g.model.pollMargin)+' · published poll (no same-state comparison)':'No numeric published poll'}));
  const region=$('nightStateFilter');
  if(region){const opts=[...new Map(house.seats.map(x=>[x.code,x.state]))].sort((a,b)=>a[1].localeCompare(b[1]));
@@ -213,7 +213,7 @@ async function loadRaces(){
  const houseRaces=house.seats.map(h=>({id:h.id,code:h.code,state:h.state,district:h.district,office:'House',label:ballotNames(h),margin:houseForecast.races[h.id]?.marginD??null,modelText:houseForecast.races[h.id]?.modelRating||'No model'}));
  races=[...senRaces,...govRaces,...houseRaces];
  $('miForecast').textContent=window.ERVIN_STATEWIDE.formatMargin(sen.states?.MI?.adjustedMargin??null);
- $('nightHorizon').textContent='Source coverage: 17 modeled Senate contests, 36 governor elections, all 435 House districts. The governor calibration uses 2018–2024 same-state governor-only polling errors; county counts below are verified separately.';
+ $('nightHorizon').textContent='Source coverage: 35 Senate contests (17 numerical Ervin margins and 18 separate publisher ratings), 36 governor elections, all 435 House districts. The governor calibration uses 2018–2024 same-state governor-only polling errors; county counts below are verified separately.';
  drawRaces();
 }
 async function init(){
