@@ -262,9 +262,9 @@ async function loadSenate(){
  const data=await response.json();
  if(!Array.isArray(data.states)||data.states.length!==17)throw Error('Preserved Senate model record invalid');
  const numeric=(data.states||[]).map(r=>({...r,office:'Senate'}));
- const response=await fetch('../counties-watch/forecast-baselines.json',{cache:'no-cache'});
- if(!response.ok)throw Error('Senate source rating snapshot unavailable');
- const snapshot=await response.json();
+ const sourceResponse=await fetch('../counties-watch/forecast-baselines.json',{cache:'no-cache'});
+ if(!sourceResponse.ok)throw Error('Senate source rating snapshot unavailable');
+ const snapshot=await sourceResponse.json();
  const rated=Object.entries(snapshot.sourceRated||{}).map(([code,r])=>({
   code,state:r.state,office:'Senate',dem:r.nonR,rep:r.rep,party:r.party,
   sourceRating:r.rating,sourceUrl:r.sourceUrl,candidateSource:r.candidateSource,
