@@ -3,6 +3,8 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import urllib.error
 P=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location("civic_national",P/"scripts/civicapi_national.py")
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
@@ -12,6 +14,18 @@ class ElectionReporting(unittest.TestCase):
   self.now=dt.datetime(2026,11,4,3,tzinfo=UTC)
   self.search={"id":87214,"province":"MI","country":"US","election_name":"Michigan US Senate","election_type":"US Senate","election_scope":"General","election_date":"2026-11-03"}
   self.detail={"election_name":"Michigan US Senate","election_type":"US Senate","election_scope":"General","election_date":"2026-11-03","province":"MI","country":"US","last_updated":"2026-11-04T02:30:00Z","test_data":False,"candidates":[{"name":"Candidate D","party":"Democratic","votes":12000},{"name":"Candidate R","party":"Republican","votes":11000}],"percent_reporting":25.0}
+ def test_transient_gateway_retries_and_recovers(self):
+  error=urllib.error.HTTPError("https://civicapi.org/api/v2/race/123",502,"Bad Gateway",{},None)
+  with patch.object(m,"request",side_effect=[error,error,{"ok":True}]) as req,patch.object(m.time,"sleep") as pause:
+   self.assertEqual(m.request_with_retry("https://civicapi.org/api/v2/race/123"),{"ok":True})
+   self.assertEqual(req.call_count,3)
+   self.assertEqual(pause.call_count,2)
+ def test_permanent_404_is_not_retried(self):
+  error=urllib.error.HTTPError("https://civicapi.org/api/v2/race/123",404,"Not Found",{},None)
+  with patch.object(m,"request",side_effect=error) as req,patch.object(m.time,"sleep") as pause:
+   with self.assertRaises(urllib.error.HTTPError):m.request_with_retry("https://civicapi.org/api/v2/race/123")
+   self.assertEqual(req.call_count,1)
+   pause.assert_not_called()
  def test_registry_506(self):
   x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)
