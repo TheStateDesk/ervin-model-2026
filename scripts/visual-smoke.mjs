@@ -73,6 +73,7 @@ try{
  await nerdMobile.close();
  // Verify the consolidated national Election Night dashboard and all 83 Michigan counties.
  const homepage=await browser.newPage({viewport:{width:1440,height:940}});
+ await homepage.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const homepageErrors=[];homepage.on('pageerror',e=>homepageErrors.push(e.message));
  await homepage.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  await homepage.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelectorAll('#watchCards .watch-card').length>0,null,{timeout:30000});
@@ -178,6 +179,7 @@ try{
  assert((await officeDesk.locator('#usMap a[data-state-link="OH"]').getAttribute('href')).includes('#stateOverview'),'Governor map must jump to statewide races within Ohio State Desk');
  await officeDesk.close();
  const homeMobile=await browser.newPage({viewport:{width:390,height:844}});
+ await homeMobile.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const mobileErrors=[];homeMobile.on('pageerror',e=>mobileErrors.push(e.message));
  await homeMobile.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  await homeMobile.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelectorAll('#watchCards .watch-card').length>0,null,{timeout:30000});
@@ -370,27 +372,45 @@ try{
  assert(await mobile.locator('html').evaluate(e=>e.classList.contains('theme-dark')),'Dark toggle failed on mobile');
  await mobile.screenshot({path:'visual-checks/TX-mobile-dark.png',fullPage:true});
  await mobile.close();
- // Confirm the five-minute-before-poll-close transition, using the public rehearsal flag.
+
+ // Rehearse the 5:55 transformation without accepting or inventing votes.
  const electionDesk=await browser.newPage({viewport:{width:1440,height:940}});
+ await electionDesk.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const deskErrors=[];electionDesk.on('pageerror',e=>deskErrors.push(e.message));
  await electionDesk.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
- await electionDesk.waitForFunction(()=>document.querySelector('#edResultsStage')?.hidden===false&&document.querySelector('#edNightMapSlot #nationMap')&&document.querySelector('#edFinalHeadline')?.textContent.includes('PREDICTION')&&document.querySelector('[data-state-map-view="reported"]')?.getAttribute('aria-pressed')==='true',null,{timeout:32000});
- await electionDesk.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:65000});
- assert((await electionDesk.locator('#edSimMap path.ed-sim-proj-district').count())===435,'Frozen 435-district map must coexist with live atlas');
- assert((await electionDesk.locator('#edCommentaryEntries').innerText()).includes('5:55 p.m.'),'Election-night desk fails to introduce the scheduled handoff');
- assert((await electionDesk.locator('#controlStatus').innerText()).includes('Historical-error sensitivity'),'Public Senate control card must display the documented model setting');
- assert((await electionDesk.locator('#edCommentaryEntries .ed-commentary-item').count())===1,'Site invented an unofficial early vote commentary');
- assert(deskErrors.length===0,'Election-night desk JavaScript errors: '+deskErrors.join(' | '));
- await electionDesk.screenshot({path:'visual-checks/Election-Night-5-55-Desktop.png',fullPage:true});
+ await electionDesk.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live'&&
+  document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&
+  document.querySelector('#edFinalHeadline')?.textContent.includes('COVERAGE')&&
+  document.querySelector('#edLiveCommentary')?.hidden===false&&
+  document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:85000});
+ assert((await electionDesk.locator('#edResultsStage').count())===0,'The 5:55 transition must not introduce a duplicate lower results stage');
+ assert((await electionDesk.locator('#edSimMap path.ed-live-lead-N').count())===435,'No House race may retain forecast coloring when no results are reported');
+ assert((await electionDesk.locator('#edSimMap a[data-sim-district="MI-09"]').getAttribute('href')).includes('/election-night/?state=MI&race=MI-09#nationalBoard'),'House district must open exactly its live race');
+ assert((await electionDesk.locator('#edCommentaryEntries .ed-commentary-item').count())===1,'Unreported election cannot generate fictional vote commentary');
+ for(const [label,office,race] of [['Senate','senateD','MI-SENATE'],['Governors','governorsD','MI-GOVERNOR']]){
+  await electionDesk.locator('#edSimTabs button').filter({hasText:label}).click();
+  await electionDesk.waitForFunction(o=>document.querySelector('#edSimMap')?.dataset.simOffice===o&&document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true',office,{timeout:30000});
+  assert((await electionDesk.locator('#edSimMap path.ed-live-lead-N').count())===50,label+' must remain gray before accepted reporting');
+  assert((await electionDesk.locator('#edSimMap a[data-sim-state="MI"]').getAttribute('href')).includes('race='+race),label+' map must link to the precise race');
+  const insets=await electionDesk.evaluate(()=>['AK','HI'].map((code,i)=>{
+   const p=document.querySelector('#edSimMap g[data-sim-inset="'+code+'"] path')?.getBoundingClientRect();
+   const b=document.querySelectorAll('#edSimMap .ed-sim-map-insets rect')[i]?.getBoundingClientRect();
+   return !!(p&&b&&p.width>10&&p.height>8&&p.left>=b.left-2&&p.right<=b.right+2&&p.top>=b.top-2&&p.bottom<=b.bottom+2);
+  }));
+  assert(insets.every(Boolean),label+' insets must match the House layout');
+  await electionDesk.locator('#edSimulationPanel').screenshot({path:'visual-checks/Election-Night-'+label+'-5-55-Desktop.png'});
+ }
+ assert(deskErrors.length===0,'Election-night hero JavaScript errors: '+deskErrors.join(' | '));
  await electionDesk.close();
  const electionMobile=await browser.newPage({viewport:{width:390,height:844}});
+ await electionMobile.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  await electionMobile.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
- await electionMobile.waitForFunction(()=>document.querySelector('#edResultsStage')?.hidden===false&&document.querySelector('#edCommentaryTitle')?.textContent==='Live commentary',null,{timeout:32000});
+ await electionMobile.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&document.querySelector('#edLiveCommentary')?.hidden===false,null,{timeout:85000});
  const nightOverflow=await electionMobile.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
- assert(nightOverflow<6,'Election-night phone viewport overflow '+nightOverflow+'px');
- await electionMobile.screenshot({path:'visual-checks/Election-Night-5-55-Mobile.png',fullPage:true});
+ assert(nightOverflow<6,'Live coverage creates horizontal phone overflow '+nightOverflow+'px');
+ await electionMobile.locator('#edSimulationPanel').screenshot({path:'visual-checks/Election-Night-5-55-Mobile.png'});
  await electionMobile.close();
- console.log('ELECTION NIGHT 5:55 HANDOFF VISUAL PASS · verified-count-only commentary · zero fabricated votes');
+ console.log('ELECTION NIGHT LIVE HERO PASS · 435 precise links · AK/HI aligned · zero invented votes');
  const directory=await browser.newPage({viewport:{width:1280,height:900}});
  await directory.goto(root+'/states/',{waitUntil:'domcontentloaded'});
  assert(await directory.locator('#themeToggle').isVisible(),'State directory theme switch missing');
