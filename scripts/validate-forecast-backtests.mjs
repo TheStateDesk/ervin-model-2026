@@ -4,7 +4,17 @@ const req=createRequire(import.meta.url),json=p=>JSON.parse(fs.readFileSync(p,'u
 const g=req('./governor-backtest.js'),govData=json('research/governor-same-office-2014-2024.json'),
  score=json('research/governor-same-office-backtest-2026-11-02.json');
 const recomputed=g.compute(govData);
-assert.equal(govData.races.length,41);
+assert.equal(govData.races.length,57,'One sourced historical governor race-year per archived event');
+const registry=json('governors/data.json');
+assert.equal(new Set(govData.races.map(x=>x.state)).size,registry.races.length,'Every 2026 governor state must have governor-only historic evidence');
+assert.equal(new Set(govData.races.map(x=>x.state+':'+x.year+':'+x.office)).size,govData.races.length,'Duplicate archived historical governor race-year');
+assert(govData.races.every(x=>x.office==='Governor'),'No Senate/President/House evidence may enter the governor historical pool');
+const duplicateInput=[
+ {state:'AL',year:2022,office:'Governor',pollMargin:-30,actualMargin:-35},
+ {state:'AL',year:2022,office:'Governor',pollMargin:-2,actualMargin:-15}
+];
+assert.equal(g.correction(duplicateInput,'AL',2026).n,1,'One governor year cannot count as two independent historical cycles');
+assert.equal(g.correction([{state:'AL',year:2022,office:'Senate',pollMargin:-5,actualMargin:-35}],'AL',2026),null,'Senate results must never calibrate governors');
 assert(govData.races.every(e=>e.year>=2018),'2014 gubernatorial error must not enter active source archive');
 assert.equal(g.correction([{state:'MI',year:2014,office:'Governor',pollMargin:3,actualMargin:1}], 'MI',2026),null,'2014 governor errors must never enter 2026 adjustment');
 assert.equal(recomputed.summary.n,score.summary.n);
@@ -12,10 +22,12 @@ assert.equal(recomputed.summary.adjustedMAE,score.summary.adjustedMAE);
 assert.equal(recomputed.summary.rawMAE,score.summary.rawMAE);
 assert.equal(recomputed.summary.rawWinners,score.summary.rawWinners);
 assert.equal(recomputed.summary.adjustedWinners,score.summary.adjustedWinners);
-assert.equal(recomputed.summary.eligible,15);
-assert.equal(recomputed.preferredRCP.n,9);
+assert.equal(recomputed.summary.eligible,20);
+assert.equal(recomputed.preferredRCP.n,10);
 assert(score.summary.adjustedMAE<score.summary.rawMAE,'Small-sample governor shrink correction must improve the pre-2026 holdout');
-assert(score.preferredRCP.adjustedMAE<score.preferredRCP.rawMAE,'Publisher-aggregate historical holdout must benefit from sparse-state shrinkage');
+assert.equal(score.preferredRCP.adjustedMAE,recomputed.preferredRCP.adjustedMAE,'RCP-only cohort is reported even when adjustment worsens error');
+assert.equal(score.preferredRCP.rawMAE,recomputed.preferredRCP.rawMAE);
+assert(score.preferredRCP.adjustedMAE>score.preferredRCP.rawMAE,'Do not conceal unfavorable RCP-only governor holdout');
 for(let i=0;i<recomputed.records.length;i++){
  const r=recomputed.records[i],b=score.records[i];
  assert.equal(r.correction,b.correction,'Governor correction drift '+r.state+' '+r.year);
@@ -51,11 +63,18 @@ assert.equal(Object.keys(senateForecast.states).length,Object.keys(senateArchive
 for(const [code,row] of Object.entries(senateForecast.states)){
  const h=senateArchive.senateStates[code];
  assert(h&&h.events.length,'No original Senate state-error history for '+code);
- assert(h.events.every(x=>(['Senate','President'].includes(x.office)||(code==='AK'&&h.historyMode==='candidate_repeat'&&x.office==='House'))&&String(x.url).startsWith('https://')), 'Missing/invalid Original Ervin federal comparison '+code);
+ assert(h.events.every(x=>['Senate','President'].includes(x.office)&&String(x.url).startsWith('https://')), 'General federal Senate pool cannot contain House or Governor events in '+code);
+ assert((h.candidateRepeatContext||[]).every(x=>code==='AK'&&x.office==='House'&&String(x.url).startsWith('https://')),'Candidate-specific context must be separate from the general federal pool');
 }
 assert.equal(houseRegister.seats.length,435);
 for(const district of houseRegister.seats)assert(house.races[district.id], 'Missing House model source row '+district.id);
 assert.equal(governorRegister.races.length,36);
+const fullAudit=json('research/poll-dedup-and-office-audit-2026-11-02.json');
+assert.equal(fullAudit.summary.governorHistoricalCoverage,36,'Governor race-specific archive incomplete');
+assert.equal(fullAudit.summary.senateWithFederalHistory,17,'All tracked Senate races require historical federal evidence');
+assert.equal(fullAudit.summary.historicalDuplicateKeys,0,'Repeated governor election year counted twice');
+assert.equal(fullAudit.summary.governorWalkForwardEvents,score.summary.eligible,'Walk-forward governor events must match published scorecard');
+assert.equal(fullAudit.summary.governorWalkForwardRaces,new Set(score.records.filter(x=>x.eligible).map(x=>x.state)).size);
 assert(govData.races.every(x=>String(x.sourceUrl).startsWith('https://')&&String(x.resultUrl).startsWith('https://')), 'Historical governor evidence must have two provenance URLs');
 const ledger=text('state/source-ledger.js');
 assert(ledger.includes('governorHistory')&&ledger.includes('senateHistory')&&ledger.includes('houseModel'),'Source ledger missing an office');
