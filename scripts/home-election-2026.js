@@ -5,7 +5,7 @@ const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g
 const root='../', finalAt=Date.parse('2026-11-03T12:00:00-05:00'), read=async(p)=>{const fetchRaw=async()=>{const r=await fetch(root+p,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};return window.ERVIN_FINAL?window.ERVIN_FINAL.get(p,fetchRaw):fetchRaw()};
 const margin=n=>!Number.isFinite(n)?'No numerical forecast':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
 const states=window.ERVIN_US_GEOGRAPHY?.states||[], stateName=Object.fromEntries(states.map(s=>[s.code,s.name]));
-let paused=false,cycles=0,model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null,lockedAt=null,phaseConfig={phase:'auto'},latestFeedAt=null,lastExternalFetch=0,modelBalance=null;
+let paused=false,cycles=0,model={senate:[],governor:[],house:[]}, watched=[],position=0,office='Senate',selected='MI',returns={},countyReports={},live=false,busy=false,lastResults=0,rotateTimer=null,lockedAt=null,phaseConfig={phase:'auto'},latestFeedAt=null,lastExternalFetch=0,modelBalance=null,phaseLast='forecast';
 const isValid=n=>typeof n==='number'&&Number.isFinite(n), party=n=>!isValid(n)?'N':n>0?'D':n<0?'R':'T';
 function label(x){return x.state+' · '+x.office+(x.office==='House'?' '+x.id:'')}
 function races(){
@@ -178,9 +178,8 @@ function updatePhase(){
     'Pre-election forecasting · final release requires a verified, immutable data snapshot.';
  }
  if((forecastPublished||showResults)&&rotateTimer){clearInterval(rotateTimer);rotateTimer=null;const pause=$('watchPause');if(pause){pause.textContent='Rotation stopped';pause.disabled=true}}
- const countyNote=$('allCountyNote');
- if(countyNote&&showResults)countyNote.textContent='LOCKED PRE-ELECTION COUNTY SCENARIOS — NOT REPORTED VOTES. View the live results desk above for verified returns.';
- if(showResults){map();drill();}
+ if(showResults&&phaseLast!==phase)window.dispatchEvent(new CustomEvent('ervin:home-live',{detail:{count:n}}));
+ phaseLast=phase;
 }
 async function refreshResults(){
  if(busy||!window.ERVIN_RETURNS)return;busy=true;
@@ -193,7 +192,9 @@ async function refreshResults(){
   if(all[1].status==='fulfilled')countyReports=all[1].value;
   const secondary={};of.forEach((x,i)=>{if(all[i+2].status==='fulfilled'&&all[i+2].value)Object.assign(secondary,core.openAmerica(all[i+2].value,x))});
   const merged=core.reconcile([core.preferCivic(civic,secondary).races],returns);
-  returns=merged.races;const prev=live;live=Object.keys(returns).length>0;lastResults=Date.now();const timestamps=Object.values(returns).map(x=>Date.parse(x.asOf||x.updatedAt||'')).filter(Number.isFinite);if(timestamps.length)latestFeedAt=Math.max(...timestamps);
+  returns=merged.races;const prev=live;live=Object.keys(returns).length>0;lastResults=Date.now();
+  window.ERVIN_HOME_RESULTS={races:returns,checkedAt:lastResults,source:'Validated civicAPI or explicitly attributed fallback'};
+  window.dispatchEvent(new CustomEvent('ervin:home-results-update',{detail:{count:Object.keys(returns).length}}));const timestamps=Object.values(returns).map(x=>Date.parse(x.asOf||x.updatedAt||'')).filter(Number.isFinite);if(timestamps.length)latestFeedAt=Math.max(...timestamps);
   if(live||prev!==live)updatePhase();
   else if(model.senate.length)updatePhase();
  }catch(e){console.warn('Live homepage check failed; saved verified data preserved',e)}
@@ -201,11 +202,6 @@ async function refreshResults(){
 }
 function init(){
  watchInit();
- for(const b of document.querySelectorAll('[data-atlas-office]'))b.addEventListener('click',()=>{office=b.dataset.atlasOffice;document.querySelectorAll('[data-atlas-office]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));map();drill()});
- $('electionStateSelect')?.addEventListener('change',e=>chooseState(e.target.value));
- $('electionStateSelect').innerHTML=states.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(s=>'<option value="'+s.code+'">'+esc(s.name)+'</option>').join('');
- $('electionStateSelect').value=selected;
- $('electionNationalMap')?.addEventListener('click',e=>{const a=e.target.closest('[data-choose-state]');if(a){$('electionStateSelect').value=a.dataset.chooseState}});
  Promise.all([window.ERVIN_FINAL?.load?.()||Promise.resolve(null),window.ERVIN_FINAL?.status?.()||Promise.resolve({phase:'auto'})]).then(([snap,status])=>{lockedAt=snap?.lockedAt||null;phaseConfig=status||{phase:'auto'};return loadModel()}).catch(e=>{$('watchCards').textContent='Forecast models temporarily unavailable. Open a state edition for saved predictions.';console.error(e)});
  refreshResults();setInterval(()=>{if(!document.hidden)refreshResults()},30000);
  setInterval(()=>{if(model.senate.length)updatePhase()},60000);
