@@ -174,11 +174,15 @@ async function refreshNational(){
    const checked=Date.parse(metadata?.checkedAt||'');
    const age=Number.isFinite(checked)?Math.round((Date.now()-checked)/60000):null;
    const eligible=Number(metadata?.registeredRaces)||0;
-   status.textContent='PRIMARY: civicAPI v2 · '+eligible+' of 506 target contests matched to provider IDs'+
-      (age!==null?' · snapshot checked '+Math.max(0,age)+' min ago':' · collector status pending')+
-      ' · '+acceptedCivic+' usable results · '+acceptedFallback+' fallback results'+
-      (age!==null&&age>30?' · WARNING: published collector snapshot is stale':'')+
-      '. County clerk feeds remain independent; never combine provider totals.';
+   const connectivity=metadata?.providerConnectivity||{};
+   const failing=['KY-06','MI-SENATE'].map(key=>connectivity[key]).filter(x=>x?.connected===false);
+   const upstreamIssue=failing.length?' · RACE API ERRORS: '+failing.map(x=>x.detail||x.failure).join(' / ').slice(0,160):
+      connectivity.statusEndpoint?.connected===true?' · Provider status endpoint reachable':' · Provider connection not yet verified';
+   status.textContent='PRIMARY: civicAPI v2 · '+eligible+' of 506 contest IDs mapped'+
+      (age!==null?' · last collector run '+Math.max(0,age)+' min ago':' · awaiting collector health report')+
+      ' · '+acceptedCivic+' accepted CivicAPI reports · '+acceptedFallback+' source-attributed fallback reports'+upstreamIssue+
+      (age!==null&&age>20?' · WARNING: the published collection is delayed':'')+
+      '. County clerk counts remain independent.';
   }
   drawRaces();
  }finally{refreshNationalBusy=false}
