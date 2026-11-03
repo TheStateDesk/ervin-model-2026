@@ -268,3 +268,21 @@ html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180
  #nationMap .ed-map-surface{display:none}
  #nationMap .ed-mobile-tilemap{display:grid}
 }
+
+
+/* Single county geography / election-night result overlay, never duplicated. */
+.ed-unified-mode{display:flex;gap:4px;align-items:center;flex-wrap:wrap;border:1px solid var(--ed-rule);padding:3px;border-radius:5px;max-width:100%}
+.ed-unified-mode button{font:750 12px Arial,sans-serif;background:transparent;color:var(--ed-ink);border:0;border-radius:3px;padding:9px 12px;cursor:pointer}
+.ed-unified-mode button[aria-pressed="true"]{background:var(--ed-blue,#356e96);color:#fff}
+.ed-unified-mode button:focus-visible{outline:2px solid #ce974b;outline-offset:2px}
+.unified-county-returns{padding:17px 0 0;border-top:1px solid var(--ed-rule);margin-top:17px;clear:both}
+.unified-county-returns .ed-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}
+.unified-county-returns .ed-stat{min-width:0}
+.unified-county-returns details{border:1px solid var(--ed-rule);padding:12px;margin:12px 0;background:var(--ed-paper)}
+.unified-county-returns details summary{cursor:pointer;color:var(--ed-ink);line-height:1.5}
+.unified-county-returns .ed-table-wrap{max-height:360px;overflow:auto}
+.ed-map-county path.county[data-county-reported="true"]{stroke:#f4e3b1;stroke-width:1.7}
+.ed-map-county path.county[data-county-reported="false"]{stroke:#f4f6f8;stroke-width:.9}
+.theme-dark .ed-map-county path.county[data-county-reported="false"]{stroke:#203647}
+.ed-map-county path.county:hover{stroke:#f7d586!important;stroke-width:2.5!important}
+@media(max-width:720px){.unified-county-returns .ed-stat-grid{grid-template-columns:1fr 1fr}.unified-county-returns .ed-stat:last-child{grid-column:1/-1}.ed-unified-mode{width:100%}.ed-unified-mode button{flex:1 1 auto}}
