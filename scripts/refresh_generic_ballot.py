@@ -16,6 +16,8 @@ from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1]
 PATH=ROOT/"polling/generic-ballot-2026.json"
 SOURCE="https://www.realclearpolling.com/polls/state-of-the-union/generic-congressional-vote"
+DDHQ="https://votes.decisiondeskhq.com/polls/generic-ballot/national"
+SILVER="https://www.natesilver.net/p/generic-ballot-average-2026-nate-silver-bulletin-congress-polls"
 
 def parse_rcp(html):
     text=" ".join(BeautifulSoup(html,"html.parser").stripped_strings)
@@ -37,31 +39,74 @@ def parse_rcp(html):
         return {"marginD":round(spread,2),"dem":d,"rep":r,"fieldEnd":field_end.isoformat(),"fieldStart":beg}
     return None
 
+def plain(html):
+    return re.sub(r"\s+"," "," ".join(BeautifulSoup(html,"html.parser").stripped_strings))
+def parse_ddhq(html):
+    text=plain(html)
+    m=re.search(r"\bCandidate\s+Democrat\s+(\d{1,2}(?:\.\d+)?)%\s+Candidate\s+Republican\s+(\d{1,2}(?:\.\d+)?)%",text,re.I)
+    if not m:return None
+    d,r=map(float,m.groups())
+    if not (35<=d<=65 and 30<=r<=65 and 0<=d+r<=100):return None
+    return {"marginD":round(d-r,2),"dem":d,"rep":r}
+def parse_silver(html):
+    text=plain(html)
+    dated=re.search(r"\bUpdated\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(2026)\b",text,re.I)
+    if not dated:return None
+    month,day,year=dated.groups()
+    published=dt.datetime.strptime(f"{month} {day} {year}","%B %d %Y").date()
+    if published>dt.date(2026,11,3) or published<dt.date(2026,10,25):return None
+    # Silver supplies an adjusted likely-voter estimate nearby (D+9.2);
+    # only the separate *unadjusted* polling average belongs here.
+    m=re.search(r"(?:dropped slightly to|moves? their lead from)\s+D\s*\+\s*(\d{1,2}(?:\.\d+)?)",text,re.I)
+    if not m:return None
+    margin=float(m.group(1))
+    if not 0<=margin<=25:return None
+    return {"marginD":margin,"published":published.isoformat()}
+def read_html(url):
+    req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; ErvinModel2026/1.0)", "Accept":"text/html"})
+    with urllib.request.urlopen(req,timeout=18) as response:
+        if response.status!=200:raise ValueError(f"HTTP {response.status}")
+        raw=response.read(2_000_001)
+        if not raw or len(raw)>2_000_000:raise ValueError("Empty or oversized publisher response")
+    return raw.decode("utf-8","replace")
+
 def main():
     source=json.loads(PATH.read_text())
     assert source["election"]=="2026-11-03"
-    try:
-        req=urllib.request.Request(SOURCE,headers={"User-Agent":"Mozilla/5.0 (compatible; ErvinModel2026/1.0)", "Accept":"text/html"})
-        with urllib.request.urlopen(req,timeout=18) as response:
-            if response.status!=200:raise ValueError("HTTP not 200")
-            raw=response.read(2_000_001)
-            if len(raw)>2_000_000:raise ValueError("Oversized response")
-        row=parse_rcp(raw.decode("utf-8","replace"))
-        if not row:raise ValueError("Published RCP table row not extractable / not validated")
-        if row["fieldEnd"]<"2026-10-20":raise ValueError("Publisher row older than October 20")
-    except Exception as exc:
-        print("GENERIC BALLOT NOT REFRESHED; preserving dated prior values:",type(exc).__name__,str(exc)[:140])
-        return
     today=dt.datetime.now(dt.timezone.utc).date().isoformat()
-    records=[x for x in source["inputs"] if x.get("publisher")=="RealClearPolling"]
-    assert len(records)==1, "Duplicate publisher input"
-    target=records[0]
-    target.update({"marginD":row["marginD"],"asOf":today,"fieldEnd":row["fieldEnd"],"url":SOURCE,
-                   "status":"Primary publisher table verified; voter shares cross-checked"})
-    source["sourceChecked"]=today
-    source["asOf"]=today
-    source["note"]="Dated publisher inputs, RCP checked "+today+" for field period through "+row["fieldEnd"]+". Remaining publishers retain their individual dates. No projected House vote totals are inferred from these averages."
-    serialized=json.dumps(source,indent=2,ensure_ascii=False)+"\n"
-    if PATH.read_text()!=serialized:PATH.write_text(serialized)
-    print("GENERIC BALLOT SOURCE VERIFIED",json.dumps({"publisher":"RealClearPolling","asOf":today,"marginD":row["marginD"],"fieldEnd":row["fieldEnd"],"dem":row["dem"],"rep":row["rep"]}))
+    by={x["publisher"]:x for x in source["inputs"]}
+    assert {"RealClearPolling","Decision Desk HQ","Silver Bulletin"}.issubset(by)
+    successes=[]
+    for publisher,url,parser in [
+        ("RealClearPolling",SOURCE,parse_rcp),
+        ("Decision Desk HQ",DDHQ,parse_ddhq),
+        ("Silver Bulletin",SILVER,parse_silver)]:
+        try:
+            observed=parser(read_html(url))
+            if not observed:raise ValueError("Published aggregate missing or contract invalid")
+            x=by[publisher]
+            if publisher=="RealClearPolling":
+                if observed["fieldEnd"]<"2026-10-20":raise ValueError("RCP table stale")
+                x.update({"marginD":observed["marginD"],"asOf":today,"fieldEnd":observed["fieldEnd"],
+                    "url":url,"status":"Primary publisher verified; D/R vote shares reconcile to RCP average","secondary":False})
+            elif publisher=="Decision Desk HQ":
+                x.update({"marginD":observed["marginD"],"asOf":today,"url":url,
+                    "status":"Primary DDHQ publisher aggregate, candidate Democratic and Republican percentages validated",
+                    "secondary":False})
+            else:
+                x.update({"marginD":observed["marginD"],"asOf":observed["published"],"url":url,
+                    "status":"Silver Bulletin article unadjusted polling average; excludes separate likely-voter forecast adjustment",
+                    "secondary":False})
+            successes.append({"publisher":publisher,**observed})
+        except Exception as err:
+            print("GENERIC BALLOT SOURCE UNAVAILABLE — preserving previously dated value:",
+                publisher,type(err).__name__,str(err)[:160],flush=True)
+    if successes:
+        source["sourceChecked"]=today
+        source["asOf"]=max(x["asOf"] for x in source["inputs"])
+        source["note"]="Each publisher source has an independent as-of date. Refreshed directly "+today+": "+", ".join(x["publisher"] for x in successes)+". Failed source reads preserve their dated values; no candidate votes or election-night returns are substituted."
+        blob=json.dumps(source,indent=2,ensure_ascii=False)+"\n"
+        if PATH.read_text()!=blob:PATH.write_text(blob)
+    print("GENERIC BALLOT PUBLISHER READINESS",json.dumps({"date":today,"successes":successes,
+        "sourceAverages":[{"publisher":x["publisher"],"marginD":x["marginD"],"asOf":x["asOf"]} for x in source["inputs"]]}),flush=True)
 if __name__=="__main__":main()
