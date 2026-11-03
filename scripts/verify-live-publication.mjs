@@ -29,7 +29,7 @@ try{
    await page.waitForFunction(expectedState=>{
     const txt=document.querySelector('#districtDetail')?.textContent||'';
     return expectedState==='TX'
-      ?txt.includes('2026 MAP · SOURCE RATING')&&txt.includes('Numerical 2026 House margin withheld')
+      ?txt.includes('ERVIN HOUSE · 2026 DISTRICT MODEL')&&txt.includes('Redrawn district:')
       :txt.includes('ERVIN HOUSE');
    },code,{timeout:30000});
    if(code==='TX'&&mode==='light'){
