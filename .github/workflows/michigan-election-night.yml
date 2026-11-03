@@ -10,7 +10,7 @@ permissions:
   pages: write
   id-token: write
 concurrency:
-  group: github-pages
+  group: michigan-election-night-precincts
   cancel-in-progress: false
 jobs:
   publish-precincts:
