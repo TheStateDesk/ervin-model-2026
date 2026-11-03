@@ -70,6 +70,11 @@ jobs:
         env:
           ERVIN_VERIFY_EXPECTED_BUILD: f63eeb26c5b6bfabd62f78b6bb546ac891ea38bc
         run: node scripts/verify-live-publication.mjs
+      - name: Verify redrawn House pages on already published audit release
+        if: github.event_name == 'pull_request' && github.head_ref == 'fix/audit2-postdeploy-redrawn-house-check'
+        env:
+          ERVIN_VERIFY_EXPECTED_BUILD: d51f77b2f2795d35882ae324db8b9f54064d9361
+        run: node scripts/verify-live-publication.mjs
       - name: Render county maps and capture screenshots (desktop/mobile, light/dark)
         run: node scripts/visual-smoke.mjs
       - name: Verify live Pages waits for loaded Texas publisher averages
