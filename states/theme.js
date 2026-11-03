@@ -1,8 +1,8 @@
 /* The State Desk shares the original Ervin appearance preference. */
 (()=>{'use strict';
 const key='ervin-2026-appearance';
-let mode='light';
-try { mode=localStorage.getItem(key)==='dark'?'dark':'light'; }catch(_){}
+let mode=window.matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light';
+try { const stored=localStorage.getItem(key);if(stored==='dark'||stored==='light')mode=stored; }catch(_){}
 const apply=()=> {
  const dark=mode==='dark';
  document.documentElement.classList.toggle('theme-dark',dark);
