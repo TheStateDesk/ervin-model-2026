@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "createdAt": "2026-11-03T05:37:34.391367+00:00",
+  "createdAt": "2026-11-03T05:38:30.250037+00:00",
   "type": "House-only pre-election polling environment and same-line presidential district history",
   "source": {
     "houseResults": "MIT Election Data and Science Lab public-domain election returns via electiondata.dev",
@@ -41,6 +41,20 @@
   "formulation": "D-R House margin = final pre-election generic House poll margin + alpha \u00d7 [0.75 \u00d7 (prior presidential two-party district margin \u2212 same-year national margin) + 0.25 \u00d7 (preceding presidential district margin \u2212 same-year national margin)].",
   "alpha": 1.0,
   "candidateRetentionRho": 0.35,
+  "forward2026": {
+    "alpha": 1.0,
+    "candidateRetentionRho": 0.35,
+    "candidateCap": 18,
+    "presidentialNationalMarginD": {
+      "2024": -1.51,
+      "2020": 4.54
+    },
+    "presidentialWeights": {
+      "2024": 0.75,
+      "2020": 0.25
+    },
+    "rule": "Same formula as retrospective House tests: dated national House GCB + alpha\u00d70.75/0.25 national-centered district presidential history. A returning candidate receives rho\u00d7capped preceding same-map House candidate residual; redrawn districts receive no residual."
+  },
   "rawAlphaOne": {
     "training": {
       "n": 793,
