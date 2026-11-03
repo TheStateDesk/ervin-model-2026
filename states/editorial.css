@@ -239,3 +239,32 @@ html.theme-dark{--ed-map-base:#132738;--ed-map-blue:#469dd5;--ed-map-red:#df7180
 .ed-skip-link{position:absolute;left:10px;top:-80px;z-index:1000;padding:8px 15px;background:var(--ed-white);color:var(--ed-ink)}
 .ed-skip-link:focus{top:7px}
 @media(max-width:600px){#nationMap .ed-map-surface{display:none}#nationMap .ed-mobile-tilemap{display:grid}.main-map-office{margin:8px 0}}
+
+
+/* 2026 live-release map layout: first state map, then county map with no
+   mismatched editor sidebar imposing hundreds of pixels of blank space. */
+.national-map-stack{display:block;width:100%;margin:0}
+.national-map-stack > .national-map-primary,
+.national-map-stack > .ed-card{width:100%;max-width:none}
+.national-map-stack .ed-map-surface{min-height:0;padding:14px}
+.national-map-stack .ed-map-surface svg{width:100%;height:auto!important;aspect-ratio:1080/625;max-height:670px;min-height:0!important}
+.national-map-stack .ed-legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:11px}
+.map-guide-bottom{margin-top:22px}
+.map-guide-bottom .ed-small-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.map-guide-bottom .ed-small-list > article{min-width:0}
+.map-guide-bottom #featuredStates{grid-template-columns:repeat(6,minmax(0,1fr))}
+.map-guide-bottom #featuredStates > .ed-kicker{grid-column:1/-1}
+.ed-public-build{font-size:10px;white-space:nowrap;font-weight:700;letter-spacing:.045em;color:var(--ed-muted);border:1px solid var(--ed-rule);padding:4px 7px;border-radius:2px}
+.nationwide-county-surface svg text{fill:var(--ed-ink);font-family:Arial,sans-serif;font-weight:600}
+@media(max-width:920px){
+ .map-guide-bottom .ed-small-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .map-guide-bottom #featuredStates{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .ed-public-build{font-size:9px}
+}
+@media(max-width:600px){
+ .map-guide-bottom .ed-small-list{grid-template-columns:1fr}
+ .map-guide-bottom #featuredStates{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ed-public-build{position:absolute;right:12px;top:2px;padding:3px 5px;opacity:.9}
+ #nationMap .ed-map-surface{display:none}
+ #nationMap .ed-mobile-tilemap{display:grid}
+}
