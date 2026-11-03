@@ -67,7 +67,7 @@ jobs:
       - name: Confirm fixed lazy-atlas verifier against the already published build
         if: github.event_name == 'pull_request' && github.head_ref == 'fix/live-atlas-verifier-2026-11-02'
         env:
-          GITHUB_SHA: f63eeb26c5b6bfabd62f78b6bb546ac891ea38bc
+          ERVIN_VERIFY_EXPECTED_BUILD: f63eeb26c5b6bfabd62f78b6bb546ac891ea38bc
         run: node scripts/verify-live-publication.mjs
       - name: Render county maps and capture screenshots (desktop/mobile, light/dark)
         run: node scripts/visual-smoke.mjs
