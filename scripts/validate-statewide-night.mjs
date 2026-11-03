@@ -21,7 +21,12 @@ for(const r of out.governor){
  if(!c)assert(r.model.fallback&&r.model.adjustedMargin===null,'Unknown governor history must not create 2026 estimate '+r.code);
 }
 const ohio=out.governor.find(x=>x.code==='OH');assert.equal(ohio.model.pollMargin,5.4);assert(ohio.model.candidateShift>2&&ohio.model.candidateShift<3);assert(ohio.model.adjustedMargin>0&&ohio.model.adjustedMargin<5);assert.equal(ohio.model.adjustedMargin,4.38,'Ohio prediction must not silently revert to R +0.0');
-for(const ss of out.senate)assert.equal(ss.model.adjustedMargin,senate.states[ss.code].adjustedMargin,'Original Senate model changed '+ss.code);
+for(const ss of out.senate.filter(r=>!r.model.sourceRated))
+ assert.equal(ss.model.adjustedMargin,senate.states[ss.code].adjustedMargin,'Original Senate model changed '+ss.code);
+for(const ss of out.senate.filter(r=>r.model.sourceRated)){
+ assert.equal(ss.model.adjustedMargin,null,'No invented Ervin number allowed for '+ss.code);
+ assert.equal(ss.model.rating,senate.sourceRated[ss.code].rating,'Source-rated Senate contest mismatch '+ss.code);
+}
 const geo=read('geo/counties/MI.json');assert.equal(geo.features.length,83);
 const manual=read('michigan/election-night/county_totals.json'),auto=read('michigan/election-night/county_auto.json'),precincts=read('michigan/election-night/results.json');
 for(const f of [manual,auto,precincts])assert.equal(f.election,'2026-11-03');
