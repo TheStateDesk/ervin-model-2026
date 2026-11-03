@@ -6,7 +6,7 @@ const engine=require('./statewide-ervin.js');
 const archive=read('research/governor-same-office-2014-2024.json'),governors=read('governors/data.json'),senate=read('counties-watch/forecast-baselines.json');
 const historical=read('research/calibration_events_2016_2024.json');
 const out=engine.apply(archive,governors,senate);
-assert.equal(out.governor.length,36);assert.equal(out.senate.length,17);
+assert.equal(out.governor.length,36);assert.equal(out.senate.length,35);assert.equal(out.summary.senateNumerical,17);assert.equal(out.summary.senateSourceRated,18);
 assert.equal(out.summary.withPublishedPolling,33);
 assert.equal(out.summary.adjustedGovernorRaces,33,'All 33 publisher-polled governors have same-state historical comparisons; three without 2026 polls remain unadjusted');
 assert.equal(archive.races.length,57);
@@ -35,4 +35,4 @@ assert(html.includes('href="../state/?state=MI#stateGeography"'),'National elect
 assert(html.includes('id="nightStateFilter"')&&html.includes('returns-core.js'),'Nationwide desk must expose live per-state view and CivicAPI validator');
 assert(!html.includes('href="../michigan/election-night/"'),'Legacy Michigan results hub remains in national election desk');
 assert(js.includes('if(upcoming())'),'Premature live vote guard absent');
-console.log('STATEWIDE & NATIONAL ELECTION NIGHT QA PASS',JSON.stringify({governors:out.governor.length,governorWithPoll:out.summary.withPublishedPolling,stateSpecificHistory:out.summary.stateErrorHistory, originalAdjustments:out.summary.adjustedGovernorRaces,senateOriginalUnchanged:out.senate.length,house:435,michiganCounties:geo.features.length,events:historical.events.length}));
+console.log('STATEWIDE & NATIONAL ELECTION NIGHT QA PASS',JSON.stringify({governors:out.governor.length,governorWithPoll:out.summary.withPublishedPolling,stateSpecificHistory:out.summary.stateErrorHistory, originalAdjustments:out.summary.adjustedGovernorRaces,senateOriginalUnchanged:out.summary.senateNumerical,senateSourceRated:out.summary.senateSourceRated,house:435,michiganCounties:geo.features.length,events:historical.events.length}));
