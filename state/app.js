@@ -52,7 +52,7 @@ function renderOverview(){
  $('stateRaceCards').innerHTML=senate+governor;
  if(code==='MI'&&s?.candidateStrength){
   const p=s.candidateStrength,box=document.createElement('div');box.className='ed-notice';
-  box.innerHTML='<strong>Why the Michigan forecast differs from published polls</strong><p>Publisher input: '+esc(margin(s.pollMargin))+'; historical Senate calibration before the candidate term: '+esc(margin(p.referenceMarginD))+'; discounted primary-polling context: '+esc(p.adjustmentD.toFixed(2))+' Democratic points. Combined forecast: '+esc(margin(s.adjustedMargin))+'. The primary-to-general-election transfer is unverified and sensitive to assumptions, so it should not be mistaken for a documented religion-related polling bias.</p>';
+  box.innerHTML='<strong>Why the Michigan forecast differs from published polls</strong><p>Publisher input: '+esc(margin(s.pollMargin))+'; historical Senate calibration before the candidate term: '+esc(margin(p.referenceMarginD))+'; discounted primary-polling context: '+esc(p.adjustmentD.toFixed(2))+' Democratic points. Combined forecast: '+esc(margin(s.adjustedMargin))+'.</p>';
   $('stateRaceCards').firstElementChild?.insertAdjacentElement('afterend',box);
  }
  // Conditional statewide odds use office-specific historic error widths, not
