@@ -171,23 +171,26 @@ try{
  const postDesk=await browser.newPage({viewport:{width:1440,height:940}});
  const postErrors=[];postDesk.on('pageerror',e=>postErrors.push(e.message));
  await postDesk.goto(root+'/states/',{waitUntil:'domcontentloaded'});
- await postDesk.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('Congress changes hands')&&Number((document.querySelector('#postReported')?.textContent||'').replaceAll(',',''))>100&&document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live',null,{timeout:65000});
+ await postDesk.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave')&&Number((document.querySelector('#postReported')?.textContent||'').replaceAll(',',''))>100&&document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live',null,{timeout:65000});
  assert((await postDesk.locator('#postCloseRaces').count())===1,'Post-election close-count desk missing');
  assert(await postDesk.locator('#watchSection').isHidden(),'Pre-election races must be archived');
  assert(await postDesk.locator('#balanceOfPower').isHidden(),'Forecast control bars still dominate homepage');
  assert((await postDesk.locator('#postMilestones a').count())>=4,'Attributable race calls missing');
+ assert((await postDesk.locator('#postAnalysis .post-article-card').count())===9,'Nine original stories missing from newsroom');
+ assert((await postDesk.locator('.post-package-card').count())===3,'Three major state features missing');
+ assert(await postDesk.locator('#edSimulationPanel').isHidden(),'Old election forecast is visible on news homepage');
  assert(postErrors.length===0,'Post-election JS errors: '+postErrors.join(', '));
  await postDesk.locator('#postElectionDesk').screenshot({path:'visual-checks/Post-Election-Results-Desktop.png'});
  await postDesk.close();
  // Balance links must route to the same 50-state atlas, and from there to
  // the correct section inside the consolidated state edition.
  const officeDesk=await browser.newPage({viewport:{width:1100,height:820}});
- await officeDesk.goto(root+'/states/?office=house#nationMap',{waitUntil:'domcontentloaded'});
+ await officeDesk.goto(root+'/states/?view=final&office=house#nationMap',{waitUntil:'domcontentloaded'});
  await officeDesk.waitForSelector('#usMap a[data-state-link="MI"]',{timeout:18000});
  assert(await officeDesk.locator('#officeFocus').isVisible(),'House balance link did not open focused consolidated state map');
  assert((await officeDesk.locator('#officeFocus').innerText()).includes('House'),'House selection context missing');
  assert((await officeDesk.locator('#usMap a[data-state-link="MI"]').getAttribute('href')).includes('#stateHouse'),'House map must jump to House section within Michigan State Desk');
- await officeDesk.goto(root+'/states/?office=governor#nationMap',{waitUntil:'domcontentloaded'});
+ await officeDesk.goto(root+'/states/?view=final&office=governor#nationMap',{waitUntil:'domcontentloaded'});
  await officeDesk.waitForSelector('#usMap a[data-state-link="OH"]',{timeout:18000});
  assert((await officeDesk.locator('#officeFocus').innerText()).includes('Governor'),'Governor state selection context missing');
  assert((await officeDesk.locator('#usMap a[data-state-link="OH"]').getAttribute('href')).includes('#stateOverview'),'Governor map must jump to statewide races within Ohio State Desk');
