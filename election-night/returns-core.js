@@ -5,6 +5,7 @@
  const DATE='2026-11-03';
  const states='AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' ');
  const codes=new Set(states),OFFICES=new Set(['House','Senate','Governor']);
+ const atLargeHouse=new Set('AK DE ND SD VT WY'.split(' '));
  // Conservative all-polls-close ET including split-zone states. Source: 2026 state closing-hour schedules.
  const closeByState={
  AL:'20:00',AK:'01:00',AZ:'21:00',AR:'20:30',CA:'23:00',CO:'21:00',CT:'20:00',
@@ -35,6 +36,9 @@
   const m=s.match(/^([A-Z]{2})-(AL|\d{1,2}|SENATE|GOVERNOR)$/);
   if(!m||!codes.has(m[1]))return null;
   const id=m[2]==='AL'?'01':/^\d+$/.test(m[2])?String(Number(m[2])).padStart(2,'0'):m[2];
+  // The official-state mirror encodes at-large House districts as ST-00;
+  // the published 435-seat index uses ST-01 for these six states.
+  if(office==='House'&&id==='00')return atLargeHouse.has(m[1])?m[1]+'-01':null;
   if(office==='House'&& !/^\d{2}$/.test(id))return null;
   if(office==='Senate'&&id!=='SENATE')return null;
   if(office==='Governor'&&id!=='GOVERNOR')return null;
@@ -48,8 +52,8 @@
   return Date.parse(d+'T'+time+':00-05:00');
  };
  const safeURL=(u)=>{try{const r=new URL(String(u));return r.protocol==='https:'&&!!r.hostname&& !r.username&&!r.password?r.href:null}catch{return null}};
- const verifiedCandidates=(raw)=>{
-  if(!Array.isArray(raw)||raw.length<2||raw.length>25)return null;
+ const verifiedCandidates=(raw,allowSingle=false)=>{
+  if(!Array.isArray(raw)||raw.length<(allowSingle?1:2)||raw.length>25)return null;
   const seen=new Set(),a=[];
   for(const c of raw){
    const name=String(c?.name??c?.n??'').trim(),votes=c?.votes??c?.v;
@@ -60,8 +64,8 @@
   }
   return a;
  };
- const build=(id,office,total,arr,timestamp,source,ref,precincts,nowMs)=>{
-  const candidates=verifiedCandidates(arr),time=Date.parse(String(timestamp||''));
+ const build=(id,office,total,arr,timestamp,source,ref,precincts,nowMs,allowSingle=false)=>{
+  const candidates=verifiedCandidates(arr,allowSingle),time=Date.parse(String(timestamp||''));
   if(!candidates||!numeric(total)||total===0||!Number.isFinite(time)||time<closeAt(id,office)||time>nowMs+300000)return null;
   const sum=candidates.reduce((n,x)=>n+x.votes,0);
   // Disallow feeds whose total includes unrepresented vote tallies beyond a small rounding tolerance.
@@ -87,7 +91,7 @@
     const raceKey=office==='Senate'&&/^[A-Z]{2}-special$/i.test(key)?key.slice(0,2)+'-SENATE':key;
     const id=canonical(office==='House'?raceKey:(raceKey.endsWith('-'+office.toUpperCase())?raceKey:raceKey+'-'+office.toUpperCase()),office);
    if(!id)continue;
-   const row=build(id,office,r?.total,r?.cands,data.as_of,'Open America / state reporting mirror',data.source_url||null,r?.pct_in,nowMs);
+   const row=build(id,office,r?.total,r?.cands,data.as_of,'Open America / state reporting mirror',data.source_url||null,r?.pct_in,nowMs,r?.uncontested===true);
    if(row)result[id]=row;
   }return result;
  }

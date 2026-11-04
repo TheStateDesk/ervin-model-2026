@@ -23,6 +23,8 @@ for(const id of ['IN-01','IN-08','KY-01','KY-02'])
  assert.equal(engine.closeAt(id,'House'),Date.parse('2026-11-04T00:00:00Z'),id+' must await last Central time polling places');
 
 assert.equal(engine.canonical('AK-AL','House'),'AK-01');
+for(const state of ['AK','DE','ND','SD','VT','WY'])assert.equal(engine.canonical(state+'-00','House'),state+'-01','At-large mirror ID '+state);
+assert.equal(engine.canonical('CA-00','House'),null,'Reject invented non-at-large district zero');
 assert.equal(engine.canonical('CA-11','Senate'),null);
 assert.equal(engine.canonical('AA-06','House'),null);
 const early=make();early.races['MI-SENATE'].asOf='2026-11-04T00:58:00Z';
@@ -54,6 +56,10 @@ const OA={api:1,year:2026,office:'Senate',as_of:'2026-11-04T02:05:00Z',
  races:{MI:{total:190,cands:[{n:'Dem candidate',v:100,p:'D'},{n:'Rep candidate',v:90,p:'R'}]}}};
 const od=engine.openAmerica(OA,'Senate',now);
 assert.equal(od['MI-SENATE']?.total,190,'Accept attributed source once polls close');
+const oneCandidate={api:1,year:2026,office:'House',as_of:'2026-11-04T02:05:00Z',races:{'VT-00':{total:200,uncontested:true,cands:[{n:'Only candidate',v:200,p:'D'}]}}};
+assert.equal(engine.openAmerica(oneCandidate,'House',now)['VT-01']?.total,200,'Accept official single-candidate unopposed returns for at-large seats');
+oneCandidate.races['VT-00'].uncontested=false;
+assert.equal(Object.keys(engine.openAmerica(oneCandidate,'House',now)).length,0,'Reject single-candidate feed without explicit uncontested indicator');
 const special={...OA,races:{'FL-special':{total:200,cands:[{n:'Angie Nixon',v:85,p:'D'},{n:'Ashley Moody',v:115,p:'R'}]},'OH-special':{total:150,cands:[{n:'Sherrod Brown',v:70,p:'D'},{n:'Jon Husted',v:80,p:'R'}]}}};
 const specialResults=engine.openAmerica(special,'Senate',now);
 assert.equal(specialResults['FL-SENATE']?.total,200,'Florida special Senate seat must be recognized by backup source');
