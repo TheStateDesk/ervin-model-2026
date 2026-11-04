@@ -14,7 +14,7 @@ for(const code of Object.keys(states)){const option=document.createElement('opti
 function renderCards(){
  const cards=Object.entries(snap).filter(([id])=>id.endsWith('-SENATE')).map(([id,x])=>{
  const margin=x.pctD-x.pctR,place=states[x.state]||x.state;
- return '<div class="pr-snapshot-card"><small>'+esc(place)+' / U.S. SENATE</small><strong>'+esc(x.candidateD)+'</strong><span class="pr-margin">D +'+margin.toFixed(2)+'</span><p>'+fmt(x.votesD)+' D · '+fmt(x.votesR)+' R<br>'+x.reportingPct.toFixed(1)+'% reporting in the dated dated return snapshot</p><a href="'+esc(x.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Open source for these totals ↗</a><a href="'+apState(x.state)+'" target="_blank" rel="noopener noreferrer">Check latest results ↗</a></div>';
+ return '<div class="pr-snapshot-card"><small>'+esc(place)+' / U.S. SENATE</small><strong>'+esc(x.candidateD)+'</strong><span class="pr-margin">D +'+margin.toFixed(2)+'</span><p>'+fmt(x.votesD)+' D · '+fmt(x.votesR)+' R<br>'+x.reportingPct.toFixed(1)+'% reporting in the dated return snapshot</p><a href="'+esc(x.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Open source for these totals ↗</a><a href="'+apState(x.state)+'" target="_blank" rel="noopener noreferrer">Check latest results ↗</a></div>';
  });
  $('prSnapshotGrid').innerHTML=cards.join('')||'<p>Dated return snapshots are unavailable. <a href="https://apnews.com/projects/elections-2026/">View AP results directly</a>.</p>';
 }
@@ -41,7 +41,7 @@ async function refresh(){
   if(office&&['House','Senate','Governor'].includes(office))$('prOffice').value=office.toLowerCase();
   if(race){$('prSearch').value=race.toUpperCase();limit=36;}
   if(firstRender&&(state||office||race)){draw();setTimeout(()=>document.querySelector('#prRaces')?.scrollIntoView({block:'start'}),100)}firstRender=false
- }catch(err){console.error('AP results reader:',err);$('prCallNotice').innerHTML='This site's source-linked call ledger is temporarily unavailable. <a href="https://apnews.com/projects/elections-2026/">Open AP’s directly maintained results ↗</a>';renderCards()}
+ }catch(err){console.error('AP results reader:',err);$('prCallNotice').innerHTML='This site\'s source-linked call ledger is temporarily unavailable. <a href="https://apnews.com/projects/elections-2026/">Open AP’s directly maintained results ↗</a>';renderCards()}
 }
 for(const id of ['prOffice','prState'])$(id).addEventListener('change',()=>{limit=36;draw()});
 $('prSearch').addEventListener('input',()=>{limit=36;draw()});
