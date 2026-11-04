@@ -28,7 +28,17 @@ async function refresh(){
  }catch(e){console.warn('NBC call refresh unavailable; preserving last sourced calls',e.message)}
  finally{busy=false}
 }
-const api=Object.freeze({get:id=>calls.get(String(id||'').toUpperCase())||null,all:()=>Object.fromEntries(calls),count:()=>calls.size,refresh,normalize});
+// Never surface an election-night call before that specific race's polls close.
+const gated=id=>{
+ const key=String(id||'').toUpperCase(),record=calls.get(key);
+ if(!record)return null;
+ const office=key.endsWith('-SENATE')?'Senate':key.endsWith('-GOVERNOR')?'Governor':'House';
+ const closedAt=window.ERVIN_RETURNS?.closeAt(key,office);
+ const minimum=Number.isFinite(closedAt)?closedAt:Date.parse('2026-11-03T18:00:00-05:00');
+ return Date.now()>=minimum?record:null;
+};
+const visible=()=>Object.fromEntries([...calls].filter(([key])=>gated(key)));
+const api=Object.freeze({get:gated,all:visible,count:()=>Object.keys(visible()).length,refresh,normalize});
 window.ERVIN_NBC_CALLS=api;
 refresh();setInterval(()=>{if(!document.hidden)refresh()},60000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});
