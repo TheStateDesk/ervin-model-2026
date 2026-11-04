@@ -447,7 +447,7 @@ try{
  await national.goto(base+'election-night/?release='+stamp,{waitUntil:'domcontentloaded'});
  await national.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83&&document.querySelector('#nationalCount')?.textContent.includes('506 indexed races'),null,{timeout:35000});
  const liveVoteText=(await national.locator('#miD').innerText()).trim();
-  if(!/^(?:—|[\\d,]+)$/.test(liveVoteText))throw Error('PUBLIC MICHIGAN VOTES MUST BE SOURCE-ATTRIBUTED NUMBERS OR UNAVAILABLE: '+liveVoteText);
+  if(!/^(?:—|[0-9,]+)$/.test(liveVoteText))throw Error('PUBLIC MICHIGAN VOTES MUST BE SOURCE-ATTRIBUTED NUMBERS OR UNAVAILABLE: '+liveVoteText);
  if((await national.locator('#miForecast').innerText())!==liveMISenate)throw Error('LIVE ELECTION NIGHT MICHIGAN FORECAST INCORRECT');
  await national.screenshot({path:'postdeploy-checks/Election-Night-National.png',fullPage:false});
  console.log('LIVE NATIONAL RESULTS PASS 506 races / 83 Michigan counties / valid reported totals');
