@@ -296,6 +296,24 @@ def coverage_by_office(expected,registry,now,stored,issues):
  assert {name:x["targeted"] for name,x in office.items()}=={"house":435,"senate":35,"governor":36}
  return office
 
+def status_for_each_race(expected,registry,now,stored,issues):
+ """Individual, inspectable status for all 506 contests; never infer zero votes."""
+ out={}
+ for key,info in sorted(expected.items()):
+  is_mapped=key in registry
+  is_eligible=is_mapped and now>=after_close(key)
+  valid=is_mapped and isinstance(stored.get(key),dict) and stored[key].get("verified") is True and type(stored[key].get("total")) is int and stored[key]["total"]>0
+  err=issues.get(key)
+  state=("unmapped" if not is_mapped else
+         "awaiting_poll_close" if not is_eligible else
+         "reporting" if valid else
+         "source_error" if str(err or "").startswith("fetch_") else
+         "awaiting_valid_vote_report")
+  out[key]={"office":info["office"],"status":state}
+  if err:out[key]["collectionIssue"]=err
+ assert len(out)==506
+ return out
+
 def main():
  now=current()
  expected=targets()
@@ -351,6 +369,7 @@ def main():
   "targetRaces":len(expected),"registeredRaces":len(registry),"eligibleRaces":len(eligible),
   "fetched":fetched,"publishedRaces":len(stored),"updatedRaces":added,
    "officeCoverage":coverage_by_office(expected,registry,now,stored,issues),
+   "raceStatuses":status_for_each_race(expected,registry,now,stored,issues),
   "discovery":discovery,"providerConnectivity":provider_connectivity,"errors":issues,
    "transientApiErrors":sum(v.startswith("fetch_HTTP_5") or v=="fetch_HTTP_429" or v=="fetch_TimeoutError" for v in issues.values()),
   "fallback":"Open America and state clerks only if CivicAPI has no valid current report for the contest",
