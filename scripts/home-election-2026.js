@@ -116,9 +116,15 @@ function map(){
  svg.innerHTML=geo.states.map(s=>{
   const observed=live?actualColor(s.code):null,p=observed||officeColor(s.code),isActual=!!observed;
   const status=isActual?'unofficial returns':'projection';
-  return '<a href="#electionDrill" data-choose-state="'+s.code+'" aria-label="'+esc(s.name+' · '+office+' · '+status)+'"><path class="atlas-state atlas-'+p+(isActual?' is-reporting':'')+'" d="'+s.d+'"><title>'+esc(s.name+' · '+office+' · '+status)+'</title></path></a>';
+  const senateBallot='AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY'.split(' ').includes(s.code);
+  const governorBallot=model.governor.some(r=>r.code===s.code);
+  const hasRace=(office==='Senate'&&senateBallot)||(office==='Governor'&&governorBallot);
+  const target=office==='House'?'../state/?state='+s.code+'#stateHouse':hasRace?
+    '../election-night/?state='+s.code+'&race='+s.code+'-'+(office==='Senate'?'SENATE':'GOVERNOR')+'#nationalBoard':
+    '../state/?state='+s.code+'#stateOverview';
+  return '<a href="'+target+'" data-choose-state="'+s.code+'" aria-label="'+esc(s.name+' · '+office+' · '+status)+' · open election details"><path class="atlas-state atlas-'+p+(isActual?' is-reporting':'')+'" d="'+s.d+'"><title>'+esc(s.name+' · '+office+' · '+status)+'</title></path></a>';
  }).join('');
- svg.querySelectorAll('[data-choose-state]').forEach(a=>a.addEventListener('click',()=>chooseState(a.dataset.chooseState)));
+ // Anchor navigation opens the correct race directly; no in-page drill interception.
 }
 function projection(coords,bounds,w,h){
  let [minx,miny,maxx,maxy]=bounds,spanX=Math.max(.001,maxx-minx),spanY=Math.max(.001,maxy-miny),scale=Math.min((w-24)/spanX,(h-24)/spanY);
