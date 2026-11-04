@@ -1738,6 +1738,26 @@
       "winner": "Maxwell Frost",
       "party": "D",
       "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "KY-02": {
+      "winner": "Brett Guthrie",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "VA-09": {
+      "winner": "Morgan Griffith",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TX-30": {
+      "winner": "Frederick Haynes III",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "VA-03": {
+      "winner": "Bobby Scott",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
     }
   }
 }
