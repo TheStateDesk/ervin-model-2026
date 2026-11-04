@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-03T23:56:25.391880Z",
+  "checkedAt": "2026-11-04T00:03:47.837454Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
@@ -10,13 +10,116 @@
     "unmapped": 2
   },
   "election": "2026-11-03",
-  "eligibleRaces": 12,
+  "eligibleRaces": 82,
   "errors": {
+    "FL-03": "no_valid_reported_votes",
+    "FL-05": "fetch_TimeoutError",
+    "FL-06": "fetch_TimeoutError",
+    "FL-07": "no_valid_reported_votes",
+    "FL-08": "no_valid_reported_votes",
+    "FL-09": "no_valid_reported_votes",
+    "FL-10": "no_valid_reported_votes",
+    "FL-13": "fetch_HTTP_502",
+    "FL-14": "no_valid_reported_votes",
+    "FL-16": "no_valid_reported_votes",
+    "FL-17": "no_valid_reported_votes",
+    "FL-18": "no_valid_reported_votes",
+    "FL-19": "no_valid_reported_votes",
+    "FL-20": "no_valid_reported_votes",
+    "FL-21": "no_valid_reported_votes",
+    "FL-22": "fetch_HTTP_502",
+    "FL-23": "no_valid_reported_votes",
+    "FL-24": "no_valid_reported_votes",
+    "FL-25": "no_valid_reported_votes",
+    "FL-26": "no_valid_reported_votes",
+    "FL-27": "no_valid_reported_votes",
+    "FL-28": "no_valid_reported_votes",
+    "FL-SENATE": "fetch_HTTP_502",
+    "GA-01": "fetch_HTTP_502",
+    "GA-02": "fetch_HTTP_502",
+    "GA-03": "no_valid_reported_votes",
+    "GA-04": "no_valid_reported_votes",
+    "GA-05": "no_valid_reported_votes",
+    "GA-06": "no_valid_reported_votes",
+    "GA-07": "no_valid_reported_votes",
+    "GA-08": "no_valid_reported_votes",
+    "GA-09": "no_valid_reported_votes",
+    "GA-10": "no_valid_reported_votes",
+    "GA-11": "no_valid_reported_votes",
+    "GA-12": "no_valid_reported_votes",
+    "GA-13": "no_valid_reported_votes",
+    "GA-14": "no_valid_reported_votes",
+    "GA-GOVERNOR": "no_valid_reported_votes",
+    "GA-SENATE": "no_valid_reported_votes",
+    "IN-01": "no_valid_reported_votes",
     "IN-07": "no_valid_reported_votes",
-    "KY-03": "no_valid_reported_votes"
+    "KY-01": "no_valid_reported_votes",
+    "KY-02": "no_valid_reported_votes",
+    "KY-03": "no_valid_reported_votes",
+    "SC-01": "no_valid_reported_votes",
+    "SC-02": "fetch_TimeoutError",
+    "SC-03": "no_valid_reported_votes",
+    "SC-04": "no_valid_reported_votes",
+    "SC-05": "no_valid_reported_votes",
+    "SC-06": "no_valid_reported_votes",
+    "SC-07": "no_valid_reported_votes",
+    "SC-GOVERNOR": "no_valid_reported_votes",
+    "SC-SENATE": "no_valid_reported_votes",
+    "VA-01": "no_valid_reported_votes",
+    "VA-02": "no_valid_reported_votes",
+    "VA-03": "no_valid_reported_votes",
+    "VA-04": "no_valid_reported_votes",
+    "VA-05": "no_valid_reported_votes",
+    "VA-06": "no_valid_reported_votes",
+    "VA-07": "no_valid_reported_votes",
+    "VA-08": "no_valid_reported_votes",
+    "VA-09": "no_valid_reported_votes",
+    "VA-10": "no_valid_reported_votes",
+    "VA-11": "no_valid_reported_votes",
+    "VA-SENATE": "no_valid_reported_votes",
+    "VT-GOVERNOR": "no_valid_reported_votes"
   },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
-  "fetched": 12,
+  "fetched": 74,
+  "officeCoverage": {
+    "governor": {
+      "awaitingPollClose": 33,
+      "eligibleForCollection": 3,
+      "eligibleWithoutValidVoteReport": 3,
+      "missingRegistryIds": [],
+      "registered": 36,
+      "sourceErrors": 0,
+      "targeted": 36,
+      "validationPending": 3,
+      "verifiedReports": 0
+    },
+    "house": {
+      "awaitingPollClose": 361,
+      "eligibleForCollection": 73,
+      "eligibleWithoutValidVoteReport": 59,
+      "missingRegistryIds": [
+        "VT-01"
+      ],
+      "registered": 434,
+      "sourceErrors": 7,
+      "targeted": 435,
+      "validationPending": 52,
+      "verifiedReports": 14
+    },
+    "senate": {
+      "awaitingPollClose": 28,
+      "eligibleForCollection": 6,
+      "eligibleWithoutValidVoteReport": 4,
+      "missingRegistryIds": [
+        "WY-SENATE"
+      ],
+      "registered": 34,
+      "sourceErrors": 1,
+      "targeted": 35,
+      "validationPending": 3,
+      "verifiedReports": 2
+    }
+  },
   "polling": {
     "note": "No verified CivicAPI polling endpoint; election results never become a pre-election poll.",
     "state": "not_integrated"
@@ -52,7 +155,7 @@
       "payloadType": "dict",
       "positiveCandidateTotals": true,
       "providerTimestamp": "2026-11-03T23:57:30.871Z",
-      "responseMs": 5670
+      "responseMs": 2556
     },
     "MI-SENATE": {
       "candidateRows": 11,
@@ -83,7 +186,7 @@
       "payloadType": "dict",
       "positiveCandidateTotals": false,
       "providerTimestamp": "2026-11-03T03:44:10.357Z",
-      "responseMs": 795
+      "responseMs": 1438
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -92,13 +195,13 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 6357
+      "responseMs": 2921
     }
   },
-  "publishedRaces": 10,
+  "publishedRaces": 16,
   "registeredRaces": 504,
   "targetRaces": 506,
-  "transientApiErrors": 0,
-  "updatedRaces": 5,
+  "transientApiErrors": 8,
+  "updatedRaces": 11,
   "version": 2
 }
