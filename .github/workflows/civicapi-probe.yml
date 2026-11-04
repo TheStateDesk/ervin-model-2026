@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths:
       - 'scripts/civicapi_national.py'
+      - 'election-night/nbc-calls.json'
+      - 'scripts/nbc-calls.js'
+      - 'scripts/validate_nbc_calls.py'
       - 'tests/test_civicapi_national.py'
       - '.github/workflows/civicapi-probe.yml'
   schedule:
@@ -31,6 +34,8 @@ jobs:
           python-version: '3.12'
       - name: Validate national results parser (offline test fixtures)
         run: python3 -m unittest discover -s tests -p test_civicapi_national.py -v
+      - name: Validate independent NBC projected winner citations
+        run: python3 scripts/validate_nbc_calls.py
       - name: Discover all races and fetch v2 results after race poll close
         run: python3 scripts/civicapi_national.py
       - name: Validate published snapshots and browser parser
