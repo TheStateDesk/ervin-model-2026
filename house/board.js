@@ -4,6 +4,9 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let seats=[],scenario=null,cookNational=null,houseRoster={races:{}};
 let liveRows={};
+// Preserve an early visitor's district/state filter across the asynchronous initial data loads.
+let filterInteracted=false;
+$('houseState')?.addEventListener('change',()=>{filterInteracted=true;if(seats.length)draw()});
 window.addEventListener('ervin:office-results',e=>{if(e.detail?.office==='House'){liveRows=e.detail.races||{};if(seats.length)draw()}});
 window.addEventListener('ervin:nbc-calls-update',()=>{if(seats.length)draw()});
 const href=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
@@ -74,13 +77,15 @@ async function init(){
   $('ratingsCount').textContent=seats.filter(x=>x.rating).length;
   $('closeCount').textContent=seats.filter(x=>x.rating==='Tossup').length;
   const states=[...new Map(seats.map(x=>[x.code,x.state])).entries()].sort((a,b)=>a[1].localeCompare(b[1]));
+  const visitorSelection=filterInteracted?$('houseState').value:null;
   $('houseState').innerHTML='<option value="all">Every state</option>'+states.map(([code,name])=>'<option value="'+code+'">'+esc(name)+'</option>').join('');
   const requested=new URLSearchParams(location.search).get('state');
-  $('houseState').value=requested&&states.some(([code])=>code===requested.toUpperCase())?requested.toUpperCase():'MI';
+  const defaultState=requested&&states.some(([code])=>code===requested.toUpperCase())?requested.toUpperCase():'MI';
+  $('houseState').value=visitorSelection&&(visitorSelection==='all'||states.some(([code])=>code===visitorSelection))?visitorSelection:defaultState;
   outlook();draw();map();
   document.dispatchEvent(new CustomEvent('ervin-house-forecast-loaded',{detail:{available:!!scenario}}));
  }catch(e){$('houseCards').textContent='House data could not be loaded. Reload the page.';console.error(e)}
- ['houseSearch','houseState','houseRating','houseSort'].forEach(id=>$(id).addEventListener(id==='houseSearch'?'input':'change',draw));
+ ['houseSearch','houseRating','houseSort'].forEach(id=>$(id).addEventListener(id==='houseSearch'?'input':'change',draw));
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
