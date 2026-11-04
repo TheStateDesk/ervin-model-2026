@@ -233,7 +233,7 @@ async function refreshResults(){
  if(busy||!window.ERVIN_RETURNS)return;busy=true;
  try{
   const core=window.ERVIN_RETURNS,of=['Senate','Governor','House'];
-  const checkExternal=Date.now()-lastExternalFetch>=60000;
+  const checkExternal=Date.now()-lastExternalFetch>=55000; // allow minor timer jitter; each 60-second browser sweep checks every office
   if(checkExternal)lastExternalFetch=Date.now();
   const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),read('civicapi/discovery.json'),...of.map(x=>checkExternal&&window.ERVIN_EXTERNAL_FEED
    ?window.ERVIN_EXTERNAL_FEED.json('https://openamerica.io/elections/results.json?year=2026&office='+x,{timeout:11000})
