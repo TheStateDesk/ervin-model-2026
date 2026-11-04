@@ -36,7 +36,20 @@ function updateGauge(race){
  $('erLiveMarker').hidden=false;
  $('erLiveDetail').textContent='Reported D–R margin as % of all votes counted; not a final-vote estimate';
 }
+function renderNBCCall(){
+ const notice=$('resultNotice');if(!notice)return;
+ let banner=$('erNbcWinner');
+ const id=office==='house'?code:state+'-'+office.toUpperCase();
+ const call=window.ERVIN_NBC_CALLS?.get(id);
+ if(!banner){banner=document.createElement('div');banner.id='erNbcWinner';banner.className='race-note';banner.style.cssText='padding:12px 14px;margin:8px 0;border:1px solid currentColor;border-radius:8px';notice.parentElement.insertBefore(banner,notice)}
+ banner.hidden=!call;if(!call){banner.replaceChildren();return}
+ const strong=document.createElement('strong');strong.textContent='NBC NEWS PROJECTS: '+call.winner+' ('+call.party+')';
+ const a=document.createElement('a');a.href=call.sourceUrl;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Original NBC News projection';
+ const small=document.createElement('small');small.textContent='Independent newsroom race call, not certified vote totals.';
+ banner.replaceChildren(strong,document.createTextNode(' · '),a,small);
+}
 function show(race,data){
+ renderNBCCall();
  if(!race||!Number.isSafeInteger(race.total)||race.total<=0||Date.now()<CLOSE){
   $('votesReported').textContent='Awaiting returns';$('countiesReported').textContent='Not available';$('outstanding').textContent='Not calculated';
   $('nightCandidates').replaceChildren();$('erLiveMargin').textContent='Awaiting votes';$('erLiveMarker').hidden=true;
@@ -176,5 +189,6 @@ function init(){
  setInterval(()=>{if(!document.hidden&&Date.now()>=CLOSE)readCounties();},30000);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){readResults();readCounties();}});
 }
+window.addEventListener('ervin:nbc-calls-update',renderNBCCall);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
