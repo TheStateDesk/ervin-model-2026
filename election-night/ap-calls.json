@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "election": "2026-11-03",
+  "publisher": "Associated Press",
+  "method": "Only documented AP general-election winner calls or contemporary reports explicitly attributing a particular candidate victory to the AP. A call is never inferred from preliminary vote leads. Articles from WHYY/PublicSource/Map the General explicitly describe AP results; their links are retained for provenance.",
+  "calls": {
+    "TX-SENATE": {
+      "winner": "James Talarico",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/midterm-election-house-senate-democrats-republicans-trump-f126e12e05b579a327b98481c0ae2226"
+    },
+    "KS-SENATE": {
+      "winner": "Adam Hamilton",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/midterm-election-house-senate-democrats-republicans-trump-f126e12e05b579a327b98481c0ae2226"
+    },
+    "SC-SENATE": {
+      "winner": "Annie Andrews",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/74fc0bf08f5822378fcfa2fe09377d69"
+    },
+    "OH-SENATE": {
+      "winner": "Sherrod Brown",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/midterm-election-house-senate-democrats-republicans-trump-f126e12e05b579a327b98481c0ae2226"
+    },
+    "NC-SENATE": {
+      "winner": "Roy Cooper",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/midterm-election-house-senate-democrats-republicans-trump-f126e12e05b579a327b98481c0ae2226"
+    },
+    "IA-SENATE": {
+      "winner": "Josh Turek",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/midterm-election-house-senate-democrats-republicans-trump-f126e12e05b579a327b98481c0ae2226"
+    },
+    "MN-SENATE": {
+      "winner": "Peggy Flanagan",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "NH-SENATE": {
+      "winner": "Chris Pappas",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "IL-SENATE": {
+      "winner": "Juliana Stratton",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "VA-SENATE": {
+      "winner": "Mark Warner",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/07cd2d398f0086aee5e017a5db92eb2c"
+    },
+    "GA-SENATE": {
+      "winner": "Jon Ossoff",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/georgia-senate-ossoff-collins-midterm-election-32dad2d529f42d055326b9ea7df9ce05"
+    },
+    "LA-SENATE": {
+      "winner": "Julia Letlow",
+      "party": "R",
+      "sourceUrl": "https://apnews.com/article/5b8c4032b80b4cdfab40f871ec86cb1a"
+    },
+    "AR-SENATE": {
+      "winner": "Tom Cotton",
+      "party": "R",
+      "sourceUrl": "https://apnews.com/article/793475f299914550969833b7c0fe596d"
+    },
+    "TX-GOVERNOR": {
+      "winner": "Gina Hinojosa",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "GA-GOVERNOR": {
+      "winner": "Keisha Lance Bottoms",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "OH-GOVERNOR": {
+      "winner": "Amy Acton",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "IA-GOVERNOR": {
+      "winner": "Rob Sand",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "CA-GOVERNOR": {
+      "winner": "Xavier Becerra",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "PA-GOVERNOR": {
+      "winner": "Josh Shapiro",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/99481bc0596c40c693f39c01fbd4ff5c"
+    },
+    "NM-GOVERNOR": {
+      "winner": "Deb Haaland",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "MN-GOVERNOR": {
+      "winner": "Amy Klobuchar",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "FL-GOVERNOR": {
+      "winner": "Byron Donalds",
+      "party": "R",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "MD-GOVERNOR": {
+      "winner": "Wes Moore",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/93d4d163acfd217521b5dce1ab7fc4a9"
+    },
+    "OK-GOVERNOR": {
+      "winner": "Mike Mazzei",
+      "party": "R",
+      "sourceUrl": "https://apnews.com/article/97095aae4a924371b113e64bc7d868e6"
+    },
+    "WI-GOVERNOR": {
+      "winner": "David Crowley",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ee1355fb426f242638e0fc4d1e5674b5"
+    },
+    "IA-01": {
+      "winner": "Christina Bohannan",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "IA-02": {
+      "winner": "Lindsay James",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "IA-03": {
+      "winner": "Sarah Trone Garriott",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "AL-02": {
+      "winner": "Shomari Figures",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "TX-34": {
+      "winner": "Vicente Gonzalez",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "OH-01": {
+      "winner": "Greg Landsman",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+    },
+    "PA-07": {
+      "winner": "Bob Brooks",
+      "party": "D",
+      "sourceUrl": "https://whyy.org/live/election-2026-pennsylvania-live-updates-midterms-new-jersey-delaware/"
+    },
+    "PA-08": {
+      "winner": "Paige Cognetti",
+      "party": "D",
+      "sourceUrl": "https://whyy.org/live/election-2026-pennsylvania-live-updates-midterms-new-jersey-delaware/"
+    },
+    "PA-10": {
+      "winner": "Janelle Stelson",
+      "party": "D",
+      "sourceUrl": "https://whyy.org/live/election-2026-pennsylvania-live-updates-midterms-new-jersey-delaware/"
+    },
+    "PA-12": {
+      "winner": "Summer Lee",
+      "party": "D",
+      "sourceUrl": "https://www.publicsource.org/2026-live-election-results-pittsburgh-area/"
+    },
+    "PA-17": {
+      "winner": "Chris Deluzio",
+      "party": "D",
+      "sourceUrl": "https://www.publicsource.org/2026-live-election-results-pittsburgh-area/"
+    },
+    "KY-06": {
+      "winner": "Zach Dembo",
+      "party": "D",
+      "sourceUrl": "https://mapthegeneral.com/us/en/live/"
+    },
+    "NJ-07": {
+      "winner": "Rebecca Bennett",
+      "party": "D",
+      "sourceUrl": "https://whyy.org/live/election-2026-pennsylvania-live-updates-midterms-new-jersey-delaware/"
+    },
+    "FL-20": {
+      "winner": "Debbie Wasserman Schultz",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/election-59c12371b87191ffdbf9102ab23290c2"
+    },
+    "NM-02": {
+      "winner": "Gabe Vasquez",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/7de2956be7504eb6a0f47ea04f9d9d05"
+    }
+  }
+}
