@@ -76,3 +76,16 @@ html.theme-dark .post-model p{color:#b3c5d1}
 html.theme-dark .post-close-item:hover{background:#2c4960}
 @media(max-width:960px){.post-hero{grid-template-columns:1fr;gap:22px}.post-analysis-grid{grid-template-columns:1fr}.post-analysis-grid article{min-height:unset}.post-milestones{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:630px){.post-hero{padding:24px 19px}.post-mast{flex-wrap:wrap}.post-snapshot{grid-template-columns:1fr}.post-snapshot>div+div{border-left:0;border-top:1px solid var(--ed-rule)}.post-milestones{grid-template-columns:1fr}.post-divider{align-items:start;flex-direction:column;gap:9px}.post-close-item{grid-template-columns:1fr auto;gap:9px}.post-close-names{grid-column:1}.post-close-margin{grid-column:2;grid-row:1 / span 2}.post-close-arrow{display:none}.post-model{grid-template-columns:1fr;padding:21px}.post-model-score{text-align:left}.post-story h1{font-size:49px}.post-map-intro h2{font-size:32px}}
+
+/* Post-midterm news briefs, replacing the model scorecard */
+.post-article-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.post-article-card{min-height:228px;padding:25px 27px;border-top:4px solid #365f7a;background:var(--ed-white);text-decoration:none!important;color:var(--ed-ink)!important;display:flex;flex-direction:column;gap:9px}
+.post-article-card:hover{background:#e6eff3;box-shadow:0 8px 24px #203b4912}
+.post-article-card>span{font-size:10px;letter-spacing:.14em;color:#956a44;font-weight:850}
+.post-article-card>strong{font:700 clamp(25px,2.5vw,35px)/1.1 var(--ed-serif);letter-spacing:-.035em}
+.post-article-card p{font-size:13px;color:var(--ed-muted);line-height:1.65;max-width:450px;margin:0}
+.post-article-card small{font-size:10px;letter-spacing:.04em;font-weight:850;color:var(--ed-blue);margin-top:auto;padding-top:8px}
+.post-article-card--lead{background:#f7f6f1}
+html.theme-dark .post-article-card{background:#1d364a;color:#eaf1f7!important;border-color:#52748d}
+html.theme-dark .post-article-card:hover{background:#284559}
+@media(max-width:700px){.post-article-grid{grid-template-columns:1fr}.post-article-card{min-height:190px;padding:21px}}

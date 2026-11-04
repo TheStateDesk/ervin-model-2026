@@ -20,7 +20,7 @@ function build(){
   <div class="post-story"><div class="post-kicker">AMERICA AFTER THE MIDTERMS</div>
    <h1>Congress changes hands.</h1>
    <p class="post-deck">Democrats have won control of the House and Senate. The new balance of power redraws the landscape in Washington as election officials continue counting votes across the country.</p>
-   <div class="post-story-actions"><a class="post-primary" href="#edSimulationPanel">National results map</a><a href="#postCloseRaces">Races still counting</a><a href="#postModelAudit">Forecast scorecard</a></div>
+   <div class="post-story-actions"><a class="post-primary" href="#edSimulationPanel">National results map</a><a href="#postCloseRaces">Races still counting</a><a href="../analysis/">Read the analysis</a></div>
    <p class="post-attribution">National chamber calls: <a href="${apSource}" target="_blank" rel="noopener noreferrer">Associated Press, November 4</a>. Projections are not certifications.</p>
   </div>
   <div class="post-control" aria-label="National chamber outcomes">
@@ -50,16 +50,13 @@ function build(){
   <p class="post-source-note" id="postCloseSource">Vote totals are unofficial and may be incomplete.</p>
  </section>
  <section class="post-analysis" id="postAnalysis" aria-labelledby="postAnalysisTitle">
-  <div class="post-divider"><div><span class="post-kicker">THE POLITICAL AFTERMATH</span><h2 id="postAnalysisTitle">What happens next</h2></div><span>ANALYSIS / NOV. 4</span></div>
-  <div class="post-analysis-grid">
-   <article><span>01 / GOVERNING</span><h3>Divided government begins in January.</h3><p>Democratic congressional majorities will face a Republican White House. Budget negotiations, oversight, and legislative bargaining will test the new balance of power.</p></article>
-   <article><span>02 / THE ECONOMY</span><h3>The affordability question endures.</h3><p>The cost of living dominated much of the debate. Focus now turns to the parties' competing proposals on prices, health care, and household finances.</p></article>
-   <article><span>03 / THE FINAL COUNT</span><h3>Every remaining seat matters.</h3><p>Canvasses, recounts, and unresolved districts may alter the size of each majority. Our maps distinguish newsroom calls from unofficial vote leads and final certification.</p></article>
+  <div class="post-divider"><div><span class="post-kicker">THE POST-MIDTERM FILES / NOVEMBER 4</span><h2 id="postAnalysisTitle">The numbers behind the upheaval</h2></div><a href="../analysis/">All analysis</a></div>
+  <div class="post-article-grid">
+    <a href="../analysis/senate-seven-flips/" class="post-article-card post-article-card--lead"><span>01 / SENATE</span><strong>Seven states that changed the Senate</strong><p>The new majority runs through Texas, Kansas, Iowa and four more Republican-held seats. See the latest reported margins.</p><small>7 SENATE FLIPS · VIEW THE REPORT</small></a>
+    <a href="../analysis/governors-switch/" class="post-article-card"><span>02 / GOVERNORS</span><strong>Four governorships turn Democratic</strong><p>Georgia, Iowa, Ohio and Texas move into the Democratic column, changing state-level governing power.</p><small>4 OFFICES FLIPPED · VIEW THE REPORT</small></a>
+    <a href="../analysis/unfinished-count/" class="post-article-card"><span>03 / CLOSE COUNTS</span><strong>Where the count isn't over</strong><p>Mississippi and Alaska offer a reminder that a decided majority is not the same as every contest being called.</p><small>LIVE UNOFFICIAL MARGINS · VIEW THE REPORT</small></a>
+    <a href="../analysis/new-congress/" class="post-article-card"><span>04 / WASHINGTON</span><strong>A new Congress, a different Washington</strong><p>How the new House and Senate majorities reshape the legislative calendar, oversight and next year's negotiations.</p><small>218 HOUSE · 51 SENATE · VIEW THE REPORT</small></a>
   </div>
- </section>
- <section class="post-model" id="postModelAudit" aria-labelledby="postModelTitle">
-  <div><span class="post-kicker">THE ORIGINAL ERVIN MODEL / POSTMORTEM</span><h2 id="postModelTitle">How did the forecast hold up?</h2><p id="postModelText">Matching the locked model against independently attributed AP race calls.</p><a href="../stats-for-nerds/">Methods, evidence and historical backtests</a></div>
-  <div class="post-model-score"><strong id="postModelScore">—</strong><small id="postModelScope">Comparable called races only</small></div>
  </section>`;
  anchor.insertAdjacentElement('beforebegin',el);
  const mapHeading=document.createElement('div');mapHeading.className='post-map-intro';
@@ -84,7 +81,7 @@ function drawOutstanding(){
  $('postCloseSource').textContent='Source: state-sourced CivicAPI results. '+(old?old+' displayed counts were last updated over two hours ago. ':'')+'Margins are between the top two reported candidates, not necessarily the two major parties. Last desk check: '+when(checkedAt)+'.';
 }
 function drawMilestones(){
- const picks=['TX-SENATE','KS-SENATE','IA-SENATE','NC-SENATE','MI-SENATE','ME-SENATE','GA-GOVERNOR','OH-SENATE'].filter(id=>calls[id]).slice(0,6);
+ const picks=['TX-SENATE','KS-SENATE','IA-SENATE','NC-SENATE','OH-SENATE','SC-SENATE','ME-SENATE','GA-GOVERNOR'].filter(id=>calls[id]).slice(0,6);
  $('postMilestones').innerHTML=picks.length?picks.map(id=>{
  const c=calls[id],r=reports[id],match=valid(r)?r.candidates.find(x=>x.name===c.winner):null,share=match?(100*match.votes/r.total).toFixed(1)+'% of unofficial ballots':'Vote share pending';
  return '<a class="post-milestone" href="'+href(id)+'"><span>'+esc(names[id.slice(0,2)]||id.slice(0,2))+' / '+office(id).toUpperCase()+'</span><strong>'+esc(c.winner)+'</strong><small>AP: '+(c.party==='D'?'Democratic':'Republican')+' win · '+esc(share)+'</small></a>';
@@ -96,21 +93,6 @@ function drawSnapshot(){
  $('postSourceTime').textContent=latest?when(new Date(latest).toISOString()):'No timed return';
  $('postDataHealth').textContent='CivicAPI / state election officials · checked '+when(checkedAt);
 }
-function drawAccuracy(){
- const m=window.ERVIN_HOME_FORECAST;if(!m)return;
- const byId=Object.fromEntries([...(m.house||[]),...(m.senate||[]),...(m.governor||[])].map(x=>[x.id,x]));
- const matches=Object.entries(calls).flatMap(([id,c])=>{
-  const r=byId[id];if(!['D','R'].includes(c.party)||!Number.isFinite(r?.margin)||Math.abs(r.margin)<.05)return[];
-  return [{id,office:office(id),correct:(r.margin>0?'D':'R')===c.party}];
- });
- const wins=matches.filter(x=>x.correct).length,detail=['senate','governor','house'].map(type=>{
-  const rows=matches.filter(x=>x.office===type);
-  return rows.length?type[0].toUpperCase()+type.slice(1)+' '+rows.filter(x=>x.correct).length+'/'+rows.length:null;
- }).filter(Boolean).join(' · ');
- $('postModelScore').textContent=matches.length?wins+' / '+matches.length:'—';
- $('postModelScope').textContent=matches.length?(100*wins/matches.length).toFixed(1)+'% correct in comparable AP-called races':'Matching source records';
- $('postModelText').textContent='Locked pre-election numerical predictions compared with independently sourced AP race calls. '+detail+'. Races without AP calls, non-comparable independent candidates, and missing numeric predictions are excluded. This score changes as additional race calls are entered.';
-}
 async function refresh(){
  if(busy)return;busy=true;
  const get=async path=>{const u=new URL(path,root);u.searchParams.set('fresh',Math.floor(Date.now()/60000));const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error(path+' HTTP '+r.status);return r.json()};
@@ -119,10 +101,10 @@ async function refresh(){
   if(a.status==='fulfilled'&&a.value?.election==='2026-11-03'&&a.value?.calls)calls=a.value.calls;
   if(b.status==='fulfilled'&&b.value?.election==='2026-11-03'&&b.value?.races)reports=b.value.races;
   if(a.status==='fulfilled'||b.status==='fulfilled')checkedAt=new Date().toISOString();
-  drawSnapshot();drawMilestones();drawOutstanding();drawAccuracy();
+  drawSnapshot();drawMilestones();drawOutstanding();
  }catch(e){console.warn('Post-election desk source refresh failed:',e)}
  finally{busy=false}
 }
-function init(){build();refresh();window.addEventListener('ervin:forecast-ready',drawAccuracy);setInterval(()=>{if(!document.hidden)refresh()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()})}
+function init(){build();refresh();setInterval(()=>{if(!document.hidden)refresh()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
