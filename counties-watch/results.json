@@ -2,7 +2,22 @@
   "version": 1,
   "election": "2026-11-03",
   "office": "US Senate",
-  "publishedAt": null,
-  "status": "awaiting verified county-level Senate returns",
-  "states": {}
+  "publishedAt": "2026-11-04T21:26:50.292446+00:00",
+  "status": "Attributed partial county results; NOT a statewide race call",
+  "states": {
+    "MI": {
+      "counties": [
+        {
+          "fips": "26081",
+          "county": "Kent",
+          "dem": 181447,
+          "rep": 136948,
+          "other": 5911,
+          "asOf": "2026-11-04T13:26:56+00:00",
+          "sourceUrl": "https://app.enhancedvoting.com/results/public/kent-county-mi/elections/11032026_20261005115447",
+          "reportingStatus": "complete"
+        }
+      ]
+    }
+  }
 }
