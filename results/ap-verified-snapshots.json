@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "election": "2026-11-03",
+  "capturedAt": "2026-11-04T17:00:00Z",
+  "method": "AP-attributed unofficial totals as published on Fox News 2026 state/Senate results pages, copied on November 4, 2026. NOT an authenticated live AP API feed. Do not update without independently checking AP-attributed totals. Percentages and 2026 vote figures may change.",
+  "resultSource": "Associated Press election tabulation, redistributed by Fox News",
+  "races": {
+    "TX-SENATE": {
+      "state": "TX",
+      "office": "Senate",
+      "candidateD": "James Talarico",
+      "candidateR": "Ken Paxton",
+      "votesD": 5266242,
+      "votesR": 4115458,
+      "pctD": 55.07,
+      "pctR": 43.03,
+      "reportingPct": 94.27,
+      "asOf": "2026-11-04T11:51:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/texas"
+    },
+    "IA-SENATE": {
+      "state": "IA",
+      "office": "Senate",
+      "candidateD": "Josh Turek",
+      "candidateR": "Ashley Hinson",
+      "votesD": 686487,
+      "votesR": 630615,
+      "pctD": 50.51,
+      "pctR": 46.4,
+      "reportingPct": 98.7,
+      "asOf": "2026-11-04T16:37:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/iowa"
+    },
+    "KS-SENATE": {
+      "state": "KS",
+      "office": "Senate",
+      "candidateD": "Adam Hamilton",
+      "candidateR": "Roger Marshall",
+      "votesD": 556414,
+      "votesR": 503230,
+      "pctD": 50.93,
+      "pctR": 46.06,
+      "reportingPct": 98.5,
+      "asOf": "2026-11-04T16:35:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/kansas"
+    },
+    "SC-SENATE": {
+      "state": "SC",
+      "office": "Senate",
+      "candidateD": "Annie Andrews",
+      "candidateR": "Darline Graham",
+      "votesD": 1042362,
+      "votesR": 951165,
+      "pctD": 51.13,
+      "pctR": 46.65,
+      "reportingPct": 99,
+      "asOf": "2026-11-04T16:28:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/south-carolina"
+    },
+    "OH-SENATE": {
+      "state": "OH",
+      "office": "Senate",
+      "candidateD": "Sherrod Brown",
+      "candidateR": "Jon Husted",
+      "votesD": 2249214,
+      "votesR": 2060829,
+      "pctD": 49.65,
+      "pctR": 45.5,
+      "reportingPct": 97.25,
+      "asOf": "2026-11-04T10:21:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/ohio"
+    },
+    "ME-SENATE": {
+      "state": "ME",
+      "office": "Senate",
+      "candidateD": "Troy Jackson",
+      "candidateR": "Susan Collins",
+      "votesD": 364841,
+      "votesR": 314487,
+      "pctD": 53.67,
+      "pctR": 46.26,
+      "reportingPct": 91.83,
+      "asOf": "2026-11-04T16:00:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/senate"
+    },
+    "NC-SENATE": {
+      "state": "NC",
+      "office": "Senate",
+      "candidateD": "Roy Cooper",
+      "candidateR": "Michael Whatley",
+      "votesD": 2467963,
+      "votesR": 1643088,
+      "pctD": 58.72,
+      "pctR": 39.09,
+      "reportingPct": 99,
+      "asOf": "2026-11-04T16:00:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/senate"
+    }
+  }
+}
