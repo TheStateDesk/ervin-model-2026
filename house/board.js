@@ -26,7 +26,7 @@ function draw(){
   const url=live?'../election-night/?state='+encodeURIComponent(r.code)+'&race='+encodeURIComponent(r.id)+'#nationalBoard':href(r);
   const top=live?.candidates?.slice().sort((a,b)=>b.votes-a.votes).slice(0,2)||[];
   const call=window.ERVIN_NBC_CALLS?.get(r.id);
-  const nbcHTML=call?'<div class="gov-lead"><strong>NBC NEWS PROJECTS '+esc(call.winner)+' ('+esc(call.party)+')</strong><small>Original NBC source linked in the election-night race view</small></div>':'';
+  const nbcHTML=call?'<div class="gov-lead"><strong>'+esc(call.publisher==='Associated Press'?'AP CALLS':'NBC NEWS PROJECTS')+' '+esc(call.winner)+' ('+esc(call.party)+')</strong><small>Original '+esc(call.publisher)+' story linked on the election-night race view</small></div>':'';
   const reported=live?'<div class="gov-lead"><small>UNOFFICIAL VOTES REPORTED</small><br>'+esc(top.map(c=>c.name+' '+c.votes.toLocaleString()).join(' · '))+'<small> · '+live.total.toLocaleString()+' votes · '+esc(live.source)+'</small></div>':'';
   return '<a class="gov-card" href="'+url+'"><div class="gov-heading"><h3 class="house-card-title">'+esc(r.id)+'</h3><span class="race-flag">'+esc(r.code)+'</span></div>'+
   '<p class="gov-candidates">'+esc(r.state)+'<br><strong>2026 candidates:</strong> '+esc(candidateText(r))+'</p>'+
