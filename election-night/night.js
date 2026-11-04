@@ -207,7 +207,7 @@ function renderRace(x){
  const id=x.office==='House'?x.id:x.code+'-'+x.office.toUpperCase();
  const report=live[x.office]?.races?.[id],reportText=report?lead(report):null;
  const source=report?.sourceURL?'<a href="'+esc(report.sourceURL)+'" target="_blank" rel="noopener noreferrer">Original count source</a>':'Source pending';
- return '<article class="race-row" id="race-'+esc(x.id)+'" role="listitem"><div><h3>'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+
+ return '<article class="race-row" id="race-'+esc(x.id)+'" role="listitem"><div><h3><a href="'+liveRaceURL(x)+'" aria-label="Open '+esc(x.state)+' '+esc(x.office)+' race results">'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</a></h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+
  (reportText?countedBreakdown(report)+'<small>UNOFFICIAL · '+esc(report.source)+' · '+esc(date(report.asOf))+'</small>':'<span class="no-data">Awaiting verified results</span><small>County/state feed has not supplied attributable 2026 vote totals yet</small>')+
  '</div><div><div class="night-row-links"><a href="'+liveRaceURL(x)+'">Election-night race view</a><a href="'+raceURL(x)+'">State/district context</a></div><small>'+source+'</small></div></article>';
 }
@@ -218,7 +218,7 @@ function drawRaces(){
  (kind!=='closest'||x.margin!==null&&Math.abs(x.margin)<=5));
  const top=shown.filter(x=>x.id==='MI-SENATE');const rest=shown.filter(x=>x.id!=='MI-SENATE').sort((a,b)=>a.office.localeCompare(b.office)||a.state.localeCompare(b.state)||String(a.district||'').localeCompare(String(b.district||'')));
  $('raceList').innerHTML=[...top,...rest].map(renderRace).join('')||'<p class="source-note">No races match the current filters.</p>';
- $('nationalCount').textContent=shown.length+' displayed · '+races.length+' indexed races, filtered without leaving this page';
+ $('nationalCount').textContent=selectedRace&&shown.length===1?'RACE DETAIL · '+shown[0].state+' '+shown[0].office+' · live unofficial returns and pre-election comparison':shown.length+' displayed · '+races.length+' indexed races, filtered without leaving this page';
 }
 async function loadRaces(){
  const [gov,house,sen,archive]=await Promise.all([fetchJSON('../governors/data.json'),fetchJSON('../house/data.json'),fetchJSON(forecastURL),fetchJSON('../research/governor-same-office-2014-2024.json')]);
@@ -255,8 +255,13 @@ async function init(){
  $('raceFind').addEventListener('input',()=>{selectedRace='';drawRaces()});$('resultsFilter').addEventListener('change',drawRaces);
  const urlSearch=new URLSearchParams(location.search),requested=(urlSearch.get('state')||'').toUpperCase();
  if(/^[A-Z]{2}$/.test(requested))selectedState=requested;
- const race=requested?(urlSearch.get('race')||'').toUpperCase():null;
- if(race&&/^[A-Z]{2}-(?:\d{1,2}|SENATE|GOVERNOR)$/.test(race))selectedRace=race;
+ const race=(urlSearch.get('race')||'').toUpperCase();
+ if(/^[A-Z]{2}-(?:\d{1,2}|SENATE|GOVERNOR)$/.test(race)&&(!requested||race.slice(0,2)===requested)){
+  selectedRace=race;selectedState=race.slice(0,2);
+  const office=race.endsWith('-SENATE')?'Senate':race.endsWith('-GOVERNOR')?'Governor':'House';
+  filter=office;
+  for(const b of document.querySelectorAll('[data-office]'))b.classList.toggle('is-active',b.dataset.office===office);
+ }
  $('nightStateFilter')?.addEventListener('change',e=>{
   selectedState=e.target.value;selectedRace='';const url=new URL(location.href);
   if(selectedState==='all')url.searchParams.delete('state');else url.searchParams.set('state',selectedState);
