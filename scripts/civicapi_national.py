@@ -275,6 +275,27 @@ def probe_provider(registry,now):
  status["networkReachable"]=any(v.get("connected") for v in status.values())
  return status
 
+def coverage_by_office(expected,registry,now,stored,issues):
+ """Audit every 2026 House, Senate and governor contest, including missing IDs.
+ A missing vote record never means that a race has zero votes in the real world.
+ """
+ office={}
+ for name in ("house","senate","governor"):
+  keys=[key for key,row in expected.items() if row["office"]==name]
+  mapped=[key for key in keys if key in registry]
+  eligible=[key for key in mapped if now>=after_close(key)]
+  reports=[key for key in mapped if key in stored and isinstance(stored[key],dict)
+           and stored[key].get("verified") is True and int(stored[key].get("total") or 0)>0]
+  missing=[key for key in keys if key not in registry]
+  without=[key for key in eligible if key not in reports]
+  office[name]={"targeted":len(keys),"registered":len(mapped),"missingRegistryIds":missing,
+   "eligibleForCollection":len(eligible),"awaitingPollClose":sum(now<after_close(key) for key in mapped),
+   "verifiedReports":len(reports),"eligibleWithoutValidVoteReport":len(without),
+   "sourceErrors":sum(str(issues.get(key,"")).startswith("fetch_") for key in eligible),
+   "validationPending":len(without)-sum(str(issues.get(key,"")).startswith("fetch_") for key in eligible)}
+ assert {name:x["targeted"] for name,x in office.items()}=={"house":435,"senate":35,"governor":36}
+ return office
+
 def main():
  now=current()
  expected=targets()
@@ -329,7 +350,8 @@ def main():
  health={"version":2,"election":DAY,"provider":"civicAPI v2","checkedAt":iso(now),
   "targetRaces":len(expected),"registeredRaces":len(registry),"eligibleRaces":len(eligible),
   "fetched":fetched,"publishedRaces":len(stored),"updatedRaces":added,
-  "discovery":discovery,"providerConnectivity":provider_connectivity,"errors":dict(list(issues.items())[:80]),
+   "officeCoverage":coverage_by_office(expected,registry,now,stored,issues),
+  "discovery":discovery,"providerConnectivity":provider_connectivity,"errors":issues,
    "transientApiErrors":sum(v.startswith("fetch_HTTP_5") or v=="fetch_HTTP_429" or v=="fetch_TimeoutError" for v in issues.values()),
   "fallback":"Open America and state clerks only if CivicAPI has no valid current report for the contest",
   "polling":{"state":"not_integrated","note":"No verified CivicAPI polling endpoint; election results never become a pre-election poll."}}
