@@ -6,18 +6,20 @@ const root=new URL('../',script?.src||location.href);
 const url=p=>new URL(p,root).href;
 const path=location.pathname;
 const isArchive=new URLSearchParams(location.search).get('view')==='final';
-const where=path.includes('/analysis/')?'analysis':path.includes('/results/')?'results':path.includes('/election-night/')?'other':path.includes('/states/')?'states':path.includes('/state/')?'state':path.includes('/house/')?'house':path.includes('/governors/')?'governors':path.includes('/michigan/')?'michigan':path.includes('/stats-for-nerds/')?'methods':'other';
+const where=path.includes('/archive/')?'archive':path.includes('/analysis/')?'analysis':path.includes('/results/')?'results':path.includes('/election-night/')?'other':path.includes('/states/')?'states':path.includes('/state/')?'state':path.includes('/house/')?'house':path.includes('/governors/')?'governors':path.includes('/michigan/')?'michigan':path.includes('/stats-for-nerds/')?'methods':'other';
 const items=[
+ ['Home','states/','states'],
  ['Results','results/','results'],
- ['States','states/','states'],
+ ['Texas','analysis/texas-new-era/','texas'],
+ ['Kansas','analysis/kansas-hamilton-upset/','kansas'],
+ ['South Carolina','analysis/south-carolina-andrews/','south-carolina'],
  ['House','house/','house'],
  ['Governors','governors/','governors'],
  ['Analysis','analysis/','analysis'],
- ['Data & methods','stats-for-nerds/','methods'],
- ['Forecast archive','states/?view=final#edSimulationPanel','archive']
+ ['Archive','archive/','archive']
 ];
 const nav=document.createElement('nav');nav.className='pe-global-nav';nav.setAttribute('aria-label','Ervin Model election reporting sections');
-const label=document.createElement('div');label.className='pe-global-label';label.innerHTML='<span class="pe-red-dot" aria-hidden="true"></span><strong>THE ERVIN MODEL</strong><small>2026 POST-MIDTERM EDITION</small>';
+const label=document.createElement('div');label.className='pe-global-label';label.innerHTML='<strong>THE STATE DESK</strong><small>ELECTIONS · NEWS · DATA</small>';
 const links=document.createElement('div');links.className='pe-global-links';
 for(const [name,target,section] of items){
  const a=document.createElement('a');a.href=url(target);a.textContent=name;
