@@ -1758,6 +1758,41 @@
       "winner": "Bobby Scott",
       "party": "D",
       "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "ME-SENATE": {
+      "winner": "Troy Jackson",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/ac895e873f373e5560c4a6c137b2ac19"
+    },
+    "MI-SENATE": {
+      "winner": "Abdul El-Sayed",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/d546ffbcf04fbb4eb581f63f807a0609"
+    },
+    "WY-SENATE": {
+      "winner": "Harriet Hageman",
+      "party": "R",
+      "sourceUrl": "https://apnews.com/article/58098fbee9554e519e4ffc629c142262"
+    },
+    "ID-SENATE": {
+      "winner": "Jim Risch",
+      "party": "R",
+      "sourceUrl": "https://apnews.com/article/164299175bda40468efb7bc6f34d22e0"
+    },
+    "IL-GOVERNOR": {
+      "winner": "JB Pritzker",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/f126e12e05b579a327b98481c0ae2226"
+    },
+    "MA-GOVERNOR": {
+      "winner": "Maura Healey",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/741e92b6c2db425eaf01f3e80c66658b"
+    },
+    "NY-GOVERNOR": {
+      "winner": "Kathy Hochul",
+      "party": "D",
+      "sourceUrl": "https://apnews.com/article/d79acbb3249e45e1bd022eeb10033deb"
     }
   }
 }
