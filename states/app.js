@@ -6,7 +6,7 @@ const states=(window.ERVIN_US_GEOGRAPHY?.states||[]).slice().sort((a,b)=>a.name.
 const names=Object.fromEntries(states.map(x=>[x.code,x.name]));
 const selectedOffice=new URLSearchParams(location.search).get('office');
 const focusedOffice=['house','governor'].includes(selectedOffice)?selectedOffice:null;
-let mapOffice=['house','governor','senate'].includes(selectedOffice)?selectedOffice:'senate',mapView='forecast';
+let mapOffice=['house','governor','senate'].includes(selectedOffice)?selectedOffice:'senate',mapView=new URLSearchParams(location.search).get('view')==='final'?'forecast':'reported';
 const href=code=>'../state/?state='+encodeURIComponent(code)+(focusedOffice==="house"?'#stateHouse':focusedOffice==="governor"?'#stateOverview':'');
 const REGION={Northeast:'CT ME MA NH NJ NY PA RI VT',Midwest:'IL IN IA KS MI MN MO NE ND OH SD WI',South:'AL AR DE FL GA KY LA MD MS NC OK SC TN TX VA WV',West:'AK AZ CA CO HI ID MT NV NM OR UT WA WY'};
 const MARGIN=n=>!Number.isFinite(n)?'No comparable margin':Math.abs(n)<.05?'Even':(n>0?'D +':'R +')+Math.abs(n).toFixed(1);
@@ -199,7 +199,7 @@ function init(){
  for(const button of document.querySelectorAll('[data-state-map-view]'))button.addEventListener('click',()=>setMapView(button.dataset.stateMapView));
  window.addEventListener('ervin:home-results-update',()=>{if(mapView!=='forecast')drawMap()});
  window.addEventListener('ervin:home-live',()=>setMapView('reported'));
- setMapView('forecast');
+ setMapView(new URLSearchParams(location.search).get('view')==='final'?'forecast':'reported');
  $('quickSelect').innerHTML='<option value="">Choose a state…</option>'+states.map(s=>'<option value="'+s.code+'">'+esc(s.name)+'</option>').join('');
  $('quickSelect').onchange=e=>{if(names[e.target.value])location.href=href(e.target.value)};
  $('stateSearch').addEventListener('input',search);
