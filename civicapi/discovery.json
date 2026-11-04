@@ -1,6 +1,6 @@
 {
-  "attemptedRaces": 426,
-  "checkedAt": "2026-11-04T03:28:11.671068Z",
+  "attemptedRaces": 498,
+  "checkedAt": "2026-11-04T04:11:33.651042Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
@@ -11,20 +11,20 @@
     "unmapped": 2
   },
   "election": "2026-11-03",
-  "eligibleRaces": 426,
+  "eligibleRaces": 498,
   "errors": {
-    "AL-01": "fetch_HTTP_502",
-    "AL-02": "fetch_HTTP_502",
-    "AL-03": "fetch_TimeoutError",
+    "AL-01": "fetch_TimeoutError",
+    "AL-02": "fetch_TimeoutError",
+    "AL-03": "fetch_HTTP_502",
     "AL-04": "fetch_HTTP_502",
     "AL-05": "fetch_HTTP_502",
     "AL-06": "fetch_HTTP_502",
-    "AL-07": "fetch_HTTP_502",
+    "AL-07": "fetch_TimeoutError",
     "AL-GOVERNOR": "fetch_HTTP_502",
     "AL-SENATE": "fetch_HTTP_502",
     "AR-01": "fetch_TimeoutError",
     "AR-02": "fetch_HTTP_502",
-    "AR-03": "fetch_HTTP_502",
+    "AR-03": "fetch_TimeoutError",
     "AR-04": "fetch_TimeoutError",
     "AR-GOVERNOR": "fetch_HTTP_502",
     "AR-SENATE": "fetch_HTTP_502",
@@ -33,29 +33,81 @@
     "AZ-03": "fetch_HTTP_502",
     "AZ-04": "fetch_TimeoutError",
     "AZ-05": "fetch_HTTP_502",
-    "AZ-06": "fetch_TimeoutError",
-    "AZ-07": "fetch_TimeoutError",
-    "AZ-08": "fetch_HTTP_502",
+    "AZ-06": "fetch_HTTP_502",
+    "AZ-07": "fetch_HTTP_502",
     "AZ-09": "fetch_HTTP_502",
     "AZ-GOVERNOR": "fetch_HTTP_502",
+    "CA-01": "fetch_HTTP_502",
+    "CA-02": "fetch_HTTP_502",
+    "CA-03": "fetch_HTTP_502",
+    "CA-04": "fetch_HTTP_502",
+    "CA-05": "fetch_HTTP_502",
+    "CA-06": "fetch_HTTP_502",
+    "CA-07": "fetch_HTTP_500",
+    "CA-08": "fetch_TimeoutError",
+    "CA-09": "fetch_HTTP_502",
+    "CA-10": "fetch_HTTP_502",
+    "CA-11": "fetch_HTTP_502",
+    "CA-12": "fetch_HTTP_502",
+    "CA-13": "fetch_HTTP_502",
+    "CA-14": "fetch_HTTP_502",
+    "CA-15": "fetch_TimeoutError",
+    "CA-16": "fetch_HTTP_502",
+    "CA-17": "fetch_HTTP_502",
+    "CA-18": "fetch_HTTP_502",
+    "CA-19": "fetch_HTTP_502",
+    "CA-20": "fetch_HTTP_502",
+    "CA-21": "fetch_HTTP_502",
+    "CA-22": "fetch_HTTP_502",
+    "CA-23": "fetch_HTTP_502",
+    "CA-24": "fetch_HTTP_502",
+    "CA-25": "fetch_HTTP_502",
+    "CA-26": "fetch_HTTP_502",
+    "CA-27": "fetch_HTTP_502",
+    "CA-28": "fetch_HTTP_502",
+    "CA-29": "fetch_HTTP_502",
+    "CA-30": "fetch_HTTP_502",
+    "CA-31": "fetch_HTTP_502",
+    "CA-32": "fetch_HTTP_502",
+    "CA-33": "fetch_HTTP_502",
+    "CA-34": "fetch_HTTP_502",
+    "CA-35": "fetch_HTTP_502",
+    "CA-36": "fetch_TimeoutError",
+    "CA-37": "fetch_HTTP_502",
+    "CA-38": "fetch_HTTP_502",
+    "CA-39": "fetch_HTTP_502",
+    "CA-40": "fetch_HTTP_502",
+    "CA-41": "fetch_HTTP_502",
+    "CA-42": "fetch_HTTP_502",
+    "CA-43": "fetch_TimeoutError",
+    "CA-44": "fetch_HTTP_502",
+    "CA-45": "fetch_TimeoutError",
+    "CA-46": "fetch_HTTP_502",
+    "CA-47": "fetch_HTTP_502",
+    "CA-48": "fetch_TimeoutError",
+    "CA-49": "fetch_TimeoutError",
+    "CA-50": "fetch_HTTP_502",
+    "CA-51": "fetch_HTTP_502",
+    "CA-52": "fetch_TimeoutError",
+    "CA-GOVERNOR": "fetch_TimeoutError",
     "CO-01": "fetch_HTTP_502",
     "CO-02": "fetch_TimeoutError",
-    "CO-03": "fetch_TimeoutError",
-    "CO-04": "fetch_HTTP_502",
+    "CO-03": "fetch_HTTP_502",
+    "CO-04": "fetch_TimeoutError",
     "CO-05": "fetch_TimeoutError",
-    "CO-06": "no_valid_reported_votes",
-    "CO-07": "fetch_HTTP_502",
+    "CO-06": "fetch_HTTP_500",
+    "CO-07": "fetch_TimeoutError",
     "CO-08": "fetch_HTTP_502",
     "CO-GOVERNOR": "fetch_HTTP_502",
     "CO-SENATE": "fetch_HTTP_502",
     "CT-01": "fetch_HTTP_502",
     "CT-02": "fetch_HTTP_502",
-    "CT-03": "fetch_HTTP_502",
+    "CT-03": "fetch_TimeoutError",
     "CT-04": "fetch_HTTP_502",
     "CT-05": "fetch_HTTP_502",
     "CT-GOVERNOR": "fetch_HTTP_502",
     "DE-01": "fetch_HTTP_502",
-    "DE-SENATE": "fetch_HTTP_502",
+    "DE-SENATE": "fetch_TimeoutError",
     "FL-01": "fetch_HTTP_502",
     "FL-02": "fetch_HTTP_502",
     "FL-03": "fetch_HTTP_502",
@@ -68,59 +120,72 @@
     "FL-10": "fetch_HTTP_502",
     "FL-11": "fetch_HTTP_502",
     "FL-12": "fetch_HTTP_502",
-    "FL-13": "fetch_HTTP_502",
+    "FL-13": "fetch_TimeoutError",
     "FL-14": "fetch_HTTP_502",
     "FL-15": "fetch_TimeoutError",
-    "FL-16": "fetch_HTTP_502",
-    "FL-17": "fetch_HTTP_502",
+    "FL-16": "fetch_TimeoutError",
+    "FL-17": "fetch_TimeoutError",
     "FL-18": "fetch_TimeoutError",
-    "FL-19": "fetch_HTTP_502",
+    "FL-19": "fetch_TimeoutError",
     "FL-20": "fetch_TimeoutError",
-    "FL-21": "fetch_HTTP_502",
-    "FL-22": "fetch_HTTP_502",
-    "FL-23": "fetch_HTTP_502",
-    "FL-24": "fetch_HTTP_502",
+    "FL-21": "fetch_TimeoutError",
+    "FL-22": "fetch_TimeoutError",
+    "FL-23": "fetch_TimeoutError",
+    "FL-24": "fetch_TimeoutError",
     "FL-25": "fetch_TimeoutError",
     "FL-26": "fetch_TimeoutError",
-    "FL-27": "fetch_HTTP_502",
+    "FL-27": "fetch_TimeoutError",
     "FL-28": "fetch_TimeoutError",
     "FL-GOVERNOR": "fetch_HTTP_502",
-    "FL-SENATE": "fetch_HTTP_502",
+    "FL-SENATE": "fetch_TimeoutError",
     "GA-01": "fetch_TimeoutError",
-    "GA-03": "fetch_TimeoutError",
-    "GA-04": "fetch_TimeoutError",
+    "GA-02": "fetch_TimeoutError",
+    "GA-03": "fetch_HTTP_502",
+    "GA-04": "fetch_HTTP_502",
     "GA-05": "fetch_HTTP_502",
     "GA-06": "fetch_HTTP_502",
     "GA-07": "fetch_HTTP_502",
     "GA-08": "fetch_HTTP_502",
-    "GA-10": "fetch_TimeoutError",
+    "GA-09": "fetch_HTTP_502",
+    "GA-10": "fetch_HTTP_502",
     "GA-11": "fetch_HTTP_502",
-    "GA-12": "fetch_TimeoutError",
-    "GA-13": "fetch_TimeoutError",
-    "GA-14": "fetch_TimeoutError",
+    "GA-12": "fetch_HTTP_502",
+    "GA-13": "fetch_HTTP_502",
+    "GA-14": "fetch_HTTP_502",
     "GA-GOVERNOR": "fetch_HTTP_502",
     "GA-SENATE": "fetch_HTTP_502",
-    "IA-01": "fetch_TimeoutError",
-    "IA-02": "fetch_TimeoutError",
-    "IA-04": "fetch_TimeoutError",
+    "IA-01": "fetch_HTTP_502",
+    "IA-02": "fetch_HTTP_502",
+    "IA-03": "fetch_HTTP_502",
+    "IA-04": "fetch_HTTP_502",
     "IA-GOVERNOR": "fetch_HTTP_502",
+    "IA-SENATE": "fetch_TimeoutError",
+    "ID-01": "fetch_HTTP_502",
     "ID-02": "fetch_HTTP_502",
-    "ID-SENATE": "fetch_HTTP_502",
-    "IL-02": "fetch_TimeoutError",
+    "ID-GOVERNOR": "fetch_HTTP_502",
+    "ID-SENATE": "fetch_TimeoutError",
+    "IL-01": "fetch_HTTP_502",
+    "IL-02": "fetch_HTTP_502",
     "IL-03": "fetch_HTTP_502",
+    "IL-04": "fetch_HTTP_502",
+    "IL-05": "fetch_HTTP_502",
     "IL-06": "fetch_HTTP_502",
     "IL-07": "fetch_HTTP_502",
+    "IL-08": "fetch_HTTP_502",
     "IL-09": "fetch_HTTP_502",
-    "IL-10": "fetch_HTTP_500",
+    "IL-10": "fetch_HTTP_502",
     "IL-11": "fetch_HTTP_502",
+    "IL-12": "fetch_HTTP_502",
     "IL-13": "fetch_HTTP_502",
     "IL-14": "fetch_HTTP_502",
-    "IL-17": "fetch_HTTP_502",
+    "IL-15": "fetch_HTTP_502",
+    "IL-16": "fetch_HTTP_502",
+    "IL-17": "fetch_TimeoutError",
     "IL-GOVERNOR": "fetch_HTTP_502",
-    "IL-SENATE": "fetch_TimeoutError",
-    "IN-01": "fetch_TimeoutError",
-    "IN-02": "fetch_TimeoutError",
-    "IN-03": "fetch_TimeoutError",
+    "IL-SENATE": "fetch_HTTP_502",
+    "IN-01": "fetch_HTTP_502",
+    "IN-02": "fetch_HTTP_502",
+    "IN-03": "fetch_HTTP_502",
     "IN-04": "fetch_HTTP_502",
     "IN-05": "fetch_HTTP_502",
     "IN-06": "fetch_HTTP_502",
@@ -129,8 +194,8 @@
     "IN-09": "fetch_HTTP_502",
     "KS-01": "fetch_HTTP_502",
     "KS-02": "fetch_HTTP_502",
-    "KS-03": "fetch_HTTP_502",
-    "KS-04": "fetch_HTTP_502",
+    "KS-03": "fetch_TimeoutError",
+    "KS-04": "fetch_TimeoutError",
     "KS-GOVERNOR": "fetch_HTTP_502",
     "KS-SENATE": "fetch_HTTP_502",
     "KY-01": "fetch_HTTP_502",
@@ -139,118 +204,107 @@
     "KY-04": "fetch_HTTP_502",
     "KY-05": "fetch_HTTP_502",
     "KY-06": "fetch_HTTP_502",
-    "KY-SENATE": "fetch_HTTP_502",
+    "KY-SENATE": "fetch_TimeoutError",
     "LA-01": "fetch_HTTP_502",
     "LA-02": "fetch_HTTP_502",
     "LA-03": "fetch_HTTP_502",
-    "LA-04": "fetch_HTTP_502",
-    "LA-05": "fetch_HTTP_502",
-    "LA-06": "fetch_HTTP_502",
-    "MA-01": "fetch_HTTP_502",
-    "MA-02": "fetch_HTTP_502",
-    "MA-03": "fetch_HTTP_502",
-    "MA-04": "fetch_HTTP_502",
-    "MA-05": "fetch_HTTP_502",
-    "MA-06": "fetch_HTTP_502",
-    "MA-07": "fetch_HTTP_502",
+    "LA-04": "fetch_TimeoutError",
+    "LA-05": "fetch_TimeoutError",
+    "LA-SENATE": "fetch_HTTP_502",
+    "MA-02": "fetch_TimeoutError",
+    "MA-03": "fetch_TimeoutError",
+    "MA-04": "fetch_TimeoutError",
+    "MA-05": "fetch_TimeoutError",
+    "MA-06": "fetch_TimeoutError",
+    "MA-07": "fetch_TimeoutError",
     "MA-08": "fetch_HTTP_502",
     "MA-09": "fetch_HTTP_502",
     "MA-GOVERNOR": "fetch_HTTP_502",
-    "MA-SENATE": "fetch_HTTP_502",
-    "MD-01": "fetch_HTTP_502",
-    "MD-02": "fetch_HTTP_502",
-    "MD-03": "fetch_HTTP_502",
-    "MD-04": "fetch_HTTP_502",
-    "MD-05": "fetch_HTTP_502",
+    "MA-SENATE": "fetch_TimeoutError",
+    "MD-01": "fetch_TimeoutError",
+    "MD-04": "fetch_TimeoutError",
     "MD-06": "fetch_HTTP_502",
-    "MD-07": "fetch_HTTP_502",
-    "MD-08": "fetch_HTTP_502",
+    "MD-07": "fetch_TimeoutError",
     "MD-GOVERNOR": "fetch_HTTP_502",
     "ME-01": "fetch_HTTP_502",
     "ME-02": "fetch_HTTP_502",
-    "ME-GOVERNOR": "fetch_HTTP_502",
-    "ME-SENATE": "fetch_HTTP_502",
+    "ME-SENATE": "fetch_TimeoutError",
     "MI-01": "fetch_HTTP_502",
     "MI-02": "fetch_HTTP_502",
-    "MI-03": "fetch_HTTP_502",
+    "MI-03": "fetch_TimeoutError",
     "MI-04": "fetch_HTTP_502",
     "MI-05": "fetch_HTTP_502",
     "MI-06": "fetch_HTTP_502",
-    "MI-07": "fetch_HTTP_502",
-    "MI-08": "fetch_HTTP_502",
-    "MI-09": "fetch_HTTP_502",
+    "MI-08": "fetch_TimeoutError",
+    "MI-09": "fetch_TimeoutError",
     "MI-10": "fetch_HTTP_502",
     "MI-11": "fetch_HTTP_502",
     "MI-12": "fetch_HTTP_502",
     "MI-13": "fetch_HTTP_502",
     "MI-GOVERNOR": "fetch_HTTP_502",
     "MI-SENATE": "fetch_HTTP_502",
-    "MN-01": "fetch_HTTP_502",
+    "MN-01": "fetch_TimeoutError",
     "MN-02": "fetch_HTTP_502",
     "MN-03": "fetch_HTTP_502",
-    "MN-04": "fetch_HTTP_502",
-    "MN-05": "fetch_HTTP_502",
+    "MN-04": "no_valid_reported_votes",
+    "MN-05": "no_valid_reported_votes",
     "MN-06": "fetch_HTTP_502",
     "MN-07": "fetch_HTTP_502",
-    "MN-08": "fetch_HTTP_502",
+    "MN-08": "fetch_TimeoutError",
     "MN-GOVERNOR": "fetch_HTTP_502",
+    "MN-SENATE": "fetch_HTTP_502",
     "MO-01": "fetch_HTTP_502",
-    "MO-02": "fetch_HTTP_502",
-    "MO-03": "fetch_TimeoutError",
-    "MO-04": "fetch_TimeoutError",
-    "MO-05": "fetch_TimeoutError",
-    "MO-06": "fetch_TimeoutError",
-    "MO-07": "fetch_TimeoutError",
-    "MO-08": "fetch_TimeoutError",
-    "MS-01": "fetch_TimeoutError",
-    "MS-02": "fetch_TimeoutError",
-    "MS-03": "fetch_TimeoutError",
-    "MS-04": "fetch_HTTP_500",
-    "MS-SENATE": "fetch_HTTP_502",
-    "MT-01": "fetch_TimeoutError",
-    "MT-02": "fetch_HTTP_500",
+    "MO-03": "fetch_HTTP_502",
+    "MO-04": "fetch_HTTP_502",
+    "MO-05": "fetch_HTTP_502",
+    "MO-06": "fetch_HTTP_502",
+    "MO-07": "fetch_HTTP_502",
+    "MO-08": "fetch_HTTP_502",
+    "MS-01": "fetch_HTTP_502",
+    "MS-02": "fetch_HTTP_502",
+    "MS-03": "fetch_HTTP_502",
+    "MS-04": "fetch_HTTP_502",
+    "MS-SENATE": "fetch_TimeoutError",
+    "MT-01": "fetch_HTTP_502",
+    "MT-02": "fetch_HTTP_502",
     "MT-SENATE": "fetch_HTTP_502",
-    "NC-01": "fetch_TimeoutError",
-    "NC-02": "fetch_HTTP_502",
-    "NC-03": "fetch_TimeoutError",
+    "NC-01": "fetch_HTTP_502",
+    "NC-02": "fetch_TimeoutError",
+    "NC-03": "fetch_HTTP_502",
     "NC-04": "fetch_HTTP_502",
-    "NC-05": "fetch_HTTP_502",
+    "NC-05": "fetch_TimeoutError",
     "NC-06": "fetch_HTTP_502",
     "NC-07": "fetch_HTTP_502",
-    "NC-08": "fetch_HTTP_502",
     "NC-09": "fetch_HTTP_502",
     "NC-10": "fetch_HTTP_502",
-    "NC-11": "fetch_TimeoutError",
+    "NC-11": "fetch_HTTP_502",
     "NC-12": "fetch_HTTP_502",
     "NC-13": "fetch_HTTP_502",
-    "NC-14": "fetch_HTTP_502",
-    "NC-SENATE": "fetch_HTTP_502",
+    "NC-14": "fetch_TimeoutError",
+    "NC-SENATE": "fetch_TimeoutError",
     "ND-01": "fetch_TimeoutError",
-    "NE-01": "fetch_HTTP_502",
+    "NE-01": "fetch_TimeoutError",
     "NE-02": "fetch_TimeoutError",
-    "NE-03": "fetch_TimeoutError",
-    "NE-GOVERNOR": "fetch_HTTP_502",
+    "NE-GOVERNOR": "fetch_TimeoutError",
     "NE-SENATE": "fetch_HTTP_502",
-    "NH-01": "fetch_HTTP_502",
+    "NH-01": "fetch_TimeoutError",
+    "NH-02": "fetch_TimeoutError",
     "NH-GOVERNOR": "fetch_HTTP_502",
-    "NH-SENATE": "fetch_HTTP_502",
-    "NJ-01": "fetch_HTTP_502",
-    "NJ-02": "fetch_TimeoutError",
-    "NJ-04": "fetch_HTTP_502",
+    "NH-SENATE": "fetch_TimeoutError",
+    "NJ-01": "fetch_TimeoutError",
+    "NJ-04": "fetch_TimeoutError",
     "NJ-05": "fetch_TimeoutError",
-    "NJ-06": "fetch_HTTP_502",
+    "NJ-06": "fetch_TimeoutError",
     "NJ-07": "fetch_HTTP_502",
     "NJ-08": "fetch_TimeoutError",
-    "NJ-09": "fetch_TimeoutError",
-    "NJ-10": "fetch_HTTP_502",
-    "NJ-11": "fetch_HTTP_502",
+    "NJ-11": "fetch_TimeoutError",
+    "NJ-12": "fetch_TimeoutError",
     "NJ-SENATE": "fetch_HTTP_502",
-    "NM-01": "fetch_HTTP_502",
-    "NM-02": "fetch_HTTP_502",
+    "NM-01": "fetch_HTTP_500",
     "NM-03": "fetch_HTTP_502",
     "NM-GOVERNOR": "fetch_HTTP_502",
-    "NM-SENATE": "fetch_HTTP_502",
-    "NV-01": "no_valid_reported_votes",
+    "NM-SENATE": "fetch_TimeoutError",
+    "NV-01": "fetch_HTTP_502",
     "NV-02": "fetch_HTTP_502",
     "NV-03": "fetch_HTTP_502",
     "NV-04": "fetch_HTTP_502",
@@ -261,7 +315,7 @@
     "NY-04": "fetch_HTTP_502",
     "NY-05": "fetch_HTTP_502",
     "NY-06": "fetch_HTTP_502",
-    "NY-07": "fetch_HTTP_502",
+    "NY-07": "fetch_TimeoutError",
     "NY-08": "fetch_HTTP_502",
     "NY-09": "fetch_HTTP_502",
     "NY-10": "fetch_HTTP_502",
@@ -273,40 +327,39 @@
     "NY-16": "fetch_HTTP_502",
     "NY-17": "fetch_HTTP_502",
     "NY-18": "fetch_HTTP_502",
-    "NY-19": "fetch_HTTP_502",
     "NY-20": "fetch_HTTP_502",
     "NY-21": "fetch_HTTP_502",
     "NY-22": "fetch_HTTP_502",
     "NY-23": "fetch_HTTP_502",
     "NY-24": "fetch_HTTP_502",
     "NY-25": "fetch_HTTP_502",
-    "NY-26": "fetch_HTTP_502",
+    "NY-26": "fetch_TimeoutError",
     "NY-GOVERNOR": "fetch_HTTP_502",
     "OH-01": "fetch_HTTP_502",
-    "OH-02": "fetch_HTTP_502",
+    "OH-02": "fetch_TimeoutError",
     "OH-03": "fetch_HTTP_502",
-    "OH-04": "fetch_HTTP_502",
-    "OH-05": "fetch_HTTP_502",
+    "OH-04": "fetch_TimeoutError",
+    "OH-05": "fetch_TimeoutError",
     "OH-06": "fetch_HTTP_502",
     "OH-07": "fetch_HTTP_502",
-    "OH-08": "fetch_HTTP_502",
-    "OH-09": "fetch_HTTP_502",
-    "OH-10": "fetch_HTTP_502",
-    "OH-11": "fetch_HTTP_502",
+    "OH-10": "fetch_TimeoutError",
     "OH-12": "fetch_HTTP_502",
     "OH-13": "fetch_HTTP_502",
     "OH-14": "fetch_HTTP_502",
-    "OH-15": "fetch_HTTP_502",
     "OH-GOVERNOR": "fetch_HTTP_502",
-    "OH-SENATE": "fetch_HTTP_502",
+    "OH-SENATE": "fetch_TimeoutError",
     "OK-01": "fetch_HTTP_502",
     "OK-02": "fetch_HTTP_502",
     "OK-03": "fetch_HTTP_502",
-    "OK-04": "fetch_HTTP_502",
-    "OK-05": "fetch_HTTP_502",
     "OK-GOVERNOR": "fetch_HTTP_502",
-    "OK-SENATE": "fetch_HTTP_502",
-    "OR-SENATE": "fetch_HTTP_502",
+    "OK-SENATE": "fetch_TimeoutError",
+    "OR-01": "fetch_HTTP_502",
+    "OR-02": "fetch_HTTP_502",
+    "OR-03": "fetch_HTTP_502",
+    "OR-04": "fetch_HTTP_502",
+    "OR-05": "fetch_HTTP_502",
+    "OR-GOVERNOR": "fetch_HTTP_502",
+    "OR-SENATE": "fetch_TimeoutError",
     "PA-01": "fetch_HTTP_502",
     "PA-02": "fetch_HTTP_502",
     "PA-03": "fetch_HTTP_502",
@@ -316,94 +369,98 @@
     "PA-07": "fetch_HTTP_502",
     "PA-08": "fetch_HTTP_502",
     "PA-09": "fetch_HTTP_502",
-    "PA-10": "fetch_HTTP_502",
-    "PA-11": "fetch_HTTP_502",
+    "PA-10": "fetch_TimeoutError",
+    "PA-11": "no_valid_reported_votes",
     "PA-12": "fetch_HTTP_502",
     "PA-13": "fetch_HTTP_502",
     "PA-14": "fetch_HTTP_502",
     "PA-15": "fetch_HTTP_502",
     "PA-16": "fetch_HTTP_502",
-    "PA-17": "fetch_HTTP_502",
+    "PA-17": "no_valid_reported_votes",
     "PA-GOVERNOR": "fetch_HTTP_502",
     "RI-01": "fetch_HTTP_502",
-    "RI-02": "fetch_HTTP_502",
     "RI-GOVERNOR": "fetch_HTTP_502",
-    "RI-SENATE": "fetch_HTTP_502",
-    "SC-01": "fetch_HTTP_502",
-    "SC-02": "fetch_HTTP_502",
+    "RI-SENATE": "fetch_TimeoutError",
     "SC-03": "fetch_HTTP_502",
     "SC-04": "fetch_HTTP_502",
     "SC-05": "fetch_HTTP_502",
     "SC-06": "fetch_HTTP_502",
     "SC-07": "fetch_HTTP_502",
-    "SC-GOVERNOR": "fetch_HTTP_502",
+    "SC-GOVERNOR": "fetch_TimeoutError",
     "SC-SENATE": "fetch_HTTP_502",
     "SD-01": "fetch_HTTP_502",
     "SD-GOVERNOR": "fetch_HTTP_502",
     "SD-SENATE": "fetch_HTTP_502",
-    "TN-01": "fetch_HTTP_502",
-    "TN-02": "fetch_HTTP_502",
-    "TN-03": "fetch_HTTP_502",
     "TN-04": "fetch_HTTP_502",
     "TN-05": "fetch_HTTP_502",
-    "TN-06": "fetch_HTTP_502",
     "TN-07": "fetch_HTTP_502",
     "TN-08": "fetch_HTTP_502",
     "TN-09": "fetch_HTTP_502",
-    "TN-GOVERNOR": "fetch_HTTP_502",
-    "TN-SENATE": "fetch_HTTP_502",
-    "TX-01": "fetch_HTTP_502",
-    "TX-02": "fetch_HTTP_502",
+    "TN-GOVERNOR": "fetch_TimeoutError",
+    "TN-SENATE": "fetch_TimeoutError",
     "TX-03": "fetch_HTTP_502",
-    "TX-04": "fetch_HTTP_502",
     "TX-05": "fetch_HTTP_502",
     "TX-06": "fetch_HTTP_502",
     "TX-07": "fetch_HTTP_502",
     "TX-08": "fetch_HTTP_502",
     "TX-09": "fetch_HTTP_502",
-    "TX-10": "fetch_HTTP_502",
-    "TX-11": "fetch_HTTP_502",
+    "TX-10": "fetch_TimeoutError",
+    "TX-11": "fetch_TimeoutError",
     "TX-12": "fetch_TimeoutError",
-    "TX-13": "fetch_HTTP_502",
+    "TX-13": "fetch_TimeoutError",
     "TX-14": "fetch_HTTP_502",
     "TX-15": "fetch_HTTP_502",
-    "TX-16": "fetch_HTTP_502",
-    "TX-17": "fetch_HTTP_502",
-    "TX-18": "fetch_HTTP_502",
-    "TX-19": "fetch_TimeoutError",
-    "TX-20": "fetch_HTTP_502",
+    "TX-16": "fetch_TimeoutError",
+    "TX-17": "fetch_TimeoutError",
+    "TX-18": "fetch_TimeoutError",
+    "TX-19": "fetch_HTTP_502",
+    "TX-20": "fetch_TimeoutError",
     "TX-21": "fetch_TimeoutError",
     "TX-22": "fetch_HTTP_502",
-    "TX-23": "fetch_HTTP_502",
-    "TX-24": "fetch_HTTP_502",
+    "TX-23": "fetch_TimeoutError",
+    "TX-24": "fetch_TimeoutError",
     "TX-25": "fetch_HTTP_502",
     "TX-26": "fetch_TimeoutError",
-    "TX-27": "fetch_HTTP_502",
-    "TX-28": "fetch_TimeoutError",
-    "TX-29": "fetch_TimeoutError",
-    "TX-30": "fetch_HTTP_502",
-    "TX-31": "fetch_HTTP_502",
-    "TX-32": "fetch_TimeoutError",
+    "TX-27": "fetch_TimeoutError",
+    "TX-28": "fetch_HTTP_502",
+    "TX-29": "fetch_HTTP_502",
+    "TX-30": "fetch_TimeoutError",
+    "TX-31": "fetch_TimeoutError",
+    "TX-32": "fetch_HTTP_502",
     "TX-33": "fetch_TimeoutError",
     "TX-34": "fetch_TimeoutError",
-    "TX-35": "fetch_HTTP_502",
+    "TX-35": "fetch_TimeoutError",
     "TX-36": "fetch_HTTP_502",
     "TX-37": "fetch_HTTP_502",
-    "TX-38": "fetch_HTTP_502",
-    "TX-GOVERNOR": "fetch_HTTP_502",
+    "TX-38": "fetch_TimeoutError",
+    "TX-GOVERNOR": "fetch_TimeoutError",
     "TX-SENATE": "fetch_HTTP_502",
-    "UT-01": "fetch_HTTP_502",
     "UT-02": "fetch_HTTP_502",
     "UT-03": "fetch_HTTP_502",
     "UT-04": "fetch_HTTP_502",
     "VA-01": "fetch_TimeoutError",
     "VA-02": "fetch_TimeoutError",
-    "VA-03": "fetch_TimeoutError",
-    "VA-05": "fetch_TimeoutError",
+    "VA-03": "fetch_HTTP_502",
+    "VA-04": "fetch_HTTP_502",
+    "VA-05": "fetch_HTTP_502",
     "VA-06": "fetch_HTTP_502",
-    "VA-11": "fetch_HTTP_502",
+    "VA-07": "fetch_HTTP_502",
+    "VA-08": "fetch_HTTP_502",
+    "VA-09": "fetch_TimeoutError",
+    "VA-10": "fetch_HTTP_502",
+    "VA-11": "fetch_TimeoutError",
     "VA-SENATE": "fetch_HTTP_502",
     "VT-GOVERNOR": "fetch_TimeoutError",
+    "WA-01": "fetch_HTTP_502",
+    "WA-02": "fetch_HTTP_502",
+    "WA-03": "fetch_HTTP_502",
+    "WA-04": "fetch_HTTP_502",
+    "WA-05": "fetch_HTTP_502",
+    "WA-06": "fetch_HTTP_502",
+    "WA-07": "fetch_HTTP_502",
+    "WA-08": "fetch_HTTP_502",
+    "WA-09": "fetch_HTTP_502",
+    "WA-10": "fetch_HTTP_502",
     "WI-01": "fetch_HTTP_502",
     "WI-02": "fetch_HTTP_502",
     "WI-03": "fetch_HTTP_502",
@@ -413,37 +470,38 @@
     "WI-07": "fetch_HTTP_502",
     "WI-08": "fetch_HTTP_502",
     "WI-GOVERNOR": "fetch_TimeoutError",
+    "WV-01": "fetch_HTTP_502",
     "WV-02": "fetch_HTTP_502",
     "WV-SENATE": "fetch_HTTP_502",
     "WY-01": "fetch_HTTP_502",
     "WY-GOVERNOR": "fetch_HTTP_502"
   },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
-  "fetched": 24,
+  "fetched": 40,
   "officeCoverage": {
     "governor": {
-      "awaitingPollClose": 5,
-      "eligibleForCollection": 31,
-      "eligibleWithoutValidVoteReport": 20,
+      "awaitingPollClose": 2,
+      "eligibleForCollection": 34,
+      "eligibleWithoutValidVoteReport": 23,
       "missingRegistryIds": [],
       "registered": 36,
-      "sourceErrors": 20,
+      "sourceErrors": 23,
       "targeted": 36,
       "validationPending": 0,
       "verifiedReports": 11
     },
     "house": {
-      "awaitingPollClose": 72,
-      "eligibleForCollection": 362,
-      "eligibleWithoutValidVoteReport": 188,
+      "awaitingPollClose": 3,
+      "eligibleForCollection": 431,
+      "eligibleWithoutValidVoteReport": 241,
       "missingRegistryIds": [
         "VT-01"
       ],
       "registered": 434,
-      "sourceErrors": 186,
+      "sourceErrors": 237,
       "targeted": 435,
-      "validationPending": 2,
-      "verifiedReports": 174
+      "validationPending": 4,
+      "verifiedReports": 190
     },
     "senate": {
       "awaitingPollClose": 1,
@@ -466,26 +524,52 @@
   "provider": "civicAPI v2",
   "providerConnectivity": {
     "KY-06": {
-      "connected": false,
-      "detail": "HTTP Error 502: Bad Gateway",
-      "failure": "HTTPError",
-      "responseMs": 104
+      "candidateRows": 5,
+      "connected": true,
+      "fields": [
+        "election_name",
+        "election_type",
+        "election_scope",
+        "election_date",
+        "country",
+        "province",
+        "district",
+        "municipality",
+        "polls_open",
+        "polls_close",
+        "is_disputed",
+        "has_map",
+        "registered_voters",
+        "percent_reporting",
+        "test_data",
+        "last_updated",
+        "called_at",
+        "round",
+        "maps",
+        "candidates",
+        "region_results"
+      ],
+      "identityMatches": true,
+      "payloadType": "dict",
+      "positiveCandidateTotals": true,
+      "providerTimestamp": "2026-11-04T04:10:41.461Z",
+      "responseMs": 3041
     },
     "MI-SENATE": {
       "connected": false,
       "detail": "HTTP Error 502: Bad Gateway",
       "failure": "HTTPError",
-      "responseMs": 110
+      "responseMs": 23
     },
-    "networkReachable": false,
+    "networkReachable": true,
     "statusEndpoint": {
       "connected": false,
-      "detail": "HTTP Error 502: Bad Gateway",
-      "failure": "HTTPError",
-      "responseMs": 96
+      "detail": "The read operation timed out",
+      "failure": "TimeoutError",
+      "responseMs": 15025
     }
   },
-  "publishedRaces": 200,
+  "publishedRaces": 216,
   "raceStatuses": {
     "AK-01": {
       "office": "house",
@@ -500,17 +584,17 @@
       "status": "awaiting_poll_close"
     },
     "AL-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "AL-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "AL-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -538,7 +622,7 @@
       "status": "source_error"
     },
     "AL-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -567,7 +651,7 @@
       "status": "source_error"
     },
     "AR-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -624,19 +708,21 @@
       "validatedVoteTotal": 205601
     },
     "AZ-06": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "AZ-07": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "AZ-08": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:11:08.870000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 197021
     },
     "AZ-09": {
       "collectionIssue": "fetch_HTTP_502",
@@ -649,216 +735,269 @@
       "status": "source_error"
     },
     "CA-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-02": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-03": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-05": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-06": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-07": {
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-08": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-09": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-10": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-11": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-12": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-13": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-14": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-15": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-16": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-17": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-18": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-19": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-20": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-21": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-22": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-23": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-24": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-25": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-26": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-27": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-28": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-29": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-30": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-31": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-32": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-33": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-34": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-35": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-36": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-37": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-38": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-39": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-40": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-41": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-42": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-43": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-44": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-45": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-46": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-47": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-48": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-49": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-50": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-51": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-52": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CA-GOVERNOR": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "governor",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "CO-01": {
       "collectionIssue": "fetch_HTTP_502",
@@ -871,12 +1010,12 @@
       "status": "source_error"
     },
     "CO-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "CO-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -886,12 +1025,12 @@
       "status": "source_error"
     },
     "CO-06": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "CO-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -925,7 +1064,7 @@
       "validatedVoteTotal": 8716
     },
     "CT-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -962,7 +1101,7 @@
       "validatedVoteTotal": 148195
     },
     "DE-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
@@ -1067,7 +1206,7 @@
       "validatedVoteTotal": 85681
     },
     "FL-13": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T00:28:03.775776Z",
       "lastValidatedResultAt": "2026-11-04T00:27:46.767000Z",
       "office": "house",
@@ -1094,7 +1233,7 @@
       "validatedVoteTotal": 198913
     },
     "FL-16": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T00:28:03.775776Z",
       "lastValidatedResultAt": "2026-11-04T00:28:51.471000Z",
       "office": "house",
@@ -1103,7 +1242,7 @@
       "validatedVoteTotal": 249963
     },
     "FL-17": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T00:28:03.775776Z",
       "lastValidatedResultAt": "2026-11-04T00:28:51.627000Z",
       "office": "house",
@@ -1121,7 +1260,7 @@
       "validatedVoteTotal": 220397
     },
     "FL-19": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T00:28:03.775776Z",
       "lastValidatedResultAt": "2026-11-04T00:28:52.028000Z",
       "office": "house",
@@ -1139,7 +1278,7 @@
       "validatedVoteTotal": 243534
     },
     "FL-21": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:12:13.887000Z",
       "office": "house",
@@ -1148,7 +1287,7 @@
       "validatedVoteTotal": 333265
     },
     "FL-22": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:12:14.032000Z",
       "office": "house",
@@ -1157,7 +1296,7 @@
       "validatedVoteTotal": 292859
     },
     "FL-23": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:12:14.169000Z",
       "office": "house",
@@ -1166,7 +1305,7 @@
       "validatedVoteTotal": 255902
     },
     "FL-24": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:12:14.376000Z",
       "office": "house",
@@ -1193,7 +1332,7 @@
       "validatedVoteTotal": 214156
     },
     "FL-27": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:38:38.676940Z",
       "lastValidatedResultAt": "2026-11-04T01:39:09.351000Z",
       "office": "house",
@@ -1220,7 +1359,7 @@
       "validatedVoteTotal": 8135404
     },
     "FL-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
@@ -1234,14 +1373,16 @@
       "validatedVoteTotal": 162342
     },
     "GA-02": {
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:51.735000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 213638
     },
     "GA-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:12:26.640000Z",
       "office": "house",
@@ -1250,7 +1391,7 @@
       "validatedVoteTotal": 227882
     },
     "GA-04": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:12:26.820000Z",
       "office": "house",
@@ -1295,14 +1436,16 @@
       "validatedVoteTotal": 223292
     },
     "GA-09": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:52.982000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 280078
     },
     "GA-10": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
       "lastValidatedResultAt": "2026-11-04T02:20:47.365000Z",
       "office": "house",
@@ -1316,12 +1459,12 @@
       "status": "source_error"
     },
     "GA-12": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "GA-13": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:19:18.893045Z",
       "lastValidatedResultAt": "2026-11-04T01:19:35.314000Z",
       "office": "house",
@@ -1330,7 +1473,7 @@
       "validatedVoteTotal": 214947
     },
     "GA-14": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
       "lastValidatedResultAt": "2026-11-04T02:20:48.217000Z",
       "office": "house",
@@ -1369,24 +1512,26 @@
       "status": "awaiting_poll_close"
     },
     "IA-01": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "IA-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "IA-03": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:28:42.343000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 226174
     },
     "IA-04": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -1400,15 +1545,18 @@
       "validatedVoteTotal": 73136
     },
     "IA-SENATE": {
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:27:40.430000Z",
       "office": "senate",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 550598
     },
     "ID-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "ID-02": {
       "collectionIssue": "fetch_HTTP_502",
@@ -1416,23 +1564,26 @@
       "status": "source_error"
     },
     "ID-GOVERNOR": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "governor",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "ID-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
     "IL-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:09.599000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 166629
     },
     "IL-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -1442,16 +1593,20 @@
       "status": "source_error"
     },
     "IL-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:10.134000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 90674
     },
     "IL-05": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:10.258000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 175200
     },
@@ -1466,9 +1621,11 @@
       "status": "source_error"
     },
     "IL-08": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:10.691000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 134496
     },
@@ -1478,7 +1635,7 @@
       "status": "source_error"
     },
     "IL-10": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -1488,9 +1645,11 @@
       "status": "source_error"
     },
     "IL-12": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:11.328000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 179662
     },
@@ -1505,21 +1664,25 @@
       "status": "source_error"
     },
     "IL-15": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:11.795000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 112698
     },
     "IL-16": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:11.977000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 87594
     },
     "IL-17": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1529,17 +1692,17 @@
       "status": "source_error"
     },
     "IL-SENATE": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
     "IN-01": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "IN-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T00:28:03.775776Z",
       "lastValidatedResultAt": "2026-11-04T00:29:05.494000Z",
       "office": "house",
@@ -1548,7 +1711,7 @@
       "validatedVoteTotal": 16714
     },
     "IN-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
       "lastValidatedResultAt": "2026-11-04T02:20:38.058000Z",
       "office": "house",
@@ -1621,12 +1784,12 @@
       "status": "source_error"
     },
     "KS-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "KS-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1691,7 +1854,7 @@
       "validatedVoteTotal": 4029
     },
     "KY-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:19:18.893045Z",
       "lastValidatedResultAt": "2026-11-04T01:19:58.682000Z",
       "office": "senate",
@@ -1715,59 +1878,65 @@
       "status": "source_error"
     },
     "LA-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "LA-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "LA-06": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:26.224000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 194291
     },
     "LA-SENATE": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:28:28.961000Z",
       "office": "senate",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 989972
     },
     "MA-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:03.599000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 95429
     },
     "MA-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MA-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MA-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MA-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MA-06": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MA-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1795,34 +1964,40 @@
       "status": "source_error"
     },
     "MA-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
     "MD-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MD-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:23.852000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 203850
     },
     "MD-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:24.015000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 239993
     },
     "MD-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MD-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:24.326000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 248181
     },
     "MD-06": {
       "collectionIssue": "fetch_HTTP_502",
@@ -1834,14 +2009,16 @@
       "validatedVoteTotal": 125727
     },
     "MD-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MD-08": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:24.954000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 236578
     },
     "MD-GOVERNOR": {
       "collectionIssue": "fetch_HTTP_502",
@@ -1867,16 +2044,14 @@
       "validatedVoteTotal": 27333
     },
     "ME-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
-      "lastValidatedResultAt": "2026-11-04T02:10:49.777000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:00.769000Z",
       "office": "governor",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 48962
+      "validatedVoteTotal": 288685
     },
     "ME-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
       "lastValidatedResultAt": "2026-11-04T02:17:23.890000Z",
       "office": "senate",
@@ -1903,7 +2078,7 @@
       "validatedVoteTotal": 7785
     },
     "MI-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1935,17 +2110,19 @@
       "validatedVoteTotal": 10341
     },
     "MI-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:11:41.847000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 206161
     },
     "MI-08": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "MI-09": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:11:40.744000Z",
       "office": "house",
@@ -1996,7 +2173,7 @@
       "status": "source_error"
     },
     "MN-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -2011,14 +2188,14 @@
       "status": "source_error"
     },
     "MN-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "no_valid_reported_votes",
       "office": "house",
-      "status": "source_error"
+      "status": "awaiting_valid_vote_report"
     },
     "MN-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "no_valid_reported_votes",
       "office": "house",
-      "status": "source_error"
+      "status": "awaiting_valid_vote_report"
     },
     "MN-06": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2031,7 +2208,7 @@
       "status": "source_error"
     },
     "MN-08": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -2041,9 +2218,11 @@
       "status": "source_error"
     },
     "MN-SENATE": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:28:00.696000Z",
       "office": "senate",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 156162
     },
@@ -2057,72 +2236,74 @@
       "validatedVoteTotal": 67295
     },
     "MO-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:29.558000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 331391
     },
     "MO-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MO-04": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MO-05": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MO-06": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MO-07": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MO-08": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MS-01": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MS-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MS-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MS-04": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MS-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
     "MT-01": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "MT-02": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2132,12 +2313,12 @@
       "status": "source_error"
     },
     "NC-01": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "NC-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:57:43.890000Z",
       "office": "house",
@@ -2146,7 +2327,7 @@
       "validatedVoteTotal": 206870
     },
     "NC-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2160,7 +2341,7 @@
       "validatedVoteTotal": 262446
     },
     "NC-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:12:43.027000Z",
       "office": "house",
@@ -2187,13 +2368,11 @@
       "validatedVoteTotal": 216877
     },
     "NC-08": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
-      "lastValidatedResultAt": "2026-11-04T01:57:44.613000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:39.683000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 210591
+      "validatedVoteTotal": 291188
     },
     "NC-09": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2214,7 +2393,7 @@
       "validatedVoteTotal": 241919
     },
     "NC-11": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2237,12 +2416,12 @@
       "validatedVoteTotal": 205177
     },
     "NC-14": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "NC-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
       "lastValidatedResultAt": "2026-11-04T02:18:03.563000Z",
       "office": "senate",
@@ -2256,7 +2435,7 @@
       "status": "source_error"
     },
     "NE-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -2266,12 +2445,14 @@
       "status": "source_error"
     },
     "NE-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:27.321000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 93440
     },
     "NE-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:10:23.663000Z",
       "office": "governor",
@@ -2285,14 +2466,16 @@
       "status": "source_error"
     },
     "NH-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "NH-02": {
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:30:09.680000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 177821
     },
@@ -2302,7 +2485,7 @@
       "status": "source_error"
     },
     "NH-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:19:18.893045Z",
       "lastValidatedResultAt": "2026-11-04T01:19:29.708000Z",
       "office": "senate",
@@ -2311,7 +2494,7 @@
       "validatedVoteTotal": 137299
     },
     "NJ-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
       "lastValidatedResultAt": "2026-11-04T02:19:12.730000Z",
       "office": "house",
@@ -2320,19 +2503,21 @@
       "validatedVoteTotal": 167000
     },
     "NJ-02": {
-      "collectionIssue": "fetch_TimeoutError",
-      "office": "house",
-      "status": "source_error"
-    },
-    "NJ-03": {
-      "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
-      "lastValidatedResultAt": "2026-11-04T03:29:51.890000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:22.305000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 176423
+      "validatedVoteTotal": 245402
+    },
+    "NJ-03": {
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:38.435000Z",
+      "office": "house",
+      "status": "reporting",
+      "validatedVoteTotal": 246458
     },
     "NJ-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:46:35.926932Z",
       "lastValidatedResultAt": "2026-11-04T01:47:06.793000Z",
       "office": "house",
@@ -2346,7 +2531,7 @@
       "status": "source_error"
     },
     "NJ-06": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -2365,24 +2550,30 @@
       "status": "source_error"
     },
     "NJ-09": {
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:25.332000Z",
+      "office": "house",
+      "status": "reporting",
+      "validatedVoteTotal": 157152
+    },
+    "NJ-10": {
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:12:25.586000Z",
+      "office": "house",
+      "status": "reporting",
+      "validatedVoteTotal": 171682
+    },
+    "NJ-11": {
       "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
-    "NJ-10": {
-      "collectionIssue": "fetch_HTTP_502",
-      "office": "house",
-      "status": "source_error"
-    },
-    "NJ-11": {
-      "collectionIssue": "fetch_HTTP_502",
-      "office": "house",
-      "status": "source_error"
-    },
     "NJ-12": {
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T03:29:54.220000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 147624
     },
@@ -2392,14 +2583,16 @@
       "status": "source_error"
     },
     "NM-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
     "NM-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:38.425000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 100971
     },
     "NM-03": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2412,14 +2605,14 @@
       "status": "source_error"
     },
     "NM-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
     "NV-01": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "NV-02": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2472,7 +2665,7 @@
       "status": "source_error"
     },
     "NY-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:09:34.539000Z",
       "office": "house",
@@ -2536,13 +2729,11 @@
       "status": "source_error"
     },
     "NY-19": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
-      "lastValidatedResultAt": "2026-11-04T03:09:36.658000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:08.921000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 238634
+      "validatedVoteTotal": 488674
     },
     "NY-20": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2575,7 +2766,7 @@
       "status": "source_error"
     },
     "NY-26": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:11:06.703000Z",
       "office": "house",
@@ -2594,7 +2785,7 @@
       "status": "source_error"
     },
     "OH-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:46:35.926932Z",
       "lastValidatedResultAt": "2026-11-04T01:47:28.554000Z",
       "office": "house",
@@ -2608,12 +2799,12 @@
       "status": "source_error"
     },
     "OH-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "OH-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:10:02.224000Z",
       "office": "house",
@@ -2640,25 +2831,21 @@
       "validatedVoteTotal": 123735
     },
     "OH-08": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:46:35.926932Z",
-      "lastValidatedResultAt": "2026-11-04T01:47:29.394000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:59.747000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 124739
+      "validatedVoteTotal": 323428
     },
     "OH-09": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:46:35.926932Z",
-      "lastValidatedResultAt": "2026-11-04T01:47:29.509000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:15:00.019000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 81400
+      "validatedVoteTotal": 148560
     },
     "OH-10": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:10:02.883000Z",
       "office": "house",
@@ -2667,13 +2854,11 @@
       "validatedVoteTotal": 232526
     },
     "OH-11": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
-      "lastValidatedResultAt": "2026-11-04T01:58:01.918000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:15:00.555000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 88635
+      "validatedVoteTotal": 114545
     },
     "OH-12": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2699,13 +2884,11 @@
       "status": "source_error"
     },
     "OH-15": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
-      "lastValidatedResultAt": "2026-11-04T01:58:02.366000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:15:01.164000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 101677
+      "validatedVoteTotal": 284279
     },
     "OH-GOVERNOR": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2713,7 +2896,7 @@
       "status": "source_error"
     },
     "OH-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
@@ -2737,22 +2920,18 @@
       "validatedVoteTotal": 120498
     },
     "OK-04": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
-      "lastValidatedResultAt": "2026-11-04T02:12:15.465000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:41.032000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 51621
+      "validatedVoteTotal": 123783
     },
     "OK-05": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
-      "lastValidatedResultAt": "2026-11-04T02:11:35.317000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:41.155000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 106707
+      "validatedVoteTotal": 264647
     },
     "OK-GOVERNOR": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2760,40 +2939,49 @@
       "status": "source_error"
     },
     "OK-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
     "OR-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "OR-02": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "OR-03": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "OR-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "OR-05": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "OR-06": {
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:12.348000Z",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "reporting",
+      "validatedVoteTotal": 149319
     },
     "OR-GOVERNOR": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "governor",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "OR-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "source_error"
     },
@@ -2843,14 +3031,14 @@
       "status": "source_error"
     },
     "PA-10": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "PA-11": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "no_valid_reported_votes",
       "office": "house",
-      "status": "source_error"
+      "status": "awaiting_valid_vote_report"
     },
     "PA-12": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2878,9 +3066,9 @@
       "status": "source_error"
     },
     "PA-17": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "no_valid_reported_votes",
       "office": "house",
-      "status": "source_error"
+      "status": "awaiting_valid_vote_report"
     },
     "PA-GOVERNOR": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2897,13 +3085,11 @@
       "validatedVoteTotal": 91897
     },
     "RI-02": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
-      "lastValidatedResultAt": "2026-11-04T02:12:11.866000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:15:07.864000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 171194
+      "validatedVoteTotal": 192993
     },
     "RI-GOVERNOR": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2911,7 +3097,7 @@
       "status": "source_error"
     },
     "RI-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
       "lastValidatedResultAt": "2026-11-04T02:18:20.575000Z",
       "office": "senate",
@@ -2920,22 +3106,18 @@
       "validatedVoteTotal": 316515
     },
     "SC-01": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:38:38.676940Z",
-      "lastValidatedResultAt": "2026-11-04T01:40:16.574000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:49.157000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 107575
+      "validatedVoteTotal": 320860
     },
     "SC-02": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
-      "lastValidatedResultAt": "2026-11-04T02:21:14.893000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:49.507000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 202991
+      "validatedVoteTotal": 294262
     },
     "SC-03": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2983,7 +3165,7 @@
       "validatedVoteTotal": 272395
     },
     "SC-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:10:14.013000Z",
       "office": "governor",
@@ -3020,31 +3202,25 @@
       "status": "source_error"
     },
     "TN-01": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:38:38.676940Z",
-      "lastValidatedResultAt": "2026-11-04T01:40:59.520000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:44.666000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 22597
+      "validatedVoteTotal": 168673
     },
     "TN-02": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
-      "lastValidatedResultAt": "2026-11-04T02:21:22.728000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:44.860000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 111454
+      "validatedVoteTotal": 227091
     },
     "TN-03": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:38:38.676940Z",
-      "lastValidatedResultAt": "2026-11-04T01:40:59.847000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:44.992000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 18175
+      "validatedVoteTotal": 228018
     },
     "TN-04": {
       "collectionIssue": "fetch_HTTP_502",
@@ -3065,13 +3241,11 @@
       "validatedVoteTotal": 21193
     },
     "TN-06": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
-      "lastValidatedResultAt": "2026-11-04T03:10:39.665000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:45.399000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 205236
+      "validatedVoteTotal": 238155
     },
     "TN-07": {
       "collectionIssue": "fetch_HTTP_502",
@@ -3101,7 +3275,7 @@
       "validatedVoteTotal": 136573
     },
     "TN-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T02:09:47.081846Z",
       "lastValidatedResultAt": "2026-11-04T02:10:50.625000Z",
       "office": "governor",
@@ -3110,7 +3284,7 @@
       "validatedVoteTotal": 686748
     },
     "TN-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:19:18.893045Z",
       "lastValidatedResultAt": "2026-11-04T01:19:40.703000Z",
       "office": "senate",
@@ -3119,22 +3293,18 @@
       "validatedVoteTotal": 56713
     },
     "TX-01": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
-      "lastValidatedResultAt": "2026-11-04T03:10:54.577000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:47.591000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 129797
+      "validatedVoteTotal": 148838
     },
     "TX-02": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
-      "lastValidatedResultAt": "2026-11-04T01:58:25.305000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:47.754000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 97010
+      "validatedVoteTotal": 219322
     },
     "TX-03": {
       "collectionIssue": "fetch_HTTP_502",
@@ -3146,13 +3316,11 @@
       "validatedVoteTotal": 224223
     },
     "TX-04": {
-      "collectionIssue": "fetch_HTTP_502",
-      "lastSuccessfulRetrievalAt": "2026-11-04T02:18:14.559284Z",
-      "lastValidatedResultAt": "2026-11-04T02:21:27.860000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:14:46.027000Z",
       "office": "house",
-      "retainedAfterSourceError": true,
       "status": "reporting",
-      "validatedVoteTotal": 219402
+      "validatedVoteTotal": 237610
     },
     "TX-05": {
       "collectionIssue": "fetch_HTTP_502",
@@ -3200,7 +3368,7 @@
       "validatedVoteTotal": 130429
     },
     "TX-10": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:58:24.086000Z",
       "office": "house",
@@ -3209,7 +3377,7 @@
       "validatedVoteTotal": 60650
     },
     "TX-11": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -3223,7 +3391,7 @@
       "validatedVoteTotal": 170053
     },
     "TX-13": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:38:38.676940Z",
       "lastValidatedResultAt": "2026-11-04T01:41:18.651000Z",
       "office": "house",
@@ -3242,12 +3410,12 @@
       "status": "source_error"
     },
     "TX-16": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "TX-17": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:58:26.789000Z",
       "office": "house",
@@ -3256,7 +3424,7 @@
       "validatedVoteTotal": 157851
     },
     "TX-18": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:10:09.524000Z",
       "office": "house",
@@ -3265,7 +3433,7 @@
       "validatedVoteTotal": 163469
     },
     "TX-19": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:58:27.020000Z",
       "office": "house",
@@ -3274,7 +3442,7 @@
       "validatedVoteTotal": 32097
     },
     "TX-20": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:58:27.130000Z",
       "office": "house",
@@ -3301,12 +3469,12 @@
       "validatedVoteTotal": 186891
     },
     "TX-23": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "TX-24": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -3325,12 +3493,12 @@
       "validatedVoteTotal": 243295
     },
     "TX-27": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "TX-28": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:10:07.255000Z",
       "office": "house",
@@ -3339,7 +3507,7 @@
       "validatedVoteTotal": 45359
     },
     "TX-29": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:10:10.442000Z",
       "office": "house",
@@ -3348,7 +3516,7 @@
       "validatedVoteTotal": 127734
     },
     "TX-30": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:10:10.563000Z",
       "office": "house",
@@ -3357,12 +3525,12 @@
       "validatedVoteTotal": 182774
     },
     "TX-31": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "TX-32": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:07:43.706919Z",
       "lastValidatedResultAt": "2026-11-04T03:10:10.683000Z",
       "office": "house",
@@ -3389,7 +3557,7 @@
       "validatedVoteTotal": 161006
     },
     "TX-35": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -3404,12 +3572,12 @@
       "status": "source_error"
     },
     "TX-38": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "TX-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "governor",
       "status": "source_error"
     },
@@ -3423,9 +3591,11 @@
       "validatedVoteTotal": 2268158
     },
     "UT-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "lastSuccessfulRetrievalAt": "2026-11-04T04:11:33.651042Z",
+      "lastValidatedResultAt": "2026-11-04T04:13:56.697000Z",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting",
+      "validatedVoteTotal": 142043
     },
     "UT-02": {
       "collectionIssue": "fetch_HTTP_502",
@@ -3461,7 +3631,7 @@
       "validatedVoteTotal": 94426
     },
     "VA-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:17:42.059000Z",
       "office": "house",
@@ -3470,14 +3640,16 @@
       "validatedVoteTotal": 52687
     },
     "VA-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T01:17:42.299000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 113610
     },
     "VA-05": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:17:42.462000Z",
       "office": "house",
@@ -3495,35 +3667,43 @@
       "validatedVoteTotal": 126582
     },
     "VA-07": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:17:42.878000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 164805
     },
     "VA-08": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:17:43.065000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 76547
     },
     "VA-09": {
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:17:43.283000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 110954
     },
     "VA-10": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:17:43.581000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 275149
     },
     "VA-11": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "lastSuccessfulRetrievalAt": "2026-11-04T01:57:36.711616Z",
       "lastValidatedResultAt": "2026-11-04T01:17:43.731000Z",
       "office": "house",
@@ -3554,44 +3734,54 @@
       "validatedVoteTotal": 35985
     },
     "WA-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-02": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-03": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-05": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-06": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-07": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-08": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-09": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WA-10": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_poll_close"
+      "status": "source_error"
     },
     "WI-01": {
       "collectionIssue": "fetch_HTTP_502",
@@ -3659,9 +3849,11 @@
       "validatedVoteTotal": 4914
     },
     "WV-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "lastSuccessfulRetrievalAt": "2026-11-04T03:28:11.671068Z",
       "lastValidatedResultAt": "2026-11-04T02:38:01.978000Z",
       "office": "house",
+      "retainedAfterSourceError": true,
       "status": "reporting",
       "validatedVoteTotal": 125849
     },
@@ -3696,7 +3888,7 @@
   },
   "registeredRaces": 504,
   "targetRaces": 506,
-  "transientApiErrors": 402,
-  "updatedRaces": 18,
+  "transientApiErrors": 458,
+  "updatedRaces": 36,
   "version": 2
 }
