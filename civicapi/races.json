@@ -667,28 +667,28 @@
       "verified": true
     },
     "IN-05": {
-      "asOf": "2026-11-04T00:05:22.669000Z",
+      "asOf": "2026-11-04T00:15:24.921000Z",
       "candidates": [
         {
           "name": "J. D. Ford",
           "party": "D",
-          "votes": 55574
+          "votes": 57204
         },
         {
           "name": "Victoria Spartz",
           "party": "R",
-          "votes": 34252
+          "votes": 36868
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 43.8,
+      "precinctsReporting": 45.8,
       "raceId": "87139",
-      "retrievedAt": "2026-11-04T00:03:47.837454Z",
+      "retrievedAt": "2026-11-04T00:14:07.948919Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87139",
       "timestampBasis": "provider_last_updated",
-      "total": 89826,
+      "total": 94072,
       "verified": true
     },
     "IN-06": {
@@ -717,47 +717,47 @@
       "verified": true
     },
     "IN-08": {
-      "asOf": "2026-11-04T00:10:53.218000Z",
+      "asOf": "2026-11-04T00:15:56.288000Z",
       "candidates": [
         {
           "name": "Mark Messmer",
           "party": "R",
-          "votes": 22064
+          "votes": 22238
         },
         {
           "name": "Mary Allen",
           "party": "D",
-          "votes": 14235
+          "votes": 14308
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 17.4,
+      "precinctsReporting": 17.5,
       "raceId": "87142",
-      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "retrievedAt": "2026-11-04T00:14:07.948919Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87142",
       "timestampBasis": "provider_last_updated",
-      "total": 36299,
+      "total": 36546,
       "verified": true
     },
     "IN-09": {
-      "asOf": "2026-11-04T00:10:53.339000Z",
+      "asOf": "2026-11-04T00:15:25.306000Z",
       "candidates": [
         {
           "name": "Erin Houchin",
           "party": "R",
-          "votes": 18177
+          "votes": 19752
         },
         {
           "name": "Brad Meyer",
           "party": "D",
-          "votes": 10993
+          "votes": 11732
         },
         {
           "name": "Tonya Hudson",
           "party": "O",
-          "votes": 619
+          "votes": 713
         },
         {
           "name": "Floyd Michael Taylor",
@@ -767,13 +767,13 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 14.3,
+      "precinctsReporting": 15.5,
       "raceId": "87143",
-      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "retrievedAt": "2026-11-04T00:14:07.948919Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87143",
       "timestampBasis": "provider_last_updated",
-      "total": 29789,
+      "total": 32197,
       "verified": true
     },
     "KY-04": {
@@ -956,6 +956,36 @@
       "total": 7,
       "verified": true
     },
+    "VA-01": {
+      "asOf": "2026-11-04T00:15:52.294000Z",
+      "candidates": [
+        {
+          "name": "Rob Wittman",
+          "party": "R",
+          "votes": 409
+        },
+        {
+          "name": "Shannon Taylor",
+          "party": "D",
+          "votes": 307
+        },
+        {
+          "name": "Write-in",
+          "party": "O",
+          "votes": 1
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 0.2,
+      "raceId": "87461",
+      "retrievedAt": "2026-11-04T00:14:07.948919Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87461",
+      "timestampBasis": "provider_last_updated",
+      "total": 717,
+      "verified": true
+    },
     "VA-04": {
       "asOf": "2026-11-04T00:11:03.534000Z",
       "candidates": [
@@ -1024,6 +1054,36 @@
       "sourceUrl": "https://civicapi.org/api/v2/race/87465",
       "timestampBasis": "provider_last_updated",
       "total": 2460,
+      "verified": true
+    },
+    "VA-06": {
+      "asOf": "2026-11-04T00:16:25.055000Z",
+      "candidates": [
+        {
+          "name": "Beth Macy",
+          "party": "D",
+          "votes": 2447
+        },
+        {
+          "name": "Ben Cline",
+          "party": "R",
+          "votes": 628
+        },
+        {
+          "name": "Write-in",
+          "party": "O",
+          "votes": 5
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 0.9,
+      "raceId": "87466",
+      "retrievedAt": "2026-11-04T00:14:07.948919Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87466",
+      "timestampBasis": "provider_last_updated",
+      "total": 3080,
       "verified": true
     },
     "VA-07": {

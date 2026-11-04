@@ -1,10 +1,10 @@
 {
-  "checkedAt": "2026-11-04T00:09:27.529124Z",
+  "checkedAt": "2026-11-04T00:14:07.948919Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
     "statusSample": {
-      "VT-01": "source_HTTPError",
+      "VT-01": "source_TimeoutError",
       "WY-SENATE": "source_TimeoutError"
     },
     "unmapped": 2
@@ -12,55 +12,77 @@
   "election": "2026-11-03",
   "eligibleRaces": 82,
   "errors": {
-    "FL-05": "no_valid_reported_votes",
-    "FL-07": "no_valid_reported_votes",
+    "FL-03": "fetch_HTTP_502",
+    "FL-04": "fetch_HTTP_502",
+    "FL-05": "fetch_HTTP_502",
+    "FL-07": "fetch_HTTP_502",
     "FL-08": "fetch_HTTP_502",
-    "FL-09": "no_valid_reported_votes",
-    "FL-10": "no_valid_reported_votes",
+    "FL-09": "fetch_HTTP_502",
+    "FL-10": "fetch_HTTP_502",
+    "FL-11": "fetch_HTTP_502",
     "FL-12": "fetch_HTTP_502",
-    "FL-14": "no_valid_reported_votes",
+    "FL-13": "fetch_HTTP_502",
+    "FL-14": "fetch_HTTP_502",
+    "FL-15": "fetch_HTTP_502",
+    "FL-16": "fetch_HTTP_502",
     "FL-17": "fetch_HTTP_502",
-    "FL-18": "no_valid_reported_votes",
-    "FL-19": "no_valid_reported_votes",
+    "FL-18": "fetch_HTTP_502",
+    "FL-19": "fetch_HTTP_502",
     "FL-20": "fetch_HTTP_502",
-    "FL-21": "no_valid_reported_votes",
-    "FL-22": "no_valid_reported_votes",
-    "FL-23": "no_valid_reported_votes",
-    "FL-24": "no_valid_reported_votes",
+    "FL-21": "fetch_HTTP_502",
+    "FL-22": "fetch_HTTP_502",
+    "FL-23": "fetch_HTTP_502",
+    "FL-24": "fetch_HTTP_502",
     "FL-25": "fetch_HTTP_502",
-    "FL-26": "no_valid_reported_votes",
-    "FL-27": "no_valid_reported_votes",
+    "FL-26": "fetch_HTTP_502",
+    "FL-27": "fetch_HTTP_502",
     "FL-28": "fetch_HTTP_502",
-    "FL-SENATE": "fetch_TimeoutError",
-    "GA-03": "no_valid_reported_votes",
-    "GA-11": "no_valid_reported_votes",
+    "FL-SENATE": "fetch_HTTP_502",
+    "GA-01": "fetch_HTTP_502",
+    "GA-02": "fetch_HTTP_502",
+    "GA-03": "fetch_HTTP_502",
+    "GA-05": "fetch_HTTP_502",
+    "GA-06": "fetch_HTTP_502",
+    "GA-07": "fetch_HTTP_502",
+    "GA-08": "fetch_HTTP_502",
+    "GA-09": "fetch_HTTP_502",
+    "GA-11": "fetch_HTTP_502",
     "GA-12": "no_valid_reported_votes",
-    "IN-01": "no_valid_reported_votes",
-    "IN-07": "no_valid_reported_votes",
-    "KY-01": "no_valid_reported_votes",
+    "GA-13": "fetch_HTTP_502",
+    "GA-GOVERNOR": "fetch_HTTP_502",
+    "IN-01": "fetch_HTTP_502",
+    "IN-02": "fetch_HTTP_502",
+    "IN-03": "fetch_HTTP_502",
+    "IN-04": "fetch_HTTP_502",
+    "IN-07": "fetch_HTTP_502",
+    "KY-01": "fetch_HTTP_502",
     "KY-02": "no_valid_reported_votes",
-    "KY-03": "no_valid_reported_votes",
-    "SC-01": "no_valid_reported_votes",
+    "KY-03": "fetch_TimeoutError",
+    "KY-04": "fetch_TimeoutError",
+    "KY-SENATE": "fetch_HTTP_502",
+    "SC-01": "fetch_TimeoutError",
     "SC-02": "no_valid_reported_votes",
-    "SC-03": "no_valid_reported_votes",
+    "SC-03": "fetch_TimeoutError",
     "SC-04": "no_valid_reported_votes",
     "SC-05": "no_valid_reported_votes",
     "SC-06": "no_valid_reported_votes",
     "SC-07": "no_valid_reported_votes",
-    "SC-GOVERNOR": "no_valid_reported_votes",
-    "SC-SENATE": "no_valid_reported_votes",
-    "VA-01": "no_valid_reported_votes",
+    "SC-GOVERNOR": "fetch_HTTP_502",
+    "SC-SENATE": "fetch_HTTP_502",
     "VA-02": "no_valid_reported_votes",
     "VA-03": "no_valid_reported_votes",
-    "VA-06": "no_valid_reported_votes",
-    "VA-08": "no_valid_reported_votes",
+    "VA-04": "fetch_TimeoutError",
+    "VA-05": "fetch_TimeoutError",
+    "VA-07": "fetch_TimeoutError",
+    "VA-08": "fetch_TimeoutError",
     "VA-09": "no_valid_reported_votes",
-    "VA-10": "no_valid_reported_votes",
-    "VA-11": "fetch_HTTP_502",
-    "VT-GOVERNOR": "no_valid_reported_votes"
+    "VA-10": "fetch_HTTP_502",
+    "VA-11": "no_valid_reported_votes",
+    "VA-SENATE": "fetch_HTTP_502",
+    "VT-GOVERNOR": "fetch_HTTP_502"
   },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
-  "fetched": 74,
+  "fetched": 25,
   "officeCoverage": {
     "governor": {
       "awaitingPollClose": 33,
@@ -68,23 +90,23 @@
       "eligibleWithoutValidVoteReport": 2,
       "missingRegistryIds": [],
       "registered": 36,
-      "sourceErrors": 0,
+      "sourceErrors": 2,
       "targeted": 36,
-      "validationPending": 2,
+      "validationPending": 0,
       "verifiedReports": 1
     },
     "house": {
       "awaitingPollClose": 361,
       "eligibleForCollection": 73,
-      "eligibleWithoutValidVoteReport": 41,
+      "eligibleWithoutValidVoteReport": 39,
       "missingRegistryIds": [
         "VT-01"
       ],
       "registered": 434,
-      "sourceErrors": 6,
+      "sourceErrors": 28,
       "targeted": 435,
-      "validationPending": 35,
-      "verifiedReports": 32
+      "validationPending": 11,
+      "verifiedReports": 34
     },
     "senate": {
       "awaitingPollClose": 28,
@@ -94,9 +116,9 @@
         "WY-SENATE"
       ],
       "registered": 34,
-      "sourceErrors": 1,
+      "sourceErrors": 2,
       "targeted": 35,
-      "validationPending": 1,
+      "validationPending": 0,
       "verifiedReports": 4
     }
   },
@@ -135,38 +157,13 @@
       "payloadType": "dict",
       "positiveCandidateTotals": true,
       "providerTimestamp": "2026-11-03T23:57:30.871Z",
-      "responseMs": 1625
+      "responseMs": 1093
     },
     "MI-SENATE": {
-      "candidateRows": 11,
-      "connected": true,
-      "fields": [
-        "election_name",
-        "election_type",
-        "election_scope",
-        "election_date",
-        "country",
-        "province",
-        "district",
-        "municipality",
-        "polls_open",
-        "polls_close",
-        "is_disputed",
-        "has_map",
-        "registered_voters",
-        "percent_reporting",
-        "test_data",
-        "last_updated",
-        "round",
-        "maps",
-        "candidates",
-        "region_results"
-      ],
-      "identityMatches": true,
-      "payloadType": "dict",
-      "positiveCandidateTotals": false,
-      "providerTimestamp": "2026-11-03T03:44:10.357Z",
-      "responseMs": 1463
+      "connected": false,
+      "detail": "The read operation timed out",
+      "failure": "TimeoutError",
+      "responseMs": 15040
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -175,10 +172,10 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 1488
+      "responseMs": 11509
     }
   },
-  "publishedRaces": 37,
+  "publishedRaces": 39,
   "raceStatuses": {
     "AK-01": {
       "office": "house",
@@ -585,26 +582,28 @@
       "status": "awaiting_poll_close"
     },
     "FL-03": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "FL-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "FL-05": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-06": {
       "office": "house",
       "status": "reporting"
     },
     "FL-07": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-08": {
       "collectionIssue": "fetch_HTTP_502",
@@ -612,16 +611,17 @@
       "status": "source_error"
     },
     "FL-09": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-10": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-11": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -631,19 +631,22 @@
       "status": "reporting"
     },
     "FL-13": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "FL-14": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-15": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "FL-16": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -653,14 +656,14 @@
       "status": "source_error"
     },
     "FL-18": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-19": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-20": {
       "collectionIssue": "fetch_HTTP_502",
@@ -668,24 +671,24 @@
       "status": "source_error"
     },
     "FL-21": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-22": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-23": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-24": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-25": {
       "collectionIssue": "fetch_HTTP_502",
@@ -693,14 +696,14 @@
       "status": "source_error"
     },
     "FL-26": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-27": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "FL-28": {
       "collectionIssue": "fetch_HTTP_502",
@@ -712,44 +715,51 @@
       "status": "awaiting_poll_close"
     },
     "FL-SENATE": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
     "GA-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-02": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-03": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "GA-04": {
       "office": "house",
       "status": "reporting"
     },
     "GA-05": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-06": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-07": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-08": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-09": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -758,9 +768,9 @@
       "status": "reporting"
     },
     "GA-11": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "GA-12": {
       "collectionIssue": "no_valid_reported_votes",
@@ -768,6 +778,7 @@
       "status": "awaiting_valid_vote_report"
     },
     "GA-13": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -776,6 +787,7 @@
       "status": "reporting"
     },
     "GA-GOVERNOR": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "governor",
       "status": "reporting"
     },
@@ -912,19 +924,22 @@
       "status": "awaiting_poll_close"
     },
     "IN-01": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "IN-02": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "IN-03": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "IN-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -937,9 +952,9 @@
       "status": "reporting"
     },
     "IN-07": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "IN-08": {
       "office": "house",
@@ -974,9 +989,9 @@
       "status": "awaiting_poll_close"
     },
     "KY-01": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "KY-02": {
       "collectionIssue": "no_valid_reported_votes",
@@ -984,11 +999,12 @@
       "status": "awaiting_valid_vote_report"
     },
     "KY-03": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "KY-04": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
@@ -1001,6 +1017,7 @@
       "status": "reporting"
     },
     "KY-SENATE": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "reporting"
     },
@@ -1809,9 +1826,9 @@
       "status": "awaiting_poll_close"
     },
     "SC-01": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "SC-02": {
       "collectionIssue": "no_valid_reported_votes",
@@ -1819,9 +1836,9 @@
       "status": "awaiting_valid_vote_report"
     },
     "SC-03": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "SC-04": {
       "collectionIssue": "no_valid_reported_votes",
@@ -1844,14 +1861,14 @@
       "status": "awaiting_valid_vote_report"
     },
     "SC-GOVERNOR": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "governor",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "SC-SENATE": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "SD-01": {
       "office": "house",
@@ -2086,9 +2103,8 @@
       "status": "awaiting_poll_close"
     },
     "VA-01": {
-      "collectionIssue": "no_valid_reported_votes",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "reporting"
     },
     "VA-02": {
       "collectionIssue": "no_valid_reported_votes",
@@ -2101,26 +2117,28 @@
       "status": "awaiting_valid_vote_report"
     },
     "VA-04": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "VA-05": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "VA-06": {
-      "collectionIssue": "no_valid_reported_votes",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "reporting"
     },
     "VA-07": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "VA-08": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "VA-09": {
       "collectionIssue": "no_valid_reported_votes",
@@ -2128,16 +2146,17 @@
       "status": "awaiting_valid_vote_report"
     },
     "VA-10": {
-      "collectionIssue": "no_valid_reported_votes",
-      "office": "house",
-      "status": "awaiting_valid_vote_report"
-    },
-    "VA-11": {
       "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
+    "VA-11": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
     "VA-SENATE": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "reporting"
     },
@@ -2146,9 +2165,9 @@
       "status": "unmapped"
     },
     "VT-GOVERNOR": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "governor",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "WA-01": {
       "office": "house",
@@ -2253,7 +2272,7 @@
   },
   "registeredRaces": 504,
   "targetRaces": 506,
-  "transientApiErrors": 8,
-  "updatedRaces": 25,
+  "transientApiErrors": 57,
+  "updatedRaces": 5,
   "version": 2
 }
