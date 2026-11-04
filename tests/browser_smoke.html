@@ -58,7 +58,7 @@
   check(!d.body.textContent.includes('CivicAPI'),'AP-led results page contains no CivicAPI provider interface');
   check(d.querySelectorAll('.pe-global-nav a[href$="/results/"]').length===1,'Results navigation points to the replacement AP-led desk');
   d.querySelector('#prOffice').value='senate';d.querySelector('#prOffice').dispatchEvent(new Event('change'));
-  check(d.querySelector('#prCallNotice')?.textContent.includes('locally documented AP'),'Office filter continues to show sourced race calls');
+  check(d.querySelector('#prCallNotice')?.textContent.includes('locally documented source-linked'),'Office filter continues to show sourced race calls');
   await navigate('../analysis/polls-underestimated-democrats/');d=frame.contentDocument;w=frame.contentWindow;
   check(d.querySelectorAll('.story-table tbody tr').length===7,'Polling feature compares seven sourced Senate races');
   check(d.querySelector('h1')?.textContent.includes('polls missed'),'Longform polling feature is available');
