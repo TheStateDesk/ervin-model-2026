@@ -22,7 +22,7 @@ function paint(){
  for(const [id,call] of calls){
   const item=mk('article',null,'ed-race');item.style.cssText='padding:12px 15px;margin-bottom:9px';
   item.append(mk('strong',(call.publisher==='Associated Press'?'AP CALLS · ':'NBC PROJECTS · ')+id+' · '+call.winner+' ('+call.party+')'));
-  const more=mk('p',null,'ed-mini');more.append(hyperlink('Original '+call.publisher+' source',call.sourceUrl));
+  const more=mk('p',null,'ed-mini');more.append(hyperlink(call.sourceUrl.includes('foxnews.com')?'Fox News AP call timeline':'Original '+call.publisher+' source',call.sourceUrl));
   more.append(document.createTextNode(' · '));
   const race=mk('a','Open race results');race.href='../election-night/?state='+state+'&race='+id+'#nationalBoard';more.append(race);
   item.append(more);rows.append(item);
