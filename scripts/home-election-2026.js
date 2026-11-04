@@ -8,7 +8,7 @@ const root='../', finalAt=Date.parse('2026-11-03T12:00:00-05:00'), read=async(p)
  const mutable=LIVE_FILES.has(p);
  const fetchRaw=async()=>{
   const url=new URL(root+p,location.href);
-  if(mutable)url.searchParams.set('live',String(Math.floor(Date.now()/30000)));
+  if(mutable)url.searchParams.set('live',String(Math.floor(Date.now()/60000)));
   const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw Error(p+' HTTP '+r.status);
   return r.json();
  };
@@ -233,7 +233,7 @@ async function refreshResults(){
  if(busy||!window.ERVIN_RETURNS)return;busy=true;
  try{
   const core=window.ERVIN_RETURNS,of=['Senate','Governor','House'];
-  const checkExternal=Date.now()-lastExternalFetch>300000;
+  const checkExternal=Date.now()-lastExternalFetch>=60000;
   if(checkExternal)lastExternalFetch=Date.now();
   const all=await Promise.allSettled([read('civicapi/races.json'),read('election-night/county-returns.json'),read('civicapi/discovery.json'),...of.map(x=>checkExternal&&window.ERVIN_EXTERNAL_FEED
    ?window.ERVIN_EXTERNAL_FEED.json('https://openamerica.io/elections/results.json?year=2026&office='+x,{timeout:11000})
@@ -256,7 +256,8 @@ function init(){
  watchInit();
  Promise.all([window.ERVIN_FINAL?.load?.()||Promise.resolve(null),window.ERVIN_FINAL?.status?.()||Promise.resolve({phase:'auto'})]).then(([snap,status])=>{lockedAt=snap?.lockedAt||null;phaseConfig=status||{phase:'auto'};return loadModel()}).catch(e=>{$('watchCards').textContent='Forecast models temporarily unavailable. Open a state edition for saved predictions.';console.error(e)});
  window.addEventListener('ervin:check-results-now',refreshResults);
- refreshResults();setInterval(()=>{if(!document.hidden)refreshResults()},30000);
+ refreshResults();setInterval(()=>{if(!document.hidden)refreshResults()},60000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshResults()});
  setInterval(()=>{if(model.senate.length)updatePhase()},60000);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
