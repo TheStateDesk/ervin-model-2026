@@ -50,11 +50,11 @@ function leaders(row){
 function detailedStatus(id,label,expectedOffice){
  const row=accepted(id,expectedOffice),top=leaders(row);
  const call=window.ERVIN_NBC_CALLS?.get(id);
- if(!row)return call?label+': NBC News projects '+call.winner+' ('+call.party+'); awaiting independently validated vote totals.':label+': awaiting an attributed unofficial vote report.';
+ if(!row)return call?label+': '+(call.publisher==='Associated Press'?'AP calls ':'NBC News projects ')+call.winner+' ('+call.party+'); awaiting independently validated vote totals.':label+': awaiting an attributed unofficial vote report.';
  const lead=top.kind==='T'?top.first.name+' and '+top.second.name+' are tied':top.first.name+' leads '+top.second.name;
  const pct=top.kind==='T'?'':', '+top.firstPct+'% to '+top.secondPct+'%';
  const progress=Number.isFinite(row.precincts)?' · '+row.precincts.toFixed(1)+'% of reporting units according to the source':' · Reporting-unit completion not supplied';
- return label+': '+(call?'NBC News projects '+call.winner+' ('+call.party+'). ':'')+lead+pct+' · '+fmt(row.total)+' unofficial votes'+progress+'. '+(call?'NBC projection is separate from the vote count.':'No independently verified winner call.');
+ return label+': '+(call?(call.publisher==='Associated Press'?'AP calls ':'NBC News projects ')+call.winner+' ('+call.party+'). ':'')+lead+pct+' · '+fmt(row.total)+' unofficial votes'+progress+'. '+(call?'Newsroom winner call is separate from the unofficial vote count.':'No independently verified winner call.');
 }
 function mapOffice(){
  const aria=[...document.querySelectorAll('#edSimTabs button')].find(x=>x.getAttribute('aria-pressed')==='true');
@@ -79,7 +79,7 @@ function summary(k,results,called=[]){
  const minor=document.createElement('small');
  minor.textContent=n?fmt(n)+' races with accepted unofficial totals'+(other?' · '+other+' independent/other leader'+(other===1?'':'s'):'')+(ties?' · '+ties+' tie'+(ties===1?'':'s'):'')+' · no race call inferred':
   (k==='senateD'?senateWaitingMessage():'Awaiting source-validated unofficial returns · unreported contests remain gray');
- minor.textContent+=' · '+called.length+' NBC News projected winners ('+called.filter(c=>c.party==='D').length+' D / '+called.filter(c=>c.party==='R').length+' R)';
+ minor.textContent+=' · '+called.length+' documented AP/NBC winner calls ('+called.filter(c=>c.party==='D').length+' D / '+called.filter(c=>c.party==='R').length+' R)';
  minor.textContent+=(k==='house'?' · 435 House districts':k==='senateD'?' · 35 Senate elections':' · 36 governor elections');
  holder.append(meta,stats,minor);holder.dataset.liveReports=String(n);holder.dataset.nbcCalled=String(called.length);
  const status=$('edCommentaryStatus');
@@ -133,7 +133,7 @@ function paint(){
  const title=$('edSimMapTitle');if(title)title.textContent=isHouse?'House · live votes by congressional district':k==='senateD'?'Senate · live votes by state':'Governors · live votes by state';
  const headingFlag=root.querySelector('.ed-sim-preview-flag');if(headingFlag)headingFlag.textContent='SOURCE-VALIDATED UNOFFICIAL RETURNS';
  const note=$('edSimMapNote');
- if(note)note.textContent='Outlined races are sourced NBC News projected winners; other colors show current unofficial vote leaders, not race calls. Each race links to live results.';
+ if(note)note.textContent='Outlined races have independently sourced AP or NBC newsroom calls; other colors show current unofficial vote leaders, not race calls. Each race links to live results.';
  if(readout&&!readout.matches(':focus'))readout.textContent='Select a race to see verified vote leaders, totals, reporting status and source details.';
  map.setAttribute('aria-label',isHouse?'Live unofficial House results: 435 clickable congressional districts':k==='senateD'?'Live unofficial Senate results by state':'Live unofficial governor results by state');
  summary(k,reported,called);root.dataset.liveReady='true';
