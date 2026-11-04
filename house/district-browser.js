@@ -57,7 +57,7 @@ async function init(){
   if(m?.ok)window.ERVIN_HOUSE_DATA=await m.json();
   const requested=(new URLSearchParams(location.search).get('state')||'MI').toUpperCase();
   if(seats.some(x=>x.code===requested))selectState=requested;
-  const input=$('houseState');if(input){if(input.value==='all')input.value=selectState;input.addEventListener('change',update);}
+  const input=$('houseState');if(input){/* The district atlas may default to Michigan, but must not reset a user's separate nationwide directory filter. */input.addEventListener('change',update);}
   $('districtJump').onchange=e=>{if(e.target.value)location.href=e.target.value;};
   await update();
  }catch(e){$('districtMapStatus').textContent='District navigation could not load: '+e.message;}
