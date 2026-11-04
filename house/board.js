@@ -3,6 +3,8 @@
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let seats=[],scenario=null,cookNational=null,houseRoster={races:{}};
+let liveRows={};
+window.addEventListener('ervin:office-results',e=>{if(e.detail?.office==='House'){liveRows=e.detail.races||{};if(seats.length)draw()}});
 const href=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
 const pick=r=>scenario?.races?.[r.id]||null;
 const margin=m=>!Number.isFinite(m)?'No estimate':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1);
@@ -20,10 +22,14 @@ function draw(){
  if($('houseSort').value==='competitive')arr.sort((a,b)=>rank(a)-rank(b)||a.id.localeCompare(b.id));else arr.sort((a,b)=>a.id.localeCompare(b.id));
  $('houseCount').textContent=arr.length+' districts';
  $('houseCards').innerHTML=arr.map(r=>{
-  const x=pick(r);return '<a class="gov-card" href="'+href(r)+'"><div class="gov-heading"><h3 class="house-card-title">'+esc(r.id)+'</h3><span class="race-flag">'+esc(r.code)+'</span></div>'+
+  const x=pick(r),live=liveRows[r.id];
+  const url=live?'../election-night/?state='+encodeURIComponent(r.code)+'&race='+encodeURIComponent(r.id)+'#nationalBoard':href(r);
+  const top=live?.candidates?.slice().sort((a,b)=>b.votes-a.votes).slice(0,2)||[];
+  const reported=live?'<div class="gov-lead"><small>UNOFFICIAL VOTES REPORTED</small><br>'+esc(top.map(c=>c.name+' '+c.votes.toLocaleString()).join(' · '))+'<small> · '+live.total.toLocaleString()+' votes · '+esc(live.source)+'</small></div>':'';
+  return '<a class="gov-card" href="'+url+'"><div class="gov-heading"><h3 class="house-card-title">'+esc(r.id)+'</h3><span class="race-flag">'+esc(r.code)+'</span></div>'+
   '<p class="gov-candidates">'+esc(r.state)+'<br><strong>2026 candidates:</strong> '+esc(candidateText(r))+'</p>'+
   '<div class="gov-lead">'+esc(x?.modelRating||r.rating||'No model loaded')+(x&&Number.isFinite(x.marginD)?' · '+esc(margin(x.marginD)):'')+' ↗</div>'+
-  '<small>'+(x?(x.changed2026Map?'2026 Census map · reconstructed presidential vote allocation':'Ervin House model')+' · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls':'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
+  reported+'<small>'+(x?(x.changed2026Map?'2026 Census map · reconstructed presidential vote allocation':'Ervin House model')+' · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls':'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
  }).join('')||'<p class="race-muted">No districts match your filters.</p>';
 }
 function outlook(){

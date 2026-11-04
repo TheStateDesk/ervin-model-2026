@@ -168,6 +168,9 @@ jobs:
           node scripts/validate-state-desk.mjs
           node scripts/validate-house-forecast.mjs
           node scripts/validate-statewide-night.mjs
+          node scripts/validate-live-page-sync.mjs
+          node --check scripts/office-live-results.js
+          node --check michigan/election-night/app.js
           node scripts/validate-forecast-backtests.mjs
           node scripts/governor-method-selection.mjs
           node scripts/test-election-night-balance.mjs

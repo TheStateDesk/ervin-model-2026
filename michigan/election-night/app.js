@@ -157,47 +157,46 @@ async function readState(){
  if(demo||Date.now()<liveStart||stateBusy)return;
  if(Date.now()-lastStateAttempt<60000)return;
  stateBusy=true;lastStateAttempt=Date.now();
- const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
  try{
+  const core=window.ERVIN_RETURNS;
+  if(!core)throw Error("Vote validator not loaded");
   const url="https://openamerica.io/elections/results.json?year=2026&office=Senate";
-  const res=await fetch(url,{mode:"cors",cache:"no-cache",credentials:"omit",signal:controller.signal});
-  if(!res.ok)throw Error("Provider HTTP "+res.status);
-  const data=await res.json();
-  if(data?.api!==1||data.year!==2026||String(data.office).toLowerCase()!=="senate")
-   throw Error("Provider sent a different election, office or API version");
-  const race=data?.races?.MI;
-  if(!race||!Array.isArray(race.cands)||!numeric(race.total)||race.total===0){
-   $("externalStatus").textContent="Awaiting statewide results";
-   $("externalVotes").textContent="No attributed 2026 Michigan Senate vote counts have been published by this feed.";
-   $("externalAsOf").textContent="Michigan has not supplied results to this provider yet. Check county clerks for more recent local reports.";
-   $("externalProgress").replaceChildren();
+  const [a,b]=await Promise.allSettled([
+   fetch("../../civicapi/races.json",{cache:"no-store",signal:controller.signal}).then(r=>{if(!r.ok)throw Error("CivicAPI snapshot "+r.status);return r.json()}),
+   window.ERVIN_EXTERNAL_FEED?window.ERVIN_EXTERNAL_FEED.json(url,{timeout:11000}):
+   fetch(url,{cache:"no-store",signal:controller.signal}).then(r=>{if(!r.ok)throw Error("Mirror "+r.status);return r.json()})
+  ]);
+  const primary=a.status==="fulfilled"?core.civic(a.value):{};
+  const secondary=b.status==="fulfilled"?core.openAmerica(b.value,"Senate"):{};
+  const row=core.preferCivic(primary,secondary).races["MI-SENATE"];
+  if(!row){
+   $("externalStatus").textContent=stateRow?"Earlier statewide tally retained":"Awaiting statewide results";
+   $("externalAsOf").textContent="No newer source-validated Michigan Senate tally is currently available. Check county clerks for local reports.";
+   if(!stateRow)$("externalVotes").textContent="No independently verified statewide count currently available.";
    return;
   }
-  const ds=race.cands.find(c=>c.p==="D"),rs=race.cands.find(c=>c.p==="R");
-  if(!ds||!rs||!numeric(ds.v)||!numeric(rs.v))throw Error("Missing or malformed D/R candidate tallies");
-  const otherCands=race.cands.filter(c=>!["D","R"].includes(c.p));
-  if(!otherCands.every(c=>numeric(c.v)))throw Error("Invalid other-candidate tally");
-  const other=otherCands.reduce((n,c)=>n+c.v,0);
-  const total=ds.v+rs.v+other;
-  if(!numeric(total)||!total||Math.abs(total-race.total)>Math.max(10,race.total*.005))
-   throw Error("State totals do not reconcile with candidate totals");
-  const issued=Date.parse(data.as_of||"");
-  if(!Number.isFinite(issued)||issued<liveStart||issued>Date.now()+300000)
-   throw Error("Missing or out-of-window state result timestamp");
-  const percent=race.pct_in==null?null:Number(race.pct_in);
-  if(percent!==null&&(!Number.isFinite(percent)||percent<0||percent>100))
-   throw Error("Invalid precinct reporting percentage");
-  stateRow={d:ds.v,r:rs.v,other,sourceTime:data.as_of,pct:percent,updatedAt:Date.now(),names:[ds.n,rs.n]};
-  $("externalVotes").innerHTML="<strong>"+esc(ds.n)+": "+fmt(ds.v)+" · "+esc(rs.n)+": "+fmt(rs.v)+"</strong> · other: "+fmt(other);
-  $("externalAsOf").textContent="Provider's latest update across its states: "+dateString(data.as_of)+" · Michigan precinct share "+(percent===null?"not reported":percent.toFixed(1)+"%")+" · independent of partial local reports.";
-  $("externalProgress").innerHTML='<div class="d" style="width:'+(ds.v/total*100)+'%"></div><div class="r" style="width:'+(rs.v/total*100)+'%"></div><div class="o" style="width:'+(other/total*100)+'%"></div>';
-  $("externalStatus").textContent=data.stale?"Source marked stale":data.live?"Unofficial feed · live":data.final?"Precinct reports complete":"Unofficial state tally";
+  const d=row.candidates.filter(c=>c.party==="D").reduce((v,c)=>v+c.votes,0);
+  const r=row.candidates.filter(c=>c.party==="R").reduce((v,c)=>v+c.votes,0);
+  const other=row.candidates.filter(c=>c.party==="O").reduce((v,c)=>v+c.votes,0);
+  if(!d||!r)throw Error("Incomplete statewide two-party candidate totals");
+  if(stateRow&&row.total<stateRow.d+stateRow.r+stateRow.other){
+   $("externalStatus").textContent="Earlier higher validated tally retained";return;
+  }
+  const dn=row.candidates.find(c=>c.party==="D")?.name||"Democrat";
+  const rn=row.candidates.find(c=>c.party==="R")?.name||"Republican";
+  stateRow={d,r,other,sourceTime:row.asOf,pct:row.precincts,updatedAt:Date.now(),names:[dn,rn]};
+  $("externalVotes").innerHTML="<strong>"+esc(dn)+": "+fmt(d)+" · "+esc(rn)+": "+fmt(r)+"</strong> · other: "+fmt(other);
+  $("externalAsOf").textContent="Michigan Senate source report: "+dateString(row.asOf)+" · "+row.source+" · reporting units "+(Number.isFinite(row.precincts)?row.precincts.toFixed(1)+"%":"not supplied")+". County clerk totals are separate.";
+  $("externalProgress").innerHTML='<div class="d" style="width:'+(100*d/row.total)+'%"></div><div class="r" style="width:'+(100*r/row.total)+'%"></div><div class="o" style="width:'+(100*other/row.total)+'%"></div>';
+  $("externalStatus").textContent="Unofficial source-validated statewide votes";
  }catch(e){
   $("externalStatus").textContent=stateRow?"Statewide feed interrupted":"Statewide feed unavailable";
-  $("externalAsOf").textContent="Unable to verify a fresh statewide response: "+(e.name==="AbortError"?"request timed out":e.message)+". Check the official county links below.";
-  if(!stateRow)$("externalVotes").textContent="No independently retrieved statewide tally available.";
- }finally{clearTimeout(timeout);stateBusy=false}
+  $("externalAsOf").textContent="No fresh source-validated report: "+(e.name==="AbortError"?"timeout":e.message)+". Check official county clerks.";
+  if(!stateRow)$("externalVotes").textContent="No independently verified statewide tally.";
+ }finally{clearTimeout(timer);stateBusy=false}
 }
+
 function tick(){
  const now=Date.now(),active=demo||now>=liveStart;
  if(Math.floor(now/60000)!==lastFreshnessMinute){lastFreshnessMinute=Math.floor(now/60000);updateFeedAge();readHealth();}

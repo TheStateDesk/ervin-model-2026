@@ -242,7 +242,8 @@ async function refresh(force=false){
   '../civicapi/races.json',
   '../civicapi/discovery.json',
   'https://openamerica.io/elections/results.json?year=2026&office=House',
-  'https://openamerica.io/elections/results.json?year=2026&office=Senate'
+  'https://openamerica.io/elections/results.json?year=2026&office=Senate',
+  'https://openamerica.io/elections/results.json?year=2026&office=Governor'
  ];
  const outcomes=await Promise.allSettled(urls.map(json));
  raw={};sourceSnapshot={civic:0,fallback:0};
@@ -255,8 +256,10 @@ async function refresh(force=false){
  if(core){
   if(outcomes[3].status==='fulfilled')Object.assign(mirror,core.openAmerica(outcomes[3].value,'House'));
   if(outcomes[4].status==='fulfilled')Object.assign(mirror,core.openAmerica(outcomes[4].value,'Senate'));
+  if(outcomes[5].status==='fulfilled')Object.assign(mirror,core.openAmerica(outcomes[5].value,'Governor'));
  }
  const chosen=core?core.preferCivic(civic,mirror).races:{};
+ const nationalCounts=Object.fromEntries(['House','Senate','Governor'].map(office=>[office,Object.values(chosen).filter(r=>r.office===office).length]));
  for(const signal of specs){
   const row=chosen[signal.id];
   if(!row||!Number.isSafeInteger(row.total)||row.total<=0||!Array.isArray(row.candidates))continue;
@@ -276,7 +279,7 @@ async function refresh(force=false){
  const age=minutes===null?'collector update time unavailable':minutes+' min old';
  const sourceBase=Number.isFinite(eligible)&&eligible>0?eligible+' registered CivicAPI races; ':'CivicAPI registry not yet verified; ';
  $('watchSourceHealth').textContent=
-  'CivicAPI primary · '+sourceBase+age+'. '+sourceSnapshot.civic+' watched contests with attributed CivicAPI candidate totals; '+
+  'Nationwide validated counts: '+nationalCounts.House+' House, '+nationalCounts.Senate+' Senate, '+nationalCounts.Governor+' governors. CivicAPI primary · '+sourceBase+age+'. '+sourceSnapshot.civic+' watched contests with attributed CivicAPI candidate totals; '+
   sourceSnapshot.fallback+' watched contests on the separately attributed fallback. No partial result is automatically treated as representative. '+
   (minutes!==null&&minutes>30?'The published collector snapshot is more than 30 minutes old. ':'')+
   (passed?passed+' independently audited signals are eligible.':'No independently audited early signals are eligible.');
