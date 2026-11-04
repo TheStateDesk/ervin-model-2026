@@ -266,7 +266,8 @@ async function init(){
  $('refreshResults').onclick=()=>Promise.allSettled([refreshNational(),refreshCounty()]);
  try{await Promise.all([loadRaces(),initCountyMap()]);await Promise.allSettled([refreshNational(),refreshCounty()]);}
  catch(e){console.error(e);$('feedStatus').textContent='Some election sources unavailable';$('miFeedStatus').textContent='County reference or feed initialization failed: '+e.message}
- setInterval(()=>{if(!document.hidden)Promise.allSettled([refreshNational(),refreshCounty()])},30000);
+ setInterval(()=>{if(!document.hidden)Promise.allSettled([refreshNational(),refreshCounty()])},60000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)Promise.allSettled([refreshNational(),refreshCounty()])});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
