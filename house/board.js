@@ -5,6 +5,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 let seats=[],scenario=null,cookNational=null,houseRoster={races:{}};
 let liveRows={};
 window.addEventListener('ervin:office-results',e=>{if(e.detail?.office==='House'){liveRows=e.detail.races||{};if(seats.length)draw()}});
+window.addEventListener('ervin:nbc-calls-update',()=>{if(seats.length)draw()});
 const href=r=>'../state/?state='+encodeURIComponent(r.code)+'#house-'+encodeURIComponent(r.district);
 const pick=r=>scenario?.races?.[r.id]||null;
 const margin=m=>!Number.isFinite(m)?'No estimate':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1);
@@ -24,11 +25,13 @@ function draw(){
   const x=pick(r),live=liveRows[r.id];
   const url=live?'../election-night/?state='+encodeURIComponent(r.code)+'&race='+encodeURIComponent(r.id)+'#nationalBoard':href(r);
   const top=live?.candidates?.slice().sort((a,b)=>b.votes-a.votes).slice(0,2)||[];
+  const call=window.ERVIN_NBC_CALLS?.get(r.id);
+  const nbcHTML=call?'<div class="gov-lead"><strong>NBC NEWS PROJECTS '+esc(call.winner)+' ('+esc(call.party)+')</strong> · <a href="'+esc(call.sourceUrl)+'" target="_blank" rel="noopener noreferrer">NBC source</a></div>':'';
   const reported=live?'<div class="gov-lead"><small>UNOFFICIAL VOTES REPORTED</small><br>'+esc(top.map(c=>c.name+' '+c.votes.toLocaleString()).join(' · '))+'<small> · '+live.total.toLocaleString()+' votes · '+esc(live.source)+'</small></div>':'';
   return '<a class="gov-card" href="'+url+'"><div class="gov-heading"><h3 class="house-card-title">'+esc(r.id)+'</h3><span class="race-flag">'+esc(r.code)+'</span></div>'+
   '<p class="gov-candidates">'+esc(r.state)+'<br><strong>2026 candidates:</strong> '+esc(candidateText(r))+'</p>'+
   '<div class="gov-lead">'+esc(x?.modelRating||r.rating||'No model loaded')+(x&&Number.isFinite(x.marginD)?' · '+esc(margin(x.marginD)):'')+' ↗</div>'+
-  reported+'<small>'+(x?(x.changed2026Map?'2026 Census map · reconstructed presidential vote allocation':'Ervin House model')+' · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls':'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
+  nbcHTML+reported+'<small>'+(x?(x.changed2026Map?'2026 Census map · reconstructed presidential vote allocation':'Ervin House model')+' · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls':'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
  }).join('')||'<p class="race-muted">No districts match your filters.</p>';
  $('houseCount').textContent=arr.length+' districts';
 }
