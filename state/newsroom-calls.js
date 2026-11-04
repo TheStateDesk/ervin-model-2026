@@ -10,8 +10,10 @@ const mk=(tag,text,cl)=>{const x=document.createElement(tag);if(text!==null)x.te
 const hyperlink=(title,href)=>{const a=mk('a',title);a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a};
 const known=new Set('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' '));
 const code=()=>{const c=String(document.getElementById('stateSelect')?.value||new URLSearchParams(location.search).get('state')||'MI').toUpperCase();return known.has(c)?c:'MI'};
+let lastPaintedState='';
 function paint(){
- const state=code(),api=window.ERVIN_NBC_CALLS,all=api?.all()||{};
+ const state=code();lastPaintedState=state;
+ const api=window.ERVIN_NBC_CALLS,all=api?.all()||{};
  const calls=Object.entries(all).filter(([key])=>key.startsWith(state+'-')).sort((a,b)=>a[0].localeCompare(b[0]));
  rows.replaceChildren();official.replaceChildren();
  const label=state==='PA'?'Pennsylvania':state==='NV'?'Nevada':state;
@@ -35,5 +37,8 @@ function paint(){
 window.addEventListener('ervin:nbc-calls-update',paint);
 document.getElementById('stateSelect')?.addEventListener('change',paint);
 window.addEventListener('popstate',()=>setTimeout(paint,50));
+// The state's asynchronous initial data load sets the selector programmatically;
+// watch only for a changed selection to avoid repeatedly repainting the calls.
+setInterval(()=>{if(!document.hidden&&code()!==lastPaintedState)paint()},1200);
 paint();
 })();
