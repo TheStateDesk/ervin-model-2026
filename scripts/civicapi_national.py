@@ -332,6 +332,14 @@ def status_for_each_race(expected,registry,now,stored,issues):
          "source_error" if str(err or "").startswith("fetch_") else
          "awaiting_valid_vote_report")
   out[key]={"office":info["office"],"status":state}
+  if valid:
+   # Record the age of the last accepted vote snapshot independently of this
+   # collection attempt. A provider 502 must not masquerade as fresh totals.
+   out[key]["lastValidatedResultAt"]=stored[key].get("asOf")
+   out[key]["lastSuccessfulRetrievalAt"]=stored[key].get("retrievedAt")
+   out[key]["validatedVoteTotal"]=stored[key]["total"]
+   if str(err or "").startswith("fetch_"):
+    out[key]["retainedAfterSourceError"]=True
   if err:out[key]["collectionIssue"]=err
  assert len(out)==506
  return out
