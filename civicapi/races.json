@@ -5382,63 +5382,63 @@
       "verified": true
     },
     "KS-01": {
-      "asOf": "2026-11-04T07:55:59.334000Z",
+      "asOf": "2026-11-04T21:38:09.815000Z",
       "candidates": [
         {
           "name": "Tracey Mann",
           "party": "R",
-          "votes": 149757
+          "votes": 149799
         },
         {
           "name": "Lauren Reinhold",
           "party": "D",
-          "votes": 94651
+          "votes": 94685
         },
         {
           "name": "Steven Jacob",
           "party": "O",
-          "votes": 6805
+          "votes": 6806
         }
       ],
       "election": "2026-11-03",
       "office": "house",
       "precinctsReporting": 100.0,
       "raceId": "87158",
-      "retrievedAt": "2026-11-04T07:57:47.169542Z",
+      "retrievedAt": "2026-11-04T21:39:55.543126Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87158",
       "timestampBasis": "provider_last_updated",
-      "total": 251213,
+      "total": 251290,
       "verified": true
     },
     "KS-02": {
-      "asOf": "2026-11-04T05:31:35.878000Z",
+      "asOf": "2026-11-04T21:38:10.280000Z",
       "candidates": [
         {
           "name": "Derek Schmidt",
           "party": "R",
-          "votes": 125026
+          "votes": 125109
         },
         {
           "name": "Don Coover",
           "party": "D",
-          "votes": 109091
+          "votes": 109147
         },
         {
           "name": "John Hauer",
           "party": "O",
-          "votes": 9096
+          "votes": 9103
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 84.3,
+      "precinctsReporting": 100.0,
       "raceId": "87159",
-      "retrievedAt": "2026-11-04T05:31:25.430470Z",
+      "retrievedAt": "2026-11-04T21:39:55.543126Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87159",
       "timestampBasis": "provider_last_updated",
-      "total": 243213,
+      "total": 243359,
       "verified": true
     },
     "KS-03": {
@@ -5472,58 +5472,58 @@
       "verified": true
     },
     "KS-04": {
-      "asOf": "2026-11-04T05:58:33.703000Z",
+      "asOf": "2026-11-04T21:38:11.542000Z",
       "candidates": [
         {
           "name": "Ron Estes",
           "party": "R",
-          "votes": 138463
+          "votes": 138483
         },
         {
           "name": "Katy Tyndell",
           "party": "D",
-          "votes": 113573
+          "votes": 113602
         },
         {
           "name": "Drew Cranmer",
           "party": "O",
-          "votes": 6129
+          "votes": 6132
         }
       ],
       "election": "2026-11-03",
       "office": "house",
       "precinctsReporting": 100.0,
       "raceId": "87161",
-      "retrievedAt": "2026-11-04T05:58:38.654090Z",
+      "retrievedAt": "2026-11-04T21:39:55.543126Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87161",
       "timestampBasis": "provider_last_updated",
-      "total": 258165,
+      "total": 258217,
       "verified": true
     },
     "KS-GOVERNOR": {
-      "asOf": "2026-11-04T07:56:04.491000Z",
+      "asOf": "2026-11-04T21:38:12.104000Z",
       "candidates": [
         {
           "name": "Cindy Holscher",
           "party": "D",
-          "votes": 546609
+          "votes": 546747
         },
         {
           "name": "Ty Masterson",
           "party": "R",
-          "votes": 541047
+          "votes": 541183
         }
       ],
       "election": "2026-11-03",
       "office": "governor",
-      "precinctsReporting": 94.6,
+      "precinctsReporting": 100.0,
       "raceId": "87163",
-      "retrievedAt": "2026-11-04T07:57:47.169542Z",
+      "retrievedAt": "2026-11-04T21:39:55.543126Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87163",
       "timestampBasis": "provider_last_updated",
-      "total": 1087656,
+      "total": 1087930,
       "verified": true
     },
     "KS-SENATE": {
@@ -6472,12 +6472,12 @@
       "verified": true
     },
     "MD-05": {
-      "asOf": "2026-11-04T07:55:23.278000Z",
+      "asOf": "2026-11-04T21:37:25.639000Z",
       "candidates": [
         {
           "name": "Adrian Boafo",
           "party": "D",
-          "votes": 187218
+          "votes": 187219
         },
         {
           "name": "Chris Chaffee",
@@ -6487,7 +6487,7 @@
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 1807
+          "votes": 1806
         },
         {
           "name": "Mildred Marie Hall",
@@ -6499,7 +6499,7 @@
       "office": "house",
       "precinctsReporting": 100.0,
       "raceId": "87194",
-      "retrievedAt": "2026-11-04T07:57:47.169542Z",
+      "retrievedAt": "2026-11-04T21:39:55.543126Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87194",
       "timestampBasis": "provider_last_updated",
