@@ -58,7 +58,7 @@ function init(){
  section.querySelectorAll('[data-post-office]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.postOffice;section.querySelectorAll('[data-post-office]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw()}));
  refresh();setInterval(()=>{if(!document.hidden)refresh()},5*60*1000);
 }
-function safe(c){try{const u=new URL(c.sourceUrl);return /^https:$/.test(u.protocol)&&/(^|\\.)(apnews|foxnews)\\.com$/.test(u.hostname)}catch{return false}}
+function safe(c){try{const u=new URL(c.sourceUrl);return /^https:$/.test(u.protocol)&&/(^|\.)(apnews|foxnews)\.com$/.test(u.hostname)}catch{return false}}
 function matching(){return Object.entries(calls).filter(([id,c])=>safe(c)&&['D','R','I'].includes(c.party)&&typeof c.winner==='string')}
 function draw(){
  const ledger=matching(),eligible=ledger.filter(([id])=>filter==='all'||type(id)===filter);

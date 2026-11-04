@@ -7,7 +7,7 @@ const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-'),apState=s=>'https://apn
 const label=id=>id.endsWith('-SENATE')?'senate':id.endsWith('-GOVERNOR')?'governor':'house';
 const fmt=n=>Number(n).toLocaleString('en-US');
 const safeLink=v=>{try{const u=new URL(v);return u.protocol==='https:'?u.href:null}catch{return null}};
-const allowed=url=>{const u=safeLink(url);return u&&(/(^|\\.)apnews\\.com$|(^|\\.)foxnews\\.com$/).test(new URL(u).hostname)};
+const allowed=url=>{const u=safeLink(url);return u&&(/(^|\.)apnews\.com$|(^|\.)foxnews\.com$/).test(new URL(u).hostname)};
 let rows=[],snap={},limit=36,firstRender=true;
 const fetchJSON=async p=>{const r=await fetch(p+'?v='+Math.floor(Date.now()/60000),{cache:'no-store'});if(!r.ok)throw Error(p+' '+r.status);return r.json()};
 for(const code of Object.keys(states)){const option=document.createElement('option');option.value=code;option.textContent=states[code];$('prState').append(option)}
