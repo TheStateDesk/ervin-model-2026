@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T22:50:52.725867+00:00",
+  "updatedAt": "2026-11-04T02:52:52.865308+00:00",
   "events": [
     {
       "at": "2026-10-26T14:19:02.019910+00:00",
@@ -389,6 +389,52 @@
       "kind": "page_modified",
       "newLinks": [],
       "sourceUrl": "https://milivcounty.gov/elections/election-results/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T02:52:52.865308+00:00",
+      "county": "Barry",
+      "kind": "page_modified",
+      "newLinks": [],
+      "sourceUrl": "https://www.barrycounty.org/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T02:52:52.865308+00:00",
+      "county": "Bay",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Potential November 2026 result report",
+          "url": "https://www.baycountymi.gov/departments/clerk/elections/Documents/Departments/Clerk/Elections/Election Results/November 3 2026 Unofficial Summary Results 949..pdf?t=202611032151200"
+        },
+        {
+          "title": "Potential November 2026 result report",
+          "url": "https://www.baycountymi.gov/departments/clerk/elections/Documents/Departments/Clerk/Elections/Election Results/November 3, 2026 Unofficial Precinct Results 949.pdf?t=202611032151070"
+        }
+      ],
+      "sourceUrl": "https://www.baycountymi.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T02:52:52.865308+00:00",
+      "county": "Livingston",
+      "kind": "page_modified",
+      "newLinks": [],
+      "sourceUrl": "https://milivcounty.gov/elections/election-results/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T02:52:52.865308+00:00",
+      "county": "Oceana",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Unofficial Statement of Votes Cast \u2013 November 3, 2026",
+          "url": "https://oceana.mi.us/wp-content/uploads/2026/11/Unofficial-Statement-of-Votes-Cast-November-3-2026-1.pdf"
+        }
+      ],
+      "sourceUrl": "https://oceana.mi.us/",
       "notice": "Source change is not an election return"
     }
   ]
