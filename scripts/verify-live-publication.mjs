@@ -144,6 +144,13 @@ try{
   const total=await front.locator(selector).count();
   if(nonNeutral!==coverage||total!==(office==='house'?435:50))throw Error('PUBLIC FINAL PREDICTION MAP CALLS INCORRECT '+JSON.stringify({office,coverage,nonNeutral,total}));
   if((await front.locator('#edSimMap path.ed-sim-proj-T').count())!==0)throw Error('PUBLIC FINAL MAP MUST NOT SHOW TOSS-UP SHADING');
+  // Validate the exact race deep links, not merely that state shapes respond to taps.
+  const expectedRace=office==='house'?'MI-09':office==='senateD'?'MI-SENATE':'MI-GOVERNOR';
+  const expectedMapLink=office==='house'?
+   '#edSimMap a[data-sim-district="MI-09"]':'#edSimMap a[data-sim-state="MI"]';
+  const destination=await front.locator(expectedMapLink).getAttribute('href');
+  if(!destination?.includes('/election-night/?state=MI&race='+expectedRace+'#nationalBoard'))
+   throw Error('PUBLIC '+label+' FINAL MAP RACE LINK WRONG '+destination);
   if(office!=='house'){
    const insets=await front.evaluate(()=>['AK','HI'].map((code,i)=>{
     const path=document.querySelector('#edSimMap g[data-sim-inset="'+code+'"] path');
@@ -157,6 +164,16 @@ try{
 
   await front.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/FINAL-PREDICTION-'+label+'-Mobile.png'});
  }
+ // Navigate to the published, race-filtered results page and verify that it
+ // actually resolves to one contest rather than the unfiltered national index.
+ const direct=await browser.newPage({viewport:{width:390,height:844}});
+ await direct.goto(base+'election-night/?state=MI&race=MI-SENATE#nationalBoard',{waitUntil:'domcontentloaded'});
+ await direct.waitForFunction(()=>document.querySelector('#raceList #race-MI-SENATE')&&document.querySelectorAll('#raceList .race-row').length===1,null,{timeout:45000});
+ const raceText=await direct.locator('#nationalCount').innerText();
+ if(!raceText.includes('Michigan')||!raceText.includes('Senate'))
+  throw Error('PUBLISHED DIRECT RACE VIEW NOT FOCUSED '+raceText);
+ await direct.screenshot({path:'postdeploy-checks/Direct-Michigan-Senate-Race-Mobile.png',fullPage:false});
+ await direct.close();
  await front.locator('#watchSection').screenshot({path:'postdeploy-checks/State-Desk-Races-To-Watch-Mobile.png'});
  await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
  console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
