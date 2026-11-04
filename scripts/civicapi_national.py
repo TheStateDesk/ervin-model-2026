@@ -43,6 +43,13 @@ EARLIER["ID-02"]="22:00"
 # These are Eastern clock times, independently validated from 2026 poll-close schedules.
 SENATE_FIRST_CLOSE={"KY":"18:00","FL":"19:00","NH":"19:00","KS":"20:00","MI":"20:00","TX":"20:00","ID":"22:00","OR":"22:00","AK":"00:00"}
 MAX_WORKERS=6
+MAX_DETAIL_WORKERS=18
+
+def detail_worker_count(n):
+ # Grow concurrency as hundreds of races become eligible; limit pressure
+ # on CivicAPI during the small early-evening election window.
+ return min(MAX_DETAIL_WORKERS,max(MAX_WORKERS,(n+27)//28))
+
 # Nov. 3, 2026: 33 regular Senate races plus Florida and Ohio specials.
 SENATE_2026=set("AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY".split())
 
@@ -339,12 +346,12 @@ def main():
  deadline=time.monotonic()+11*60
  def get_one(item):
   key,row=item
-  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=9,max_attempts=3,deadline=deadline),None
+  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=7,max_attempts=2,deadline=deadline),None
   except urllib.error.HTTPError as e:return key,None,"HTTP_"+str(e.code)
   except Exception as e:return key,None,type(e).__name__
  # One contest = one detail request, with six workers and a bounded retry budget.
  # An unstable upstream must not hang the 16-minute GitHub workflow.
- with futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
+ with futures.ThreadPoolExecutor(max_workers=detail_worker_count(len(eligible))) as pool:
   # Prioritize statewide Senate returns ahead of the larger House queue.
   # Slow or timed-out district endpoints must not starve Senate results.
   ordered=sorted(eligible.items(),key=lambda item:(0 if item[0].endswith("-SENATE") else 1 if item[0].endswith("-GOVERNOR") else 2,item[0]))
