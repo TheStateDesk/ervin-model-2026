@@ -73,6 +73,24 @@ class ElectionReporting(unittest.TestCase):
   self.assertIn("CO-SENATE",x)
   self.assertIn("RI-SENATE",x)
   self.assertEqual(sum(v["office"]=="governor" for v in x.values()),36)
+ def test_every_2026_race_has_an_audit_status(self):
+  expected=m.targets()
+  registry={k:{"office":v["office"]} for k,v in expected.items() if k not in ("WY-SENATE","VT-01")}
+  now=dt.datetime(2026,11,4,3,tzinfo=UTC)
+  stored={"KY-SENATE":{"verified":True,"total":39201}}
+  issues={"GA-SENATE":"fetch_TimeoutError"}
+  report=m.coverage_by_office(expected,registry,now,stored,issues)
+  self.assertEqual({k:r["targeted"] for k,r in report.items()},{"house":435,"senate":35,"governor":36})
+  self.assertEqual(sum(r["targeted"] for r in report.values()),506)
+  self.assertEqual(sum(r["registered"] for r in report.values()),504)
+  self.assertEqual(report["senate"]["missingRegistryIds"],["WY-SENATE"])
+  self.assertEqual(report["house"]["missingRegistryIds"],["VT-01"])
+  self.assertEqual(report["senate"]["verifiedReports"],1)
+  self.assertEqual(report["senate"]["sourceErrors"],1)
+  for office,row in report.items():
+   self.assertEqual(row["registered"],row["awaitingPollClose"]+row["eligibleForCollection"])
+   self.assertEqual(row["eligibleForCollection"],row["verifiedReports"]+row["eligibleWithoutValidVoteReport"])
+   self.assertGreaterEqual(row["validationPending"],0)
  def test_accept_valid(self):
   r=m.normalize("MI-SENATE",self.search,self.detail,self.now,87214)
   self.assertEqual(r["total"],23000)
