@@ -8,6 +8,8 @@ const fmt=n=>Number(n).toLocaleString('en-US');
 const labelTime=when=>new Date(when).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
 const stateNames={AK:'Alaska',AZ:'Arizona',GA:'Georgia',IA:'Iowa',KS:'Kansas',ME:'Maine',MI:'Michigan',MN:'Minnesota',MT:'Montana',NC:'North Carolina',NE:'Nebraska',NH:'New Hampshire',OH:'Ohio',PA:'Pennsylvania',SD:'South Dakota',TX:'Texas',WI:'Wisconsin'};
 const priorityStates=['MI','OH','TX','ME','GA','NC','IA','AK','NE','KS','MN'];
+// Ballot coverage is broader than the 17 numerical Senate forecasts.
+const SENATE_BALLOT_STATES=new Set('AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY'.split(' '));
 let active=false,lastPost=0,posted=new Set(),selectedDistribution='house';
 const pending=new Map(),seen=new Map();
 function make(tag,cls,textValue){const el=document.createElement(tag);if(cls)el.className=cls;if(textValue!==undefined)el.textContent=textValue;return el;}
@@ -241,9 +243,12 @@ function fillStateMap(office,rows,revision){
  for(const geoState of geo){
   const s=rows[geoState.code],r=s.entries[0]||null,kind=r?.kind||'N';
   const candidate=kind==='D'?r?.dem:kind==='R'?r?.rep:null;
+  const onBallot=office==='senateD'?SENATE_BALLOT_STATES.has(s.code):!!r;
   const detail=r?s.name+' '+what+': projected '+(kind==='D'?'Democratic':'Republican')+' winner'+(candidate?' '+candidate:'')+' ('+(IS_FINITE(r.margin)?marginText(r.margin):r.rating||r.qualitativeRating||'publisher rating')+').':
-   s.name+': no 2026 '+what+' election modeled on this map.';
-  const link=makeSvg('a',{href:'../state/?state='+encodeURIComponent(s.code)+'#stateOverview','data-sim-state':s.code,'aria-label':detail+' Open state.',tabindex:0});
+   s.name+(onBallot?': 2026 '+what+' contest without a numerical Ervin forecast.':': no 2026 '+what+' election on this map.');
+  const raceId=s.code+'-'+(office==='senateD'?'SENATE':'GOVERNOR');
+  const target=onBallot?nightRaceHref(raceId):'../state/?state='+encodeURIComponent(s.code)+'#stateOverview';
+  const link=makeSvg('a',{href:target,'data-sim-state':s.code,'aria-label':detail+(onBallot?' Open this race.':' Open state election overview.'),tabindex:0});
   const path=makeSvg('path',{d:geoState.d,class:'ed-sim-proj-state ed-sim-proj-'+kind,'data-sim-kind':kind});
   const tip=makeSvg('title');tip.textContent=detail;path.append(tip);link.append(path);
   link.addEventListener('pointerenter',()=>summary.textContent=detail);
@@ -275,13 +280,13 @@ async function fillHouseMap(rows,revision,attempt=0){
   for(const shape of shapes){
    const r=calls.get(shape.id),detail=names[shape.code]+' '+shape.id+': projected '+(r.kind==='D'?'Democratic':'Republican')+' winner ('+(IS_FINITE(r.margin)?marginText(r.margin):r.rating+' source rating')+').';
    const district=String(Number(shape.id.slice(3))).padStart(2,'0');
-   const link=makeSvg('a',{href:'../state/?state='+encodeURIComponent(shape.code)+'#house-'+district,'data-sim-district':shape.id,'data-sim-state':shape.code,'aria-label':detail+' Open district details.',tabindex:0});
+   const link=makeSvg('a',{href:nightRaceHref(shape.id),'data-sim-district':shape.id,'data-sim-state':shape.code,'aria-label':detail+' Open this congressional race.',tabindex:0});
    const path=makeSvg('path',{d:shape.d,class:'ed-sim-proj-district ed-sim-proj-'+r.kind,'data-sim-kind':r.kind,'fill-rule':'evenodd'});
    const title=makeSvg('title');title.textContent=detail;path.append(title);link.append(path);
    link.addEventListener('pointerenter',()=>summary.textContent=detail);
    link.addEventListener('focus',()=>summary.textContent=detail);
-   link.addEventListener('pointerleave',()=>summary.textContent='Each of 435 districts carries an individual final predicted winner. Select a district to open its state dossier.');
-   link.addEventListener('blur',()=>summary.textContent='Each of 435 districts carries an individual final predicted winner. Select a district to open its state dossier.');
+   link.addEventListener('pointerleave',()=>summary.textContent='Each of 435 districts carries an individual final predicted winner. Select a district to open its race page.');
+   link.addEventListener('blur',()=>summary.textContent='Each of 435 districts carries an individual final predicted winner. Select a district to open its race page.');
    frag.append(link);
   }
   const ak=makeSvg('g',{class:'ed-sim-map-insets','aria-hidden':'true','pointer-events':'none'});
@@ -294,7 +299,7 @@ async function fillHouseMap(rows,revision,attempt=0){
   el.setAttribute('viewBox','0 0 1080 625');
   el.setAttribute('aria-label','Final House projection: 435 clickable congressional districts, each assigned a Democratic or Republican winner');
   el.dataset.simOffice='house';
-  summary.textContent='Every one of 435 U.S. House districts has a final predicted winner. Select a district to open its state dossier.';
+  summary.textContent='Every one of 435 U.S. House districts has a final predicted winner. Select a district to open its race page.';
  }catch(error){
   if(revision!==mapRevision)return;
   if(attempt<2){
