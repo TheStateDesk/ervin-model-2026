@@ -1,13 +1,13 @@
 {
   "version": 1,
   "election": "2026-11-03",
-  "checkedAt": "2026-11-04T06:06:53.871680+00:00",
+  "checkedAt": "2026-11-04T06:38:28.372698+00:00",
   "scope": "All 50 locally bundled county-equivalent geographies, with independently sourced county election office URLs where available. No actual 2026 results asserted.",
   "summary": {
     "states": 50,
     "countyEquivalents": 3143,
     "countySourcesIndependentlyLinked": 104,
-    "countySourcePagesResponding": 84,
+    "countySourcePagesResponding": 89,
     "countiesWithoutDirectVerifiedSource": 3039,
     "machineReadableCountyFeedsConfirmed": 0,
     "verified2026CountyReturnsBeforePollClose": 0
@@ -354,8 +354,8 @@
         "26023": {
           "county": "Branch",
           "sourceUrl": "https://www.countyofbranch.com",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -480,8 +480,8 @@
         "26051": {
           "county": "Gladwin",
           "sourceUrl": "https://gladwincounty-mi.gov",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -561,8 +561,8 @@
         "26069": {
           "county": "Iosco",
           "sourceUrl": "https://iosco.net",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -669,8 +669,8 @@
         "26093": {
           "county": "Livingston",
           "sourceUrl": "https://milivcounty.gov/elections/election-results/",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -876,8 +876,8 @@
         "26139": {
           "county": "Ottawa",
           "sourceUrl": "https://miottawa.org",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -1191,7 +1191,7 @@
           "county": "Middlesex",
           "sourceUrl": "https://www.middlesexcountynj.gov/government/departments/department-of-community-services/office-of-county-clerk/election-services/election-results",
           "connectivity": "indeterminate",
-          "note": "HTTP 403 to robot",
+          "note": "Connection timeout or automated access blocked",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -1331,7 +1331,7 @@
       "notIndependentlyLinked": 88,
       "stateAuthority": "https://liveresults.ohiosos.gov/",
       "authorityRole": "state-and-county-results",
-      "authorityConnectivity": "indeterminate",
+      "authorityConnectivity": "reachable",
       "countySources": {},
       "verifiedResultFeeds": 0,
       "note": "Source link and HTTP connectivity do not mean this county has a validated 2026 vote feed."
