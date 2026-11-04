@@ -1,36 +1,44 @@
-<!doctype html><html lang="en"><head><meta name="robots" content="noindex,follow"><meta charset="utf-8"><title>State Desk public homepage browser smoke</title></head>
-<body><h1>State Desk public homepage browser acceptance</h1><pre id="report" data-status="RUNNING">Running…</pre>
+<!doctype html><html lang="en"><head><meta name="robots" content="noindex,follow"><meta charset="utf-8"><title>Post-midterm public State Desk browser acceptance</title></head>
+<body><h1>Post-election editorial + archive acceptance</h1><pre id="report" data-status="RUNNING">Running…</pre>
 <script>
 (async()=>{
  const report=document.getElementById('report'),checks=[];
  const check=(v,msg)=>{if(!v)throw Error(msg);checks.push(msg)};
- const frame=document.createElement('iframe');frame.title='The State Desk homepage';frame.style.cssText='width:1180px;height:940px;border:0';
- const load=new Promise((res,rej)=>{frame.onload=res;frame.onerror=()=>rej(Error('State Desk unavailable'))});
- frame.src='../states/';document.body.appendChild(frame);
+ const until=async(fn,what)=>{for(let i=0;i<240;i++){if(fn())return;await new Promise(r=>setTimeout(r,100))}throw Error('Timeout: '+what)};
+ const frame=document.createElement('iframe');frame.title='Post-election homepage';frame.style.cssText='width:1180px;height:940px;border:0';
+ document.body.append(frame);
+ const navigate=src=>new Promise((resolve,reject)=>{frame.onload=resolve;frame.onerror=()=>reject(Error('Unable to open '+src));frame.src=src});
  try{
-  await load;const d=frame.contentDocument,w=frame.contentWindow,$=id=>d.getElementById(id);
-  const until=async fn=>{for(let i=0;i<180;i++){if(fn())return;await new Promise(r=>setTimeout(r,100))}throw Error('Timeout waiting for State Desk models')};
-  await until(()=>$('powerCards')?.dataset.powerReady==='true'&&$('watchCards')?.querySelectorAll('.watch-card').length>=4&&$('usMap')?.querySelector('path.ed-state'));
-  const heading=d.querySelector('h1.ed-headline')?.textContent||'';
-  check(/Every state|A Blue House|Election Night|2026/.test(heading),'The 50-state editorial State Desk headline must show either the preview, locked forecast, or election-night phase: '+heading);
-  check($('watchSection')&&$('balanceOfPower')&&$('nationMap')&&$('electionDashboard'),'Races to watch, office balance, atlas and automatic election-night dashboard are present');
-  check(!d.querySelector('#electionNationalMap,#electionLocalMap'),'Live and forecast maps must not duplicate national/state SVGs');
-  check($('watchSection').getBoundingClientRect().top<$('balanceOfPower').getBoundingClientRect().top,'Races to watch precede office balance');
-  const nightActive=Date.now()>=Date.parse('2026-11-03T17:55:00-05:00');
-  check(nightActive?($('edSimulationPanel')?.dataset.coverageMode==='live'&&$('edFinalHeadline')?.textContent.includes('COVERAGE')&&$('edLiveCommentary')?.hidden===false):$('balanceOfPower').getBoundingClientRect().top<$('nationMap').getBoundingClientRect().top,'Pre-election atlas follows balance; at 5:55 the original lead becomes LIVE ELECTION COVERAGE with commentary');
-  check($('powerCards').querySelectorAll('.power-card').length===3,'Three office forecast cards render');
-  check(d.querySelectorAll('#usMap path.ed-state').length>=50,'All fifty state shapes accessible');
-  check(!d.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),'Retired workbench does not appear');
-  check(!d.querySelector('a[href="../"]'),'Homepage does not link back to retired root');
-  const first=$('watchCards').querySelector('.watch-card__name').textContent;
-  $('watchNext').click();check($('watchCards').querySelector('.watch-card__name').textContent!==first,'Races to watch carousel advances');
-  $('watchPrev').click();check($('watchCards').querySelector('.watch-card__name').textContent===first,'Races to watch carousel reverses');
-  check(d.querySelectorAll('[data-map-office]').length===3&&d.querySelectorAll('[data-national-county-view]').length===3,'Senate governor and House office buttons, with one forecast/report county map available');
-  const wasDark=d.documentElement.classList.contains('theme-dark');
-  $('themeToggle').click();check(d.documentElement.classList.contains('theme-dark')!==wasDark,'Appearance toggle switches contrast theme');
-  $('themeToggle').click();check(d.documentElement.classList.contains('theme-dark')===wasDark,'Appearance toggle switches back');
-  frame.style.width='390px';await new Promise(res=>w.requestAnimationFrame(res));
-  check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'No phone horizontal overflow');
+  await navigate('../states/');
+  const d=frame.contentDocument,w=frame.contentWindow,$=id=>d.getElementById(id);
+  await until(()=>$('postElectionDesk')&&Number(($('postReported')?.textContent||'').replaceAll(',',''))>100,'2026 sourced post-election count');
+  check(d.querySelector('#postElectionDesk h1')?.textContent.includes('Congress changes hands'),'Results-first editorial headline present');
+  check(d.querySelectorAll('#postAnalysis .post-article-card').length===4,'Four short election analysis articles are linked from homepage');
+  check(!$('postModelAudit')&&!d.body.textContent.includes('Forecast scorecard'),'No model accuracy scorecard on results homepage');
+  check($('postCalled')?.textContent!=='—','Attributed AP call count is available');
+  check($('watchSection')?.hidden===false&&w.getComputedStyle($('watchSection')).display==='none','Pre-election watch carousel is archived, not shown');
+  check($('balanceOfPower')&&w.getComputedStyle($('balanceOfPower')).display==='none','Forecast seat projections no longer compete with reported control');
+  check(d.querySelectorAll('.pe-global-nav a').length===7,'Unified editorial navigation installed');
+  check(d.querySelectorAll('#usMap path.ed-state').length===50,'All fifty state SVG shapes available');
+  check($('postCloseRaces')&&$('postCloseList'),'Outstanding-count section exists');
+  const senate=d.querySelector('[data-post-office="senate"]');senate.click();
+  check(senate.getAttribute('aria-pressed')==='true','Senate close-count office filter works');
+  const all=d.querySelector('[data-post-office="all"]');all.click();
+  check(all.getAttribute('aria-pressed')==='true','Close-count filter can reset');
+  const theme=$('themeToggle'),dark=d.documentElement.classList.contains('theme-dark');theme.click();
+  check(d.documentElement.classList.contains('theme-dark')!==dark,'Light/dark appearance switch works');
+  theme.click();
+  frame.style.width='390px';await new Promise(resolve=>w.requestAnimationFrame(resolve));
+  check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'Results homepage has no phone-width horizontal overflow');
+  await navigate('../states/?view=final');
+  await until(()=>d.querySelector('#edFinalHeadline')&&d.querySelectorAll('#edSimTabs button').length===3,'locked forecast archive');
+  check(!d.querySelector('#postElectionDesk'),'Archive stays separate from election reporting');
+  check(d.querySelector('#edFinalHeadline')?.textContent.includes('FINAL'),'Original final forecast remains accessible');
+  await navigate('../analysis/senate-seven-flips/');
+  await until(()=>d.querySelectorAll('#storyTable tr').length===7,'senate story dynamic data');
+  check(d.querySelector('h1')?.textContent.includes('Seven states'),'Story detail page loads');
+  check(d.querySelectorAll('.story-sources a').length>=2,'Article cites independent external election reporting');
+  check(d.querySelectorAll('.pe-global-nav a').length===7,'Articles share the same nav as national site');
   report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.join('\n');
  }catch(err){report.dataset.status='FAIL';report.textContent='FAIL: '+err.stack}
 })();
