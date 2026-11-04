@@ -8,8 +8,9 @@ on:
       - '.github/workflows/civicapi-probe.yml'
   schedule:
     - cron: '37 2,8,14,20 * * *'
-    - cron: '3,13,23,33,43,53 0-9 4 11 *'
-    - cron: '3,13,23,33,43,53 23 3 11 *'
+    # Every five minutes during election-night hours (GitHub's minimum schedule interval).
+    - cron: '3-58/5 0-9 4 11 *'
+    - cron: '3-58/5 23 3 11 *'
   workflow_dispatch:
 permissions:
   contents: write
