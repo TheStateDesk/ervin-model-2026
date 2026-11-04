@@ -71,6 +71,11 @@ class ElectionReporting(unittest.TestCase):
   self.assertEqual(m.detail_worker_count(82),6)
   self.assertEqual(m.detail_worker_count(300),11)
   self.assertEqual(m.detail_worker_count(506),18)
+ def test_unreported_races_are_checked_first_per_chamber(self):
+  pending={"GA-SENATE":{},"MI-SENATE":{},"GA-GOVERNOR":{},"FL-03":{},"FL-04":{}}
+  stored={"GA-SENATE":{"total":100},"FL-03":{"total":100}}
+  ordered=sorted(pending.items(),key=lambda x:m.result_priority(x,stored))
+  self.assertEqual([key for key,_ in ordered],["MI-SENATE","GA-SENATE","GA-GOVERNOR","FL-04","FL-03"])
  def test_registry_506(self):
   x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)

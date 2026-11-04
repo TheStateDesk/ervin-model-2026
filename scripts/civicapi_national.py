@@ -45,6 +45,13 @@ SENATE_FIRST_CLOSE={"KY":"18:00","FL":"19:00","NH":"19:00","KS":"20:00","MI":"20
 MAX_WORKERS=6
 MAX_DETAIL_WORKERS=18
 
+def result_priority(item, stored):
+ # Senate and governor first; check missing reports before stored reports
+ # within each chamber when CivicAPI's upstream connection is overloaded.
+ key=item[0]
+ return (0 if key.endswith("-SENATE") else 1 if key.endswith("-GOVERNOR") else 2,
+         0 if key not in stored else 1,key)
+
 def detail_worker_count(n):
  # Grow concurrency as hundreds of races become eligible; limit pressure
  # on CivicAPI during the small early-evening election window.
@@ -360,7 +367,7 @@ def main():
  with futures.ThreadPoolExecutor(max_workers=detail_workers) as pool:
   # Prioritize statewide Senate returns ahead of the larger House queue.
   # Slow or timed-out district endpoints must not starve Senate results.
-  ordered=sorted(eligible.items(),key=lambda item:(0 if item[0].endswith("-SENATE") else 1 if item[0].endswith("-GOVERNOR") else 2,item[0]))
+  ordered=sorted(eligible.items(),key=lambda item:result_priority(item,stored))
   for key,data,error in pool.map(get_one,ordered):
    if error:
     issues[key]="fetch_"+error;continue
@@ -379,7 +386,7 @@ def main():
  if added:save(OUT,{"version":1,"election":DAY,"races":stored})
  elif not OUT.exists():save(OUT,{"version":1,"election":DAY,"races":{}})
  health={"version":2,"election":DAY,"provider":"civicAPI v2","checkedAt":iso(now),
-  "targetRaces":len(expected),"registeredRaces":len(registry),"eligibleRaces":len(eligible),
+  "targetRaces":len(expected),"registeredRaces":len(registry),"eligibleRaces":len(eligible),"attemptedRaces":len(eligible),
   "fetched":fetched,"publishedRaces":len(stored),"updatedRaces":added,
    "officeCoverage":coverage_by_office(expected,registry,now,stored,issues),
    "raceStatuses":status_for_each_race(expected,registry,now,stored,issues),
