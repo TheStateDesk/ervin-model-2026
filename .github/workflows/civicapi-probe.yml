@@ -18,6 +18,9 @@ on:
     - cron: '*/10 8-23 4 11 *'
     - cron: '*/10 0-16 5 11 *'
     - cron: '0 17 5 11 *'
+    # Post-election follow-through: hourly through November 11, 2026.
+    - cron: '17 18-23 5 11 *'
+    - cron: '17 * 6-11 11 *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -41,6 +44,20 @@ jobs:
           # Normal four-times-daily maintenance stays unchanged.
           if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$REQUESTED_CRON" == "37 2,8,14,20 * * *" ]]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Hourly post-election source checking continues after the earlier ten-minute cutoff.
+          if [[ "$REQUESTED_CRON" == "17 18-23 5 11 *" || "$REQUESTED_CRON" == "17 * 6-11 11 *" ]]; then
+            now=$(date -u +%s)
+            start=$(date -u -d "2026-11-05T18:00:00Z" +%s)
+            end=$(date -u -d "2026-11-12T00:00:00Z" +%s)
+            if (( now >= start && now < end )); then
+              echo "run=true" >> "$GITHUB_OUTPUT"
+              echo "Hourly post-election results collection is active"
+            else
+              echo "run=false" >> "$GITHUB_OUTPUT"
+              echo "Hourly post-election collection is outside its 2026 window"
+            fi
             exit 0
           fi
           # These date-specific cron expressions recur annually. Disable
