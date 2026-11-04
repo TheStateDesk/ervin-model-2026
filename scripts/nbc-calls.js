@@ -4,7 +4,7 @@
 const script=document.currentScript;
 const endpoint=new URL('../election-night/nbc-calls.json',script?.src||location.href).href;
 const calls=new Map();
-const allowed=/^www\\.nbc[a-z0-9-]+\\.com$/i;
+const allowed=/^www\.nbc[a-z0-9-]+\.com$/i;
 const normalize=s=>String(s||'').normalize('NFKC').toLowerCase().replace(/[^a-z0-9]/g,'');
 function validate(key,row){
  if(!/^[A-Z]{2}-(?:[0-9]{2}|SENATE|GOVERNOR)$/.test(key)||!row||!['D','R','I','O'].includes(row.party))return null;
