@@ -1,0 +1,24 @@
+
+/* Shared navigation + editorial polish across existing public data desks */
+.pe-site{--pe-paper:#f4f2ed;--pe-navy:#1e3546;--pe-blue:#376c8b;--pe-brass:#ae865b}
+.pe-global-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:23px;padding:11px max(20px,calc((100vw - 1390px)/2));background:#1e3546;color:#f7f2ea;border-bottom:3px solid #c8a370;position:relative;z-index:29;font-family:"Libre Franklin",Arial,system-ui,sans-serif}
+.pe-global-label{display:flex;align-items:center;gap:9px;white-space:nowrap}.pe-global-label strong{font-size:11px;letter-spacing:.09em;color:#fff}
+.pe-global-label small{color:#bfc9cd;font-size:9px;letter-spacing:.08em;margin-left:4px}
+.pe-red-dot{display:inline-block;width:7px;height:7px;flex:none;border-radius:50%;background:#d7a26a}
+.pe-global-links{display:flex;align-items:center;gap:1px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;white-space:nowrap}
+.pe-global-links a{color:#e2e9ee!important;text-decoration:none!important;font-weight:800;font-size:10px;letter-spacing:.035em;padding:8px 11px;border-radius:3px;transition:background .15s}
+.pe-global-links a:hover,.pe-global-links a[aria-current=page]{background:#35546b;color:#fff!important}
+.pe-global-links a[aria-current=page]{box-shadow:inset 0 -2px #e2bb80}
+.pe-edition-line{box-sizing:border-box;width:min(1400px,calc(100% - 42px));display:flex;justify-content:space-between;align-items:center;gap:20px;margin:18px auto 0;padding:10px 0;border-top:3px double #3b4b56;border-bottom:1px solid #bcc9cb;font:750 10px/1.55 "Libre Franklin",Arial,sans-serif;color:#455e70}
+.pe-edition-line>span:first-child{letter-spacing:.13em;color:#a07149}
+.pe-edition-line>span:last-child{font-weight:500;text-align:right}
+.pe-site .ed-head{box-shadow:none}
+.pe-site .ed-head .ed-mast>a,.pe-site .night-head .ed-mast>a{letter-spacing:-.04em}
+.pe-site main h1,.pe-site main h2{scroll-margin-top:30px}
+.pe-site :focus-visible{outline:3px solid #d4a56f;outline-offset:2px}
+.ed-post-election .ed-head .ed-nav{display:none}
+html.theme-dark .pe-global-nav{background:#0b1f2f;border-color:#a88962}
+html.theme-dark .pe-edition-line{color:#aebdc7;border-color:#526674}
+@media(max-width:1080px){.pe-global-nav{flex-direction:column;align-items:stretch;gap:7px}.pe-global-links{width:100%}.pe-global-label{justify-content:space-between}}
+@media(max-width:600px){.pe-global-nav{padding:10px 13px}.pe-global-links a{padding:9px 10px}.pe-global-label strong{font-size:10px}.pe-global-label small{font-size:8px}.pe-edition-line{width:calc(100% - 28px);flex-direction:column;align-items:flex-start;gap:3px}.pe-edition-line>span:last-child{text-align:left}}
+@media(prefers-reduced-motion:reduce){.pe-global-links a{transition:none}}
