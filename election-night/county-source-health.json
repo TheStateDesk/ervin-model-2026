@@ -1,7 +1,7 @@
 {
   "version": 1,
   "election": "2026-11-03",
-  "checkedAt": "2026-11-04T06:38:28.372698+00:00",
+  "checkedAt": "2026-11-04T14:24:41.291907+00:00",
   "scope": "All 50 locally bundled county-equivalent geographies, with independently sourced county election office URLs where available. No actual 2026 results asserted.",
   "summary": {
     "states": 50,
@@ -1191,7 +1191,7 @@
           "county": "Middlesex",
           "sourceUrl": "https://www.middlesexcountynj.gov/government/departments/department-of-community-services/office-of-county-clerk/election-services/election-results",
           "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "note": "HTTP 403 to robot",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
