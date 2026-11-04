@@ -389,16 +389,18 @@ async function loadReturns(force=false){
   }
   const chosen=core.preferCivic(civic,fallback);
   const inState=Object.values(chosen.races).filter(row=>row.id.startsWith(code+'-'));
-  $('resultRows').innerHTML=inState.length?inState.map(row=>{
+  const nbcCalls=Object.values(window.ERVIN_NBC_CALLS?.all()||{}).filter(c=>c.id.startsWith(code+'-'));
+  const callMarkup=nbcCalls.length?'<div class="ed-cap">NBC NEWS PROJECTED WINNERS · '+nbcCalls.length+'</div>'+nbcCalls.map(c=>'<article><strong>'+esc(c.id)+' · '+esc(c.winner)+' ('+esc(c.party)+')</strong><small>Projection from NBC News Decision Desk · not a certified result</small><a href="'+safeURL(c.sourceUrl)+'" target="_blank" rel="noopener noreferrer">NBC source</a></article>').join(''):'';
+  $('resultRows').innerHTML=callMarkup+(inState.length?inState.map(row=>{
    const sorted=row.candidates.slice().sort((a,b)=>b.votes-a.votes);
    const summary=sorted.slice(0,3).map(c=>c.name+' '+fmt(c.votes)).join(' · ');
    return '<article><strong>'+esc(row.office+' · '+row.id)+'</strong><small>'+esc(summary)+' · '+fmt(row.total)+' unofficial votes · '+esc(row.source)+' · '+esc(row.asOf)+'</small>'+
    (row.sourceURL?'<a href="'+safeURL(row.sourceURL)+'" target="_blank" rel="noopener noreferrer">Count provenance</a>':'')+'</article>';
-  }).join(''):'<div class="ed-empty">No accepted 2026 vote totals for '+esc(stateName(code))+' in the published providers. This does not mean that zero votes have been counted.</div>';
+  }).join(''):'<div class="ed-empty">No accepted 2026 vote totals for '+esc(stateName(code))+' in the published providers. This does not mean that zero votes have been counted.</div>');
   const civicCount=inState.filter(r=>r.source.includes('CivicAPI')).length;
   $('resultStatus').className='ed-inline-status'+(inState.length?' live':'');
-  $('resultStatus').textContent=inState.length?inState.length+' contests with attributed returns · '+civicCount+' from CivicAPI':'Awaiting attributed current-election results';
-  $('resultUpdated').textContent='Checked '+(window.ERVIN_AP_DATE?.timestamp(Date.now())||new Date().toLocaleTimeString())+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
+  $('resultStatus').textContent=(inState.length?inState.length+' contests with attributed returns · '+civicCount+' from CivicAPI':'Awaiting attributed current-election results')+' · '+nbcCalls.length+' NBC News projections';
+  $('resultUpdated').textContent='NBC News winner projections are independently sourced. Checked '+(window.ERVIN_AP_DATE?.timestamp(Date.now())||new Date().toLocaleTimeString())+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
  }catch(e){
   $('resultStatus').className='ed-inline-status stale';
   $('resultStatus').textContent='Source audit unavailable: '+String(e.message||e).slice(0,90);
