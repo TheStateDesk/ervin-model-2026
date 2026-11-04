@@ -1,4 +1,4 @@
-/* 2026 editorial homepage: AP-attributed winner calls and original reporting, no CivicAPI totals */
+/* Independent 2026 election newsroom; documented AP-based calls, multi-outlet reporting and original analysis. */
 (function postElection(){
 'use strict';
 if(new URLSearchParams(location.search).get('view')==='final')return;
@@ -25,14 +25,14 @@ let calls={},filter='all',busy=false,limit=30;
 function init(){
  const anchor=$('edSimulationPanel');if(!anchor)return;
  const section=document.createElement('section');section.id='postElectionDesk';section.className='post-desk';
- section.setAttribute('aria-label','AP-led election results and post-midterm journalism');
+ section.setAttribute('aria-label','Election results and original post-midterm journalism');
  section.innerHTML=`
  <div class="post-mast"><span>THE ERVIN MODEL / THE AFTERMATH</span><time datetime="2026-11-04">NOVEMBER 4, 2026</time></div>
  <div class="post-hero"><div class="post-story"><div class="post-kicker">AMERICA AFTER THE MIDTERMS</div>
  <h1>A national wave. A new political map.</h1>
  <p class="post-deck">Democrats captured both chambers of Congress while Senate victories in Texas, Kansas and South Carolina reached deep into Republican territory. Meet the new senators and examine what voters decided.</p>
- <div class="post-story-actions"><a class="post-primary" href="../results/">AP-led results desk</a><a href="../analysis/polls-underestimated-democrats/">Why the polls missed</a><a href="../analysis/">All reporting</a></div>
- <p class="post-attribution">Chamber control based on <a href="${dataSource}" target="_blank" rel="noopener noreferrer">Associated Press reporting</a>. Projections are not certifications.</p></div>
+ <div class="post-story-actions"><a class="post-primary" href="../results/">Election results</a><a href="../analysis/polls-underestimated-democrats/">Why the polls missed</a><a href="../analysis/">All reporting</a></div>
+ <p class="post-attribution">Chamber control is projected in <a href="https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/" target="_blank" rel="noopener noreferrer">Reuters' national election analysis</a> and <a href="${dataSource}" target="_blank" rel="noopener noreferrer">AP reporting</a>. Projections are not certifications.</p></div>
  <div class="post-control"><div class="post-control-title">THE NEXT CONGRESS <span>PROJECTED CONTROL</span></div>
  <div class="post-chamber"><span>HOUSE OF REPRESENTATIVES</span><strong>Democratic majority</strong><small>Projected by the Associated Press</small></div>
  <div class="post-chamber"><span>U.S. SENATE</span><strong>Democratic majority</strong><small>Projected by the Associated Press</small></div>
@@ -45,21 +45,30 @@ function init(){
  <a href="../analysis/south-carolina-andrews/" class="post-package-card"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/South%20Carolina%20State%20House%2C%20Gervais%20Street%2C%20Columbia%2C%20SC.jpg?width=700" alt="South Carolina State House, historic illustration" loading="lazy"><span>SOUTH CAROLINA · THE UPSET</span><strong>Annie Andrews’ next test: health care and costs</strong><small>Rural hospitals, groceries and the first Democratic win since 1998</small></a></div>
  </section>
  <div class="post-snapshot" aria-live="polite">
- <div><span class="post-figure-label">AP-ATTRIBUTED HOUSE CALLS</span><strong id="postReported">—</strong><small>House districts documented in the site's election source ledger</small></div>
- <div><span class="post-figure-label">ALL TRACKED AP-ATTRIBUTED CALLS</span><strong id="postCalled">—</strong><small>Our published ledger, not a national count of decided races</small></div>
- <div><span class="post-figure-label">CURRENT AP RESULTS</span><strong id="postSourceTime">AP NEWS</strong><small id="postDataHealth"><a href="${ap}" target="_blank" rel="noopener noreferrer">Open AP's live election results ↗</a></small></div>
+ <div><span class="post-figure-label">DOCUMENTED HOUSE CALLS</span><strong id="postReported">—</strong><small>House districts documented in the site's election source ledger</small></div>
+ <div><span class="post-figure-label">ALL TRACKED WINNER CALLS</span><strong id="postCalled">—</strong><small>Our published ledger, not a national count of decided races</small></div>
+ <div><span class="post-figure-label">CURRENT RESULTS COVERAGE</span><strong id="postSourceTime">AP NEWS</strong><small id="postDataHealth"><a href="${ap}" target="_blank" rel="noopener noreferrer">Open AP's live election results ↗</a></small></div>
  </div>
- <div class="post-divider"><div><span class="post-kicker">THE ELECTION'S PIVOTAL RESULTS</span><h2>Races that changed the map</h2></div><a href="../results/">All AP-attributed calls</a></div>
+ <div class="post-divider"><div><span class="post-kicker">THE ELECTION'S PIVOTAL RESULTS</span><h2>Races that changed the map</h2></div><a href="../results/">Browse verified calls</a></div>
  <div class="post-milestones" id="postMilestones"><p>Checking locally sourced winner calls…</p></div>
  <section class="post-watch" id="postCloseRaces" aria-labelledby="postCloseTitle">
- <div class="post-divider"><div><span class="post-kicker">FROM OUR AP-ATTRIBUTED CALL LEDGER</span><h2 id="postCloseTitle">Browse the reported winners</h2></div><span id="postOpenCount">Loading source records</span></div>
- <p class="post-explainer">These are individually documented newsroom calls, not unofficial vote leads. A partial local ledger does not mean other AP results are uncalled. For all current counts, go directly to the AP.</p>
+ <div class="post-divider"><div><span class="post-kicker">SOURCE-LINKED ELECTION RETURNS</span><h2 id="postCloseTitle">Explore the results</h2></div><span id="postOpenCount">Loading source records</span></div>
+ <p class="post-explainer">The board documents published newsroom projections, not official certifications. Our local record is a partial index of called races. For current counts, open the linked results publisher.</p>
  <div class="post-filters" id="postFilters" role="group" aria-label="Choose an election office">
  <button type="button" data-post-office="all" aria-pressed="true">All</button><button type="button" data-post-office="senate" aria-pressed="false">Senate</button><button type="button" data-post-office="house" aria-pressed="false">House</button><button type="button" data-post-office="governor" aria-pressed="false">Governors</button></div>
  <div class="post-close-list" id="postCloseList"><p>Loading AP-attributed winners…</p></div><button id="postMore" class="post-more" type="button" hidden>Show more sourced results</button>
- <p class="post-source-note" id="postCloseSource">Winner calls are sourced separately from vote totals.</p></section>
+ <p class="post-source-note" id="postCloseSource">Winner calls are sourced separately from vote totals. The underlying call ledger uses AP reporting, including AP-syndicated publishers.</p></section>
+ <section class="post-peer-coverage" aria-label="Reporting from other newsrooms">
+  <div class="post-divider"><div><span class="post-kicker">ADDITIONAL REPORTING / ORIGINAL LOCAL AND NATIONAL NEWSROOMS</span><h2>Beyond election-night calls</h2></div><a href="../analysis/">Our own analysis</a></div>
+  <div class="post-peer-grid">
+   <a href="https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/" target="_blank" rel="noopener noreferrer"><span>THE TEXAS TRIBUNE · TEXAS</span><strong>How Texas's statewide power structure changed</strong><small>Local reporting on the sweep, the governor's race and the road ahead.</small></a>
+   <a href="https://kansasreflector.com/2026/11/03/hamilton-makes-history-with-u-s-senate-win/" target="_blank" rel="noopener noreferrer"><span>KANSAS REFLECTOR · KANSAS</span><strong>A historic Senate race seen from the counties</strong><small>Turnout in Johnson, Sedgwick and Wyandotte counties, and Hamilton's path.</small></a>
+   <a href="https://courthousenews.com/annie-andrews-defeats-darline-graham-in-south-carolina-senate-race/" target="_blank" rel="noopener noreferrer"><span>COURTHOUSE NEWS SERVICE · SOUTH CAROLINA</span><strong>Two Republican-leaning counties shift toward Andrews</strong><small>Greenville and York reveal why the statewide margin matters.</small></a>
+   <a href="https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/" target="_blank" rel="noopener noreferrer"><span>REUTERS · NATIONAL</span><strong>Economic anxiety underlies the 2026 results</strong><small>Voter concerns, control of Congress and the limits of a new majority.</small></a>
+  </div>
+ </section>
  <section class="post-analysis" id="postAnalysis" aria-labelledby="postAnalysisTitle">
- <div class="post-divider"><div><span class="post-kicker">OUR JOURNALISM / NINE ORIGINAL REPORTS</span><h2 id="postAnalysisTitle">The numbers behind the upheaval</h2></div><a href="../analysis/">All reporting</a></div>
+ <div class="post-divider"><div><span class="post-kicker">ORIGINAL REPORTING / NINE STORIES</span><h2 id="postAnalysisTitle">The numbers behind the upheaval</h2></div><a href="../analysis/">All reporting</a></div>
  <div class="post-article-grid">${stories.map((s,i)=>'<a class="post-article-card'+(i===0?' post-article-card--lead':'')+'" href="../analysis/'+s.slug+'/"><div class="post-article-photo"><img src="'+s.img+'" loading="'+(i===0?'eager':'lazy')+'" alt="Historical editorial illustration for this 2026 election article"></div><span>'+s.k+'</span><strong>'+s.title+'</strong><p>'+s.desc+'</p><small>'+s.read+' READ · EXPLORE →</small></a>').join('')}</div>
  </section>`;
  anchor.insertAdjacentElement('beforebegin',section);
@@ -77,14 +86,14 @@ function draw(){
  const list=sorted.slice(0,limit); const more=$('postMore');if(more){more.hidden=sorted.length<=limit;more.textContent='Show more sourced results ('+(sorted.length-limit)+' remaining)';}$('postOpenCount').textContent=fmt(eligible.length)+' source-linked calls in this office';
  $('postCloseList').innerHTML=list.length?list.map(([id,c])=>{
  const state=names[id.slice(0,2)]||id.slice(0,2),office=type(id),label=office==='house'?'DISTRICT '+id.slice(3):office.toUpperCase();
- return '<a class="post-close-item" href="'+href(id)+'"><div class="post-close-ident"><b>'+esc(state)+'</b><small>'+label+'</small></div><div class="post-close-names"><strong>'+esc(c.winner)+'</strong><span>Associated Press-attributed winner call</span></div><div class="post-close-margin"><strong>'+esc(c.party)+'</strong><small>AP-sourced call</small></div><span class="post-close-arrow" aria-hidden="true">›</span></a>';
+ return '<a class="post-close-item" href="'+href(id)+'"><div class="post-close-ident"><b>'+esc(state)+'</b><small>'+label+'</small></div><div class="post-close-names"><strong>'+esc(c.winner)+'</strong><span>Projected winner · Original call documented</span></div><div class="post-close-margin"><strong>'+esc(c.party)+'</strong><small>Source-linked</small></div><span class="post-close-arrow" aria-hidden="true">›</span></a>';
  }).join(''):'<p class="post-empty">No AP-attributed calls match this office in our local ledger. <a href="https://apnews.com/projects/elections-2026/">Browse AP directly.</a></p>';
- $('postCloseSource').innerHTML='Read the complete results on <a href="'+ap+'" target="_blank" rel="noopener noreferrer">AP News</a>. This site does not have a licensed direct AP API connection; the source-linked call ledger is refreshed when the repository is updated.';
+ $('postCloseSource').innerHTML='Method: the site's archived winner-call ledger draws on AP reporting and AP-syndicated publications; the original call source is linked for each race. It is not a direct live API. The ledger updates when the repository is refreshed. <a href="'+ap+'" target="_blank" rel="noopener noreferrer">Check the underlying results publisher</a>.';
  $('postReported').textContent=fmt(ledger.filter(([id])=>type(id)==='house').length);
  $('postCalled').textContent=fmt(ledger.length);
  $('postMilestones').innerHTML=picks.filter(id=>calls[id]&&safe(calls[id])).slice(0,6).map(id=>{
  const c=calls[id],state=names[id.slice(0,2)]||id.slice(0,2);
- return '<a class="post-milestone" href="'+href(id)+'"><span>'+state+' / '+type(id).toUpperCase()+'</span><strong>'+esc(c.winner)+'</strong><small>AP-attributed winner call · View source</small></a>';
+ return '<a class="post-milestone" href="'+href(id)+'"><span>'+state+' / '+type(id).toUpperCase()+'</span><strong>'+esc(c.winner)+'</strong><small>Projected winner · Open race</small></a>';
  }).join('')||'<p class="post-empty">AP-attributed ledger updating. <a href="'+ap+'">Browse AP results.</a></p>';
 }
 async function refresh(){
