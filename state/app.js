@@ -400,7 +400,7 @@ async function loadReturns(force=false){
   const civicCount=inState.filter(r=>r.source.includes('CivicAPI')).length;
   $('resultStatus').className='ed-inline-status'+(inState.length?' live':'');
   $('resultStatus').textContent=(inState.length?inState.length+' contests with attributed returns · '+civicCount+' from CivicAPI':'Awaiting attributed current-election results')+' · '+nbcCalls.length+' NBC News projections';
-  $('resultUpdated').textContent='NBC News winner projections are independently sourced. Checked '+(window.ERVIN_AP_DATE?.timestamp(Date.now())||new Date().toLocaleTimeString())+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. This is a source audit, not a projection or race-call desk.';
+  $('resultUpdated').textContent='NBC News winner projections are independently sourced. Checked '+(window.ERVIN_AP_DATE?.timestamp(Date.now())||new Date().toLocaleTimeString())+' · CivicAPI primary, independent fallback if unavailable or behind · '+chosen.warnings.length+' held source discrepancies. The separately cited NBC projected-winner notices are newsroom calls, not deductions from the vote count.';
  }catch(e){
   $('resultStatus').className='ed-inline-status stale';
   $('resultStatus').textContent='Source audit unavailable: '+String(e.message||e).slice(0,90);
@@ -471,6 +471,7 @@ async function start(){
   await display(new URLSearchParams(location.search).get('state')||'MI');
   // Optional polling/archive data can finish after map draw, without blocking it.
   updated.then(()=>{});
+  window.addEventListener('ervin:nbc-calls-update',()=>{if(code)loadReturns(true)});
   setInterval(()=>{if(!document.hidden)loadReturns(false)},60000);
  }catch(e){console.error('State desk failed',e);$('stateTitle').textContent='State data could not be loaded';$('stateDeck').textContent='A required election registry could not be retrieved. Reload to try again.';}
 }
