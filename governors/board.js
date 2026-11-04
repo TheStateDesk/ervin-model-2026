@@ -14,7 +14,7 @@ function card(r){const m=r.model,history=m?.events||[];
  const faces='<div class="gov-photo-pair">'+[['D',r.dem],['R',r.rep]].map(([p,n])=>'<div class="gov-photo-item"><span class="gov-face '+p+'" data-gov-face="'+esc(r.code)+'-'+p+'">'+esc(n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join(''))+'</span><span>'+esc(n)+'</span></div>').join('')+'</div>';
  const live=liveRows[r.code+'-GOVERNOR'];
  const nbc=window.ERVIN_NBC_CALLS?.get(r.code+'-GOVERNOR');
- const nbcHTML=nbc?'<div class="gov-lead"><strong>NBC NEWS PROJECTS '+esc(nbc.winner)+' ('+esc(nbc.party)+')</strong> · <a href="'+esc(nbc.sourceUrl)+'" target="_blank" rel="noopener noreferrer">NBC source</a></div>':'';
+ const nbcHTML=nbc?'<div class="gov-lead"><strong>'+esc(nbc.publisher==='Associated Press'?'AP CALLS':'NBC NEWS PROJECTS')+' '+esc(nbc.winner)+' ('+esc(nbc.party)+')</strong> · <a href="'+esc(nbc.sourceUrl)+'" target="_blank" rel="noopener noreferrer">'+esc(nbc.publisher)+' source</a></div>':'';
  const leaders=live?.candidates?.slice().sort((a,b)=>b.votes-a.votes).slice(0,2)||[];
  const liveHTML=live?'<div class="gov-lead" style="margin:9px 0"><small>UNOFFICIAL REPORTED VOTES</small><br>'+esc(leaders.map(c=>c.name+' '+val(c.votes)).join(' · '))+' · '+val(live.total)+' votes<br><small>'+esc(live.source)+'</small> · <a href="../election-night/?state='+esc(r.code)+'&race='+esc(r.code)+'-GOVERNOR#nationalBoard">View live race</a></div>':'';
  const oddsHTML=odds?'<div class="gov-winning-chances"><span><b>'+window.ERVIN_ODDS.pct(odds.dem)+'</b> D/non-R</span><span><b>'+window.ERVIN_ODDS.pct(odds.rep)+'</b> R</span></div><small class="gov-odds-note">Illustrative uncalibrated scenario · '+odds.sigma.toFixed(1)+' point assumed error'+(m?.fallback?' · publisher polling only':'')+'</small>':'<small>Win chance unavailable without comparable polling.</small>';
@@ -30,7 +30,7 @@ function draw(){
 function drawMap(){
  const geo=window.ERVIN_US_GEOGRAPHY;if(!geo?.states)return;
  const by=Object.fromEntries(races.map(r=>[r.code,r]));
- $('govUSMap').innerHTML=geo.states.map(x=>{const r=by[x.code],call=r?window.ERVIN_NBC_CALLS?.get(r.code+'-GOVERNOR'):null;const type=r?'election '+(call?(call.party==='D'?'d':call.party==='R'?'r':'neutral'):color(r)):'';return '<a href="'+(r?'#govCards':'#governorRaces')+'" data-code="'+x.code+'" aria-label="'+esc(x.name+(r?' governor '+(call?'NBC projects '+call.winner:grade(r)):' no governor race'))+'"><path class="gov-state '+type+'" d="'+x.d+'"><title>'+esc(x.name+' '+(r?(call?'NBC projects '+call.winner:grade(r)):'No 2026 governor contest'))+'</title></path></a>'}).join('');
+ $('govUSMap').innerHTML=geo.states.map(x=>{const r=by[x.code],call=r?window.ERVIN_NBC_CALLS?.get(r.code+'-GOVERNOR'):null;const type=r?'election '+(call?(call.party==='D'?'d':call.party==='R'?'r':'neutral'):color(r)):'';return '<a href="'+(r?'#govCards':'#governorRaces')+'" data-code="'+x.code+'" aria-label="'+esc(x.name+(r?' governor '+(call?(call.publisher==='Associated Press'?'AP calls ':'NBC projects ')+call.winner:grade(r)):' no governor race'))+'"><path class="gov-state '+type+'" d="'+x.d+'"><title>'+esc(x.name+' '+(r?(call?(call.publisher==='Associated Press'?'AP calls ':'NBC projects ')+call.winner:grade(r)):'No 2026 governor contest'))+'</title></path></a>'}).join('');
  $('govUSMap').querySelectorAll('a[data-code]').forEach(a=>a.addEventListener('click',()=>{if(!by[a.dataset.code])return;$('govSearch').value=by[a.dataset.code].state;draw();}));
 }
 async function init(){
