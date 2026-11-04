@@ -114,7 +114,12 @@ const collectorWorkflow=fs.readFileSync('.github/workflows/civicapi-probe.yml','
 assert(homeJS.includes("setInterval(()=>{if(!document.hidden)refreshResults()},60000)"),'Live homepage must check all offices every 60 seconds');
 assert(homeJS.includes('Date.now()-lastExternalFetch>=55000'),'All three backup office sources must be checked each active minute, accounting for timer jitter');
 assert(nightJS.includes("setInterval(()=>{if(!document.hidden)Promise.allSettled([refreshNational(),refreshCounty()])},60000)"),'National and county results desk must refresh every 60 seconds');
-assert(collectorWorkflow.includes("cron: '3-58/5 0-9 4 11 *'")&&collectorWorkflow.includes("cron: '3-58/5 23 3 11 *'"),'Election-night upstream collection must run at GitHub Actions maximum supported scheduled frequency');
+assert(collectorWorkflow.includes("cron: '*/10 8-23 4 11 *'")&&
+ collectorWorkflow.includes("cron: '*/10 0-16 5 11 *'")&&
+ collectorWorkflow.includes("cron: '0 17 5 11 *'")&&
+ collectorWorkflow.includes('2026-11-05T17:10:00Z')&&
+ collectorWorkflow.includes("if: steps.cadence.outputs.run == 'true'"),
+ 'Election-result collector must follow one-time ten-minute cadence through Nov. 5 noon Eastern, then stop its temporary schedule');
 assert(html.includes('returns-core.js')&&html.includes('id="nightStateFilter"'));
 assert(html.includes('civicReportingStatus')&&nightJS.includes('core.reconcile'));
 assert(stateHtml.includes('data-election-night-state')&&stateJS.includes("querySelectorAll('[data-election-night-state]')"));
