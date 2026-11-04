@@ -81,7 +81,7 @@ function summary(k,results){
  minor.textContent+=(k==='house'?' · 435 House districts':k==='senateD'?' · 35 Senate elections':' · 36 governor elections');
  holder.append(meta,stats,minor);holder.dataset.liveReports=String(n);
  const status=$('edCommentaryStatus');
- if(status)status.textContent=n?fmt(n)+' reporting race'+(n===1?'':'s')+' · checking every 30 seconds':(k==='senateD'?senateWaitingMessage():'Waiting for the first accepted reports')+' · checks every 30 seconds';
+ if(status)status.textContent=n?fmt(n)+' reporting race'+(n===1?'':'s')+' · checking every 60 seconds':(k==='senateD'?senateWaitingMessage():'Waiting for the first accepted reports')+' · checks every 60 seconds';
 }
 function paint(){
  paintQueued=false;
