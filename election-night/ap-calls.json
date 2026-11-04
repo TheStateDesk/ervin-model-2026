@@ -1348,6 +1348,26 @@
       "winner": "Brad Lander",
       "party": "D",
       "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-02": {
+      "winner": "Brendan F. Boyle",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-03": {
+      "winner": "Christopher M. Rabb",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-04": {
+      "winner": "Madeleine Dean",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-05": {
+      "winner": "Mary Gay Scanlon",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
     }
   }
 }
