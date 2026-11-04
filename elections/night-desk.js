@@ -9,7 +9,7 @@ const feedOffice=office[0].toUpperCase()+office.slice(1);
 const code=office==='house'?state+'-'+district:state;
 const BASE='https://openamerica.io/elections/results.json?year=2026&office=';
 const CLOSE=Date.parse('2026-11-03T18:00:00-05:00');
-let latest=null,countyFeed=null,fetchAt=0,lastResultAt=0,sourceError=false;
+let latest=null,countyFeed=null,fetchAt=0,lastResultAt=0,sourceError=false,previousResults={};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const fmt=n=>Number(n||0).toLocaleString('en-US');
 function datetime(s){const d=new Date(s);return Number.isNaN(+d)?'Unverified':d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York',timeZoneName:'short'});}
@@ -40,8 +40,8 @@ function show(race,data){
  if(!race||!Number.isSafeInteger(race.total)||race.total<=0||Date.now()<CLOSE){
   $('votesReported').textContent='Awaiting returns';$('countiesReported').textContent='Not available';$('outstanding').textContent='Not calculated';
   $('nightCandidates').replaceChildren();$('erLiveMargin').textContent='Awaiting votes';$('erLiveMarker').hidden=true;
-  $('resultNotice').textContent='No confirmed 2026 results for this contest in the connected 22-state source. A missing contest is not a vote total of zero. Check the original state election office for newer reports.';
-  setStatus(Date.now()<CLOSE?'Pre-election · no votes counted':'No matching official-source race',null);
+  $('resultNotice').textContent='No source-validated 2026 results for this contest in the connected CivicAPI or independently attributed fallback feeds. A missing contest is not a vote total of zero. Check the original state election office for newer reports.';
+  setStatus(Date.now()<CLOSE?'Pre-election · no votes counted':'No matching source-validated race',null);
   return;
  }
  $('votesReported').textContent=fmt(race.total);
@@ -50,25 +50,51 @@ function show(race,data){
  $('nightCandidates').innerHTML=[...race.cands].sort((a,b)=>(Number(b.v)||0)-(Number(a.v)||0)).map(c=>
   '<div class="er-night-candidate"><span><span class="er-party">'+esc(c.p||'—')+'</span>'+esc(c.n)+'</span><strong>'+fmt(c.v)+' · '+(Number.isFinite(c.pct)?c.pct.toFixed(1):((Number(c.v)||0)/race.total*100).toFixed(1))+'%</strong></div>'
  ).join('');
- $('resultNotice').textContent='Unofficial votes reported by state election offices via Open America. Feed-wide latest-source timestamp: '+datetime(data.as_of)+'. '+(data.stale?'Provider marks the feed as stale. ':data.live?'Provider marks the feed as live. ':'Provider freshness not confirmed. ')+'No independent race call is made here.';
- setStatus(data.stale?'Published results · possibly delayed':data.live?'Source reporting live':'Published unofficial results',data.stale?'stale':data.live?'live':null);
+ $('resultNotice').textContent='Unofficial votes from '+String(data.source||'a validated reporting provider')+'. Race-level source timestamp: '+datetime(data.as_of)+'. '+(data.stale?'The newest accepted tally is over 30 minutes old. ':'The source has a timestamped accepted tally. ')+'No independent race call is made here.';
+ setStatus(data.stale?'Published results · possibly delayed':'Published unofficial results',data.stale?'stale':'live');
  updateGauge(race);
 }
 async function readResults(){
  if(Date.now()-lastResultAt<59000)return;
- lastResultAt=Date.now();$('erRefresh').disabled=true;setStatus('Checking attributed state returns',null);
- const ctrl=new AbortController(),timeout=setTimeout(()=>ctrl.abort(),11000);
+ lastResultAt=Date.now();$('erRefresh').disabled=true;setStatus('Checking source-validated 2026 election returns',null);
  try{
-  const res=await fetch(BASE+encodeURIComponent(feedOffice),{mode:'cors',credentials:'omit',cache:'no-cache',signal:ctrl.signal});
-  if(!res.ok)throw Error('HTTP '+res.status);
-  const p=await res.json();if(p.api!==1||p.year!==2026||p.office!==feedOffice||!p.races||typeof p.counting!=='boolean')throw Error('Unexpected official feed schema');
-  latest=p;sourceError=false;
-  const row=p.races[code];show(row,p);
-  $('erChecked').textContent='Checked '+datetime(new Date().toISOString());
- }catch(e){sourceError=true;setStatus('Source unavailable · prior data may be old','stale');$('erChecked').textContent='Request failed: '+e.message;
-  if(!latest)$('resultNotice').textContent='Official feed cannot be checked from this browser. No vote figures are claimed. Follow the state election office link below.';
- }finally{clearTimeout(timeout);$('erRefresh').disabled=false;}
+  const core=window.ERVIN_RETURNS;
+  if(!core)throw Error('Election results validation unavailable');
+  const mirrorURL=BASE+encodeURIComponent(feedOffice);
+  const get=async url=>{
+   const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),12000);
+   try{const r=await fetch(url,{cache:'no-store',signal:ctrl.signal});
+    if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json();
+   }finally{clearTimeout(timer)}
+  };
+  const [primary,fallback]=await Promise.allSettled([
+    get('../civicapi/races.json'),
+    window.ERVIN_EXTERNAL_FEED?window.ERVIN_EXTERNAL_FEED.json(mirrorURL,{timeout:11000}):get(mirrorURL)
+  ]);
+  const sourceA=primary.status==='fulfilled'?core.civic(primary.value):{};
+  const sourceB=fallback.status==='fulfilled'?core.openAmerica(fallback.value,feedOffice):{};
+  if(primary.status==='rejected'&&fallback.status==='rejected')throw Error('Both reporting sources unavailable');
+  const selected=core.preferCivic(sourceA,sourceB);
+  const merged=core.reconcile([selected.races],previousResults);
+  previousResults=merged.races;
+  const raceId=office==='house'?code:state+'-'+office.toUpperCase();
+  const row=merged.races[raceId];
+  latest=row||latest;
+  if(!row){show(null,{source:'No confirmed current report'});}
+  else{
+   const stale=Date.now()-Date.parse(row.asOf)>30*60000;
+   const display={total:row.total,pct_in:row.precincts,
+    cands:row.candidates.map(c=>({n:c.name,p:c.party,v:c.votes})),source:row.source,
+    as_of:row.asOf,stale,live:!stale};
+   show(display,display);
+  }
+  sourceError=false;
+  $('erChecked').textContent='Checked '+datetime(new Date().toISOString())+' · '+(Object.keys(sourceA).length?'CivicAPI primary loaded':'CivicAPI awaiting accepted returns')+' · '+(Object.keys(sourceB).length?'independent fallback available':'fallback unavailable');
+ }catch(e){sourceError=true;setStatus('Source unavailable · prior data may be old','stale');$('erChecked').textContent='Source request failed: '+e.message;
+  if(!latest)$('resultNotice').textContent='Neither current reporting source could be checked from this browser. No vote figures are invented; see official state election links.';
+ }finally{$('erRefresh').disabled=false}
 }
+
 function normalize(n){return String(n||'').trim().toLowerCase().replace(/ county$/,'');}
 function recolor(){
  const mode=$('countyMapMode')?.value;if(mode!=='2026live')return;

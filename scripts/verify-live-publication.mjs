@@ -16,7 +16,7 @@ async function ready(path){
 let browser;
 try{
  fs.mkdirSync('postdeploy-checks',{recursive:true});
- for(const path of ['states/','state/','election-night/','geo/counties/TX.json','geo/counties/MI.json','states/editorial.css'])await ready(path);
+ for(const path of ['states/','state/','election-night/','house/','governors/','stats-for-nerds/','michigan/election-night/','elections/','scripts/office-live-results.js','geo/counties/TX.json','geo/counties/MI.json','states/editorial.css'])await ready(path);
  browser=await chromium.launch({headless:true,args:['--disable-dev-shm-usage']});
  for(const [code,expect,house] of [['TX',254,38],['MI',83,13]]){
   for(const mode of ['light','dark']){
@@ -446,8 +446,31 @@ try{
  if((await governor.locator('#govCards .gov-card').count())!==36)throw Error('Not all governor Ervin projections live');
  const liveOH=governor.locator('#govCards [data-code="OH"]');
  if(!(await liveOH.innerText()).includes(ohModel))throw Error('LIVE OHIO GOVERNOR CARD DOES NOT MATCH STATE DESK '+ohModel);
+ await governor.waitForFunction(ids=>window.ERVIN_OFFICE_LIVE?.office==='Governor'&&ids.every(id=>window.ERVIN_OFFICE_LIVE.races?.[id]),publishedGovernors,{timeout:35000});
+ if(!(await governor.locator('#officeLiveStatus').innerText()).includes('governor races reporting unofficial votes'))throw Error('PUBLIC GOVERNOR DIRECTORY LOST VALIDATED REPORTING STATUS');
  await governor.screenshot({path:'postdeploy-checks/Governor-Ervin-Live.png',fullPage:false});
- console.log('LIVE GOVERNORS PASS 36 races');
+ console.log('LIVE GOVERNORS PASS 36 races / '+publishedGovernors.length+' published CivicAPI returns');
  await governor.close();
+ const houseDirectory=await browser.newPage({viewport:{width:1440,height:940}});
+ const houseErrors=[];houseDirectory.on('pageerror',e=>houseErrors.push(e.message));
+ await houseDirectory.goto(base+'house/?state=MI&release='+stamp,{waitUntil:'domcontentloaded'});
+ await houseDirectory.waitForFunction(()=>document.querySelectorAll('#houseCards .gov-card').length===13,null,{timeout:35000});
+ const expectedMichiganHouse=publishedHouse.filter(id=>id.startsWith('MI-'));
+ await houseDirectory.waitForFunction(ids=>window.ERVIN_OFFICE_LIVE?.office==='House'&&ids.every(id=>window.ERVIN_OFFICE_LIVE.races?.[id]),expectedMichiganHouse,{timeout:35000});
+ if(!(await houseDirectory.locator('#officeLiveStatus').innerText()).includes('house races reporting unofficial votes'))throw Error('PUBLIC HOUSE DIRECTORY LOST LIVE REPORTING STATUS');
+ if(houseErrors.length)throw Error('PUBLIC HOUSE DIRECTORY JS ERRORS '+houseErrors.join(' | '));
+ await houseDirectory.screenshot({path:'postdeploy-checks/House-Live-Districts.png',fullPage:false});
+ console.log('PUBLIC HOUSE DIRECTORY LIVE SYNC PASS '+expectedMichiganHouse.length+' Michigan races');
+ await houseDirectory.close();
+ const dossier=await browser.newPage({viewport:{width:1440,height:940}});
+ await dossier.goto(base+'elections/?office=governor&state=FL&release='+stamp,{waitUntil:'domcontentloaded'});
+ await dossier.waitForFunction(()=>document.querySelector('#erChecked')?.textContent.includes('Checked'),null,{timeout:35000});
+ if(!(await dossier.locator('#erChecked').innerText()).includes('CivicAPI'))throw Error('PUBLIC RACE DOSSIER DOES NOT USE SHARED SOURCE VALIDATION');
+ await dossier.close();
+ const miNight=await browser.newPage({viewport:{width:1440,height:940}});
+ await miNight.goto(base+'michigan/election-night/?release='+stamp,{waitUntil:'domcontentloaded'});
+ await miNight.waitForFunction(()=>Boolean(window.ERVIN_RETURNS)&&Boolean(document.querySelector('#externalStatus')),null,{timeout:20000});
+ await miNight.close();
+ console.log('PUBLIC INDIVIDUAL DOSSIER AND MICHIGAN NIGHT SOURCE SYNC PASS');
  console.log('LIVE DEPLOYMENT VISUAL ACCEPTANCE PASS '+stamp);
 }catch(e){console.error(e);process.exitCode=1;}finally{await browser?.close();}
