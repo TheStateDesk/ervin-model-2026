@@ -89,3 +89,16 @@ html.theme-dark .post-close-item:hover{background:#2c4960}
 html.theme-dark .post-article-card{background:#1d364a;color:#eaf1f7!important;border-color:#52748d}
 html.theme-dark .post-article-card:hover{background:#284559}
 @media(max-width:700px){.post-article-grid{grid-template-columns:1fr}.post-article-card{min-height:190px;padding:21px}}
+
+/* Image-driven post-midterm essays */
+.post-article-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.post-article-card{overflow:hidden;padding:0 0 20px!important;min-height:0;display:flex;flex-direction:column;gap:9px}
+.post-article-photo{height:165px;background:#bdcbd0;overflow:hidden;margin:0 0 9px}
+.post-article-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.post-article-card>span,.post-article-card>strong,.post-article-card>p,.post-article-card>small{margin-left:21px;margin-right:21px}
+.post-article-card--lead{grid-column:1/-1;display:grid;grid-template-columns:1.1fr 1fr;column-gap:24px;align-items:center;padding:0!important;min-height:275px}
+.post-article-card--lead .post-article-photo{grid-row:1/5;grid-column:1;min-height:275px;height:100%;margin:0}
+.post-article-card--lead>span,.post-article-card--lead>strong,.post-article-card--lead>p,.post-article-card--lead>small{grid-column:2;margin-left:0;padding-right:20px}
+.post-article-card--lead>span{align-self:end}.post-article-card--lead>strong{font-size:clamp(30px,3.8vw,52px)}.post-article-card--lead>small{align-self:start}
+.post-article-card:hover .post-article-photo img{opacity:.94}
+@media(max-width:700px){.post-article-grid{grid-template-columns:1fr}.post-article-card--lead{grid-column:auto;display:flex;min-height:0;padding:0 0 20px!important}.post-article-card--lead .post-article-photo{height:190px;min-height:0;width:100%;margin-bottom:9px}.post-article-card--lead>span,.post-article-card--lead>strong,.post-article-card--lead>p,.post-article-card--lead>small{margin-left:21px;margin-right:21px}.post-article-card--lead>strong{font-size:30px}}
