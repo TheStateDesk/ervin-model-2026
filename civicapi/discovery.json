@@ -1,10 +1,10 @@
 {
-  "checkedAt": "2026-11-04T00:03:47.837454Z",
+  "checkedAt": "2026-11-04T00:09:27.529124Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
     "statusSample": {
-      "VT-01": "source_TimeoutError",
+      "VT-01": "source_HTTPError",
       "WY-SENATE": "source_TimeoutError"
     },
     "unmapped": 2
@@ -12,52 +12,36 @@
   "election": "2026-11-03",
   "eligibleRaces": 82,
   "errors": {
-    "FL-03": "no_valid_reported_votes",
-    "FL-05": "fetch_TimeoutError",
-    "FL-06": "fetch_TimeoutError",
+    "FL-05": "no_valid_reported_votes",
     "FL-07": "no_valid_reported_votes",
-    "FL-08": "no_valid_reported_votes",
+    "FL-08": "fetch_HTTP_502",
     "FL-09": "no_valid_reported_votes",
     "FL-10": "no_valid_reported_votes",
-    "FL-13": "fetch_HTTP_502",
+    "FL-12": "fetch_HTTP_502",
     "FL-14": "no_valid_reported_votes",
-    "FL-16": "no_valid_reported_votes",
-    "FL-17": "no_valid_reported_votes",
+    "FL-17": "fetch_HTTP_502",
     "FL-18": "no_valid_reported_votes",
     "FL-19": "no_valid_reported_votes",
-    "FL-20": "no_valid_reported_votes",
+    "FL-20": "fetch_HTTP_502",
     "FL-21": "no_valid_reported_votes",
-    "FL-22": "fetch_HTTP_502",
+    "FL-22": "no_valid_reported_votes",
     "FL-23": "no_valid_reported_votes",
     "FL-24": "no_valid_reported_votes",
-    "FL-25": "no_valid_reported_votes",
+    "FL-25": "fetch_HTTP_502",
     "FL-26": "no_valid_reported_votes",
     "FL-27": "no_valid_reported_votes",
-    "FL-28": "no_valid_reported_votes",
-    "FL-SENATE": "fetch_HTTP_502",
-    "GA-01": "fetch_HTTP_502",
-    "GA-02": "fetch_HTTP_502",
+    "FL-28": "fetch_HTTP_502",
+    "FL-SENATE": "fetch_TimeoutError",
     "GA-03": "no_valid_reported_votes",
-    "GA-04": "no_valid_reported_votes",
-    "GA-05": "no_valid_reported_votes",
-    "GA-06": "no_valid_reported_votes",
-    "GA-07": "no_valid_reported_votes",
-    "GA-08": "no_valid_reported_votes",
-    "GA-09": "no_valid_reported_votes",
-    "GA-10": "no_valid_reported_votes",
     "GA-11": "no_valid_reported_votes",
     "GA-12": "no_valid_reported_votes",
-    "GA-13": "no_valid_reported_votes",
-    "GA-14": "no_valid_reported_votes",
-    "GA-GOVERNOR": "no_valid_reported_votes",
-    "GA-SENATE": "no_valid_reported_votes",
     "IN-01": "no_valid_reported_votes",
     "IN-07": "no_valid_reported_votes",
     "KY-01": "no_valid_reported_votes",
     "KY-02": "no_valid_reported_votes",
     "KY-03": "no_valid_reported_votes",
     "SC-01": "no_valid_reported_votes",
-    "SC-02": "fetch_TimeoutError",
+    "SC-02": "no_valid_reported_votes",
     "SC-03": "no_valid_reported_votes",
     "SC-04": "no_valid_reported_votes",
     "SC-05": "no_valid_reported_votes",
@@ -68,15 +52,11 @@
     "VA-01": "no_valid_reported_votes",
     "VA-02": "no_valid_reported_votes",
     "VA-03": "no_valid_reported_votes",
-    "VA-04": "no_valid_reported_votes",
-    "VA-05": "no_valid_reported_votes",
     "VA-06": "no_valid_reported_votes",
-    "VA-07": "no_valid_reported_votes",
     "VA-08": "no_valid_reported_votes",
     "VA-09": "no_valid_reported_votes",
     "VA-10": "no_valid_reported_votes",
-    "VA-11": "no_valid_reported_votes",
-    "VA-SENATE": "no_valid_reported_votes",
+    "VA-11": "fetch_HTTP_502",
     "VT-GOVERNOR": "no_valid_reported_votes"
   },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
@@ -85,39 +65,39 @@
     "governor": {
       "awaitingPollClose": 33,
       "eligibleForCollection": 3,
-      "eligibleWithoutValidVoteReport": 3,
+      "eligibleWithoutValidVoteReport": 2,
       "missingRegistryIds": [],
       "registered": 36,
       "sourceErrors": 0,
       "targeted": 36,
-      "validationPending": 3,
-      "verifiedReports": 0
+      "validationPending": 2,
+      "verifiedReports": 1
     },
     "house": {
       "awaitingPollClose": 361,
       "eligibleForCollection": 73,
-      "eligibleWithoutValidVoteReport": 59,
+      "eligibleWithoutValidVoteReport": 41,
       "missingRegistryIds": [
         "VT-01"
       ],
       "registered": 434,
-      "sourceErrors": 7,
+      "sourceErrors": 6,
       "targeted": 435,
-      "validationPending": 52,
-      "verifiedReports": 14
+      "validationPending": 35,
+      "verifiedReports": 32
     },
     "senate": {
       "awaitingPollClose": 28,
       "eligibleForCollection": 6,
-      "eligibleWithoutValidVoteReport": 4,
+      "eligibleWithoutValidVoteReport": 2,
       "missingRegistryIds": [
         "WY-SENATE"
       ],
       "registered": 34,
       "sourceErrors": 1,
       "targeted": 35,
-      "validationPending": 3,
-      "verifiedReports": 2
+      "validationPending": 1,
+      "verifiedReports": 4
     }
   },
   "polling": {
@@ -155,7 +135,7 @@
       "payloadType": "dict",
       "positiveCandidateTotals": true,
       "providerTimestamp": "2026-11-03T23:57:30.871Z",
-      "responseMs": 2556
+      "responseMs": 1625
     },
     "MI-SENATE": {
       "candidateRows": 11,
@@ -186,7 +166,7 @@
       "payloadType": "dict",
       "positiveCandidateTotals": false,
       "providerTimestamp": "2026-11-03T03:44:10.357Z",
-      "responseMs": 1438
+      "responseMs": 1463
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -195,13 +175,2085 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 2921
+      "responseMs": 1488
     }
   },
-  "publishedRaces": 16,
+  "publishedRaces": 37,
+  "raceStatuses": {
+    "AK-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AK-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "AK-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "AL-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AL-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AL-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AL-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AL-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AL-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AL-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AL-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "AL-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "AR-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AR-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AR-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AR-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AR-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "AR-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "AZ-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "CA-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-14": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-15": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-16": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-17": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-18": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-19": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-20": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-21": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-22": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-23": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-24": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-25": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-26": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-27": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-28": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-29": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-30": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-31": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-32": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-33": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-34": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-35": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-36": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-37": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-38": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-39": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-40": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-41": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-42": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-43": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-44": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-45": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-46": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-47": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-48": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-49": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-50": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-51": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-52": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CA-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "CO-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CO-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "CO-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "CT-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CT-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CT-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CT-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CT-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "CT-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "DE-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "DE-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "FL-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "FL-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "FL-03": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-04": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-05": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-06": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-07": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-08": {
+      "collectionIssue": "fetch_HTTP_502",
+      "office": "house",
+      "status": "source_error"
+    },
+    "FL-09": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-10": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-11": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-12": {
+      "collectionIssue": "fetch_HTTP_502",
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-13": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-14": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-15": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-16": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "FL-17": {
+      "collectionIssue": "fetch_HTTP_502",
+      "office": "house",
+      "status": "source_error"
+    },
+    "FL-18": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-19": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-20": {
+      "collectionIssue": "fetch_HTTP_502",
+      "office": "house",
+      "status": "source_error"
+    },
+    "FL-21": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-22": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-23": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-24": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-25": {
+      "collectionIssue": "fetch_HTTP_502",
+      "office": "house",
+      "status": "source_error"
+    },
+    "FL-26": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-27": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "FL-28": {
+      "collectionIssue": "fetch_HTTP_502",
+      "office": "house",
+      "status": "source_error"
+    },
+    "FL-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "FL-SENATE": {
+      "collectionIssue": "fetch_TimeoutError",
+      "office": "senate",
+      "status": "source_error"
+    },
+    "GA-01": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-02": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-03": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "GA-04": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-05": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-06": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-07": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-08": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-09": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-10": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-11": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "GA-12": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "GA-13": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-14": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "GA-GOVERNOR": {
+      "office": "governor",
+      "status": "reporting"
+    },
+    "GA-SENATE": {
+      "office": "senate",
+      "status": "reporting"
+    },
+    "HI-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "HI-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "HI-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "IA-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IA-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IA-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IA-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IA-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "IA-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "ID-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "ID-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "ID-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "ID-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "IL-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-14": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-15": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-16": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-17": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "IL-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "IL-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "IN-01": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "IN-02": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "IN-03": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "IN-04": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "IN-05": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "IN-06": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "IN-07": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "IN-08": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "IN-09": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "KS-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "KS-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "KS-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "KS-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "KS-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "KS-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "KY-01": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "KY-02": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "KY-03": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "KY-04": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "KY-05": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "KY-06": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "KY-SENATE": {
+      "office": "senate",
+      "status": "reporting"
+    },
+    "LA-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "LA-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "LA-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "LA-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "LA-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "LA-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "LA-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "MA-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MA-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "MA-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "MD-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MD-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "ME-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "ME-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "ME-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "ME-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "MI-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MI-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "MI-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "MN-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MN-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "MN-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "MO-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MO-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MO-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MO-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MO-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MO-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MO-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MO-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MS-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MS-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MS-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MS-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MS-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "MT-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MT-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "MT-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "NC-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-14": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NC-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "ND-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NE-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NE-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NE-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NE-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "NE-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "NH-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NH-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NH-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "NH-SENATE": {
+      "office": "senate",
+      "status": "reporting"
+    },
+    "NJ-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NJ-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "NM-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NM-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NM-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NM-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "NM-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "NV-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NV-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NV-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NV-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NV-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "NY-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-14": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-15": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-16": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-17": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-18": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-19": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-20": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-21": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-22": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-23": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-24": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-25": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-26": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "NY-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "OH-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-14": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-15": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OH-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "OH-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "OK-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OK-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OK-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OK-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OK-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OK-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "OK-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "OR-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OR-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OR-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OR-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OR-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OR-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "OR-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "OR-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "PA-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-14": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-15": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-16": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-17": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "PA-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "RI-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "RI-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "RI-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "RI-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "SC-01": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-02": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-03": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-04": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-05": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-06": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-07": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-GOVERNOR": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "governor",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SC-SENATE": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "senate",
+      "status": "awaiting_valid_vote_report"
+    },
+    "SD-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "SD-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "SD-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "TN-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TN-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "TN-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "TX-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-11": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-12": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-13": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-14": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-15": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-16": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-17": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-18": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-19": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-20": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-21": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-22": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-23": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-24": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-25": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-26": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-27": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-28": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-29": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-30": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-31": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-32": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-33": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-34": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-35": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-36": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-37": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-38": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "TX-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "TX-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "UT-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "UT-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "UT-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "UT-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "VA-01": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "VA-02": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "VA-03": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "VA-04": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "VA-05": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "VA-06": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "VA-07": {
+      "office": "house",
+      "status": "reporting"
+    },
+    "VA-08": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "VA-09": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "VA-10": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
+    "VA-11": {
+      "collectionIssue": "fetch_HTTP_502",
+      "office": "house",
+      "status": "source_error"
+    },
+    "VA-SENATE": {
+      "office": "senate",
+      "status": "reporting"
+    },
+    "VT-01": {
+      "office": "house",
+      "status": "unmapped"
+    },
+    "VT-GOVERNOR": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "governor",
+      "status": "awaiting_valid_vote_report"
+    },
+    "WA-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-09": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WA-10": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-03": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-04": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-05": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-06": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-07": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-08": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WI-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "WV-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WV-02": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WV-SENATE": {
+      "office": "senate",
+      "status": "awaiting_poll_close"
+    },
+    "WY-01": {
+      "office": "house",
+      "status": "awaiting_poll_close"
+    },
+    "WY-GOVERNOR": {
+      "office": "governor",
+      "status": "awaiting_poll_close"
+    },
+    "WY-SENATE": {
+      "office": "senate",
+      "status": "unmapped"
+    }
+  },
   "registeredRaces": 504,
   "targetRaces": 506,
   "transientApiErrors": 8,
-  "updatedRaces": 11,
+  "updatedRaces": 25,
   "version": 2
 }

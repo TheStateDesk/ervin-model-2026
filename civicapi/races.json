@@ -1,6 +1,36 @@
 {
   "election": "2026-11-03",
   "races": {
+    "FL-03": {
+      "asOf": "2026-11-04T00:05:45.484000Z",
+      "candidates": [
+        {
+          "name": "Seth Harp",
+          "party": "D",
+          "votes": 50145
+        },
+        {
+          "name": "Kat Cammack",
+          "party": "R",
+          "votes": 20179
+        },
+        {
+          "name": "Mike Klein",
+          "party": "O",
+          "votes": 1289
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 21.8,
+      "raceId": "87042",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87042",
+      "timestampBasis": "provider_last_updated",
+      "total": 71613,
+      "verified": true
+    },
     "FL-04": {
       "asOf": "2026-11-04T00:04:05.997000Z",
       "candidates": [
@@ -34,6 +64,41 @@
       "sourceUrl": "https://civicapi.org/api/v2/race/87043",
       "timestampBasis": "provider_last_updated",
       "total": 57694,
+      "verified": true
+    },
+    "FL-06": {
+      "asOf": "2026-11-04T00:05:46.128000Z",
+      "candidates": [
+        {
+          "name": "Randy Fine",
+          "party": "R",
+          "votes": 25749
+        },
+        {
+          "name": "Eric Yonce",
+          "party": "D",
+          "votes": 19535
+        },
+        {
+          "name": "Andrew Parrott",
+          "party": "O",
+          "votes": 370
+        },
+        {
+          "name": "Write-in",
+          "party": "O",
+          "votes": 0
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 13.5,
+      "raceId": "87045",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87045",
+      "timestampBasis": "provider_last_updated",
+      "total": 45654,
       "verified": true
     },
     "FL-11": {
@@ -96,6 +161,36 @@
       "total": 85681,
       "verified": true
     },
+    "FL-13": {
+      "asOf": "2026-11-04T00:05:47.027000Z",
+      "candidates": [
+        {
+          "name": "Leela Gray",
+          "party": "D",
+          "votes": 5748
+        },
+        {
+          "name": "Anna Paulina Luna",
+          "party": "R",
+          "votes": 5550
+        },
+        {
+          "name": "Tony D'Arrigo",
+          "party": "O",
+          "votes": 217
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 3.6,
+      "raceId": "87052",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87052",
+      "timestampBasis": "provider_last_updated",
+      "total": 11515,
+      "verified": true
+    },
     "FL-15": {
       "asOf": "2026-11-04T00:04:07.914000Z",
       "candidates": [
@@ -126,48 +221,403 @@
       "total": 137508,
       "verified": true
     },
-    "IN-02": {
-      "asOf": "2026-11-03T23:54:30.546000Z",
+    "FL-16": {
+      "asOf": "2026-11-04T00:05:47.627000Z",
       "candidates": [
         {
-          "name": "Rudy Yakym",
+          "name": "Sydney Gruters",
           "party": "R",
-          "votes": 2523
+          "votes": 12912
         },
         {
-          "name": "Jamee Decio",
+          "name": "Kelly Kirschner",
           "party": "D",
-          "votes": 1866
+          "votes": 9316
         },
         {
-          "name": "William Henry",
+          "name": "Mark Davis",
           "party": "O",
-          "votes": 74
+          "votes": 276
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 2.2,
+      "precinctsReporting": 7.0,
+      "raceId": "87055",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87055",
+      "timestampBasis": "provider_last_updated",
+      "total": 22504,
+      "verified": true
+    },
+    "GA-01": {
+      "asOf": "2026-11-04T00:09:50.691000Z",
+      "candidates": [
+        {
+          "name": "Jim Kingston",
+          "party": "R",
+          "votes": 28494
+        },
+        {
+          "name": "Amanda Hollowell",
+          "party": "D",
+          "votes": 26307
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 16.3,
+      "raceId": "87073",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87073",
+      "timestampBasis": "provider_last_updated",
+      "total": 54801,
+      "verified": true
+    },
+    "GA-02": {
+      "asOf": "2026-11-04T00:09:50.988000Z",
+      "candidates": [
+        {
+          "name": "Sanford Bishop",
+          "party": "D",
+          "votes": 8698
+        },
+        {
+          "name": "Matt Day",
+          "party": "R",
+          "votes": 5908
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 4.4,
+      "raceId": "87074",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87074",
+      "timestampBasis": "provider_last_updated",
+      "total": 14606,
+      "verified": true
+    },
+    "GA-04": {
+      "asOf": "2026-11-04T00:09:51.409000Z",
+      "candidates": [
+        {
+          "name": "Hank Johnson",
+          "party": "D",
+          "votes": 33207
+        },
+        {
+          "name": "James Duffie",
+          "party": "R",
+          "votes": 12458
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 13.7,
+      "raceId": "87076",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87076",
+      "timestampBasis": "provider_last_updated",
+      "total": 45665,
+      "verified": true
+    },
+    "GA-05": {
+      "asOf": "2026-11-04T00:09:51.713000Z",
+      "candidates": [
+        {
+          "name": "Nikema Williams",
+          "party": "D",
+          "votes": 95985
+        },
+        {
+          "name": "John Salvesen",
+          "party": "R",
+          "votes": 6075
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 30.5,
+      "raceId": "87077",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87077",
+      "timestampBasis": "provider_last_updated",
+      "total": 102060,
+      "verified": true
+    },
+    "GA-06": {
+      "asOf": "2026-11-04T00:09:52.025000Z",
+      "candidates": [
+        {
+          "name": "Lucy McBath",
+          "party": "D",
+          "votes": 101821
+        },
+        {
+          "name": "Kevin Martin",
+          "party": "R",
+          "votes": 18557
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 36.0,
+      "raceId": "87078",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87078",
+      "timestampBasis": "provider_last_updated",
+      "total": 120378,
+      "verified": true
+    },
+    "GA-07": {
+      "asOf": "2026-11-04T00:09:52.274000Z",
+      "candidates": [
+        {
+          "name": "Anthony Kozycki",
+          "party": "D",
+          "votes": 66828
+        },
+        {
+          "name": "Rich McCormick",
+          "party": "R",
+          "votes": 46351
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 33.8,
+      "raceId": "87079",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87079",
+      "timestampBasis": "provider_last_updated",
+      "total": 113179,
+      "verified": true
+    },
+    "GA-08": {
+      "asOf": "2026-11-04T00:09:52.497000Z",
+      "candidates": [
+        {
+          "name": "Austin Scott",
+          "party": "R",
+          "votes": 18005
+        },
+        {
+          "name": "Kelly Esti",
+          "party": "D",
+          "votes": 17424
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 10.6,
+      "raceId": "87080",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87080",
+      "timestampBasis": "provider_last_updated",
+      "total": 35429,
+      "verified": true
+    },
+    "GA-09": {
+      "asOf": "2026-11-04T00:09:52.705000Z",
+      "candidates": [
+        {
+          "name": "Caitlyn Gegen",
+          "party": "D",
+          "votes": 54639
+        },
+        {
+          "name": "Andrew Clyde",
+          "party": "R",
+          "votes": 30456
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 25.4,
+      "raceId": "87081",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87081",
+      "timestampBasis": "provider_last_updated",
+      "total": 85095,
+      "verified": true
+    },
+    "GA-10": {
+      "asOf": "2026-11-04T00:09:52.893000Z",
+      "candidates": [
+        {
+          "name": "Houston Gaines",
+          "party": "R",
+          "votes": 23984
+        },
+        {
+          "name": "Pamela DeLancy",
+          "party": "D",
+          "votes": 19414
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 12.9,
+      "raceId": "87082",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87082",
+      "timestampBasis": "provider_last_updated",
+      "total": 43398,
+      "verified": true
+    },
+    "GA-13": {
+      "asOf": "2026-11-04T00:09:53.440000Z",
+      "candidates": [
+        {
+          "name": "Jasmine Clark",
+          "party": "D",
+          "votes": 75441
+        },
+        {
+          "name": "Jonathan Chavez",
+          "party": "R",
+          "votes": 22274
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 29.2,
+      "raceId": "87085",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87085",
+      "timestampBasis": "provider_last_updated",
+      "total": 97715,
+      "verified": true
+    },
+    "GA-14": {
+      "asOf": "2026-11-04T00:09:53.651000Z",
+      "candidates": [
+        {
+          "name": "Shawn Harris",
+          "party": "D",
+          "votes": 628
+        },
+        {
+          "name": "Clay Fuller",
+          "party": "R",
+          "votes": 618
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 0.4,
+      "raceId": "87086",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87086",
+      "timestampBasis": "provider_last_updated",
+      "total": 1246,
+      "verified": true
+    },
+    "GA-GOVERNOR": {
+      "asOf": "2026-11-04T00:09:56.352000Z",
+      "candidates": [
+        {
+          "name": "Keisha Lance Bottoms",
+          "party": "D",
+          "votes": 486918
+        },
+        {
+          "name": "Rick Jackson",
+          "party": "R",
+          "votes": 228670
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "governor",
+      "precinctsReporting": 15.3,
+      "raceId": "87088",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87088",
+      "timestampBasis": "provider_last_updated",
+      "total": 715588,
+      "verified": true
+    },
+    "GA-SENATE": {
+      "asOf": "2026-11-04T00:09:54.681000Z",
+      "candidates": [
+        {
+          "name": "Jon Ossoff",
+          "party": "D",
+          "votes": 520317
+        },
+        {
+          "name": "Mike Collins",
+          "party": "R",
+          "votes": 196043
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "senate",
+      "precinctsReporting": 15.3,
+      "raceId": "87087",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87087",
+      "timestampBasis": "provider_last_updated",
+      "total": 716360,
+      "verified": true
+    },
+    "IN-02": {
+      "asOf": "2026-11-04T00:10:52.546000Z",
+      "candidates": [
+        {
+          "name": "Jamee Decio",
+          "party": "D",
+          "votes": 7028
+        },
+        {
+          "name": "Rudy Yakym",
+          "party": "R",
+          "votes": 6705
+        },
+        {
+          "name": "William Henry",
+          "party": "O",
+          "votes": 187
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 6.7,
       "raceId": "87136",
-      "retrievedAt": "2026-11-03T23:54:02.831553Z",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87136",
       "timestampBasis": "provider_last_updated",
-      "total": 4463,
+      "total": 13920,
       "verified": true
     },
     "IN-03": {
-      "asOf": "2026-11-04T00:05:22.451000Z",
+      "asOf": "2026-11-04T00:10:52.649000Z",
       "candidates": [
         {
           "name": "Kelly Thompson",
           "party": "D",
-          "votes": 43907
+          "votes": 45087
         },
         {
           "name": "Marlin Stutzman",
           "party": "R",
-          "votes": 35881
+          "votes": 37147
         },
         {
           "name": "Phillip D. Beachy (Phil)",
@@ -177,13 +627,13 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 38.3,
+      "precinctsReporting": 39.5,
       "raceId": "87137",
-      "retrievedAt": "2026-11-04T00:03:47.837454Z",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87137",
       "timestampBasis": "provider_last_updated",
-      "total": 79788,
+      "total": 82234,
       "verified": true
     },
     "IN-04": {
@@ -267,47 +717,47 @@
       "verified": true
     },
     "IN-08": {
-      "asOf": "2026-11-04T00:05:52.757000Z",
+      "asOf": "2026-11-04T00:10:53.218000Z",
       "candidates": [
         {
           "name": "Mark Messmer",
           "party": "R",
-          "votes": 19689
+          "votes": 22064
         },
         {
           "name": "Mary Allen",
           "party": "D",
-          "votes": 13412
+          "votes": 14235
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 15.8,
+      "precinctsReporting": 17.4,
       "raceId": "87142",
-      "retrievedAt": "2026-11-04T00:03:47.837454Z",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87142",
       "timestampBasis": "provider_last_updated",
-      "total": 33101,
+      "total": 36299,
       "verified": true
     },
     "IN-09": {
-      "asOf": "2026-11-04T00:05:23.074000Z",
+      "asOf": "2026-11-04T00:10:53.339000Z",
       "candidates": [
         {
           "name": "Erin Houchin",
           "party": "R",
-          "votes": 13133
+          "votes": 18177
         },
         {
           "name": "Brad Meyer",
           "party": "D",
-          "votes": 7878
+          "votes": 10993
         },
         {
           "name": "Tonya Hudson",
           "party": "O",
-          "votes": 419
+          "votes": 619
         },
         {
           "name": "Floyd Michael Taylor",
@@ -317,13 +767,13 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 10.3,
+      "precinctsReporting": 14.3,
       "raceId": "87143",
-      "retrievedAt": "2026-11-04T00:03:47.837454Z",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87143",
       "timestampBasis": "provider_last_updated",
-      "total": 21430,
+      "total": 29789,
       "verified": true
     },
     "KY-04": {
@@ -504,6 +954,156 @@
       "sourceUrl": "https://civicapi.org/api/v2/race/87283",
       "timestampBasis": "provider_last_updated",
       "total": 7,
+      "verified": true
+    },
+    "VA-04": {
+      "asOf": "2026-11-04T00:11:03.534000Z",
+      "candidates": [
+        {
+          "name": "Robert Murray",
+          "party": "R",
+          "votes": 4335
+        },
+        {
+          "name": "Jennifer McClellan",
+          "party": "D",
+          "votes": 3759
+        },
+        {
+          "name": "Joan E. \"Andrews\" Bell",
+          "party": "O",
+          "votes": 107
+        },
+        {
+          "name": "Write-in",
+          "party": "O",
+          "votes": 11
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 2.4,
+      "raceId": "87464",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87464",
+      "timestampBasis": "provider_last_updated",
+      "total": 8212,
+      "verified": true
+    },
+    "VA-05": {
+      "asOf": "2026-11-04T00:11:03.659000Z",
+      "candidates": [
+        {
+          "name": "Tom Perriello",
+          "party": "D",
+          "votes": 1285
+        },
+        {
+          "name": "John McGuire",
+          "party": "R",
+          "votes": 1155
+        },
+        {
+          "name": "Cooke C. Harvey",
+          "party": "O",
+          "votes": 17
+        },
+        {
+          "name": "Write-in",
+          "party": "O",
+          "votes": 3
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 0.7,
+      "raceId": "87465",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87465",
+      "timestampBasis": "provider_last_updated",
+      "total": 2460,
+      "verified": true
+    },
+    "VA-07": {
+      "asOf": "2026-11-04T00:11:03.900000Z",
+      "candidates": [
+        {
+          "name": "Doug Ollivant",
+          "party": "R",
+          "votes": 1308
+        },
+        {
+          "name": "Eugene Vindman",
+          "party": "D",
+          "votes": 1201
+        },
+        {
+          "name": "Randall A. Terry",
+          "party": "O",
+          "votes": 5
+        },
+        {
+          "name": "Joshua E. Ertle",
+          "party": "O",
+          "votes": 4
+        },
+        {
+          "name": "Write-in",
+          "party": "O",
+          "votes": 4
+        },
+        {
+          "name": "Alaha Ahrar",
+          "party": "O",
+          "votes": 3
+        },
+        {
+          "name": "Taner E. Demirci Lopez",
+          "party": "O",
+          "votes": 1
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "house",
+      "precinctsReporting": 0.7,
+      "raceId": "87467",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87467",
+      "timestampBasis": "provider_last_updated",
+      "total": 2526,
+      "verified": true
+    },
+    "VA-SENATE": {
+      "asOf": "2026-11-04T00:09:59.954000Z",
+      "candidates": [
+        {
+          "name": "Bert Mizusawa",
+          "party": "R",
+          "votes": 5497
+        },
+        {
+          "name": "Mark Warner",
+          "party": "D",
+          "votes": 5201
+        },
+        {
+          "name": "Write-in",
+          "party": "O",
+          "votes": 16
+        }
+      ],
+      "election": "2026-11-03",
+      "office": "senate",
+      "precinctsReporting": 0.3,
+      "raceId": "87472",
+      "retrievedAt": "2026-11-04T00:09:27.529124Z",
+      "source": "civicAPI",
+      "sourceUrl": "https://civicapi.org/api/v2/race/87472",
+      "timestampBasis": "provider_last_updated",
+      "total": 10714,
       "verified": true
     }
   },
