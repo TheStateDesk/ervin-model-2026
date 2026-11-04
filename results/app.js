@@ -1,4 +1,4 @@
-/* AP-led results edition. Only the AP-attributed local call ledger and independently identified AP-syndicated snapshots are allowed in this view. */
+/* Source-documented results edition. Race call provenance remains AP-based and each result retains its original source link. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -14,18 +14,18 @@ for(const code of Object.keys(states)){const option=document.createElement('opti
 function renderCards(){
  const cards=Object.entries(snap).filter(([id])=>id.endsWith('-SENATE')).map(([id,x])=>{
  const margin=x.pctD-x.pctR,place=states[x.state]||x.state;
- return '<div class="pr-snapshot-card"><small>'+esc(place)+' / U.S. SENATE</small><strong>'+esc(x.candidateD)+'</strong><span class="pr-margin">D +'+margin.toFixed(2)+'</span><p>'+fmt(x.votesD)+' D · '+fmt(x.votesR)+' R<br>'+x.reportingPct.toFixed(1)+'% reporting in the dated AP-attributed snapshot</p><a href="'+esc(x.sourceUrl)+'" target="_blank" rel="noopener noreferrer">See AP-sourced votes ↗</a><a href="'+apState(x.state)+'" target="_blank" rel="noopener noreferrer">Latest directly at AP ↗</a></div>';
+ return '<div class="pr-snapshot-card"><small>'+esc(place)+' / U.S. SENATE</small><strong>'+esc(x.candidateD)+'</strong><span class="pr-margin">D +'+margin.toFixed(2)+'</span><p>'+fmt(x.votesD)+' D · '+fmt(x.votesR)+' R<br>'+x.reportingPct.toFixed(1)+'% reporting in the dated dated return snapshot</p><a href="'+esc(x.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Open source for these totals ↗</a><a href="'+apState(x.state)+'" target="_blank" rel="noopener noreferrer">Check latest results ↗</a></div>';
  });
- $('prSnapshotGrid').innerHTML=cards.join('')||'<p>AP-sourced snapshots are unavailable. <a href="https://apnews.com/projects/elections-2026/">View AP results directly</a>.</p>';
+ $('prSnapshotGrid').innerHTML=cards.join('')||'<p>Dated return snapshots are unavailable. <a href="https://apnews.com/projects/elections-2026/">View AP results directly</a>.</p>';
 }
 function draw(){
  const office=$('prOffice').value,state=$('prState').value,q=$('prSearch').value.toLowerCase().trim();
  let filtered=rows.filter(x=>(office==='all'||x.office===office)&&(state==='all'||x.state===state)&&(!q||[x.id,x.winner,x.place].join(' ').toLowerCase().includes(q)));
  filtered.sort((a,b)=>{const featured=['TX-SENATE','KS-SENATE','IA-SENATE','SC-SENATE','NC-SENATE','OH-SENATE','ME-SENATE'];const ai=featured.indexOf(a.id),bi=featured.indexOf(b.id);if(ai>=0||bi>=0)return (ai<0?99:ai)-(bi<0?99:bi);return a.id.localeCompare(b.id)});
- $('prCallNotice').textContent=fmt(filtered.length)+' locally documented AP-attributed race calls match these filters. These records do not replace AP’s full election ledger or certification.';
+ $('prCallNotice').textContent=fmt(filtered.length)+' locally documented source-linked race calls match these filters. These records do not replace AP’s full election ledger or certification.';
  $('prCallList').innerHTML=filtered.slice(0,limit).map(x=>{
  const source=safeLink(x.sourceUrl),party=x.party==='D'?'D':x.party==='R'?'R':'I';
- return '<article class="pr-race" id="race-'+esc(x.id)+'"><div><div class="pr-race-kicker">'+esc(x.place)+' · '+(x.office==='house'?'DISTRICT '+x.id.split('-')[1]:x.office.toUpperCase())+'</div><strong>'+esc(x.winner)+'</strong><small>Documented AP-attributed winner call · not official certification</small>'+(source?'<a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">Original call source ↗</a>':'')+'<a href="'+apState(x.state)+'" target="_blank" rel="noopener noreferrer">AP state results ↗</a></div><span class="pr-party '+party+'">'+party+'</span></article>';
+ return '<article class="pr-race" id="race-'+esc(x.id)+'"><div><div class="pr-race-kicker">'+esc(x.place)+' · '+(x.office==='house'?'DISTRICT '+x.id.split('-')[1]:x.office.toUpperCase())+'</div><strong>'+esc(x.winner)+'</strong><small>Projected winner · not official certification</small>'+(source?'<a href="'+esc(source)+'" target="_blank" rel="noopener noreferrer">Original call source ↗</a>':'')+'<a href="'+apState(x.state)+'" target="_blank" rel="noopener noreferrer">Latest state results ↗</a></div><span class="pr-party '+party+'">'+party+'</span></article>';
  }).join('')||'<p>No locally documented calls match. See <a href="https://apnews.com/projects/elections-2026/">AP’s full results</a> for current reporting.</p>';
  $('prShowMore').hidden=filtered.length<=limit;$('prStateNote').textContent=state==='all'?'Nationwide ledger':states[state]+' / sourced calls';
 }
@@ -41,7 +41,7 @@ async function refresh(){
   if(office&&['House','Senate','Governor'].includes(office))$('prOffice').value=office.toLowerCase();
   if(race){$('prSearch').value=race.toUpperCase();limit=36;}
   if(firstRender&&(state||office||race)){draw();setTimeout(()=>document.querySelector('#prRaces')?.scrollIntoView({block:'start'}),100)}firstRender=false
- }catch(err){console.error('AP results reader:',err);$('prCallNotice').innerHTML='This site’s attributed call ledger is temporarily unavailable. <a href="https://apnews.com/projects/elections-2026/">Open AP’s directly maintained results ↗</a>';renderCards()}
+ }catch(err){console.error('AP results reader:',err);$('prCallNotice').innerHTML='This site's source-linked call ledger is temporarily unavailable. <a href="https://apnews.com/projects/elections-2026/">Open AP’s directly maintained results ↗</a>';renderCards()}
 }
 for(const id of ['prOffice','prState'])$(id).addEventListener('change',()=>{limit=36;draw()});
 $('prSearch').addEventListener('input',()=>{limit=36;draw()});
