@@ -373,3 +373,6 @@ body.ed-body{font-family:var(--ed-sans)!important;line-height:1.58}
  .ed-shell{width:calc(100% - 26px)}
  .ed-body .ed-card{padding:17px 0}
 }
+
+/* An NBC projection has a distinct outline, not just a vote-leader fill. */
+#edSimMap path.ed-live-nbc-called{stroke:#e6b35b;stroke-width:2.8px;stroke-linejoin:round;vector-effect:non-scaling-stroke;paint-order:stroke fill}
