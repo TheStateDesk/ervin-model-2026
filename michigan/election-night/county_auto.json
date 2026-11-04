@@ -2,8 +2,20 @@
   "version": 1,
   "election": "2026-11-03",
   "office": "US Senate",
-  "status": "awaiting_verified_automatic_county_reports",
-  "updatedAt": null,
-  "counties": [],
-  "sourcePolicy": "No county automatically reported until original published general-election Senate figures and local post-close timestamp pass verification."
+  "updatedAt": "2026-11-04T15:21:31.626707+00:00",
+  "status": "unofficial_automatically_validated_county_report",
+  "counties": [
+    {
+      "county": "Kent",
+      "dem": 181447,
+      "rep": 136948,
+      "other": 5911,
+      "asOf": "2026-11-04T13:26:56Z",
+      "sourceUrl": "https://app.enhancedvoting.com/results/public/kent-county-mi/elections/11032026_20261005115447",
+      "reportingStatus": "complete",
+      "sourceType": "county_clerk"
+    }
+  ],
+  "adapter": "kent_official_enhanced_voting",
+  "sourcePolicy": "Automatically parsed ONLY after 8 p.m. local, from directly attributed November 2026 Senate contest and positive precinct-reported fraction. Verify against clerk's original page."
 }
