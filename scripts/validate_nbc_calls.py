@@ -14,7 +14,7 @@ ballots=read('civicapi/races.json').get('races',{})
 records={}
 for label,path,publisher,hosts in (
  ('NBC','election-night/nbc-calls.json','NBC News Decision Desk',r'www\.nbc[a-z0-9-]+\.com'),
- ('AP','election-night/ap-calls.json','Associated Press',r'(?:apnews\.com|www\.apnews\.com|whyy\.org|www\.publicsource\.org|mapthegeneral\.com)')):
+ ('AP','election-night/ap-calls.json','Associated Press',r'(?:apnews\.com|www\.apnews\.com|whyy\.org|www\.publicsource\.org|mapthegeneral\.com|www\.foxnews\.com)')):
  data=read(path)
  assert data.get('version')==1 and data.get('election')=='2026-11-03' and data.get('publisher')==publisher,(label,'metadata')
  calls=data.get('calls',{})
