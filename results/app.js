@@ -8,11 +8,11 @@ const label=id=>id.endsWith('-SENATE')?'senate':id.endsWith('-GOVERNOR')?'govern
 const fmt=n=>Number(n).toLocaleString('en-US');
 const safeLink=v=>{try{const u=new URL(v);return u.protocol==='https:'?u.href:null}catch{return null}};
 const allowed=url=>{const u=safeLink(url);return u&&(/(^|\\.)apnews\\.com$|(^|\\.)foxnews\\.com$/).test(new URL(u).hostname)};
-let rows=[],snap={},limit=36;
+let rows=[],snap={},limit=36,firstRender=true;
 const fetchJSON=async p=>{const r=await fetch(p+'?v='+Math.floor(Date.now()/60000),{cache:'no-store'});if(!r.ok)throw Error(p+' '+r.status);return r.json()};
 for(const code of Object.keys(states)){const option=document.createElement('option');option.value=code;option.textContent=states[code];$('prState').append(option)}
 function renderCards(){
- const cards=Object.entries(snap).map(([id,x])=>{
+ const cards=Object.entries(snap).filter(([id])=>id.endsWith('-SENATE')).map(([id,x])=>{
  const margin=x.pctD-x.pctR,place=states[x.state]||x.state;
  return '<div class="pr-snapshot-card"><small>'+esc(place)+' / U.S. SENATE</small><strong>'+esc(x.candidateD)+'</strong><span class="pr-margin">D +'+margin.toFixed(2)+'</span><p>'+fmt(x.votesD)+' D · '+fmt(x.votesR)+' R<br>'+x.reportingPct.toFixed(1)+'% reporting in the dated AP-attributed snapshot</p><a href="'+esc(x.sourceUrl)+'" target="_blank" rel="noopener noreferrer">See AP-sourced votes ↗</a><a href="'+apState(x.state)+'" target="_blank" rel="noopener noreferrer">Latest directly at AP ↗</a></div>';
  });
@@ -40,7 +40,7 @@ async function refresh(){
   if(state&&states[state.toUpperCase()])$('prState').value=state.toUpperCase();
   if(office&&['House','Senate','Governor'].includes(office))$('prOffice').value=office.toLowerCase();
   if(race){$('prSearch').value=race.toUpperCase();limit=36;}
-  if(state||office||race){draw();setTimeout(()=>document.querySelector('#prRaces')?.scrollIntoView({block:'start'}),100)}
+  if(firstRender&&(state||office||race)){draw();setTimeout(()=>document.querySelector('#prRaces')?.scrollIntoView({block:'start'}),100)}firstRender=false
  }catch(err){console.error('AP results reader:',err);$('prCallNotice').innerHTML='This site’s attributed call ledger is temporarily unavailable. <a href="https://apnews.com/projects/elections-2026/">Open AP’s directly maintained results ↗</a>';renderCards()}
 }
 for(const id of ['prOffice','prState'])$(id).addEventListener('change',()=>{limit=36;draw()});

@@ -13,7 +13,7 @@
   let d=frame.contentDocument,w=frame.contentWindow;const $=id=>frame.contentDocument.getElementById(id);
   await until(()=>$('postElectionDesk')&&Number(($('postReported')?.textContent||'').replaceAll(',',''))>100,'2026 sourced post-election count');
   check(d.querySelector('#postElectionDesk h1')?.textContent.includes('Congress changes hands'),'Results-first editorial headline present');
-  check(d.querySelectorAll('#postAnalysis .post-article-card').length===4,'Four short election analysis articles are linked from homepage');
+  check(d.querySelectorAll('#postAnalysis .post-article-card').length===5,'Five original election analysis articles are linked from homepage');
   check(!$('postModelAudit')&&!d.body.textContent.includes('Forecast scorecard'),'No model accuracy scorecard on results homepage');
   check($('postCalled')?.textContent!=='—','Attributed AP call count is available');
   check($('watchSection')?.hidden===false&&w.getComputedStyle($('watchSection')).display==='none','Pre-election watch carousel is archived, not shown');
@@ -35,10 +35,22 @@
   check(!d.querySelector('#postElectionDesk'),'Archive stays separate from election reporting');
   check(d.querySelector('#edFinalHeadline')?.textContent.includes('FINAL'),'Original final forecast remains accessible');
   await navigate('../analysis/senate-seven-flips/');d=frame.contentDocument;w=frame.contentWindow;
-  await until(()=>d.querySelectorAll('#storyTable tr').length===7,'senate story dynamic data');
-  check(d.querySelector('h1')?.textContent.includes('Seven states'),'Story detail page loads');
+  await until(()=>d.querySelectorAll('.story-table tbody tr').length===7,'senate story AP-attributed source table');
+  check(d.querySelector('h1')?.textContent.includes('Seven Senate flips'),'Story detail page loads');
   check(d.querySelectorAll('.story-sources a').length>=2,'Article cites independent external election reporting');
   check(d.querySelectorAll('.pe-global-nav a').length===7,'Articles share the same nav as national site');
+  await navigate('../results/');d=frame.contentDocument;w=frame.contentWindow;
+  await until(()=>Number((d.querySelector('#prAllCount')?.textContent||'').replaceAll(',',''))>100&&d.querySelectorAll('.pr-race').length>15,'AP-led results reader and call ledger');
+  check(d.querySelectorAll('.pr-snapshot-card').length===7,'Seven Senate AP-attributed vote snapshots display, excluding governor snapshot records');
+  check(d.querySelectorAll('a[href*="apnews.com/projects/elections-2026/"]').length>=3,'Results desk links directly to original AP election pages');
+  check(!d.body.textContent.includes('CivicAPI'),'AP-led results page contains no CivicAPI provider interface');
+  check(d.querySelectorAll('.pe-global-nav a[href$="/results/"]').length===1,'Results navigation points to the replacement AP-led desk');
+  d.querySelector('#prOffice').value='senate';d.querySelector('#prOffice').dispatchEvent(new Event('change'));
+  check(d.querySelector('#prCallNotice')?.textContent.includes('locally documented AP'),'Office filter continues to show sourced race calls');
+  await navigate('../analysis/polls-underestimated-democrats/');d=frame.contentDocument;w=frame.contentWindow;
+  check(d.querySelectorAll('.story-table tbody tr').length===7,'Polling feature compares seven sourced Senate races');
+  check(d.querySelector('h1')?.textContent.includes('polls missed'),'Longform polling feature is available');
+  check(d.querySelector('.story-hero-photo img')?.getAttribute('src')?.includes('commons.wikimedia.org'),'Feature photo comes from Wikimedia Commons');
   report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.join('\n');
  }catch(err){report.dataset.status='FAIL';report.textContent='FAIL: '+err.stack}
 })();

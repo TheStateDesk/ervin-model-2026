@@ -6,7 +6,7 @@ const mode=document.body.dataset.liveOffice;if(!['House','Governor'].includes(mo
 const $=id=>document.getElementById(id),format=n=>Number(n).toLocaleString('en-US');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let active=false;
-const url=id=>'../election-night/?state='+id.slice(0,2)+'&race='+id+'#nationalBoard';
+const url=id=>'../results/?state='+id.slice(0,2)+'&race='+id+'#nationalBoard';
 const fetchJSON=async path=>{const u=new URL(path,root);u.searchParams.set('updated',Math.floor(Date.now()/60000));const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error(path+' '+r.status);return r.json()};
 const good=x=>x&&x.verified===true&&Number.isSafeInteger(x.total)&&x.total>0&&Array.isArray(x.candidates)&&x.candidates.length>=2;
 const update=async()=>{
@@ -38,7 +38,7 @@ const update=async()=>{
 const init=()=>{
  const anchor=document.querySelector('.race-topline')||document.querySelector('.race-lede');if(!anchor)return;
  const section=document.createElement('section');section.className='pe-office-results';section.setAttribute('aria-label','Post-election results first');
- section.innerHTML='<div class="pe-office-lede"><div><span>2026 / THE POST-ELECTION DESK</span><h2 id="peOfficeTitle">Election results</h2><p id="peOfficeSummary">Loading sourced unofficial returns…</p></div><a href="../analysis/">Read the analysis</a></div><div class="pe-office-stats" id="peOfficeStats"><div>Checking…</div></div><div class="pe-office-races" id="peOfficeRaces"></div><p class="pe-office-method" id="peOfficeStatus">Sourcing the latest results and newsroom calls…</p><div class="pe-office-source"><a href="https://apnews.com/projects/elections-2026/" target="_blank" rel="noopener noreferrer">AP official results coverage</a><a href="../election-night/">National results desk</a></div>';
+ section.innerHTML='<div class="pe-office-lede"><div><span>2026 / THE POST-ELECTION DESK</span><h2 id="peOfficeTitle">Election results</h2><p id="peOfficeSummary">Loading sourced unofficial returns…</p></div><a href="../analysis/">Read the analysis</a></div><div class="pe-office-stats" id="peOfficeStats"><div>Checking…</div></div><div class="pe-office-races" id="peOfficeRaces"></div><p class="pe-office-method" id="peOfficeStatus">Sourcing the latest results and newsroom calls…</p><div class="pe-office-source"><a href="https://apnews.com/projects/elections-2026/" target="_blank" rel="noopener noreferrer">AP official results coverage</a><a href="../results/">National results desk</a></div>';
  anchor.insertAdjacentElement('afterend',section);
  update();setInterval(()=>{if(!document.hidden)update()},60000);
 };

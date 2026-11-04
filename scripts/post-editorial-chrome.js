@@ -6,9 +6,9 @@ const root=new URL('../',script?.src||location.href);
 const url=p=>new URL(p,root).href;
 const path=location.pathname;
 const isArchive=new URLSearchParams(location.search).get('view')==='final';
-const where=path.includes('/analysis/')?'analysis':path.includes('/election-night/')?'results':path.includes('/states/')?'states':path.includes('/state/')?'state':path.includes('/house/')?'house':path.includes('/governors/')?'governors':path.includes('/michigan/')?'michigan':path.includes('/stats-for-nerds/')?'methods':'other';
+const where=path.includes('/analysis/')?'analysis':path.includes('/results/')?'results':path.includes('/election-night/')?'other':path.includes('/states/')?'states':path.includes('/state/')?'state':path.includes('/house/')?'house':path.includes('/governors/')?'governors':path.includes('/michigan/')?'michigan':path.includes('/stats-for-nerds/')?'methods':'other';
 const items=[
- ['Results','election-night/','results'],
+ ['Results','results/','results'],
  ['States','states/','states'],
  ['House','house/','house'],
  ['Governors','governors/','governors'],
