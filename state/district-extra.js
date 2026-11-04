@@ -5,7 +5,7 @@ const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const states=window.ERVIN_US_GEOGRAPHY?.states||[];
 const KEY=()=>new URLSearchParams(location.search).get('state')?.toUpperCase()||'MI';
 const CLOSE=Date.parse('2026-11-03T20:00:00-05:00');
-let roster={},registry=[],forecast={},mode='forecast',live={},asOf='',provider='',snapshotChecked=false,lastCheck=0,renderToken=0;
+let roster={},registry=[],forecast={},mode=Date.now()>=Date.parse('2026-11-04T00:00:00-05:00')?'results':'forecast',live={},asOf='',provider='',snapshotChecked=false,lastCheck=0,renderToken=0;
 const raceId=r=>r?.id||'';
 const normalize=(value)=>{const r=String(value||'').toUpperCase().match(/^([A-Z]{2})[- ]?(\d{1,2})$/);return r?r[1]+'-'+r[2].padStart(2,'0'):''};
 const number=v=>Number(v).toLocaleString('en-US');

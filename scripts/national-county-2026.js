@@ -8,7 +8,7 @@ const codes='AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI M
 const isN=n=>typeof n==='number'&&Number.isFinite(n),vote=n=>Number.isSafeInteger(n)&&n>=0&&n<=16000000;
 const fmt=m=>!isN(m)?'No available forecast':Math.abs(m)<.05?'Even':(m>0?'D +':'R +')+Math.abs(m).toFixed(1)+' pts';
 const iso=n=>new Date(n).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
-let shapes=[],history=null,models=null,office='Senate',view='forecast',loaded=false,started=false,nearViewport=false,authority=null,health=null,results=null,rows={},busy=false,lastFetch=0,runId=0,loadAttempts=0;
+let shapes=[],history=null,models=null,office='Senate',view=Date.now()>=Date.parse('2026-11-04T00:00:00-05:00')?'reported':'forecast',loaded=false,started=false,nearViewport=false,authority=null,health=null,results=null,rows={},busy=false,lastFetch=0,runId=0,loadAttempts=0;
 const el=name=>document.createElementNS(NS,name);
 const fetchJSON=async p=>{
  const staticGeo=/\/geo\/packs\/p\d\d\.json$/.test(p);

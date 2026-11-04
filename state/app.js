@@ -11,7 +11,7 @@ const stateList=window.ERVIN_US_GEOGRAPHY?.states||[];
 const byCode=Object.fromEntries(stateList.map(x=>[x.code,x]));
 let house=[],governors=[],baselines={},historical={counties:{}},senatePolls={},govPolls={},housePolls={},coverage={senate:{states:{}},governor:{states:{}},house:{districts:{}}},pollingWarning='';
 let senateQualitative={};let sourceTimeLabel='Source update time unavailable';let historicalError=null;let governorErvin={};let houseRoster={races:{}};let houseScenario={races:{},summary:{}};let houseQuestions={races:{},summary:{}};let houseVerified={races:{}};let statewideLatest={senate:{},governor:{}};let texasGovAverages=null,texasGovSurveys={polls:[]};let houseZoom=1,houseCenter={x:450,y:290};
-let countyChosenByUser=false; for(const b of document.querySelectorAll('[data-county-view]'))b.setAttribute('aria-pressed',String(b.dataset.countyView==='forecast'));let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
+const POST_ELECTION=Date.now()>=Date.parse('2026-11-04T00:00:00-05:00'); let countyChosenByUser=false; for(const b of document.querySelectorAll('[data-county-view]'))b.setAttribute('aria-pressed',String(b.dataset.countyView===(POST_ELECTION?'reported':'forecast')));let code='MI',stateHouse=[],selectedDistrict=null,countyShape=null,districtShape=null,cachedCountyRows=[],countyScenario={senate:null,governor:null},selectedCounty=null,countyToken=0,houseToken=0,resultLast=0,mapZoom=1,mapCenter={x:450,y:290},siena={races:{}};
 const pollCutoff=Date.parse('2026-11-03T18:00:00-05:00');
 function stateName(c){return byCode[c]?.name||house.find(x=>x.code===c)?.state||c;}
 function sourceItem(text,url,detail=''){return '<article><strong><a href="'+safeURL(url)+'" target="_blank" rel="noopener noreferrer">'+esc(text)+'</a></strong>'+(detail?'<small>'+esc(detail)+'</small>':'')+'</article>';}
@@ -418,7 +418,7 @@ async function display(next){
  selectedDistrict=null;countyShape=null;districtShape=null;cachedCountyRows=[];selectedCounty=null;countyToken++;houseToken++;
  stateHouse=house.filter(x=>x.code===code).sort((a,b)=>String(a.district).localeCompare(String(b.district)));
  renderLead();renderOverview();initDistrictButtons();renderPolls();officialLinks();
- countyChosenByUser=false;$('countyLayer').value=getSen()?'senate':getGov()?'governor':'2024';$('countyTableFind').value='';$('countySearch').value='';
+ countyChosenByUser=false;$('countyLayer').value=POST_ELECTION?'reported':getSen()?'senate':getGov()?'governor':'2024';$('countyTableFind').value='';$('countySearch').value='';
  $('countyMap').replaceChildren();$('districtMap').replaceChildren();
  // Map and results start independently; slow polling metadata cannot block geographic boundaries.
  loadReturns(true);
@@ -458,7 +458,7 @@ async function start(){
    coverage=values[5]||coverage;siena=values[6]||siena;houseVerified=values[7]||houseVerified;statewideLatest=values[8]||statewideLatest;texasGovAverages=values[9]||texasGovAverages;texasGovSurveys=values[10]||texasGovSurveys;houseScenario=values[11]||houseScenario;houseQuestions=values[12]||houseQuestions;houseRoster=values[14]||houseRoster;historicalError=values[15]?.version===1?values[15]:null;
    if(values[13]&&window.ERVIN_STATEWIDE){const cal=window.ERVIN_STATEWIDE.apply(values[13],{races:governors},{states:baselines});governorErvin=Object.fromEntries(cal.governor.map(g=>[g.code,g]));}
    if(!countyChosenByUser){
-    $('countyLayer').value=getSen()?'senate':getGov()?'governor':'2024';
+    $('countyLayer').value=POST_ELECTION?'reported':getSen()?'senate':getGov()?'governor':'2024';
     if(countyShape)drawCounties();
    }
 
