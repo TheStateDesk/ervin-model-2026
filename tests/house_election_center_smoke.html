@@ -25,7 +25,12 @@
   allStates.dispatchEvent(new frame.contentWindow.Event('change',{bubbles:true}));
   stage='house-all-435';await until(()=>d.querySelectorAll('#houseCards .gov-card').length===435);
   ok(d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House district cards are indexed');
-  ok(d.querySelectorAll('#houseMapSvg path').length>=50,'All House states rendered geographically');
+  // The 435-card paint and its independent SVG map paint can settle on
+  // different browser frames under visual-test contention. Require the
+  // complete fifty-state geography, but wait for its actual render.
+  stage='house-all-geographic-states';
+  await until(()=>d.querySelectorAll('#houseMapSvg path[data-code]').length===50);
+  ok(d.querySelectorAll('#houseMapSvg path[data-code]').length===50,'All House states rendered geographically');
   ok(d.getElementById('ratingsCount').textContent==='68','68 sourced House ratings are explicitly identified');
   ok(d.getElementById('houseModelSummary').textContent.includes('Numerical House scenarios')&&d.getElementById('houseModelSummary').textContent.includes('not calibrated win probabilities'),'House numerical margins use 2026 congressional boundaries with rebuilt-vote caveats');
   ok(!d.getElementById('houseCards').textContent.includes('No model loaded')&&d.querySelectorAll('#houseCards .gov-card').length===435,'All 435 House cards include provisional model ratings rather than blank placeholders');
