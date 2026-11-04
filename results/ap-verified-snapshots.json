@@ -95,6 +95,58 @@
       "reportingPct": 99,
       "asOf": "2026-11-04T16:00:00Z",
       "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/senate"
+    },
+    "GA-GOVERNOR": {
+      "state": "GA",
+      "office": "Governor",
+      "candidateD": "Keisha Lance Bottoms",
+      "candidateR": "Rick Jackson",
+      "votesD": 2268446,
+      "votesR": 1908258,
+      "pctD": 54.31,
+      "pctR": 45.69,
+      "reportingPct": 98.63,
+      "asOf": "2026-11-04T09:56:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/georgia"
+    },
+    "IA-GOVERNOR": {
+      "state": "IA",
+      "office": "Governor",
+      "candidateD": "Rob Sand",
+      "candidateR": "Zach Lahn",
+      "votesD": 757326,
+      "votesR": 607415,
+      "pctD": 55.49,
+      "pctR": 44.51,
+      "reportingPct": 99,
+      "asOf": "2026-11-04T16:37:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/iowa"
+    },
+    "OH-GOVERNOR": {
+      "state": "OH",
+      "office": "Governor",
+      "candidateD": "Amy Acton",
+      "candidateR": "Vivek Ramaswamy",
+      "votesD": 2350266,
+      "votesR": 2023379,
+      "pctD": 51.95,
+      "pctR": 44.73,
+      "reportingPct": 97.25,
+      "asOf": "2026-11-04T10:21:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/ohio"
+    },
+    "TX-GOVERNOR": {
+      "state": "TX",
+      "office": "Governor",
+      "candidateD": "Gina Hinojosa",
+      "candidateR": "Greg Abbott",
+      "votesD": 5060631,
+      "votesR": 4380650,
+      "pctD": 52.81,
+      "pctR": 45.72,
+      "reportingPct": 94.31,
+      "asOf": "2026-11-04T10:51:00Z",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/state/texas"
     }
   }
 }
