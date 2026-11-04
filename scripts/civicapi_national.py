@@ -291,8 +291,8 @@ def coverage_by_office(expected,registry,now,stored,issues):
   office[name]={"targeted":len(keys),"registered":len(mapped),"missingRegistryIds":missing,
    "eligibleForCollection":len(eligible),"awaitingPollClose":sum(now<after_close(key) for key in mapped),
    "verifiedReports":len(reports),"eligibleWithoutValidVoteReport":len(without),
-   "sourceErrors":sum(str(issues.get(key,"")).startswith("fetch_") for key in eligible),
-   "validationPending":len(without)-sum(str(issues.get(key,"")).startswith("fetch_") for key in eligible)}
+   "sourceErrors":sum(str(issues.get(key,"")).startswith("fetch_") for key in without),
+   "validationPending":len(without)-sum(str(issues.get(key,"")).startswith("fetch_") for key in without)}
  assert {name:x["targeted"] for name,x in office.items()}=={"house":435,"senate":35,"governor":36}
  return office
 
