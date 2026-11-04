@@ -346,13 +346,18 @@ def main():
  deadline=time.monotonic()+11*60
  def get_one(item):
   key,row=item
-  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=7,max_attempts=3,deadline=deadline),None
+  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=7,max_attempts=2 if upstream_down else 3,deadline=deadline),None
   except urllib.error.HTTPError as e:return key,None,"HTTP_"+str(e.code)
   except Exception as e:return key,None,type(e).__name__
  # One contest = one detail request, with bounded 5xx/timeout retries.
  # Upstream 502s may be transient: retry the individual contest, never drop
  # a previously validated tally, and stop at the collection deadline.
- with futures.ThreadPoolExecutor(max_workers=detail_worker_count(len(eligible))) as pool:
+ # If status and sentinel race endpoints are unavailable, reduce pressure on
+ # CivicAPI instead of driving a high-concurrency 502 gateway-error storm.
+ # Every eligible House, Senate, and governor race remains in the queue.
+ upstream_down=not provider_connectivity.get("networkReachable",False)
+ detail_workers=min(8,detail_worker_count(len(eligible))) if upstream_down else detail_worker_count(len(eligible))
+ with futures.ThreadPoolExecutor(max_workers=detail_workers) as pool:
   # Prioritize statewide Senate returns ahead of the larger House queue.
   # Slow or timed-out district endpoints must not starve Senate results.
   ordered=sorted(eligible.items(),key=lambda item:(0 if item[0].endswith("-SENATE") else 1 if item[0].endswith("-GOVERNOR") else 2,item[0]))
