@@ -104,7 +104,7 @@ function paint(){
   if(href)anchor.setAttribute('href',href);
   anchor.dataset.liveRace=indexed?id:'';
   const row=indexed?accepted(id,expectedOffice):null;
-  const info=leaders(row),call=indexed?window.ERVIN_NBC_CALLS?.get(id):null,kind=call?.party||info?.kind||'N',shape=anchor.querySelector('path');
+  const info=leaders(row),call=indexed?window.ERVIN_NBC_CALLS?.get(id):null,kind=info?.kind||'N',shape=anchor.querySelector('path');
   if(!shape)continue;
   shape.classList.remove('ed-sim-proj-D','ed-sim-proj-R','ed-sim-proj-T','ed-sim-proj-N',
    'ed-live-lead-D','ed-live-lead-R','ed-live-lead-T','ed-live-lead-I','ed-live-lead-N');
