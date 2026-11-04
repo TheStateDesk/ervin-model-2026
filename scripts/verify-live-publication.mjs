@@ -221,11 +221,15 @@ try{
   await actualVotes.waitForFunction(expected=>{
    const results=window.ERVIN_HOME_RESULTS?.races||{};
    const paths=[...document.querySelectorAll('#edSimMap a[data-sim-district]')];
-   return expected.every(id=>results[id]&&paths.some(a=>a.dataset.simDistrict===id&&
-    a.querySelector('path')?.classList.contains('ed-live-lead-'+(()=>{const leaders=results[id].candidates.slice().sort((a,b)=>b.votes-a.votes);return leaders[0].votes===leaders[1].votes?'T':leaders[0].party==='O'?'I':leaders[0].party})())));
+   return expected.every(id=>{
+    const row=results[id],leaders=row?.candidates?.slice().sort((a,b)=>b.votes-a.votes);
+    if(!leaders?.[0]||!leaders[1])return false;
+    const kind=leaders[0].votes===leaders[1].votes?'T':leaders[0].party==='O'?'I':leaders[0].party;
+    return paths.some(a=>a.dataset.simDistrict===id&&a.querySelector('path')?.classList.contains('ed-live-lead-'+kind));
+   });
   },publishedHouse,{timeout:40000});
   const actual=await actualVotes.evaluate(()=>({
-   visibleLeaders:document.querySelectorAll('#edSimMap path.ed-live-lead-D,#edSimMap path.ed-live-lead-R,#edSimMap path.ed-live-lead-I').length,
+   visibleLeaders:document.querySelectorAll('#edSimMap path.ed-live-lead-D,#edSimMap path.ed-live-lead-R,#edSimMap path.ed-live-lead-I,#edSimMap path.ed-live-lead-T').length,
    liveTotal:document.querySelector('#edFinalCallSummary')?.dataset.liveReports,
    commentary:document.querySelectorAll('#edCommentaryEntries .ed-commentary-item').length,
    ids:Object.keys(window.ERVIN_HOME_RESULTS?.races||{})
