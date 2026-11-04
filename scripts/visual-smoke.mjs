@@ -400,11 +400,11 @@ try{
  await mobile.screenshot({path:'visual-checks/TX-mobile-dark.png',fullPage:true});
  await mobile.close();
 
- // Rehearse the 5:55 transformation without accepting or inventing votes.
+ // Rehearse the historical election-night visualization in the forecast archive, not the post-election newsroom.
  const electionDesk=await browser.newPage({viewport:{width:1440,height:940}});
  await electionDesk.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const deskErrors=[];electionDesk.on('pageerror',e=>deskErrors.push(e.message));
- await electionDesk.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
+ await electionDesk.goto(root+'/states/?view=final&preview=closing',{waitUntil:'domcontentloaded'});
  await electionDesk.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live'&&
   document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&
   document.querySelector('#edFinalHeadline')?.textContent.includes('COVERAGE')&&
@@ -476,7 +476,7 @@ try{
  await refreshPage.route('https://openamerica.io/elections/results.json?**',async route=>{
   await route.fulfill({status:200,contentType:'application/json',body:'{}'});
  });
- await refreshPage.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
+ await refreshPage.goto(root+'/states/?view=final&preview=closing',{waitUntil:'domcontentloaded'});
  await refreshPage.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&
   document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&
   !!window.ERVIN_HOME_RESULTS,null,{timeout:85000});
@@ -496,7 +496,7 @@ try{
  console.log('LIVE RESULTS REFRESH CACHE REGRESSION PASS · already-open page accepts source-validated updates without reload');
  const electionMobile=await browser.newPage({viewport:{width:390,height:844}});
  await electionMobile.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
- await electionMobile.goto(root+'/states/?preview=closing',{waitUntil:'domcontentloaded'});
+ await electionMobile.goto(root+'/states/?view=final&preview=closing',{waitUntil:'domcontentloaded'});
  await electionMobile.waitForFunction(()=>document.querySelector('#edSimulationPanel')?.dataset.liveReady==='true'&&document.querySelector('#edLiveCommentary')?.hidden===false,null,{timeout:85000});
  const nightOverflow=await electionMobile.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
  assert(nightOverflow<6,'Live coverage creates horizontal phone overflow '+nightOverflow+'px');
