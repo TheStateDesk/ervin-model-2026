@@ -728,6 +728,626 @@
       "winner": "Marty Jackley",
       "party": "R",
       "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-16": {
+      "winner": "Mike Kelly",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OH-08": {
+      "winner": "Warren Davidson",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AL-05": {
+      "winner": "Dale Strong",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "WI-07": {
+      "winner": "Michael Alfonso",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MO-03": {
+      "winner": "Bob Onder",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-10": {
+      "winner": "Brad Schneider",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "WI-08": {
+      "winner": "Tony Wied",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "LA-01": {
+      "winner": "Steve Scalise",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "GA-12": {
+      "winner": "Rick Allen",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TX-37": {
+      "winner": "Greg Casar",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-11": {
+      "winner": "Lloyd Smucker",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "CT-02": {
+      "winner": "Joe Courtney",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MD-02": {
+      "winner": "Johnny Olszewski",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OH-15": {
+      "winner": "Don Leonard",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-23": {
+      "winner": "Nick Langworthy",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MI-02": {
+      "winner": "John Moolenaar",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MA-08": {
+      "winner": "Stephen F. Lynch",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "LA-04": {
+      "winner": "Mike Johnson",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-14": {
+      "winner": "Guy Reschenthaler",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-20": {
+      "winner": "Paul Tonko",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MO-07": {
+      "winner": "Eric Burlison",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TN-03": {
+      "winner": "Chuck Fleischmann",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MA-04": {
+      "winner": "Jake Auchincloss",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-06": {
+      "winner": "Sean Casten",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "WI-06": {
+      "winner": "Glenn Grothman",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-14": {
+      "winner": "Lauren Underwood",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MI-13": {
+      "winner": "Donavan McKinney",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MI-06": {
+      "winner": "Debbie Dingell",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-16": {
+      "winner": "George Latimer",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-09": {
+      "winner": "Daniel Meuser",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TN-01": {
+      "winner": "Diana Harshbarger",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MA-09": {
+      "winner": "Bill Keating",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MA-06": {
+      "winner": "Dan Koh",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AL-07": {
+      "winner": "Terri Sewell",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NJ-09": {
+      "winner": "Nellie Pou",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MS-03": {
+      "winner": "Michael Guest",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "ME-01": {
+      "winner": "Chellie Pingree",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IN-01": {
+      "winner": "Frank Mrvan",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MA-03": {
+      "winner": "Lori Loureiro Trahan",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "GA-11": {
+      "winner": "John Cowan",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "WI-05": {
+      "winner": "Scott Fitzgerald",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "CO-07": {
+      "winner": "Brittany Pettersen",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AZ-07": {
+      "winner": "Adelita Grijalva",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AZ-04": {
+      "winner": "Greg Stanton",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AL-03": {
+      "winner": "Mike Rogers",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AZ-03": {
+      "winner": "Yassamin Ansari",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "KS-03": {
+      "winner": "Sharice Davids",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "SC-05": {
+      "winner": "Wes Climer",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OH-14": {
+      "winner": "David P. Joyce",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MS-01": {
+      "winner": "Trent Kelly",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-16": {
+      "winner": "Darin LaHood",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "SC-04": {
+      "winner": "William Timmons",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-03": {
+      "winner": "Delia Ramirez",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TX-01": {
+      "winner": "Nathaniel Moran",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "ND-01": {
+      "winner": "Julie Fedorchak",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OH-05": {
+      "winner": "Bob Latta",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-22": {
+      "winner": "John Mannion",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "CT-04": {
+      "winner": "Jim Himes",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "GA-10": {
+      "winner": "Houston Gaines",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MO-05": {
+      "winner": "Emanuel Cleaver",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-26": {
+      "winner": "Tim Kennedy",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "WI-04": {
+      "winner": "Gwen Moore",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MO-06": {
+      "winner": "Chris Stigall",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-17": {
+      "winner": "Eric Sorensen",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "LA-02": {
+      "winner": "Troy Carter",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MS-04": {
+      "winner": "Mike Ezell",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MS-02": {
+      "winner": "Bennie Thompson",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-04": {
+      "winner": "Patty Garcia",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MO-04": {
+      "winner": "Mark Alford",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-15": {
+      "winner": "Mary Miller",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-19": {
+      "winner": "Josh Riley",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MA-01": {
+      "winner": "Richard E. Neal",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-25": {
+      "winner": "Joseph Morelle",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-11": {
+      "winner": "Bill Foster",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MD-03": {
+      "winner": "Sarah Elfreth",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-18": {
+      "winner": "Pat Ryan",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "FL-18": {
+      "winner": "Scott Franklin",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MO-08": {
+      "winner": "Jason Smith",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OH-12": {
+      "winner": "Troy Balderson",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OH-06": {
+      "winner": "Michael A. Rulli",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "CO-02": {
+      "winner": "Joe Neguse",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MD-04": {
+      "winner": "Glenn Ivey",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AL-04": {
+      "winner": "Robert Aderholt",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "GA-07": {
+      "winner": "Rich McCormick",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MD-05": {
+      "winner": "Adrian Boafo",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "CO-06": {
+      "winner": "Jason Crow",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-08": {
+      "winner": "Melissa Bean",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-15": {
+      "winner": "Glenn Thompson",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TX-29": {
+      "winner": "Sylvia Garcia",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MD-07": {
+      "winner": "Kweisi Mfume",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-11": {
+      "winner": "Nicole Malliotakis",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TX-07": {
+      "winner": "Lizzie Fletcher",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NJ-04": {
+      "winner": "Chris Smith",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MI-11": {
+      "winner": "Jeremy Moss",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-06": {
+      "winner": "Grace Meng",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "CO-01": {
+      "winner": "Melat Kiros",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "WV-02": {
+      "winner": "Riley Moore",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NH-01": {
+      "winner": "Stefany Shaheen",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IN-08": {
+      "winner": "Mark Messmer",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "WV-01": {
+      "winner": "Carol Miller",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OK-04": {
+      "winner": "Tom Cole",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AR-01": {
+      "winner": "Rick Crawford",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-06": {
+      "winner": "Chrissy Houlahan",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "AR-04": {
+      "winner": "Bruce Westerman",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-12": {
+      "winner": "Mike Bost",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "MD-08": {
+      "winner": "Jamie Raskin",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "SC-07": {
+      "winner": "Russell Fry",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "PA-13": {
+      "winner": "John Joyce",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NJ-05": {
+      "winner": "Josh Gottheimer",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "FL-22": {
+      "winner": "Pia Dandiya",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "VA-11": {
+      "winner": "James Walkinshaw",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "VA-06": {
+      "winner": "Ben Cline",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "IL-05": {
+      "winner": "Mike Quigley",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-07": {
+      "winner": "Claire Valdez",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "TX-16": {
+      "winner": "Veronica Escobar",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-15": {
+      "winner": "Ritchie Torres",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-13": {
+      "winner": "Darializa Avila Chevalier",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-08": {
+      "winner": "Hakeem Jeffries",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NJ-06": {
+      "winner": "Frank Pallone",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-14": {
+      "winner": "Alexandria Ocasio-Cortez",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "OH-02": {
+      "winner": "David J. Taylor",
+      "party": "R",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-05": {
+      "winner": "Gregory Meeks",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-09": {
+      "winner": "Yvette Clarke",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
+    },
+    "NY-10": {
+      "winner": "Brad Lander",
+      "party": "D",
+      "sourceUrl": "https://www.foxnews.com/elections/2026/midterm-results/house"
     }
   }
 }
