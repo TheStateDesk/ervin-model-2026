@@ -10,10 +10,13 @@ on:
       - 'tests/test_civicapi_national.py'
       - '.github/workflows/civicapi-probe.yml'
   schedule:
+    # Retain the original low-frequency maintenance collection.
     - cron: '37 2,8,14,20 * * *'
-    # Every five minutes during election-night hours (GitHub's minimum schedule interval).
-    - cron: '3-58/5 0-9 4 11 *'
-    - cron: '3-58/5 23 3 11 *'
+    # One-time: every ten minutes through Nov. 5, 2026 at noon EST
+    # (17:00 UTC); GitHub Actions cron timestamps are UTC.
+    - cron: '*/10 8-23 4 11 *'
+    - cron: '*/10 0-16 5 11 *'
+    - cron: '0 17 5 11 *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -26,19 +29,51 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 16
     steps:
+      - name: Guard one-time ten-minute election-results schedule
+        id: cadence
+        shell: bash
+        env:
+          REQUESTED_CRON: ${{ github.event.schedule }}
+        run: |
+          set -euo pipefail
+          # Manual and code-triggered runs remain available at all times.
+          # Normal four-times-daily maintenance stays unchanged.
+          if [[ "$GITHUB_EVENT_NAME" != "schedule" || "$REQUESTED_CRON" == "37 2,8,14,20 * * *" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # These date-specific cron expressions recur annually. Disable
+          # the temporary high-frequency schedule after its 2026 cutoff.
+          now=$(date -u +%s)
+          begin=$(date -u -d "2026-11-04T07:50:00Z" +%s)
+          # One final noon ET slot; up to ten minutes of Actions queue delay.
+          cutoff=$(date -u -d "2026-11-05T17:10:00Z" +%s)
+          if (( now >= begin && now < cutoff )); then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Ten-minute election-results collection is active"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "One-time election-night ten-minute window has expired; skipping"
+          fi
       - uses: actions/checkout@v4
+        if: steps.cadence.outputs.run == 'true'
         with:
           persist-credentials: true
       - uses: actions/setup-python@v5
+        if: steps.cadence.outputs.run == 'true'
         with:
           python-version: '3.12'
       - name: Validate national results parser (offline test fixtures)
+        if: steps.cadence.outputs.run == 'true'
         run: python3 -m unittest discover -s tests -p test_civicapi_national.py -v
       - name: Validate independent NBC projected winner citations
+        if: steps.cadence.outputs.run == 'true'
         run: python3 scripts/validate_nbc_calls.py
       - name: Discover all races and fetch v2 results after race poll close
+        if: steps.cadence.outputs.run == 'true'
         run: python3 scripts/civicapi_national.py
       - name: Validate published snapshots and browser parser
+        if: steps.cadence.outputs.run == 'true'
         run: |
           python3 -m json.tool civicapi/races.json >/dev/null
           python3 -m json.tool civicapi/registry.json >/dev/null
@@ -46,6 +81,7 @@ jobs:
           node --check election-night/returns-core.js
           node scripts/test-live-results-stress.mjs
       - name: Commit validated race roster and reporting snapshots
+        if: steps.cadence.outputs.run == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
