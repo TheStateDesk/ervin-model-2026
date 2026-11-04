@@ -114,7 +114,9 @@ try{
 
    assert((await homepage.locator('#edFinalCallSummary').innerText()).includes(' D'),'Each map must show its final call tally');
    const target=office==='house'?'#edSimMap a[data-sim-district="MI-09"]':'#edSimMap a[data-sim-state="MI"]';
-   assert((await homepage.locator(target).first().getAttribute('href')).includes(office==='house'?'#house-09':'#stateOverview'),office+' map must link into the appropriate race');
+   const raceId=office==='house'?'MI-09':office==='senateD'?'MI-SENATE':'MI-GOVERNOR';
+   const raceHref=await homepage.locator(target).first().getAttribute('href');
+   assert(raceHref?.includes('/election-night/?state=MI&race='+raceId+'#nationalBoard'),office+' map must open the exact race, got '+raceHref);
    await homepage.locator(target).first().focus();
    assert((await homepage.locator('#edSimMapReadout').innerText()).includes('Michigan'),office+' forecast details missing');
    await homepage.locator('#edSimulationPanel').screenshot({path:'visual-checks/FINAL-PREDICTION-'+label+'-Large-Map.png'});
