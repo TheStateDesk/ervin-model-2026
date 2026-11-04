@@ -380,6 +380,40 @@ try{
  await oh.screenshot({path:'postdeploy-checks/Ohio-Governor-State-Desk-Mobile.png',fullPage:false});
  console.log('LIVE OHIO GOVERNOR CROSS-CHECK PASS '+ohModel);
  await oh.close();
+ // Verify the published Stats for Nerds page consumes actual verified vote
+ // snapshots and that its refresh control makes another source request.
+ const nerd=await browser.newPage({viewport:{width:1440,height:900}});
+ const nerdErrors=[];nerd.on('pageerror',e=>nerdErrors.push(e.message));
+ await nerd.goto(base+'stats-for-nerds/?release='+stamp,{waitUntil:'domcontentloaded'});
+ await nerd.waitForFunction(()=>document.querySelector('#sourceStatus')?.textContent.startsWith('Source audit')&&
+  document.querySelector('#targetCards')?.textContent.includes('Texas')&&
+  document.querySelector('#errorSummary')?.textContent.includes('SENATE'),null,{timeout:65000});
+ const expectedWatched=publishedCivic.accepted.filter(id=>['KY-06','VA-02','VA-05','GA-SENATE','SC-SENATE','FL-27','NC-SENATE','OH-SENATE'].includes(id));
+ await nerd.waitForFunction(min=>Number(document.querySelector('#numReported')?.textContent||0)>=min,expectedWatched.length,{timeout:25000});
+ const nerdSnapshot=await nerd.evaluate(()=>({
+   reported:Number(document.querySelector('#numReported')?.textContent||0),
+   refreshStatus:document.querySelector('#sourceStatus')?.textContent,
+   collectorStatus:document.querySelector('#watchSourceHealth')?.textContent,
+   watchedRows:document.querySelector('#signalRows')?.textContent,
+   samples:document.querySelector('#sampleHealth')?.textContent
+ }));
+ if(nerdSnapshot.reported<expectedWatched.length||
+    !nerdSnapshot.collectorStatus.includes('CivicAPI primary')||
+    !nerdSnapshot.samples?.includes('14,000')||
+    expectedWatched.some(id=>!nerdSnapshot.watchedRows?.includes(id))||
+    (expectedWatched.length>0&&!nerdSnapshot.watchedRows?.includes('total counted')))
+   throw Error('PUBLIC STATS FOR NERDS DID NOT SHOW VERIFIED RETURNS '+JSON.stringify({expectedWatched,nerdSnapshot,nerdErrors}));
+ let refreshRequests=0;
+ nerd.on('request',req=>{if(req.url().includes('/civicapi/races.json'))refreshRequests++});
+ await nerd.locator('#refreshSignals').click();
+ if(refreshRequests<1)throw Error('PUBLIC STATS FOR NERDS REFRESH BUTTON DID NOT REQUEST CIVICAPI DATA');
+ await nerd.locator('#signals').screenshot({path:'postdeploy-checks/Stats-For-Nerds-Returns-Desktop.png'});
+ await nerd.setViewportSize({width:390,height:844});
+ if((await nerd.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth))>5)throw Error('PUBLIC STATS FOR NERDS MOBILE PAGE OVERFLOW');
+ await nerd.screenshot({path:'postdeploy-checks/Stats-For-Nerds-Mobile.png',fullPage:false});
+ if(nerdErrors.length)throw Error('PUBLIC STATS FOR NERDS JS ERRORS '+nerdErrors.join(' | '));
+ console.log('PUBLIC STATS FOR NERDS LIVE REFRESH PASS '+JSON.stringify({watchedReports:nerdSnapshot.reported,verifiedWatchedCivic:expectedWatched,refreshRequests}));
+ await nerd.close();
  // A deployed model must show the evidence, not silently introduce a
  // religion- or county-demographic penalty into Michigan's Ervin's Take.
  const michiganAudit=await browser.newPage({viewport:{width:390,height:844}});

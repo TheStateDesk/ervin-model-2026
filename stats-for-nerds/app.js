@@ -267,13 +267,14 @@ async function refresh(force=false){
     marginD:100*(dem-rep)/(dem+rep),sourceURL:row.sourceURL};
   if(row.source?.includes('CivicAPI'))sourceSnapshot.civic++;else sourceSnapshot.fallback++;
  }
+ $('numReported').textContent=Object.keys(raw).length;
  audit();render();
  const passed=Object.values(signalMeta).filter(x=>x.state==='approved').length;
  const eligible=Number(civicHealth?.registeredRaces);
  const checked=Date.parse(civicHealth?.checkedAt||'');
  const minutes=Number.isFinite(checked)?Math.max(0,Math.round((Date.now()-checked)/60000)):null;
  const age=minutes===null?'collector update time unavailable':minutes+' min old';
- const sourceBase=Number.isFinite(eligible)&&eligible>0?eligible+' of 488 registered CivicAPI races; ':'CivicAPI registry not yet verified; ';
+ const sourceBase=Number.isFinite(eligible)&&eligible>0?eligible+' registered CivicAPI races; ':'CivicAPI registry not yet verified; ';
  $('watchSourceHealth').textContent=
   'CivicAPI primary · '+sourceBase+age+'. '+sourceSnapshot.civic+' watched contests with attributed CivicAPI candidate totals; '+
   sourceSnapshot.fallback+' watched contests on the separately attributed fallback. No partial result is automatically treated as representative. '+
@@ -282,10 +283,12 @@ async function refresh(force=false){
  $('sourceStatus').textContent='Source audit · '+new Date().toLocaleString('en-US')+
   ' · '+passed+' fully eligible early signal(s) · '+Object.keys(raw).length+' attributed reports. '+
   (outcomes[0].status==='fulfilled'?'Reviewed-signal file checked. ':'Reviewed-signal file unavailable. ')+
-  'CivicAPI is preferred; older or lower-count results may defer to the fallback. Neither provider alone verifies mail/early versus election-day composition.';
+  'CivicAPI is preferred; older or lower-count results may defer to the fallback. Neither provider alone verifies mail/early versus election-day composition.'+
+  (outcomes[1].status!=='fulfilled'?' CivicAPI vote snapshot could not be loaded.':'')+
+  (!core?' Results parser unavailable.':'');
 }
 async function init(){
- $('numWatch').textContent=specs.length;
+ $('numReported').textContent='0';
  $('inputRace').innerHTML=specs.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.title)+'</option>').join('');
  $('inputRace').value='VA-02';
  $('refreshSignals').addEventListener('click',()=>refresh(true));
@@ -321,6 +324,7 @@ async function init(){
   $('sourceStatus').textContent='Original Ervin polling and district files loaded. Awaiting independent verified early signals.';
   await refresh(true);
   setInterval(()=>{if(!document.hidden)refresh(false)},60000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh(true)});
  }catch(e){$('sourceStatus').textContent='The baseline data could not be verified: '+e.message+'. No provisional model output will be displayed.';$('targetCards').textContent='Unable to load reproducible simulations.'}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
