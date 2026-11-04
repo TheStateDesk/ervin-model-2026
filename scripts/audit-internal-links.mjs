@@ -36,7 +36,11 @@ for(const file of pages){
    const hash=decodeURIComponent(url.hash.slice(1));
    const targetHtml=target===file?html:fs.readFileSync(target,'utf8');
    const ids=new Set([...targetHtml.matchAll(/\b(?:id|name)\s*=\s*(["'])(.*?)\1/g)].map(x=>x[2]));
-   if(hash&&!ids.has(hash))issues.push(relative+': missing anchor '+val);
+   // The results-first homepage adds its editorial modules after DOM ready.
+   // Audit their source rather than rejecting intentionally JS-mounted anchors.
+   const dynamicHome=new Set(['postCloseRaces','postAnalysis','postElectionDesk']);
+   const injected=rel==='states/index.html'&&hash&&dynamicHome.has(hash)&&fs.readFileSync(path.join(root,'scripts/post-election-2026.js'),'utf8').includes('id="'+hash+'"');
+   if(hash&&!ids.has(hash)&&!injected)issues.push(relative+': missing anchor '+val);
   }
  }
 }
