@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T04:47:21.755343+00:00",
+  "updatedAt": "2026-11-04T07:30:35.575132+00:00",
   "events": [
     {
       "at": "2026-10-26T14:19:02.019910+00:00",
@@ -494,6 +494,83 @@
         }
       ],
       "sourceUrl": "https://www.schoolcraftcounty.net/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T07:30:35.575132+00:00",
+      "county": "Alger",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Unofficial Results for the November 3, 2026 General Election",
+          "url": "https://algercounty.gov/unofficial-results-for-the-november-3-2026-general-election/"
+        }
+      ],
+      "sourceUrl": "https://www.algercounty.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T07:30:35.575132+00:00",
+      "county": "Bay",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Potential November 2026 result report",
+          "url": "https://www.baycountymi.gov/departments/clerk/elections/Documents/Departments/Clerk/Elections/Election Results/November 3, 2026 All Precincts Reported Unofficial Precinct Results.pdf?t=202611040033530"
+        },
+        {
+          "title": "Potential November 2026 result report",
+          "url": "https://www.baycountymi.gov/departments/clerk/elections/Documents/Departments/Clerk/Elections/Election Results/November 3, 2026 All Precincts Reported Unofficial Summary Results.pdf?t=202611040031350"
+        }
+      ],
+      "sourceUrl": "https://www.baycountymi.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T07:30:35.575132+00:00",
+      "county": "Charlevoix",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Statement of Votes Cast (Totals include Early Voting Numbers)",
+          "url": "https://charlevoixcountymi.documents-on-demand.com/document/f2422fb9-2948-4031-b723-f77a14d03297/Statement%20of%20Votes%20Nov%2026.PDF"
+        }
+      ],
+      "sourceUrl": "https://www.charlevoixcounty.org/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T07:30:35.575132+00:00",
+      "county": "Gogebic",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "November 3, 2026 General Election Unofficial Results",
+          "url": "https://www.gogebic.gov/document_center/StatementOfVotesCastRPT.pdf?t=202611040014330"
+        }
+      ],
+      "sourceUrl": "https://www.gogebic.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T07:30:35.575132+00:00",
+      "county": "Livingston",
+      "kind": "page_modified",
+      "newLinks": [],
+      "sourceUrl": "https://milivcounty.gov/elections/election-results/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T07:30:35.575132+00:00",
+      "county": "Oceana",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "Unofficial Statement of Votes Cast \u2013 November 3, 2026",
+          "url": "https://oceana.mi.us/wp-content/uploads/2026/11/Unofficial-Statement-of-Votes-Cast-November-3-2026-11.pdf"
+        }
+      ],
+      "sourceUrl": "https://oceana.mi.us/",
       "notice": "Source change is not an election return"
     }
   ]
