@@ -1,0 +1,37 @@
+/* Post-midterm article system */
+.story-body{background:#f5f3ee!important;color:#202f3b!important}
+.story-masthead{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:18px max(22px,calc((100vw - 1170px)/2));background:#fffdfa;border-bottom:1px solid #c8d2d6}
+.story-masthead>a{text-decoration:none;color:#243c4c!important;font-weight:800;font-size:11px;letter-spacing:.06em}.story-brand{font-size:13px!important;white-space:nowrap}
+.story-brand span{display:inline-flex;width:31px;height:31px;background:#243e50;color:white;align-items:center;justify-content:center;border-radius:3px;margin-right:7px;font:700 20px Georgia,serif}.story-masthead>span{letter-spacing:.13em;font-size:9px;color:#63737a;font-weight:800}
+.story-shell{max-width:1170px;margin:auto;padding:35px 25px 75px}.story-breadcrumb{font-size:10px;font-weight:800;color:#758389;letter-spacing:.05em;text-transform:uppercase}.story-breadcrumb a{color:#40627b!important;text-decoration:none}
+.story-heading{max-width:1020px;padding:45px 0 30px;border-bottom:1px solid #bdc8ca}.story-kicker{font-size:12px;letter-spacing:.16em;font-weight:850;color:#a56d3f}
+.story-heading h1,.story-index-hero h1{font:650 clamp(45px,6.9vw,89px)/1.01 "Newsreader",Georgia,serif;letter-spacing:-.055em;margin:13px 0 16px}
+.story-deck{font:400 clamp(19px,2.25vw,29px)/1.42 Georgia,serif;max-width:875px;color:#475d6a;margin:0 0 23px}
+.story-byline{font-size:10px;letter-spacing:.08em;color:#5e6f7a;font-weight:850}.story-byline span{padding:0 9px}
+.story-lede-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(240px,.7fr);gap:55px;margin-top:36px}.story-copy{max-width:730px}
+.story-copy p{font:400 19px/1.8 Georgia,serif;margin:0 0 23px}.story-aside{background:#e9e5db;padding:25px 26px;align-self:start;border-top:4px solid #315d79}
+.story-aside>span{display:block;font-size:10px;font-weight:800;letter-spacing:.13em;color:#526674}
+.story-aside strong{display:block;font:700 75px/1 "Newsreader",Georgia,serif;margin:12px 0 0}.story-aside p{font:550 20px Georgia,serif;margin:4px 0 18px}.story-aside small{font-size:11px;color:#587080}
+.story-data{margin:46px 0;padding:24px 0 22px;border-top:4px solid #1f3b51;border-bottom:1px solid #c0cacd}.story-data-top{display:flex;align-items:end;justify-content:space-between;gap:18px}
+.story-data-top span{font-size:10px;color:#a16c3b;font-weight:850;letter-spacing:.15em}.story-data h2,.story-sources h2,.story-index-note h2{font:700 34px "Newsreader",Georgia,serif;margin:8px 0}
+.story-data-top a{font-size:12px;font-weight:800}.story-data-stamp,.story-precision{font-size:11px;color:#687a86;line-height:1.7}.story-table-wrap{overflow:auto}
+.story-table{border-collapse:collapse;width:100%;font-size:12px;min-width:780px}.story-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#536b77;background:#e7ebec}
+.story-table td,.story-table th{padding:15px 12px;border-bottom:1px solid #d1d8d8;vertical-align:middle}.story-table tr:hover{background:#e8eef0}
+.story-table td small{display:block;font-size:10px;color:#607986}.story-table a{font-weight:800}
+.story-sources{margin-top:35px}.story-sources>div{display:flex;gap:12px 26px;flex-wrap:wrap}.story-sources a{font-size:12px;font-weight:750}
+.story-more{margin-top:40px;padding:20px 0;border-top:1px solid #c6d1d3}.story-more>strong{font:700 24px Georgia,serif}
+.story-more>div{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.story-more a{background:#fffefa;border:1px solid #d0d8d9;padding:17px;font:700 19px Georgia,serif;color:#263e52!important;text-decoration:none}
+.story-footer{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:center;border-top:1px solid #bdcacc;padding:27px 18px;background:#fffdfa;font-size:10px;font-weight:850;letter-spacing:.05em}.story-footer a{color:#385b70!important}
+.story-index-hero{border-top:4px solid #263e50;padding:47px 0 40px;max-width:1040px}.story-index-hero>span{font-size:11px;letter-spacing:.18em;font-weight:850;color:#9c673f}
+.story-index-hero p{font:400 23px/1.5 Georgia,serif;color:#526975;max-width:760px}.story-index-hero>a{display:inline-block;padding:13px 17px;background:#27465d;color:white!important;text-decoration:none;font-weight:800;font-size:12px;margin-top:8px}
+.story-index-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}.story-index-card{padding:28px;background:#fffefa;border:1px solid #c8d2d2;text-decoration:none!important;color:#253a48!important;min-height:235px;display:flex;flex-direction:column;gap:11px}
+.story-index-card:hover{border-color:#42708a;background:#edf4f6}.story-index-card span{font-size:10px;color:#9d663d;font-weight:850;letter-spacing:.13em}
+.story-index-card strong{font:700 34px/1.12 Georgia,serif}.story-index-card p{font-size:13px;color:#5b6f7c;line-height:1.6;margin:0}.story-index-card small{font-size:10px;font-weight:850;letter-spacing:.08em;margin-top:auto;padding-top:7px}
+.story-index-note{padding:23px 0;border-top:1px solid #c6d1d4;margin-top:40px}.story-index-note p{font-size:13px;line-height:1.7;max-width:900px}
+html.theme-dark .story-body,html.theme-dark body.story-body{background:#101e2b!important;color:#e2eaf0!important}
+html.theme-dark .story-masthead,html.theme-dark .story-footer,html.theme-dark .story-index-card,html.theme-dark .story-more a{background:#20364a;border-color:#3c5467;color:#dfeaf0!important}
+html.theme-dark .story-heading{border-color:#4b6572}
+html.theme-dark .story-heading h1,html.theme-dark .story-index-hero h1{color:#f1f4f6}
+html.theme-dark .story-aside{background:#264156}
+html.theme-dark .story-copy p{color:#d6e1e9}
+@media(max-width:780px){.story-masthead>span{display:none}.story-lede-grid{grid-template-columns:1fr;gap:0}.story-aside{max-width:450px}.story-more>div{grid-template-columns:1fr}.story-index-grid{grid-template-columns:1fr}.story-heading{padding-top:26px}.story-shell{padding:24px 20px 50px}.story-data-top{align-items:start;flex-direction:column}.story-copy p{font-size:17px}}
