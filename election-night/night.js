@@ -162,7 +162,7 @@ async function refreshNational(){
   const acceptedCivic=Object.values(merged.races).filter(r=>r.source?.includes('CivicAPI')).length;
   const acceptedFallback=Object.values(merged.races).filter(r=>!r.source?.includes('CivicAPI')).length;
   const count=acceptedCivic+acceptedFallback;
-  $('countedRaces').textContent=fmt(count);
+  $('countedRaces').textContent=fmt(count);if($('nbcCalledCount'))$('nbcCalledCount').textContent=fmt(window.ERVIN_NBC_CALLS?.count()||0);
   $('feedStatus').textContent=count?
     acceptedCivic+' CivicAPI races · '+acceptedFallback+' fallback races'+(sourceWarnings.length?' · '+sourceWarnings.length+' conflicts held':''):
     Date.now()<Date.parse('2026-11-03T18:00:00-05:00')?'CivicAPI primary feed ready; awaiting poll closings':'No verified 2026 vote totals in connected result feeds';
@@ -187,6 +187,8 @@ async function refreshNational(){
   drawRaces();
  }finally{refreshNationalBusy=false}
 }
+const nbcCall=id=>window.ERVIN_NBC_CALLS?.get(id)||null;
+window.addEventListener('ervin:nbc-calls-update',()=>{if($('nbcCalledCount'))$('nbcCalledCount').textContent=String(window.ERVIN_NBC_CALLS?.count()||0);if(races.length)drawRaces()});
 function lead(row){
  if(!row?.candidates?.length)return null;
  const ranked=row.candidates.slice().sort((a,b)=>b.votes-a.votes);
@@ -206,15 +208,16 @@ function liveRaceURL(x){return '?state='+encodeURIComponent(x.code)+'&race='+enc
 function renderRace(x){
  const id=x.office==='House'?x.id:x.code+'-'+x.office.toUpperCase();
  const report=live[x.office]?.races?.[id],reportText=report?lead(report):null;
+ const call=nbcCall(id),callMarkup=call?'<div class="nbc-call" style="margin:8px 0;padding:8px 10px;border:1px solid currentColor;border-radius:6px"><strong>NBC NEWS PROJECTS '+esc(call.winner)+' ('+esc(call.party)+')</strong> · <a href="'+esc(call.sourceUrl)+'" target="_blank" rel="noopener noreferrer">NBC source</a></div>':'';
  const source=report?.sourceURL?'<a href="'+esc(report.sourceURL)+'" target="_blank" rel="noopener noreferrer">Original count source</a>':'Source pending';
- return '<article class="race-row" id="race-'+esc(x.id)+'" role="listitem"><div><h3><a href="'+liveRaceURL(x)+'" aria-label="Open '+esc(x.state)+' '+esc(x.office)+' race results">'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</a></h3><small>'+esc(x.label||x.candidates||'')+'</small></div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+
+ return '<article class="race-row" id="race-'+esc(x.id)+'" role="listitem"><div><h3><a href="'+liveRaceURL(x)+'" aria-label="Open '+esc(x.state)+' '+esc(x.office)+' race results">'+esc(x.office==='House'?x.id+' · '+x.state:x.state+' · '+x.office)+'</a></h3><small>'+esc(x.label||x.candidates||'')+'</small>'+callMarkup+'</div><div><span class="model-value">'+esc(x.modelText)+'</span><small>PRE-ELECTION ESTIMATE</small></div><div>'+
  (reportText?countedBreakdown(report)+'<small>UNOFFICIAL · '+esc(report.source)+' · '+esc(date(report.asOf))+'</small>':'<span class="no-data">Awaiting verified results</span><small>County/state feed has not supplied attributable 2026 vote totals yet</small>')+
  '</div><div><div class="night-row-links"><a href="'+liveRaceURL(x)+'">Election-night race view</a><a href="'+raceURL(x)+'">State/district context</a></div><small>'+source+'</small></div></article>';
 }
 function drawRaces(){
  const q=$('raceFind').value.toLowerCase().trim(),kind=$('resultsFilter').value;
  const shown=races.filter(x=>(selectedState==='all'||x.code===selectedState)&&(filter==='All'||x.office===filter)&&(!selectedRace||x.id===selectedRace)&&(!q||[x.code,x.id,x.state,x.label,x.candidates].join(' ').toLowerCase().includes(q))&&
- (kind!=='reported'||!!(live[x.office]?.races||{})[x.office==='House'?x.id:x.code+'-'+x.office.toUpperCase()])&&
+ (kind!=='reported'||!!(live[x.office]?.races||{})[x.office==='House'?x.id:x.code+'-'+x.office.toUpperCase()])&&(kind!=='called'||!!nbcCall(x.id))&&
  (kind!=='closest'||x.margin!==null&&Math.abs(x.margin)<=5));
  const top=shown.filter(x=>x.id==='MI-SENATE');const rest=shown.filter(x=>x.id!=='MI-SENATE').sort((a,b)=>a.office.localeCompare(b.office)||a.state.localeCompare(b.state)||String(a.district||'').localeCompare(String(b.district||'')));
  $('raceList').innerHTML=[...top,...rest].map(renderRace).join('')||'<p class="source-note">No races match the current filters.</p>';
