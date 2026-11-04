@@ -346,11 +346,12 @@ def main():
  deadline=time.monotonic()+11*60
  def get_one(item):
   key,row=item
-  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=7,max_attempts=2,deadline=deadline),None
+  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=7,max_attempts=3,deadline=deadline),None
   except urllib.error.HTTPError as e:return key,None,"HTTP_"+str(e.code)
   except Exception as e:return key,None,type(e).__name__
- # One contest = one detail request, with six workers and a bounded retry budget.
- # An unstable upstream must not hang the 16-minute GitHub workflow.
+ # One contest = one detail request, with bounded 5xx/timeout retries.
+ # Upstream 502s may be transient: retry the individual contest, never drop
+ # a previously validated tally, and stop at the collection deadline.
  with futures.ThreadPoolExecutor(max_workers=detail_worker_count(len(eligible))) as pool:
   # Prioritize statewide Senate returns ahead of the larger House queue.
   # Slow or timed-out district endpoints must not starve Senate results.
