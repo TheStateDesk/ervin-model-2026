@@ -10,7 +10,7 @@
  const navigate=src=>new Promise((resolve,reject)=>{frame.onload=resolve;frame.onerror=()=>reject(Error('Unable to open '+src));frame.src=src});
  try{
   await navigate('../states/');
-  const d=frame.contentDocument,w=frame.contentWindow,$=id=>d.getElementById(id);
+  let d=frame.contentDocument,w=frame.contentWindow;const $=id=>frame.contentDocument.getElementById(id);
   await until(()=>$('postElectionDesk')&&Number(($('postReported')?.textContent||'').replaceAll(',',''))>100,'2026 sourced post-election count');
   check(d.querySelector('#postElectionDesk h1')?.textContent.includes('Congress changes hands'),'Results-first editorial headline present');
   check(d.querySelectorAll('#postAnalysis .post-article-card').length===4,'Four short election analysis articles are linked from homepage');
@@ -30,11 +30,11 @@
   theme.click();
   frame.style.width='390px';await new Promise(resolve=>w.requestAnimationFrame(resolve));
   check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'Results homepage has no phone-width horizontal overflow');
-  await navigate('../states/?view=final');
+  await navigate('../states/?view=final');d=frame.contentDocument;w=frame.contentWindow;
   await until(()=>d.querySelector('#edFinalHeadline')&&d.querySelectorAll('#edSimTabs button').length===3,'locked forecast archive');
   check(!d.querySelector('#postElectionDesk'),'Archive stays separate from election reporting');
   check(d.querySelector('#edFinalHeadline')?.textContent.includes('FINAL'),'Original final forecast remains accessible');
-  await navigate('../analysis/senate-seven-flips/');
+  await navigate('../analysis/senate-seven-flips/');d=frame.contentDocument;w=frame.contentWindow;
   await until(()=>d.querySelectorAll('#storyTable tr').length===7,'senate story dynamic data');
   check(d.querySelector('h1')?.textContent.includes('Seven states'),'Story detail page loads');
   check(d.querySelectorAll('.story-sources a').length>=2,'Article cites independent external election reporting');
