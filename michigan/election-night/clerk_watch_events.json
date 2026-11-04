@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T07:30:35.575132+00:00",
+  "updatedAt": "2026-11-04T12:46:52.832083+00:00",
   "events": [
     {
       "at": "2026-10-26T14:19:02.019910+00:00",
@@ -570,6 +570,31 @@
           "url": "https://oceana.mi.us/wp-content/uploads/2026/11/Unofficial-Statement-of-Votes-Cast-November-3-2026-11.pdf"
         }
       ],
+      "sourceUrl": "https://oceana.mi.us/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T12:46:52.832083+00:00",
+      "county": "Arenac",
+      "kind": "new_result_links",
+      "newLinks": [
+        {
+          "title": "2026 NOV ElectionSummaryReportRPT.pdf",
+          "url": "https://www.arenaccountymi.gov/Docs/Clerk/ELECTION RESULTS/2026/2026 NOV ElectionSummaryReportRPT.pdf"
+        },
+        {
+          "title": "2026 NOV StatementOfVotesCastRPT.pdf",
+          "url": "https://www.arenaccountymi.gov/Docs/Clerk/ELECTION RESULTS/2026/2026 NOV StatementOfVotesCastRPT.pdf"
+        }
+      ],
+      "sourceUrl": "https://www.arenaccountymi.gov/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-04T12:46:52.832083+00:00",
+      "county": "Oceana",
+      "kind": "page_modified",
+      "newLinks": [],
       "sourceUrl": "https://oceana.mi.us/",
       "notice": "Source change is not an election return"
     }
