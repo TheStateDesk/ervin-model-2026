@@ -1,0 +1,16 @@
+
+/* November 4, 2026: editorial state reporting and original tables */
+.state-article-aside{border-top-color:#b28a5d}
+.state-article-aside hr{border:0;border-top:1px solid #b8c5c8;margin:22px 0}
+.state-article-aside ul{padding-left:20px;margin:13px 0 17px}
+.state-article-aside li{font:600 12px/1.6 "Libre Franklin",Arial,sans-serif;margin-bottom:10px}
+.state-article-aside a{font-size:12px}
+.state-stat-pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.state-stat-pairs div{padding:11px 10px;background:#fffdf8;border:1px solid #d6ddde}
+.state-stat-pairs small{display:block;font-size:11px;letter-spacing:.03em;color:#526c7d}
+.state-stat-pairs b{display:block;font:700 23px Georgia,serif;margin-top:5px;color:#224d70}
+.state-article-next{margin:44px 0;border-top:3px double #516879;padding:20px 0}
+.state-article-next h2{font-size:27px!important;margin:0 0 12px!important}
+.state-article-next a{display:block;font:800 13px/1.5 "Libre Franklin",Arial,sans-serif;padding:12px 3px;border-bottom:1px solid #d3dada}
+.state-table-first{font-weight:800}
+@media(max-width:780px){.state-article-aside{position:static}.state-stat-pairs b{font-size:20px}}
