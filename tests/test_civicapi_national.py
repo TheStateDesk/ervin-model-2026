@@ -79,6 +79,15 @@ class ElectionReporting(unittest.TestCase):
   now=dt.datetime(2026,11,4,3,tzinfo=UTC)
   stored={"KY-SENATE":{"verified":True,"total":39201}}
   issues={"GA-SENATE":"fetch_TimeoutError"}
+  per_race=m.status_for_each_race(expected,registry,now,stored,issues)
+  self.assertEqual(len(per_race),506)
+  self.assertEqual(set(per_race),set(expected))
+  self.assertEqual(per_race["WY-SENATE"]["status"],"unmapped")
+  self.assertEqual(per_race["VT-01"]["status"],"unmapped")
+  self.assertEqual(per_race["KY-SENATE"]["status"],"reporting")
+  self.assertEqual(per_race["GA-SENATE"]["status"],"source_error")
+  self.assertEqual(per_race["CA-01"]["status"],"awaiting_poll_close")
+  self.assertEqual(per_race["IN-03"]["status"],"awaiting_valid_vote_report")
   report=m.coverage_by_office(expected,registry,now,stored,issues)
   self.assertEqual({k:r["targeted"] for k,r in report.items()},{"house":435,"senate":35,"governor":36})
   self.assertEqual(sum(r["targeted"] for r in report.values()),506)
