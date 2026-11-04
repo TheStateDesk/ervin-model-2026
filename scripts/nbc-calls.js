@@ -12,7 +12,7 @@ const configurations=[
 const tables=new Map(),calls=new Map(),normalize=s=>String(s||'').normalize('NFKC').toLowerCase().replace(/[^a-z0-9]/g,'');
 const allowedHosts={
  nbc:/^www\.nbc[a-z0-9-]+\.com$/i,
- ap:/^(?:apnews\.com|www\.apnews\.com|whyy\.org|www\.publicsource\.org|mapthegeneral\.com)$/i
+ ap:/^(?:apnews\.com|www\.apnews\.com|whyy\.org|www\.publicsource\.org|mapthegeneral\.com|www\.foxnews\.com)$/i
 };
 function validate(id,row,desk){
  if(!/^[A-Z]{2}-(?:[0-9]{2}|SENATE|GOVERNOR)$/.test(id)||!row||!['D','R','I','O'].includes(row.party))return null;
