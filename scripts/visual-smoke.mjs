@@ -75,7 +75,7 @@ try{
  const homepage=await browser.newPage({viewport:{width:1440,height:940}});
  await homepage.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const homepageErrors=[];homepage.on('pageerror',e=>homepageErrors.push(e.message));
- await homepage.goto(root+'/states/',{waitUntil:'domcontentloaded'});
+ await homepage.goto(root+'/states/?view=final',{waitUntil:'domcontentloaded'});
  await homepage.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelectorAll('#watchCards .watch-card').length>0,null,{timeout:30000});
   assert(/Every state|A Blue House|Election Night|final/i.test(await homepage.locator('h1.ed-headline').innerText()),'State Desk must keep its public heading through forecast and live phases');
   assert((await homepage.locator('#watchSection').count())===1,'Closest races carousel must appear on State Desk');
@@ -167,6 +167,18 @@ try{
  await homepage.locator('#watchSection').screenshot({path:'visual-checks/State-Desk-Races-To-Watch-Desktop.png'});
  await homepage.locator('#balanceOfPower').screenshot({path:'visual-checks/State-Desk-National-Balance-Desktop.png'});
  await homepage.close();
+ // The default public page now leads with the post-election result desk.
+ const postDesk=await browser.newPage({viewport:{width:1440,height:940}});
+ const postErrors=[];postDesk.on('pageerror',e=>postErrors.push(e.message));
+ await postDesk.goto(root+'/states/',{waitUntil:'domcontentloaded'});
+ await postDesk.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('Congress changes hands')&&Number((document.querySelector('#postReported')?.textContent||'').replaceAll(',',''))>100&&document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live',null,{timeout:65000});
+ assert((await postDesk.locator('#postCloseRaces').count())===1,'Post-election close-count desk missing');
+ assert(await postDesk.locator('#watchSection').isHidden(),'Pre-election races must be archived');
+ assert(await postDesk.locator('#balanceOfPower').isHidden(),'Forecast control bars still dominate homepage');
+ assert((await postDesk.locator('#postMilestones a').count())>=4,'Attributable race calls missing');
+ assert(postErrors.length===0,'Post-election JS errors: '+postErrors.join(', '));
+ await postDesk.locator('#postElectionDesk').screenshot({path:'visual-checks/Post-Election-Results-Desktop.png'});
+ await postDesk.close();
  // Balance links must route to the same 50-state atlas, and from there to
  // the correct section inside the consolidated state edition.
  const officeDesk=await browser.newPage({viewport:{width:1100,height:820}});
@@ -183,7 +195,7 @@ try{
  const homeMobile=await browser.newPage({viewport:{width:390,height:844}});
  await homeMobile.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const mobileErrors=[];homeMobile.on('pageerror',e=>mobileErrors.push(e.message));
- await homeMobile.goto(root+'/states/',{waitUntil:'domcontentloaded'});
+ await homeMobile.goto(root+'/states/?view=final',{waitUntil:'domcontentloaded'});
  await homeMobile.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelectorAll('#watchCards .watch-card').length>0,null,{timeout:30000});
   await homeMobile.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:65000});
   const mobileSimTop=(await homeMobile.locator('#edSimulationPanel').boundingBox()).y;
@@ -195,6 +207,12 @@ try{
  assert(mobileErrors.length===0,'Mobile State Desk browser errors: '+mobileErrors.join(', '));
  await homeMobile.locator('#watchSection').screenshot({path:'visual-checks/State-Desk-Races-To-Watch-Mobile.png'});
  await homeMobile.close();
+ const postMobile=await browser.newPage({viewport:{width:390,height:844}});
+ await postMobile.goto(root+'/states/',{waitUntil:'domcontentloaded'});
+ await postMobile.waitForSelector('#postElectionDesk h1',{timeout:25000});
+ assert(await postMobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+4),'Post-election homepage mobile overflow');
+ await postMobile.locator('#postElectionDesk').screenshot({path:'visual-checks/Post-Election-Results-Mobile.png'});
+ await postMobile.close();
  const nationalNight=await browser.newPage({viewport:{width:1440,height:940}});
  const nightErrors=[];nationalNight.on('pageerror',e=>nightErrors.push(e.message));
  await nationalNight.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
@@ -240,7 +258,7 @@ try{
  assert(mastBox.x>=brandBox.x,'Editorial center masthead must remain visible');
  assert((await nightMobile.locator('.night-head nav a').count())===4,'Mobile nav must contain four State Desk destinations');
  assert(await nightMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Editorial Election Night mobile masthead must not overflow');
- assert((await nightMobile.locator('.night-head .ed-mast a').innerText())==='Election Night','National masthead heading missing');
+ assert((await nightMobile.locator('.night-head .ed-mast a').innerText())==='Election Results','National masthead heading missing');
   await nightMobile.locator('.night-head').screenshot({path:'visual-checks/National-Election-Night-Mobile-Header.png'});
  await nightMobile.close();
  const governorPage=await browser.newPage({viewport:{width:1440,height:900}});

@@ -65,7 +65,7 @@ try{
  const frontJsErrors=[],frontRequestFailures=[];
  front.on('pageerror',e=>frontJsErrors.push(e.message));
  front.on('requestfailed',r=>{if(/\/geo\/districts\/|\/scripts\/election-day-desk/.test(r.url()))frontRequestFailures.push({url:r.url(),reason:r.failure()?.errorText});});
- await front.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
+ await front.goto(base+'states/?view=final&release='+stamp,{waitUntil:'domcontentloaded'});
  await front.waitForFunction(()=>document.querySelector('#powerCards')?.dataset.powerReady==='true'&&document.querySelector('#watchCards')?.querySelectorAll('.watch-card').length>=4&&document.querySelectorAll('#usMap path.ed-state').length>=50&&document.querySelector('#edFinalHeadline')?.textContent.includes('PREDICTION'),null,{timeout:35000});
  try{
   await front.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435,null,{timeout:85000});
@@ -178,6 +178,17 @@ try{
  await front.locator('#balanceOfPower').screenshot({path:'postdeploy-checks/State-Desk-Office-Balance-Mobile.png'});
  console.log('LIVE STATE DESK HOMEPAGE ACCEPTANCE PASS '+JSON.stringify(frontModel));
  await front.close();
+ // Independently check the published results-first front page.
+ const aftermath=await browser.newPage({viewport:{width:390,height:844}});
+ const aftermathErrors=[];aftermath.on('pageerror',e=>aftermathErrors.push(e.message));
+ await aftermath.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
+ await aftermath.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('Congress changes hands')&&Number((document.querySelector('#postReported')?.textContent||'').replaceAll(',',''))>100,null,{timeout:45000});
+ if(!await aftermath.locator('#watchSection').isHidden())throw Error('PUBLIC FRONT PAGE STILL FORECAST-FIRST');
+ if((await aftermath.locator('#postMilestones a').count())<4)throw Error('PUBLIC POST-ELECTION CALLS MISSING');
+ if(await aftermath.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+4))throw Error('PUBLIC POST-ELECTION MOBILE OVERFLOW');
+ if(aftermathErrors.length)throw Error('PUBLIC POST-ELECTION JS ERRORS '+aftermathErrors.join(', '));
+ await aftermath.locator('#postElectionDesk').screenshot({path:'postdeploy-checks/Post-Election-Results-Mobile.png'});
+ await aftermath.close();
 
  // Independently verify the real deployed live feature with a controlled
  // pre-poll-close clock, ensuring no votes can appear by accident.
