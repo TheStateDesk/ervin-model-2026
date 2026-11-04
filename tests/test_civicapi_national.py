@@ -66,6 +66,11 @@ class ElectionReporting(unittest.TestCase):
    rows=m.discover("VT","house")
   self.assertEqual(len(rows),1)
   self.assertEqual(queries,["US House","House"])
+ def test_worker_capacity_scales_with_national_poll_closings(self):
+  self.assertEqual(m.detail_worker_count(0),6)
+  self.assertEqual(m.detail_worker_count(82),6)
+  self.assertEqual(m.detail_worker_count(300),11)
+  self.assertEqual(m.detail_worker_count(506),18)
  def test_registry_506(self):
   x=m.targets();self.assertEqual(len(x),506)
   self.assertEqual(sum(v["office"]=="house" for v in x.values()),435)
