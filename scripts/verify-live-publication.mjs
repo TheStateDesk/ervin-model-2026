@@ -222,7 +222,7 @@ try{
    const results=window.ERVIN_HOME_RESULTS?.races||{};
    const paths=[...document.querySelectorAll('#edSimMap a[data-sim-district]')];
    return expected.every(id=>results[id]&&paths.some(a=>a.dataset.simDistrict===id&&
-    a.querySelector('path')?.classList.contains('ed-live-lead-'+(results[id].candidates.slice().sort((a,b)=>b.votes-a.votes)[0].party))));
+    a.querySelector('path')?.classList.contains('ed-live-lead-'+(()=>{const leaders=results[id].candidates.slice().sort((a,b)=>b.votes-a.votes);return leaders[0].votes===leaders[1].votes?'T':leaders[0].party==='O'?'I':leaders[0].party})())));
   },publishedHouse,{timeout:40000});
   const actual=await actualVotes.evaluate(()=>({
    visibleLeaders:document.querySelectorAll('#edSimMap path.ed-live-lead-D,#edSimMap path.ed-live-lead-R,#edSimMap path.ed-live-lead-I').length,
@@ -241,9 +241,9 @@ try{
    if(document.querySelector('#edSimMap')?.dataset.simOffice!=='senateD')return false;
    const results=window.ERVIN_HOME_RESULTS?.races||{};
    return expected.every(id=>{
-    const row=results[id],leader=row?.candidates?.slice().sort((a,b)=>b.votes-a.votes)[0];
+    const row=results[id],order=row?.candidates?.slice().sort((a,b)=>b.votes-a.votes),leader=order?.[0],kind=leader&&(order[0].votes===order[1]?.votes?'T':leader.party==='O'?'I':leader.party);
     const anchor=[...document.querySelectorAll('#edSimMap a[data-sim-state]')].find(a=>a.dataset.simState===id.slice(0,2));
-    return !!row&&!!leader&&anchor?.querySelector('path')?.classList.contains('ed-live-lead-'+leader.party);
+    return !!row&&!!kind&&anchor?.querySelector('path')?.classList.contains('ed-live-lead-'+kind);
    });
   },publishedSenate,{timeout:40000});
   await actualVotes.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Actual-Reported-Senate-Votes.png'});
@@ -255,9 +255,9 @@ try{
    if(document.querySelector('#edSimMap')?.dataset.simOffice!=='governorsD')return false;
    const results=window.ERVIN_HOME_RESULTS?.races||{};
    return expected.every(id=>{
-    const row=results[id],leader=row?.candidates?.slice().sort((a,b)=>b.votes-a.votes)[0];
+    const row=results[id],order=row?.candidates?.slice().sort((a,b)=>b.votes-a.votes),leader=order?.[0],kind=leader&&(order[0].votes===order[1]?.votes?'T':leader.party==='O'?'I':leader.party);
     const anchor=[...document.querySelectorAll('#edSimMap a[data-sim-state]')].find(a=>a.dataset.simState===id.slice(0,2));
-    return !!row&&!!leader&&anchor?.querySelector('path')?.classList.contains('ed-live-lead-'+leader.party);
+    return !!row&&!!kind&&anchor?.querySelector('path')?.classList.contains('ed-live-lead-'+kind);
    });
   },publishedGovernors,{timeout:40000});
   await actualVotes.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Actual-Reported-Governor-Votes.png'});
