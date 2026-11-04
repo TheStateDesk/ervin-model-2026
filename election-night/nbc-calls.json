@@ -4,35 +4,80 @@
   "publisher": "NBC News Decision Desk",
   "method": "Only explicit NBC News general-election race projections with an attributable NBC News or NBC-owned station story; not inferred from vote leads. Unlisted races are uncalled in this dataset, not necessarily uncalled by NBC.",
   "calls": {
-    "GA-SENATE": {
-      "winner": "Jon Ossoff",
+    "CT-GOVERNOR": {
+      "winner": "Ned Lamont",
       "party": "D",
-      "sourceUrl": "https://www.nbcnewyork.com/elections/georgia-senate-race-2026/6567183/"
+      "sourceUrl": "https://www.nbcconnecticut.com/elections/connecticut-governor-election-results-lamont-fazio-midterms/3787870/"
     },
-    "NC-SENATE": {
-      "winner": "Roy Cooper",
-      "party": "D",
-      "sourceUrl": "https://www.nbcsandiego.com/elections/roy-cooper-michael-whatley-north-carolina-senate-results/4094160/"
+    "FL-GOVERNOR": {
+      "winner": "Byron Donalds",
+      "party": "R",
+      "sourceUrl": "https://www.nbcconnecticut.com/elections/election-day-2026-midterms-congress-results-live-updates/3791346/"
     },
     "FL-SENATE": {
       "winner": "Ashley Moody",
       "party": "R",
       "sourceUrl": "https://www.nbcnewyork.com/elections/florida-senate-2026-results/6567229/"
     },
-    "NJ-SENATE": {
-      "winner": "Cory Booker",
+    "GA-GOVERNOR": {
+      "winner": "Keisha Lance Bottoms",
       "party": "D",
-      "sourceUrl": "https://www.nbcphiladelphia.com/elections/cory-booker-wins-reelection-to-u-s-senate-in-new-jersey/4486539/"
+      "sourceUrl": "https://www.nbcconnecticut.com/elections/election-day-2026-midterms-congress-results-live-updates/3791346/"
+    },
+    "GA-SENATE": {
+      "winner": "Jon Ossoff",
+      "party": "D",
+      "sourceUrl": "https://www.nbcnewyork.com/elections/georgia-senate-race-2026/6567183/"
+    },
+    "IL-GOVERNOR": {
+      "winner": "JB Pritzker",
+      "party": "D",
+      "sourceUrl": "https://www.nbcchicago.com/news/local/chicago-politics/illinois-governors-race-jb-pritzker-defeats-darren-bailey-nbc-news-projects/4011543/"
     },
     "IL-SENATE": {
       "winner": "Juliana Stratton",
       "party": "D",
       "sourceUrl": "https://www.nbcchicago.com/news/local/chicago-politics/illinois-senate-election-juliana-stratton-defeats-don-tracy-nbc-news-projects/4011549/"
     },
-    "IL-GOVERNOR": {
-      "winner": "JB Pritzker",
+    "MD-GOVERNOR": {
+      "winner": "Wes Moore",
       "party": "D",
-      "sourceUrl": "https://www.nbcchicago.com/news/local/chicago-politics/illinois-governors-race-jb-pritzker-defeats-darren-bailey-nbc-news-projects/4011543/"
+      "sourceUrl": "https://www.nbcsandiego.com/elections/election-day-2026-midterms-congress-results-live-updates/4095466/"
+    },
+    "NC-SENATE": {
+      "winner": "Roy Cooper",
+      "party": "D",
+      "sourceUrl": "https://www.nbcsandiego.com/elections/roy-cooper-michael-whatley-north-carolina-senate-results/4094160/"
+    },
+    "NH-SENATE": {
+      "winner": "Chris Pappas",
+      "party": "D",
+      "sourceUrl": "https://www.nbcconnecticut.com/elections/election-day-2026-midterms-congress-results-live-updates/3791346/"
+    },
+    "NJ-SENATE": {
+      "winner": "Cory Booker",
+      "party": "D",
+      "sourceUrl": "https://www.nbcphiladelphia.com/elections/cory-booker-wins-reelection-to-u-s-senate-in-new-jersey/4486539/"
+    },
+    "OH-GOVERNOR": {
+      "winner": "Amy Acton",
+      "party": "D",
+      "sourceUrl": "https://www.nbcconnecticut.com/elections/election-day-2026-midterms-congress-results-live-updates/3791346/"
+    },
+    "PA-GOVERNOR": {
+      "winner": "Josh Shapiro",
+      "party": "D",
+      "sourceUrl": "https://www.nbcsandiego.com/elections/election-day-2026-midterms-congress-results-live-updates/4095466/"
+    },
+    "SC-SENATE": {
+      "winner": "Annie Andrews",
+      "party": "D",
+      "sourceUrl": "https://www.nbcconnecticut.com/elections/election-day-2026-midterms-congress-results-live-updates/3791346/"
+    },
+    "TX-SENATE": {
+      "winner": "James Talarico",
+      "party": "D",
+      "sourceUrl": "https://www.nbcconnecticut.com/elections/election-day-2026-midterms-congress-results-live-updates/3791346/"
     }
   }
 }
