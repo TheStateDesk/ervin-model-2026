@@ -49,11 +49,12 @@ function leaders(row){
 }
 function detailedStatus(id,label,expectedOffice){
  const row=accepted(id,expectedOffice),top=leaders(row);
- if(!row)return label+': awaiting an attributed unofficial vote report.';
+ const call=window.ERVIN_NBC_CALLS?.get(id);
+ if(!row)return call?label+': NBC News projects '+call.winner+' ('+call.party+'); awaiting independently validated vote totals.':label+': awaiting an attributed unofficial vote report.';
  const lead=top.kind==='T'?top.first.name+' and '+top.second.name+' are tied':top.first.name+' leads '+top.second.name;
  const pct=top.kind==='T'?'':', '+top.firstPct+'% to '+top.secondPct+'%';
  const progress=Number.isFinite(row.precincts)?' · '+row.precincts.toFixed(1)+'% of reporting units according to the source':' · Reporting-unit completion not supplied';
- return label+': '+lead+pct+' · '+fmt(row.total)+' unofficial votes'+progress+'. This is not an official race call.';
+ return label+': '+(call?'NBC News projects '+call.winner+' ('+call.party+'). ':'')+lead+pct+' · '+fmt(row.total)+' unofficial votes'+progress+'. '+(call?'NBC projection is separate from the vote count.':'No independently verified winner call.');
 }
 function mapOffice(){
  const aria=[...document.querySelectorAll('#edSimTabs button')].find(x=>x.getAttribute('aria-pressed')==='true');
@@ -64,7 +65,7 @@ function knownStateRace(code,k){
  if(k==='senateD')return SENATE_STATES_2026.has(code);
  return !!window.ERVIN_HOME_FORECAST?.governor?.some(r=>r.code===code)||!!accepted(idFor(code,k),officeFor(k));
 }
-function summary(k,results){
+function summary(k,results,called=[]){
  const holder=$('edFinalCallSummary');if(!holder)return;
  const d=results.filter(x=>x.kind==='D').length,r=results.filter(x=>x.kind==='R').length;
  const other=results.filter(x=>x.kind==='I').length,ties=results.filter(x=>x.kind==='T').length;
@@ -78,8 +79,9 @@ function summary(k,results){
  const minor=document.createElement('small');
  minor.textContent=n?fmt(n)+' races with accepted unofficial totals'+(other?' · '+other+' independent/other leader'+(other===1?'':'s'):'')+(ties?' · '+ties+' tie'+(ties===1?'':'s'):'')+' · no race call inferred':
   (k==='senateD'?senateWaitingMessage():'Awaiting source-validated unofficial returns · unreported contests remain gray');
+ minor.textContent+=' · '+called.length+' NBC News projected winners ('+called.filter(c=>c.party==='D').length+' D / '+called.filter(c=>c.party==='R').length+' R)';
  minor.textContent+=(k==='house'?' · 435 House districts':k==='senateD'?' · 35 Senate elections':' · 36 governor elections');
- holder.append(meta,stats,minor);holder.dataset.liveReports=String(n);
+ holder.append(meta,stats,minor);holder.dataset.liveReports=String(n);holder.dataset.nbcCalled=String(called.length);
  const status=$('edCommentaryStatus');
  if(status)status.textContent=n?fmt(n)+' reporting race'+(n===1?'':'s')+' · checking every 60 seconds':(k==='senateD'?senateWaitingMessage():'Waiting for the first accepted reports')+' · checks every 60 seconds';
 }
@@ -94,7 +96,7 @@ function paint(){
  const anchors=[...map.querySelectorAll(isHouse?'a[data-sim-district]':'a[data-sim-state]')];
  if(anchors.length!==(isHouse?435:50))return;
  office=k;
- const reported=[];
+ const reported=[],called=[];
  for(const anchor of anchors){
   const code=anchor.dataset.simState,id=isHouse?anchor.dataset.simDistrict:idFor(code,k);
   const indexed=isHouse||knownStateRace(code,k);
@@ -102,12 +104,14 @@ function paint(){
   if(href)anchor.setAttribute('href',href);
   anchor.dataset.liveRace=indexed?id:'';
   const row=indexed?accepted(id,expectedOffice):null;
-  const info=leaders(row),kind=info?.kind||'N',shape=anchor.querySelector('path');
+  const info=leaders(row),call=indexed?window.ERVIN_NBC_CALLS?.get(id):null,kind=call?.party||info?.kind||'N',shape=anchor.querySelector('path');
   if(!shape)continue;
   shape.classList.remove('ed-sim-proj-D','ed-sim-proj-R','ed-sim-proj-T','ed-sim-proj-N',
    'ed-live-lead-D','ed-live-lead-R','ed-live-lead-T','ed-live-lead-I','ed-live-lead-N');
   shape.classList.add('ed-live-lead-'+kind);
-  shape.dataset.liveStatus=row?'reported':'pending';
+ shape.classList.toggle('ed-live-nbc-called',!!call);
+ anchor.dataset.nbcCalled=call?'true':'false';
+  shape.dataset.liveStatus=row?'reported':call?'nbc-called':'pending';
   shape.dataset.simKind=kind;
   const label=isHouse?(stateNames[code]||code)+' '+id:stateNames[code]||code;
   const description=indexed?detailedStatus(id,label,expectedOffice):
@@ -124,14 +128,15 @@ function paint(){
    anchor.dataset.liveHoverBound='1';
   }
   if(row)reported.push(info);
+ if(call)called.push(call);
  }
  const title=$('edSimMapTitle');if(title)title.textContent=isHouse?'House · live votes by congressional district':k==='senateD'?'Senate · live votes by state':'Governors · live votes by state';
  const headingFlag=root.querySelector('.ed-sim-preview-flag');if(headingFlag)headingFlag.textContent='SOURCE-VALIDATED UNOFFICIAL RETURNS';
  const note=$('edSimMapNote');
- if(note)note.textContent='Colors identify current vote leaders from accepted unofficial reports, not projected or certified winners. Each district or state links to the corresponding race; gray means no validated count.';
+ if(note)note.textContent='Outlined races are sourced NBC News projected winners; other colors show current unofficial vote leaders, not race calls. Each race links to live results.';
  if(readout&&!readout.matches(':focus'))readout.textContent='Select a race to see verified vote leaders, totals, reporting status and source details.';
  map.setAttribute('aria-label',isHouse?'Live unofficial House results: 435 clickable congressional districts':k==='senateD'?'Live unofficial Senate results by state':'Live unofficial governor results by state');
- summary(k,reported);root.dataset.liveReady='true';
+ summary(k,reported,called);root.dataset.liveReady='true';
 }
 function schedulePaint(){
  if(paintQueued||!active)return;
@@ -267,6 +272,7 @@ function activate(){
 }
 function init(){
  on('ervin:home-results-update',sync);
+ on('ervin:nbc-calls-update',()=>{if(active){schedulePaint();sync()}});
  on('ervin:forecast-ready',schedulePaint);
  on('ervin:election-night-open',activate);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(Date.now()>=SWITCH_AT)activate();sync();}});
