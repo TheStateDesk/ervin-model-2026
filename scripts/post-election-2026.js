@@ -88,7 +88,7 @@ function draw(){
  const state=names[id.slice(0,2)]||id.slice(0,2),office=type(id),label=office==='house'?'DISTRICT '+id.slice(3):office.toUpperCase();
  return '<a class="post-close-item" href="'+href(id)+'"><div class="post-close-ident"><b>'+esc(state)+'</b><small>'+label+'</small></div><div class="post-close-names"><strong>'+esc(c.winner)+'</strong><span>Projected winner · Original call documented</span></div><div class="post-close-margin"><strong>'+esc(c.party)+'</strong><small>Source-linked</small></div><span class="post-close-arrow" aria-hidden="true">›</span></a>';
  }).join(''):'<p class="post-empty">No AP-attributed calls match this office in our local ledger. <a href="https://apnews.com/projects/elections-2026/">Browse AP directly.</a></p>';
- $('postCloseSource').innerHTML='Method: the site's archived winner-call ledger draws on AP reporting and AP-syndicated publications; the original call source is linked for each race. It is not a direct live API. The ledger updates when the repository is refreshed. <a href="'+ap+'" target="_blank" rel="noopener noreferrer">Check the underlying results publisher</a>.';
+ $('postCloseSource').innerHTML='Method: the site\'s archived winner-call ledger draws on AP reporting and AP-syndicated publications; the original call source is linked for each race. It is not a direct live API. The ledger updates when the repository is refreshed. <a href="'+ap+'" target="_blank" rel="noopener noreferrer">Check the underlying results publisher</a>.';
  $('postReported').textContent=fmt(ledger.filter(([id])=>type(id)==='house').length);
  $('postCalled').textContent=fmt(ledger.length);
  $('postMilestones').innerHTML=picks.filter(id=>calls[id]&&safe(calls[id])).slice(0,6).map(id=>{
