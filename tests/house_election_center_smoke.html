@@ -32,8 +32,9 @@
   const search=d.getElementById('houseSearch');search.value='MI-04';search.dispatchEvent(new frame.contentWindow.Event('input',{bubbles:true}));
   ok(d.querySelectorAll('#houseCards .gov-card').length===1&&d.getElementById('houseCards').textContent.includes('Tossup'),'House search and Cook rating work');
   stage='house-MI';d=await load('../house/?state=MI');
-  await until(()=>d.getElementById('houseCount').textContent.includes('districts'));
-  ok(d.querySelectorAll('#houseCards .gov-card').length===13,'State links filter Michigan 13 House districts');
+  // Check the completed district-card paint, not an earlier counter update.
+  stage='house-MI-rendered';await until(()=>d.querySelectorAll('#houseCards .gov-card').length===13);
+  ok(d.getElementById('houseState').value==='MI'&&d.querySelectorAll('#houseCards .gov-card').length===13,'State links filter Michigan 13 House districts');
   stage='district-MI-04';d=await load('../elections/?office=house&state=MI&district=04');
   await until(()=>d.getElementById('raceTitle').textContent.includes('District 4'));
   ok(d.getElementById('raceTitle').textContent.includes('District 4'),'House race dossier resolves district query');

@@ -20,7 +20,6 @@ function draw(){
   return inState&&match&&type;
  });
  if($('houseSort').value==='competitive')arr.sort((a,b)=>rank(a)-rank(b)||a.id.localeCompare(b.id));else arr.sort((a,b)=>a.id.localeCompare(b.id));
- $('houseCount').textContent=arr.length+' districts';
  $('houseCards').innerHTML=arr.map(r=>{
   const x=pick(r),live=liveRows[r.id];
   const url=live?'../election-night/?state='+encodeURIComponent(r.code)+'&race='+encodeURIComponent(r.id)+'#nationalBoard':href(r);
@@ -31,6 +30,7 @@ function draw(){
   '<div class="gov-lead">'+esc(x?.modelRating||r.rating||'No model loaded')+(x&&Number.isFinite(x.marginD)?' · '+esc(margin(x.marginD)):'')+' ↗</div>'+
   reported+'<small>'+(x?(x.changed2026Map?'2026 Census map · reconstructed presidential vote allocation':'Ervin House model')+' · '+esc(x.confidence)+' · '+esc(x.publishedSurveyCount)+' indexed public polls':'Model not available')+(r.rating?' · Cook: '+esc(r.rating):'')+'</small></a>';
  }).join('')||'<p class="race-muted">No districts match your filters.</p>';
+ $('houseCount').textContent=arr.length+' districts';
 }
 function outlook(){
  if(!$('houseModelSummary'))return;
