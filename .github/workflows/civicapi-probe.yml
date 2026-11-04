@@ -8,6 +8,7 @@ on:
       - 'scripts/nbc-calls.js'
       - 'scripts/validate_nbc_calls.py'
       - 'tests/test_civicapi_national.py'
+      - 'scripts/test-live-results-stress.mjs'
       - '.github/workflows/civicapi-probe.yml'
   schedule:
     # Retain the original low-frequency maintenance collection.
