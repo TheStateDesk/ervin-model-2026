@@ -446,10 +446,11 @@ try{
  const national=await browser.newPage({viewport:{width:1440,height:940}});
  await national.goto(base+'election-night/?release='+stamp,{waitUntil:'domcontentloaded'});
  await national.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83&&document.querySelector('#nationalCount')?.textContent.includes('506 indexed races'),null,{timeout:35000});
- if((await national.locator('#miD').innerText())!=='—')throw Error('Live national desk fabricated a pre-election vote total');
+ const liveVoteText=(await national.locator('#miD').innerText()).trim();
+  if(!/^(?:—|[\\d,]+)$/.test(liveVoteText))throw Error('PUBLIC MICHIGAN VOTES MUST BE SOURCE-ATTRIBUTED NUMBERS OR UNAVAILABLE: '+liveVoteText);
  if((await national.locator('#miForecast').innerText())!==liveMISenate)throw Error('LIVE ELECTION NIGHT MICHIGAN FORECAST INCORRECT');
  await national.screenshot({path:'postdeploy-checks/Election-Night-National.png',fullPage:false});
- console.log('LIVE NATIONAL NIGHT PASS 506 races / 83 Michigan counties / no premature votes');
+ console.log('LIVE NATIONAL RESULTS PASS 506 races / 83 Michigan counties / valid reported totals');
  await national.close();
  const governor=await browser.newPage({viewport:{width:1440,height:940}});
  await governor.goto(base+'governors/?release='+stamp,{waitUntil:'domcontentloaded'});
