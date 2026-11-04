@@ -52,6 +52,14 @@ def result_priority(item, stored):
  return (0 if key.endswith("-SENATE") else 1 if key.endswith("-GOVERNOR") else 2,
          0 if key not in stored else 1,key)
 
+def detail_attempts(key, stored, upstream_down):
+ # A missing statewide result is critical on election night. Give such
+ # contests one extra bounded recovery attempt when the provider is failing,
+ # without multiplying requests for the much larger House queue.
+ if not upstream_down:return 3
+ if key not in stored and (key.endswith("-SENATE") or key.endswith("-GOVERNOR")):return 3
+ return 2
+
 def detail_worker_count(n):
  # Grow concurrency as hundreds of races become eligible; limit pressure
  # on CivicAPI during the small early-evening election window.
@@ -353,7 +361,7 @@ def main():
  deadline=time.monotonic()+11*60
  def get_one(item):
   key,row=item
-  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=7,max_attempts=2 if upstream_down else 3,deadline=deadline),None
+  try:return key,request_with_retry(BASE+"/race/"+str(row["raceId"]),timeout=7,max_attempts=detail_attempts(key,stored,upstream_down),deadline=deadline),None
   except urllib.error.HTTPError as e:return key,None,"HTTP_"+str(e.code)
   except Exception as e:return key,None,type(e).__name__
  # One contest = one detail request, with bounded 5xx/timeout retries.

@@ -66,6 +66,13 @@ class ElectionReporting(unittest.TestCase):
    rows=m.discover("VT","house")
   self.assertEqual(len(rows),1)
   self.assertEqual(queries,["US House","House"])
+ def test_statewide_missing_results_receive_bounded_gateway_retry(self):
+  prior={"GA-SENATE":{"total":2000},"TX-05":{"total":1000}}
+  self.assertEqual(m.detail_attempts("MI-SENATE",prior,True),3)
+  self.assertEqual(m.detail_attempts("AZ-GOVERNOR",prior,True),3)
+  self.assertEqual(m.detail_attempts("GA-SENATE",prior,True),2)
+  self.assertEqual(m.detail_attempts("TX-01",prior,True),2)
+  self.assertEqual(m.detail_attempts("MI-SENATE",prior,False),3)
  def test_worker_capacity_scales_with_national_poll_closings(self):
   self.assertEqual(m.detail_worker_count(0),6)
   self.assertEqual(m.detail_worker_count(82),6)
