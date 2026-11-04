@@ -215,6 +215,8 @@ try{
  });
  const publishedHouse=publishedCivic.accepted.filter(id=>/^([A-Z]{2})-[0-9]{2}$/.test(id));
  const publishedSenate=publishedCivic.accepted.filter(id=>id.endsWith('-SENATE'));
+ const publishedGovernors=publishedCivic.accepted.filter(id=>id.endsWith('-GOVERNOR'));
+ if(publishedHouse.length+publishedSenate.length+publishedGovernors.length!==publishedCivic.accepted.length)throw Error('PUBLIC REAL VOTE REPORT HAS UNCLASSIFIED CONTESTS');
  if(publishedHouse.length){
   await actualVotes.waitForFunction(expected=>{
    const results=window.ERVIN_HOME_RESULTS?.races||{};
@@ -246,6 +248,20 @@ try{
   },publishedSenate,{timeout:40000});
   await actualVotes.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Actual-Reported-Senate-Votes.png'});
   console.log('PUBLIC REAL SENATE CIVICAPI VOTE DELIVERY PASS '+JSON.stringify({reportedSenate:publishedSenate}));
+ }
+ if(publishedGovernors.length){
+  await actualVotes.locator('#edSimTabs button').filter({hasText:'Governors'}).click();
+  await actualVotes.waitForFunction(expected=>{
+   if(document.querySelector('#edSimMap')?.dataset.simOffice!=='governorsD')return false;
+   const results=window.ERVIN_HOME_RESULTS?.races||{};
+   return expected.every(id=>{
+    const row=results[id],leader=row?.candidates?.slice().sort((a,b)=>b.votes-a.votes)[0];
+    const anchor=[...document.querySelectorAll('#edSimMap a[data-sim-state]')].find(a=>a.dataset.simState===id.slice(0,2));
+    return !!row&&!!leader&&anchor?.querySelector('path')?.classList.contains('ed-live-lead-'+leader.party);
+   });
+  },publishedGovernors,{timeout:40000});
+  await actualVotes.locator('#edSimulationPanel').screenshot({path:'postdeploy-checks/Actual-Reported-Governor-Votes.png'});
+  console.log('PUBLIC REAL GOVERNOR CIVICAPI VOTE DELIVERY PASS '+JSON.stringify({reportedGovernors:publishedGovernors}));
  }
  if(!publishedCivic.accepted.length)console.log('PUBLIC REAL CIVICAPI VOTE DELIVERY: no accepted post-close vote records in public snapshot; no unverified votes displayed');
  if(voteErrors.length)throw Error('PUBLIC LIVE ACTUAL RESULTS PAGE JS ERRORS '+voteErrors.join(' | '));
