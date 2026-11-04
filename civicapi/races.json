@@ -912,28 +912,28 @@
       "verified": true
     },
     "CA-02": {
-      "asOf": "2026-11-04T15:54:27.477000Z",
+      "asOf": "2026-11-04T16:16:50.755000Z",
       "candidates": [
         {
           "name": "Jared Huffman",
           "party": "D",
-          "votes": 106520
+          "votes": 106795
         },
         {
           "name": "Robin Littau",
           "party": "R",
-          "votes": 52627
+          "votes": 53693
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 61.0,
+      "precinctsReporting": 100.0,
       "raceId": "86979",
-      "retrievedAt": "2026-11-04T15:56:04.997819Z",
+      "retrievedAt": "2026-11-04T16:18:36.175836Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/86979",
       "timestampBasis": "provider_last_updated",
-      "total": 159147,
+      "total": 160488,
       "verified": true
     },
     "CA-03": {
@@ -2187,28 +2187,28 @@
       "verified": true
     },
     "CA-GOVERNOR": {
-      "asOf": "2026-11-04T15:54:19.019000Z",
+      "asOf": "2026-11-04T16:16:40.522000Z",
       "candidates": [
         {
           "name": "Xavier Becerra",
           "party": "D",
-          "votes": 4991891
+          "votes": 4992161
         },
         {
           "name": "Steve Hilton",
           "party": "R",
-          "votes": 2814373
+          "votes": 2815459
         }
       ],
       "election": "2026-11-03",
       "office": "governor",
-      "precinctsReporting": 57.8,
+      "precinctsReporting": 100.0,
       "raceId": "86952",
-      "retrievedAt": "2026-11-04T15:56:04.997819Z",
+      "retrievedAt": "2026-11-04T16:18:36.175836Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/86952",
       "timestampBasis": "provider_last_updated",
-      "total": 7806264,
+      "total": 7807620,
       "verified": true
     },
     "CO-01": {
