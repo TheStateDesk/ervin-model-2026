@@ -8499,6 +8499,22 @@
         "province": "WY",
         "type": "Governor"
       }
+    },
+    "WY-SENATE": {
+      "election": "2026-11-03",
+      "identifiedAt": "2026-11-04T07:57:47.169542Z",
+      "name": "Wyoming US Senate",
+      "office": "senate",
+      "raceId": "87496",
+      "search": {
+        "country": "US",
+        "election_date": "2026-11-03T05:00:00.000Z",
+        "election_name": "Wyoming US Senate",
+        "election_type": "General",
+        "id": 87496,
+        "province": "WY",
+        "type": "US Senate"
+      }
     }
   },
   "version": 1
