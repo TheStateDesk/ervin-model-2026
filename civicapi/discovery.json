@@ -1,11 +1,12 @@
 {
-  "checkedAt": "2026-11-04T01:46:35.926932Z",
+  "attemptedRaces": 309,
+  "checkedAt": "2026-11-04T01:57:36.711616Z",
   "discovery": {
     "found": 504,
     "lookups": 2,
     "statusSample": {
       "VT-01": "source_HTTPError",
-      "WY-SENATE": "source_TimeoutError"
+      "WY-SENATE": "source_HTTPError"
     },
     "unmapped": 2
   },
@@ -16,26 +17,26 @@
     "AL-02": "fetch_HTTP_502",
     "AL-03": "fetch_HTTP_502",
     "AL-04": "fetch_HTTP_502",
-    "AL-05": "fetch_HTTP_502",
-    "AL-06": "fetch_HTTP_502",
-    "AL-07": "fetch_HTTP_502",
+    "AL-05": "fetch_TimeoutError",
+    "AL-06": "fetch_HTTP_500",
+    "AL-07": "fetch_TimeoutError",
     "AL-GOVERNOR": "fetch_HTTP_502",
-    "AL-SENATE": "fetch_HTTP_500",
+    "AL-SENATE": "fetch_HTTP_502",
     "AR-01": "fetch_HTTP_502",
-    "AR-02": "fetch_HTTP_502",
-    "AR-03": "fetch_HTTP_502",
+    "AR-02": "fetch_TimeoutError",
+    "AR-03": "fetch_HTTP_500",
     "AR-04": "fetch_HTTP_502",
     "AR-GOVERNOR": "fetch_HTTP_502",
-    "AR-SENATE": "fetch_TimeoutError",
+    "AR-SENATE": "fetch_HTTP_502",
     "CT-01": "fetch_HTTP_502",
     "CT-02": "fetch_HTTP_502",
     "CT-03": "fetch_HTTP_502",
-    "CT-04": "fetch_HTTP_502",
-    "CT-05": "fetch_HTTP_502",
+    "CT-04": "fetch_TimeoutError",
+    "CT-05": "fetch_TimeoutError",
     "CT-GOVERNOR": "fetch_HTTP_502",
     "DE-01": "fetch_HTTP_502",
-    "DE-SENATE": "fetch_TimeoutError",
-    "FL-01": "fetch_HTTP_502",
+    "DE-SENATE": "fetch_HTTP_502",
+    "FL-01": "fetch_TimeoutError",
     "FL-02": "fetch_HTTP_502",
     "FL-03": "fetch_HTTP_502",
     "FL-04": "fetch_HTTP_502",
@@ -63,71 +64,70 @@
     "FL-26": "fetch_HTTP_502",
     "FL-27": "fetch_HTTP_502",
     "FL-28": "fetch_HTTP_502",
-    "FL-GOVERNOR": "fetch_HTTP_502",
-    "FL-SENATE": "fetch_HTTP_500",
-    "GA-01": "fetch_TimeoutError",
-    "GA-02": "fetch_TimeoutError",
+    "FL-GOVERNOR": "fetch_TimeoutError",
+    "FL-SENATE": "fetch_HTTP_502",
+    "GA-01": "fetch_HTTP_502",
+    "GA-02": "fetch_HTTP_502",
     "GA-03": "fetch_HTTP_502",
     "GA-04": "fetch_HTTP_502",
     "GA-05": "fetch_HTTP_502",
-    "GA-06": "fetch_TimeoutError",
-    "GA-07": "fetch_TimeoutError",
+    "GA-06": "fetch_HTTP_502",
+    "GA-07": "fetch_HTTP_502",
     "GA-08": "fetch_HTTP_502",
     "GA-09": "fetch_HTTP_502",
     "GA-10": "fetch_HTTP_502",
     "GA-11": "fetch_HTTP_502",
     "GA-12": "fetch_HTTP_502",
     "GA-13": "fetch_HTTP_502",
-    "GA-14": "fetch_TimeoutError",
+    "GA-14": "fetch_HTTP_502",
     "GA-GOVERNOR": "fetch_HTTP_502",
     "GA-SENATE": "fetch_HTTP_502",
     "IL-01": "fetch_HTTP_502",
-    "IL-02": "fetch_TimeoutError",
+    "IL-02": "fetch_HTTP_502",
     "IL-03": "fetch_HTTP_502",
     "IL-04": "fetch_HTTP_502",
-    "IL-05": "fetch_HTTP_500",
-    "IL-06": "fetch_HTTP_500",
+    "IL-05": "fetch_HTTP_502",
+    "IL-06": "fetch_HTTP_502",
     "IL-07": "fetch_HTTP_502",
     "IL-08": "fetch_HTTP_502",
-    "IL-09": "fetch_HTTP_500",
+    "IL-09": "fetch_HTTP_502",
     "IL-10": "fetch_HTTP_502",
-    "IL-11": "fetch_HTTP_500",
-    "IL-12": "fetch_HTTP_502",
-    "IL-13": "fetch_HTTP_502",
-    "IL-14": "fetch_HTTP_502",
-    "IL-15": "fetch_HTTP_502",
-    "IL-16": "fetch_HTTP_500",
-    "IL-17": "fetch_HTTP_502",
-    "IL-GOVERNOR": "fetch_HTTP_502",
-    "IL-SENATE": "fetch_HTTP_500",
-    "IN-01": "fetch_HTTP_502",
+    "IL-11": "fetch_HTTP_502",
+    "IL-12": "fetch_TimeoutError",
+    "IL-13": "fetch_TimeoutError",
+    "IL-14": "fetch_TimeoutError",
+    "IL-15": "fetch_TimeoutError",
+    "IL-16": "fetch_TimeoutError",
+    "IL-17": "fetch_HTTP_500",
+    "IL-GOVERNOR": "fetch_TimeoutError",
+    "IL-SENATE": "fetch_HTTP_502",
+    "IN-01": "fetch_TimeoutError",
     "IN-02": "fetch_HTTP_502",
     "IN-03": "fetch_HTTP_502",
     "IN-04": "fetch_HTTP_502",
-    "IN-05": "fetch_HTTP_500",
-    "IN-06": "fetch_HTTP_500",
-    "IN-07": "fetch_HTTP_502",
+    "IN-05": "fetch_HTTP_502",
+    "IN-06": "fetch_HTTP_502",
     "IN-08": "fetch_HTTP_502",
     "IN-09": "fetch_HTTP_502",
-    "KS-02": "fetch_HTTP_502",
-    "KS-03": "fetch_HTTP_502",
+    "KS-02": "fetch_TimeoutError",
+    "KS-03": "fetch_HTTP_500",
     "KS-04": "fetch_HTTP_502",
-    "KS-SENATE": "fetch_TimeoutError",
+    "KS-SENATE": "fetch_HTTP_502",
     "KY-01": "fetch_HTTP_502",
     "KY-02": "fetch_HTTP_502",
-    "KY-03": "fetch_HTTP_502",
+    "KY-03": "fetch_TimeoutError",
     "KY-04": "fetch_HTTP_502",
     "KY-05": "fetch_HTTP_502",
     "KY-06": "fetch_HTTP_502",
     "KY-SENATE": "fetch_HTTP_502",
     "MA-01": "fetch_HTTP_502",
-    "MA-02": "fetch_HTTP_502",
+    "MA-02": "fetch_TimeoutError",
     "MA-03": "fetch_HTTP_502",
     "MA-04": "fetch_HTTP_502",
     "MA-05": "fetch_HTTP_502",
-    "MA-06": "fetch_HTTP_502",
+    "MA-06": "fetch_HTTP_500",
     "MA-07": "fetch_HTTP_502",
-    "MA-08": "fetch_HTTP_502",
+    "MA-08": "fetch_HTTP_500",
     "MA-09": "fetch_HTTP_502",
     "MA-GOVERNOR": "fetch_HTTP_502",
     "MA-SENATE": "fetch_HTTP_502",
@@ -143,7 +143,7 @@
     "ME-01": "fetch_HTTP_502",
     "ME-02": "fetch_HTTP_502",
     "ME-GOVERNOR": "fetch_HTTP_502",
-    "ME-SENATE": "fetch_HTTP_500",
+    "ME-SENATE": "fetch_HTTP_502",
     "MI-02": "fetch_HTTP_502",
     "MI-03": "fetch_HTTP_502",
     "MI-04": "fetch_HTTP_502",
@@ -156,7 +156,7 @@
     "MI-11": "fetch_HTTP_502",
     "MI-12": "fetch_HTTP_502",
     "MI-13": "fetch_HTTP_502",
-    "MI-SENATE": "fetch_HTTP_500",
+    "MI-SENATE": "fetch_HTTP_502",
     "MO-01": "fetch_HTTP_502",
     "MO-02": "fetch_HTTP_502",
     "MO-03": "fetch_HTTP_502",
@@ -167,58 +167,57 @@
     "MO-08": "fetch_HTTP_502",
     "MS-01": "fetch_HTTP_502",
     "MS-02": "fetch_HTTP_502",
-    "MS-03": "fetch_HTTP_502",
+    "MS-03": "fetch_TimeoutError",
     "MS-04": "fetch_HTTP_502",
     "MS-SENATE": "fetch_HTTP_502",
     "NC-01": "fetch_HTTP_502",
-    "NC-02": "fetch_HTTP_502",
     "NC-03": "fetch_HTTP_502",
-    "NC-04": "fetch_HTTP_502",
-    "NC-05": "fetch_HTTP_502",
-    "NC-06": "fetch_HTTP_502",
-    "NC-07": "fetch_HTTP_502",
-    "NC-08": "fetch_HTTP_502",
-    "NC-09": "fetch_HTTP_502",
-    "NC-10": "fetch_HTTP_502",
     "NC-11": "fetch_HTTP_502",
     "NC-12": "fetch_HTTP_502",
-    "NC-13": "fetch_HTTP_502",
-    "NC-14": "fetch_HTTP_502",
-    "NH-01": "fetch_HTTP_502",
+    "NC-14": "fetch_TimeoutError",
+    "NC-SENATE": "fetch_HTTP_502",
+    "NH-01": "fetch_TimeoutError",
     "NH-02": "fetch_HTTP_502",
     "NH-GOVERNOR": "fetch_HTTP_502",
     "NH-SENATE": "fetch_HTTP_502",
-    "NJ-02": "fetch_TimeoutError",
-    "NJ-03": "fetch_TimeoutError",
-    "NJ-05": "fetch_TimeoutError",
-    "NJ-06": "fetch_TimeoutError",
-    "NJ-08": "fetch_TimeoutError",
-    "NJ-09": "fetch_HTTP_502",
-    "NJ-10": "fetch_TimeoutError",
-    "NJ-11": "fetch_HTTP_502",
-    "NJ-12": "fetch_HTTP_502",
+    "NJ-01": "fetch_HTTP_502",
+    "NJ-02": "fetch_HTTP_502",
+    "NJ-03": "fetch_HTTP_502",
+    "NJ-04": "fetch_HTTP_502",
+    "NJ-05": "fetch_HTTP_502",
+    "NJ-06": "fetch_HTTP_502",
+    "NJ-07": "fetch_HTTP_502",
+    "NJ-08": "fetch_HTTP_502",
+    "NJ-09": "fetch_TimeoutError",
+    "NJ-10": "fetch_HTTP_502",
+    "NJ-11": "fetch_TimeoutError",
+    "NJ-12": "fetch_HTTP_500",
     "NJ-SENATE": "fetch_HTTP_502",
     "OH-01": "fetch_TimeoutError",
+    "OH-02": "fetch_HTTP_502",
     "OH-03": "fetch_HTTP_502",
-    "OH-04": "fetch_TimeoutError",
+    "OH-04": "fetch_HTTP_502",
     "OH-05": "fetch_TimeoutError",
-    "OH-10": "fetch_TimeoutError",
-    "OH-11": "fetch_TimeoutError",
-    "OH-13": "fetch_TimeoutError",
-    "OH-14": "fetch_TimeoutError",
-    "OH-15": "fetch_TimeoutError",
+    "OH-06": "fetch_HTTP_502",
+    "OH-07": "fetch_HTTP_502",
+    "OH-08": "fetch_HTTP_502",
+    "OH-09": "fetch_HTTP_502",
+    "OH-10": "fetch_HTTP_502",
+    "OH-12": "fetch_HTTP_502",
+    "OH-13": "fetch_HTTP_502",
+    "OH-14": "fetch_HTTP_502",
     "OH-GOVERNOR": "fetch_HTTP_502",
     "OH-SENATE": "fetch_HTTP_502",
-    "OK-01": "fetch_TimeoutError",
-    "OK-02": "fetch_TimeoutError",
-    "OK-03": "no_valid_reported_votes",
-    "OK-04": "no_valid_reported_votes",
-    "OK-05": "fetch_TimeoutError",
-    "OK-GOVERNOR": "fetch_HTTP_502",
+    "OK-01": "no_valid_reported_votes",
+    "OK-02": "fetch_HTTP_502",
+    "OK-03": "fetch_HTTP_500",
+    "OK-04": "fetch_TimeoutError",
+    "OK-05": "no_valid_reported_votes",
+    "OK-GOVERNOR": "fetch_TimeoutError",
     "OK-SENATE": "fetch_HTTP_502",
     "PA-01": "fetch_HTTP_502",
-    "PA-02": "no_valid_reported_votes",
-    "PA-03": "fetch_TimeoutError",
+    "PA-02": "fetch_HTTP_502",
+    "PA-03": "fetch_HTTP_502",
     "PA-04": "fetch_HTTP_502",
     "PA-05": "fetch_HTTP_502",
     "PA-06": "fetch_HTTP_502",
@@ -230,88 +229,74 @@
     "PA-12": "fetch_HTTP_502",
     "PA-13": "fetch_HTTP_502",
     "PA-14": "fetch_HTTP_502",
-    "PA-15": "no_valid_reported_votes",
+    "PA-15": "fetch_TimeoutError",
     "PA-16": "fetch_TimeoutError",
     "PA-17": "fetch_HTTP_502",
     "PA-GOVERNOR": "fetch_HTTP_502",
+    "RI-01": "fetch_TimeoutError",
     "RI-02": "fetch_HTTP_502",
-    "RI-GOVERNOR": "fetch_HTTP_502",
+    "RI-GOVERNOR": "fetch_TimeoutError",
     "RI-SENATE": "fetch_HTTP_502",
     "SC-01": "fetch_HTTP_502",
-    "SC-02": "fetch_HTTP_502",
-    "SC-03": "fetch_HTTP_502",
+    "SC-02": "fetch_TimeoutError",
+    "SC-03": "fetch_TimeoutError",
     "SC-04": "fetch_HTTP_502",
-    "SC-05": "fetch_HTTP_502",
+    "SC-05": "fetch_TimeoutError",
     "SC-06": "fetch_HTTP_502",
-    "SC-07": "fetch_HTTP_502",
+    "SC-07": "fetch_TimeoutError",
     "SC-GOVERNOR": "fetch_HTTP_502",
     "SC-SENATE": "fetch_HTTP_502",
     "TN-01": "fetch_HTTP_502",
-    "TN-02": "fetch_HTTP_502",
-    "TN-03": "fetch_HTTP_502",
-    "TN-04": "fetch_HTTP_502",
-    "TN-05": "fetch_HTTP_502",
-    "TN-06": "fetch_HTTP_502",
-    "TN-07": "fetch_HTTP_502",
-    "TN-08": "fetch_HTTP_502",
-    "TN-09": "fetch_HTTP_502",
-    "TN-GOVERNOR": "fetch_HTTP_502",
+    "TN-02": "fetch_TimeoutError",
+    "TN-03": "fetch_HTTP_500",
+    "TN-04": "fetch_TimeoutError",
+    "TN-05": "fetch_TimeoutError",
+    "TN-06": "fetch_HTTP_500",
+    "TN-07": "fetch_TimeoutError",
+    "TN-08": "fetch_TimeoutError",
+    "TN-09": "fetch_TimeoutError",
+    "TN-GOVERNOR": "fetch_TimeoutError",
     "TN-SENATE": "fetch_HTTP_502",
-    "TX-01": "fetch_HTTP_502",
-    "TX-02": "fetch_HTTP_502",
-    "TX-03": "fetch_HTTP_502",
-    "TX-04": "fetch_HTTP_502",
-    "TX-05": "fetch_HTTP_502",
-    "TX-06": "fetch_HTTP_502",
-    "TX-07": "fetch_HTTP_502",
+    "TX-01": "fetch_TimeoutError",
+    "TX-03": "fetch_HTTP_500",
+    "TX-04": "fetch_HTTP_500",
+    "TX-05": "fetch_HTTP_500",
+    "TX-07": "fetch_TimeoutError",
     "TX-08": "fetch_TimeoutError",
     "TX-09": "no_valid_reported_votes",
-    "TX-10": "fetch_HTTP_502",
-    "TX-11": "fetch_HTTP_502",
-    "TX-12": "fetch_HTTP_500",
-    "TX-13": "fetch_HTTP_502",
-    "TX-14": "fetch_HTTP_502",
-    "TX-15": "fetch_TimeoutError",
-    "TX-17": "fetch_HTTP_502",
-    "TX-18": "fetch_HTTP_500",
-    "TX-19": "fetch_HTTP_502",
-    "TX-20": "fetch_TimeoutError",
-    "TX-21": "fetch_HTTP_500",
+    "TX-11": "fetch_HTTP_500",
+    "TX-13": "fetch_HTTP_500",
+    "TX-14": "fetch_HTTP_500",
+    "TX-15": "fetch_HTTP_502",
+    "TX-18": "fetch_HTTP_502",
+    "TX-21": "fetch_HTTP_502",
     "TX-22": "fetch_HTTP_502",
-    "TX-24": "fetch_HTTP_500",
-    "TX-25": "fetch_TimeoutError",
-    "TX-26": "fetch_TimeoutError",
-    "TX-27": "fetch_TimeoutError",
-    "TX-28": "fetch_TimeoutError",
-    "TX-29": "fetch_HTTP_500",
+    "TX-24": "fetch_HTTP_502",
+    "TX-25": "fetch_HTTP_502",
+    "TX-26": "fetch_HTTP_502",
+    "TX-27": "fetch_HTTP_502",
+    "TX-28": "fetch_HTTP_502",
+    "TX-29": "fetch_HTTP_502",
     "TX-30": "fetch_HTTP_502",
     "TX-31": "fetch_HTTP_502",
-    "TX-32": "fetch_TimeoutError",
-    "TX-33": "fetch_TimeoutError",
-    "TX-34": "fetch_TimeoutError",
-    "TX-35": "fetch_TimeoutError",
-    "TX-36": "fetch_TimeoutError",
-    "TX-37": "fetch_HTTP_500",
-    "TX-38": "fetch_TimeoutError",
+    "TX-32": "fetch_HTTP_502",
+    "TX-33": "fetch_HTTP_502",
+    "TX-34": "fetch_HTTP_502",
+    "TX-35": "fetch_HTTP_502",
+    "TX-36": "fetch_HTTP_502",
+    "TX-37": "fetch_HTTP_502",
+    "TX-38": "fetch_HTTP_502",
     "TX-SENATE": "fetch_HTTP_502",
     "VA-01": "fetch_HTTP_502",
-    "VA-02": "fetch_TimeoutError",
-    "VA-03": "fetch_HTTP_500",
-    "VA-04": "fetch_TimeoutError",
-    "VA-05": "fetch_HTTP_502",
-    "VA-07": "fetch_HTTP_502",
-    "VA-08": "fetch_TimeoutError",
-    "VA-09": "fetch_HTTP_502",
-    "VA-10": "fetch_HTTP_502",
-    "VA-11": "fetch_HTTP_502",
+    "VA-04": "fetch_HTTP_500",
     "VA-SENATE": "fetch_HTTP_502",
     "VT-GOVERNOR": "fetch_HTTP_502",
     "WV-01": "fetch_HTTP_502",
-    "WV-02": "fetch_HTTP_500",
-    "WV-SENATE": "fetch_HTTP_502"
+    "WV-02": "fetch_HTTP_502",
+    "WV-SENATE": "fetch_TimeoutError"
   },
   "fallback": "Open America and state clerks only if CivicAPI has no valid current report for the contest",
-  "fetched": 17,
+  "fetched": 31,
   "officeCoverage": {
     "governor": {
       "awaitingPollClose": 19,
@@ -327,15 +312,15 @@
     "house": {
       "awaitingPollClose": 165,
       "eligibleForCollection": 269,
-      "eligibleWithoutValidVoteReport": 176,
+      "eligibleWithoutValidVoteReport": 159,
       "missingRegistryIds": [
         "VT-01"
       ],
       "registered": 434,
-      "sourceErrors": 171,
+      "sourceErrors": 156,
       "targeted": 435,
-      "validationPending": 5,
-      "verifiedReports": 93
+      "validationPending": 3,
+      "verifiedReports": 110
     },
     "senate": {
       "awaitingPollClose": 11,
@@ -359,25 +344,25 @@
   "providerConnectivity": {
     "KY-06": {
       "connected": false,
-      "detail": "HTTP Error 500: Internal Server Error",
+      "detail": "HTTP Error 502: Bad Gateway",
       "failure": "HTTPError",
-      "responseMs": 29
+      "responseMs": 23
     },
     "MI-SENATE": {
       "connected": false,
-      "detail": "HTTP Error 500: Internal Server Error",
+      "detail": "HTTP Error 502: Bad Gateway",
       "failure": "HTTPError",
-      "responseMs": 39
+      "responseMs": 30
     },
     "networkReachable": false,
     "statusEndpoint": {
       "connected": false,
-      "detail": "HTTP Error 500: Internal Server Error",
+      "detail": "HTTP Error 502: Bad Gateway",
       "failure": "HTTPError",
-      "responseMs": 28
+      "responseMs": 27
     }
   },
-  "publishedRaces": 108,
+  "publishedRaces": 125,
   "raceStatuses": {
     "AK-01": {
       "office": "house",
@@ -412,17 +397,17 @@
       "status": "reporting"
     },
     "AL-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "AL-06": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
     "AL-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -432,7 +417,7 @@
       "status": "source_error"
     },
     "AL-SENATE": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "reporting"
     },
@@ -442,12 +427,12 @@
       "status": "source_error"
     },
     "AR-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "AR-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
@@ -462,7 +447,7 @@
       "status": "source_error"
     },
     "AR-SENATE": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
@@ -774,12 +759,12 @@
       "status": "source_error"
     },
     "CT-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "CT-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -794,12 +779,12 @@
       "status": "reporting"
     },
     "DE-SENATE": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
     "FL-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -939,22 +924,22 @@
       "status": "reporting"
     },
     "FL-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "governor",
       "status": "source_error"
     },
     "FL-SENATE": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
     "GA-01": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -974,12 +959,12 @@
       "status": "reporting"
     },
     "GA-06": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "GA-07": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -1014,7 +999,7 @@
       "status": "reporting"
     },
     "GA-14": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -1086,7 +1071,7 @@
       "status": "source_error"
     },
     "IL-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -1101,12 +1086,12 @@
       "status": "source_error"
     },
     "IL-05": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "IL-06": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -1121,7 +1106,7 @@
       "status": "source_error"
     },
     "IL-09": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -1131,52 +1116,52 @@
       "status": "source_error"
     },
     "IL-11": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "IL-12": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "IL-13": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "IL-14": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "IL-15": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "IL-16": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "IL-17": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
     "IL-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "governor",
       "status": "source_error"
     },
     "IL-SENATE": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
     "IN-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1196,19 +1181,18 @@
       "status": "reporting"
     },
     "IN-05": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "IN-06": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "IN-07": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "IN-08": {
       "collectionIssue": "fetch_HTTP_502",
@@ -1225,12 +1209,12 @@
       "status": "awaiting_poll_close"
     },
     "KS-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "KS-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
@@ -1244,7 +1228,7 @@
       "status": "awaiting_poll_close"
     },
     "KS-SENATE": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
@@ -1259,7 +1243,7 @@
       "status": "source_error"
     },
     "KY-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1317,7 +1301,7 @@
       "status": "source_error"
     },
     "MA-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1337,7 +1321,7 @@
       "status": "source_error"
     },
     "MA-06": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
@@ -1347,7 +1331,7 @@
       "status": "source_error"
     },
     "MA-08": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
@@ -1427,7 +1411,7 @@
       "status": "source_error"
     },
     "ME-SENATE": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
@@ -1500,7 +1484,7 @@
       "status": "awaiting_poll_close"
     },
     "MI-SENATE": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "source_error"
     },
@@ -1595,7 +1579,7 @@
       "status": "source_error"
     },
     "MS-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1627,9 +1611,8 @@
       "status": "source_error"
     },
     "NC-02": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-03": {
       "collectionIssue": "fetch_HTTP_502",
@@ -1637,39 +1620,32 @@
       "status": "source_error"
     },
     "NC-04": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-05": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-06": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-07": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-08": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-09": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-10": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-11": {
       "collectionIssue": "fetch_HTTP_502",
@@ -1682,16 +1658,16 @@
       "status": "reporting"
     },
     "NC-13": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "NC-14": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "NC-SENATE": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "senate",
       "status": "reporting"
     },
@@ -1720,7 +1696,7 @@
       "status": "awaiting_poll_close"
     },
     "NH-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -1740,59 +1716,62 @@
       "status": "reporting"
     },
     "NJ-01": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "NJ-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "NJ-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "NJ-04": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "NJ-05": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "NJ-06": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "NJ-07": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "NJ-08": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "NJ-09": {
-      "collectionIssue": "fetch_HTTP_502",
-      "office": "house",
-      "status": "source_error"
-    },
-    "NJ-10": {
       "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
-    "NJ-11": {
+    "NJ-10": {
       "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
+    "NJ-11": {
+      "collectionIssue": "fetch_TimeoutError",
+      "office": "house",
+      "status": "source_error"
+    },
     "NJ-12": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
@@ -1955,6 +1934,7 @@
       "status": "source_error"
     },
     "OH-02": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -1964,7 +1944,7 @@
       "status": "source_error"
     },
     "OH-04": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -1974,49 +1954,52 @@
       "status": "source_error"
     },
     "OH-06": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "OH-07": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "OH-08": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "OH-09": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "OH-10": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "OH-11": {
-      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "OH-12": {
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "OH-13": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "OH-14": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "OH-15": {
-      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "OH-GOVERNOR": {
       "collectionIssue": "fetch_HTTP_502",
@@ -2029,32 +2012,32 @@
       "status": "source_error"
     },
     "OK-01": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "no_valid_reported_votes",
       "office": "house",
-      "status": "source_error"
+      "status": "awaiting_valid_vote_report"
     },
     "OK-02": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "OK-03": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "OK-04": {
-      "collectionIssue": "no_valid_reported_votes",
-      "office": "house",
-      "status": "awaiting_valid_vote_report"
-    },
-    "OK-05": {
       "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
+    "OK-05": {
+      "collectionIssue": "no_valid_reported_votes",
+      "office": "house",
+      "status": "awaiting_valid_vote_report"
+    },
     "OK-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "governor",
       "status": "source_error"
     },
@@ -2101,12 +2084,12 @@
       "status": "source_error"
     },
     "PA-02": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "PA-03": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2166,9 +2149,9 @@
       "status": "source_error"
     },
     "PA-15": {
-      "collectionIssue": "no_valid_reported_votes",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "awaiting_valid_vote_report"
+      "status": "source_error"
     },
     "PA-16": {
       "collectionIssue": "fetch_TimeoutError",
@@ -2186,6 +2169,7 @@
       "status": "source_error"
     },
     "RI-01": {
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
@@ -2195,7 +2179,7 @@
       "status": "source_error"
     },
     "RI-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "governor",
       "status": "source_error"
     },
@@ -2210,12 +2194,12 @@
       "status": "reporting"
     },
     "SC-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "SC-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
@@ -2225,7 +2209,7 @@
       "status": "reporting"
     },
     "SC-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
@@ -2235,7 +2219,7 @@
       "status": "reporting"
     },
     "SC-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -2267,47 +2251,47 @@
       "status": "reporting"
     },
     "TN-02": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "TN-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "TN-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "TN-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "TN-06": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "TN-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "TN-08": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "TN-09": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
     "TN-GOVERNOR": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "governor",
       "status": "reporting"
     },
@@ -2317,37 +2301,35 @@
       "status": "reporting"
     },
     "TX-01": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "TX-02": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "TX-03": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
     "TX-04": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "TX-05": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "TX-06": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "TX-07": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "source_error"
     },
@@ -2362,32 +2344,30 @@
       "status": "awaiting_valid_vote_report"
     },
     "TX-10": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "TX-11": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
     "TX-12": {
-      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "TX-13": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "TX-14": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "source_error"
     },
     "TX-15": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2396,27 +2376,24 @@
       "status": "awaiting_poll_close"
     },
     "TX-17": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "TX-18": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-19": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "TX-20": {
-      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
-      "status": "source_error"
+      "status": "reporting"
     },
     "TX-21": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2430,32 +2407,32 @@
       "status": "awaiting_poll_close"
     },
     "TX-24": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-25": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-26": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-27": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-28": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-29": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2470,37 +2447,37 @@
       "status": "source_error"
     },
     "TX-32": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-33": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-34": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-35": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-36": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-37": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "TX-38": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
@@ -2535,22 +2512,19 @@
       "status": "reporting"
     },
     "VA-02": {
-      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "VA-03": {
-      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "VA-04": {
-      "collectionIssue": "fetch_TimeoutError",
+      "collectionIssue": "fetch_HTTP_500",
       "office": "house",
       "status": "reporting"
     },
     "VA-05": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -2559,27 +2533,22 @@
       "status": "reporting"
     },
     "VA-07": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "VA-08": {
-      "collectionIssue": "fetch_TimeoutError",
       "office": "house",
       "status": "reporting"
     },
     "VA-09": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "VA-10": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
     "VA-11": {
-      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "reporting"
     },
@@ -2679,12 +2648,12 @@
       "status": "reporting"
     },
     "WV-02": {
-      "collectionIssue": "fetch_HTTP_500",
+      "collectionIssue": "fetch_HTTP_502",
       "office": "house",
       "status": "source_error"
     },
     "WV-SENATE": {
-      "collectionIssue": "fetch_HTTP_502",
+      "collectionIssue": "fetch_TimeoutError",
       "office": "senate",
       "status": "reporting"
     },
@@ -2703,7 +2672,7 @@
   },
   "registeredRaces": 504,
   "targetRaces": 506,
-  "transientApiErrors": 292,
-  "updatedRaces": 12,
+  "transientApiErrors": 278,
+  "updatedRaces": 25,
   "version": 2
 }
