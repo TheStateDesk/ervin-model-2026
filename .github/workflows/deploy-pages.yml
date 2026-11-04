@@ -35,6 +35,12 @@ jobs:
           python3 -c 'import json; from pathlib import Path; d=json.loads(Path("governors/data.json").read_text()); assert len(d["races"])==36; assert len({r["code"] for r in d["races"]})==36; assert sum(r["poll"] is not None for r in d["races"])==33; print("PASS: 36 distinct governor races, 33 attributed polling averages")'
           node --check governors/board.js
           node --check elections/app.js
+      - name: Validate NBC News projections, race identities, and source citations
+        run: |
+          python3 scripts/validate_nbc_calls.py
+          node --check scripts/nbc-calls.js
+          node --check election-night/night.js
+          node --check scripts/live-coverage-hero.js
       - name: Validate House district index and independent historical backtests
         run: |
           python3 -c 'import json;h=json.load(open("house/data.json"));seats=h["seats"];assert len(seats)==435 and len({x["id"] for x in seats})==435;assert len([x for x in seats if x["rating"]])==68;print("PASS: 435 House districts / 68 sourced ratings")'
