@@ -87,7 +87,20 @@ try{
   assert((await homepage.locator('#stateDirectory').count())===1,'State directory must remain');
   assert((await homepage.locator('#electionDashboard').count())===1,'Scheduled national election dashboard is missing');
   // The final prediction must lead the page, without a competing simulation chart.
-  await homepage.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&!document.querySelector('#edSimulationPanel .ed-final-distribution')&&document.querySelector('#edFinalHeadline')?.textContent.includes('FINAL'),null,{timeout:65000});
+  try {
+   await homepage.waitForFunction(()=>document.querySelectorAll('#edSimMap a[data-sim-district]').length===435&&!document.querySelector('#edSimulationPanel .ed-final-distribution')&&document.querySelector('#edFinalHeadline')?.textContent.includes('FINAL'),null,{timeout:65000});
+  } catch(err) {
+   const diagnostic=await homepage.evaluate(()=>({
+    archive:location.search, mapCount:document.querySelectorAll('#edSimMap a[data-sim-district]').length,
+    mapOffice:document.querySelector('#edSimMap')?.dataset.simOffice,
+    mapText:document.querySelector('#edSimMapReadout')?.textContent,
+    mapSummary:document.querySelector('#edFinalCallSummary')?.textContent,
+    scripts:[...document.querySelectorAll('script[src]')].map(x=>x.getAttribute('src')).filter(x=>/election-day|forecast|geo|live-coverage/.test(x)),
+    model:{house:window.ERVIN_HOME_FORECAST?.house?.length,senate:window.ERVIN_HOME_FORECAST?.senate?.length,governor:window.ERVIN_HOME_FORECAST?.governor?.length},
+    geography:window.ERVIN_US_GEOGRAPHY?.states?.length
+   }));
+   throw Error('Final archive House map failed to render: '+JSON.stringify({diagnostic,pageErrors:homepageErrors})+'; '+err.message);
+  }
   const headingBottom=await homepage.locator('.ed-byline').evaluate(el=>el.getBoundingClientRect().bottom);
   const simTop=await homepage.locator('#edSimulationPanel').evaluate(el=>el.getBoundingClientRect().top);
   const deckTop=await homepage.locator('.ed-standfirst').evaluate(el=>el.getBoundingClientRect().top);
@@ -171,12 +184,12 @@ try{
  const postDesk=await browser.newPage({viewport:{width:1440,height:940}});
  const postErrors=[];postDesk.on('pageerror',e=>postErrors.push(e.message));
  await postDesk.goto(root+'/states/',{waitUntil:'domcontentloaded'});
- await postDesk.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave')&&Number((document.querySelector('#postReported')?.textContent||'').replaceAll(',',''))>100&&document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live',null,{timeout:65000});
+ await postDesk.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave')&&Number((document.querySelector('#postOpenCount')?.textContent||'').match(/\\d[\\d,]*/)?.[0]?.replaceAll(',','')||'0')>100&&document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live',null,{timeout:65000});
  assert((await postDesk.locator('#postCloseRaces').count())===1,'Post-election close-count desk missing');
  assert(await postDesk.locator('#watchSection').isHidden(),'Pre-election races must be archived');
  assert(await postDesk.locator('#balanceOfPower').isHidden(),'Forecast control bars still dominate homepage');
  assert((await postDesk.locator('#postMilestones a').count())>=4,'Attributable race calls missing');
- assert((await postDesk.locator('#postAnalysis .post-article-card').count())===9,'Nine original stories missing from newsroom');
+ assert((await postDesk.locator('#postAnalysis .post-article-card').count())>=10,'New forecast audit and other State Desk articles missing from newsroom');
  assert((await postDesk.locator('.post-package-card').count())===3,'Three major state features missing');
  assert(await postDesk.locator('#edSimulationPanel').isHidden(),'Old election forecast is visible on news homepage');
  assert(postErrors.length===0,'Post-election JS errors: '+postErrors.join(', '));
