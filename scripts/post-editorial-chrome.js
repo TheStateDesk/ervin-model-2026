@@ -6,7 +6,7 @@ const root=new URL('../',script?.src||location.href);
 const url=p=>new URL(p,root).href;
 const path=location.pathname;
 const isArchive=new URLSearchParams(location.search).get('view')==='final';
-const where=path.includes('/archive/')?'archive':path.includes('/analysis/')?'analysis':path.includes('/results/')?'results':path.includes('/election-night/')?'other':path.includes('/states/')?'states':path.includes('/state/')?'state':path.includes('/house/')?'house':path.includes('/governors/')?'governors':path.includes('/michigan/')?'michigan':path.includes('/stats-for-nerds/')?'methods':'other';
+const where=path.includes('/corrections/')?'corrections':path.includes('/about/')?'about':path.includes('/archive/')?'archive':path.includes('/analysis/')?'analysis':path.includes('/results/')?'results':path.includes('/election-night/')?'other':path.includes('/states/')?'states':path.includes('/state/')?'state':path.includes('/house/')?'house':path.includes('/governors/')?'governors':path.includes('/michigan/')?'michigan':path.includes('/stats-for-nerds/')?'methods':'other';
 const items=[
  ['Home','states/','states'],
  ['Results','results/','results'],
@@ -16,6 +16,9 @@ const items=[
  ['House','house/','house'],
  ['Governors','governors/','governors'],
  ['Analysis','analysis/','analysis'],
+ ['Forecast grade','analysis/forecast-grade/','grade'],
+ ['About','about/','about'],
+ ['Corrections','corrections/','corrections'],
  ['Archive','archive/','archive']
 ];
 const nav=document.createElement('nav');nav.className='pe-global-nav';nav.setAttribute('aria-label','Ervin Model election reporting sections');
