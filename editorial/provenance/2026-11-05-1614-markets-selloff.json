@@ -1,0 +1,76 @@
+{
+  "article": "analysis/markets-november-5-selloff/index.html",
+  "status": "approved_for_publication",
+  "published_at": "2026-11-05T16:14:00-05:00",
+  "updated_at": "2026-11-05T16:14:00-05:00",
+  "original_sources": [
+    {
+      "publisher": "Yahoo Finance",
+      "authors": [
+        "Grace O'Donnell",
+        "Ines Ferré",
+        "David Hollerith"
+      ],
+      "updated": "2026-11-05T14:37:00-05:00",
+      "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-plunge-chip-stocks-melt-down-193726491.html"
+    },
+    {
+      "publisher": "Reuters",
+      "date": "2026-11-05",
+      "url": "https://www.reuters.com/world/china/global-markets-view-europe-2026-11-05/"
+    },
+    {
+      "publisher": "Charles Schwab",
+      "author": "Joe Mazzola",
+      "published": "2026-11-05T09:14:00-05:00",
+      "url": "https://www.schwab.com/learn/story/stock-market-update-open"
+    },
+    {
+      "publisher": "MarketWatch",
+      "date": "2026-11-05",
+      "url": "https://www.marketwatch.com/livecoverage/stock-market-today-dow-s-p-500-nasdaq-democrat-sweep-midterm-elections-rally/card/benchmark-treasury-yields-hover-near-2-month-lows-ahead-of-jobs-data-prqtbFHsPVg8m8pXYRgv"
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Dow -3%, S&P 500 -4%, Nasdaq -5.2% at 2:37 pm ET; intraday",
+      "source_index": 0
+    },
+    {
+      "claim": "PHLX Semiconductor index -10%; intraday",
+      "source_index": 0
+    },
+    {
+      "claim": "Nine of eleven sectors rose Wednesday; consumer discretionary led",
+      "source_index": 2
+    },
+    {
+      "claim": "10-year Treasury 4.880%, prior peak 5.310%",
+      "source_index": 3
+    },
+    {
+      "claim": "43 basis points fall",
+      "calculation": "(5.310 - 4.880)*100",
+      "source_index": 3
+    },
+    {
+      "claim": "Brent below $100 earlier Thursday",
+      "source_index": 1
+    },
+    {
+      "claim": "Brent around $97 later",
+      "source_index": 0
+    },
+    {
+      "claim": "65,000 expected October payrolls vs 29,000 September",
+      "source_index": 2
+    }
+  ],
+  "images": [],
+  "checks": {
+    "numbers": "Checked numeric claims against source summaries and calculation; all market figures identified as intraday",
+    "links": "Source pages discovered and linked; full independent HTTP audit not completed",
+    "duplicates": "Compared topic with existing election-rally analysis; new story covers Nov. 5 reversal rather than Nov. 4 rally",
+    "mobile": "Responsive stylesheet and viewport tag present; browser screenshots not completed"
+  }
+}
