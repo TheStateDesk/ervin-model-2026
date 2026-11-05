@@ -10,9 +10,16 @@ async function show(){
  const anchor=document.querySelector('#postElectionDesk .post-state-package');
  if(!anchor)return;
  try{
-  const url=new URL('headlines/latest.json',root);
-  url.searchParams.set('v',String(Math.floor(Date.now()/1800000)));
-  const r=await fetch(url,{cache:'no-store'});if(!r.ok)return;
+  const fresh=String(Math.floor(Date.now()/1800000));
+  // Raw main-branch JSON can update every scan without rebuilding the entire Pages site.
+  const raw='https://raw.githubusercontent.com/geervin/ervin-model-2026/main/headlines/latest.json?v='+fresh;
+  let r;
+  try{r=await fetch(raw,{cache:'no-store'});}catch{}
+  if(!r?.ok){
+   const fallback=new URL('headlines/latest.json',root);fallback.searchParams.set('v',fresh);
+   r=await fetch(fallback,{cache:'no-store'});
+  }
+  if(!r.ok)return;
   const data=await r.json();
   const checked=Date.parse(data.generated_at||'');
   if(!Number.isFinite(checked)||Date.now()-checked>14*3600000||checked>Date.now()+600000)return;
