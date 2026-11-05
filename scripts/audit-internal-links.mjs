@@ -53,7 +53,7 @@ for(const rel of headers){
  if(/<nav[\s\S]*?href=["'](?:\.\.\/)*michigan\/election-night\//i.test(h))issues.push(rel+': Michigan-only election night linked from header');
 }
 const nightHtml=fs.readFileSync(path.join(root,'election-night/index.html'),'utf8');
-const nightHeader=nightHtml.match(/<header\b[^>]*>[\s\S]*?<\/header>/i)?.[0]||'';
+const nightHeader=nightHtml.match(/<header class="ed-head night-head"[\s\S]*?<\/header>/i)?.[0]||'';
 const nightNav=nightHeader.match(/<nav\b[^>]*>[\s\S]*?<\/nav>/i)?.[0]||'';
 const nightLinks=[...nightNav.matchAll(/href=["']([^"']+)["']/g)].map(x=>x[1]);
 const expectedNightLinks=['../states/','#nationalBoard','#michiganSpotlight','../stats-for-nerds/'];
@@ -67,14 +67,14 @@ if(nightHtml.includes('href="../state/?state=MI#stateResults"'))issues.push('Liv
 for(const rel of ['states/index.html','state/index.html','stats-for-nerds/index.html','election-night/index.html']){
  const html=fs.readFileSync(path.join(root,rel),'utf8');
  const a=[...html.matchAll(/<a\b[^>]*\bhref=["']([^"']+)["']/gi)].map(x=>x[1]);
- const retired=a.filter(u=>/^\.\.\/(?:house|governors|elections)(?:\/|$)/.test(u)&&!(/\.(?:json|csv|md)(?:[?#]|$)/.test(u)) || u==='../');
+ const retired=a.filter(u=>/^\.\.\/(?:house|governors|elections)(?:\/|$)/.test(u)&&!(/\.(?:json|csv|md)(?:[?#]|$)/.test(u)));
  if(retired.length)issues.push(rel+': public interface links to retired pages '+retired.join(', '));
 }
 const front=fs.readFileSync(path.join(root,'states/index.html'),'utf8');
 const entry=fs.readFileSync(path.join(root,'index.html'),'utf8');
 // The newspaper-style front page is the canonical public entry point.
 // Keep the election dashboard available at /states/ without redirecting readers there.
-if(!entry.includes('<title>The State Desk')||!entry.includes('aria-label="Main sections"')||!entry.includes('href="analysis/"')||!entry.includes('href="states/"')||!entry.includes('AI assistance')||entry.includes('location.replace'))issues.push('Site root must show the State Desk newsroom homepage, preserve election-desk navigation and footer disclosure');
+if(!entry.includes('<title>The State Desk')||!entry.includes('aria-label="Primary sections"')||!(entry.includes('href="analysis/"')||entry.includes('href="./analysis/"'))||!entry.includes('href="states/"')||!entry.includes('AI assistance')||entry.includes('location.replace'))issues.push('Site root must show the State Desk newsroom homepage, preserve election-desk navigation and footer disclosure');
 if(!front.includes('id="watchSection"')||!front.includes('id="balanceOfPower"')||!front.includes('id="powerCards"'))issues.push('State Desk homepage missing races carousel or projected office balance');
 if(front.indexOf('id="watchSection"')>front.indexOf('id="balanceOfPower"')||front.indexOf('id="balanceOfPower"')>front.indexOf('id="nationMap"'))issues.push('The State Desk should show the races carousel and office balance before the geographic atlas');
 if(!front.includes('../scripts/home-election-2026.js')||!front.includes('../scripts/home-power.js'))issues.push('National forecast scripts not loaded on actual homepage');
@@ -88,7 +88,7 @@ if(!front.includes('id="officeFocus"'))issues.push('House / governor focused sta
 if(!nightHtml.includes('class="ed-head night-head"')||!nightHtml.includes('class="night-shell ed-shell"'))issues.push('Election Night has not adopted State Desk editorial layout');
 
 if(/(?:id="(?:advancedPollingDrawer|researchLab|forecast-settings|races)"|window\.ERVIN_DATA|href=["'][^"']*(?:#researchLab|#races|#tabs|\?source=))/i.test(front))issues.push('Old research dashboard controls exposed on State Desk homepage');
-if(front.includes('href="../"')||front.includes('Original Ervin forecast'))issues.push('State Desk links back to retired root dashboard');
+if(front.includes('href="../elections/overview/"'))issues.push('State Desk links into retired election research dashboard');
 for(const rel of ['governors/index.html','states/index.html','state/index.html']){
  const html=fs.readFileSync(path.join(root,rel),'utf8');
  if(!html.includes('statewide-ervin.js?v=20261102-power-oh-pollrefresh-v2'))issues.push(rel+': stale governor model script');

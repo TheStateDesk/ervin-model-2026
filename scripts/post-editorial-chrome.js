@@ -27,7 +27,7 @@ for(const [name,target,section] of items){
  links.append(a);
 }
 nav.append(label,links);
-const insert=()=>{if(document.querySelector('.pe-global-nav'))return;
+const insert=()=>{if(document.querySelector('.td-global-header'))return;if(document.querySelector('.pe-global-nav'))return;
  document.body.classList.add('pe-site');
  const header=document.querySelector('header');if(header)header.insertAdjacentElement('afterend',nav);else document.body.prepend(nav);
  document.querySelectorAll('a').forEach(a=>{const text=(a.textContent||'').trim();

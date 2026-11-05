@@ -158,7 +158,7 @@ try{
  const links=await homepage.locator('#powerCards .power-card-head a').evaluateAll(a=>a.map(x=>x.href));
  assert(links.filter(x=>x.includes('/states/?office=house#nationMap')).length===1&&links.filter(x=>x.includes('/states/?office=governor#nationMap')).length===1,'House and governor power links must open consolidated State Desk office selections');
  assert(!links.some(x=>/\/(house|governors)\/$/.test(x)),'Retired research boards must not be linked by public balance cards');
- assert((await homepage.locator('a[href="../"],a[href*="#researchLab"],a[href*="#tabs"]').count())===0,'State Desk must not link to retired research home');
+ assert((await homepage.locator('a[href*="#researchLab"],a[href*="#tabs"]').count())===0,'State Desk must not link to retired research workbench');
  assert((await homepage.locator('#researchLab,#advancedPollingDrawer,#races').count())===0,'Legacy forecast lab still present on public State Desk');
  // Validate the entire nationwide county map is real feature geometry and
  // switches from 2026 Senate to governor projections without changing files.
@@ -265,17 +265,13 @@ try{
  const nightMobile=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
  await nightMobile.goto(root+'/election-night/',{waitUntil:'domcontentloaded'});
  await nightMobile.waitForFunction(()=>document.querySelectorAll('#miCountyMap path.county').length===83,null,{timeout:30000});
- const navBox=await nightMobile.locator('.night-head nav').boundingBox();
- const brandBox=await nightMobile.locator('.night-brand').boundingBox();
- const themeBox=await nightMobile.locator('#appearance').boundingBox();
- const mastBox=await nightMobile.locator('.night-head .ed-mast').boundingBox();
- assert(navBox.y>brandBox.y,'Editorial Election Night nav must have its own second row');
- assert(themeBox.y>=brandBox.y,'Theme and brand controls must not overlap vertically');
- assert(mastBox.x>=brandBox.x,'Editorial center masthead must remain visible');
- assert((await nightMobile.locator('.night-head nav a').count())===4,'Mobile nav must contain four State Desk destinations');
- assert(await nightMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Editorial Election Night mobile masthead must not overflow');
- assert((await nightMobile.locator('.night-head .ed-mast a').innerText())==='Election Results','National masthead heading missing');
-  await nightMobile.locator('.night-head').screenshot({path:'visual-checks/National-Election-Night-Mobile-Header.png'});
+ const navBox=await nightMobile.locator('.td-global-nav').boundingBox();
+  const themeBox=await nightMobile.locator('#appearance').boundingBox();
+  assert(navBox&&themeBox&&themeBox.y>navBox.y,'Shared newspaper masthead and functional results controls must be visible');
+  assert((await nightMobile.locator('.td-global-nav a').count())===8,'Mobile newspaper navigation must contain eight real destinations');
+  assert((await nightMobile.locator('.night-head nav a').count())===4,'Election night subnavigation must retain four results destinations');
+  assert(await nightMobile.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+4),'Election Night mobile masthead must not overflow');
+  await nightMobile.locator('.td-global-header').screenshot({path:'visual-checks/National-Election-Night-Mobile-Header.png'});
  await nightMobile.close();
  const governorPage=await browser.newPage({viewport:{width:1440,height:900}});
  await governorPage.goto(root+'/governors/',{waitUntil:'domcontentloaded'});
