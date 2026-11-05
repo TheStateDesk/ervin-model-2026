@@ -17,6 +17,7 @@ for (const story of stories) {
   test(/<meta name="description"/.test(html), file + ': missing description');
   test(/AI-assisted/i.test(html), file + ': missing drafting disclosure');
 }
+for (const file of ['uncalled/index.html','uncalled/tracker.js','analysis/forecast-coverage/index.html','analysis/forecast-coverage/score.js']) test(fs.existsSync(file), 'Audit record missing: '+file);
 const home = read('states/index.html');
 test(home.includes('id="postElectionDesk"'), 'home: missing static news section');
 test(home.indexOf('id="postElectionDesk"') < home.indexOf('id="edSimulationPanel"'), 'home: newsroom not first');
