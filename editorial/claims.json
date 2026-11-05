@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "purpose": "Machine-readable per-article citation inventory; linking a source does not prove factual support without an editor reviewing the original.",
+  "published_editions": "Nov. 4, 2026",
+  "review_required_before_merge": true,
+  "articles": [
+    {
+      "slug": "texas-new-era",
+      "public_path": "analysis/texas-new-era/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/",
+        "https://www.texastribune.org/2026/11/04/ken-paxton-political-future-texas-gop-senate-loss/",
+        "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+        "https://www.reuters.com/world/us/james-talarico-becomes-first-democrat-win-statewide-texas-since-1994-2026-11-04/",
+        "https://www.texastribune.org/2026/08/05/texas-senate-james-talarico-economic-agenda-ken-paxton/",
+        "https://apnews.com/projects/elections-2026/"
+      ],
+      "claims": [
+        {
+          "claim": "2026 Texas Senate outcome, candidate platform and state political consequences",
+          "source_links": [
+            "https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/",
+            "https://www.texastribune.org/2026/11/04/ken-paxton-political-future-texas-gop-senate-loss/",
+            "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+            "https://www.reuters.com/world/us/james-talarico-becomes-first-democrat-win-statewide-texas-since-1994-2026-11-04/",
+            "https://www.texastribune.org/2026/08/05/texas-senate-james-talarico-economic-agenda-ken-paxton/"
+          ],
+          "local_data_files": [
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "kansas-hamilton-upset",
+      "public_path": "analysis/kansas-hamilton-upset/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://kansasreflector.com/2026/11/03/hamilton-makes-history-with-u-s-senate-win/",
+        "https://www.axios.com/2026/11/04/kansas-senate-results-marshall-adam-hamilton",
+        "https://kansasreflector.com/2026/05/27/u-s-senate-candidate-in-kansas-faults-democratic-rivals-handling-of-reported-sex-abuse/",
+        "https://transcripts.cnn.com/show/acd/date/2026-10-13/segment/01",
+        "https://www.factcheck.org/2026/11/in-kansas-both-sides-twist-the-facts-in-accusations-of-protecting-pedophiles/",
+        "https://hamiltonforkansas.com/issues/",
+        "https://www.sos.ks.gov/elections/24elec/2024-General-Election-Official-Vote-Totals.pdf",
+        "https://apnews.com/projects/elections-2026/"
+      ],
+      "claims": [
+        {
+          "claim": "Kansas Senate winner, candidate agenda, and sourced contextual reporting on allegations",
+          "source_links": [
+            "https://kansasreflector.com/2026/11/03/hamilton-makes-history-with-u-s-senate-win/",
+            "https://www.axios.com/2026/11/04/kansas-senate-results-marshall-adam-hamilton",
+            "https://kansasreflector.com/2026/05/27/u-s-senate-candidate-in-kansas-faults-democratic-rivals-handling-of-reported-sex-abuse/",
+            "https://transcripts.cnn.com/show/acd/date/2026-10-13/segment/01",
+            "https://www.factcheck.org/2026/11/in-kansas-both-sides-twist-the-facts-in-accusations-of-protecting-pedophiles/",
+            "https://hamiltonforkansas.com/issues/",
+            "https://www.sos.ks.gov/elections/24elec/2024-General-Election-Official-Vote-Totals.pdf",
+            "https://apnews.com/projects/elections-2026/"
+          ],
+          "local_data_files": [
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "south-carolina-andrews",
+      "public_path": "analysis/south-carolina-andrews/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://www.cbsnews.com/news/south-carolina-2026-senate-annie-andrews-darline-graham/",
+        "https://www.reuters.com/world/us/democrat-annie-andrews-wins-us-senate-seat-south-carolina-upset-2026-11-04/",
+        "https://courthousenews.com/annie-andrews-defeats-darline-graham-in-south-carolina-senate-race/",
+        "https://drannieandrews.com/platform/",
+        "https://apnews.com/projects/elections-2026/"
+      ],
+      "claims": [
+        {
+          "claim": "2026 South Carolina Senate winner and policy priorities",
+          "source_links": [
+            "https://www.cbsnews.com/news/south-carolina-2026-senate-annie-andrews-darline-graham/",
+            "https://www.reuters.com/world/us/democrat-annie-andrews-wins-us-senate-seat-south-carolina-upset-2026-11-04/",
+            "https://courthousenews.com/annie-andrews-defeats-darline-graham-in-south-carolina-senate-race/",
+            "https://drannieandrews.com/platform/",
+            "https://apnews.com/projects/elections-2026/"
+          ],
+          "local_data_files": [
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "polls-underestimated-democrats",
+      "public_path": "analysis/polls-underestimated-democrats/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5",
+        "https://www.washingtonpost.com/politics/2026/10/08/gop-hope-democratic-worry-are-midterm-polls-underestimating-republicans/",
+        "https://apnews.com/article/9fc6de0b46af4336df2684c6d1d504d9",
+        "https://www.axios.com/2026/11/04/midterm-election-winners-losers-results",
+        "https://www.poliwave.com/us/fed/polls",
+        "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+        "https://www.realclearpolling.com/stories/analysis/if-the-senate-is-close-these-are-the-five-races-to-watch"
+      ],
+      "claims": [
+        {
+          "claim": "Seven selected Senate vote margins versus frozen Nov. 2 polling inputs",
+          "source_links": [
+            "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5",
+            "https://www.washingtonpost.com/politics/2026/10/08/gop-hope-democratic-worry-are-midterm-polls-underestimating-republicans/",
+            "https://apnews.com/article/9fc6de0b46af4336df2684c6d1d504d9",
+            "https://www.axios.com/2026/11/04/midterm-election-winners-losers-results",
+            "https://www.poliwave.com/us/fed/polls"
+          ],
+          "local_data_files": [
+            "../../polling/coverage-2026-11-02.json",
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "three-state-election-margins",
+      "public_path": "analysis/three-state-election-margins/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://kansasreflector.com/2026/11/03/hamilton-makes-history-with-u-s-senate-win/",
+        "https://courthousenews.com/annie-andrews-defeats-darline-graham-in-south-carolina-senate-race/",
+        "https://www.fec.gov/resources/cms-content/documents/2024presgeresults.pdf",
+        "https://www.sos.ks.gov/elections/24elec/2024-General-Election-Official-Vote-Totals.pdf",
+        "https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/",
+        "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+        "https://apnews.com/projects/elections-2026/"
+      ],
+      "claims": [
+        {
+          "claim": "2024 certified presidential result versus dated 2026 Senate margins",
+          "source_links": [
+            "https://kansasreflector.com/2026/11/03/hamilton-makes-history-with-u-s-senate-win/",
+            "https://courthousenews.com/annie-andrews-defeats-darline-graham-in-south-carolina-senate-race/",
+            "https://www.fec.gov/resources/cms-content/documents/2024presgeresults.pdf",
+            "https://www.sos.ks.gov/elections/24elec/2024-General-Election-Official-Vote-Totals.pdf",
+            "https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/"
+          ],
+          "local_data_files": [
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "senate-seven-flips",
+      "public_path": "analysis/senate-seven-flips/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://www.cbsnews.com/news/senate-control-democrats-republicans-2026-midterm-elections/",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/texas",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/iowa",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/kansas",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/south-carolina",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/ohio",
+        "https://www.foxnews.com/elections/2026/midterm-results/senate",
+        "https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/",
+        "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+        "https://apnews.com/article/6e285484736b5116629a3b6e37e1dda5",
+        "https://apnews.com/projects/elections-2026/us-senate-results/",
+        "https://www.axios.com/2026/11/04/senate-republicans-trump-midterm-elections",
+        "https://kansasreflector.com/2026/11/03/hamilton-makes-history-with-u-s-senate-win/",
+        "https://courthousenews.com/annie-andrews-defeats-darline-graham-in-south-carolina-senate-race/"
+      ],
+      "claims": [
+        {
+          "claim": "Seven source-recorded Senate flips and resulting control",
+          "source_links": [
+            "https://www.cbsnews.com/news/senate-control-democrats-republicans-2026-midterm-elections/",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/texas",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/iowa",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/kansas",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/south-carolina"
+          ],
+          "local_data_files": [
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "governors-switch",
+      "public_path": "analysis/governors-switch/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://www.multistate.us/resources/governors-2026-state-election-results",
+        "https://apnews.com/article/b20c577aaffced99155af448bd182fa5",
+        "https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/",
+        "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+        "https://www.axios.com/2026/11/04/midterm-election-winners-losers-results"
+      ],
+      "claims": [
+        {
+          "claim": "Five called gubernatorial flips and Alaska disagreement between source trackers",
+          "source_links": [
+            "https://www.multistate.us/resources/governors-2026-state-election-results",
+            "https://apnews.com/article/b20c577aaffced99155af448bd182fa5",
+            "https://www.texastribune.org/2026/11/04/texas-democrats-blue-wave/",
+            "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+            "https://www.axios.com/2026/11/04/midterm-election-winners-losers-results"
+          ],
+          "local_data_files": [
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "unfinished-count",
+      "public_path": "analysis/unfinished-count/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://apnews.com/projects/elections-2026/",
+        "https://www.ap.org/elections/our-role-in-the-u-s-elections/how-ap-counts-the-vote/",
+        "https://apnews.com/projects/elections-2026/us-senate-results/"
+      ],
+      "claims": [
+        {
+          "claim": "Differences among newsroom calls, unofficial vote leaders and certification",
+          "source_links": [
+            "https://apnews.com/projects/elections-2026/",
+            "https://www.ap.org/elections/our-role-in-the-u-s-elections/how-ap-counts-the-vote/",
+            "https://apnews.com/projects/elections-2026/us-senate-results/"
+          ],
+          "local_data_files": [],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "new-congress",
+      "public_path": "analysis/new-congress/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+        "https://apnews.com/article/9fc6de0b46af4336df2684c6d1d504d9",
+        "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd",
+        "https://www.axios.com/2026/11/03/election-day-midterm-trump-democrats-republicans",
+        "https://www.senate.gov/about/powers-procedures/filibusters-cloture/overview.htm"
+      ],
+      "claims": [
+        {
+          "claim": "Projected congressional control and legislative cloture constraints",
+          "source_links": [
+            "https://www.reuters.com/business/media-telecom/takeaways-us-midterm-elections-2026-11-04/",
+            "https://apnews.com/article/9fc6de0b46af4336df2684c6d1d504d9",
+            "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd",
+            "https://www.axios.com/2026/11/03/election-day-midterm-trump-democrats-republicans",
+            "https://www.senate.gov/about/powers-procedures/filibusters-cloture/overview.htm"
+          ],
+          "local_data_files": [],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    },
+    {
+      "slug": "forecast-grade",
+      "public_path": "analysis/forecast-grade/",
+      "published_on": "2026-11-04",
+      "publisher": "Gabriel Ervin",
+      "ai_assisted": true,
+      "author_approval_required": true,
+      "source_review_status": "URL links inventoried, underlying claims still require human verification",
+      "source_links": [
+        "https://www.foxnews.com/elections/2026/midterm-results/state/texas",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/iowa",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/kansas",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/south-carolina",
+        "https://www.foxnews.com/elections/2026/midterm-results/state/ohio",
+        "https://www.foxnews.com/elections/2026/midterm-results/senate",
+        "https://www.cbsnews.com/midterms/"
+      ],
+      "claims": [
+        {
+          "claim": "Seven-race mean absolute errors of frozen adjusted vs raw-poll margins",
+          "source_links": [
+            "https://www.foxnews.com/elections/2026/midterm-results/state/texas",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/iowa",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/kansas",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/south-carolina",
+            "https://www.foxnews.com/elections/2026/midterm-results/state/ohio"
+          ],
+          "local_data_files": [
+            "../../final/forecast-final.json",
+            "../../results/ap-verified-snapshots.json"
+          ],
+          "confidence": "cited but not independently reverified by this manifest"
+        }
+      ],
+      "image_rights": "Verify original Wikimedia Commons file, author and license before future reuse"
+    }
+  ]
+}
