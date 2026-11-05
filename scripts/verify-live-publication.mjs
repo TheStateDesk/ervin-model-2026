@@ -135,7 +135,7 @@ try{
    countyViewTabs:document.querySelectorAll('[data-national-county-view]').length,
    duplicateCountyMaps:document.querySelectorAll('#electionNationalMap,#electionLocalMap').length,
    oldLab:!!document.querySelector('#researchLab,#advancedPollingDrawer,#forecast-settings,#races'),
-   badLinks:[...document.querySelectorAll('a')].filter(a=>a.getAttribute('href')==='../').length,
+   badLinks:[...document.querySelectorAll('a')].filter(a=>/\/elections\/overview\/|#researchLab|#tabs/.test(a.getAttribute('href')||'')).length,
    count:document.querySelectorAll('#powerCards .power-card').length,
    governors:document.querySelector('[data-power-office="governors"]')?.textContent,
    senateD:Number(document.querySelector('[data-power-office="senate"] [data-power-d]')?.textContent),
