@@ -165,6 +165,8 @@ jobs:
           sleep 1
           timeout 75s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=19000 --dump-dom http://127.0.0.1:8765/tests/theme_smoke.html > /tmp/ervin-theme-smoke.html 2>/tmp/ervin-theme-chrome.err
           python3 -c 'from pathlib import Path; import re,sys; h=Path("/tmp/ervin-theme-smoke.html").read_text(); m=re.search(r"<pre[^>]*data-status=.(PASS|FAIL).[^>]*>(.*?)</pre>",h,re.S); print((re.sub(r"<[^>]*>","",m.group(2)) if m else "Missing theme smoke result")[:8000]); sys.exit(0 if m and m.group(1)=="PASS" else 1)'
+      - name: Validate editorial sources, page disclosures and RSS
+        run: node scripts/validate-editorial-publication.mjs
       - name: Pre-publish state and county integrity
         run: |
           node scripts/test-county-results-core.mjs
