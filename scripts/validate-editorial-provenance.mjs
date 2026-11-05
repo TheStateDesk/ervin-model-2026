@@ -15,7 +15,7 @@ for(const item of manifest.articles){
  assert(item.ai_assisted===true&&item.author_approval_required===true,'Editorial approval requirement absent');
  const article=path.join('analysis',item.slug,'index.html');
  const html=fs.readFileSync(article,'utf8');
- assert(/<a\\s+href="https?:/i.test(html),'Missing source links '+article);
+ assert(/<a\s+href="https?:/i.test(html),'Missing source links '+article);
  for(const source of item.source_links){
   assert(typeof source==='string'&&source.startsWith('https://'),'Invalid source link');
   assert(html.includes(source),'Source inventory not matched on page: '+article+' '+source);
