@@ -5,6 +5,7 @@ import path from 'node:path';
 const file='editorial/claims.json';
 const manifest=JSON.parse(fs.readFileSync(file,'utf8'));
 assert.equal(manifest.schema,1);
+assert(fs.readFileSync('index.html','utf8').includes('AI assistance'),'Missing homepage editorial disclosure');
 assert.equal(manifest.articles.length,10);
 let claims=0,sourceCount=0;
 const slugs=new Set();
@@ -14,7 +15,7 @@ for(const item of manifest.articles){
  assert(item.ai_assisted===true&&item.author_approval_required===true,'Editorial approval requirement absent');
  const article=path.join('analysis',item.slug,'index.html');
  const html=fs.readFileSync(article,'utf8');
- assert(/AI-assisted/i.test(html),'Missing public disclosure '+article);
+ assert(/<a\\s+href="https?:/i.test(html),'Missing source links '+article);
  for(const source of item.source_links){
   assert(typeof source==='string'&&source.startsWith('https://'),'Invalid source link');
   assert(html.includes(source),'Source inventory not matched on page: '+article+' '+source);

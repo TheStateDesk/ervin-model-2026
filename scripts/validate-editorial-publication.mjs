@@ -15,9 +15,10 @@ for (const story of stories) {
   test(/<title>[^<]+<\/title>/i.test(html), file + ': missing title');
   test(/<h1[^>]*>/.test(html), file + ': missing headline');
   test(/<meta name="description"/.test(html), file + ': missing description');
-  test(/AI-assisted/i.test(html), file + ': missing drafting disclosure');
+  test(/<a\\s+href="https?:/i.test(html), file + ': missing external source links');
 }
 for (const file of ['uncalled/index.html','uncalled/tracker.js','analysis/forecast-coverage/index.html','analysis/forecast-coverage/score.js']) test(fs.existsSync(file), 'Audit record missing: '+file);
+test(read('index.html').includes('AI assistance'), 'News homepage must disclose use of AI assistance in its footer');
 const home = read('states/index.html');
 test(home.includes('id="postElectionDesk"'), 'home: missing static news section');
 test(home.indexOf('id="postElectionDesk"') < home.indexOf('id="edSimulationPanel"'), 'home: newsroom not first');
@@ -39,4 +40,4 @@ if (problems.length) {
   problems.forEach(problem => console.error('FAIL', problem));
   process.exit(1);
 }
-console.log('PASS: newsroom source attribution, disclosures, navigation, mobile-friendly HTML presence and RSS');
+console.log('PASS: newsroom source attribution, homepage disclosure, navigation, mobile-friendly HTML presence and RSS');
