@@ -6337,7 +6337,7 @@
       "verified": true
     },
     "MD-01": {
-      "asOf": "2026-11-04T20:53:03.542000Z",
+      "asOf": "2026-11-05T14:52:43.768000Z",
       "candidates": [
         {
           "name": "Andy Harris",
@@ -6352,19 +6352,19 @@
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 478
+          "votes": 477
         },
         {
           "name": "Edward Shlikas",
           "party": "O",
-          "votes": 0
+          "votes": 1
         }
       ],
       "election": "2026-11-03",
       "office": "house",
       "precinctsReporting": 100.0,
       "raceId": "87190",
-      "retrievedAt": "2026-11-04T20:54:29.228681Z",
+      "retrievedAt": "2026-11-05T14:53:59.814604Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87190",
       "timestampBasis": "provider_last_updated",
@@ -6402,34 +6402,34 @@
       "verified": true
     },
     "MD-03": {
-      "asOf": "2026-11-05T01:46:29.140000Z",
+      "asOf": "2026-11-05T14:52:44.104000Z",
       "candidates": [
         {
           "name": "Sarah Elfreth",
           "party": "D",
-          "votes": 173364
+          "votes": 173368
         },
         {
           "name": "Berney Flowers",
           "party": "R",
-          "votes": 91642
+          "votes": 91643
         },
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 707
+          "votes": 694
         },
         {
           "name": "Robert L. Coffman",
           "party": "O",
-          "votes": 3
+          "votes": 11
         }
       ],
       "election": "2026-11-03",
       "office": "house",
       "precinctsReporting": 100.0,
       "raceId": "87192",
-      "retrievedAt": "2026-11-05T01:47:56.378273Z",
+      "retrievedAt": "2026-11-05T14:53:59.814604Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87192",
       "timestampBasis": "provider_last_updated",
@@ -6437,42 +6437,42 @@
       "verified": true
     },
     "MD-04": {
-      "asOf": "2026-11-04T15:47:14.392000Z",
+      "asOf": "2026-11-05T14:52:44.456000Z",
       "candidates": [
         {
           "name": "Glenn Ivey",
           "party": "D",
-          "votes": 145407
+          "votes": 148803
         },
         {
           "name": "George McDermott",
           "party": "R",
-          "votes": 10374
+          "votes": 10624
         },
         {
           "name": "Sam Husseini",
           "party": "O",
-          "votes": 7417
+          "votes": 7592
         },
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 263
+          "votes": 270
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 55.9,
+      "precinctsReporting": 100.0,
       "raceId": "87193",
-      "retrievedAt": "2026-11-04T15:56:04.997819Z",
+      "retrievedAt": "2026-11-05T14:53:59.814604Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87193",
       "timestampBasis": "provider_last_updated",
-      "total": 163461,
+      "total": 167289,
       "verified": true
     },
     "MD-05": {
-      "asOf": "2026-11-05T01:46:30.070000Z",
+      "asOf": "2026-11-05T14:52:45.492000Z",
       "candidates": [
         {
           "name": "Adrian Boafo",
@@ -6487,19 +6487,19 @@
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 1800
+          "votes": 1791
         },
         {
           "name": "Mildred Marie Hall",
           "party": "O",
-          "votes": 6
+          "votes": 15
         }
       ],
       "election": "2026-11-03",
       "office": "house",
       "precinctsReporting": 100.0,
       "raceId": "87194",
-      "retrievedAt": "2026-11-05T01:47:56.378273Z",
+      "retrievedAt": "2026-11-05T14:53:59.814604Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87194",
       "timestampBasis": "provider_last_updated",
@@ -6572,12 +6572,12 @@
       "verified": true
     },
     "MD-08": {
-      "asOf": "2026-11-04T20:53:06.095000Z",
+      "asOf": "2026-11-05T14:52:46.255000Z",
       "candidates": [
         {
           "name": "Jamie Raskin",
           "party": "D",
-          "votes": 199582
+          "votes": 199583
         },
         {
           "name": "Cheryl Riley",
@@ -6597,53 +6597,53 @@
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 79.4,
+      "precinctsReporting": 100.0,
       "raceId": "87197",
-      "retrievedAt": "2026-11-04T20:54:29.228681Z",
+      "retrievedAt": "2026-11-05T14:53:59.814604Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87197",
       "timestampBasis": "provider_last_updated",
-      "total": 241918,
+      "total": 241919,
       "verified": true
     },
     "MD-GOVERNOR": {
-      "asOf": "2026-11-05T01:46:32.364000Z",
+      "asOf": "2026-11-05T14:52:47.178000Z",
       "candidates": [
         {
           "name": "Wes Moore",
           "party": "D",
-          "votes": 1165429
+          "votes": 1168825
         },
         {
           "name": "Dan Cox",
           "party": "R",
-          "votes": 617673
+          "votes": 617959
         },
         {
           "name": "Andy Ellis",
           "party": "O",
-          "votes": 38357
+          "votes": 38438
         },
         {
           "name": "Cathy White",
           "party": "O",
-          "votes": 36632
+          "votes": 36702
         },
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 4756
+          "votes": 4767
         }
       ],
       "election": "2026-11-03",
       "office": "governor",
-      "precinctsReporting": 74.4,
+      "precinctsReporting": 100.0,
       "raceId": "87198",
-      "retrievedAt": "2026-11-05T01:47:56.378273Z",
+      "retrievedAt": "2026-11-05T14:53:59.814604Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87198",
       "timestampBasis": "provider_last_updated",
-      "total": 1862847,
+      "total": 1866691,
       "verified": true
     },
     "ME-01": {
