@@ -73,7 +73,9 @@
   check(d.querySelector('.story-table tbody tr')?.textContent.includes('Texas'),'Preliminary forecast scorecard has independently linked source rows');
   check(d.querySelector('a[href*="forecast-final.json"]')!==null,'Audit links to original locked forecast');
   await navigate('../about/');d=frame.contentDocument;
-  check(d.body.textContent.includes('AI assistance'),'About page discloses AI-assisted production');
+  check(d.querySelector('h1')?.textContent.includes('Independent political reporting'),'About page provides publication background');
+  await navigate('../');d=frame.contentDocument;
+  check(d.querySelector('.td-footer-note')?.textContent.includes('AI assistance'),'Homepage footer carries the public AI-assistance notice');
   await navigate('../corrections/');d=frame.contentDocument;
   check(d.body.textContent.includes('Kansas'),'Published corrections page includes the Kansas source correction');
   report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.join('\n');
