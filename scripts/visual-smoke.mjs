@@ -158,7 +158,7 @@ try{
  const links=await homepage.locator('#powerCards .power-card-head a').evaluateAll(a=>a.map(x=>x.href));
  assert(links.filter(x=>x.includes('/states/?office=house#nationMap')).length===1&&links.filter(x=>x.includes('/states/?office=governor#nationMap')).length===1,'House and governor power links must open consolidated State Desk office selections');
  assert(!links.some(x=>/\/(house|governors)\/$/.test(x)),'Retired research boards must not be linked by public balance cards');
- assert((await homepage.locator('a[href="../"],a[href*="#researchLab"],a[href*="#tabs"]').count())===0,'State Desk must not link to retired research home');
+ assert((await homepage.locator('a[href*="#researchLab"],a[href*="#tabs"]').count())===0,'State Desk must not link to retired research workbench');
  assert((await homepage.locator('#researchLab,#advancedPollingDrawer,#races').count())===0,'Legacy forecast lab still present on public State Desk');
  // Validate the entire nationwide county map is real feature geometry and
  // switches from 2026 Senate to governor projections without changing files.
