@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T03:53:46.362866Z",
+  "generated_at": "2026-11-05T04:31:41.659645Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -11,7 +11,7 @@
     "REUTERS VIA GOOGLE NEWS"
   ],
   "source_warnings": [
-    "ASSOCIATED PRESS: no recent politics items"
+    "AP VIA FLIPBOARD (UNOFFICIAL): no recent politics items"
   ],
   "priority": [
     {
@@ -26,22 +26,7 @@
           "url": "https://www.pbs.org/newshour/politics/vance-blames-iran-war-for-gop-midterm-losses"
         }
       ],
-      "priority_score": 7,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Trump speaks about White House ballroom and Iran war’s unpopularity after midterm losses – video",
-      "url": "https://www.theguardian.com/us-news/video/2026/nov/04/trump-speaks-about-white-house-ballroom-and-iran-wars-unpopularity-after-midterm-losses-video",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-04T19:57:37Z",
-      "source_count": 2,
-      "other_sources": [
-        {
-          "source": "THE HILL",
-          "url": "https://thehill.com/video-clips/6198474-watch-live-trump-speaks-from-white-house-ballroom-construction-site/"
-        }
-      ],
-      "priority_score": 7,
+      "priority_score": 5,
       "note": "Potential major development; verify original reporting before publishing."
     },
     {
@@ -75,15 +60,15 @@
       "note": "Potential major development; verify original reporting before publishing."
     },
     {
-      "title": "Democrats' midterm sweep fuels $750 billion Big Tech rally - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNTzc2SlBDbW9CQmpVSmZXdzM1aW9hSGV3cnF2ZFZWTnozUHl0ejU2T3R1eG5xVmhFMG1Vb25oQTc0clFCUVhOQ1ZQaHhLWF9POElFb3cwMjVGdGt5UTFlaWgyUlAtWWIwbFlpbDFmaC1mM1Rta2g5OE1NVk0yNlA4bl9HTi1VTWdqYlc0enR0a3BMUW5MU1RPaTBiWmVVNy00SmdteVk0LVptR21iWGRyVnk2ekttazR3?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T19:28:58Z",
+      "title": "Trump speaks about White House ballroom and Iran war’s unpopularity after midterm losses – video",
+      "url": "https://www.theguardian.com/us-news/video/2026/nov/04/trump-speaks-about-white-house-ballroom-and-iran-wars-unpopularity-after-midterm-losses-video",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-04T19:57:37Z",
       "source_count": 2,
       "other_sources": [
         {
           "source": "THE HILL",
-          "url": "https://thehill.com/policy/technology/6197847-democrats-big-tech-ai-regulations-2026-midterm-wins/"
+          "url": "https://thehill.com/video-clips/6198474-watch-live-trump-speaks-from-white-house-ballroom-construction-site/"
         }
       ],
       "priority_score": 5,
@@ -103,6 +88,21 @@
       ],
       "priority_score": 5,
       "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
+      "title": "Crypto’s midterm spending spree stumbles as Democrats rack up big wins - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOdlkxeHZnLTRjamNZS2JrMm9EeDZzdTM2NVNFT2JrSFEyZmF4MzVxR1VvVTlRZ3VBRHc0LWxUeXJKT1p4UEl3aGNtLWF0bzE2c3k1d3dPcjNBOC1xSTMycklfWVdnNTYybkhvT2Y4Q3BPSGVad2w5ODJLVWZtOURrVnRtM1ZpaEdIQnk1ZGl1RkZ2alVNclNLZjlVY1RXcEVNUnJERjMySjRqaGxyM044XzBoaGxtNUlLN1ZxaGFCWQ?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-04T16:47:35Z",
+      "source_count": 2,
+      "other_sources": [
+        {
+          "source": "THE HILL",
+          "url": "https://thehill.com/policy/technology/6197847-democrats-big-tech-ai-regulations-2026-midterm-wins/"
+        }
+      ],
+      "priority_score": 5,
+      "note": "Potential major development; verify original reporting before publishing."
     }
   ],
   "headlines": [
@@ -110,7 +110,13 @@
       "title": "US midterm elections 2026 live: Democratic lead grows in Mississippi Senate race as Republican blame game begins",
       "url": "https://www.theguardian.com/us-news/live/2026/nov/04/midterm-elections-results-senate-house-michigan-maine-mississippi-latest-updates",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T03:37:35Z"
+      "published_at": "2026-11-05T04:14:32Z"
+    },
+    {
+      "title": "ANC narrowly leads DA in early South Africa municipal election results - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNUnN3dFFLUkpFd0tTREdxWjlLMlRWTzRRcGhNdVVuMTl3OEJybmJFNndpQmZ1Y0RUYXF1dW94akRDVGFIbVQyUmIxdmIxZFR2dkdiNm52ZzB5TUxyU1NzRjR1VlNXRzBNZDlyLW8tLXZqeVpKN085NDdvN2tqNjdJU0VPeUduTk5HN0pMaFdNNFpsOExwMk8tYVROOG42R0x1MVVacUJBc013YnJ2Uml3cEtvcTZWZw?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T04:12:00Z"
     },
     {
       "title": "Photos show Americans reacting in real-time to midterm results - Reuters",
@@ -137,6 +143,12 @@
       "published_at": "2026-11-05T02:20:00Z"
     },
     {
+      "title": "Rupee to rally after US midterm fallout sinks oil on Iran war-exit hopes - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQME9GZlNzY1R1djlUYWZnQ2lQRXE3ZHoxQ1VhOEZhaVRyVTY3TWZIRXhNMDNaemNtb0NFNzJZeTZtYlRCX0FtbFlYenA4Z0gtSkZBZVFRQThHZkRtcHhsR09wWXVhdl9CLUQ2Z19JNWpFWlI0N013RFR4VDFrSTFoZzVQS3F5Y216eWdlMTlZbWxldWY4TXh0M09TLTBuX3lUZ1ZWRzVaRHhxSENxT3E4Qlpwd0E?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T02:19:00Z"
+    },
+    {
       "title": "Datacenters were on the ballot. US voters rejected them",
       "url": "https://www.theguardian.com/us-news/2026/nov/04/datacenters-midterm-elections",
       "source": "THE GUARDIAN",
@@ -147,6 +159,12 @@
       "url": "https://www.theguardian.com/us-news/2026/nov/04/colorado-rejects-conservative-immigration-amendment",
       "source": "THE GUARDIAN",
       "published_at": "2026-11-05T01:10:46Z"
+    },
+    {
+      "title": "Dollar edges lower as US election outcome cheers global markets - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOS3ZvRzF1aTlTZE9WT0NxYkU4TWFHTi04YnhEVXd1VTJRTXdibGtPdGZtTWkwZEVBLU0xNmtZaEc4R2lWZWVSdGJtY1FSdzhIazR5a2YwdDJoRzFFTHN1Z2FNb2l5b2x5SllyTE9sTTZTNkxFODFJVkhxOGhlblRTXzNiLTZpc3FKcXBqRzZUMjYtY3VXOHlnR0hPOFFYTldZaXpzSGNTbzlPNlhUdHF1amJTcFp1dw?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T01:06:00Z"
     },
     {
       "title": "Live updates: Trump blames Iran war for midterm loss while touting ballroom construction",
@@ -231,24 +249,6 @@
       "url": "https://www.pbs.org/newshour/show/okcs-republican-mayor-says-election-wipeout-is-rejection-of-trumpism",
       "source": "PBS NEWSHOUR",
       "published_at": "2026-11-04T23:25:13Z"
-    },
-    {
-      "title": "US judge rules DOJ cannot link states' grant funding to immigration enforcement - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPdllVSlVYNC12bGJxOE5vanRCQlNTODBHX3VHMDc5cU9xQ0g2cXFNYmp6Y3dvOGJ3UGVUZ3haLUpsb1NRYWRBQ3d4VkFZdVpablNyZmRDM0VmVUs2UVozSndKT01KeFRtYk4xdVowV1V2Y2czQW1kUmdhbjBiNjN4Z3dkVjY3anhxV1hDT3I4dEdBSGZqS3hObnRhVC1Vam1XWVNCMDJYblMyVndjLWl4ZW0xVVl4dTZGcEMtQ3VERkJtaGktOFVz?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:24:57Z"
-    },
-    {
-      "title": "Democratic and GOP strategists on how parties should respond to midterm results",
-      "url": "https://www.pbs.org/newshour/show/democratic-and-gop-strategists-on-how-parties-should-respond-to-midterm-results",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-04T23:15:00Z"
-    },
-    {
-      "title": "Paraguay bank crisis spurs lawmakers' calls to impeach president - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPQnVQS0hGM3R0Ynl5bHhWNDN2dkFQX1BqT3NWSnJaYzlXODRySlJ2TnNzZUdSY1FvWVBYMkxrOTQ2aDB1V2tlT1JuX3lwTVA0SzV4cTVzeGcwcHpoZUxleFpaYnFtQkhuQXJWYnoyalBmRm1pdi0wYXVuakM2c0ZLZzJ4LUN2c244MVV1a2tzd1BrZS1icjQxOFAtMXcwRXJiV2RqLV8tbnZxMEpHSlV4Uw?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:10:09Z"
     }
   ]
 }
