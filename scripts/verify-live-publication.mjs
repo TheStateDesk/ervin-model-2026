@@ -54,11 +54,21 @@ try{
    await page.close();
   }
  }
- // The State Desk is the only canonical public homepage. The root path
- // redirects here; the experimental research workbench is not linked from it.
- const rootPage=await browser.newPage();
+ // The newspaper home is the public entry point; election results stay in /states/.
+ const rootPage=await browser.newPage({viewport:{width:390,height:844}});
  await rootPage.goto(base+'?release='+stamp,{waitUntil:'domcontentloaded'});
- await rootPage.waitForURL(/\/states\//,{timeout:18000});
+ const newsroom=await rootPage.evaluate(()=>({
+   title:document.title,
+   masthead:document.querySelector('.masthead')?.textContent||'',
+   heading:document.querySelector('h1')?.textContent||'',
+   stories:document.querySelectorAll('a[href^="analysis/"]').length,
+   electionLink:!!document.querySelector('a[href="states/"]'),
+   footer:document.querySelector('footer')?.textContent||'',
+   viewport:!!document.querySelector('meta[name="viewport"]')
+ }));
+ if(!newsroom.title.includes('The State Desk')||!newsroom.masthead.includes('The State Desk')||!newsroom.heading||newsroom.stories<5||!newsroom.electionLink||!newsroom.footer.includes('AI assistance')||!newsroom.viewport)throw Error('PUBLIC NEWSPAPER HOMEPAGE VERIFICATION FAILED '+JSON.stringify(newsroom));
+ await rootPage.screenshot({path:'postdeploy-checks/State-Desk-Newsroom-Mobile.png',fullPage:false});
+ console.log('PUBLIC NEWSPAPER HOMEPAGE PASS '+newsroom.stories+' story/navigation links and election archive');
  await rootPage.close();
  const front=await browser.newPage({viewport:{width:390,height:844}});
  await front.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
