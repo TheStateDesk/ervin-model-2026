@@ -1,7 +1,7 @@
 {
-  "status": "draft_only",
+  "status": "approved_for_publication",
   "drafted_at": "2026-11-05T13:02:51Z",
-  "updated_at": "2026-11-05T13:02:51Z",
+  "updated_at": "2026-11-05T15:40:00Z",
   "original_publishers": [
     {
       "publisher": "Reuters, September 1, 2026",
@@ -18,18 +18,27 @@
     {
       "publisher": "Congressional Constitution Annotated, Twentieth Amendment (standing primary record)",
       "url": "https://constitution.congress.gov/browse/amendment-20/"
+    },
+    {
+      "publisher": "Congressional Research Service, September 17, 2026",
+      "url": "https://www.everycrsreport.com/reports/R49353.html"
+    },
+    {
+      "publisher": "U.S. Senate legislative record",
+      "url": "https://www.senate.gov/legislative/active_leg_page.htm"
     }
   ],
   "claims": {
-    "370–48 House vote": "Reuters September 1 report",
-    "December 11 2026 funding deadline": "Reuters September 1 report; requires enacted-law recheck",
+    "370–48 House vote": "CRS R49353, September 1 House concurrence",
+    "December 11 2026 funding deadline": "Public Law 119-103; CRS R49353; Senate legislative record",
     "January 3 2027 new congressional terms": "Twentieth Amendment, calendar application",
     "22 calendar days": "December 11 to January 3 arithmetic; editorial calculation",
     "December 4 earlier proposal": "AP July report; explicitly superseded as proposal"
   },
   "checks": {
-    "links": "URLs structurally checked; live HTTP checks not completed",
-    "numbers": "arithmetic manually checked; primary records pending",
-    "mobile": "responsive CSS reviewed; browser screenshot pending"
-  }
+    "links": "Source URLs reviewed against accessible publisher pages and public records; no comprehensive automated HTTP audit",
+    "numbers": "CRS R49353 and U.S. Senate public law listing cross-checked; 22-day interval independently calculated",
+    "mobile": "Responsive CSS inspected; automated mobile-browser screenshot not completed"
+  },
+  "published_at": "2026-11-05T15:40:00Z"
 }
