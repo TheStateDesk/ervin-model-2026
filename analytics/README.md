@@ -5,7 +5,7 @@ The State Desk now includes a site-wide optional, privacy-focused Cloudflare Web
 ## Activate
 
 1. Create a free [Cloudflare account](https://dash.cloudflare.com/sign-up) if needed. Keep GitHub Pages hosting unchanged; Cloudflare does not need to host your site, control DNS or proxy traffic.
-2. Open [Cloudflare Web Analytics](https://dash.cloudflare.com/?to=/:account/web-analytics), select **Add a site**, and register **geervin.github.io**.
+2. Open [Cloudflare Web Analytics](https://dash.cloudflare.com/?to=/:account/web-analytics), select **Add a site**, and register **thestatedesk.github.io**.
 3. Go to **Manage site**, copy the token in the `data-cf-beacon` snippet. It is a public 32-character hexadecimal *site* token, not a Cloudflare API key.
 4. Replace the empty value in `analytics/config.json` with the token (keep the JSON syntax). Commit to `main` and confirm GitHub Pages deployment.
 5. Open the [Cloudflare Web Analytics dashboard](https://dash.cloudflare.com/?to=/:account/web-analytics) to view page views, visits, top article paths, referrers, geography and trends.

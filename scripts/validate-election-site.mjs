@@ -121,7 +121,7 @@ class TestElement {
  addEventListener(type,callback){this.events[type]=callback;}
 }
 const documentStub={
- currentScript:{src:'https://geervin.github.io/ervin-model-2026/scripts/geo-engine.js'},
+ currentScript:{src:'https://thestatedesk.github.io/scripts/geo-engine.js'},
  createElementNS:(_,tag)=>new TestElement(tag),
  createDocumentFragment:()=>new TestElement('fragment')
 };
@@ -131,13 +131,13 @@ const fetchStub=async url=>{
  const parsed=new URL(url);
  if(simulateAlaskaPrimaryOutage&&/\/geo\/(counties|districts)\/AK\.json$/.test(parsed.pathname))return {ok:false,status:503};
  if(simulateTexasPrimaryOutage&&/\/geo\/districts\/TX\.json$/.test(parsed.pathname))return {ok:false,status:503};
- const marker='/ervin-model-2026/';
+ const marker='/';
  assert(parsed.pathname.startsWith(marker),'Geography escaped site base path: '+parsed.pathname);
  const local=path.join(root,parsed.pathname.slice(marker.length));
  if(!fs.existsSync(local))return {ok:false,status:404};
  return {ok:true,json:async()=>JSON.parse(fs.readFileSync(local,'utf8'))};
 };
-const context={document:documentStub,window:browserWindow,fetch:fetchStub,URL,location:{href:'https://geervin.github.io/ervin-model-2026/elections/'}};
+const context={document:documentStub,window:browserWindow,fetch:fetchStub,URL,location:{href:'https://thestatedesk.github.io/elections/'}};
 new Script(file('scripts/geo-engine.js'),{filename:'scripts/geo-engine.js'}).runInNewContext(context);
 let projectedCountyShapes=0,projectedDistrictShapes=0;
 for(const [code,meta] of geographicStates){

@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"michigan"/"election-night"/"source_health.json"
-UA="ErvinModel/1.0 (public election night source readiness; github.com/geervin/ervin-model-2026)"
+UA="ErvinModel/1.0 (public election night source readiness; github.com/TheStateDesk/thestatedesk.github.io)"
 URLS={
  "oakland":{"label":"Oakland · 2026 results portal","url":"https://results.enr.clarityelections.com/MI/Oakland/127284/","kind":"page"},
  "kent":{"label":"Kent · 2026 results portal","url":"https://app.enhancedvoting.com/results/public/kent-county-mi/elections/11032026_20261005115447","kind":"page"},
@@ -30,7 +30,7 @@ def inspect(key,entry,opener=urllib.request.urlopen):
     result={"label":entry["label"],"url":entry["url"],"status":"unavailable",
             "note":"Not tested","role":entry["kind"]}
     try:
-        request=urllib.request.Request(entry["url"],headers={"User-Agent":UA,"Accept":"application/json,text/html;q=0.8,*/*;q=0.5","Origin":"https://geervin.github.io"})
+        request=urllib.request.Request(entry["url"],headers={"User-Agent":UA,"Accept":"application/json,text/html;q=0.8,*/*;q=0.5","Origin":"https://thestatedesk.github.io"})
         with opener(request,timeout=12) as response:
             code=getattr(response,"status",200)
             body=response.read(2_000_000)
@@ -58,7 +58,7 @@ def inspect(key,entry,opener=urllib.request.urlopen):
         else:
             result.update(status="indeterminate",note="HTTP 200 but no readable response body")
         if entry["kind"] in ("gis","replay","current"):
-            if cors not in ("*", "https://geervin.github.io"):
+            if cors not in ("*", "https://thestatedesk.github.io"):
                 result.update(status="indeterminate",note="Server responds, but browser CORS permission was not confirmed")
             else:
                 result["note"] += " · browser CORS allowed"

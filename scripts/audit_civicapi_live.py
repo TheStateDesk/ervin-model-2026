@@ -34,7 +34,7 @@ def fetch(label,path,params=None):
     begin=time.perf_counter()
     req=urllib.request.Request(url,headers={
         "Accept":"application/json",
-        "User-Agent":"ErvinModel2026-ReadOnlyPreflight/1.0 (https://geervin.github.io/ervin-model-2026/)",
+        "User-Agent":"ErvinModel2026-ReadOnlyPreflight/1.0 (https://thestatedesk.github.io/)",
     })
     try:
         with urllib.request.urlopen(req,timeout=16) as response:

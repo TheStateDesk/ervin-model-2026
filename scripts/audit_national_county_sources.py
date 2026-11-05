@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 REG=ROOT/'election-night'/'county-sources.json'
 OUT=ROOT/'election-night'/'county-source-health.json'
-UA='ErvinModel/2026 (county election source audit; github.com/geervin/ervin-model-2026)'
+UA='ErvinModel/2026 (county election source audit; github.com/TheStateDesk/thestatedesk.github.io)'
 CODES='AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split()
 
 def normalized(s):

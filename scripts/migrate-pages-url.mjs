@@ -12,9 +12,9 @@ import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 
 const apply=process.argv.includes('--apply');
-const oldSite='geervin.github.io/ervin-model-2026';
+const oldSite='thestatedesk.github.io';
 const newSite='thestatedesk.github.io';
-const oldRepo='geervin/ervin-model-2026';
+const oldRepo='TheStateDesk/thestatedesk.github.io';
 const newRepo='TheStateDesk/thestatedesk.github.io';
 const textFile=/\.(?:html?|css|[cm]?js|json|xml|ya?ml|md|txt|py|toml|svg|webmanifest|csv|sh)$/i;
 
@@ -32,8 +32,8 @@ for(const file of tracked){
  const before=bytes.toString('utf8');
  let after=before.replaceAll(oldSite,newSite).replaceAll(oldRepo,newRepo)
   .replaceAll('geervin\\.github\\.io','thestatedesk\\.github\\.io')
-  .replaceAll('geervin.github.io',newSite)
-  .replaceAll('/ervin-model-2026/','/');
+  .replaceAll('thestatedesk.github.io',newSite)
+  .replaceAll('/','/');
  if(after===before)continue;
  changed.push(file);
  if(apply)fs.writeFileSync(file,after);

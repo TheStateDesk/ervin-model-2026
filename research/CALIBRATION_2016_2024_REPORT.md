@@ -1,6 +1,6 @@
 # Ervin + 2016–2024 partially pooled calibration
 
-**Implemented October 23, 2026.** Deployed on [the Ervin Model website](https://geervin.github.io/ervin-model-2026/), under the **Ervin +** model setting (default on Ervin's Take).
+**Implemented October 23, 2026.** Deployed on [the Ervin Model website](https://thestatedesk.github.io/), under the **Ervin +** model setting (default on Ervin's Take).
 
 ## Scope and traceability
 
