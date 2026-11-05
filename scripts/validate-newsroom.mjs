@@ -24,6 +24,7 @@ for(const p of pages){
  for(const [name,target] of tabs)assert(h.includes('href="'+up+target+'"'),p+' has no working '+name+' section link');
 }
 const rootHtml=read('index.html');
+assert(!read('about/index.html').includes('AI assistance'),'The publication notice belongs in the homepage footer rather than a second About-page disclosure');
 assert(!/editorial preview|proposed analysis|remains unpublished/i.test(rootHtml),'Unpublished draft label visible on public front page');
 assert(rootHtml.includes('href="states/"'),'Preserved interactive election atlas must remain accessible');
 assert(rootHtml.includes('AI assistance')&&rootHtml.indexOf('AI assistance')>rootHtml.lastIndexOf('<footer'),'Homepage editorial notice must be in footer only');
