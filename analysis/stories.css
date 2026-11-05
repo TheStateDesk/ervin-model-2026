@@ -44,3 +44,9 @@ html.theme-dark .story-copy p{color:#d6e1e9}
 .story-correction{border-left:4px solid #9d6d43;background:#eee8de;padding:15px 18px;margin:18px 0 24px;font:13px/1.7 "Libre Franklin",Arial,sans-serif}
 @media(max-width:780px){.story-lede-grid{grid-template-columns:minmax(0,1fr);gap:20px}.story-copy,.story-aside{width:100%;max-width:100%}.story-copy .story-table-wrap{width:100%!important;max-width:100%!important;overflow-x:auto}.story-table{min-width:620px}}
 @media(max-width:430px){.story-heading h1,.story-index-hero h1{font-size:clamp(35px,10vw,48px);line-height:1.08}.story-shell{padding-left:16px;padding-right:16px}}
+
+/* Shared story typography and restrained editorial presentation */
+.story-heading h1{font-size:clamp(34px,4.2vw,54px)!important;letter-spacing:-.018em!important;line-height:1.1!important}
+.story-heading .story-kicker{text-transform:uppercase}
+.story-production-note{display:none}
+.story-hero-photo figure,.story-hero-photo{border-top:0!important}
