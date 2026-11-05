@@ -1,6 +1,6 @@
 {
   "attemptedRaces": 505,
-  "checkedAt": "2026-11-05T06:23:38.606637Z",
+  "checkedAt": "2026-11-05T09:18:14.822212Z",
   "discovery": {
     "found": 505,
     "lookups": 1,
@@ -12,8 +12,20 @@
   "election": "2026-11-03",
   "eligibleRaces": 505,
   "errors": {
+    "FL-04": "vote_total_decreased_held",
+    "FL-07": "vote_total_decreased_held",
+    "FL-08": "vote_total_decreased_held",
     "FL-10": "no_valid_reported_votes",
+    "FL-14": "vote_total_decreased_held",
+    "FL-15": "vote_total_decreased_held",
+    "FL-21": "vote_total_decreased_held",
+    "FL-22": "vote_total_decreased_held",
+    "FL-23": "vote_total_decreased_held",
+    "FL-24": "vote_total_decreased_held",
+    "FL-25": "vote_total_decreased_held",
     "FL-26": "vote_total_decreased_held",
+    "FL-GOVERNOR": "vote_total_decreased_held",
+    "FL-SENATE": "vote_total_decreased_held",
     "IN-01": "vote_total_decreased_held",
     "IN-02": "vote_total_decreased_held",
     "IN-03": "vote_total_decreased_held",
@@ -151,7 +163,7 @@
       "payloadType": "dict",
       "positiveCandidateTotals": true,
       "providerTimestamp": "2026-11-04T15:48:21.263Z",
-      "responseMs": 117
+      "responseMs": 84
     },
     "MI-SENATE": {
       "candidateRows": 12,
@@ -183,7 +195,7 @@
       "payloadType": "dict",
       "positiveCandidateTotals": true,
       "providerTimestamp": "2026-11-04T15:46:24.895Z",
-      "responseMs": 119
+      "responseMs": 103
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -192,7 +204,7 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 89
+      "responseMs": 93
     }
   },
   "publishedRaces": 481,
@@ -912,6 +924,7 @@
       "validatedVoteTotal": 299778
     },
     "FL-04": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T20:54:29.228681Z",
       "lastValidatedResultAt": "2026-11-04T20:53:28.025000Z",
       "office": "house",
@@ -933,6 +946,7 @@
       "validatedVoteTotal": 331558
     },
     "FL-07": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T15:56:04.997819Z",
       "lastValidatedResultAt": "2026-11-04T15:48:25.372000Z",
       "office": "house",
@@ -940,6 +954,7 @@
       "validatedVoteTotal": 324157
     },
     "FL-08": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T05:31:25.430470Z",
       "lastValidatedResultAt": "2026-11-04T05:31:44.945000Z",
       "office": "house",
@@ -980,6 +995,7 @@
       "validatedVoteTotal": 313496
     },
     "FL-14": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T05:31:25.430470Z",
       "lastValidatedResultAt": "2026-11-04T05:31:47.783000Z",
       "office": "house",
@@ -987,6 +1003,7 @@
       "validatedVoteTotal": 300226
     },
     "FL-15": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T05:31:25.430470Z",
       "lastValidatedResultAt": "2026-11-04T05:31:48.365000Z",
       "office": "house",
@@ -1029,6 +1046,7 @@
       "validatedVoteTotal": 245505
     },
     "FL-21": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T15:56:04.997819Z",
       "lastValidatedResultAt": "2026-11-04T15:48:33.475000Z",
       "office": "house",
@@ -1036,6 +1054,7 @@
       "validatedVoteTotal": 340788
     },
     "FL-22": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T15:56:04.997819Z",
       "lastValidatedResultAt": "2026-11-04T15:48:33.972000Z",
       "office": "house",
@@ -1043,6 +1062,7 @@
       "validatedVoteTotal": 294933
     },
     "FL-23": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T15:56:04.997819Z",
       "lastValidatedResultAt": "2026-11-04T15:48:34.140000Z",
       "office": "house",
@@ -1050,6 +1070,7 @@
       "validatedVoteTotal": 258707
     },
     "FL-24": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T20:54:29.228681Z",
       "lastValidatedResultAt": "2026-11-04T20:53:37.196000Z",
       "office": "house",
@@ -1057,6 +1078,7 @@
       "validatedVoteTotal": 204772
     },
     "FL-25": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T20:54:29.228681Z",
       "lastValidatedResultAt": "2026-11-04T20:53:37.538000Z",
       "office": "house",
@@ -1086,6 +1108,7 @@
       "validatedVoteTotal": 236269
     },
     "FL-GOVERNOR": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-05T06:23:38.606637Z",
       "lastValidatedResultAt": "2026-11-05T06:20:18.076000Z",
       "office": "governor",
@@ -1093,6 +1116,7 @@
       "validatedVoteTotal": 8270540
     },
     "FL-SENATE": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-05T06:23:38.606637Z",
       "lastValidatedResultAt": "2026-11-05T06:20:12.422000Z",
       "office": "senate",
@@ -3731,6 +3755,6 @@
   "registeredRaces": 505,
   "targetRaces": 506,
   "transientApiErrors": 0,
-  "updatedRaces": 23,
+  "updatedRaces": 0,
   "version": 2
 }
