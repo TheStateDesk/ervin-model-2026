@@ -20,7 +20,7 @@
   check(d.querySelectorAll('#postCloseList .post-close-item').length>=10,'At least ten attributed result calls render and link to race details');
   check($('watchSection')?.hidden===false&&w.getComputedStyle($('watchSection')).display==='none','Pre-election watch carousel is archived, not shown');
   check($('balanceOfPower')&&w.getComputedStyle($('balanceOfPower')).display==='none','Forecast seat projections no longer compete with reported control');
-  check(d.querySelectorAll('.pe-global-nav a').length>=8,'Persistent eight-section editorial navigation installed');
+  check(d.querySelectorAll('.td-global-nav a').length>=8,'Persistent eight-section editorial navigation installed');
   check(d.querySelectorAll('#usMap path.ed-state').length===50,'All fifty state SVG shapes available');
   check($('postCloseRaces')&&$('postCloseList'),'Outstanding-count section exists');
   const senate=d.querySelector('[data-post-office="senate"]');senate.click();
@@ -43,7 +43,7 @@
   frame.style.width='390px';await new Promise(resolve=>w.requestAnimationFrame(resolve));
   check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'Senate article mobile text fits without horizontal overflow');
   frame.style.width='1180px';
-  check(d.querySelectorAll('.pe-global-nav a').length>=8,'Articles share the same nav as national site');
+  check(d.querySelectorAll('.td-global-nav a').length>=8,'Articles share the same nav as national site');
   await navigate('../analysis/texas-new-era/');d=frame.contentDocument;
   check(d.querySelector('h1')?.textContent.includes('Talarico'),'New Texas feature is linked and readable');
   await navigate('../analysis/kansas-hamilton-upset/');d=frame.contentDocument;
@@ -59,7 +59,7 @@
   check(d.querySelectorAll('.pr-snapshot-card').length===7,'Seven Senate AP-attributed vote snapshots display, excluding governor snapshot records');
   check(d.querySelectorAll('a[href*="apnews.com/projects/elections-2026/"]').length>=3,'Results desk links directly to original AP election pages');
   check(!d.body.textContent.includes('CivicAPI'),'AP-led results page contains no CivicAPI provider interface');
-  check(d.querySelectorAll('.pe-global-nav a[href$="/results/"]').length===1,'Results navigation points to the replacement AP-led desk');
+  check(d.querySelectorAll('.td-global-nav a[href$="/results/"]').length===1,'Results navigation points to the replacement AP-led desk');
   d.querySelector('#prOffice').value='senate';d.querySelector('#prOffice').dispatchEvent(new Event('change'));
   check(d.querySelector('#prCallNotice')?.textContent.includes('locally documented source-linked'),'Office filter continues to show sourced race calls');
   await navigate('../analysis/polls-underestimated-democrats/');d=frame.contentDocument;w=frame.contentWindow;
