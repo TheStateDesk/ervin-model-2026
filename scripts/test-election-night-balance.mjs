@@ -57,7 +57,7 @@ assert(html.indexOf('id="watchSection"')<html.indexOf('id="balanceOfPower"'),'Pu
 assert(html.includes('scripts/home-election-2026.js')&&html.includes('scripts/home-control.js')&&html.includes('scripts/senate_control.js'),'Races to watch and public Senate-control sensitivity model must both be available');
 assert(!html.includes('id="researchLab"')&&!html.includes('window.ERVIN_DATA'),'Retired research dashboard still exposed on the public homepage');
 assert(html.includes('../election-night/power.js')&&html.includes('../scripts/home-power.js'),'State Desk balance module missing');
-assert(root.includes('location.replace')&&root.includes('states/'),'Site root must send visitors to actual homepage');
+assert(root.includes('<title>The State Desk')&&root.includes('href="states/"')&&root.includes('AI assistance')&&!root.includes('location.replace'),'The newspaper home must remain public with an election-desk link and footer notice');
 assert(browser.includes('ERVIN_POWER.compute')&&browser.includes('ERVIN_POWER.render'));
 assert(css.includes('power-segment-d')&&css.includes('power-segment-r')&&css.includes('power-segment-t'));
 assert(!nightHtml.includes('id="balanceOfPower"')&&!nightHtml.includes('power.js'),'Election Night must not have forecast balance bars');
