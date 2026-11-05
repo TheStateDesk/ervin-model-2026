@@ -1,0 +1,37 @@
+{
+  "status": "published",
+  "drafted_at": "2026-11-05T13:02:51Z",
+  "updated_at": "2026-11-05T15:40:00Z",
+  "original_publishers": [
+    {
+      "publisher": "Mississippi Today, November 4, 2026",
+      "url": "https://mississippitoday.org/2026/11/04/an-army-of-lawyers-colom-hyde-smith-camps-monitor-vote-counting-as-nation-watches/"
+    },
+    {
+      "publisher": "WLBT via WTVA, November 4, 2026, 5:17 p.m. EST (page later updated)",
+      "url": "https://www.wtva.com/2026/11/04/mississippi-has-10-days-certify-election-results-secretary-state-says/"
+    },
+    {
+      "publisher": "ABC News, November 4, 2026",
+      "url": "https://abcnews.com/Politics/recounts-mississippi-razor-thin-margin-senate-race/story?id=137844445"
+    },
+    {
+      "publisher": "Reuters, November 5, 2026",
+      "url": "https://www.reuters.com/legal/government/democrats-vow-rein-trump-he-shows-off-white-house-ballroom-2026-11-05/"
+    }
+  ],
+  "claims": {
+    "70 counties uploaded": "WLBT via WTVA Nov 4 report",
+    "82 counties total": "WLBT via WTVA Nov 4 report",
+    "12 not yet uploaded": "82 minus 70, editorial calculation",
+    "approximately 3600 outstanding mailed absentee ballots": "WLBT via WTVA Nov 4 report",
+    "November 13 certification deadline": "WLBT via WTVA Nov 4 report",
+    "no automatic or candidate-requested recount": "Mississippi Today Nov 4 reporting; confirm with secretary of state before publication"
+  },
+  "checks": {
+    "links": "Source links spot-checked; comprehensive automated HTTP validation not completed",
+    "numbers": "WLBT/WTVA and WLOX corroborate 70 of 82 counties, 3600 mail ballots and November 13 deadline; ABC News confirms recount rules",
+    "mobile": "Responsive CSS reviewed; automated mobile screenshots not completed"
+  },
+  "published_at": "2026-11-05T15:40:00Z"
+}

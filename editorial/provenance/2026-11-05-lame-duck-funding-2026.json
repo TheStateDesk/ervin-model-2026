@@ -1,0 +1,52 @@
+{
+  "status": "published",
+  "drafted_at": "2026-11-05T13:02:51Z",
+  "updated_at": "2026-11-05T15:40:00Z",
+  "original_publishers": [
+    {
+      "publisher": "Reuters, September 1, 2026",
+      "url": "https://www.reuters.com/legal/government/us-house-has-enough-votes-pass-stopgap-funds-prevent-shutdowns-oct-1-2026-09-01/"
+    },
+    {
+      "publisher": "Associated Press, July 2026 (earlier proposal)",
+      "url": "https://apnews.com/article/a808a5428729a70cdc0250ab0a35611a"
+    },
+    {
+      "publisher": "Reuters, November 5, 2026",
+      "url": "https://www.reuters.com/legal/government/democrats-vow-rein-trump-he-shows-off-white-house-ballroom-2026-11-05/"
+    },
+    {
+      "publisher": "Congressional Constitution Annotated, Twentieth Amendment (standing primary record)",
+      "url": "https://constitution.congress.gov/browse/amendment-20/"
+    },
+    {
+      "publisher": "Congressional Research Service, September 17, 2026",
+      "url": "https://www.everycrsreport.com/reports/R49353.html"
+    },
+    {
+      "publisher": "U.S. Senate legislative record",
+      "url": "https://www.senate.gov/legislative/active_leg_page.htm"
+    },
+    {
+      "publisher": "Congressional Research Service, September 17, 2026",
+      "url": "https://www.everycrsreport.com/reports/R49353.html"
+    },
+    {
+      "publisher": "U.S. Senate legislative record",
+      "url": "https://www.senate.gov/legislative/active_leg_page.htm"
+    }
+  ],
+  "claims": {
+    "370–48 House vote": "CRS R49353",
+    "December 11 2026 funding deadline": "Public Law 119-103; CRS R49353",
+    "January 3 2027 new congressional terms": "Twentieth Amendment, calendar application",
+    "22 calendar days": "December 11 to January 3 arithmetic; editorial calculation",
+    "December 4 earlier proposal": "AP July report; explicitly superseded as proposal"
+  },
+  "checks": {
+    "links": "Source links spot-checked; comprehensive automated HTTP validation not completed",
+    "numbers": "Cross-checked against CRS R49353 and Senate legislative record; date arithmetic checked",
+    "mobile": "Responsive CSS reviewed; automated mobile screenshots not completed"
+  },
+  "published_at": "2026-11-05T15:40:00Z"
+}
