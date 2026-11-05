@@ -1,0 +1,121 @@
+{
+  "edition": "2026-11-05T07:01:11Z",
+  "status": "DRAFT_REVIEW_ONLY",
+  "main_publication_authorized": false,
+  "editor": "Gabriel Ervin",
+  "disclosure": "AI-assisted drafts; secondary synthesis, not original field reporting; all articles require editor approval.",
+  "headlines_queue": "headlines/latest.json (read 2026-11-05, generated 2026-11-05T04:31:41.659645Z)",
+  "forecast": "final/forecast-final.json (lockedAt 2026-11-03T16:42:53.117Z; unchanged)",
+  "articles": [
+    {
+      "slug": "congress-veto-budget-2027",
+      "claims": [
+        {
+          "claim": "Democrats secured both chambers in 2026",
+          "sources": [
+            "https://www.reuters.com/legal/government/democrats-seize-congress-sweeping-midterm-repudiation-trump-2026-11-04/",
+            "https://apnews.com/article/ef6199e25927a9ac9f4c18eae0e497cd"
+          ],
+          "status": "reported projected control; do not present as certified"
+        },
+        {
+          "claim": "Two-thirds in each chamber for veto override",
+          "sources": [
+            "https://constitution.congress.gov/browse/article-1/section-7/"
+          ],
+          "number": "2/3"
+        },
+        {
+          "claim": "Three-fifths cloture on ordinary Senate legislation",
+          "sources": [
+            "https://www.senate.gov/about/powers-procedures/filibusters-cloture/overview.htm"
+          ],
+          "number": "3/5",
+          "caveat": "procedural exceptions"
+        },
+        {
+          "claim": "Congressional terms begin January 3 at noon",
+          "sources": [
+            "https://constitution.congress.gov/browse/amendment-20/"
+          ],
+          "number": "January 3; noon"
+        },
+        {
+          "claim": "White House explored executive authority",
+          "sources": [
+            "https://www.reuters.com/legal/government/trump-white-house-maps-path-govern-without-congress-if-democrats-win-2026-11-01/"
+          ],
+          "status": "attributed Reuters reporting"
+        }
+      ]
+    },
+    {
+      "slug": "medicaid-subsidies-2027",
+      "claims": [
+        {
+          "claim": "Incoming Democratic health-policy agenda",
+          "sources": [
+            "https://www.washingtonpost.com/health/2026/11/04/democrats-aim-restore-aca-subsidies-medicaid-funding-next-year/"
+          ],
+          "status": "attributed reported plans, not enacted legislation"
+        },
+        {
+          "claim": "Average premium rise projected about 15%",
+          "number": "approximately 15%",
+          "sources": [
+            "https://www.washingtonpost.com/health/2026/11/04/democrats-aim-restore-aca-subsidies-medicaid-funding-next-year/"
+          ],
+          "caveat": "reported forecast, not universal enrollee premium"
+        },
+        {
+          "claim": "Marketplace subsidies and Medicaid are distinct programs",
+          "sources": [
+            "https://www.healthcare.gov/lower-costs/",
+            "https://www.medicaid.gov/medicaid/index.html"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "markets-2026-election-reaction",
+      "claims": [
+        {
+          "claim": "Five big technology firms gained over $750 billion in estimated market capitalization",
+          "number": "> $750 billion",
+          "sources": [
+            "https://www.reuters.com/business/retail-consumer/democrats-midterm-sweep-fuels-750-billion-big-tech-rally-2026-11-04/"
+          ],
+          "caveat": "Reuters intraday/closing market estimate, not cash proceeds"
+        },
+        {
+          "claim": "Market and bond reaction",
+          "sources": [
+            "https://www.theguardian.com/business/live/2026/nov/04/dollar-falls-while-gold-us-treasury-bonds-rally-markets-react-democrats-midterm-election-victory-marks-spencer-latest-live-updates",
+            "https://www.reuters.com/business/finance/investors-gaming-out-congress-control-spending-ai-outlook-2026-11-02/"
+          ],
+          "status": "separate market reporting and forward-looking analysis"
+        }
+      ]
+    }
+  ],
+  "publication_timestamp_policy": "No article has a public publication timestamp; 2026-11-05T07:01:11Z is the draft-preparation timestamp. Verify publication timestamps on each publisher page before approval.",
+  "image_policy": "No images included: Commons/Wikipedia license verification pending. Do not use wire photos without rights.",
+  "checks": {
+    "source_link_validation": "Not completed: GitHub connector does not crawl arbitrary external publisher URLs. Source links obtained from fresh web results and primary institutional URLs.",
+    "claim_number_validation": "Manual claim-to-source manifest provided; not independently audited against all full source texts.",
+    "duplicate_content": "Manual subject comparison with analysis/index.html completed; no verbatim article copying intended. Automated similarity test pending.",
+    "mobile_display": "Responsive viewport CSS authored; browser screenshot test pending.",
+    "rss_sitemap": "Edited on branch; XML parser validation pending."
+  },
+  "review_checklist": [
+    "Confirm each source URL resolves and supports the attributed claim",
+    "Verify publication and update timestamps from publishers",
+    "Recheck election outcomes against AP as of approval date",
+    "Confirm numerical claims against source text",
+    "Run XML parsing and mobile browser screenshot checks",
+    "Run similarity and external-link audits",
+    "Verify image licensing before adding photos",
+    "Remove preview/noindex labels and set real publication dates only upon explicit editorial approval",
+    "Merge only after Gabriel Ervin expressly approves"
+  ]
+}
