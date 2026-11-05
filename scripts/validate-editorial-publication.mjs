@@ -15,7 +15,7 @@ for (const story of stories) {
   test(/<title>[^<]+<\/title>/i.test(html), file + ': missing title');
   test(/<h1[^>]*>/.test(html), file + ': missing headline');
   test(/<meta name="description"/.test(html), file + ': missing description');
-  test(/<a\\s+href="https?:/i.test(html), file + ': missing external source links');
+  test(/<a\s+href="https?:/i.test(html), file + ': missing external source links');
 }
 for (const file of ['uncalled/index.html','uncalled/tracker.js','analysis/forecast-coverage/index.html','analysis/forecast-coverage/score.js']) test(fs.existsSync(file), 'Audit record missing: '+file);
 test(read('index.html').includes('AI assistance'), 'News homepage must disclose use of AI assistance in its footer');
