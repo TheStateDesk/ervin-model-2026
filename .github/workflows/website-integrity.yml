@@ -49,6 +49,9 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/validate-editorial-publication.mjs
+      - run: node scripts/validate-editorial-provenance.mjs
+      - run: node --check uncalled/tracker.js
+      - run: node --check analysis/forecast-coverage/score.js
       - run: node scripts/test-county-results-core.mjs
       - run: python3 -m unittest discover -s tests -p test_national_county_sources.py -v
       - run: node scripts/validate-election-site.mjs

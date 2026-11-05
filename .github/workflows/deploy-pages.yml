@@ -121,7 +121,11 @@ jobs:
           console.log('All seven browser acceptance suites are enforced by the later Playwright visual/screenshot gate.');
           NODE
       - name: Validate editorial sources, page disclosures and RSS
-        run: node scripts/validate-editorial-publication.mjs
+        run: |
+          node scripts/validate-editorial-publication.mjs
+          node scripts/validate-editorial-provenance.mjs
+          node --check uncalled/tracker.js
+          node --check analysis/forecast-coverage/score.js
       - name: Pre-publish state and county integrity
         run: |
           node scripts/test-county-results-core.mjs
