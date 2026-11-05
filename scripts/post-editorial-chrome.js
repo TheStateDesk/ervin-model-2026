@@ -53,4 +53,17 @@ const insert=()=>{if(document.querySelector('.pe-global-nav'))return;
  }
 };
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',insert,{once:true});else insert();
+// Site-wide, privacy-preserving page-visit instrumentation. Cloudflare Web Analytics
+// requires an owner-issued public site token; never invent or hard-code one.
+// Pages loaded locally, in CI, or on unrecognized hosts must not send traffic.
+if(/^geervin\\.github\\.io$/i.test(location.hostname)){
+ fetch(url('analytics/config.json'),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(cfg=>{
+  const token=typeof cfg?.cloudflareSiteToken==='string'?cfg.cloudflareSiteToken.trim():'';
+  if(!/^[a-f0-9]{32}$/i.test(token))return;
+  const beacon=document.createElement('script');
+  beacon.defer=true;beacon.src='https://static.cloudflareinsights.com/beacon.min.js';
+  beacon.setAttribute('data-cf-beacon',JSON.stringify({token}));
+  document.head.appendChild(beacon);
+ }).catch(()=>{}); // Do not block navigation or reporting when analytics is unavailable.
+}
 })();
