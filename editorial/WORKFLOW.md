@@ -38,3 +38,5 @@ The privacy-conscious Cloudflare Web Analytics loader exists, but `analytics/con
 - Source original reporting and key numbers in each article and the claim manifest. Use concise AI-assistance disclosure in the footer; keep the editor's approval gate for articles. Keep source and Commons photographer/license details in the provenance manifest and proper caption/credit near the image.
 - Article template must include canonical URL, meta description, Open Graph and Twitter cards, and accurate NewsArticle JSON-LD with author, publisher, publish/update timestamps. Do not fabricate a photograph or license to fill a preview card.
 - Draft validation must check headline punctuation, duplicated caveats, image credit, mobile navigation, favicon, source URLs, archive preservation, and that no internal editorial status leaks onto the public home page.
+
+Run `node editorial/style-check.mjs analysis/<slug>/index.html` for each draft before requesting editorial approval. Treat its warnings as review blockers until corrected or documented in the PR; keep human verification and the existing PR gate.
