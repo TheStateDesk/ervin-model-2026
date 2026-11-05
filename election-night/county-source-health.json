@@ -1,13 +1,13 @@
 {
   "version": 1,
   "election": "2026-11-03",
-  "checkedAt": "2026-11-05T06:57:28.158290+00:00",
+  "checkedAt": "2026-11-05T09:18:21.726012+00:00",
   "scope": "All 50 locally bundled county-equivalent geographies, with independently sourced county election office URLs where available. No actual 2026 results asserted.",
   "summary": {
     "states": 50,
     "countyEquivalents": 3143,
     "countySourcesIndependentlyLinked": 104,
-    "countySourcePagesResponding": 89,
+    "countySourcePagesResponding": 87,
     "countiesWithoutDirectVerifiedSource": 3039,
     "machineReadableCountyFeedsConfirmed": 0,
     "verified2026CountyReturnsBeforePollClose": 0
@@ -588,8 +588,8 @@
         "26075": {
           "county": "Jackson",
           "sourceUrl": "https://www.co.jackson.mi.us",
-          "connectivity": "reachable",
-          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "connectivity": "indeterminate",
+          "note": "Connection timeout or automated access blocked",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -1109,8 +1109,8 @@
         "34005": {
           "county": "Burlington",
           "sourceUrl": "https://www.burlingtoncountynj.gov/598/Election-Results",
-          "connectivity": "reachable",
-          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
+          "connectivity": "indeterminate",
+          "note": "Connection timeout or automated access blocked",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
