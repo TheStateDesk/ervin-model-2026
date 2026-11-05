@@ -1,0 +1,34 @@
+name: One-time GitHub Pages domain migration
+on:
+  push:
+    branches:
+      - migration/prepare-thestatedesk-github-io
+    paths:
+      - .github/workflows/migrate-pages-domain-once.yml
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Replace old domain and repository references
+        run: |
+          node scripts/migrate-pages-url.mjs --apply
+          git diff --check
+          node scripts/audit-internal-links.mjs
+      - name: Commit the complete migration on this feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Migrate all tracked site references to thestatedesk.github.io"
+            git push origin HEAD:migration/prepare-thestatedesk-github-io
+          fi
