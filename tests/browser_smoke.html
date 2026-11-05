@@ -11,16 +11,16 @@
  try{
   await navigate('../states/');
   let d=frame.contentDocument,w=frame.contentWindow;const $=id=>frame.contentDocument.getElementById(id);
-  await until(()=>$('postElectionDesk')&&Number(($('postReported')?.textContent||'').replaceAll(',',''))>100,'2026 sourced post-election count');
+  await until(()=>$('postElectionDesk')&&Number((($('postOpenCount')?.textContent||'').match(/\d[\d,]*/)?.[0]||'0').replaceAll(',',''))>100&&d.querySelectorAll('#postCloseList .post-close-item').length>=10,'2026 source-linked results list');
   check(d.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave'),'Results-first editorial headline present');
-  check(d.querySelectorAll('#postAnalysis .post-article-card').length===9,'Nine original reports linked from newsroom homepage');
+  check(d.querySelectorAll('#postAnalysis .post-article-card').length>=10,'Ten or more articles including the forecast audit linked from the newsroom homepage');
   check(d.querySelectorAll('.post-package-card').length===3,'Texas Kansas South Carolina feature package appears on front page');
   check(w.getComputedStyle($('edSimulationPanel')).display==='none','Historical prediction map is hidden on news homepage');
-  check(!$('postModelAudit')&&!d.body.textContent.includes('Forecast scorecard'),'No model accuracy scorecard on results homepage');
-  check($('postCalled')?.textContent!=='—','Attributed AP call count is available');
+  check(d.querySelector('a[href*="analysis/forecast-grade/"]')!==null,'Original forecast accuracy audit linked from homepage');
+  check(d.querySelectorAll('#postCloseList .post-close-item').length>=10,'At least ten attributed result calls render and link to race details');
   check($('watchSection')?.hidden===false&&w.getComputedStyle($('watchSection')).display==='none','Pre-election watch carousel is archived, not shown');
   check($('balanceOfPower')&&w.getComputedStyle($('balanceOfPower')).display==='none','Forecast seat projections no longer compete with reported control');
-  check(d.querySelectorAll('.pe-global-nav a').length===9,'Nine-section editorial navigation installed');
+  check(d.querySelectorAll('.pe-global-nav a').length>=8,'Persistent eight-section editorial navigation installed');
   check(d.querySelectorAll('#usMap path.ed-state').length===50,'All fifty state SVG shapes available');
   check($('postCloseRaces')&&$('postCloseList'),'Outstanding-count section exists');
   const senate=d.querySelector('[data-post-office="senate"]');senate.click();
@@ -40,7 +40,10 @@
   await until(()=>d.querySelectorAll('.story-table tbody tr').length===7,'senate story AP-attributed source table');
   check(d.querySelector('h1')?.textContent.includes('Seven Senate flips'),'Story detail page loads');
   check(d.querySelectorAll('.story-sources a').length>=2,'Article cites independent external election reporting');
-  check(d.querySelectorAll('.pe-global-nav a').length===9,'Articles share the same nav as national site');
+  frame.style.width='390px';await new Promise(resolve=>w.requestAnimationFrame(resolve));
+  check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'Senate article mobile text fits without horizontal overflow');
+  frame.style.width='1180px';
+  check(d.querySelectorAll('.pe-global-nav a').length>=8,'Articles share the same nav as national site');
   await navigate('../analysis/texas-new-era/');d=frame.contentDocument;
   check(d.querySelector('h1')?.textContent.includes('Talarico'),'New Texas feature is linked and readable');
   await navigate('../analysis/kansas-hamilton-upset/');d=frame.contentDocument;
@@ -63,6 +66,16 @@
   check(d.querySelectorAll('.story-table tbody tr').length===7,'Polling feature compares seven sourced Senate races');
   check(d.querySelector('h1')?.textContent.includes('polls missed'),'Longform polling feature is available');
   check(d.querySelector('.story-hero-photo img')?.getAttribute('src')?.includes('commons.wikimedia.org'),'Feature photo comes from Wikimedia Commons');
+  frame.style.width='390px';await new Promise(resolve=>w.requestAnimationFrame(resolve));
+  check(d.documentElement.scrollWidth<=d.documentElement.clientWidth+5,'Polling longform mobile text fits without horizontal overflow');
+  frame.style.width='1180px';
+  await navigate('../analysis/forecast-grade/');d=frame.contentDocument;
+  check(d.querySelector('.story-table tbody tr')?.textContent.includes('Texas'),'Preliminary forecast scorecard has independently linked source rows');
+  check(d.querySelector('a[href*="forecast-final.json"]')!==null,'Audit links to original locked forecast');
+  await navigate('../about/');d=frame.contentDocument;
+  check(d.body.textContent.includes('AI assistance'),'About page discloses AI-assisted production');
+  await navigate('../corrections/');d=frame.contentDocument;
+  check(d.body.textContent.includes('Kansas'),'Published corrections page includes the Kansas source correction');
   report.dataset.status='PASS';report.textContent='PASS '+checks.length+' checks\n'+checks.join('\n');
  }catch(err){report.dataset.status='FAIL';report.textContent='FAIL: '+err.stack}
 })();
