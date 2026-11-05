@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T04:31:41.659645Z",
+  "generated_at": "2026-11-05T09:18:08.015545Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -75,25 +75,10 @@
       "note": "Potential major development; verify original reporting before publishing."
     },
     {
-      "title": "AI data-center stocks slide, renewables rally after Democratic US midterm sweep - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOcW5CTURXaGFocTExc3NDZk9feEYwc1dTaDVuTkVqUEZxejUwS1ZkZkhaMlNZUnh0UkY5VFo5ZXczeFBPMDFzMVBvUTc0SEUxREtORkRSTE5maGlaZWVMREY5ZXduYlZRQUFPNGNnUFhqNlpiQUhKYWhKeVNscEF2ZGNSaG5ha19TZ3ZkYXJxbVpPZ0RId1g3VXBCM0RfTzdqWnBxbEFqanIxS1NYUGJKOTNPcUlNOEhzM0xvMkt0RlhPcDB1aWF6MnRUaktaQ0R0YWRJ?oc=5",
+      "title": "Democrats' midterm sweep fuels $750 billion Big Tech rally - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNTzc2SlBDbW9CQmpVSmZXdzM1aW9hSGV3cnF2ZFZWTnozUHl0ejU2T3R1eG5xVmhFMG1Vb25oQTc0clFCUVhOQ1ZQaHhLWF9POElFb3cwMjVGdGt5UTFlaWgyUlAtWWIwbFlpbDFmaC1mM1Rta2g5OE1NVk0yNlA4bl9HTi1VTWdqYlc0enR0a3BMUW5MU1RPaTBiWmVVNy00SmdteVk0LVptR21iWGRyVnk2ekttazR3?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T17:11:03Z",
-      "source_count": 2,
-      "other_sources": [
-        {
-          "source": "THE HILL",
-          "url": "https://thehill.com/business/6197256-stocks-rally-democrats-midterm-victory/"
-        }
-      ],
-      "priority_score": 5,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Crypto’s midterm spending spree stumbles as Democrats rack up big wins - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOdlkxeHZnLTRjamNZS2JrMm9EeDZzdTM2NVNFT2JrSFEyZmF4MzVxR1VvVTlRZ3VBRHc0LWxUeXJKT1p4UEl3aGNtLWF0bzE2c3k1d3dPcjNBOC1xSTMycklfWVdnNTYybkhvT2Y4Q3BPSGVad2w5ODJLVWZtOURrVnRtM1ZpaEdIQnk1ZGl1RkZ2alVNclNLZjlVY1RXcEVNUnJERjMySjRqaGxyM044XzBoaGxtNUlLN1ZxaGFCWQ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T16:47:35Z",
+      "published_at": "2026-11-04T19:28:58Z",
       "source_count": 2,
       "other_sources": [
         {
@@ -107,10 +92,76 @@
   ],
   "headlines": [
     {
-      "title": "US midterm elections 2026 live: Democratic lead grows in Mississippi Senate race as Republican blame game begins",
-      "url": "https://www.theguardian.com/us-news/live/2026/nov/04/midterm-elections-results-senate-house-michigan-maine-mississippi-latest-updates",
+      "title": "US midterm elections 2026 live: Democrats eye historic upset in Mississippi Senate race as Republican blame game begins",
+      "url": "https://www.theguardian.com/us-news/live/2026/nov/05/midterm-elections-live-latest-updates-mississippi-senate-race",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T04:14:32Z"
+      "published_at": "2026-11-05T09:08:39Z"
+    },
+    {
+      "title": "‘I never understood wind’: midterms spark hope for renewables after Trump’s hostility",
+      "url": "https://www.theguardian.com/business/2026/nov/05/democrats-midterms-triumph-renewable-energy-industry-donald-trump",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-05T09:04:05Z"
+    },
+    {
+      "title": "Tech barons cozied up to Trump. What will they do in newly blue America?",
+      "url": "https://www.theguardian.com/technology/2026/nov/05/tech-barons-america-musk-bezos-zuckerberg",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-05T09:00:02Z"
+    },
+    {
+      "title": "Where Trump and Republicans lost the midterms – a visual analysis of the key states",
+      "url": "https://www.theguardian.com/us-news/ng-interactive/2026/nov/04/midterm-election-results-maps-guide",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-05T08:34:01Z"
+    },
+    {
+      "title": "US midterm elections 2026: live results from Senate, House and governor races in all 50 states",
+      "url": "https://www.theguardian.com/us-news/ng-interactive/2026/nov/04/midterm-elections-full-results-senate-house-governor-races",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-05T08:33:19Z"
+    },
+    {
+      "title": "Photos show Americans reacting in real-time to midterm results - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPbW1ldDZNRklJd0FRTHk3Qm5pc0U2QkpKT2l6MU9CSmRHSmQwSUJDcWkwYzd3ZWRVRndLSlNSUngzYUFBOWJFM3J0c0FCX2ZOSHlyZVFHOVhFNlpTTnBuc2hLMzMzakhGdDF3T1owSVJ4dExIaUl4V0UzZ0g0RWdIN3R0TENyUG9YekVLdWQtTDU2cnJKQ19MWHo4QjFXbW56SzBr?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T07:54:14Z"
+    },
+    {
+      "title": "China says US farm purchases hinge on tariff-cut deal - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQbjZCZGJiUVFJRkdBeU1DaTExb3FMSmdaLVRuLTRrQWNnd3F5MDg1YnZlTUZfclBPRWhQZXdlbWxEakVXdlNidWVWbmhFcGZTVEpSOWlJSE1FTHhOWTVlUXkwSG5rTXRNTDE5ckRWTzhnYmx3LVVJSDE2S2JNQW9CTUNFanlFNWlqMkJWdFZTMzU0VnpzX2tua25aQS0zNTdsUDNRRA?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T07:44:00Z"
+    },
+    {
+      "title": "COMMENTARY: Asia hopes Democrats can provide relief from Trump's Iran war, tariffs - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOUk1naVB2YlNzNHNsUVA1ZVp4ZU5QaUNocUZjdkt0VVdHZVVmZXdRZzhSdUt5RFROWXlBclNEM0p0NnJTc3dqaWlBWVhoUWRVczliT2JGR3l3RXU0R1N0aGZicXFZSkdiNjd6dmZJWVVoRWp4X21wNUJNd2EzOG5CMnJoR1ExaW1lX1Q4R0o0cHhBM1lZX0lnd0NLMkFVaTJZZ0FvUVNfejFaaFViQU9tX3REV2ZBNjdCOHU3ak1EcUdJX2xsbFdCWE9pVzk?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T07:00:00Z"
+    },
+    {
+      "title": "Food, fuel and taxes – can the Democrats do anything to ease cost of living pressures?",
+      "url": "https://www.bbc.co.uk/news/articles/ck1ex50x5q46o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T06:01:05Z"
+    },
+    {
+      "title": "China's cleantech stocks jump as investors bet on US policy shift - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQdHllX1NRUnhtUFNpX3FES2xxMF93ZVJTdkhEelhpSXR6RmViQ2ZLc3Z1TXpKRjBNMjdrbWZZYmlSVGdWd2MxSUdsaHdCTmUzckE1M09ScmVsLWhuTThTa190TVlFMWpwbC1jcTlobmxjMG9SOVV0N3hHQUl3dDUzdmR2ZFhjQkFFRVRtOEhSdzVJazQ0aF9mdnhtY0h5ZDBVQUhOc0hkS3pJejN6Ui1F?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T05:50:00Z"
+    },
+    {
+      "title": "New Zealand leaders make final appeals as election remains tight - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOMW1LODR1eW8yNFdoQUYzMGd0bGtUWTJhMGZveVViNERIT2FGWURqY3BPNXFGWmZtWFdtbzZyRzdOLWVneVJCY2UzYnBhaUh4ZVpTRkhOMHJoTUpZZW9Ja3U3azZ1VUZoS1RWbGdyQThia2JBNVJkbWNWU3VtcUZ5X1Boc01FbUw3NTRGd1dId19MQ3FaaXJuYUZjZkxzVy1oaG9VdmtqdTBMRlRwS3A3RElUZkFybFk?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T05:48:00Z"
+    },
+    {
+      "title": "Iran's IRGC says two tankers and tugboat caught fire in Strait of Hormuz - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQN2pHcmkxeDJDM184TXNiS2xIOUdXdHNrTXcyVHFKcUNGZEgtanhxTm9TR0UxWjA5cGlXSy12RVBLT3JYYVVBVEltbXFTNWtFT09OMVBIUkFEVlZiaW1mcVhPM3JfQ2tnZm1uRnJSQlVoX1FfNTl5bmh1c1pZMUJBVlVZeVdoWnlQMURoR0g0WVZYcjU4WDloZzRxMHh3Q24zMlRSYXV3MUFZTGxEQXM3NXNuNExxUQ?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T04:21:00Z"
     },
     {
       "title": "ANC narrowly leads DA in early South Africa municipal election results - Reuters",
@@ -119,16 +170,22 @@
       "published_at": "2026-11-05T04:12:00Z"
     },
     {
-      "title": "Photos show Americans reacting in real-time to midterm results - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPbW1ldDZNRklJd0FRTHk3Qm5pc0U2QkpKT2l6MU9CSmRHSmQwSUJDcWkwYzd3ZWRVRndLSlNSUngzYUFBOWJFM3J0c0FCX2ZOSHlyZVFHOVhFNlpTTnBuc2hLMzMzakhGdDF3T1owSVJ4dExIaUl4V0UzZ0g0RWdIN3R0TENyUG9YekVLdWQtTDU2cnJKQ19MWHo4QjFXbW56SzBr?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T03:06:15Z"
+      "title": "Vance walks Trump tightrope with scathing election critique blaming Iran war",
+      "url": "https://www.bbc.co.uk/news/articles/crz98zqkz7z0o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T03:47:56Z"
     },
     {
-      "title": "Trump has been humbled. Now what? - podcast",
-      "url": "https://www.theguardian.com/news/audio/2026/nov/05/trump-has-been-humbled-now-what-podcast",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T03:00:51Z"
+      "title": "Gold rallies as dollar, Treasury yields soften after US midterm results - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPRGw2bTVBSnBUN1BZcDhwQ0dVSmFIUVhDdGZLazVPNnV2NG5iYkVxXzg5QmRyY21IOWZOcFVRVXJBSU5PT1pXQWh3UHVmVWxhSm15bVh2NTVQZzJGVHpPT2dSSHc2NXlaLUYyQmVGX24xdW84cVN2NXpGcUhGZ0xrNDZSODR1NDNtNW9vc2JJSUVRcGZIMkprZHNONm4wN2VxUzdBX3B1NWxxcDBsWjNnZ05tUzdMRHJNaEJja2oxNC1QLWQt?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T03:46:00Z"
+    },
+    {
+      "title": "China blocks SoftBank’s $5.4 billion takeover of ABB’s robotics division - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNTVBJa2g4T1RZOXVuY3phU1ZicmlpM0kzUTdjNlBrMmtNZ29aNlBxZzNwQWkzam9WNVB6MGFwV2tERnA5WWNhWE9ZaWtKaV9JMDdpWHBKRjUyU2ZKU2lEN2R4U29ZQlo3T3g1cndpLUNqZXFhclphYzdyN0thaXM5WXl4UnN2eGZiUXd4SXdUenppTXNRTU1CV3RURnEyT05XUFRNUWFiMGNwN0QzYjVtS1Zoc24zcV9lWHV2eDZQckJwb2ZpS3g0OG9VMnpJaHJt?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T03:15:00Z"
     },
     {
       "title": "Trump urges Congress to pass daylight saving bill after ‘ridiculous’ early sunset",
@@ -137,31 +194,25 @@
       "published_at": "2026-11-05T02:48:08Z"
     },
     {
-      "title": "Oil falls for a fourth day on expectations for lower risk of Iran war escalation - Reuters",
+      "title": "Chip stocks, oil sink in the aftermath of Democratic election sweep - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPUG9ENFo3M0RHNWI0VEdfTlZhWmpjVGR0UjViV3dBQllRVkNha0YzU1FhX2lDaWVUT1U1Ym5DbWRlOFpJZ3JPU3AwZ1Nia3NNWjdKc3Jvd0VXU3otQU83ZjFlQmZwbHcyZmJKZFk4dVJWaXhWQnV6MTF6TUpmaDcxNmdhbFFNaU1N?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T02:35:00Z"
+    },
+    {
+      "title": "Oil rises as investors weigh risk of Iran war escalation - Reuters",
       "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQdzM2c3YzcktwU285aS1QaVVzTk51WFR0UnpxMXlnaFdEd2RtZWYzMm81TDZQUTJZS0ZlLXFVV3ZhcGFibkdLZm9Remo3YjlhNHJTd1lxSXNMUFNzejhIMkt0TlFRXy1RZl9TdTkxbDhfdjQxUEIzcUhaYlpOMjZJSVViNmVPV0dRV0RmaTJ3dDJ3QUs4TTFleFlnZnNyUHhVYlQ5NldaZVRZRFd5dU5nVnRKVUQ0UFE?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
       "published_at": "2026-11-05T02:20:00Z"
     },
     {
-      "title": "Rupee to rally after US midterm fallout sinks oil on Iran war-exit hopes - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQME9GZlNzY1R1djlUYWZnQ2lQRXE3ZHoxQ1VhOEZhaVRyVTY3TWZIRXhNMDNaemNtb0NFNzJZeTZtYlRCX0FtbFlYenA4Z0gtSkZBZVFRQThHZkRtcHhsR09wWXVhdl9CLUQ2Z19JNWpFWlI0N013RFR4VDFrSTFoZzVQS3F5Y216eWdlMTlZbWxldWY4TXh0M09TLTBuX3lUZ1ZWRzVaRHhxSENxT3E4Qlpwd0E?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T02:19:00Z"
+      "title": "When to expect Senate results from the tight race in Mississippi",
+      "url": "https://www.bbc.co.uk/news/videos/c6j9kx8j1x2yo?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T01:21:45Z"
     },
     {
-      "title": "Datacenters were on the ballot. US voters rejected them",
-      "url": "https://www.theguardian.com/us-news/2026/nov/04/datacenters-midterm-elections",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T01:30:14Z"
-    },
-    {
-      "title": "Colorado rejects conservative effort to require police to cooperate with immigration officers",
-      "url": "https://www.theguardian.com/us-news/2026/nov/04/colorado-rejects-conservative-immigration-amendment",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T01:10:46Z"
-    },
-    {
-      "title": "Dollar edges lower as US election outcome cheers global markets - Reuters",
+      "title": "Dollar slides as US election drives oil and Treasury yields lower; sterling gains - Reuters",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOS3ZvRzF1aTlTZE9WT0NxYkU4TWFHTi04YnhEVXd1VTJRTXdibGtPdGZtTWkwZEVBLU0xNmtZaEc4R2lWZWVSdGJtY1FSdzhIazR5a2YwdDJoRzFFTHN1Z2FNb2l5b2x5SllyTE9sTTZTNkxFODFJVkhxOGhlblRTXzNiLTZpc3FKcXBqRzZUMjYtY3VXOHlnR0hPOFFYTldZaXpzSGNTbzlPNlhUdHF1amJTcFp1dw?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
       "published_at": "2026-11-05T01:06:00Z"
@@ -173,82 +224,16 @@
       "published_at": "2026-11-05T00:56:00Z"
     },
     {
+      "title": "Democrat leads by dozens of votes in surprisingly tight Mississippi Senate race",
+      "url": "https://www.bbc.co.uk/news/articles/c6n9rwxlx992o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T00:51:45Z"
+    },
+    {
       "title": "Iowa Democrat who quit race wins seat anyway",
       "url": "https://thehill.com/homenews/state-watch/6199864-eric-armstrong-iowa-house-win/",
       "source": "THE HILL",
       "published_at": "2026-11-05T00:41:44Z"
-    },
-    {
-      "title": "None of the House Republicans who voted to impeach Trump will be in the next Congress",
-      "url": "https://thehill.com/homenews/house/6199833-trump-impeachment-vote-republicans-exit/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T00:33:50Z"
-    },
-    {
-      "title": "Midterm voters rebuke Trump, handing Democrats both chambers of Congress",
-      "url": "https://www.pbs.org/newshour/show/midterm-voters-rebuke-trump-handing-democrats-both-chambers-of-congress",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-04T23:55:07Z"
-    },
-    {
-      "title": "Wall Street ends higher after Democrats win Congress; data center stocks tumble - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQbWpBY1VHMFd5a2tJXzM1RFFFQTl5Y09aVDgza095UkJKVzNnQ3F4VW1pMzBEazJKMGhlS21zUEdCLXJPOVhWdXRnZmlLRHliMDdqYmt2b2ZWYk5FeW85VnBSalpRd1E5b3BVSUZDU2VLMUNiQm41YWw1SUgxV2dWaUFZUkI2MllhY0Z5ZkZHcWNuQmdCaHBKbVRhck1meTRz?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:54:37Z"
-    },
-    {
-      "title": "News Wrap: Officials in Iran welcome midterm results as vote against war",
-      "url": "https://www.pbs.org/newshour/show/news-wrap-officials-in-iran-welcome-midterm-results-as-vote-against-war",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-04T23:50:44Z"
-    },
-    {
-      "title": "Pentagon chief tech officer says government will detail laws that apply to AI labs this month - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPVnhKSFlmQ0s5bTNuVFE4bU0zZzRHbnIwaXlyeHNkWmJmc1k4Yl9iZ3RvUWtPRFpFTW5QWEFUNDVtcjRfWmxYZU5wVV9RRFZNZ0hiV3JjZGdzR3NMUTRTc3I5SnJPMU1EMGkyTjdBMFNiYnJlWGJZamduZFVQT3ZuRlFqelVWSnJJVVE0djRhamVWenhzYVROQ1NocER5QkZVQm8wcWxKQmZ6ZEdHRlIzZkk3bk9YOXEyQm1rcXl1eExJM1ZyaW1kNmxSejc?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:42:51Z"
-    },
-    {
-      "title": "After Republicans routed, Trump devotes first post-midterm event to White House ballroom - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUmMwcE12Zlp6RnV5bFVSeXNXMlVMTU1wYjd0MlBqVURNWmo4OGJTOEhqSXhiQkdENHZkeW0tRFdGSXJ1ZHR0ZUZEcW1hTVJwN0N1S2tkeEVIa0ZBcW11WU8zVE90cXduWUFYZ011Y0Y0SmNXeVctLUt0Wk11bWhWRGIydzVxN3JSUGpKV1c3Vy1pTnYwTTlIYTlFVFA0YkoyZ096UW5TRzAwTjJmeXBGb1lsN2wzWWN1N0d2aA?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:41:41Z"
-    },
-    {
-      "title": "Seven numbers that explain Democrats' US midterm triumph - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOQjNiTDV1RGJXeTYtWWc2NnRMLU1kOFFvYjFtWTZ3aXJMZWh6NDJ4Z2NHbHBiZnNTMDBVY2NPdWMydGxtQlVjNzBxa3A1Z0wtRHBKSV94elZBbHNKNlFGaFVPdEVCTkI4THd3RUxlRUcydks1UmVBbnduVkN2V1B5TlZ3em1uVERjdWgydVZKSGZqSGl4MWR5b0pqalNGdw?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:36:32Z"
-    },
-    {
-      "title": "Politics of fear failed to stop El-Sayed's historic US Senate win - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPYTJSNEVNREFCa1owQnhxaDl4Q0ZhQVJldGphaW9uZ0dEa09Eb2RIV2MyTWNmQ0VhczhkUVVINFgtazVocE9MS2hzTFd0cnVpQmF0ZC1TdmlpZkxiSGh6c2JPQkVOYWNIRFR0RHVfYWJPMFU2djNYaVY3Wm85OUItd0FEaVpVRTdzSm5RX0VnUDVpZ1NjcDB5bG5FV2tJQndQRTZFclI2UXBQNDJtMmJJVUFOUzA5RDBp?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:36:07Z"
-    },
-    {
-      "title": "'A mandate for change': Progressive Democrat William Lawrence flips House seat in Michigan",
-      "url": "https://www.pbs.org/newshour/show/a-mandate-for-change-progressive-democrat-william-lawrence-flips-house-seat-in-michigan",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-04T23:35:28Z"
-    },
-    {
-      "title": "Trump says Hegseth doing 'a very good job' as questions swirl about his future - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOYTEzMDVoRDFiSGh1VHBhVGVTV2JlZ2g3dVk0a2VCMjNVdENMQkQ1bk5vVDA5OHBIS0daTVVfeUJWYnpZdzdBMld1VXZPTGdBdVRScG4xSlpKWHRScXpOcFhFS2MxbzZ6OGF2OHNwSXBEczh3b2doemhkSHFKWFFxZjZDWVpHVFVheFhXcWYxS0tyYlVBbS00dnl3aDlLYTd5MEx4MVMzdHl1TWJ0OHo4dF9aeWRhU3JPOWc?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T23:32:38Z"
-    },
-    {
-      "title": "New Mexico's Deb Haaland on making history as first Native American woman elected governor",
-      "url": "https://www.pbs.org/newshour/show/new-mexicos-deb-haaland-on-making-history-as-first-native-american-woman-elected-governor",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-04T23:30:16Z"
-    },
-    {
-      "title": "OKC's Republican mayor says election wipeout is 'rejection of Trumpism'",
-      "url": "https://www.pbs.org/newshour/show/okcs-republican-mayor-says-election-wipeout-is-rejection-of-trumpism",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-04T23:25:13Z"
     }
   ]
 }
