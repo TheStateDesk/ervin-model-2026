@@ -182,11 +182,12 @@ try{
  const aftermath=await browser.newPage({viewport:{width:390,height:844}});
  const aftermathErrors=[];aftermath.on('pageerror',e=>aftermathErrors.push(e.message));
  await aftermath.goto(base+'states/?release='+stamp,{waitUntil:'domcontentloaded'});
- await aftermath.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave')&&Number((document.querySelector('#postReported')?.textContent||'').replaceAll(',',''))>100,null,{timeout:45000});
+ await aftermath.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave')&&Number((document.querySelector('#postOpenCount')?.textContent||'').match(/[0-9][0-9,]*/)?.[0]?.replaceAll(',','')||'0')>100&&document.querySelectorAll('#postCloseList .post-close-item').length>=10,null,{timeout:45000});
  if(!await aftermath.locator('#watchSection').isHidden())throw Error('PUBLIC FRONT PAGE STILL FORECAST-FIRST');
+  if(!await aftermath.locator('a[href*="analysis/forecast-grade/"]').count())throw Error('PUBLIC ACCOUNTABILITY ANALYSIS NOT LINKED');
  if((await aftermath.locator('#postMilestones a').count())<4)throw Error('PUBLIC POST-ELECTION CALLS MISSING');
  if((await aftermath.locator('.post-package-card').count())!==3)throw Error('PUBLIC NEW STATE FEATURES MISSING');
- if((await aftermath.locator('#postAnalysis .post-article-card').count())!==9)throw Error('PUBLIC NEW STORIES MISSING');
+ if((await aftermath.locator('#postAnalysis .post-article-card').count())<10)throw Error('PUBLIC NEW STORIES MISSING');
  if(!await aftermath.locator('#edSimulationPanel').isHidden())throw Error('PUBLIC FORECAST NOT ARCHIVED');
  if(await aftermath.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+4))throw Error('PUBLIC POST-ELECTION MOBILE OVERFLOW');
  if(aftermathErrors.length)throw Error('PUBLIC POST-ELECTION JS ERRORS '+aftermathErrors.join(', '));
