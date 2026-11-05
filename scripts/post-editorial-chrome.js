@@ -8,18 +8,14 @@ const path=location.pathname;
 const isArchive=new URLSearchParams(location.search).get('view')==='final';
 const where=path.includes('/corrections/')?'corrections':path.includes('/about/')?'about':path.includes('/archive/')?'archive':path.includes('/analysis/')?'analysis':path.includes('/results/')?'results':path.includes('/election-night/')?'other':path.includes('/states/')?'states':path.includes('/state/')?'state':path.includes('/house/')?'house':path.includes('/governors/')?'governors':path.includes('/michigan/')?'michigan':path.includes('/stats-for-nerds/')?'methods':'other';
 const items=[
- ['Home','states/','states'],
+ ['Latest','states/','states'],
  ['Results','results/','results'],
- ['Texas','analysis/texas-new-era/','texas'],
- ['Kansas','analysis/kansas-hamilton-upset/','kansas'],
- ['South Carolina','analysis/south-carolina-andrews/','south-carolina'],
- ['House','house/','house'],
- ['Governors','governors/','governors'],
  ['Analysis','analysis/','analysis'],
+ ['Data & methods','stats-for-nerds/','methods'],
  ['Forecast grade','analysis/forecast-grade/','grade'],
+ ['Forecast archive','archive/','archive'],
  ['About','about/','about'],
- ['Corrections','corrections/','corrections'],
- ['Archive','archive/','archive']
+ ['Corrections','corrections/','corrections']
 ];
 const nav=document.createElement('nav');nav.className='pe-global-nav';nav.setAttribute('aria-label','Ervin Model election reporting sections');
 const label=document.createElement('div');label.className='pe-global-label';label.innerHTML='<strong>THE STATE DESK</strong><small>ELECTIONS · NEWS · DATA</small>';
