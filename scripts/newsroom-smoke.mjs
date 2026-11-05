@@ -7,7 +7,7 @@ const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.
 let browser;
 const pages=[['Home',''],['Congress','congress/'],['White House','white-house/'],['States','states-news/'],['Policy & Economy','policy-economy/'],['Analysis','analysis/'],['Election Results','results/'],['Forecast Archive','archive/']];
 try{
- await sleep(550);
+ for(let i=0;i<40;i++){try{const result=await fetch(base);if(result.ok)break;}catch{}await sleep(250)}
  browser=await chromium.launch({headless:true,args:['--disable-dev-shm-usage']});
  for(const width of [390,1440]){
   const page=await browser.newPage({viewport:{width,height:850}});
