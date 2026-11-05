@@ -19,7 +19,9 @@ for(const p of pages){
  const h=read(p),up='../'.repeat(p.split('/').length-1)||'./';
  assert(h.includes('class="td-global-header"')&&h.includes('class="td-site-footer"'),p+' lacks shared newspaper header/footer');
  assert(h.includes('td-newsroom.css'),p+' is missing shared stylesheet');
- assert(h.includes('id="main-content"'),p+' is missing accessible main anchor');
+ const mainTag=h.match(/<main\\b[^>]*>/i)?.[0]||'';
+ const mainId=mainTag.match(/\\bid="([^"]+)"/)?.[1];
+ assert(mainId&&h.includes('class="td-skip" href="#'+mainId+'"'),p+' has no working keyboard skip anchor');
  assert(h.includes('class="td-global-nav"'),p+' lacks real section navigation');
  for(const [name,target] of tabs)assert(h.includes('href="'+up+target+'"'),p+' has no working '+name+' section link');
 }
