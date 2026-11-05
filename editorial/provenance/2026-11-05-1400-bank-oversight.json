@@ -37,11 +37,13 @@
     }
   ],
   "images": [],
-  "status": "editorial review required",
+  "status": "approved_for_publication",
   "validation": {
     "links": "URLs inspected through search results, not HTTP-tested from draft deployment",
     "numbers": "No article-specific numerical data",
     "duplicates": "Manual headline comparison against current homepage; full corpus similarity test not completed",
     "mobile": "Viewport meta and existing responsive stylesheet retained; visual browser check not completed"
-  }
+  },
+  "published_at": "2026-11-05T16:14:00-05:00",
+  "updated_at": "2026-11-05T16:14:00-05:00"
 }
