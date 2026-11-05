@@ -1,0 +1,76 @@
+name: Half-hour major politics headline watch
+on:
+  schedule:
+    # UTC; offset avoids GitHub Actions' busiest top-of-hour slots.
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/watch_major_headlines.py'
+      - 'tests/test_watch_major_headlines.py'
+      - '.github/workflows/watch-major-headlines.yml'
+permissions:
+  contents: write
+concurrency:
+  group: politics-headline-watch
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run offline monitoring regression checks
+        run: python -m unittest discover -s tests -p 'test_watch_major_headlines.py' -v
+      - name: Scan national politics headlines from multiple independent publishers
+        run: python scripts/watch_major_headlines.py
+      - name: Preserve scan outcome as an audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: politics-headline-scan-${{ github.run_number }}
+          path: headlines/latest.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Publish material priority-queue changes to the source repository
+        run: |
+          set -euo pipefail
+          if [ ! -f headlines/latest.json ]; then echo "No new publishable headline queue"; exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add headlines/latest.json
+          if git diff --cached --quiet; then
+            echo 'Sources checked; no new priority queue. Avoid a redundant commit.'
+            exit 0
+          fi
+          git commit -m 'Refresh sourced major-politics headline watch'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo 'Priority headline queue updated on main'
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo 'Headline watch could not publish queue after retries' >&2
+              exit 1
+            fi
+            git fetch origin main
+            # Re-evaluate against the latest main revision; do not discard other editors' work.
+            git rebase origin/main || {
+              git rebase --abort || true
+              git reset --hard origin/main
+              python scripts/watch_major_headlines.py
+              git add headlines/latest.json
+              if git diff --cached --quiet; then exit 0; fi
+              git commit -m 'Refresh sourced major-politics headline watch'
+            }
+            sleep 2
+          done
+      # The GITHUB_TOKEN commit updates raw.githubusercontent.com without a Pages
+      # deployment. On-site browser fetches the JSON directly from main.
+      # This workflow does not fabricate or publish original AI-written articles.
