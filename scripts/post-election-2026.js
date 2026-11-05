@@ -1,7 +1,10 @@
 /* Independent 2026 election newsroom; documented AP-based calls, multi-outlet reporting and original analysis. */
 (function postElection(){
 'use strict';
-if(new URLSearchParams(location.search).get('view')==='final')return;
+if(new URLSearchParams(location.search).get('view')==='final'){
+ document.addEventListener('DOMContentLoaded',()=>document.getElementById('postElectionDesk')?.remove(),{once:true});
+ return;
+}
 const $=id=>document.getElementById(id),root=new URL('../',document.currentScript?.src||location.href);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=x=>Number(x).toLocaleString('en-US'),type=id=>id.endsWith('-SENATE')?'senate':id.endsWith('-GOVERNOR')?'governor':'house';
