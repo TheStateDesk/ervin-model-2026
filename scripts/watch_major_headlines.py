@@ -135,7 +135,10 @@ def rank(articles: list[dict]) -> tuple[list[dict], list[dict]]:
     for group in groups:
         lead = max(group, key=lambda x: (importance(x["title"]), x["published_at"]))
         score = importance(lead["title"]) + (5 if len(group) >= 2 else 0)
-        if score < 3:
+        # A lone headline with incidental political keywords is not automatically
+        # a major story. Prefer independently echoed developments; retain all other
+        # source headlines for the six-hour editorial research queue.
+        if score < 3 or (len(group) == 1 and score < 6):
             continue
         leads.append({**lead, "source_count": len(group),
                       "other_sources": [{"source": x["source"], "url": x["url"]} for x in group if x is not lead][:3],
