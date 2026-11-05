@@ -26,3 +26,15 @@ The privacy-conscious Cloudflare Web Analytics loader exists, but `analytics/con
 ## Future architecture
 
 `editorial/claims.json` is a first-pass published-article source and assertion inventory, **not** yet a complete content CMS. Avoid constructing unreviewed auto-writing pipelines. A later reviewed change can make article index, RSS, sitemap and archive pages render from one editorial manifest, but preserve historical URLs and apply a human approval gate first.
+
+
+## House style: news first, defensiveness once
+
+- Lead with the verified development, specific people, decisions and numbers; do not lead with a statement about this publication or its obligations. Prefer informative headlines without terminal periods.
+- Write in an independent, restrained newspaper voice. Avoid defensive repetition and unnecessary self-grading. Keep one concise limits/as-of note near data; place material corrections, dated, at the end of affected stories. Never conceal a material error.
+- Prefer positive, precise sentences over repeated negations. In draft checks flag: “must not be conflated”, “not a photograph”, “this article does not”, “our first obligation”, and “we cannot conclude”; flag “unofficial” or “preliminary” more than once and more than approximately one negation per 100 words. Flag headlines or first sentences about the publication rather than the news. Editorial judgment can override flags with a documented reason.
+- Use “historical adjustment” for the forecasting technique and reserve “correction” for editorial corrections. Call the historical product “the Ervin forecast”. Preserve the Nov. 3 forecast exactly as published.
+- Use a uniform sentence-case byline, “By Gabriel Ervin” only when personally written or substantially edited by him, otherwise “By The State Desk”; date as “Nov. 5, 2026”, with separately labeled update time when needed. Never falsely attribute AI-written text to a human.
+- Source original reporting and key numbers in each article and the claim manifest. Use concise AI-assistance disclosure in the footer; keep the editor's approval gate for articles. Keep source and Commons photographer/license details in the provenance manifest and proper caption/credit near the image.
+- Article template must include canonical URL, meta description, Open Graph and Twitter cards, and accurate NewsArticle JSON-LD with author, publisher, publish/update timestamps. Do not fabricate a photograph or license to fill a preview card.
+- Draft validation must check headline punctuation, duplicated caveats, image credit, mobile navigation, favicon, source URLs, archive preservation, and that no internal editorial status leaks onto the public home page.
