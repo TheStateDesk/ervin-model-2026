@@ -2,7 +2,7 @@
 // Non-gating live-site diagnostic: shows whether the current Pages publication contains local geography.
 import {chromium} from 'playwright';
 import fs from 'node:fs';
-const root='https://geervin.github.io/ervin-model-2026/';
+const root='https://thestatedesk.github.io/';
 const files=['','states/','state/?state=TX','state/?state=MI','geo/counties/TX.json','geo/counties/MI.json','geo/districts/TX.json','scripts/geo-engine.js','states/editorial.css'];
 const results={checkedAt:new Date().toISOString(),root,paths:[],browser:[]};
 for(const path of files)try{
@@ -16,7 +16,7 @@ try{
   const p=await b.newPage({viewport:{width:1440,height:950}});
   const errors=[],failed=[];
   p.on('pageerror',e=>errors.push(e.message));
-  p.on('response',r=>{if(r.status()>=400&&/geervin.github.io/.test(r.url()))failed.push({status:r.status(),url:r.url()});});
+  p.on('response',r=>{if(r.status()>=400&&/thestatedesk.github.io/.test(r.url()))failed.push({status:r.status(),url:r.url()});});
   const nav=await p.goto(root+'state/?state='+code,{waitUntil:'domcontentloaded',timeout:24000}).catch(e=>({error:e.message}));
   await p.waitForTimeout(6000);
   const details=await p.evaluate(()=>{

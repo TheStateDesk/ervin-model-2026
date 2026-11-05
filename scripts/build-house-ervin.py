@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1]
 TODAY=datetime.datetime.now(datetime.timezone.utc).date()
 NEW_MAP={'AL','CA','FL','LA','NC','OH','TN','TX','UT'}
-HEADERS={'User-Agent':'ErvinModelResearch/1.0 (+https://github.com/geervin/ervin-model-2026; public election research)','Accept':'application/json,text/html,*/*'}
+HEADERS={'User-Agent':'ErvinModelResearch/1.0 (+https://github.com/TheStateDesk/thestatedesk.github.io; public election research)','Accept':'application/json,text/html,*/*'}
 BASE='https://api.electiondata.dev/v1/house-results/table/'
 URLS={2022:BASE+'2022.json',2024:BASE+'2024.json'}
 POLL_DIR='https://peoplespoll.com/house'

@@ -87,7 +87,7 @@ def parse_report(content,now=None):
     return record,reported,total
 
 def fetch_html():
-    request=urllib.request.Request(URL,headers={"User-Agent":"ErvinModelPublicResultReader/1.0 (source verification; github.com/geervin/ervin-model-2026)",
+    request=urllib.request.Request(URL,headers={"User-Agent":"ErvinModelPublicResultReader/1.0 (source verification; github.com/TheStateDesk/thestatedesk.github.io)",
                                                 "Accept":"text/html,application/xhtml+xml;q=0.9"})
     with urllib.request.urlopen(request,timeout=17) as response:
         if response.status!=200:raise ValueError("Kent HTTP "+str(response.status))

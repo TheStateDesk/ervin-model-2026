@@ -2,7 +2,7 @@
 // Post-deployment browser acceptance. Runs against GitHub Pages, not the source checkout.
 import {chromium} from 'playwright';
 import fs from 'node:fs';
-const base='https://geervin.github.io/ervin-model-2026/';
+const base='https://thestatedesk.github.io/';
 const stamp=process.env.ERVIN_VERIFY_EXPECTED_BUILD||process.env.GITHUB_SHA||Date.now().toString();
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function ready(path){

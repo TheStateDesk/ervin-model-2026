@@ -1,6 +1,6 @@
 # CivicAPI v2 is the primary national election-night data provider
 
-**Implemented:** November 2, 2026. Public site: https://geervin.github.io/ervin-model-2026/election-night/
+**Implemented:** November 2, 2026. Public site: https://thestatedesk.github.io/election-night/
 
 ## Architecture
 

@@ -24,4 +24,4 @@
 - The earlier 50-state geometry renderer audit also passed **100 of 100 county/district SVG rendering checks** (3,143 county-equivalent polygons; 435 House districts).
 - Live GitHub Pages publishing and native iOS Safari were **not** independently confirmed; these checks do not substitute for cross-device browser QA or real election-night result feed testing.
 
-To inspect: [all states](https://geervin.github.io/ervin-model-2026/states/) → [Texas](https://geervin.github.io/ervin-model-2026/state/?state=TX#stateGeography) or [Michigan](https://geervin.github.io/ervin-model-2026/state/?state=MI#stateGeography).
+To inspect: [all states](https://thestatedesk.github.io/states/) → [Texas](https://thestatedesk.github.io/state/?state=TX#stateGeography) or [Michigan](https://thestatedesk.github.io/state/?state=MI#stateGeography).

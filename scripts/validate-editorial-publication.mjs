@@ -32,7 +32,7 @@ const chrome = read('scripts/post-editorial-chrome.js');
 test(chrome.includes("['About'") && chrome.includes("['Corrections'"), 'publisher and corrections not in navigation');
 const sitemap = read('sitemap.xml');
 for (const loc of ['about/', 'corrections/', 'analysis/forecast-grade/']) {
-  test(sitemap.includes('https://geervin.github.io/ervin-model-2026/' + loc), 'sitemap missing ' + loc);
+  test(sitemap.includes('https://thestatedesk.github.io/' + loc), 'sitemap missing ' + loc);
 }
 const feed = read('feed.xml');
 test(feed.includes('<rss version="2.0"') && feed.includes('/analysis/forecast-grade/'), 'RSS incomplete');

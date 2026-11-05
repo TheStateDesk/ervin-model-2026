@@ -1,6 +1,6 @@
 # Stats for Nerds: early signal laboratory (November 2, 2026)
 
-**Live page:** https://geervin.github.io/ervin-model-2026/stats-for-nerds/
+**Live page:** https://thestatedesk.github.io/stats-for-nerds/
 
 ## Why this exists
 

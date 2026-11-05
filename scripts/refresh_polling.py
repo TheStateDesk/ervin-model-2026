@@ -36,7 +36,7 @@ def page_html(state):
     title="2026_United_States_Senate_election_in_"+state.replace(" ","_")
     if state=="Alaska": title="2026_United_States_Senate_election_in_Alaska"
     url="https://en.wikipedia.org/wiki/"+title
-    req=urllib.request.Request(url,headers={"User-Agent":"ErvinModelResearch/1.0 (poll-data public source audit; GitHub geervin/ervin-model-2026)","Accept":"text/html"})
+    req=urllib.request.Request(url,headers={"User-Agent":"ErvinModelResearch/1.0 (poll-data public source audit; GitHub TheStateDesk/thestatedesk.github.io)","Accept":"text/html"})
     with urllib.request.urlopen(req,timeout=25) as response:
         return response.read(4500000).decode("utf-8","replace"),url
 

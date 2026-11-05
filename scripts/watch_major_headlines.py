@@ -16,7 +16,7 @@ import xml.etree.ElementTree as ET
 UTC = dt.timezone.utc
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "headlines" / "latest.json"
-UA = "ErvinStateDesk/1.0 (politics news link monitor; https://github.com/geervin/ervin-model-2026)"
+UA = "ErvinStateDesk/1.0 (politics news link monitor; https://github.com/TheStateDesk/thestatedesk.github.io)"
 SOURCES = [
     ("POLITICO", "https://www.politico.com/rss/politicopicks.xml"),
     ("NPR", "https://feeds.npr.org/1014/rss.xml"),

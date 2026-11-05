@@ -12,7 +12,7 @@ async function show(){
  try{
   const fresh=String(Math.floor(Date.now()/1800000));
   // Raw main-branch JSON can update every scan without rebuilding the entire Pages site.
-  const raw='https://raw.githubusercontent.com/geervin/ervin-model-2026/main/headlines/latest.json?v='+fresh;
+  const raw='https://raw.githubusercontent.com/TheStateDesk/thestatedesk.github.io/main/headlines/latest.json?v='+fresh;
   let r;
   try{r=await fetch(raw,{cache:'no-store'});}catch{}
   if(!r?.ok){

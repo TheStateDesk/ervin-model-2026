@@ -25,7 +25,7 @@
 
 **Additional pending polish:** cross-page typography, portrait licensing and attributions, dynamic generic-ballot secondary aggregators, local network-dependent fallback reliability, fuller 2026 district geography, and 2018 House uniform-swing backtest. These are **not represented as completed by this patch**.
 
-**Release/manual fallback:** the live pre-election schedule is Nov 3, 2026, 09:35 ET source check and 10:45 ET final sweep. If by 11:30 ET `final/forecast-final.json` is still absent on `main`, an authorized operator should open [Election Day final forecasts and publisher source sweep](https://github.com/geervin/ervin-model-2026/actions/workflows/election-day-final-sweep.yml) and use **Run workflow** on `main`; then verify a successful run, the immutable lock in GitHub and the live Pages build stamp. Do not manually construct a lock or claim a final headline before evidence validation. Results are unofficial until state officials certify them.
+**Release/manual fallback:** the live pre-election schedule is Nov 3, 2026, 09:35 ET source check and 10:45 ET final sweep. If by 11:30 ET `final/forecast-final.json` is still absent on `main`, an authorized operator should open [Election Day final forecasts and publisher source sweep](https://github.com/TheStateDesk/thestatedesk.github.io/actions/workflows/election-day-final-sweep.yml) and use **Run workflow** on `main`; then verify a successful run, the immutable lock in GitHub and the live Pages build stamp. Do not manually construct a lock or claim a final headline before evidence validation. Results are unofficial until state officials certify them.
 
 ## Original inputs and independent references
 

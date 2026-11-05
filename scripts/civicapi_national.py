@@ -85,7 +85,7 @@ def after_close(key):
  hr,mn=map(int,h.split(":"))
  return dt.datetime.combine(day,dt.time(hr,mn),ET).astimezone(dt.timezone.utc)
 def request(url,timeout=18):
- req=urllib.request.Request(url,headers={"User-Agent":"ErvinModel2026/CivicAPI-research (https://geervin.github.io/ervin-model-2026/)","Accept":"application/json"})
+ req=urllib.request.Request(url,headers={"User-Agent":"ErvinModel2026/CivicAPI-research (https://thestatedesk.github.io/)","Accept":"application/json"})
  with urllib.request.urlopen(req,timeout=timeout) as f:
   if f.status!=200:raise ValueError("CivicAPI response not 200")
   raw=f.read(7_000_001)
