@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T03:52:02.239321Z",
+  "generated_at": "2026-11-05T03:53:46.362866Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -102,26 +102,6 @@
         }
       ],
       "priority_score": 5,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Man arrested near White House for making ‘finger gun’ gesture at National Guard",
-      "url": "https://thehill.com/policy/defense/6199306-dc-national-guard-arrest-finger-gun/",
-      "source": "THE HILL",
-      "published_at": "2026-11-04T22:09:45Z",
-      "source_count": 1,
-      "other_sources": [],
-      "priority_score": 4,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Conservative US Supreme Court justices Thomas and Alito in spotlight after Democratic landslide - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQMDVYRXNneFQxQ09sNE1LRkU2a2RmdWlkcHl4QmxWYnpYUUxCNThGejlvY1E1U0RoaTlEZkZkRjdlaDlIbzlubDZlMjBnWGRKbngwQXNqS1FtRzQ2by1Zd0xFWnBwdWpDY1BLbFFraEFOV08zTUgtTkRLTnRLN0tiQ2hpcjQ4amdJaWdLcExGSVF4Vk9Kc1REdTh2eVdHVTFPYzA2UzV2THBnUmhTYUdwTHVXc3ZpcGVtS3J0N2ZOUF9YMnRkajZMTjY3aw?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-04T20:14:35Z",
-      "source_count": 1,
-      "other_sources": [],
-      "priority_score": 4,
       "note": "Potential major development; verify original reporting before publishing."
     }
   ],
