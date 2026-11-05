@@ -376,3 +376,6 @@ body.ed-body{font-family:var(--ed-sans)!important;line-height:1.58}
 
 /* An NBC projection has a distinct outline, not just a vote-leader fill. */
 #edSimMap path.ed-live-nbc-called{stroke:#e6b35b;stroke-width:2.8px;stroke-linejoin:round;vector-effect:non-scaling-stroke;paint-order:stroke fill}
+
+/* Phone masthead: reserve a separate row for utility controls. */
+@media(max-width:680px){html.ed-post-election .ed-head-inner{display:grid;grid-template-columns:34px minmax(0,1fr);column-gap:10px;row-gap:8px;align-items:center}html.ed-post-election .ed-mast{min-width:0;text-align:left}html.ed-post-election .ed-mast a{font-size:clamp(21px,7vw,32px)!important;letter-spacing:-.015em!important;line-height:1.12!important;white-space:normal}html.ed-post-election .ed-utility{grid-column:1/-1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}html.ed-post-election .ed-public-build{display:none}html.ed-post-election .ed-head .ed-date{display:none}}
