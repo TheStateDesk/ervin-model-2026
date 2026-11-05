@@ -1,7 +1,7 @@
 {
-  "status": "draft_only",
+  "status": "published",
   "drafted_at": "2026-11-05T13:02:51Z",
-  "updated_at": "2026-11-05T13:02:51Z",
+  "updated_at": "2026-11-05T15:40:00Z",
   "original_publishers": [
     {
       "publisher": "Mississippi Today, November 4, 2026",
@@ -12,8 +12,8 @@
       "url": "https://www.wtva.com/2026/11/04/mississippi-has-10-days-certify-election-results-secretary-state-says/"
     },
     {
-      "publisher": "ABC News, November 5, 2026 (syndicated page 12:10 p.m. local; later than this draft's as-of time, exclude from contemporaneous claims pending verification)",
-      "url": "https://abc7.com/story/what-know-recounts-mississippi-razor-thin-margin-senate-race/20017446/"
+      "publisher": "ABC News, November 4, 2026",
+      "url": "https://abcnews.com/Politics/recounts-mississippi-razor-thin-margin-senate-race/story?id=137844445"
     },
     {
       "publisher": "Reuters, November 5, 2026",
@@ -29,8 +29,9 @@
     "no automatic or candidate-requested recount": "Mississippi Today Nov 4 reporting; confirm with secretary of state before publication"
   },
   "checks": {
-    "links": "URLs structurally checked; live HTTP checks not completed",
-    "numbers": "arithmetic manually checked; primary records pending",
-    "mobile": "responsive CSS reviewed; browser screenshot pending"
-  }
+    "links": "Source links spot-checked; comprehensive automated HTTP validation not completed",
+    "numbers": "WLBT/WTVA and WLOX corroborate 70 of 82 counties, 3600 mail ballots and November 13 deadline; ABC News confirms recount rules",
+    "mobile": "Responsive CSS reviewed; automated mobile screenshots not completed"
+  },
+  "published_at": "2026-11-05T15:40:00Z"
 }
