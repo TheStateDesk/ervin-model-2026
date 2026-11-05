@@ -87,3 +87,6 @@ html.ed-post-election .ed-footer{margin-top:40px}
 .post-peer-grid a>small{font:12px/1.55 var(--ed-sans);color:var(--ed-muted)}
 @media(max-width:920px){.post-peer-grid{grid-template-columns:repeat(2,1fr)}.post-peer-grid a{border-bottom:1px solid var(--ed-rule)}}
 @media(max-width:610px){.post-peer-grid{grid-template-columns:1fr}.post-peer-grid a{border-left:0!important;padding:17px 8px}.post-peer-grid a>strong{font-size:22px}}
+
+/* The static newsroom HTML must remain indexable on /states/ but never appear in the pre-election forecast archive. */
+html:not(.ed-post-election) #postElectionDesk{display:none!important}
