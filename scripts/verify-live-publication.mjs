@@ -59,17 +59,29 @@ try{
  await rootPage.goto(base+'?release='+stamp,{waitUntil:'domcontentloaded'});
  const newsroom=await rootPage.evaluate(()=>({
    title:document.title,
-   masthead:document.querySelector('.masthead')?.textContent||'',
-   heading:document.querySelector('h1')?.textContent||'',
+   masthead:document.querySelector('.td-masthead')?.textContent||'',
+   heading:document.querySelector('main h1')?.textContent||'',
+   sectionNav:document.querySelectorAll('.td-global-nav a').length,
+   leadImage:!!document.querySelector('.td-lead-card img'),
+   mobileNavFits:(document.querySelector('.td-global-nav')?.scrollWidth||9999)<=window.innerWidth+2,
    stories:document.querySelectorAll('a[href^="analysis/"]').length,
    electionLink:!!document.querySelector('a[href="states/"]'),
    footer:document.querySelector('footer')?.textContent||'',
    viewport:!!document.querySelector('meta[name="viewport"]')
  }));
- if(!newsroom.title.includes('The State Desk')||!newsroom.masthead.includes('The State Desk')||!newsroom.heading||newsroom.stories<5||!newsroom.electionLink||!newsroom.footer.includes('AI assistance')||!newsroom.viewport)throw Error('PUBLIC NEWSPAPER HOMEPAGE VERIFICATION FAILED '+JSON.stringify(newsroom));
+ if(!newsroom.title.includes('The State Desk')||!newsroom.masthead.includes('The State Desk')||!newsroom.heading||newsroom.stories<5||!newsroom.electionLink||!newsroom.footer.includes('AI assistance')||(!newsroom.viewport||newsroom.sectionNav!==8||!newsroom.leadImage||!newsroom.mobileNavFits))throw Error('PUBLIC NEWSPAPER HOMEPAGE VERIFICATION FAILED '+JSON.stringify(newsroom));
  await rootPage.screenshot({path:'postdeploy-checks/State-Desk-Newsroom-Mobile.png',fullPage:false});
  console.log('PUBLIC NEWSPAPER HOMEPAGE PASS '+newsroom.stories+' story/navigation links and election archive');
  await rootPage.close();
+ // Check every newspaper navigation destination on the publicly deployed site.
+ for(const section of ['congress/','white-house/','states-news/','policy-economy/','analysis/','results/','archive/']){
+  const sectionPage=await browser.newPage({viewport:{width:390,height:844}});
+  const reply=await sectionPage.goto(base+section+'?release='+stamp,{waitUntil:'domcontentloaded'});
+  const ok=!!reply?.ok()&&await sectionPage.evaluate(()=>Boolean(document.querySelector('.td-global-header')&&document.querySelector('main h1')&&document.querySelectorAll('.td-global-nav a').length===8));
+  if(!ok)throw Error('PUBLIC NAV DESTINATION FAILED '+section+' HTTP '+reply?.status());
+  console.log('PUBLIC NEWSPAPER SECTION PASS '+section);
+  await sectionPage.close();
+ }
  const front=await browser.newPage({viewport:{width:390,height:844}});
  await front.addInitScript(()=>{Date.now=()=>Date.parse('2026-11-03T21:30:00Z')});
  const frontJsErrors=[],frontRequestFailures=[];

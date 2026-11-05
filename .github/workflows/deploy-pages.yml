@@ -124,6 +124,7 @@ jobs:
         run: |
           node scripts/validate-editorial-publication.mjs
           node scripts/validate-editorial-provenance.mjs
+          node scripts/validate-newsroom.mjs
           node --check uncalled/tracker.js
           node --check analysis/forecast-coverage/score.js
       - name: Pre-publish state and county integrity
@@ -148,6 +149,7 @@ jobs:
           npm install --no-save playwright@1.56.1
           npx playwright install --with-deps chromium
           node scripts/visual-smoke.mjs
+          node scripts/newsroom-smoke.mjs
       - name: Upload pre-publish visual evidence
         uses: actions/upload-artifact@v4
         with:

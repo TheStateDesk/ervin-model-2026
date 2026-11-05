@@ -50,6 +50,7 @@ jobs:
           node-version: '22'
       - run: node scripts/validate-editorial-publication.mjs
       - run: node scripts/validate-editorial-provenance.mjs
+      - run: node scripts/validate-newsroom.mjs
       - run: node --check uncalled/tracker.js
       - run: node --check analysis/forecast-coverage/score.js
       - run: node scripts/test-county-results-core.mjs
@@ -90,7 +91,9 @@ jobs:
           ERVIN_VERIFY_EXPECTED_BUILD: d51f77b2f2795d35882ae324db8b9f54064d9361
         run: node scripts/verify-live-publication.mjs
       - name: Render county maps and capture screenshots (desktop/mobile, light/dark)
-        run: node scripts/visual-smoke.mjs
+        run: |
+          node scripts/visual-smoke.mjs
+          node scripts/newsroom-smoke.mjs
       - name: Verify live Pages waits for loaded Texas publisher averages
         if: github.event_name == 'pull_request' && github.head_ref == 'fix/house-live-polling-async-check-20261102'
         run: node scripts/verify-live-publication.mjs
