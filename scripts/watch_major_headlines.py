@@ -24,7 +24,7 @@ SOURCES = [
     ("THE GUARDIAN", "https://www.theguardian.com/us-news/us-politics/rss"),
     ("PBS NEWSHOUR", "https://www.pbs.org/newshour/feeds/rss/politics"),
     ("BBC NEWS", "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"),
-    ("ASSOCIATED PRESS", "https://flipboard.com/@associatedpress/top-stories-u7govdf1z.rss"),
+    ("AP VIA FLIPBOARD (UNOFFICIAL)", "https://flipboard.com/@associatedpress/top-stories-u7govdf1z.rss"),
     ("REUTERS VIA GOOGLE NEWS", "https://news.google.com/rss/search?q=when%3A1d%20site%3Areuters.com%20US%20politics&hl=en-US&gl=US&ceid=US:en"),
 ]
 POLITICAL = re.compile(r"\b(president|white house|congress|senat(?:e|or)|house (?:of representatives|speaker)|"
@@ -34,12 +34,12 @@ POLITICAL = re.compile(r"\b(president|white house|congress|senat(?:e|or)|house (
     r"national security|state department|pentagon|politic|government|border|shutdown|"
     r"impeach|military|iran|ukraine|israel|china|nato|sanctions?)\b", re.I)
 MAJOR = [
-    (r"\b(breaking|historic|landmark|unprecedented|emergency|shutdown)\b", 3),
+    (r"\b(emergency|government shutdown|shutdown)\b", 2),
     (r"\b(resign(?:s|ed|ation)?|ousted|fired|removed|dies|died|assassinat|indict(?:ed|ment)?|arrested)\b", 4),
     (r"\b(supreme court|impeachment|executive order|veto|signed into law)\b", 4),
     (r"\b(wins? election|won election|projected winner|calls? (?:the )?race|flips? (?:the )?seat)\b", 3),
     (r"\b(passes? (?:the )?bill|passes? (?:the )?senate|passes? (?:the )?house|spending bill|debt ceiling)\b", 3),
-    (r"\b(invasion|strikes?|ceasefire|war|sanctions?|tariffs?)\b", 2),
+    (r"\b(invasion|ceasefire|sanctions?|tariffs?)\b", 2),
 ]
 STOP = set(("the a an and or but on in at for with as of to from by over after before new latest says "
             "has have had is are was were will would can could about under amid more than this that "
@@ -174,11 +174,14 @@ def update(output: pathlib.Path, feeds: list[tuple[str, bytes]], now: dt.datetim
             old = json.loads(output.read_text(encoding="utf-8"))
         except (ValueError, OSError):
             pass
-    # Commit when the priority queue materially changes, or once in 6h to keep freshness visible.
+    # Avoid time-triggered rewrites when content is unchanged. Every scan remains in Actions logs.
     old_keys = [(x.get("url"), x.get("source_count")) for x in old.get("priority", [])]
     new_keys = [(x.get("url"), x.get("source_count")) for x in leads]
-    last = parse_date(old.get("generated_at", ""))
-    changed = old_keys != new_keys or not last or (now - last).total_seconds() >= 6 * 3600
+    old_headlines = [(x.get("url"), x.get("title")) for x in old.get("headlines", [])]
+    new_headlines = [(x.get("url"), x.get("title")) for x in headlines]
+    changed = (old_keys != new_keys or old_headlines != new_headlines or
+               old.get("source_warnings", []) != errors or
+               old.get("sources_reporting", []) != live)
     if changed:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
