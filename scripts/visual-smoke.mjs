@@ -184,7 +184,7 @@ try{
  const postDesk=await browser.newPage({viewport:{width:1440,height:940}});
  const postErrors=[];postDesk.on('pageerror',e=>postErrors.push(e.message));
  await postDesk.goto(root+'/states/',{waitUntil:'domcontentloaded'});
- await postDesk.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave')&&Number((document.querySelector('#postOpenCount')?.textContent||'').match(/\\d[\\d,]*/)?.[0]?.replaceAll(',','')||'0')>100&&document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live',null,{timeout:65000});
+ await postDesk.waitForFunction(()=>document.querySelector('#postElectionDesk h1')?.textContent.includes('A national wave')&&Number((document.querySelector('#postOpenCount')?.textContent||'').match(/[0-9][0-9,]*/)?.[0]?.replaceAll(',','')||'0')>100&&document.querySelector('#edSimulationPanel')?.dataset.coverageMode==='live',null,{timeout:65000});
  assert((await postDesk.locator('#postCloseRaces').count())===1,'Post-election close-count desk missing');
  assert(await postDesk.locator('#watchSection').isHidden(),'Pre-election races must be archived');
  assert(await postDesk.locator('#balanceOfPower').isHidden(),'Forecast control bars still dominate homepage');
