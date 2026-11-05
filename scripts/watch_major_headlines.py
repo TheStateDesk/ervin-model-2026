@@ -27,19 +27,19 @@ SOURCES = [
     ("ASSOCIATED PRESS", "https://flipboard.com/@associatedpress/top-stories-u7govdf1z.rss"),
     ("REUTERS VIA GOOGLE NEWS", "https://news.google.com/rss/search?q=when%3A1d%20site%3Areuters.com%20US%20politics&hl=en-US&gl=US&ceid=US:en"),
 ]
-POLITICAL = re.compile(r"\\b(president|white house|congress|senat(?:e|or)|house (?:of representatives|speaker)|"
+POLITICAL = re.compile(r"\b(president|white house|congress|senat(?:e|or)|house (?:of representatives|speaker)|"
     r"supreme court|federal|governor|election|midterm|vote|ballot|democrat|republican|gop|"
     r"trump|administration|cabinet|secretary of state|justice department|attorney general|"
     r"legislat|immigration|tariff|budget|tax(?:es|ation)?|medicaid|medicare|obamacare|"
     r"national security|state department|pentagon|politic|government|border|shutdown|"
-    r"impeach|military|iran|ukraine|israel|china|nato|sanctions?)\\b", re.I)
+    r"impeach|military|iran|ukraine|israel|china|nato|sanctions?)\b", re.I)
 MAJOR = [
-    (r"\\b(breaking|historic|landmark|unprecedented|emergency|shutdown)\\b", 3),
-    (r"\\b(resign(?:s|ed|ation)?|ousted|fired|removed|dies|died|assassinat|indict(?:ed|ment)?|arrested)\\b", 4),
-    (r"\\b(supreme court|impeachment|executive order|veto|signed into law)\\b", 4),
-    (r"\\b(wins? election|won election|projected winner|calls? (?:the )?race|flips? (?:the )?seat)\\b", 3),
-    (r"\\b(passes? (?:the )?bill|passes? (?:the )?senate|passes? (?:the )?house|spending bill|debt ceiling)\\b", 3),
-    (r"\\b(invasion|strikes?|ceasefire|war|sanctions?|tariffs?)\\b", 2),
+    (r"\b(breaking|historic|landmark|unprecedented|emergency|shutdown)\b", 3),
+    (r"\b(resign(?:s|ed|ation)?|ousted|fired|removed|dies|died|assassinat|indict(?:ed|ment)?|arrested)\b", 4),
+    (r"\b(supreme court|impeachment|executive order|veto|signed into law)\b", 4),
+    (r"\b(wins? election|won election|projected winner|calls? (?:the )?race|flips? (?:the )?seat)\b", 3),
+    (r"\b(passes? (?:the )?bill|passes? (?:the )?senate|passes? (?:the )?house|spending bill|debt ceiling)\b", 3),
+    (r"\b(invasion|strikes?|ceasefire|war|sanctions?|tariffs?)\b", 2),
 ]
 STOP = set(("the a an and or but on in at for with as of to from by over after before new latest says "
             "has have had is are was were will would can could about under amid more than this that "
@@ -48,7 +48,7 @@ STOP = set(("the a an and or but on in at for with as of to from by over after b
 
 
 def clean(value: str) -> str:
-    return re.sub(r"\\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", value or ""))).strip()
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", value or ""))).strip()
 
 
 def parse_date(raw: str) -> dt.datetime | None:
@@ -178,7 +178,7 @@ def update(output: pathlib.Path, feeds: list[tuple[str, bytes]], now: dt.datetim
     changed = old_keys != new_keys or not last or (now - last).total_seconds() >= 6 * 3600
     if changed:
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+        output.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({"checked_at": data["generated_at"], "source_count": len(live),
                       "headlines_seen": len(items), "priority_leads": len(leads),
                       "write_required": changed, "warnings": errors}, ensure_ascii=False))
