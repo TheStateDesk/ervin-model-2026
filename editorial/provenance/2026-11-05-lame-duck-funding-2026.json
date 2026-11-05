@@ -1,0 +1,35 @@
+{
+  "status": "draft_only",
+  "drafted_at": "2026-11-05T13:02:51Z",
+  "updated_at": "2026-11-05T13:02:51Z",
+  "original_publishers": [
+    {
+      "publisher": "Reuters, September 1, 2026",
+      "url": "https://www.reuters.com/legal/government/us-house-has-enough-votes-pass-stopgap-funds-prevent-shutdowns-oct-1-2026-09-01/"
+    },
+    {
+      "publisher": "Associated Press, July 2026 (earlier proposal)",
+      "url": "https://apnews.com/article/a808a5428729a70cdc0250ab0a35611a"
+    },
+    {
+      "publisher": "Reuters, November 5, 2026",
+      "url": "https://www.reuters.com/legal/government/democrats-vow-rein-trump-he-shows-off-white-house-ballroom-2026-11-05/"
+    },
+    {
+      "publisher": "Congressional Constitution Annotated, Twentieth Amendment (standing primary record)",
+      "url": "https://constitution.congress.gov/browse/amendment-20/"
+    }
+  ],
+  "claims": {
+    "370–48 House vote": "Reuters September 1 report",
+    "December 11 2026 funding deadline": "Reuters September 1 report; requires enacted-law recheck",
+    "January 3 2027 new congressional terms": "Twentieth Amendment, calendar application",
+    "22 calendar days": "December 11 to January 3 arithmetic; editorial calculation",
+    "December 4 earlier proposal": "AP July report; explicitly superseded as proposal"
+  },
+  "checks": {
+    "links": "URLs structurally checked; live HTTP checks not completed",
+    "numbers": "arithmetic manually checked; primary records pending",
+    "mobile": "responsive CSS reviewed; browser screenshot pending"
+  }
+}
