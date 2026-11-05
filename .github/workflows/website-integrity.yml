@@ -14,7 +14,17 @@ on:
       - 'stats-for-nerds/**'
       - 'index.html'
       - 'site-chrome.js'
+      - 'analysis/**'
+      - 'about/**'
+      - 'corrections/**'
+      - 'feed.xml'
+      - 'sitemap.xml'
       - 'polling/**'
+      - 'analysis/**'
+      - 'about/**'
+      - 'corrections/**'
+      - 'feed.xml'
+      - 'sitemap.xml'
       - '.github/workflows/website-integrity.yml'
   pull_request:
     paths:
@@ -38,6 +48,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: node scripts/validate-editorial-publication.mjs
       - run: node scripts/test-county-results-core.mjs
       - run: python3 -m unittest discover -s tests -p test_national_county_sources.py -v
       - run: node scripts/validate-election-site.mjs
