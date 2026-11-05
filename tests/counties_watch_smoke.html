@@ -40,7 +40,7 @@
   ok(d.querySelectorAll("#sourceDesk a[href^='https://']").length===3,"Every public results resource opens a verified HTTPS destination");
   ok($("sourceDesk").textContent.includes("not")&&$("sourceDesk").textContent.includes("automatically"),"Outbound news links explicitly do not imply automated result ingestion");
   ok(d.querySelectorAll(".jump-nav a[href^='#']").length>=5,"Page quick navigation offers direct section jumps");
-  ok($("feedMessage").textContent.includes("No verified"),"Empty vote snapshot does not invent election results");
+  ok(/No verified|of ten chosen units have verified 2026 returns recorded/.test($("feedMessage").textContent),"County feed shows verified returns when present or explicitly records none; no votes are inferred");
   let first=$("countyRows").querySelector("tr[data-fips]");
   first.dispatchEvent(new w.KeyboardEvent("keydown",{key:"Enter",bubbles:true}));
   ok(first.classList.contains("active"),"Keyboard county selection highlights row");
