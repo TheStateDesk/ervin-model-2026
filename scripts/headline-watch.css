@@ -1,0 +1,17 @@
+/* Half-hour editorial lead monitor: links are external reporting, not State Desk articles. */
+.wire-watch{padding:22px 0 30px;margin:19px 0 28px;border-top:3px solid #263f50;border-bottom:1px solid #c8cfd0}
+.wire-watch-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:15px}
+.wire-watch-heading span{font:800 10px/1.4 "Libre Franklin",Arial,sans-serif;letter-spacing:.13em;color:#8a5f3c}
+.wire-watch-heading h2{font:650 clamp(27px,3vw,39px)/1.1 "Newsreader",Georgia,serif;margin:4px 0 0;color:#243847}
+.wire-watch-heading>small{font:11px/1.5 "Libre Franklin",Arial,sans-serif;color:#6f767d}
+.wire-watch-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.wire-watch-grid>a{display:flex;flex-direction:column;gap:8px;padding:12px 14px 15px;border-left:1px solid #ccd3d5;text-decoration:none!important;min-width:0;color:#25394a!important}
+.wire-watch-grid>a:first-child{border-left:3px solid #365c73}
+.wire-watch-grid>a:hover{background:#f4f3ef}
+.wire-watch-grid>a>span{font:800 10px/1.4 "Libre Franklin",Arial,sans-serif;letter-spacing:.06em;color:#8b6446}
+.wire-watch-grid>a>strong{font:650 20px/1.15 "Newsreader",Georgia,serif;overflow-wrap:anywhere}
+.wire-watch-grid>a>small{margin-top:auto;font:11px/1.4 "Libre Franklin",Arial,sans-serif;color:#73818c}
+.wire-watch-note{font:11px/1.55 "Libre Franklin",Arial,sans-serif;color:#677580;margin:12px 0 0}
+.wire-watch-note a{color:inherit;text-decoration:underline}
+@media(max-width:950px){.wire-watch-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:610px){.wire-watch-heading{display:block}.wire-watch-heading>small{display:block;margin-top:8px}.wire-watch-grid{grid-template-columns:1fr}.wire-watch-grid>a{border-left:3px solid #d3d8da;min-height:0}.wire-watch-grid>a>strong{font-size:21px}}
