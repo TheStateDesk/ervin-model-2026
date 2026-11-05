@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T12:09:23.922043Z",
+  "generated_at": "2026-11-05T20:13:46.789735Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -15,30 +15,30 @@
   ],
   "priority": [
     {
-      "title": "Democrats will control Congress. Will it change Trump's approach to foreign policy?",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6028977/democrats-will-control-congress-will-it-change-trumps-approach-to-foreign-policy",
-      "source": "NPR",
-      "published_at": "2026-11-05T09:50:34Z",
+      "title": "Melania Trump calls for lasting Ukraine truce as she hosts Russian and Ukrainian officials",
+      "url": "https://www.bbc.co.uk/news/articles/c9p8g085mz07o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T19:08:08Z",
       "source_count": 2,
       "other_sources": [
         {
-          "source": "REUTERS VIA GOOGLE NEWS",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNMUhtZlVMd1gzdC1DRkZpNUxiX0t5a2ZwVkl1UGdDcXFROFZ1UzcxSjB1bUNSVE1kaE53bG1hNVE3cktDVzNNN1lpUHFVdWo0V19pMG9mLTI2VnRjYWVFNFFGamdWaVBvVTdyRHZWczZ5Ul93UjJTaC10VW5ZbmxQcG94RllSVGpoX3BTeTdzMHpmRjZqSnZCYmQtQzlZS2RNS1Z0UVdqajhGdGdp?oc=5"
+          "source": "THE HILL",
+          "url": "https://thehill.com/video-clips/6200577-watch-live-melania-trump-russia-ukraine-officials-white-house-localized-ceasefire/"
         }
       ],
       "priority_score": 5,
       "note": "Potential major development; verify original reporting before publishing."
     },
     {
-      "title": "Democrats will take control of Congress next year. What does it mean for the economy?",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6029304/democrats-will-take-control-of-congress-next-year-what-does-it-mean-for-the-economy",
-      "source": "NPR",
-      "published_at": "2026-11-05T09:46:54Z",
+      "title": "Trump’s Washington arch poised for approval as judge weighs bid to block construction - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNRlhvZGtKal8wM0d0dVZKaENBa2tkS1VZY0RTV1A3TzNkSTFCOU9aMWFaQ0JfWG9xVDMyRExlc0tYRXVsZ3RBbllwNHQ0a2FGOXhhNUhobzUwOWw5Mkh3bGYzZWtpWkFxMVNhRzhFMFk3QzdyNkI1VXcyMDgwaHJfS2lNZFZpRTM3VXZ5cV9XRVVpVzB2eW1FR1o4WDFZTWNCUFlzbVQwX09zdU1BdExpcjhTWDdqeGtXSXh3?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T11:09:51Z",
       "source_count": 2,
       "other_sources": [
         {
-          "source": "BBC NEWS",
-          "url": "https://www.bbc.co.uk/news/videos/cwkg5xmlpj4jo?at_medium=RSS&at_campaign=rss"
+          "source": "NPR",
+          "url": "https://www.npr.org/2026/11/05/nx-s1-6027301/trump-arch-federal-approval-judge-construction"
         }
       ],
       "priority_score": 5,
@@ -47,148 +47,148 @@
   ],
   "headlines": [
     {
-      "title": "Sen. Kirsten Gillibrand on the Democratic Party's agenda for the next Congress",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6028837/sen-kirsten-gillibrand-on-the-democratic-partys-agenda-for-the-next-congress",
-      "source": "NPR",
-      "published_at": "2026-11-05T11:45:30Z"
+      "title": "California governor commutes death sentences for all 548 people on death row",
+      "url": "https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T20:12:03Z"
     },
     {
-      "title": "US midterm elections 2026 live: Democrats eye historic upset in Mississippi Senate race as Republican blame game begins",
-      "url": "https://www.theguardian.com/us-news/live/2026/nov/05/midterm-elections-live-latest-updates-mississippi-senate-race",
+      "title": "Dem senator presses call for Kennedy to ‘resign or be fired’ after election",
+      "url": "https://thehill.com/homenews/senate/6202130-alsobrooks-calls-rfk-jr-resign/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T20:04:40Z"
+    },
+    {
+      "title": "NCPC virtual meeting for Trump triumphal arch crashes during public testimony",
+      "url": "https://thehill.com/homenews/administration/6202036-ncpc-meeting-crashes-trump-arch/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T20:02:31Z"
+    },
+    {
+      "title": "Deep-red Kansas votes for change as patience wears thin with Trump: ‘The economy is really taking a beating’",
+      "url": "https://www.theguardian.com/us-news/2026/nov/05/kansas-voters-trump-republicans-dispatch",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T11:37:21Z"
+      "published_at": "2026-11-05T20:00:32Z"
     },
     {
-      "title": "Progressives hail ‘blue wave’ victories in US midterm elections as top Democrats push for unity",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/progressives-democrats-midterm-elections",
+      "title": "‘Dark horse diplomat’: Melania Trump plays both sides in joint Russia-Ukraine White House visit",
+      "url": "https://www.theguardian.com/us-news/2026/nov/05/melania-trump-white-house-visit-ukraine-russia",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T11:00:22Z"
+      "published_at": "2026-11-05T19:46:31Z"
     },
     {
-      "title": "Iran strikes kept quiet during midterm homestretch set off worries on transparency",
-      "url": "https://thehill.com/policy/defense/6199633-trump-iran-strikes-midterm-transparency/",
+      "title": "Appeals court questions if Trump’s conviction survives presidential immunity",
+      "url": "https://thehill.com/regulation/court-battles/6201976-trump-presidential-immunity-hush-money-conviction/",
       "source": "THE HILL",
-      "published_at": "2026-11-05T11:00:00Z"
+      "published_at": "2026-11-05T19:45:41Z"
     },
     {
-      "title": "Republicans sort through election carnage for a message ahead of a new era",
-      "url": "https://thehill.com/homenews/senate/6199515-gop-midterms-defeat-trump/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T11:00:00Z"
-    },
-    {
-      "title": "Democrats signal oversight blitz as Trump officials lawyer up",
-      "url": "https://thehill.com/homenews/house/6199505-house-investigations-trump-administration/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T11:00:00Z"
-    },
-    {
-      "title": "Mississippi has an unexpectedly close Senate race but no recount procedure",
-      "url": "https://thehill.com/homenews/campaign/6199322-mississippi-senate-race-recount-mail-ballots/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T11:00:00Z"
-    },
-    {
-      "title": "Healthcare powers Democrats’ midterm rout: 4 takeaways",
-      "url": "https://thehill.com/policy/healthcare/6199119-democrats-win-congress-healthcare-takeaways/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T11:00:00Z"
-    },
-    {
-      "title": "Photos show Americans reacting in real-time to midterm results - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPbW1ldDZNRklJd0FRTHk3Qm5pc0U2QkpKT2l6MU9CSmRHSmQwSUJDcWkwYzd3ZWRVRndLSlNSUngzYUFBOWJFM3J0c0FCX2ZOSHlyZVFHOVhFNlpTTnBuc2hLMzMzakhGdDF3T1owSVJ4dExIaUl4V0UzZ0g0RWdIN3R0TENyUG9YekVLdWQtTDU2cnJKQ19MWHo4QjFXbW56SzBr?oc=5",
+      "title": "Paraguay President Peña resigns under mounting pressure from bank collapse - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWGc3WWZCT3BZUUFMY3E0VW43Z244SWNKVUk4NS1RZ1RHVGVSdG1RSVNKVjFaZGdlQjktT2JvcElpNEVvMllaNTdIbWRMdmdQZ1F3RjZwMThjcVU5X1pYY20wajc0MzIyenBHX3MtaEVRRnpRTC16TWdITnA4QWZxcFhtNHh0UlR0YlZ2UkVqUmF4YXZWejdWY2xsZ0c2bm5oWUNiczZnWms4NHo2eHctcHJKSHJEMmNDQmtZ?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T10:55:55Z"
+      "published_at": "2026-11-05T19:31:51Z"
     },
     {
-      "title": "Trump's arch is on the verge of federal approval. But a judge could block construction",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6027301/trump-arch-federal-approval-judge-construction",
-      "source": "NPR",
-      "published_at": "2026-11-05T10:02:00Z"
+      "title": "Rove: Paxton ‘drew down the entire Republican ticket’ in Texas",
+      "url": "https://thehill.com/homenews/campaign/6201889-karl-rove-ken-paxton-texas-republicans/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T19:25:18Z"
     },
     {
-      "title": "Not just Congress: Democrats’ blue wave washes over state legislatures across US",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/democrats-state-legislatures-midterm-elections",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T10:00:05Z"
+      "title": "Musk has little to show for his record spending on Republican campaigns in US midterms - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQLW1HNDhJZmxwMWdaVVZTX05ZVjhhTkRhV19Wb3RJOVhfWjdCa0MxLV9uWXZ1YWRKVUZ5bGZHN3duOTJMWGdrQ0tDRDdORGtHTlIxVWlhOXozR1J2MXBxV2JreTY4b2c3empONmg5QXl0ejFvelFlTjRSTzZZd19fSy0zT0E2T1NjWXE5Y29pdXFVQ1pYbDFrQXlwZ0ZRSkhuRS1oR2RYU2FFdDVmN1JJS2t6Yzczbk1Ydnc?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T19:20:55Z"
     },
     {
-      "title": "The South flexes political power in midterms, sets regional influence in 2028 election",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6029818/blue-wave-south-carolina-georgia-mississippi-texas",
-      "source": "NPR",
-      "published_at": "2026-11-05T10:00:00Z"
+      "title": "Greg Steube to run for House GOP conference chair",
+      "url": "https://thehill.com/homenews/house/6201925-greg-steube-house-gop-conference-chair-run-2027/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T19:20:17Z"
     },
     {
-      "title": "Democrats will control Congress. Will it change Trump's approach to foreign policy?",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6028977/democrats-will-control-congress-will-it-change-trumps-approach-to-foreign-policy",
-      "source": "NPR",
-      "published_at": "2026-11-05T09:50:34Z"
+      "title": "Sanders calls for Democrats to pass ‘Medicare for All’",
+      "url": "https://thehill.com/homenews/senate/6201914-sanders-calls-medicare-all/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T19:15:49Z"
     },
     {
-      "title": "Democrats will take control of Congress next year. What does it mean for the economy?",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6029304/democrats-will-take-control-of-congress-next-year-what-does-it-mean-for-the-economy",
-      "source": "NPR",
-      "published_at": "2026-11-05T09:46:54Z"
-    },
-    {
-      "title": "Democrats and Republicans reflect on midterm results and the message sent by voters",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6029732/democrats-and-republicans-reflect-on-midterm-results-and-the-message-sent-by-voters",
-      "source": "NPR",
-      "published_at": "2026-11-05T09:46:11Z"
-    },
-    {
-      "title": "Trump blames GOP candidates and Fox News for midterm losses",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6028845/trump-blames-gop-candidates-and-fox-news-for-midterm-losses",
-      "source": "NPR",
-      "published_at": "2026-11-05T09:45:40Z"
-    },
-    {
-      "title": "Russia's Dmitriev in Washington for first US contact since Trump's midterm setback - Reuters",
+      "title": "Melania Trump urges 'humanity over war' with Ukraine, Russia officials - Reuters",
       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOWkhXRFdJbFdiTmQySWJyWVRIbHhpdFlXaVRSQmh6UzJvbDJSbWZUdGRwM0VPaFpHbkVpc1VmSlAybEFJUTN0cmNMWkpuX1FJSE8zT3NBYXdXY05lLUhjTldMelM1eGdUWWVnbF9qb0s3VFMySFJ1Qk5GTFJmeXVHM1NLaHNEMzdrZjhXNWpEcVhOQTdSV3V6SVVMQU0xMGtNbUhkblZRdG82aUdvTWxLbHZQUmFpdEh5WUV4ZUgtZU1JcjFjaUxZ?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T09:15:47Z"
+      "published_at": "2026-11-05T19:13:42Z"
     },
     {
-      "title": "‘I never understood wind’: midterms spark hope for renewables after Trump’s hostility",
-      "url": "https://www.theguardian.com/business/2026/nov/05/democrats-midterms-triumph-renewable-energy-industry-donald-trump",
+      "title": "Watch live: Hinojosa speaks after midterm win against Abbott",
+      "url": "https://thehill.com/video-clips/6201860-watch-live-gina-hinojosa-texas-governors-race-presser-midterms/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T19:12:58Z"
+    },
+    {
+      "title": "Trump is soothing the midterms loss with what he loves best: interior design | Arwa Mahdawi",
+      "url": "https://www.theguardian.com/us-news/2026/nov/05/trumps-interior-design",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T09:04:05Z"
+      "published_at": "2026-11-05T19:12:23Z"
     },
     {
-      "title": "Trump's political humbling signals short-term gain, long-term pain for China - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQQVBkVEFRMUNIQ0xmQVZXR1lLZmJBeVJiMXJMalZKLTRCaG00cmhCWjVKQjZmUUh3ajlGY3hjejlwRm40M1BNVXlwWFJjcXU0Um40QVNQY1BjNEZFbGF0RUdvamZYNlBCelY2UFBuOHVzU2pRYWk5RXRPbjU5QkdwcUo2cXhKU2JqMy01ZHpoQk5MbTg2a19rdXRCR1JLeFI2RzJMNDNtMm9LelZOWS1vaVpyNG5GS2pManc?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T07:57:00Z"
+      "title": "US midterm voters responded in a thunderous voice. This is just the beginning | Betsy Reed",
+      "url": "https://www.theguardian.com/us-news/2026/nov/05/us-midterm-election-free-press",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-05T19:09:42Z"
     },
     {
-      "title": "Democrats vow to rein in Trump as he shows off White House ballroom - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQLVU3cDBrU2hPWkdiTmdId1ZVSmtRUDNVTDJDekRieFZleUdwSl9IV1pUOWtmQzBTMWE3S1RZQ2lnSmoxdG1LeHFzTjZzeE81aFFEbWJCV2t3alpBeHdCeUhmTF91Vk9hNXU3YWRtVzBia1hWY0ZHUVdCLWY2SWtERWRwQjVYbzNyRlUyQ19UNlRjRkUtdjE3RmpRcE1CVk1RcWh6RVFDMXpTZVlXZ0xXYw?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T07:50:00Z"
-    },
-    {
-      "title": "China says US farm purchases hinge on tariff-cut deal - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQbjZCZGJiUVFJRkdBeU1DaTExb3FMSmdaLVRuLTRrQWNnd3F5MDg1YnZlTUZfclBPRWhQZXdlbWxEakVXdlNidWVWbmhFcGZTVEpSOWlJSE1FTHhOWTVlUXkwSG5rTXRNTDE5ckRWTzhnYmx3LVVJSDE2S2JNQW9CTUNFanlFNWlqMkJWdFZTMzU0VnpzX2tua25aQS0zNTdsUDNRRA?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T07:44:00Z"
-    },
-    {
-      "title": "COMMENTARY: Asia hopes Democrats can provide relief from Trump's Iran war, tariffs - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOUk1naVB2YlNzNHNsUVA1ZVp4ZU5QaUNocUZjdkt0VVdHZVVmZXdRZzhSdUt5RFROWXlBclNEM0p0NnJTc3dqaWlBWVhoUWRVczliT2JGR3l3RXU0R1N0aGZicXFZSkdiNjd6dmZJWVVoRWp4X21wNUJNd2EzOG5CMnJoR1ExaW1lX1Q4R0o0cHhBM1lZX0lnd0NLMkFVaTJZZ0FvUVNfejFaaFViQU9tX3REV2ZBNjdCOHU3ak1EcUdJX2xsbFdCWE9pVzk?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T07:00:00Z"
-    },
-    {
-      "title": "Emirates airline net profit drops 66% in first half dragged down by Iran war - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQZ0FfNmtkUFFEaTlUdDhvdXZNYko4TUMwOVNTWVpEdHl5ZjMxUE8xdW9PRHNjelJlbFFkaFNEMEN6OHRnZVEzYnFXY09LQUtTa0FMSFZKY0I4amR2dUt3VGRTc3ExUGJ1cGFtQ245eDFuUkhkWUI3ZGNBMVQzN3NBRlZJOXJxZjRCRVN1STlia2lXUHdoRF9EdkhFcWpGZXJqUW9CUkJmUERhTzMxUGx0Wi1XX2ZwV3BEMVBHM1pmLWpYX01XX2xR?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T06:03:00Z"
-    },
-    {
-      "title": "Food, fuel and taxes – can the Democrats do anything to ease cost of living pressures?",
-      "url": "https://www.bbc.co.uk/news/articles/ck1ex50x5q46o?at_medium=RSS&at_campaign=rss",
+      "title": "Melania Trump calls for lasting Ukraine truce as she hosts Russian and Ukrainian officials",
+      "url": "https://www.bbc.co.uk/news/articles/c9p8g085mz07o?at_medium=RSS&at_campaign=rss",
       "source": "BBC NEWS",
-      "published_at": "2026-11-05T06:01:05Z"
+      "published_at": "2026-11-05T19:08:08Z"
+    },
+    {
+      "title": "Trump administration held talks with Iran on deporting Iranians during the war, court documents show",
+      "url": "https://www.pbs.org/newshour/world/trump-administration-held-talks-with-iran-on-deporting-iranians-during-the-war-court-documents-show",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-05T19:04:43Z"
+    },
+    {
+      "title": "Boebert, billionaires' tax and other midterms races still to watch",
+      "url": "https://www.bbc.co.uk/news/articles/c6vg0y2nr445o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T19:02:17Z"
+    },
+    {
+      "title": "Iran's security chief discusses regional, bilateral affairs with Putin - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMkR5dEUwb2FoSDZrZ2p1UVF1T3VzbjEwSmhUWFBSeElYM0lHamE3SE0zYVViRHNqZ2piYTBjbWtoZThDU01hQmpYRFlwMHJTTFl3S2MyWnFoZWh1VTRCdEFvckJZcHktYjNpMWxLbU1vOGp3N0k1Yi1FZ0xTMXYzU2I2OHVZeGZrVXdiUmJOZ0phb2dLTjVGTTQ4aGF0WEdOLTVzS2RLQzBYNXR5?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T18:59:00Z"
+    },
+    {
+      "title": "California rejects ballot measure requiring voter ID",
+      "url": "https://thehill.com/homenews/campaign/6178993-california-proposition-39-voter-id-fails/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T18:42:40Z"
+    },
+    {
+      "title": "Stevens pulls out of election analysis event at DC university",
+      "url": "https://thehill.com/homenews/campaign/6201679-haley-stevens-gwu-panel-canceled/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T18:36:55Z"
+    },
+    {
+      "title": "Democrat concedes in open race for Golden’s House seat in Maine",
+      "url": "https://thehill.com/homenews/campaign/6201704-democrat-matt-dunlap-maine-2nd-concession-2026-midterms/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T18:30:04Z"
+    },
+    {
+      "title": "Colorado rejects ballot measure adding new restrictions on mid-decade redistricting",
+      "url": "https://thehill.com/homenews/state-watch/6186493-colorado-ballot-measure-redistricting-limits-2026/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T18:23:10Z"
+    },
+    {
+      "title": "US issues new Cuba sanctions, takes aim at sectors of Cuban economy - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQblVpSUg3SjBzNjdqeWlrY1hpeWNhQ2E0VzNmZW1RTVl3ekVfRW5ERnpNU2gwa3M3NUZuNWFFc3JWR3BnNGlHeS1VOENLeFcwRUxaYm00TnVxZWd1RkxtbEJ0WlJTQmFMeXZDZm9iX1Fybk5qTGJ5eVhCMlV6c2VFbUd4ZXZBS2VmeW9tM0d1SjRoN0FibW13RnAtcU11XzVENk5PVTVYV2RPMGJkM3ZlaQ?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T18:11:08Z"
     }
   ]
 }
