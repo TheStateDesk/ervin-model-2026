@@ -1,0 +1,47 @@
+{
+  "draft": "analysis/bank-oversight-2027/index.html",
+  "prepared_at": "2026-11-05T14:00:00-05:00",
+  "source_reporting": [
+    {
+      "publisher": "Reuters",
+      "authors": [
+        "Nupur Anand",
+        "Tatiana Bautzer",
+        "Michelle Price"
+      ],
+      "published": "2026-11-05T04:03:00-05:00",
+      "url": "https://www.reuters.com/legal/transactional/banks-brace-tighter-oversight-us-congress-after-democrats-sweep-2026-11-05/"
+    },
+    {
+      "publisher": "Associated Press",
+      "published_date": "2026-11-03",
+      "url": "https://apnews.com/article/f126e12e05b579a327b98481c0ae2226"
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Democrats won both chambers",
+      "source": "Associated Press URL above"
+    },
+    {
+      "claim": "Banks anticipate hearings on consumer lending, fees, mortgages and fraud",
+      "source": "Reuters URL above"
+    },
+    {
+      "claim": "Warren and Waters are possible committee chairs, not confirmed",
+      "source": "Reuters URL above"
+    },
+    {
+      "claim": "No quantitative statistics in draft",
+      "source": "N/A"
+    }
+  ],
+  "images": [],
+  "status": "editorial review required",
+  "validation": {
+    "links": "URLs inspected through search results, not HTTP-tested from draft deployment",
+    "numbers": "No article-specific numerical data",
+    "duplicates": "Manual headline comparison against current homepage; full corpus similarity test not completed",
+    "mobile": "Viewport meta and existing responsive stylesheet retained; visual browser check not completed"
+  }
+}
