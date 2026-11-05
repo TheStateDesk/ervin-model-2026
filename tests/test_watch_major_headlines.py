@@ -62,6 +62,8 @@ class HeadlineWatchTests(unittest.TestCase):
             second = watch.update(dest, data, NOW + dt.timedelta(minutes=30))
             self.assertTrue(first["changed"])
             self.assertFalse(second["changed"])
+            seven_hours = watch.update(dest, data, NOW + dt.timedelta(hours=7))
+            self.assertFalse(seven_hours["changed"], "An unchanged scan must not rewrite public JSON merely because six hours elapsed")
             saved = json.loads(dest.read_text())
             self.assertEqual(saved["priority"][0]["source_count"], 2)
             self.assertEqual(saved["generated_at"], NOW.isoformat().replace("+00:00", "Z"))
