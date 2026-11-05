@@ -35,7 +35,22 @@ try{
  for(const slug of ['congress-veto-budget-2027','medicaid-subsidies-2027','markets-2026-election-reaction']){
   await check.goto(base+'analysis/'+slug+'/',{waitUntil:'domcontentloaded'});
   await check.locator('.td-article-photo img').waitFor({state:'visible'});
-  await check.waitForFunction(()=>{const im=document.querySelector('.td-article-photo img');return im?.complete&&im.naturalWidth>0},null,{timeout:18000});
+  // Wikimedia's image redirect can occasionally be slow or transiently fail.
+  // Retry the actual image request, never accept a broken or merely present IMG.
+  let imageLoaded=false;
+  for(let attempt=1;attempt<=3&&!imageLoaded;attempt++){
+   try {
+    await check.waitForFunction(()=>{const im=document.querySelector('.td-article-photo img');return im?.complete&&im.naturalWidth>0},null,{timeout:20000});
+    imageLoaded=true;
+   } catch {
+    const diag=await check.locator('.td-article-photo img').evaluate(im=>({src:im.currentSrc,complete:im.complete,width:im.naturalWidth}));
+    console.warn('IMAGE ATTEMPT '+attempt+' '+slug+' '+JSON.stringify(diag));
+    if(attempt<3)await check.locator('.td-article-photo img').evaluate(im=>{
+      const src=new URL(im.src);src.searchParams.set('verify',String(Date.now()));im.src=src.href;
+    });
+   }
+  }
+  if(!imageLoaded)throw Error('Article photograph failed to load after 3 real network attempts: '+slug);
   console.log('ARTICLE IMAGE LOAD PASS '+slug);
  }
  await check.close();
