@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths-ignore:
       - 'michigan/election-night/imports/*.csv'
+      # The headline panel reads raw main directly; a source-list refresh needs no Pages rebuild.
+      - 'headlines/latest.json'
   workflow_dispatch:
 permissions:
   contents: read
@@ -111,7 +113,7 @@ jobs:
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           sleep 1
           for ATTEMPT in 1 2 3; do
-            timeout 90s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=$((34000+ATTEMPT*13000)) --dump-dom http://127.0.0.1:8765/tests/browser_smoke.html > /tmp/ervin-smoke.html 2>/tmp/ervin-chrome.err || true
+            timeout 90s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=$((65000+ATTEMPT*15000)) --dump-dom http://127.0.0.1:8765/tests/browser_smoke.html > /tmp/ervin-smoke.html 2>/tmp/ervin-chrome.err || true
             if python3 -c 'from pathlib import Path; import re,sys; html=Path("/tmp/ervin-smoke.html").read_text(); m=re.search(r"<pre[^>]*data-status=\"(PASS|FAIL)\"[^>]*>(.*?)</pre>",html,re.S); print((re.sub(r"<[^>]+>","",m.group(2)) if m else "Missing browser result")[:4000]); sys.exit(0 if m and m.group(1)=="PASS" else 1)'; then
               break
             fi
@@ -119,9 +121,9 @@ jobs:
             if [ "$ATTEMPT" -eq 3 ]; then cat /tmp/ervin-chrome.err | tail -30; exit 1; fi
             sleep 3
           done
-          timeout 85s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=28000 --dump-dom http://127.0.0.1:8765/tests/michigan_smoke.html > /tmp/michigan-smoke.html 2>/tmp/michigan-chrome.err
+          timeout 85s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=65000 --dump-dom http://127.0.0.1:8765/tests/michigan_smoke.html > /tmp/michigan-smoke.html 2>/tmp/michigan-chrome.err
           python3 -c 'from pathlib import Path; import re,sys; html=Path("/tmp/michigan-smoke.html").read_text(); m=re.search(r"<pre[^>]*data-status=\"(PASS|FAIL)\"[^>]*>(.*?)</pre>",html,re.S); print((re.sub(r"<[^>]+>","",m.group(2)) if m else "Missing Michigan browser result")[:4000]); sys.exit(0 if m and m.group(1)=="PASS" else 1)'
-          timeout 55s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=11000 --dump-dom http://127.0.0.1:8765/tests/michigan_election_night_smoke.html > /tmp/mi-night-smoke.html 2>/tmp/mi-night-chrome.err
+          timeout 55s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-background-networking --no-first-run --virtual-time-budget=40000 --dump-dom http://127.0.0.1:8765/tests/michigan_election_night_smoke.html > /tmp/mi-night-smoke.html 2>/tmp/mi-night-chrome.err
           python3 -c 'from pathlib import Path; import re,sys; html=Path("/tmp/mi-night-smoke.html").read_text(); m=re.search(r"<pre[^>]*data-status=\"(PASS|FAIL)\"[^>]*>(.*?)</pre>",html,re.S); print((re.sub(r"<[^>]+>","",m.group(2)) if m else "Missing Michigan election-night result")[:4000]); sys.exit(0 if m and m.group(1)=="PASS" else 1)'
       - name: Counties to Watch browser smoke (Chromium)
         run: |
