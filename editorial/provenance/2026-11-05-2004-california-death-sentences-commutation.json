@@ -1,0 +1,67 @@
+{
+  "status": "draft_only",
+  "prepared_at": "2026-11-05T20:04:00-05:00",
+  "updated_at": "2026-11-05T20:04:00-05:00",
+  "article": "analysis/california-death-sentences-commutation/index.html",
+  "sources": [
+    {
+      "publisher": "California governor's announcement as reported by Reuters",
+      "url": "https://www.reuters.com/world/us/california-governor-grant-clemency-all-548-death-row-inmates-state-2026-11-05/",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    },
+    {
+      "publisher": "Associated Press, November 5",
+      "url": "https://apnews.com/article/dd8a949162b3325edfaa381952ff2466",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    },
+    {
+      "publisher": "Los Angeles Times, updated November 5 at 1:45 p.m. PT",
+      "url": "https://www.latimes.com/california/story/2026-11-05/newsom-commute-california-death-sentences",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    },
+    {
+      "publisher": "CalMatters, November 5",
+      "url": "https://calmatters.org/justice/2026/11/gavin-newsom-death-penalty-commutation/",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    }
+  ],
+  "claims": [
+    {
+      "value": 548,
+      "meaning": "announced death-sentence commutations",
+      "source": "https://apnews.com/article/dd8a949162b3325edfaa381952ff2466"
+    },
+    {
+      "value": 382,
+      "meaning": "requiring California Supreme Court approval",
+      "source": "https://apnews.com/article/dd8a949162b3325edfaa381952ff2466"
+    },
+    {
+      "value": 166,
+      "meaning": "548 minus 382, computed—not final case count",
+      "formula": "548-382",
+      "source": "https://apnews.com/article/dd8a949162b3325edfaa381952ff2466"
+    },
+    {
+      "value": 2019,
+      "meaning": "execution moratorium",
+      "source": "https://www.reuters.com/world/us/california-governor-grant-clemency-all-548-death-row-inmates-state-2026-11-05/"
+    },
+    {
+      "value": 2006,
+      "meaning": "last California execution",
+      "source": "https://www.reuters.com/world/us/california-governor-grant-clemency-all-548-death-row-inmates-state-2026-11-05/"
+    }
+  ],
+  "images": [],
+  "validation": {
+    "links": "Source URLs resolved in web search; not all HTTP status codes verified",
+    "numbers": "Manifest calculations cross-checked",
+    "duplicates": "Compared against current homepage and RSS headlines; whole-corpus scan outstanding",
+    "mobile": "Viewport meta and shared responsive CSS present; visual screenshots outstanding"
+  }
+}
