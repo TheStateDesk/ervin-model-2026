@@ -1,0 +1,121 @@
+{
+  "edition": "2026-11-06-1400",
+  "status": "draft-not-published",
+  "generated_at": "2026-11-06T13:58:54-05:00",
+  "watcher": "headlines/latest.json (2026-11-06T15:51:38.755307Z); treated as leads only",
+  "forecast": "final/forecast-final.json lockedAt 2026-11-03T16:42:53.117Z; not changed",
+  "stories": [
+    {
+      "slug": "october-jobs-2026-wages",
+      "title": "October hiring strengthens, but pay is still chasing prices",
+      "published_at_proposed": "2026-11-06T13:58:54-05:00",
+      "updated_at_proposed": "2026-11-06T13:58:54-05:00",
+      "claims": [
+        {
+          "claim": "October payroll gain",
+          "value": 165000,
+          "source": "https://www.bls.gov/news.release/archives/empsit_11062026.htm"
+        },
+        {
+          "claim": "Unemployment",
+          "value": "4.1%",
+          "source": "https://www.bls.gov/news.release/archives/empsit_11062026.htm"
+        },
+        {
+          "claim": "Annual earnings growth",
+          "value": "3.1%",
+          "source": "https://www.ft.com/content/f84c722c-99a9-4628-84dc-c42a192cb35c"
+        },
+        {
+          "claim": "September annual inflation",
+          "value": "3.7%",
+          "source": "https://www.theguardian.com/business/2026/nov/06/us-job-growth-october"
+        },
+        {
+          "claim": "Illustrative percentage-point difference",
+          "value": "3.1 - 3.7 = -0.6 percentage points",
+          "source": "above two cited rates; newsroom arithmetic"
+        },
+        {
+          "claim": "Combined revisions",
+          "value": 84000,
+          "source": "https://www.ft.com/content/f84c722c-99a9-4628-84dc-c42a192cb35c"
+        }
+      ],
+      "ai_assistance": "AI drafted; editor must verify before publication",
+      "images": "none; no unverified Commons credits"
+    },
+    {
+      "slug": "congress-ai-bills-2027",
+      "title": "The next Congress is preparing an AI agenda. Its first test may be electricity bills",
+      "published_at_proposed": "2026-11-06T13:58:54-05:00",
+      "updated_at_proposed": "2026-11-06T13:58:54-05:00",
+      "claims": [
+        {
+          "claim": "Reuters report date",
+          "value": "2026-11-06",
+          "source": "https://www.reuters.com/business/media-telecom/democrats-planning-flood-ai-bills-when-they-take-control-congress-2026-11-06/"
+        },
+        {
+          "claim": "Veto override threshold",
+          "value": "two-thirds in both houses",
+          "source": "https://constitution.congress.gov/browse/article-1/section-7/"
+        },
+        {
+          "claim": "Earlier Sanders-Casar proposal",
+          "value": "proposal; not enacted law",
+          "source": "https://apnews.com/article/d6a6a2cd8e71d7c95bdc394595aa85d1"
+        }
+      ],
+      "ai_assistance": "AI drafted; editor must verify before publication",
+      "images": "none; no unverified Commons credits"
+    },
+    {
+      "slug": "jay-rockefeller-legacy-2026",
+      "title": "Jay Rockefeller, former West Virginia governor and five-term senator, dies at 89",
+      "published_at_proposed": "2026-11-06T13:58:54-05:00",
+      "updated_at_proposed": "2026-11-06T13:58:54-05:00",
+      "claims": [
+        {
+          "claim": "Age at death",
+          "value": 89,
+          "source": "https://apnews.com/article/b5cb393af7826335b0b495b70e5b528e"
+        },
+        {
+          "claim": "Governor start",
+          "value": 1977,
+          "source": "https://apnews.com/article/b5cb393af7826335b0b495b70e5b528e"
+        },
+        {
+          "claim": "Senate election",
+          "value": 1984,
+          "source": "https://www.reuters.com/world/us/former-us-senator-jay-rockefeller-dies-89-washington-post-reports-2026-11-06/"
+        },
+        {
+          "claim": "Retirement",
+          "value": 2015,
+          "source": "https://apnews.com/article/b5cb393af7826335b0b495b70e5b528e"
+        },
+        {
+          "claim": "Senate terms",
+          "value": 5,
+          "source": "https://www.reuters.com/world/us/former-us-senator-jay-rockefeller-dies-89-washington-post-reports-2026-11-06/"
+        },
+        {
+          "claim": "CHIP legislation year",
+          "value": 1997,
+          "source": "https://apnews.com/article/b5cb393af7826335b0b495b70e5b528e"
+        }
+      ],
+      "ai_assistance": "AI drafted; editor must verify before publication",
+      "images": "none; no unverified Commons credits"
+    }
+  ],
+  "checks": {
+    "duplicate_topics": "Compared against main analysis directory and open draft PR #33 and #34; these three topics are distinct",
+    "numbers": "Arithmetic checked for wage-price difference; other numbers tied to linked source records",
+    "links": "Source URLs verified via research retrieval for core references; not all links HTTP-tested",
+    "mobile": "Responsive CSS authored; live device rendering not yet completed",
+    "election_staleness": "Watcher reports remaining close races; no published results modified; manual certification audit still required"
+  }
+}
