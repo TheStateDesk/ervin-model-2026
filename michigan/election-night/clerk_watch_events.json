@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T20:41:40.048375+00:00",
+  "updatedAt": "2026-11-06T07:56:53.085879+00:00",
   "events": [
     {
       "at": "2026-10-26T14:19:02.019910+00:00",
@@ -679,6 +679,22 @@
           "url": "https://oceana.mi.us/wp-content/uploads/2026/11/Unofficial-Statement-of-Votes-Cast-November-3-2026-13.pdf"
         }
       ],
+      "sourceUrl": "https://oceana.mi.us/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-06T07:56:53.085879+00:00",
+      "county": "Livingston",
+      "kind": "page_modified",
+      "newLinks": [],
+      "sourceUrl": "https://milivcounty.gov/elections/election-results/",
+      "notice": "Source change is not an election return"
+    },
+    {
+      "at": "2026-11-06T07:56:53.085879+00:00",
+      "county": "Oceana",
+      "kind": "page_modified",
+      "newLinks": [],
       "sourceUrl": "https://oceana.mi.us/",
       "notice": "Source change is not an election return"
     }
