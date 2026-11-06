@@ -1,0 +1,36 @@
+{
+  "status": "draft_unapproved",
+  "created_at": "2026-11-06T02:01:25-05:00",
+  "updated_at": "2026-11-06T02:01:25-05:00",
+  "title": "National Guard's expanded D.C. equipment plan sharpens the debate over its mission",
+  "source_reporting": [
+    {
+      "publisher": "Associated Press, Nov. 5",
+      "url": "https://apnews.com/article/e6f2fc06768103f59536b785756f8858",
+      "checked_at": "2026-11-06T02:01:25-05:00"
+    },
+    {
+      "publisher": "Washington Post, Nov. 5",
+      "url": "https://www.washingtonpost.com/dc-md-va/2026/11/05/national-guard-adding-boats-humvees-dc-leaders-hope-oust-troops/",
+      "checked_at": "2026-11-06T02:01:25-05:00"
+    },
+    {
+      "publisher": "Fox News, Nov. 5",
+      "url": "https://www.foxnews.com/politics/hegseth-expands-national-guard-operations-dc-authorizes-police-patrol-cars-humvees-boats/",
+      "checked_at": "2026-11-06T02:01:25-05:00"
+    }
+  ],
+  "claim_manifest": {
+    "October 29 memorandum": "Fox News; AP",
+    "60 marked patrol cars": "Fox News; AP",
+    "20 light towers": "Fox News; AP",
+    "boats with law enforcement officer": "Washington Post",
+    "no general arrest powers": "Washington Post"
+  },
+  "photos": [],
+  "verification": {
+    "original_documents": "not independently obtained",
+    "source_links": "source URLs reviewed in search results",
+    "mobile_render": "not visually verified"
+  }
+}
