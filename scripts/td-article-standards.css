@@ -8,3 +8,17 @@ body.td-news:not(.story-body) .td-article figure img,body.td-news:not(.story-bod
 body.td-news:not(.story-body) .td-article figcaption,body.td-news:not(.story-body) main.td-layout article figcaption{font:13px/1.5 Arial,sans-serif;color:#65727e;margin-top:9px}
 body.td-news:not(.story-body) .td-article a,body.td-news:not(.story-body) main.td-layout article a{overflow-wrap:anywhere}
 @media(max-width:700px){body.td-news:not(.story-body) main.td-layout{padding:20px 19px}body.td-news:not(.story-body) .td-article h1{font-size:2.45rem}}
+
+/* Newspaper-style opening initial for the first substantive paragraph of every story. */
+body.td-news .td-story-opening::first-letter {
+  float:left;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:4.15em;
+  font-weight:700;
+  line-height:.78;
+  margin:.08em .13em 0 0;
+  color:#315c73;
+}
+@media(max-width:600px){
+  body.td-news .td-story-opening::first-letter{font-size:3.75em;margin:.09em .12em 0 0}
+}
