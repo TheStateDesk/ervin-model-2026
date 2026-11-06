@@ -33,17 +33,14 @@ for p in OUT.rglob('*.html'):
  h=p.read_text(encoding='utf-8')
  depth=len(p.relative_to(OUT).parts)-1
  prefix='../'*depth
- # Remove all anchors pointing to old election tools and archives.
- def drop_link(m):
-  href=m.group(2)
-  path=urlsplit(href).path
-  target=path
-  while target.startswith('../'):target=target[3:]
-  if target.startswith('./'):target=target[2:]
-  if target.split('/')[0] in retired or target.startswith('analysis/forecast-'):
-   return ''
-  return m.group(0)
- h=re.sub(r'<a\b([^>]*?)href=(["\'])(.*?)\2([^>]*)>.*?</a>',lambda m: '' if (lambda u: (lambda t:t.split('/')[0] in retired or t.startswith('analysis/forecast-'))(re.sub(r'^(?:\.\./|\./)+','',urlsplit(u).path)))(m.group(3)) else m.group(0),h,flags=re.I|re.S)
+ # Remove retired forecast cards as complete article units, not individual nested links.
+ h=re.sub(r'<article\\b[^>]*>\\s*<a\\b[^>]*href=["\\'][^"\\']*analysis/forecast-(?:grade|coverage)/["\\'][^>]*>.*?</a>\\s*</article>','',h,flags=re.I|re.S)
+ # Remove only simple retired navigation links; never consume story cards or footer markup.
+ retired_pat='|'.join(retired)
+ h=re.sub(r'<a\\b[^>]*href=["\\'](?:\\.\\./|\\./)*(?:'+retired_pat+r')/[^"\\']*["\\'][^>]*>[^<]*</a>','',h,flags=re.I)
+ # Nested caption anchors inside clickable article cards invalidate HTML and can
+ # cause Safari to reparent entire cards or the footer. Keep the credit as text.
+ h=re.sub(r'(<figcaption>.*?)<a\\b[^>]*>([^<]*)</a>(.*?</figcaption>)',lambda m:m.group(1)+m.group(2)+m.group(3),h,flags=re.I|re.S)
  # Remove sections dedicated to election atlas and forecast archive.
  h=re.sub(r'<aside\b[^>]*class=["\'][^"\']*td-news-band[^"\']*["\'][^>]*>.*?</aside>','',h,flags=re.I|re.S)
  h=re.sub(r'<meta name="description" content="([^"]*)2026 election([^"]*)">',lambda m:'<meta name="description" content="'+m.group(1).rstrip(' ,;')+'.">',h,flags=re.I)
