@@ -48,7 +48,10 @@ for p in OUT.rglob('*.html'):
  h=re.sub(r'<aside\b[^>]*class=["\'][^"\']*td-news-band[^"\']*["\'][^>]*>.*?</aside>','',h,flags=re.I|re.S)
  h=re.sub(r'<meta name="description" content="([^"]*)2026 election([^"]*)">',lambda m:'<meta name="description" content="'+m.group(1).rstrip(' ,;')+'.">',h,flags=re.I)
  h=re.sub(r'<script\b[^>]*src=["\'][^"\']*(?:post-editorial-chrome|home-election|nbc-calls|live-coverage-hero)[^"\']*["\'][^>]*></script>','',h,flags=re.I)
- if p.parts[-3:-1] and p.parent.parent.name=='analysis' and p.name=='index.html':\n  if 'td-article-standards.css' not in h: h=h.replace('</head>','<link rel="stylesheet" href="../../scripts/td-article-standards.css"></head>')\n  if 'newsroom-dropcap.js' not in h: h=h.replace('</body>','<script defer src="../../scripts/newsroom-dropcap.js"></script></body>')\n p.write_text(h,encoding='utf-8')
+ if p.parent.parent.name=='analysis' and p.name=='index.html':
+  if 'td-article-standards.css' not in h: h=h.replace('</head>','<link rel="stylesheet" href="../../scripts/td-article-standards.css"></head>')
+  if 'newsroom-dropcap.js' not in h: h=h.replace('</body>','<script defer src="../../scripts/newsroom-dropcap.js"></script></body>')
+ p.write_text(h,encoding='utf-8')
 # Keep XML feeds/sitemap free of excluded URLs.
 for f in ['sitemap.xml','feed.xml']:
  p=OUT/f
