@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-06T07:52:29.837657Z",
+  "generated_at": "2026-11-06T15:51:38.755307Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -18,9 +18,13 @@
       "title": "Judge blocks construction of Trump's massive arch after federal agency approval",
       "url": "https://www.bbc.co.uk/news/articles/cq99zd93ryvko?at_medium=RSS&at_campaign=rss",
       "source": "BBC NEWS",
-      "published_at": "2026-11-06T05:31:59Z",
-      "source_count": 2,
+      "published_at": "2026-11-06T15:30:42Z",
+      "source_count": 3,
       "other_sources": [
+        {
+          "source": "THE HILL",
+          "url": "https://thehill.com/homenews/administration/6203354-donald-trump-dc-arch-blocked-after-commission-approval/"
+        },
         {
           "source": "NPR",
           "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction"
@@ -30,12 +34,16 @@
       "note": "Potential major development; verify original reporting before publishing."
     },
     {
-      "title": "Trump signs order to preserve Oval Office as national monument",
-      "url": "https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-06T04:29:25Z",
+      "title": "Trump signs order to make Oval Office a national monument – video",
+      "url": "https://www.theguardian.com/us-news/video/2026/nov/06/trump-signs-order-to-make-gold-decorated-oval-office-a-national-monument-video",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T10:42:08Z",
       "source_count": 4,
       "other_sources": [
+        {
+          "source": "BBC NEWS",
+          "url": "https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&at_campaign=rss"
+        },
         {
           "source": "REUTERS VIA GOOGLE NEWS",
           "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYmpHaGcydVUtZWxPRVpuc21LWjdwd3VYcUdnRndlOVlTUlNfeHBYWU5yZEJpekt5RzVVZ29EOVo5UDNuM0lQck1BX3RnMTdhOEt4UGY2bXhpajlTZl9lZmR0U1hxeDEwTVhKQTh0c0liNE9zelpYN2xPZzFyUHd6RmM5bFVrQXhVMDZNMWVrcy1LTnM?oc=5"
@@ -43,59 +51,6 @@
         {
           "source": "THE HILL",
           "url": "https://thehill.com/homenews/administration/6202079-trump-national-monuments-oval-office-cabinet-room/"
-        },
-        {
-          "source": "PBS NEWSHOUR",
-          "url": "https://www.pbs.org/newshour/politics/trump-signs-proclamation-he-says-will-prevent-future-changes-to-oval-office-and-cabinet-room"
-        }
-      ],
-      "priority_score": 5,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "California governor commutes sentences for state's 548 death row inmates",
-      "url": "https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-05T23:09:33Z",
-      "source_count": 2,
-      "other_sources": [
-        {
-          "source": "REUTERS VIA GOOGLE NEWS",
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxONFpTdTN5c1lMaW81c2hwQkJjQ2E3U1hWWGVTUjlraUJoLVNxdGcybWNVY1FXMm03MXZkeWEwVWpabEcwdW9qRkxBeXhZRGlJRUp2NVl0T1pjWFBNRE9hX21ySTVraGxaTm54OS1TXzB6NXJLY2NkQ3JURnluWWpEM0g0VmRGMm1XczdBR1ZTVjZFRkxzejg3UjJ5eTNCZmxlbXVmczZ6bmZYd3Q0aE82LQ?oc=5"
-        }
-      ],
-      "priority_score": 5,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "WATCH: First lady Melania Trump hosted Russian and Ukrainian officials. Trump met with Putin's envoy",
-      "url": "https://www.pbs.org/newshour/politics/watch-first-lady-melania-trump-hosted-russian-and-ukrainian-officials-trump-met-with-putins-envoy",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-05T22:04:18Z",
-      "source_count": 3,
-      "other_sources": [
-        {
-          "source": "REUTERS VIA GOOGLE NEWS",
-          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQQkIyajduM2t4eXl5eGs0V1hHU0Y2amcxWjM1dmthWmtDekkwV3V5MElyZlpjZFlfOUVENC1fSXJ2S0llMDloc2VJZmktZG5jUWFvMVUwbTJ6VkNuSF9EX0dEdzliNnlzN0J6RlIydnVMVE9sdVNpV3J1VzR0MTdfRk51WVE0dVk?oc=5"
-        },
-        {
-          "source": "THE HILL",
-          "url": "https://thehill.com/video-clips/6200577-watch-live-melania-trump-russia-ukraine-officials-white-house-localized-ceasefire/"
-        }
-      ],
-      "priority_score": 5,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Inside Mississippi's ballot counting in tight Senate race",
-      "url": "https://www.bbc.co.uk/news/videos/cmj477d0dyxqo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-05T20:31:38Z",
-      "source_count": 2,
-      "other_sources": [
-        {
-          "source": "THE HILL",
-          "url": "https://thehill.com/homenews/campaign/6201459-colom-leads-hyde-smith-mississippi/"
         }
       ],
       "priority_score": 5,
@@ -104,148 +59,148 @@
   ],
   "headlines": [
     {
-      "title": "Judge temporarily halts building work on Trump’s triumphal arch",
-      "url": "https://www.theguardian.com/us-news/2026/nov/06/judge-temporarily-halts-work-trump-triumphal-arch-washington",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T06:36:20Z"
+      "title": "Colom rips ‘unlawful attack’ after Hyde-Smith demands ballot preservation in Mississippi",
+      "url": "https://thehill.com/homenews/6204045-mississippi-senate-race-ballot-handling-fight/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T15:44:04Z"
+    },
+    {
+      "title": "Jay Rockefeller, former West Virginia governor and U.S. senator, dies at 89",
+      "url": "https://www.pbs.org/newshour/politics/jay-rockefeller-former-west-virginia-governor-and-u-s-senator-dies-at-89",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-06T15:37:10Z"
     },
     {
       "title": "Judge blocks construction of Trump's massive arch after federal agency approval",
       "url": "https://www.bbc.co.uk/news/articles/cq99zd93ryvko?at_medium=RSS&at_campaign=rss",
       "source": "BBC NEWS",
-      "published_at": "2026-11-06T05:31:59Z"
+      "published_at": "2026-11-06T15:30:42Z"
     },
     {
-      "title": "A judge blocks construction of Trump's arch moments after it won federal approval",
-      "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction",
-      "source": "NPR",
-      "published_at": "2026-11-06T05:05:43Z"
-    },
-    {
-      "title": "As the Republican civil war kicks off, Democrats start plotting – podcast",
-      "url": "https://www.theguardian.com/politics/audio/2026/nov/06/us-midterm-elections-politics-weekly-america-panel-podcast",
+      "title": "US midterm elections 2026 live: all eyes on last two razor-thin Senate races as Democrats vie to expand blue wave",
+      "url": "https://www.theguardian.com/us-news/live/2026/nov/06/us-midterm-elections-2026-democrats-blue-wave-congress-latest-news-updates",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T05:00:43Z"
+      "published_at": "2026-11-06T15:27:32Z"
+    },
+    {
+      "title": "Top prosecutor in office that housed Trump’s ‘grand conspiracy’ probe resigns from DOJ",
+      "url": "https://thehill.com/regulation/court-battles/6203924-reding-quinones-doj-resignation/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T15:19:15Z"
+    },
+    {
+      "title": "Zelensky: Ukraine may receive increased US assistance following ‘new political infrastructure’",
+      "url": "https://thehill.com/policy/international/6203855-zelensky-ukraine-us-aid-midterms/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T15:16:30Z"
+    },
+    {
+      "title": "Congress has a new majority, but immigration policy won’t change just yet",
+      "url": "https://thehill.com/opinion/immigration/6201644-new-congress-immigration-agenda/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T15:00:00Z"
+    },
+    {
+      "title": "US Attorney whose office oversaw Trump's election conspiracy probe resigns - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQNnJnWlVMYkUwX0hPQjVtXzZnNzhBUDhwczhNdnB0dVA3OTJnYTExdnV6ZjRya3M1UUo2TXUyT1l6U0ZRZmh2eUVRNWtJMFBDY2pMQWhaNU9yNm9NWHZGU1UzY2N1TDhwTnh1UXVNNG1YNFBWR2FWZDEzV01mMW0wS1hOcE9hZU1hbFJiaHEtZ0o2SW84T3Q4NDlOYjRTcFdPRnE2SXIzMjFQVHA3UVNZbm1ZaTF2TDhZeXc?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T14:56:37Z"
+    },
+    {
+      "title": "Democrats planning flood of AI bills when they take control of Congress - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSW1qclJEWjVTQTNNU0hWWndTVFlOWFpNY1RqQ1I5Z0F2anRxTE5IQnlTTDhjeU9uUGV2anlLaVBfMFdPc0k5eDJVTVk4VTlVbnVZX0VwVnBEMnhHX19fTGRvX2NrQnNJeGN5MzBBaXBLb3d3Y25JdHpjSXFQMENoa01vNk0yLXVLRVBGZjlHLVFuUmI0QWp5aFBBRzRUSDdNMkpCQ1lJVExIei0zVFFiY0x2eVBPcFJ3d2NCeGN6REF0dw?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T14:37:43Z"
+    },
+    {
+      "title": "Trump on stock market losses: ‘You only have yourselves to blame’",
+      "url": "https://thehill.com/homenews/administration/6203425-donald-trump-stock-market-losses-2026-midterms-economy/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T14:21:15Z"
+    },
+    {
+      "title": "The most diverse, anti-establishment Congress in history is cause for optimism",
+      "url": "https://www.theguardian.com/us-news/2026/nov/05/congress-midterms-diverse",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T14:17:18Z"
+    },
+    {
+      "title": "Federal judge temporarily halts building work on Trump’s triumphal arch",
+      "url": "https://www.theguardian.com/us-news/2026/nov/06/judge-temporarily-halts-work-trump-triumphal-arch-washington",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T14:04:35Z"
     },
     {
       "title": "US midterm election results in graphics and charts - Reuters",
       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9mYlFQMWJNR3dHZEQ1QVZ5TEo4QnRWOHYwTE9UMGh2X2x4TV8xTk1VbWNJSWZzdkdjclZFdjBNZmE5UFhhQnU4dGh0eXloOVhCeTBkekRwQUUyTzVZNV96Uml0ZXZDbHB1RHExMkphQUtLRnl3cWNMYmwyYVE?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T05:00:05Z"
+      "published_at": "2026-11-06T14:00:05Z"
     },
     {
-      "title": "Australia faces same issues that flipped control of US Congress in midterms, experts say",
-      "url": "https://www.theguardian.com/australia-news/2026/nov/06/us-midterms-warning-for-australia-cost-of-living-fuel-prices",
+      "title": "Live updates: Trump’s triumphal arch OK’d by panel, halted by judge; jobs report surprises",
+      "url": "https://thehill.com/homenews/administration/6203096-live-updates-trump-midterm-elections-iran-jobs/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T13:55:40Z"
+    },
+    {
+      "title": "Andrews: Time for ‘generational change’ in Senate leadership",
+      "url": "https://thehill.com/homenews/senate/6203427-annie-andrews-south-carolina-senate-leadership-overhaul-midterms/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T13:54:52Z"
+    },
+    {
+      "title": "Trump-backed Mark Lamb wins Arizona House seat",
+      "url": "https://thehill.com/homenews/campaign/6175163-mark-lamb-arizona-house-race-2026-midterms/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T13:52:52Z"
+    },
+    {
+      "title": "China, Gabon elevate ties, pledge deeper mining, security cooperation - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOY2FjTkkyemRQSHlzUzlMSElVSnJpc0VNVGVPUnMyZUQ1ZlZTbzJabFdhakdjN3JtNUlqMUFrVFBadWlDM0lHdGx3T3RPWl9xNEIzb044aXlsbjFtYWV0TE9NNV95RTVFY09wWEJHZzFVRTVlUzItZ1A1QkQ0R0VDMmNxUklqZnNvT1k3SVlkbktlcVExQ090ay1zWFNQZHl0MlY2MnVoS3g0M19iWGtodWl5X2U?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T13:45:43Z"
+    },
+    {
+      "title": "America’s scientific future depends on what Congress does next",
+      "url": "https://thehill.com/opinion/congress-blog/technology/6201574-congress-restores-scientific-funding/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T13:30:00Z"
+    },
+    {
+      "title": "Jay Rockefeller, heir to famed dynasty and healthcare advocate in US Senate, dies at 89 - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPZDBJMDRPNVh2YlpfUHRFLTNnNG9YSWJwQ0lEYWpIc1M3Q2c2WW1aLUZKVm9xaGVEMHNkUVpHbXRYLWp0NzB3WlN0VlMxVWxQWFRaSUtJamtqelJoQkdNMGZ4TWpaR1Rya0FKZlRPM2NYRkZMSm9DN1VtNlZNZlc4eXdyT0hVdzR2VHNVbWs0emtkRjdwRVlFQmhSbzhGMFBlVUZhTzdJamRhTDlmdVRB?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T13:13:22Z"
+    },
+    {
+      "title": "Judge temporarily blocks work on Trump arch after panel’s approval",
+      "url": "https://thehill.com/homenews/administration/6203354-donald-trump-dc-arch-blocked-after-commission-approval/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T13:11:58Z"
+    },
+    {
+      "title": "Trump Media’s investors lost $2.2 billion while Trump holds $460 million stake - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQUGkzZG4yU1c4YThoQTduQWZQMlBJREw3LW8tYkd2Wnl4c29kRXZjblRCcWtCdzFuak8zVEE3Ump5WkJwajZRRV91bUhtN2QtYjNHemh6MjZMZzZ6ck9TNVFrQ2FhZWFaQTlXbkpYMDN3RnZWZ0h2Yzg2cnBfOFB3aVlILXhsUzhkeW9QY29yUWR0Mm9SN1NIUEVldzJDT1RWZmc4MlE3cXhkUHdndFRRcDZPYktSenhnRzhQR1dkSDNQV0JLMEdpenZnVHhUQQ?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T13:05:15Z"
+    },
+    {
+      "title": "What is this strange, post-election feeling? Oh right – it’s utter joy | Dave Schilling",
+      "url": "https://www.theguardian.com/commentisfree/2026/nov/06/post-election-feeling-optimism",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T04:45:24Z"
+      "published_at": "2026-11-06T13:00:43Z"
     },
     {
-      "title": "Trump signs order to preserve Oval Office as national monument",
-      "url": "https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-06T04:29:25Z"
-    },
-    {
-      "title": "Hegseth not in consideration for Tennessee Senate: Report",
-      "url": "https://thehill.com/policy/defense/6203115-hegseth-tennessee-senate-seat-blackburn/",
+      "title": "Schumer vows Senate Democrats would block any ‘right-winger’ Trump Supreme Court nominee",
+      "url": "https://thehill.com/homenews/senate/6203353-chuck-schumer-donald-trump-supreme-court/",
       "source": "THE HILL",
-      "published_at": "2026-11-06T03:36:55Z"
+      "published_at": "2026-11-06T12:59:55Z"
     },
     {
-      "title": "NCPC approves plan to build Trump’s triumphal arch",
-      "url": "https://thehill.com/homenews/administration/6202351-ncpc-approves-trump-arch/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T03:34:58Z"
-    },
-    {
-      "title": "White House denies Hegseth and Rubio to leave jobs after Republican election losses",
-      "url": "https://www.bbc.co.uk/news/articles/cqg7xxg4jdv5o?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-06T02:08:57Z"
-    },
-    {
-      "title": "Democrat Jessica Killin flips longtime GOP-held Colorado House seat",
-      "url": "https://thehill.com/homenews/campaign/6180533-jessica-killin-unseats-jeff-crank-colorado-5th-district/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T01:58:35Z"
-    },
-    {
-      "title": "Rubio places additional sanctions on Cuba, targeting ‘illicit’ shipping network",
-      "url": "https://thehill.com/policy/defense/6202991-rubio-broadens-cuba-sanctions-crude-oil/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T01:53:06Z"
-    },
-    {
-      "title": "Top Democrat vows ‘vigorous’ oversight of Pentagon",
-      "url": "https://thehill.com/newsletters/defense-national-security/6202978-asmith-pentagon-oversight-armed-services-committee/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T01:48:13Z"
-    },
-    {
-      "title": "Bruce Wolpe on what Trump will do after the ‘profound result’ of the US midterms - podcast",
-      "url": "https://www.theguardian.com/australia-news/audio/2026/nov/06/bruce-wolpe-trump-us-midterms-australian-politics-podcast",
+      "title": "‘I didn’t expect to be a main character’: Abdul El-Sayed heads to the Senate with a mandate – and a spotlight",
+      "url": "https://www.theguardian.com/us-news/2026/nov/06/abdul-el-sayed-islamophobia-michigan-senate-seat",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T01:30:39Z"
-    },
-    {
-      "title": "GOP’s McKinney wins election for Newhouse’s open Washington seat",
-      "url": "https://thehill.com/homenews/campaign/6134794-republican-amanda-mckinney-washington-4th-district/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T00:31:35Z"
-    },
-    {
-      "title": "Failed GOP redistricting in South Carolina, Indiana would have backfired: DDHQ",
-      "url": "https://thehill.com/homenews/campaign/6202901-midterm-congressional-gop-redistricting-analysis/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T00:23:47Z"
-    },
-    {
-      "title": "Trump takes action to make sure the Oval Office stays oval - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZkRZczJ5WUJPUEFMQ08xY20wb19HRUo5eEF4bFpNaEd3UUtnQmMyRnJBQXFtQ2VmUlVCWkVZWG5sOVRLcHVyaENMdzhtR09RR0V0dzllVGlqVXBLNlpWTFhuWXBsRjdoVnpVamdFOWFGZFpKUmJ3MlVUMTRLclJ2M3lnTVQ4NTB1VHN6aDdXX3ZiTUVSRXI2UmFRMzI?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T00:17:00Z"
-    },
-    {
-      "title": "These are the races in the House and Senate that haven't been called yet",
-      "url": "https://www.npr.org/2026/11/05/g-s1-152127/house-senate-uncalled-races",
-      "source": "NPR",
-      "published_at": "2026-11-06T00:03:45Z"
-    },
-    {
-      "title": "Texas governor-elect says state will have laws to shield citizens from data centers - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPWUdBMU5JdUNaZTZrV1hLcmZ4blU4Y2ZxUjhxUFJkQnE5MzliSXYtcUd1TnVRQ1NYcEZwR2NTS29jTmJVXzFKblhaay12d0FENWs5M0VKampGS3A5VGh6VDAxX29Ld0JSQ0x6blhRVnY0RHJPRHBlZmVfakxpVk5HMmJ3UnJZeUttakxUYVFQQVRlblRxamUzS2hXS2NCZ2dkN0pDOHJza0VTOE9zeHB0MDJpRUw0VEFqVnJfTA?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T00:01:00Z"
-    },
-    {
-      "title": "Lula's election win dashes US hopes of quick access to Brazil's rare earths - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbnhUT0ZFTnpsamNBblowSmJHVXhjMEhiRzZCWVRLVk95TXFFcVAxSkxBRXhxZHJaVWdERTdTOTVtcEZTRl9mYi1wSE90Q2hqZGVHSGUzdkxLa3R6SWxHbXlBa3ktdEhGRXhra1lIaG54ZUhFQWQ3TW5XUUdVVnBhcVptaFlVdUY2b3dIMHotRFh0T1pVTGpMTmNyU3R1UUlnakRaQWVPOVpTTUp2ZkxhMk9IMWFYZw?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:58:33Z"
-    },
-    {
-      "title": "China's yuan dilemma: too weak abroad and too strong at home - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdG8tUkNHdE1DSTdndG40UGVsSEh6cVBmcFZBSmFHNi10VU9ET3JPbU1XRlg3bHI4SnptNGcxV3BGNHdXT2Qycm9Oa1VfRmJNNFFyNGxJN0ZfbHdyNi1zbHRISnBlZWNKUGdqT0V0UVJHRHhFLWRYVTB1alpvSGRCZWZaTzJyaHdicWpyVDdGQmVWVlFqREs2TTNMcVZYVlllb1FCUlVZMDMxQQ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:55:53Z"
-    },
-    {
-      "title": "A look at the midterm races that remain undecided",
-      "url": "https://www.pbs.org/newshour/show/a-look-at-the-midterm-races-that-remain-undecided",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-05T23:55:48Z"
-    },
-    {
-      "title": "Melania Trump touts rare agreement she brokered between Russia and Ukraine",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6030662/melania-trump-touts-rare-agreement-she-brokered-between-russia-and-ukraine",
-      "source": "NPR",
-      "published_at": "2026-11-05T23:52:48Z"
-    },
-    {
-      "title": "Trump seeks national monument status for iconic White House rooms",
-      "url": "https://thehill.com/newsletters/energy-environment/6202853-white-house-rooms-national-monuments-trump/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T23:46:56Z"
+      "published_at": "2026-11-06T12:46:37Z"
     }
   ]
 }
