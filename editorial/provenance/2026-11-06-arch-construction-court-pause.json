@@ -1,0 +1,65 @@
+{
+  "draft": true,
+  "created_at": "2026-11-06T08:03:18-05:00",
+  "proposed_published_at": "2026-11-06T08:03:18-05:00",
+  "proposed_updated_at": "2026-11-06T08:03:18-05:00",
+  "headline": "Court pauses construction of Washington arch after federal planning approval",
+  "claim_data": [
+    {
+      "claim": "14-day temporary restraining order",
+      "value": 14,
+      "unit": "days",
+      "original_publishers": [
+        "Associated Press",
+        "Reuters"
+      ],
+      "urls": [
+        "https://apnews.com/article/246d15697c00b065bc8ab8c614d50ca7",
+        "https://www.reuters.com/world/us/trumps-washington-arch-poised-approval-judge-weighs-bid-block-construction-2026-11-05/"
+      ]
+    },
+    {
+      "claim": "Commission approval vote",
+      "value": {
+        "yes": 8,
+        "no": 4
+      },
+      "original_publishers": [
+        "Associated Press",
+        "Reuters"
+      ],
+      "urls": [
+        "https://apnews.com/article/246d15697c00b065bc8ab8c614d50ca7",
+        "https://www.reuters.com/world/us/trumps-washington-arch-poised-approval-judge-weighs-bid-block-construction-2026-11-05/"
+      ],
+      "note": "NCPC primary project record does not yet display final action"
+    },
+    {
+      "claim": "Proposed arch height",
+      "value": 250,
+      "unit": "feet",
+      "original_publishers": [
+        "National Capital Planning Commission"
+      ],
+      "urls": [
+        "https://www.ncpc.gov/review/project/8778/"
+      ]
+    },
+    {
+      "claim": "Commission project file",
+      "value": 8778,
+      "original_publishers": [
+        "National Capital Planning Commission"
+      ],
+      "urls": [
+        "https://www.ncpc.gov/review/project/8778/"
+      ]
+    }
+  ],
+  "editorial_notes": [
+    "No photograph; licensing unverified",
+    "No court PDF independently retrieved; court findings attributed to AP",
+    "Headline watch treated as leads only",
+    "No changes to existing live articles or election forecast"
+  ]
+}
