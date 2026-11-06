@@ -1,6 +1,6 @@
 {
   "attemptedRaces": 505,
-  "checkedAt": "2026-11-06T06:54:44.901475Z",
+  "checkedAt": "2026-11-06T09:48:05.739693Z",
   "discovery": {
     "found": 505,
     "lookups": 1,
@@ -12,8 +12,11 @@
   "election": "2026-11-03",
   "eligibleRaces": 505,
   "errors": {
+    "FL-02": "vote_total_decreased_held",
+    "FL-04": "vote_total_decreased_held",
     "FL-05": "vote_total_decreased_held",
     "FL-06": "vote_total_decreased_held",
+    "FL-07": "vote_total_decreased_held",
     "FL-10": "no_valid_reported_votes",
     "FL-14": "vote_total_decreased_held",
     "FL-15": "vote_total_decreased_held",
@@ -160,8 +163,8 @@
       "identityMatches": true,
       "payloadType": "dict",
       "positiveCandidateTotals": true,
-      "providerTimestamp": "2026-11-06T06:43:26.723Z",
-      "responseMs": 57
+      "providerTimestamp": "2026-11-06T09:45:21.843Z",
+      "responseMs": 76
     },
     "MI-SENATE": {
       "candidateRows": 12,
@@ -192,8 +195,8 @@
       "identityMatches": true,
       "payloadType": "dict",
       "positiveCandidateTotals": true,
-      "providerTimestamp": "2026-11-06T06:33:52.111Z",
-      "responseMs": 76
+      "providerTimestamp": "2026-11-06T09:19:53.359Z",
+      "responseMs": 97
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -202,7 +205,7 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 56
+      "responseMs": 77
     }
   },
   "publishedRaces": 499,
@@ -908,6 +911,7 @@
       "validatedVoteTotal": 290474
     },
     "FL-02": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T20:54:29.228681Z",
       "lastValidatedResultAt": "2026-11-04T20:53:27.281000Z",
       "office": "house",
@@ -922,6 +926,7 @@
       "validatedVoteTotal": 299778
     },
     "FL-04": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T20:54:29.228681Z",
       "lastValidatedResultAt": "2026-11-04T20:53:28.025000Z",
       "office": "house",
@@ -945,6 +950,7 @@
       "validatedVoteTotal": 331558
     },
     "FL-07": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-04T15:56:04.997819Z",
       "lastValidatedResultAt": "2026-11-04T15:48:25.372000Z",
       "office": "house",
@@ -3805,6 +3811,6 @@
   "registeredRaces": 505,
   "targetRaces": 506,
   "transientApiErrors": 0,
-  "updatedRaces": 152,
+  "updatedRaces": 0,
   "version": 2
 }
