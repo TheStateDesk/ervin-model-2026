@@ -1,0 +1,56 @@
+{
+  "status": "draft_only",
+  "prepared_at": "2026-11-05T20:04:00-05:00",
+  "updated_at": "2026-11-05T20:04:00-05:00",
+  "article": "analysis/white-house-russia-ukraine-humanitarian-talks/index.html",
+  "sources": [
+    {
+      "publisher": "White House statement, November 5",
+      "url": "https://www.whitehouse.gov/briefings-statements/2026/11/first-lady-melania-trump-unites-russia-and-ukraine-at-the-white-house-following-historic-ceasefire/",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    },
+    {
+      "publisher": "Reuters, November 5",
+      "url": "https://www.reuters.com/world/asia-pacific/russias-dmitriev-washington-first-us-contact-since-trumps-midterm-setback-2026-11-05/",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    },
+    {
+      "publisher": "Al Jazeera, November 5",
+      "url": "https://www.aljazeera.com/news/2026/11/5/melania-trump-calls-for-peace-at-meeting-with-russia-ukraine-officials",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    },
+    {
+      "publisher": "Washington Post, November 5 at 7:02 p.m. EST",
+      "url": "https://www.washingtonpost.com/world/2026/11/05/ukraine-continues-strikes-russian-refineries-lead-up-white-house-meeting/",
+      "accessed_at": "2026-11-05T20:04:00-05:00",
+      "source_published": "2026-11-05; see original publisher for exact clock time"
+    }
+  ],
+  "claims": [
+    {
+      "value": "2026-10-23",
+      "meaning": "agreements signed",
+      "source": "https://www.whitehouse.gov/briefings-statements/2026/11/first-lady-melania-trump-unites-russia-and-ukraine-at-the-white-house-following-historic-ceasefire/"
+    },
+    {
+      "value": 6,
+      "meaning": "local ceasefire days",
+      "source": "https://www.aljazeera.com/news/2026/11/5/melania-trump-calls-for-peace-at-meeting-with-russia-ukraine-officials"
+    },
+    {
+      "value": "nearly 800",
+      "meaning": "reported evacuees",
+      "source": "https://www.aljazeera.com/news/2026/11/5/melania-trump-calls-for-peace-at-meeting-with-russia-ukraine-officials"
+    }
+  ],
+  "images": [],
+  "validation": {
+    "links": "Source URLs resolved in web search; not all HTTP status codes verified",
+    "numbers": "Manifest calculations cross-checked",
+    "duplicates": "Compared against current homepage and RSS headlines; whole-corpus scan outstanding",
+    "mobile": "Viewport meta and shared responsive CSS present; visual screenshots outstanding"
+  }
+}
