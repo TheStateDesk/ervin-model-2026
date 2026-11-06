@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-06T15:51:38.755307Z",
+  "generated_at": "2026-11-06T21:26:24.505392Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -15,19 +15,53 @@
   ],
   "priority": [
     {
+      "title": "Schumer says Democrats will stop Trump from placing 'right-winger' on the Supreme Court",
+      "url": "https://www.pbs.org/newshour/politics/schumer-says-democrats-will-stop-trump-from-placing-right-winger-on-the-supreme-court",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-06T19:46:53Z",
+      "source_count": 2,
+      "other_sources": [
+        {
+          "source": "THE HILL",
+          "url": "https://thehill.com/homenews/senate/6203353-chuck-schumer-donald-trump-supreme-court/"
+        }
+      ],
+      "priority_score": 9,
+      "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
+      "title": "Democrats blast Trump’s decision to appoint Stephen Miller as chief of staff in wake of Republican midterm rout – live",
+      "url": "https://www.theguardian.com/us-news/live/2026/nov/06/us-midterm-elections-2026-democrats-blue-wave-congress-latest-news-updates",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T21:03:08Z",
+      "source_count": 5,
+      "other_sources": [
+        {
+          "source": "BBC NEWS",
+          "url": "https://www.bbc.co.uk/news/articles/cm9qzz5x9g5yo?at_medium=RSS&at_campaign=rss"
+        },
+        {
+          "source": "PBS NEWSHOUR",
+          "url": "https://www.pbs.org/newshour/politics/trump-names-stephen-miller-his-next-chief-of-staff-after-major-republican-midterm-losses"
+        },
+        {
+          "source": "NPR",
+          "url": "https://www.npr.org/2026/11/06/nx-s1-6032795/stephen-miller-replace-susie-wiles-trumps-chief-of-staff"
+        }
+      ],
+      "priority_score": 5,
+      "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
       "title": "Judge blocks construction of Trump's massive arch after federal agency approval",
       "url": "https://www.bbc.co.uk/news/articles/cq99zd93ryvko?at_medium=RSS&at_campaign=rss",
       "source": "BBC NEWS",
       "published_at": "2026-11-06T15:30:42Z",
-      "source_count": 3,
+      "source_count": 2,
       "other_sources": [
         {
           "source": "THE HILL",
           "url": "https://thehill.com/homenews/administration/6203354-donald-trump-dc-arch-blocked-after-commission-approval/"
-        },
-        {
-          "source": "NPR",
-          "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction"
         }
       ],
       "priority_score": 5,
@@ -38,19 +72,11 @@
       "url": "https://www.theguardian.com/us-news/video/2026/nov/06/trump-signs-order-to-make-gold-decorated-oval-office-a-national-monument-video",
       "source": "THE GUARDIAN",
       "published_at": "2026-11-06T10:42:08Z",
-      "source_count": 4,
+      "source_count": 2,
       "other_sources": [
         {
           "source": "BBC NEWS",
           "url": "https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&at_campaign=rss"
-        },
-        {
-          "source": "REUTERS VIA GOOGLE NEWS",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYmpHaGcydVUtZWxPRVpuc21LWjdwd3VYcUdnRndlOVlTUlNfeHBYWU5yZEJpekt5RzVVZ29EOVo5UDNuM0lQck1BX3RnMTdhOEt4UGY2bXhpajlTZl9lZmR0U1hxeDEwTVhKQTh0c0liNE9zelpYN2xPZzFyUHd6RmM5bFVrQXhVMDZNMWVrcy1LTnM?oc=5"
-        },
-        {
-          "source": "THE HILL",
-          "url": "https://thehill.com/homenews/administration/6202079-trump-national-monuments-oval-office-cabinet-room/"
         }
       ],
       "priority_score": 5,
@@ -59,148 +85,148 @@
   ],
   "headlines": [
     {
-      "title": "Colom rips ‘unlawful attack’ after Hyde-Smith demands ballot preservation in Mississippi",
-      "url": "https://thehill.com/homenews/6204045-mississippi-senate-race-ballot-handling-fight/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T15:44:04Z"
-    },
-    {
-      "title": "Jay Rockefeller, former West Virginia governor and U.S. senator, dies at 89",
-      "url": "https://www.pbs.org/newshour/politics/jay-rockefeller-former-west-virginia-governor-and-u-s-senator-dies-at-89",
+      "title": "Democrats win the Arizona House, Senate and governor's office for the first time since 1966",
+      "url": "https://www.pbs.org/newshour/politics/democrats-win-the-arizona-house-senate-and-governors-office-for-the-first-time-since-1966",
       "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-06T15:37:10Z"
+      "published_at": "2026-11-06T21:16:31Z"
     },
     {
-      "title": "Judge blocks construction of Trump's massive arch after federal agency approval",
-      "url": "https://www.bbc.co.uk/news/articles/cq99zd93ryvko?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-06T15:30:42Z"
+      "title": "Cornell Faculty Senate passes no-confidence vote over Jane Doe case, but Board of Trustees backs president",
+      "url": "https://thehill.com/homenews/education/6205152-cornell-faculty-senate-no-confidence-vote-jane-doe-new-york/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T21:09:33Z"
     },
     {
-      "title": "US midterm elections 2026 live: all eyes on last two razor-thin Senate races as Democrats vie to expand blue wave",
+      "title": "Democrats blast Trump’s decision to appoint Stephen Miller as chief of staff in wake of Republican midterm rout – live",
       "url": "https://www.theguardian.com/us-news/live/2026/nov/06/us-midterm-elections-2026-democrats-blue-wave-congress-latest-news-updates",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T15:27:32Z"
+      "published_at": "2026-11-06T21:03:08Z"
     },
     {
-      "title": "Top prosecutor in office that housed Trump’s ‘grand conspiracy’ probe resigns from DOJ",
-      "url": "https://thehill.com/regulation/court-battles/6203924-reding-quinones-doj-resignation/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T15:19:15Z"
-    },
-    {
-      "title": "Zelensky: Ukraine may receive increased US assistance following ‘new political infrastructure’",
-      "url": "https://thehill.com/policy/international/6203855-zelensky-ukraine-us-aid-midterms/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T15:16:30Z"
-    },
-    {
-      "title": "Congress has a new majority, but immigration policy won’t change just yet",
-      "url": "https://thehill.com/opinion/immigration/6201644-new-congress-immigration-agenda/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T15:00:00Z"
-    },
-    {
-      "title": "US Attorney whose office oversaw Trump's election conspiracy probe resigns - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQNnJnWlVMYkUwX0hPQjVtXzZnNzhBUDhwczhNdnB0dVA3OTJnYTExdnV6ZjRya3M1UUo2TXUyT1l6U0ZRZmh2eUVRNWtJMFBDY2pMQWhaNU9yNm9NWHZGU1UzY2N1TDhwTnh1UXVNNG1YNFBWR2FWZDEzV01mMW0wS1hOcE9hZU1hbFJiaHEtZ0o2SW84T3Q4NDlOYjRTcFdPRnE2SXIzMjFQVHA3UVNZbm1ZaTF2TDhZeXc?oc=5",
+      "title": "In Republican collapse, Colorado military town elects Democrat for the first time - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQZC1MUWlWSWJIdmtzQTBRMmpzQjVKVUxQLU9qY2tkeGNDSXA5NjFxQnIyek44N3FuV1EzWTVnR2MtblZJTm5UM3VqdHhXbTlUdTRqdWNvUTRjZnJDRjV6alVBNHNkWkkyUUg1bW0wYWdmUGMyalFPMU50OGpnZ3ZVNFdxbHVNM25RWUFqaGFtVGlteW5nVjRRMDBYRUFuWEtYZ3BVZG80a3F1NERjSUdSVm9XRzI?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T14:56:37Z"
+      "published_at": "2026-11-06T21:01:43Z"
+    },
+    {
+      "title": "Trump's triumphal arch is blocked for now, but a new website highlights the plans",
+      "url": "https://www.pbs.org/newshour/politics/trumps-triumphal-arch-is-blocked-for-now-but-a-new-website-highlights-the-plans",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-06T20:36:43Z"
+    },
+    {
+      "title": "Christie mulling White House bid, says ‘Trump era is over’",
+      "url": "https://thehill.com/homenews/campaign/6204997-chris-christie-2028-presidential-election/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T20:33:02Z"
+    },
+    {
+      "title": "White House recasts Trump arch as military tribute - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNTnNTOVhpTWZhSUtoZWVGZGlzMGlrVVQ5ek5GT2pPajJ2N2YycUxVRkh5RFNFb1pQYmZFRVdpaWxZVHp3ckRMaWZjenlXbld0Rk02WUYyVEVnZUVRX3h6Q0VtQ1lhRWRoSGp4ektMdFVJUzhHQ1ZoaVYyZHl2Y0RxLWJYQmVGNVcycFlPWlc0cmdLOVhReW5V?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T20:31:43Z"
+    },
+    {
+      "title": "Trump names Stephen Miller as new White House chief of staff",
+      "url": "https://www.bbc.co.uk/news/articles/cm9qzz5x9g5yo?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-06T20:11:45Z"
+    },
+    {
+      "title": "Stephen Miller, architect of Trump’s immigration crackdown, to become White House chief of staff",
+      "url": "https://www.theguardian.com/us-news/2026/nov/06/stephen-miller-chief-of-staff-trump",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T20:06:11Z"
+    },
+    {
+      "title": "Trump promotes Stephen Miller to chief of staff, replacing Susie Wiles - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPRW9VOFJHVC05elRKeHJYaUVfalhSNTJYS0dhNkJobGVIaGU1ZVlLaUNlakI2SURhTHNqc2c2ODFYcWpVaE5uUXpoNEI1d1h3MjFxbTlqNHQwVVJmNEFyUl9uRWktTWdRMGs1Z05GUXRxU2FwVC0wV19JSExCbi1DM1pPNHZVUzFZcVB3ak93TWM4MUk?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T20:04:32Z"
+    },
+    {
+      "title": "What happens after the ‘blue wave’? Your questions on the US midterm election results answered",
+      "url": "https://www.theguardian.com/community/live/2026/nov/05/what-happens-after-the-blue-wave-our-reporters-answer-your-midterm-election-results-questions",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T19:59:42Z"
+    },
+    {
+      "title": "Johnson, staunch Trump ally, seeks to delay Senate GOP leadership election after big losses",
+      "url": "https://thehill.com/homenews/senate/6204900-ron-johnson-senate-gop-leadership-election-midterm-election-losses/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T19:53:51Z"
+    },
+    {
+      "title": "No one knows how many ballots are outstanding in Mississippi's Senate race",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6030645/mississippi-senate-results-provisional-ballots",
+      "source": "NPR",
+      "published_at": "2026-11-06T19:50:14Z"
+    },
+    {
+      "title": "Schumer says Democrats will stop Trump from placing 'right-winger' on the Supreme Court",
+      "url": "https://www.pbs.org/newshour/politics/schumer-says-democrats-will-stop-trump-from-placing-right-winger-on-the-supreme-court",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-06T19:46:53Z"
+    },
+    {
+      "title": "Paraguay leadership in limbo as impeachment trial starts against president - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPdXV6WEZCVmtNQW9RV3BEWDhvUWtqRlBoaGpMQ1ZqQkk4Y2g3QWRtXzhjQ2ZFRVE2VWVRUlE3MDNuZnJ2aWw1WEtsZG5YRGo1V01EMXhqRldTMkNmNGI2RFZkeHZLVWJuWV9aTDZVSHlTTm9NNVpQeF9CRGtBWkFScnE4aEtzTDRUbkxZb2pYbE1RQ3NFS3V2bHpFUUJvcmFYRlpoSThucjBKVmtveWRWdkFGaHZPdw?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T19:43:35Z"
+    },
+    {
+      "title": "Two top Justice Department officials resign as post-election exodus accelerates - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNc3d2VFhsUzJucjhiOHdzTnBuU0VDNF9PcEV3c2VvQ2FlQ3lZM2k5VXF3TXlseFJaMDlkekVxT19GUHJvbG1VdHdfbmNRWi1MdU9zdXpGVjJCSkhXc0NOSXVseldlXzZvOU1NVlJmaFlqNUlkUkJFeHFPZ2ZIRjNkdE5vb2Ixd01LVGttWEluTTNnakkybGVtMlFfM2VHcGVqbzBFbWJWWDNFcWVTSmJGWFdmRWlVVG9tS3hpcmVtQ3Jpd04yRmdKeg?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T19:26:15Z"
     },
     {
       "title": "Democrats planning flood of AI bills when they take control of Congress - Reuters",
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSW1qclJEWjVTQTNNU0hWWndTVFlOWFpNY1RqQ1I5Z0F2anRxTE5IQnlTTDhjeU9uUGV2anlLaVBfMFdPc0k5eDJVTVk4VTlVbnVZX0VwVnBEMnhHX19fTGRvX2NrQnNJeGN5MzBBaXBLb3d3Y25JdHpjSXFQMENoa01vNk0yLXVLRVBGZjlHLVFuUmI0QWp5aFBBRzRUSDdNMkpCQ1lJVExIei0zVFFiY0x2eVBPcFJ3d2NCeGN6REF0dw?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T14:37:43Z"
+      "published_at": "2026-11-06T19:20:55Z"
     },
     {
-      "title": "Trump on stock market losses: ‘You only have yourselves to blame’",
-      "url": "https://thehill.com/homenews/administration/6203425-donald-trump-stock-market-losses-2026-midterms-economy/",
+      "title": "Trump names Stephen Miller his next chief of staff after major Republican midterm losses",
+      "url": "https://www.pbs.org/newshour/politics/trump-names-stephen-miller-his-next-chief-of-staff-after-major-republican-midterm-losses",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-06T19:17:44Z"
+    },
+    {
+      "title": "Stephen Miller will replace Susie Wiles as Trump's chief of staff",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6032795/stephen-miller-replace-susie-wiles-trumps-chief-of-staff",
+      "source": "NPR",
+      "published_at": "2026-11-06T19:13:52Z"
+    },
+    {
+      "title": "Giuliani says Vance as president could be a ‘dangerous possibility’",
+      "url": "https://thehill.com/homenews/administration/6204712-gop-midterm-war-economic-split/",
       "source": "THE HILL",
-      "published_at": "2026-11-06T14:21:15Z"
+      "published_at": "2026-11-06T19:03:27Z"
     },
     {
-      "title": "The most diverse, anti-establishment Congress in history is cause for optimism",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/congress-midterms-diverse",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T14:17:18Z"
-    },
-    {
-      "title": "Federal judge temporarily halts building work on Trump’s triumphal arch",
-      "url": "https://www.theguardian.com/us-news/2026/nov/06/judge-temporarily-halts-work-trump-triumphal-arch-washington",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T14:04:35Z"
-    },
-    {
-      "title": "US midterm election results in graphics and charts - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9mYlFQMWJNR3dHZEQ1QVZ5TEo4QnRWOHYwTE9UMGh2X2x4TV8xTk1VbWNJSWZzdkdjclZFdjBNZmE5UFhhQnU4dGh0eXloOVhCeTBkekRwQUUyTzVZNV96Uml0ZXZDbHB1RHExMkphQUtLRnl3cWNMYmwyYVE?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T14:00:05Z"
-    },
-    {
-      "title": "Live updates: Trump’s triumphal arch OK’d by panel, halted by judge; jobs report surprises",
+      "title": "Live updates: Trump names Miller as chief of staff; triumphal arch OK’d by panel, halted by judge",
       "url": "https://thehill.com/homenews/administration/6203096-live-updates-trump-midterm-elections-iran-jobs/",
       "source": "THE HILL",
-      "published_at": "2026-11-06T13:55:40Z"
+      "published_at": "2026-11-06T19:02:04Z"
     },
     {
-      "title": "Andrews: Time for ‘generational change’ in Senate leadership",
-      "url": "https://thehill.com/homenews/senate/6203427-annie-andrews-south-carolina-senate-leadership-overhaul-midterms/",
+      "title": "Susie Wiles out, Stephen Miller in, as Trump’s chief of staff",
+      "url": "https://thehill.com/homenews/administration/6204745-susie-wiles-out-stephen-miller-in-as-trumps-chief-of-staff/",
       "source": "THE HILL",
-      "published_at": "2026-11-06T13:54:52Z"
+      "published_at": "2026-11-06T18:58:02Z"
     },
     {
-      "title": "Trump-backed Mark Lamb wins Arizona House seat",
-      "url": "https://thehill.com/homenews/campaign/6175163-mark-lamb-arizona-house-race-2026-midterms/",
+      "title": "Trump backs Gruters’s reelection bid as RNC chair",
+      "url": "https://thehill.com/homenews/administration/6204698-trump-backs-gruters-rnc-reelection/",
       "source": "THE HILL",
-      "published_at": "2026-11-06T13:52:52Z"
+      "published_at": "2026-11-06T18:42:45Z"
     },
     {
-      "title": "China, Gabon elevate ties, pledge deeper mining, security cooperation - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOY2FjTkkyemRQSHlzUzlMSElVSnJpc0VNVGVPUnMyZUQ1ZlZTbzJabFdhakdjN3JtNUlqMUFrVFBadWlDM0lHdGx3T3RPWl9xNEIzb044aXlsbjFtYWV0TE9NNV95RTVFY09wWEJHZzFVRTVlUzItZ1A1QkQ0R0VDMmNxUklqZnNvT1k3SVlkbktlcVExQ090ay1zWFNQZHl0MlY2MnVoS3g0M19iWGtodWl5X2U?oc=5",
+      "title": "EXCLUSIVE: Apple's autocomplete restrictions include 'Dictator Trump' and 'Sleepy Joe,' researcher finds - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNTUR2UGkwV2c4dmhzNURLVE9HOFU0Vks4d3FkRzFBa1hWZXloRGtwaVVoUnl4WFVBU0ktdXl3eU1lclhVTC1xUjBPX2NWMG82V2IzdVZXZVd5dFEwSkhSUzdMV2I1VlB5a1R4czhndXdGQURaY3pzTVZoUC1UNm5OUXBRZXNFSXpBV3VOODc1UUZGV21oTkxtWW9fMGdsanBDV2NUUVNST3R3Zm5mUW5JQWtvdXRSem1ZSlJSaE93d0FtckdmX2c0MGlLT2I3Tjh5eXVlZlFpNW0?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T13:45:43Z"
-    },
-    {
-      "title": "America’s scientific future depends on what Congress does next",
-      "url": "https://thehill.com/opinion/congress-blog/technology/6201574-congress-restores-scientific-funding/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T13:30:00Z"
-    },
-    {
-      "title": "Jay Rockefeller, heir to famed dynasty and healthcare advocate in US Senate, dies at 89 - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPZDBJMDRPNVh2YlpfUHRFLTNnNG9YSWJwQ0lEYWpIc1M3Q2c2WW1aLUZKVm9xaGVEMHNkUVpHbXRYLWp0NzB3WlN0VlMxVWxQWFRaSUtJamtqelJoQkdNMGZ4TWpaR1Rya0FKZlRPM2NYRkZMSm9DN1VtNlZNZlc4eXdyT0hVdzR2VHNVbWs0emtkRjdwRVlFQmhSbzhGMFBlVUZhTzdJamRhTDlmdVRB?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T13:13:22Z"
-    },
-    {
-      "title": "Judge temporarily blocks work on Trump arch after panel’s approval",
-      "url": "https://thehill.com/homenews/administration/6203354-donald-trump-dc-arch-blocked-after-commission-approval/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T13:11:58Z"
-    },
-    {
-      "title": "Trump Media’s investors lost $2.2 billion while Trump holds $460 million stake - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQUGkzZG4yU1c4YThoQTduQWZQMlBJREw3LW8tYkd2Wnl4c29kRXZjblRCcWtCdzFuak8zVEE3Ump5WkJwajZRRV91bUhtN2QtYjNHemh6MjZMZzZ6ck9TNVFrQ2FhZWFaQTlXbkpYMDN3RnZWZ0h2Yzg2cnBfOFB3aVlILXhsUzhkeW9QY29yUWR0Mm9SN1NIUEVldzJDT1RWZmc4MlE3cXhkUHdndFRRcDZPYktSenhnRzhQR1dkSDNQV0JLMEdpenZnVHhUQQ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T13:05:15Z"
-    },
-    {
-      "title": "What is this strange, post-election feeling? Oh right – it’s utter joy | Dave Schilling",
-      "url": "https://www.theguardian.com/commentisfree/2026/nov/06/post-election-feeling-optimism",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T13:00:43Z"
-    },
-    {
-      "title": "Schumer vows Senate Democrats would block any ‘right-winger’ Trump Supreme Court nominee",
-      "url": "https://thehill.com/homenews/senate/6203353-chuck-schumer-donald-trump-supreme-court/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T12:59:55Z"
-    },
-    {
-      "title": "‘I didn’t expect to be a main character’: Abdul El-Sayed heads to the Senate with a mandate – and a spotlight",
-      "url": "https://www.theguardian.com/us-news/2026/nov/06/abdul-el-sayed-islamophobia-michigan-senate-seat",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T12:46:37Z"
+      "published_at": "2026-11-06T18:28:02Z"
     }
   ]
 }
