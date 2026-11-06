@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T20:13:46.789735Z",
+  "generated_at": "2026-11-06T01:04:47.125757Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -15,12 +15,50 @@
   ],
   "priority": [
     {
-      "title": "Melania Trump calls for lasting Ukraine truce as she hosts Russian and Ukrainian officials",
-      "url": "https://www.bbc.co.uk/news/articles/c9p8g085mz07o?at_medium=RSS&at_campaign=rss",
+      "title": "California governor commutes sentences for state's 548 death row inmates",
+      "url": "https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&at_campaign=rss",
       "source": "BBC NEWS",
-      "published_at": "2026-11-05T19:08:08Z",
+      "published_at": "2026-11-05T23:09:33Z",
       "source_count": 2,
       "other_sources": [
+        {
+          "source": "REUTERS VIA GOOGLE NEWS",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxONFpTdTN5c1lMaW81c2hwQkJjQ2E3U1hWWGVTUjlraUJoLVNxdGcybWNVY1FXMm03MXZkeWEwVWpabEcwdW9qRkxBeXhZRGlJRUp2NVl0T1pjWFBNRE9hX21ySTVraGxaTm54OS1TXzB6NXJLY2NkQ3JURnluWWpEM0g0VmRGMm1XczdBR1ZTVjZFRkxzejg3UjJ5eTNCZmxlbXVmczZ6bmZYd3Q0aE82LQ?oc=5"
+        }
+      ],
+      "priority_score": 5,
+      "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
+      "title": "Trump says Oval Office to become national monument - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYmpHaGcydVUtZWxPRVpuc21LWjdwd3VYcUdnRndlOVlTUlNfeHBYWU5yZEJpekt5RzVVZ29EOVo5UDNuM0lQck1BX3RnMTdhOEt4UGY2bXhpajlTZl9lZmR0U1hxeDEwTVhKQTh0c0liNE9zelpYN2xPZzFyUHd6RmM5bFVrQXhVMDZNMWVrcy1LTnM?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T23:01:44Z",
+      "source_count": 3,
+      "other_sources": [
+        {
+          "source": "THE HILL",
+          "url": "https://thehill.com/homenews/administration/6202079-trump-national-monuments-oval-office-cabinet-room/"
+        },
+        {
+          "source": "PBS NEWSHOUR",
+          "url": "https://www.pbs.org/newshour/politics/trump-signs-proclamation-he-says-will-prevent-future-changes-to-oval-office-and-cabinet-room"
+        }
+      ],
+      "priority_score": 5,
+      "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
+      "title": "WATCH: First lady Melania Trump hosted Russian and Ukrainian officials. Trump met with Putin's envoy",
+      "url": "https://www.pbs.org/newshour/politics/watch-first-lady-melania-trump-hosted-russian-and-ukrainian-officials-trump-met-with-putins-envoy",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-05T22:04:18Z",
+      "source_count": 3,
+      "other_sources": [
+        {
+          "source": "REUTERS VIA GOOGLE NEWS",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQQkIyajduM2t4eXl5eGs0V1hHU0Y2amcxWjM1dmthWmtDekkwV3V5MElyZlpjZFlfOUVENC1fSXJ2S0llMDloc2VJZmktZG5jUWFvMVUwbTJ6VkNuSF9EX0dEdzliNnlzN0J6RlIydnVMVE9sdVNpV3J1VzR0MTdfRk51WVE0dVk?oc=5"
+        },
         {
           "source": "THE HILL",
           "url": "https://thehill.com/video-clips/6200577-watch-live-melania-trump-russia-ukraine-officials-white-house-localized-ceasefire/"
@@ -30,15 +68,15 @@
       "note": "Potential major development; verify original reporting before publishing."
     },
     {
-      "title": "Trump’s Washington arch poised for approval as judge weighs bid to block construction - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNRlhvZGtKal8wM0d0dVZKaENBa2tkS1VZY0RTV1A3TzNkSTFCOU9aMWFaQ0JfWG9xVDMyRExlc0tYRXVsZ3RBbllwNHQ0a2FGOXhhNUhobzUwOWw5Mkh3bGYzZWtpWkFxMVNhRzhFMFk3QzdyNkI1VXcyMDgwaHJfS2lNZFZpRTM3VXZ5cV9XRVVpVzB2eW1FR1o4WDFZTWNCUFlzbVQwX09zdU1BdExpcjhTWDdqeGtXSXh3?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T11:09:51Z",
+      "title": "Inside Mississippi's ballot counting in tight Senate race",
+      "url": "https://www.bbc.co.uk/news/videos/cmj477d0dyxqo?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-05T20:31:38Z",
       "source_count": 2,
       "other_sources": [
         {
-          "source": "NPR",
-          "url": "https://www.npr.org/2026/11/05/nx-s1-6027301/trump-arch-federal-approval-judge-construction"
+          "source": "THE HILL",
+          "url": "https://thehill.com/homenews/campaign/6201459-colom-leads-hyde-smith-mississippi/"
         }
       ],
       "priority_score": 5,
@@ -47,148 +85,148 @@
   ],
   "headlines": [
     {
-      "title": "California governor commutes death sentences for all 548 people on death row",
-      "url": "https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-05T20:12:03Z"
-    },
-    {
-      "title": "Dem senator presses call for Kennedy to ‘resign or be fired’ after election",
-      "url": "https://thehill.com/homenews/senate/6202130-alsobrooks-calls-rfk-jr-resign/",
+      "title": "GOP’s McKinney wins election for Newhouse’s open Washington seat",
+      "url": "https://thehill.com/homenews/campaign/6134794-republican-amanda-mckinney-washington-4th-district/",
       "source": "THE HILL",
-      "published_at": "2026-11-05T20:04:40Z"
+      "published_at": "2026-11-06T00:31:35Z"
     },
     {
-      "title": "NCPC virtual meeting for Trump triumphal arch crashes during public testimony",
-      "url": "https://thehill.com/homenews/administration/6202036-ncpc-meeting-crashes-trump-arch/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T20:02:31Z"
-    },
-    {
-      "title": "Deep-red Kansas votes for change as patience wears thin with Trump: ‘The economy is really taking a beating’",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/kansas-voters-trump-republicans-dispatch",
+      "title": "Trump signs proclamation to try to prevent changes to gold-covered Oval Office",
+      "url": "https://www.theguardian.com/us-news/2026/nov/05/trump-oval-office-design-proclamation",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T20:00:32Z"
+      "published_at": "2026-11-06T00:29:06Z"
     },
     {
-      "title": "‘Dark horse diplomat’: Melania Trump plays both sides in joint Russia-Ukraine White House visit",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/melania-trump-white-house-visit-ukraine-russia",
+      "title": "US elections 2026 live: Democrats exceed 250 House seats as blue wave sweeping Congress grows",
+      "url": "https://www.theguardian.com/us-news/live/2026/nov/05/midterm-elections-live-latest-updates-mississippi-senate-race",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T19:46:31Z"
+      "published_at": "2026-11-06T00:26:50Z"
     },
     {
-      "title": "Appeals court questions if Trump’s conviction survives presidential immunity",
-      "url": "https://thehill.com/regulation/court-battles/6201976-trump-presidential-immunity-hush-money-conviction/",
+      "title": "Failed GOP redistricting in South Carolina, Indiana would have backfired: DDHQ",
+      "url": "https://thehill.com/homenews/campaign/6202901-midterm-congressional-gop-redistricting-analysis/",
       "source": "THE HILL",
-      "published_at": "2026-11-05T19:45:41Z"
+      "published_at": "2026-11-06T00:23:47Z"
     },
     {
-      "title": "Paraguay President Peña resigns under mounting pressure from bank collapse - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWGc3WWZCT3BZUUFMY3E0VW43Z244SWNKVUk4NS1RZ1RHVGVSdG1RSVNKVjFaZGdlQjktT2JvcElpNEVvMllaNTdIbWRMdmdQZ1F3RjZwMThjcVU5X1pYY20wajc0MzIyenBHX3MtaEVRRnpRTC16TWdITnA4QWZxcFhtNHh0UlR0YlZ2UkVqUmF4YXZWejdWY2xsZ0c2bm5oWUNiczZnWms4NHo2eHctcHJKSHJEMmNDQmtZ?oc=5",
+      "title": "These are the races in the House and Senate that haven't been called yet",
+      "url": "https://www.npr.org/2026/11/05/g-s1-152127/house-senate-uncalled-races",
+      "source": "NPR",
+      "published_at": "2026-11-06T00:03:45Z"
+    },
+    {
+      "title": "Lula's election win dashes US hopes of quick access to Brazil's rare earths - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbnhUT0ZFTnpsamNBblowSmJHVXhjMEhiRzZCWVRLVk95TXFFcVAxSkxBRXhxZHJaVWdERTdTOTVtcEZTRl9mYi1wSE90Q2hqZGVHSGUzdkxLa3R6SWxHbXlBa3ktdEhGRXhra1lIaG54ZUhFQWQ3TW5XUUdVVnBhcVptaFlVdUY2b3dIMHotRFh0T1pVTGpMTmNyU3R1UUlnakRaQWVPOVpTTUp2ZkxhMk9IMWFYZw?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T19:31:51Z"
+      "published_at": "2026-11-05T23:58:33Z"
     },
     {
-      "title": "Rove: Paxton ‘drew down the entire Republican ticket’ in Texas",
-      "url": "https://thehill.com/homenews/campaign/6201889-karl-rove-ken-paxton-texas-republicans/",
+      "title": "A look at the midterm races that remain undecided",
+      "url": "https://www.pbs.org/newshour/show/a-look-at-the-midterm-races-that-remain-undecided",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-05T23:55:48Z"
+    },
+    {
+      "title": "Melania Trump touts rare agreement she brokered between Russia and Ukraine",
+      "url": "https://www.npr.org/2026/11/05/nx-s1-6030662/melania-trump-touts-rare-agreement-she-brokered-between-russia-and-ukraine",
+      "source": "NPR",
+      "published_at": "2026-11-05T23:52:48Z"
+    },
+    {
+      "title": "Trump seeks national monument status for iconic White House rooms",
+      "url": "https://thehill.com/newsletters/energy-environment/6202853-white-house-rooms-national-monuments-trump/",
       "source": "THE HILL",
-      "published_at": "2026-11-05T19:25:18Z"
+      "published_at": "2026-11-05T23:46:56Z"
     },
     {
-      "title": "Musk has little to show for his record spending on Republican campaigns in US midterms - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQLW1HNDhJZmxwMWdaVVZTX05ZVjhhTkRhV19Wb3RJOVhfWjdCa0MxLV9uWXZ1YWRKVUZ5bGZHN3duOTJMWGdrQ0tDRDdORGtHTlIxVWlhOXozR1J2MXBxV2JreTY4b2c3empONmg5QXl0ejFvelFlTjRSTzZZd19fSy0zT0E2T1NjWXE5Y29pdXFVQ1pYbDFrQXlwZ0ZRSkhuRS1oR2RYU2FFdDVmN1JJS2t6Yzczbk1Ydnc?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T19:20:55Z"
+      "title": "After midterms, Trump is left to weigh his next move in Iran war that contributed to GOP loss",
+      "url": "https://www.pbs.org/newshour/politics/after-midterms-trump-is-left-to-weigh-his-next-move-in-iran-war-that-contributed-to-gop-loss",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-05T23:46:36Z"
     },
     {
-      "title": "Greg Steube to run for House GOP conference chair",
-      "url": "https://thehill.com/homenews/house/6201925-greg-steube-house-gop-conference-chair-run-2027/",
+      "title": "Hegseth in ‘trouble’ as Trump faces music on Iran war, midterms",
+      "url": "https://thehill.com/policy/defense/6202854-hegseth-pentagon-future-uncertain/",
       "source": "THE HILL",
-      "published_at": "2026-11-05T19:20:17Z"
+      "published_at": "2026-11-05T23:41:23Z"
     },
     {
-      "title": "Sanders calls for Democrats to pass ‘Medicare for All’",
-      "url": "https://thehill.com/homenews/senate/6201914-sanders-calls-medicare-all/",
+      "title": "How North Carolina Democrats flipped several House seats in historically GOP districts",
+      "url": "https://www.npr.org/2026/11/05/nx-s1-6031719/north-carolina-democrats-flip-house-seats-republican-districts",
+      "source": "NPR",
+      "published_at": "2026-11-05T23:34:36Z"
+    },
+    {
+      "title": "Hegseth allows National Guard to boost DC patrols with military vehicles, boats and patrol cars",
+      "url": "https://www.pbs.org/newshour/politics/hegseth-allows-national-guard-to-boost-dc-patrols-with-military-vehicles-boats-and-patrol-cars",
+      "source": "PBS NEWSHOUR",
+      "published_at": "2026-11-05T23:31:50Z"
+    },
+    {
+      "title": "Senate GOP’s campaign arm demands Mississippi election officials preserve affidavit ballots",
+      "url": "https://thehill.com/homenews/campaign/6202795-nrsc-demands-mississippi-ballot-preservation/",
       "source": "THE HILL",
-      "published_at": "2026-11-05T19:15:49Z"
+      "published_at": "2026-11-05T23:25:19Z"
     },
     {
-      "title": "Melania Trump urges 'humanity over war' with Ukraine, Russia officials - Reuters",
+      "title": "Trump says he met Putin envoy, sees Ukraine deal soon - Reuters",
       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOWkhXRFdJbFdiTmQySWJyWVRIbHhpdFlXaVRSQmh6UzJvbDJSbWZUdGRwM0VPaFpHbkVpc1VmSlAybEFJUTN0cmNMWkpuX1FJSE8zT3NBYXdXY05lLUhjTldMelM1eGdUWWVnbF9qb0s3VFMySFJ1Qk5GTFJmeXVHM1NLaHNEMzdrZjhXNWpEcVhOQTdSV3V6SVVMQU0xMGtNbUhkblZRdG82aUdvTWxLbHZQUmFpdEh5WUV4ZUgtZU1JcjFjaUxZ?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T19:13:42Z"
+      "published_at": "2026-11-05T23:22:15Z"
     },
     {
-      "title": "Watch live: Hinojosa speaks after midterm win against Abbott",
-      "url": "https://thehill.com/video-clips/6201860-watch-live-gina-hinojosa-texas-governors-race-presser-midterms/",
+      "title": "Markets tank after post-Election Day surge",
+      "url": "https://thehill.com/business/6202769-nasdaq-dow-jones-sp-slide/",
       "source": "THE HILL",
-      "published_at": "2026-11-05T19:12:58Z"
+      "published_at": "2026-11-05T23:22:08Z"
     },
     {
-      "title": "Trump is soothing the midterms loss with what he loves best: interior design | Arwa Mahdawi",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/trumps-interior-design",
+      "title": "Following midterm losses, MAHA is at a crossroads",
+      "url": "https://thehill.com/newsletters/healthcare/6202796-following-midterm-losses-maha-is-at-a-crossroads/",
+      "source": "THE HILL",
+      "published_at": "2026-11-05T23:17:58Z"
+    },
+    {
+      "title": "What happens after the ‘blue wave’? Ask your midterm election results questions",
+      "url": "https://www.theguardian.com/community/live/2026/nov/05/what-happens-after-the-blue-wave-our-reporters-answer-your-midterm-election-results-questions",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T19:12:23Z"
+      "published_at": "2026-11-05T23:10:36Z"
     },
     {
-      "title": "US midterm voters responded in a thunderous voice. This is just the beginning | Betsy Reed",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/us-midterm-election-free-press",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T19:09:42Z"
-    },
-    {
-      "title": "Melania Trump calls for lasting Ukraine truce as she hosts Russian and Ukrainian officials",
-      "url": "https://www.bbc.co.uk/news/articles/c9p8g085mz07o?at_medium=RSS&at_campaign=rss",
+      "title": "California governor commutes sentences for state's 548 death row inmates",
+      "url": "https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&at_campaign=rss",
       "source": "BBC NEWS",
-      "published_at": "2026-11-05T19:08:08Z"
+      "published_at": "2026-11-05T23:09:33Z"
     },
     {
-      "title": "Trump administration held talks with Iran on deporting Iranians during the war, court documents show",
-      "url": "https://www.pbs.org/newshour/world/trump-administration-held-talks-with-iran-on-deporting-iranians-during-the-war-court-documents-show",
+      "title": "China's yuan dilemma: too weak abroad and too strong at home - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdG8tUkNHdE1DSTdndG40UGVsSEh6cVBmcFZBSmFHNi10VU9ET3JPbU1XRlg3bHI4SnptNGcxV3BGNHdXT2Qycm9Oa1VfRmJNNFFyNGxJN0ZfbHdyNi1zbHRISnBlZWNKUGdqT0V0UVJHRHhFLWRYVTB1alpvSGRCZWZaTzJyaHdicWpyVDdGQmVWVlFqREs2TTNMcVZYVlllb1FCUlVZMDMxQQ?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T23:08:25Z"
+    },
+    {
+      "title": "Midterms upended Congress but Trump still commands foreign policy - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPaFdhWXVRZDFtNThlVzMtcUs4eU9nTlVZZHJHZzAxbUhKNVBYN3FoR0lSMHJNSzVkQVJQdXlaWTZQZXNwUzEwSkhxRjBwQ1dRZzIyMFV5QkhTaWRmWHVKWEdSQmhyR1NHaUhyMlpnV09GVkxPbmh5MTlUZEphbVE1OENqSXlNTmdEejZPbUlNdmdzRTBiRnVYTHNuWHVQUEo0VXFvODJTaElxQQ?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T23:07:42Z"
+    },
+    {
+      "title": "Trump says Oval Office to become national monument - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYmpHaGcydVUtZWxPRVpuc21LWjdwd3VYcUdnRndlOVlTUlNfeHBYWU5yZEJpekt5RzVVZ29EOVo5UDNuM0lQck1BX3RnMTdhOEt4UGY2bXhpajlTZl9lZmR0U1hxeDEwTVhKQTh0c0liNE9zelpYN2xPZzFyUHd6RmM5bFVrQXhVMDZNMWVrcy1LTnM?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T23:01:44Z"
+    },
+    {
+      "title": "After taking control of Congress, Democrats vow major probes into Trump's 'tentacles of corruption'",
+      "url": "https://www.pbs.org/newshour/politics/after-taking-control-of-congress-democrats-vow-major-probes-into-trumps-tentacles-of-corruption",
       "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-05T19:04:43Z"
+      "published_at": "2026-11-05T23:00:50Z"
     },
     {
-      "title": "Boebert, billionaires' tax and other midterms races still to watch",
-      "url": "https://www.bbc.co.uk/news/articles/c6vg0y2nr445o?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-05T19:02:17Z"
-    },
-    {
-      "title": "Iran's security chief discusses regional, bilateral affairs with Putin - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMkR5dEUwb2FoSDZrZ2p1UVF1T3VzbjEwSmhUWFBSeElYM0lHamE3SE0zYVViRHNqZ2piYTBjbWtoZThDU01hQmpYRFlwMHJTTFl3S2MyWnFoZWh1VTRCdEFvckJZcHktYjNpMWxLbU1vOGp3N0k1Yi1FZ0xTMXYzU2I2OHVZeGZrVXdiUmJOZ0phb2dLTjVGTTQ4aGF0WEdOLTVzS2RLQzBYNXR5?oc=5",
+      "title": "US midterm election results in graphics and charts - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9mYlFQMWJNR3dHZEQ1QVZ5TEo4QnRWOHYwTE9UMGh2X2x4TV8xTk1VbWNJSWZzdkdjclZFdjBNZmE5UFhhQnU4dGh0eXloOVhCeTBkekRwQUUyTzVZNV96Uml0ZXZDbHB1RHExMkphQUtLRnl3cWNMYmwyYVE?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T18:59:00Z"
-    },
-    {
-      "title": "California rejects ballot measure requiring voter ID",
-      "url": "https://thehill.com/homenews/campaign/6178993-california-proposition-39-voter-id-fails/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T18:42:40Z"
-    },
-    {
-      "title": "Stevens pulls out of election analysis event at DC university",
-      "url": "https://thehill.com/homenews/campaign/6201679-haley-stevens-gwu-panel-canceled/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T18:36:55Z"
-    },
-    {
-      "title": "Democrat concedes in open race for Golden’s House seat in Maine",
-      "url": "https://thehill.com/homenews/campaign/6201704-democrat-matt-dunlap-maine-2nd-concession-2026-midterms/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T18:30:04Z"
-    },
-    {
-      "title": "Colorado rejects ballot measure adding new restrictions on mid-decade redistricting",
-      "url": "https://thehill.com/homenews/state-watch/6186493-colorado-ballot-measure-redistricting-limits-2026/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T18:23:10Z"
-    },
-    {
-      "title": "US issues new Cuba sanctions, takes aim at sectors of Cuban economy - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQblVpSUg3SjBzNjdqeWlrY1hpeWNhQ2E0VzNmZW1RTVl3ekVfRW5ERnpNU2gwa3M3NUZuNWFFc3JWR3BnNGlHeS1VOENLeFcwRUxaYm00TnVxZWd1RkxtbEJ0WlJTQmFMeXZDZm9iX1Fybk5qTGJ5eVhCMlV6c2VFbUd4ZXZBS2VmeW9tM0d1SjRoN0FibW13RnAtcU11XzVENk5PVTVYV2RPMGJkM3ZlaQ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T18:11:08Z"
+      "published_at": "2026-11-05T23:00:05Z"
     }
   ]
 }
