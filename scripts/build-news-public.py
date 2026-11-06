@@ -34,7 +34,7 @@ for p in OUT.rglob('*.html'):
  depth=len(p.relative_to(OUT).parts)-1
  prefix='../'*depth
  # Remove retired forecast cards as complete article units, not individual nested links.
- h=re.sub(r'<article\\b[^>]*>\\s*<a\\b[^>]*href=["\\'][^"\\']*analysis/forecast-(?:grade|coverage)/["\\'][^>]*>.*?</a>\\s*</article>','',h,flags=re.I|re.S)
+ h=re.sub(r"""<article\b[^>]*>\s*<a\b[^>]*href=["'][^"']*analysis/forecast-(?:grade|coverage)/["'][^>]*>.*?</a>\s*</article>""",'',h,flags=re.I|re.S)
  # Remove only simple retired navigation links; never consume story cards or footer markup.
  retired_pat='|'.join(retired)
  h=re.sub(r'<a\\b[^>]*href=["\\'](?:\\.\\./|\\./)*(?:'+retired_pat+r')/[^"\\']*["\\'][^>]*>[^<]*</a>','',h,flags=re.I)
