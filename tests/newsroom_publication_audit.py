@@ -6,7 +6,7 @@ articles=sorted((root/'analysis').glob('*/index.html'))
 errors=[]; seen={}
 for path in articles:
     s=path.read_text(encoding='utf-8')
-    src=re.search(r'<img\b[^>]*\bsrc=["\\']([^"\\']+)',s,re.I)
+    src=re.search(r'<img\b[^>]*\bsrc="([^"]+)"',s,re.I)
     if not src: errors.append(f'{path}: missing photo')
     else:
         url=src.group(1).split('?')[0]
