@@ -1,43 +1,8 @@
-name: Website integrity
+name: News website integrity
 on:
   push:
     branches: [main]
-    paths:
-      - 'geo/**'
-      - 'scripts/**'
-      - 'house/**'
-      - 'elections/**'
-      - 'governors/**'
-      - 'election-night/**'
-      - 'states/**'
-      - 'state/**'
-      - 'stats-for-nerds/**'
-      - 'index.html'
-      - 'site-chrome.js'
-      - 'analysis/**'
-      - 'about/**'
-      - 'corrections/**'
-      - 'feed.xml'
-      - 'sitemap.xml'
-      - 'polling/**'
-      - 'analysis/**'
-      - 'about/**'
-      - 'corrections/**'
-      - 'feed.xml'
-      - 'sitemap.xml'
-      - '.github/workflows/website-integrity.yml'
   pull_request:
-    paths:
-      - 'geo/**'
-      - 'scripts/**'
-      - 'house/**'
-      - 'elections/**'
-      - 'governors/**'
-      - 'states/**'
-      - 'state/**'
-      - 'stats-for-nerds/**'
-      - 'index.html'
-      - 'site-chrome.js'
 jobs:
   integrity:
     runs-on: ubuntu-latest
@@ -45,66 +10,19 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: node scripts/validate-editorial-publication.mjs
-      - run: node scripts/validate-editorial-provenance.mjs
-      - run: node scripts/validate-newsroom.mjs
-      - run: node --check uncalled/tracker.js
-      - run: node --check analysis/forecast-coverage/score.js
-      - run: node scripts/test-county-results-core.mjs
-      - run: python3 -m unittest discover -s tests -p test_national_county_sources.py -v
-      - run: node scripts/validate-election-site.mjs
-      - run: node scripts/audit-internal-links.mjs
-      - run: node scripts/validate-state-desk.mjs
-      - run: node scripts/validate-house-forecast.mjs
-      - run: python3 -m py_compile scripts/build-house-ervin.py scripts/refresh_generic_ballot.py tests/test_generic_ballot_refresh.py
-      - run: node scripts/validate-house-model.mjs
-      - run: node scripts/validate-statewide-night.mjs
-      - run: |
-          node scripts/validate-forecast-backtests.mjs
-          node scripts/governor-method-selection.mjs
-      - run: node scripts/test-election-night-balance.mjs
-      - run: node scripts/test-early-signal-lab.mjs
-      - run: node scripts/test-435-house-candidates.mjs
-      - run: node scripts/test-live-results-stress.mjs
-      - run: node scripts/test-historical-moe.mjs
-      - run: node scripts/test-michigan-candidate-effect.mjs
-      - name: Verify CivicAPI 488-contest registry and sampled live v2 response contracts
+      - name: Validate news-only publication
         run: |
-          python3 -m unittest discover -s tests -p test_civicapi_national.py -v
-          python3 -m unittest discover -s tests -p test_civicapi_probe.py -v
-          python3 scripts/audit_civicapi_live.py
-      - name: Install browser for visual verification
-        run: |
-          npm install --no-save playwright@1.56.1
-          npx playwright install --with-deps chromium
-      - name: Confirm fixed lazy-atlas verifier against the already published build
-        if: github.event_name == 'pull_request' && github.head_ref == 'fix/live-atlas-verifier-2026-11-02'
-        env:
-          ERVIN_VERIFY_EXPECTED_BUILD: f63eeb26c5b6bfabd62f78b6bb546ac891ea38bc
-        run: node scripts/verify-live-publication.mjs
-      - name: Verify redrawn House pages on already published audit release
-        if: github.event_name == 'pull_request' && github.head_ref == 'fix/audit2-postdeploy-redrawn-house-check'
-        env:
-          ERVIN_VERIFY_EXPECTED_BUILD: d51f77b2f2795d35882ae324db8b9f54064d9361
-        run: node scripts/verify-live-publication.mjs
-      - name: Render county maps and capture screenshots (desktop/mobile, light/dark)
-        run: |
-          node scripts/visual-smoke.mjs
-          node scripts/newsroom-smoke.mjs
-      - name: Verify live Pages waits for loaded Texas publisher averages
-        if: github.event_name == 'pull_request' && github.head_ref == 'fix/house-live-polling-async-check-20261102'
-        run: node scripts/verify-live-publication.mjs
-      - name: Audit currently published site and capture live screenshots
-        if: always()
-        run: node scripts/live-site-audit.mjs || true
-      - name: Preserve visual screenshots and report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: county-visual-verification
-          path: visual-checks/
-          retention-days: 7
-
+          python3 scripts/build-news-public.py
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path('_news_public')
+          for section in ('congress','white-house','states-news','policy-economy','analysis'):
+              p=root/section/'index.html'
+              assert p.is_file(),p
+              assert 'The State Desk' in p.read_text(),p
+          for retired in ('archive','results','elections','election-night','governors','house','states','michigan','stats-for-nerds'):
+              assert not (root/retired).exists(),retired
+          home=(root/'index.html').read_text()
+          assert 'td-global-header' in home
+          print('PASS: News-only publication integrity')
+          PY
