@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-06T01:04:47.125757Z",
+  "generated_at": "2026-11-06T07:52:29.837657Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -15,6 +15,44 @@
   ],
   "priority": [
     {
+      "title": "Judge blocks construction of Trump's massive arch after federal agency approval",
+      "url": "https://www.bbc.co.uk/news/articles/cq99zd93ryvko?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-06T05:31:59Z",
+      "source_count": 2,
+      "other_sources": [
+        {
+          "source": "NPR",
+          "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction"
+        }
+      ],
+      "priority_score": 5,
+      "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
+      "title": "Trump signs order to preserve Oval Office as national monument",
+      "url": "https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-06T04:29:25Z",
+      "source_count": 4,
+      "other_sources": [
+        {
+          "source": "REUTERS VIA GOOGLE NEWS",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYmpHaGcydVUtZWxPRVpuc21LWjdwd3VYcUdnRndlOVlTUlNfeHBYWU5yZEJpekt5RzVVZ29EOVo5UDNuM0lQck1BX3RnMTdhOEt4UGY2bXhpajlTZl9lZmR0U1hxeDEwTVhKQTh0c0liNE9zelpYN2xPZzFyUHd6RmM5bFVrQXhVMDZNMWVrcy1LTnM?oc=5"
+        },
+        {
+          "source": "THE HILL",
+          "url": "https://thehill.com/homenews/administration/6202079-trump-national-monuments-oval-office-cabinet-room/"
+        },
+        {
+          "source": "PBS NEWSHOUR",
+          "url": "https://www.pbs.org/newshour/politics/trump-signs-proclamation-he-says-will-prevent-future-changes-to-oval-office-and-cabinet-room"
+        }
+      ],
+      "priority_score": 5,
+      "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
       "title": "California governor commutes sentences for state's 548 death row inmates",
       "url": "https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&at_campaign=rss",
       "source": "BBC NEWS",
@@ -24,25 +62,6 @@
         {
           "source": "REUTERS VIA GOOGLE NEWS",
           "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxONFpTdTN5c1lMaW81c2hwQkJjQ2E3U1hWWGVTUjlraUJoLVNxdGcybWNVY1FXMm03MXZkeWEwVWpabEcwdW9qRkxBeXhZRGlJRUp2NVl0T1pjWFBNRE9hX21ySTVraGxaTm54OS1TXzB6NXJLY2NkQ3JURnluWWpEM0g0VmRGMm1XczdBR1ZTVjZFRkxzejg3UjJ5eTNCZmxlbXVmczZ6bmZYd3Q0aE82LQ?oc=5"
-        }
-      ],
-      "priority_score": 5,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Trump says Oval Office to become national monument - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYmpHaGcydVUtZWxPRVpuc21LWjdwd3VYcUdnRndlOVlTUlNfeHBYWU5yZEJpekt5RzVVZ29EOVo5UDNuM0lQck1BX3RnMTdhOEt4UGY2bXhpajlTZl9lZmR0U1hxeDEwTVhKQTh0c0liNE9zelpYN2xPZzFyUHd6RmM5bFVrQXhVMDZNMWVrcy1LTnM?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:01:44Z",
-      "source_count": 3,
-      "other_sources": [
-        {
-          "source": "THE HILL",
-          "url": "https://thehill.com/homenews/administration/6202079-trump-national-monuments-oval-office-cabinet-room/"
-        },
-        {
-          "source": "PBS NEWSHOUR",
-          "url": "https://www.pbs.org/newshour/politics/trump-signs-proclamation-he-says-will-prevent-future-changes-to-oval-office-and-cabinet-room"
         }
       ],
       "priority_score": 5,
@@ -85,22 +104,94 @@
   ],
   "headlines": [
     {
+      "title": "Judge temporarily halts building work on Trump’s triumphal arch",
+      "url": "https://www.theguardian.com/us-news/2026/nov/06/judge-temporarily-halts-work-trump-triumphal-arch-washington",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T06:36:20Z"
+    },
+    {
+      "title": "Judge blocks construction of Trump's massive arch after federal agency approval",
+      "url": "https://www.bbc.co.uk/news/articles/cq99zd93ryvko?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-06T05:31:59Z"
+    },
+    {
+      "title": "A judge blocks construction of Trump's arch moments after it won federal approval",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6031990/trump-arch-planning-commission-injunction",
+      "source": "NPR",
+      "published_at": "2026-11-06T05:05:43Z"
+    },
+    {
+      "title": "As the Republican civil war kicks off, Democrats start plotting – podcast",
+      "url": "https://www.theguardian.com/politics/audio/2026/nov/06/us-midterm-elections-politics-weekly-america-panel-podcast",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T05:00:43Z"
+    },
+    {
+      "title": "US midterm election results in graphics and charts - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9mYlFQMWJNR3dHZEQ1QVZ5TEo4QnRWOHYwTE9UMGh2X2x4TV8xTk1VbWNJSWZzdkdjclZFdjBNZmE5UFhhQnU4dGh0eXloOVhCeTBkekRwQUUyTzVZNV96Uml0ZXZDbHB1RHExMkphQUtLRnl3cWNMYmwyYVE?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T05:00:05Z"
+    },
+    {
+      "title": "Australia faces same issues that flipped control of US Congress in midterms, experts say",
+      "url": "https://www.theguardian.com/australia-news/2026/nov/06/us-midterms-warning-for-australia-cost-of-living-fuel-prices",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T04:45:24Z"
+    },
+    {
+      "title": "Trump signs order to preserve Oval Office as national monument",
+      "url": "https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-06T04:29:25Z"
+    },
+    {
+      "title": "Hegseth not in consideration for Tennessee Senate: Report",
+      "url": "https://thehill.com/policy/defense/6203115-hegseth-tennessee-senate-seat-blackburn/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T03:36:55Z"
+    },
+    {
+      "title": "NCPC approves plan to build Trump’s triumphal arch",
+      "url": "https://thehill.com/homenews/administration/6202351-ncpc-approves-trump-arch/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T03:34:58Z"
+    },
+    {
+      "title": "White House denies Hegseth and Rubio to leave jobs after Republican election losses",
+      "url": "https://www.bbc.co.uk/news/articles/cqg7xxg4jdv5o?at_medium=RSS&at_campaign=rss",
+      "source": "BBC NEWS",
+      "published_at": "2026-11-06T02:08:57Z"
+    },
+    {
+      "title": "Democrat Jessica Killin flips longtime GOP-held Colorado House seat",
+      "url": "https://thehill.com/homenews/campaign/6180533-jessica-killin-unseats-jeff-crank-colorado-5th-district/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T01:58:35Z"
+    },
+    {
+      "title": "Rubio places additional sanctions on Cuba, targeting ‘illicit’ shipping network",
+      "url": "https://thehill.com/policy/defense/6202991-rubio-broadens-cuba-sanctions-crude-oil/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T01:53:06Z"
+    },
+    {
+      "title": "Top Democrat vows ‘vigorous’ oversight of Pentagon",
+      "url": "https://thehill.com/newsletters/defense-national-security/6202978-asmith-pentagon-oversight-armed-services-committee/",
+      "source": "THE HILL",
+      "published_at": "2026-11-06T01:48:13Z"
+    },
+    {
+      "title": "Bruce Wolpe on what Trump will do after the ‘profound result’ of the US midterms - podcast",
+      "url": "https://www.theguardian.com/australia-news/audio/2026/nov/06/bruce-wolpe-trump-us-midterms-australian-politics-podcast",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-06T01:30:39Z"
+    },
+    {
       "title": "GOP’s McKinney wins election for Newhouse’s open Washington seat",
       "url": "https://thehill.com/homenews/campaign/6134794-republican-amanda-mckinney-washington-4th-district/",
       "source": "THE HILL",
       "published_at": "2026-11-06T00:31:35Z"
-    },
-    {
-      "title": "Trump signs proclamation to try to prevent changes to gold-covered Oval Office",
-      "url": "https://www.theguardian.com/us-news/2026/nov/05/trump-oval-office-design-proclamation",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T00:29:06Z"
-    },
-    {
-      "title": "US elections 2026 live: Democrats exceed 250 House seats as blue wave sweeping Congress grows",
-      "url": "https://www.theguardian.com/us-news/live/2026/nov/05/midterm-elections-live-latest-updates-mississippi-senate-race",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T00:26:50Z"
     },
     {
       "title": "Failed GOP redistricting in South Carolina, Indiana would have backfired: DDHQ",
@@ -109,16 +200,34 @@
       "published_at": "2026-11-06T00:23:47Z"
     },
     {
+      "title": "Trump takes action to make sure the Oval Office stays oval - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZkRZczJ5WUJPUEFMQ08xY20wb19HRUo5eEF4bFpNaEd3UUtnQmMyRnJBQXFtQ2VmUlVCWkVZWG5sOVRLcHVyaENMdzhtR09RR0V0dzllVGlqVXBLNlpWTFhuWXBsRjdoVnpVamdFOWFGZFpKUmJ3MlVUMTRLclJ2M3lnTVQ4NTB1VHN6aDdXX3ZiTUVSRXI2UmFRMzI?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T00:17:00Z"
+    },
+    {
       "title": "These are the races in the House and Senate that haven't been called yet",
       "url": "https://www.npr.org/2026/11/05/g-s1-152127/house-senate-uncalled-races",
       "source": "NPR",
       "published_at": "2026-11-06T00:03:45Z"
     },
     {
+      "title": "Texas governor-elect says state will have laws to shield citizens from data centers - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPWUdBMU5JdUNaZTZrV1hLcmZ4blU4Y2ZxUjhxUFJkQnE5MzliSXYtcUd1TnVRQ1NYcEZwR2NTS29jTmJVXzFKblhaay12d0FENWs5M0VKampGS3A5VGh6VDAxX29Ld0JSQ0x6blhRVnY0RHJPRHBlZmVfakxpVk5HMmJ3UnJZeUttakxUYVFQQVRlblRxamUzS2hXS2NCZ2dkN0pDOHJza0VTOE9zeHB0MDJpRUw0VEFqVnJfTA?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T00:01:00Z"
+    },
+    {
       "title": "Lula's election win dashes US hopes of quick access to Brazil's rare earths - Reuters",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNbnhUT0ZFTnpsamNBblowSmJHVXhjMEhiRzZCWVRLVk95TXFFcVAxSkxBRXhxZHJaVWdERTdTOTVtcEZTRl9mYi1wSE90Q2hqZGVHSGUzdkxLa3R6SWxHbXlBa3ktdEhGRXhra1lIaG54ZUhFQWQ3TW5XUUdVVnBhcVptaFlVdUY2b3dIMHotRFh0T1pVTGpMTmNyU3R1UUlnakRaQWVPOVpTTUp2ZkxhMk9IMWFYZw?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
       "published_at": "2026-11-05T23:58:33Z"
+    },
+    {
+      "title": "China's yuan dilemma: too weak abroad and too strong at home - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdG8tUkNHdE1DSTdndG40UGVsSEh6cVBmcFZBSmFHNi10VU9ET3JPbU1XRlg3bHI4SnptNGcxV3BGNHdXT2Qycm9Oa1VfRmJNNFFyNGxJN0ZfbHdyNi1zbHRISnBlZWNKUGdqT0V0UVJHRHhFLWRYVTB1alpvSGRCZWZaTzJyaHdicWpyVDdGQmVWVlFqREs2TTNMcVZYVlllb1FCUlVZMDMxQQ?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-05T23:55:53Z"
     },
     {
       "title": "A look at the midterm races that remain undecided",
@@ -137,96 +246,6 @@
       "url": "https://thehill.com/newsletters/energy-environment/6202853-white-house-rooms-national-monuments-trump/",
       "source": "THE HILL",
       "published_at": "2026-11-05T23:46:56Z"
-    },
-    {
-      "title": "After midterms, Trump is left to weigh his next move in Iran war that contributed to GOP loss",
-      "url": "https://www.pbs.org/newshour/politics/after-midterms-trump-is-left-to-weigh-his-next-move-in-iran-war-that-contributed-to-gop-loss",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-05T23:46:36Z"
-    },
-    {
-      "title": "Hegseth in ‘trouble’ as Trump faces music on Iran war, midterms",
-      "url": "https://thehill.com/policy/defense/6202854-hegseth-pentagon-future-uncertain/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T23:41:23Z"
-    },
-    {
-      "title": "How North Carolina Democrats flipped several House seats in historically GOP districts",
-      "url": "https://www.npr.org/2026/11/05/nx-s1-6031719/north-carolina-democrats-flip-house-seats-republican-districts",
-      "source": "NPR",
-      "published_at": "2026-11-05T23:34:36Z"
-    },
-    {
-      "title": "Hegseth allows National Guard to boost DC patrols with military vehicles, boats and patrol cars",
-      "url": "https://www.pbs.org/newshour/politics/hegseth-allows-national-guard-to-boost-dc-patrols-with-military-vehicles-boats-and-patrol-cars",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-05T23:31:50Z"
-    },
-    {
-      "title": "Senate GOP’s campaign arm demands Mississippi election officials preserve affidavit ballots",
-      "url": "https://thehill.com/homenews/campaign/6202795-nrsc-demands-mississippi-ballot-preservation/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T23:25:19Z"
-    },
-    {
-      "title": "Trump says he met Putin envoy, sees Ukraine deal soon - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOWkhXRFdJbFdiTmQySWJyWVRIbHhpdFlXaVRSQmh6UzJvbDJSbWZUdGRwM0VPaFpHbkVpc1VmSlAybEFJUTN0cmNMWkpuX1FJSE8zT3NBYXdXY05lLUhjTldMelM1eGdUWWVnbF9qb0s3VFMySFJ1Qk5GTFJmeXVHM1NLaHNEMzdrZjhXNWpEcVhOQTdSV3V6SVVMQU0xMGtNbUhkblZRdG82aUdvTWxLbHZQUmFpdEh5WUV4ZUgtZU1JcjFjaUxZ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:22:15Z"
-    },
-    {
-      "title": "Markets tank after post-Election Day surge",
-      "url": "https://thehill.com/business/6202769-nasdaq-dow-jones-sp-slide/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T23:22:08Z"
-    },
-    {
-      "title": "Following midterm losses, MAHA is at a crossroads",
-      "url": "https://thehill.com/newsletters/healthcare/6202796-following-midterm-losses-maha-is-at-a-crossroads/",
-      "source": "THE HILL",
-      "published_at": "2026-11-05T23:17:58Z"
-    },
-    {
-      "title": "What happens after the ‘blue wave’? Ask your midterm election results questions",
-      "url": "https://www.theguardian.com/community/live/2026/nov/05/what-happens-after-the-blue-wave-our-reporters-answer-your-midterm-election-results-questions",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-05T23:10:36Z"
-    },
-    {
-      "title": "California governor commutes sentences for state's 548 death row inmates",
-      "url": "https://www.bbc.co.uk/news/articles/cqrkyyd2j8mvo?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-05T23:09:33Z"
-    },
-    {
-      "title": "China's yuan dilemma: too weak abroad and too strong at home - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdG8tUkNHdE1DSTdndG40UGVsSEh6cVBmcFZBSmFHNi10VU9ET3JPbU1XRlg3bHI4SnptNGcxV3BGNHdXT2Qycm9Oa1VfRmJNNFFyNGxJN0ZfbHdyNi1zbHRISnBlZWNKUGdqT0V0UVJHRHhFLWRYVTB1alpvSGRCZWZaTzJyaHdicWpyVDdGQmVWVlFqREs2TTNMcVZYVlllb1FCUlVZMDMxQQ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:08:25Z"
-    },
-    {
-      "title": "Midterms upended Congress but Trump still commands foreign policy - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPaFdhWXVRZDFtNThlVzMtcUs4eU9nTlVZZHJHZzAxbUhKNVBYN3FoR0lSMHJNSzVkQVJQdXlaWTZQZXNwUzEwSkhxRjBwQ1dRZzIyMFV5QkhTaWRmWHVKWEdSQmhyR1NHaUhyMlpnV09GVkxPbmh5MTlUZEphbVE1OENqSXlNTmdEejZPbUlNdmdzRTBiRnVYTHNuWHVQUEo0VXFvODJTaElxQQ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:07:42Z"
-    },
-    {
-      "title": "Trump says Oval Office to become national monument - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYmpHaGcydVUtZWxPRVpuc21LWjdwd3VYcUdnRndlOVlTUlNfeHBYWU5yZEJpekt5RzVVZ29EOVo5UDNuM0lQck1BX3RnMTdhOEt4UGY2bXhpajlTZl9lZmR0U1hxeDEwTVhKQTh0c0liNE9zelpYN2xPZzFyUHd6RmM5bFVrQXhVMDZNMWVrcy1LTnM?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:01:44Z"
-    },
-    {
-      "title": "After taking control of Congress, Democrats vow major probes into Trump's 'tentacles of corruption'",
-      "url": "https://www.pbs.org/newshour/politics/after-taking-control-of-congress-democrats-vow-major-probes-into-trumps-tentacles-of-corruption",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-05T23:00:50Z"
-    },
-    {
-      "title": "US midterm election results in graphics and charts - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9mYlFQMWJNR3dHZEQ1QVZ5TEo4QnRWOHYwTE9UMGh2X2x4TV8xTk1VbWNJSWZzdkdjclZFdjBNZmE5UFhhQnU4dGh0eXloOVhCeTBkekRwQUUyTzVZNV96Uml0ZXZDbHB1RHExMkphQUtLRnl3cWNMYmwyYVE?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-05T23:00:05Z"
     }
   ]
 }
