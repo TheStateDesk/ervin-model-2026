@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-07T01:07:15.291315Z",
+  "generated_at": "2026-11-07T07:42:52.013108Z",
   "sources_checked": 8,
   "sources_reporting": [
     "NPR",
@@ -15,38 +15,42 @@
   ],
   "priority": [
     {
-      "title": "Schumer says Democrats will stop Trump from placing 'right-winger' on the Supreme Court",
-      "url": "https://www.pbs.org/newshour/politics/schumer-says-democrats-will-stop-trump-from-placing-right-winger-on-the-supreme-court",
-      "source": "PBS NEWSHOUR",
-      "published_at": "2026-11-06T19:46:53Z",
-      "source_count": 2,
-      "other_sources": [
-        {
-          "source": "THE HILL",
-          "url": "https://thehill.com/homenews/senate/6203353-chuck-schumer-donald-trump-supreme-court/"
-        }
-      ],
-      "priority_score": 9,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Democrats blast Trump’s decision to appoint Stephen Miller as chief of staff in wake of Republican midterm rout – live",
+      "title": "Democrats blast Trump’s decision to make Stephen Miller his chief of staff as president defends picking loyal ‘MVP’ - as it happened",
       "url": "https://www.theguardian.com/us-news/live/2026/nov/06/us-midterm-elections-2026-democrats-blue-wave-congress-latest-news-updates",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-07T00:30:46Z",
-      "source_count": 6,
+      "published_at": "2026-11-07T03:02:26Z",
+      "source_count": 5,
       "other_sources": [
         {
-          "source": "REUTERS VIA GOOGLE NEWS",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPRW9VOFJHVC05elRKeHJYaUVfalhSNTJYS0dhNkJobGVIaGU1ZVlLaUNlakI2SURhTHNqc2c2ODFYcWpVaE5uUXpoNEI1d1h3MjFxbTlqNHQwVVJmNEFyUl9uRWktTWdRMGs1Z05GUXRxU2FwVC0wV19JSExCbi1DM1pPNHZVUzFZcVB3ak93TWM4MUk?oc=5"
+          "source": "PBS NEWSHOUR",
+          "url": "https://www.pbs.org/newshour/show/what-trump-picking-stephen-miller-for-chief-of-staff-signals-about-his-agenda"
         },
         {
           "source": "BBC NEWS",
           "url": "https://www.bbc.co.uk/news/articles/cm9qzz5x9g5yo?at_medium=RSS&at_campaign=rss"
         },
         {
-          "source": "PBS NEWSHOUR",
-          "url": "https://www.pbs.org/newshour/politics/trump-names-stephen-miller-his-next-chief-of-staff-after-major-republican-midterm-losses"
+          "source": "NPR",
+          "url": "https://www.npr.org/2026/11/06/nx-s1-6032795/stephen-miller-replace-susie-wiles-trumps-chief-of-staff"
+        }
+      ],
+      "priority_score": 5,
+      "note": "Potential major development; verify original reporting before publishing."
+    },
+    {
+      "title": "Stephen Miller, architect of Trump’s immigration crackdown, to become White House chief of staff",
+      "url": "https://www.theguardian.com/us-news/2026/nov/06/stephen-miller-chief-of-staff-trump",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-07T01:38:06Z",
+      "source_count": 3,
+      "other_sources": [
+        {
+          "source": "REUTERS VIA GOOGLE NEWS",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQMFE5R2FTdFE5RWUzVVVZTDZweHB1dUF3WU90dk9jd3c5ZFlsZ0Q4c1ZUSElmSHkwNW40cUk1cjF2UUNaNFdSVDRPUHlfajdOeENzcVdNM1k0ZU9oSXNNRUNndFBtT2N0OE01Q3VGRFBkdlVUZXNTVTRGMWw5RHdVM29vYkZxOVVRMElfelJmTTB0Q3hoSUxDakdRNU0tYUQxZUw1WUZqWmc2NUc1U1BFOGdtUW5nM01QMFJDU2ZqUVZ2QW5J?oc=5"
+        },
+        {
+          "source": "NPR",
+          "url": "https://www.npr.org/2026/11/06/nx-s1-6032810/stephen-miller-replaces-susie-wiles-as-white-house-chief-of-staff"
         }
       ],
       "priority_score": 5,
@@ -68,30 +72,15 @@
       "note": "Potential major development; verify original reporting before publishing."
     },
     {
-      "title": "Stephen Miller replaces Susie Wiles as White House chief of staff",
-      "url": "https://www.npr.org/2026/11/06/nx-s1-6032810/stephen-miller-replaces-susie-wiles-as-white-house-chief-of-staff",
-      "source": "NPR",
-      "published_at": "2026-11-06T22:21:35Z",
+      "title": "Trump makes hardliner Stephen Miller his chief of staff after midterm defeat - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPRW9VOFJHVC05elRKeHJYaUVfalhSNTJYS0dhNkJobGVIaGU1ZVlLaUNlakI2SURhTHNqc2c2ODFYcWpVaE5uUXpoNEI1d1h3MjFxbTlqNHQwVVJmNEFyUl9uRWktTWdRMGs1Z05GUXRxU2FwVC0wV19JSExCbi1DM1pPNHZVUzFZcVB3ak93TWM4MUk?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T23:37:27Z",
       "source_count": 2,
       "other_sources": [
         {
-          "source": "THE GUARDIAN",
-          "url": "https://www.theguardian.com/us-news/2026/nov/06/stephen-miller-chief-of-staff-trump"
-        }
-      ],
-      "priority_score": 5,
-      "note": "Potential major development; verify original reporting before publishing."
-    },
-    {
-      "title": "Trump signs order to make Oval Office a national monument – video",
-      "url": "https://www.theguardian.com/us-news/video/2026/nov/06/trump-signs-order-to-make-gold-decorated-oval-office-a-national-monument-video",
-      "source": "THE GUARDIAN",
-      "published_at": "2026-11-06T10:42:08Z",
-      "source_count": 2,
-      "other_sources": [
-        {
-          "source": "BBC NEWS",
-          "url": "https://www.bbc.co.uk/news/articles/cmy0eeg101djo?at_medium=RSS&at_campaign=rss"
+          "source": "PBS NEWSHOUR",
+          "url": "https://www.pbs.org/newshour/politics/trump-names-stephen-miller-his-next-chief-of-staff-after-major-republican-midterm-losses"
         }
       ],
       "priority_score": 5,
@@ -100,10 +89,52 @@
   ],
   "headlines": [
     {
-      "title": "Democrats blast Trump’s decision to appoint Stephen Miller as chief of staff in wake of Republican midterm rout – live",
+      "title": "Qatar says its mediation efforts between US and Iran continue to prevent escalation - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOWnBiR0l0NVE4d1Rpd2xSTmFvVGtGSTU2SDJmZXRndk9yS2Z0TlhsUW1ZNldhRnZtOGs0UUhJZWt0VFYzNEtrV1FJMW9QU05BMl94azJLZkZNNTNDWm9TbDFualhlV0VBbHJyQzdnZEJOVnd5Z0pMNzJUZkQ1dF82TU83MkNJbkxsRlhkRVVCYWxxbXF0SlhGaGdvcEhYdVFRQm05bVM4b1BHZzlhcEEta21QQzZRZUl6NUtQZ0o4ajVTTzJxV3lEdVhB?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-07T04:29:04Z"
+    },
+    {
+      "title": "Former GOP governor: ‘Wisconsin is a blue state’",
+      "url": "https://thehill.com/homenews/campaign/6205785-tommy-thompson-declares-wisconsin-blue-midterms/",
+      "source": "THE HILL",
+      "published_at": "2026-11-07T03:13:21Z"
+    },
+    {
+      "title": "Democrats blast Trump’s decision to make Stephen Miller his chief of staff as president defends picking loyal ‘MVP’ - as it happened",
       "url": "https://www.theguardian.com/us-news/live/2026/nov/06/us-midterm-elections-2026-democrats-blue-wave-congress-latest-news-updates",
       "source": "THE GUARDIAN",
-      "published_at": "2026-11-07T00:30:46Z"
+      "published_at": "2026-11-07T03:02:26Z"
+    },
+    {
+      "title": "California rejects billionaire tax proposal in win for executives, Newsom",
+      "url": "https://thehill.com/business/6185092-california-voters-reject-wealth-tax/",
+      "source": "THE HILL",
+      "published_at": "2026-11-07T02:12:13Z"
+    },
+    {
+      "title": "Wahab beats fellow Democrat in heated race for Swalwell’s House seat",
+      "url": "https://thehill.com/homenews/campaign/6182641-aisha-wahab-eric-swalwell-california-house-seat-democrat-miderms-2026/",
+      "source": "THE HILL",
+      "published_at": "2026-11-07T01:49:38Z"
+    },
+    {
+      "title": "Ex-RFK Jr adviser bashes White House on MAHA priorities",
+      "url": "https://thehill.com/homenews/administration/6205715-calley-means-susan-wiles-departure-maha/",
+      "source": "THE HILL",
+      "published_at": "2026-11-07T01:47:20Z"
+    },
+    {
+      "title": "Stephen Miller, architect of Trump’s immigration crackdown, to become White House chief of staff",
+      "url": "https://www.theguardian.com/us-news/2026/nov/06/stephen-miller-chief-of-staff-trump",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-07T01:38:06Z"
+    },
+    {
+      "title": "Stephen Miller’s appointment shows Trump hasn’t learned his lesson on immigration",
+      "url": "https://www.theguardian.com/us-news/2026/nov/06/donald-trump-stephen-miller-immigration",
+      "source": "THE GUARDIAN",
+      "published_at": "2026-11-07T01:04:52Z"
     },
     {
       "title": "Prime Video releases trailer for 2-part Melania Trump series",
@@ -178,70 +209,28 @@
       "published_at": "2026-11-06T23:24:15Z"
     },
     {
+      "title": "Two missiles strike Iran's Qeshm Island, Tasnim news agency says - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNSVljNk9VX0xKSElKQjgwMVhnLVpzdmZMTE9YMW5Eb0FpdFpkb0tkczBNZkh1eWFyLU5VanpKU3VGd21EUk52bGc3ZDN4UVd2UFhHM3VReWVUa2kxTVQ3TlJ5UkRFbmdYQzAxTVF0bldhS1BIYjhIOWx4RVU3UnZiMkRORW5nUHJERUQzeTdoSE1kRzlmYVduLVhUbzkzMVFNX1pqb0I2YXZpT1FJRW00alBCWXQydmc?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T23:04:12Z"
+    },
+    {
       "title": "US Treasury sanctions Canadian money services firms over Iran-related transactions - Reuters",
       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQanB1RlNfclNuTUN5SEpJTjFWWUM1UVR2V2xLclNnTjhfNnp0VjNGZE5qeDBiekZXOFpLR2hOTnFud1ZKYlgzaFF6dGpwbkdENXF5VldQSEl0MEE1X0dHbWMyWHFvOU82WC01SjNSamFuSFQtY1M4VHJMN1VEMzlyQnN3UkotaXhiTm4taGdud2w5Wnk0cmtVQlp1MjRvNEJreERfdzZZbmtRQWo5d3NTYnVpOThYRjUwU3BJSGRFSEE?oc=5",
       "source": "REUTERS VIA GOOGLE NEWS",
       "published_at": "2026-11-06T22:46:57Z"
     },
     {
+      "title": "Before his promotion, Stephen Miller designed Trump's immigration crackdown - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQMFE5R2FTdFE5RWUzVVVZTDZweHB1dUF3WU90dk9jd3c5ZFlsZ0Q4c1ZUSElmSHkwNW40cUk1cjF2UUNaNFdSVDRPUHlfajdOeENzcVdNM1k0ZU9oSXNNRUNndFBtT2N0OE01Q3VGRFBkdlVUZXNTVTRGMWw5RHdVM29vYkZxOVVRMElfelJmTTB0Q3hoSUxDakdRNU0tYUQxZUw1WUZqWmc2NUc1U1BFOGdtUW5nM01QMFJDU2ZqUVZ2QW5J?oc=5",
+      "source": "REUTERS VIA GOOGLE NEWS",
+      "published_at": "2026-11-06T22:38:13Z"
+    },
+    {
       "title": "Susie Wiles exits White House as Trump ousts another woman from key role",
       "url": "https://www.theguardian.com/us-news/2026/nov/06/susie-wiles-white-house-resignation",
       "source": "THE GUARDIAN",
       "published_at": "2026-11-06T22:35:09Z"
-    },
-    {
-      "title": "What to know about Gina Hinojosa, Texas' first Latina governor-elect",
-      "url": "https://www.npr.org/2026/11/06/nx-s1-6030822/what-to-know-about-gina-hinojosa-texas-first-latina-governor-elect",
-      "source": "NPR",
-      "published_at": "2026-11-06T22:26:00Z"
-    },
-    {
-      "title": "Razor-tight Mississippi Senate race sparks ballot battle - could there be a recount?",
-      "url": "https://www.bbc.co.uk/news/articles/cwj0llvqqm72o?at_medium=RSS&at_campaign=rss",
-      "source": "BBC NEWS",
-      "published_at": "2026-11-06T22:22:51Z"
-    },
-    {
-      "title": "Cornell faculty senate declares no confidence in university leadership - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNVHdSSjVhSmQwUkViRVA5b0prMDltYWNMekxDV182QV9WRDJvak1JbjBBWXJRcTdNVlVsbHhfTWs5RjJfbGlkMzZldXpNSDBzM3hUTnVNNjBwTFRQWFFmc0paSXFtYnhndEQwMDJqVVE4OGVwaWh0Snl1V2xwMGdmcDdPRFZrWFJac05QdTh2cVZJSTJ0LVI2TGFreXN4NDRGdlhTZXNMMVdHYjJfNWFqeHZn?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T22:22:51Z"
-    },
-    {
-      "title": "Stephen Miller replaces Susie Wiles as White House chief of staff",
-      "url": "https://www.npr.org/2026/11/06/nx-s1-6032810/stephen-miller-replaces-susie-wiles-as-white-house-chief-of-staff",
-      "source": "NPR",
-      "published_at": "2026-11-06T22:21:35Z"
-    },
-    {
-      "title": "In Republican collapse, Colorado military town elects Democrat for the first time - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQZC1MUWlWSWJIdmtzQTBRMmpzQjVKVUxQLU9qY2tkeGNDSXA5NjFxQnIyek44N3FuV1EzWTVnR2MtblZJTm5UM3VqdHhXbTlUdTRqdWNvUTRjZnJDRjV6alVBNHNkWkkyUUg1bW0wYWdmUGMyalFPMU50OGpnZ3ZVNFdxbHVNM25RWUFqaGFtVGlteW5nVjRRMDBYRUFuWEtYZ3BVZG80a3F1NERjSUdSVm9XRzI?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T22:03:17Z"
-    },
-    {
-      "title": "Watch live: Trump to speak from Kennedy Space Center days after GOP midterm losses",
-      "url": "https://thehill.com/video-clips/6204918-watch-live-donald-trump-florida-nasa-space-center-midterms/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T22:00:00Z"
-    },
-    {
-      "title": "Democrats planning flood of AI bills when they take control of Congress - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSW1qclJEWjVTQTNNU0hWWndTVFlOWFpNY1RqQ1I5Z0F2anRxTE5IQnlTTDhjeU9uUGV2anlLaVBfMFdPc0k5eDJVTVk4VTlVbnVZX0VwVnBEMnhHX19fTGRvX2NrQnNJeGN5MzBBaXBLb3d3Y25JdHpjSXFQMENoa01vNk0yLXVLRVBGZjlHLVFuUmI0QWp5aFBBRzRUSDdNMkpCQ1lJVExIei0zVFFiY0x2eVBPcFJ3d2NCeGN6REF0dw?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T21:56:42Z"
-    },
-    {
-      "title": "Democrats blast ‘dangerous’ elevation of Miller as refusal to learn from the election",
-      "url": "https://thehill.com/homenews/house/6205303-democrats-trump-miller-promotion/",
-      "source": "THE HILL",
-      "published_at": "2026-11-06T21:49:54Z"
-    },
-    {
-      "title": "Can the US Democrats' 'Blue Wave' election sweep buoy Ukraine? - Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNSUlCRnhXUUxLU0EwelVOdThCN1pOUlJwQ1hZdk0yNldENVU2dlZsb2JPTVZ3WWgyRURjUWtZWmUyYjNNY2E3WXhtNzEtRHJhdVE4MTJRdmE1dXoxOXo3MkZMX1FEQTl3eEt3RmpzaVdJaXdJaFBTRl9sWUhPeU82YnhtSnM4eER1MlNLbDh5NklvYWZWWFFaSVBfdG4zMEE1b0FnOWxIcXdoZDQ?oc=5",
-      "source": "REUTERS VIA GOOGLE NEWS",
-      "published_at": "2026-11-06T21:44:34Z"
     }
   ]
 }
