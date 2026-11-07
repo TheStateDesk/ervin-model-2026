@@ -63,11 +63,8 @@ for p in OUT.rglob('*.html'):
  if p.parent.parent.name=='analysis' and p.name=='index.html':
   if 'td-article-standards.css' not in h: h=h.replace('</head>','<link rel="stylesheet" href="../../scripts/td-article-standards.css"></head>')
   if 'newsroom-dropcap.js' not in h: h=h.replace('</body>','<script defer src="../../scripts/newsroom-dropcap.js"></script></body>')
- # Keep one disclosure at the bottom of each published article.
- if depth==2 and p.relative_to(OUT).parts[0]=='analysis':
-  h=re.sub(r'<p\b[^>]*>(?:(?!</p>).)*(?:AI-assistance disclosure|AI assistance|AI-assisted)(?:(?!</p>).)*</p>','',h,flags=re.I|re.S)
-  disclosure='<p class="td-footer-note" data-ai-disclosure="true">This article was prepared with AI assistance using attributed reporting and public records.</p>'
-  h=h.replace('</main>',disclosure+'</main>',1)
+ # Remove AI notices from public page copy as requested by the publisher.
+ h=re.sub(r'<p\b[^>]*>(?:(?!</p>).)*(?:AI-assistance disclosure|AI assistance|AI-assisted)(?:(?!</p>).)*</p>','',h,flags=re.I|re.S)
  p.write_text(h,encoding='utf-8')
 # Filter complete XML records. A cross-record regex could erase valid entries
 # before a retired URL and could not remove RSS items at all.
