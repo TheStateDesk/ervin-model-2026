@@ -1,6 +1,6 @@
 {
   "attemptedRaces": 505,
-  "checkedAt": "2026-11-07T00:16:47.045965Z",
+  "checkedAt": "2026-11-07T00:57:29.663280Z",
   "discovery": {
     "found": 505,
     "lookups": 1,
@@ -35,6 +35,7 @@
     "MA-05": "no_valid_reported_votes",
     "MA-07": "no_valid_reported_votes",
     "MN-01": "vote_total_decreased_held",
+    "MN-02": "vote_total_decreased_held",
     "MN-03": "vote_total_decreased_held",
     "MN-04": "vote_total_decreased_held",
     "MN-05": "vote_total_decreased_held",
@@ -159,8 +160,8 @@
       "identityMatches": true,
       "payloadType": "dict",
       "positiveCandidateTotals": true,
-      "providerTimestamp": "2026-11-07T00:08:42.313Z",
-      "responseMs": 87
+      "providerTimestamp": "2026-11-07T00:54:20.262Z",
+      "responseMs": 73
     },
     "MI-SENATE": {
       "candidateRows": 12,
@@ -191,8 +192,8 @@
       "identityMatches": true,
       "payloadType": "dict",
       "positiveCandidateTotals": true,
-      "providerTimestamp": "2026-11-06T23:54:20.466Z",
-      "responseMs": 109
+      "providerTimestamp": "2026-11-07T00:49:58.106Z",
+      "responseMs": 118
     },
     "networkReachable": true,
     "statusEndpoint": {
@@ -201,7 +202,7 @@
         "status"
       ],
       "payloadType": "dict",
-      "responseMs": 94
+      "responseMs": 83
     }
   },
   "publishedRaces": 499,
@@ -340,11 +341,11 @@
       "validatedVoteTotal": 342994
     },
     "AZ-02": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:34.350000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:47:05.705000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 321103
+      "validatedVoteTotal": 322194
     },
     "AZ-03": {
       "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
@@ -375,11 +376,11 @@
       "validatedVoteTotal": 341359
     },
     "AZ-07": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:37.693000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:47:08.202000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 185367
+      "validatedVoteTotal": 186953
     },
     "AZ-08": {
       "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
@@ -389,18 +390,18 @@
       "validatedVoteTotal": 282358
     },
     "AZ-09": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:18:42.087000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:47:08.475000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 273062
+      "validatedVoteTotal": 278050
     },
     "AZ-GOVERNOR": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:46.071000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:47:10.356000Z",
       "office": "governor",
       "status": "reporting",
-      "validatedVoteTotal": 2461706
+      "validatedVoteTotal": 2469397
     },
     "CA-01": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -410,53 +411,53 @@
       "validatedVoteTotal": 175062
     },
     "CA-02": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:51.905000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:18.142000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 179006
+      "validatedVoteTotal": 182334
     },
     "CA-03": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:53.114000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:19.447000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 181566
+      "validatedVoteTotal": 207168
     },
     "CA-04": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:54.949000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:21.456000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 125973
+      "validatedVoteTotal": 133269
     },
     "CA-05": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:55.509000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:21.928000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 206677
+      "validatedVoteTotal": 206736
     },
     "CA-06": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:55.600000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:22.055000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 156294
+      "validatedVoteTotal": 180929
     },
     "CA-07": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:11.757000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:22.147000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 141913
+      "validatedVoteTotal": 173290
     },
     "CA-08": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:55.849000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:22.230000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 212165
+      "validatedVoteTotal": 212287
     },
     "CA-09": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -473,11 +474,11 @@
       "validatedVoteTotal": 251691
     },
     "CA-11": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:08.195000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:15.465000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 218935
+      "validatedVoteTotal": 263725
     },
     "CA-12": {
       "lastSuccessfulRetrievalAt": "2026-11-04T15:56:04.997819Z",
@@ -501,18 +502,18 @@
       "validatedVoteTotal": 121367
     },
     "CA-15": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:09.060000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:15.843000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 150009
+      "validatedVoteTotal": 162789
     },
     "CA-16": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:09.152000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.059000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 167650
+      "validatedVoteTotal": 170663
     },
     "CA-17": {
       "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
@@ -522,53 +523,53 @@
       "validatedVoteTotal": 120022
     },
     "CA-18": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:09.325000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.212000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 115054
+      "validatedVoteTotal": 116146
     },
     "CA-19": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:09.425000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.343000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 205663
+      "validatedVoteTotal": 212210
     },
     "CA-20": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:09.709000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.558000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 164876
+      "validatedVoteTotal": 168648
     },
     "CA-21": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:09.806000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.633000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 98835
+      "validatedVoteTotal": 99931
     },
     "CA-22": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:09.912000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.702000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 92363
+      "validatedVoteTotal": 93372
     },
     "CA-23": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:00.540000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.775000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 152339
+      "validatedVoteTotal": 152666
     },
     "CA-24": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:48:10.119000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:16.892000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 180805
+      "validatedVoteTotal": 185712
     },
     "CA-25": {
       "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
@@ -578,53 +579,53 @@
       "validatedVoteTotal": 128869
     },
     "CA-26": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:01.706000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:17.414000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 196496
+      "validatedVoteTotal": 198742
     },
     "CA-27": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:02.146000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:17.529000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 194805
+      "validatedVoteTotal": 207621
     },
     "CA-28": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:03.017000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:17.646000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 211279
+      "validatedVoteTotal": 219592
     },
     "CA-29": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:03.346000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:17.760000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 140880
+      "validatedVoteTotal": 149409
     },
     "CA-30": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:03.838000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:18.257000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 215630
+      "validatedVoteTotal": 227766
     },
     "CA-31": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:04.193000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:18.375000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 191629
+      "validatedVoteTotal": 201579
     },
     "CA-32": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:04.319000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:18.478000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 221478
+      "validatedVoteTotal": 229589
     },
     "CA-33": {
       "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
@@ -634,39 +635,39 @@
       "validatedVoteTotal": 136428
     },
     "CA-34": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:04.577000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:18.693000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 140894
+      "validatedVoteTotal": 149033
     },
     "CA-35": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:05.106000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:18.835000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 128631
+      "validatedVoteTotal": 129791
     },
     "CA-36": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:06.586000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:18.955000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 253820
+      "validatedVoteTotal": 265475
     },
     "CA-37": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:07.010000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:19.097000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 149081
+      "validatedVoteTotal": 158766
     },
     "CA-38": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:07.203000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:19.256000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 177034
+      "validatedVoteTotal": 184663
     },
     "CA-39": {
       "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
@@ -683,39 +684,39 @@
       "validatedVoteTotal": 150334
     },
     "CA-41": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:09.006000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:19.602000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 207274
+      "validatedVoteTotal": 216073
     },
     "CA-42": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:09.100000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:19.724000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 219045
+      "validatedVoteTotal": 224363
     },
     "CA-43": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:09.209000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:19.831000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 152851
+      "validatedVoteTotal": 160799
     },
     "CA-44": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:09.331000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:20.328000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 147437
+      "validatedVoteTotal": 155389
     },
     "CA-45": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:24:09.460000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:20.453000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 195952
+      "validatedVoteTotal": 197397
     },
     "CA-46": {
       "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
@@ -767,11 +768,11 @@
       "validatedVoteTotal": 139544
     },
     "CA-GOVERNOR": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:51:40.624000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:53:12.714000Z",
       "office": "governor",
       "status": "reporting",
-      "validatedVoteTotal": 9020887
+      "validatedVoteTotal": 9338540
     },
     "CO-01": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -1524,18 +1525,18 @@
       "validatedVoteTotal": 224790
     },
     "KS-01": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:52:51.417000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:54:50.263000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 253170
+      "validatedVoteTotal": 253318
     },
     "KS-02": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:52:51.797000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:54:50.535000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 245702
+      "validatedVoteTotal": 245721
     },
     "KS-03": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -1545,25 +1546,25 @@
       "validatedVoteTotal": 337509
     },
     "KS-04": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:52:52.447000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:54:50.718000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 259490
+      "validatedVoteTotal": 259910
     },
     "KS-GOVERNOR": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:52:52.916000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:54:51.158000Z",
       "office": "governor",
       "status": "reporting",
-      "validatedVoteTotal": 1094271
+      "validatedVoteTotal": 1094842
     },
     "KS-SENATE": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:52:52.676000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:54:50.938000Z",
       "office": "senate",
       "status": "reporting",
-      "validatedVoteTotal": 1099312
+      "validatedVoteTotal": 1099896
     },
     "KY-01": {
       "lastSuccessfulRetrievalAt": "2026-11-04T05:31:25.430470Z",
@@ -1743,11 +1744,11 @@
       "validatedVoteTotal": 297542
     },
     "MD-02": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:53:38.523000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:55:22.561000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 246255
+      "validatedVoteTotal": 246797
     },
     "MD-03": {
       "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
@@ -1778,11 +1779,11 @@
       "validatedVoteTotal": 251266
     },
     "MD-07": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:53:40.389000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:55:27.224000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 178068
+      "validatedVoteTotal": 183002
     },
     "MD-08": {
       "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
@@ -1792,11 +1793,11 @@
       "validatedVoteTotal": 250306
     },
     "MD-GOVERNOR": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:53:40.773000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:55:28.484000Z",
       "office": "governor",
       "status": "reporting",
-      "validatedVoteTotal": 1982953
+      "validatedVoteTotal": 1988439
     },
     "ME-01": {
       "lastSuccessfulRetrievalAt": "2026-11-05T21:12:12.333250Z",
@@ -1940,6 +1941,7 @@
       "validatedVoteTotal": 326187
     },
     "MN-02": {
+      "collectionIssue": "vote_total_decreased_held",
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
       "lastValidatedResultAt": "2026-11-06T23:54:01.531000Z",
       "office": "house",
@@ -2424,11 +2426,11 @@
       "validatedVoteTotal": 725190
     },
     "NV-01": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:30:06.324000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:50:55.231000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 237303
+      "validatedVoteTotal": 237918
     },
     "NV-02": {
       "collectionIssue": "vote_total_decreased_held",
@@ -2439,25 +2441,25 @@
       "validatedVoteTotal": 342621
     },
     "NV-03": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:30:06.922000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:50:56.108000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 270373
+      "validatedVoteTotal": 270842
     },
     "NV-04": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:30:07.018000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:50:56.419000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 248882
+      "validatedVoteTotal": 249215
     },
     "NV-GOVERNOR": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:30:07.485000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:50:57.005000Z",
       "office": "governor",
       "status": "reporting",
-      "validatedVoteTotal": 1077526
+      "validatedVoteTotal": 1078958
     },
     "NY-01": {
       "collectionIssue": "vote_total_decreased_held",
@@ -2858,46 +2860,46 @@
       "validatedVoteTotal": 303369
     },
     "OR-03": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:13:27.376000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:49:50.249000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 300552
+      "validatedVoteTotal": 301022
     },
     "OR-04": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:13:27.572000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:49:50.670000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 334375
+      "validatedVoteTotal": 334424
     },
     "OR-05": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:13:27.669000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:49:51.560000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 343150
+      "validatedVoteTotal": 345849
     },
     "OR-06": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:13:27.798000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:49:52.462000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 251176
+      "validatedVoteTotal": 251271
     },
     "OR-GOVERNOR": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:13:28.942000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:49:53.610000Z",
       "office": "governor",
       "status": "reporting",
-      "validatedVoteTotal": 1864689
+      "validatedVoteTotal": 1868108
     },
     "OR-SENATE": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:13:28.023000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:49:53.242000Z",
       "office": "senate",
       "status": "reporting",
-      "validatedVoteTotal": 1851786
+      "validatedVoteTotal": 1855153
     },
     "PA-01": {
       "lastSuccessfulRetrievalAt": "2026-11-05T21:12:12.333250Z",
@@ -2977,11 +2979,11 @@
       "validatedVoteTotal": 301355
     },
     "PA-12": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:23:36.927000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:57:09.396000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 296677
+      "validatedVoteTotal": 296776
     },
     "PA-13": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -2991,11 +2993,11 @@
       "validatedVoteTotal": 281262
     },
     "PA-14": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:23:37.094000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:57:09.971000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 276276
+      "validatedVoteTotal": 276520
     },
     "PA-15": {
       "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
@@ -3019,11 +3021,11 @@
       "validatedVoteTotal": 330630
     },
     "PA-GOVERNOR": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:55:36.958000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:57:10.339000Z",
       "office": "governor",
       "status": "reporting",
-      "validatedVoteTotal": 4985019
+      "validatedVoteTotal": 4985374
     },
     "RI-01": {
       "lastSuccessfulRetrievalAt": "2026-11-06T20:55:45.174598Z",
@@ -3505,18 +3507,18 @@
       "validatedVoteTotal": 194396
     },
     "UT-02": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:56:14.254000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:55:15.549000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 253138
+      "validatedVoteTotal": 253386
     },
     "UT-03": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:56:14.441000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:55:16.784000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 220286
+      "validatedVoteTotal": 222467
     },
     "UT-04": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -3584,11 +3586,11 @@
       "validatedVoteTotal": 314461
     },
     "VA-09": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:56:17.833000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:56:58.106000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 294484
+      "validatedVoteTotal": 294543
     },
     "VA-10": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -3605,11 +3607,11 @@
       "validatedVoteTotal": 333741
     },
     "VA-SENATE": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-06T23:56:18.865000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:56:58.805000Z",
       "office": "senate",
       "status": "reporting",
-      "validatedVoteTotal": 3578938
+      "validatedVoteTotal": 3579061
     },
     "VT-01": {
       "office": "house",
@@ -3623,32 +3625,32 @@
       "validatedVoteTotal": 309055
     },
     "WA-01": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:14:47.836000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:51:14.180000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 250997
+      "validatedVoteTotal": 267799
     },
     "WA-02": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T06:54:44.901475Z",
-      "lastValidatedResultAt": "2026-11-06T06:41:14.769000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:51:14.725000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 305969
+      "validatedVoteTotal": 322464
     },
     "WA-03": {
-      "lastSuccessfulRetrievalAt": "2026-11-06T20:32:11.837016Z",
-      "lastValidatedResultAt": "2026-11-06T20:22:22.151000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:51:15.435000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 329769
+      "validatedVoteTotal": 344468
     },
     "WA-04": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:14:48.143000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:51:15.561000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 193478
+      "validatedVoteTotal": 211727
     },
     "WA-05": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -3672,11 +3674,11 @@
       "validatedVoteTotal": 315779
     },
     "WA-08": {
-      "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
-      "lastValidatedResultAt": "2026-11-07T00:14:48.580000Z",
+      "lastSuccessfulRetrievalAt": "2026-11-07T00:57:29.663280Z",
+      "lastValidatedResultAt": "2026-11-07T00:51:16.092000Z",
       "office": "house",
       "status": "reporting",
-      "validatedVoteTotal": 306196
+      "validatedVoteTotal": 308139
     },
     "WA-09": {
       "lastSuccessfulRetrievalAt": "2026-11-07T00:16:47.045965Z",
@@ -3803,6 +3805,6 @@
   "registeredRaces": 505,
   "targetRaces": 506,
   "transientApiErrors": 0,
-  "updatedRaces": 117,
+  "updatedRaces": 69,
   "version": 2
 }
