@@ -962,28 +962,28 @@
       "verified": true
     },
     "CA-04": {
-      "asOf": "2026-11-07T07:13:01.978000Z",
+      "asOf": "2026-11-07T08:57:02.434000Z",
       "candidates": [
         {
           "name": "Eric Jones",
           "party": "D",
-          "votes": 71227
+          "votes": 72473
         },
         {
           "name": "Mike Thompson",
           "party": "D",
-          "votes": 67426
+          "votes": 68108
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 53.9,
+      "precinctsReporting": 54.6,
       "raceId": "87001",
-      "retrievedAt": "2026-11-07T07:15:00.094484Z",
+      "retrievedAt": "2026-11-07T09:11:32.369508Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87001",
       "timestampBasis": "provider_last_updated",
-      "total": 138653,
+      "total": 140581,
       "verified": true
     },
     "CA-05": {
@@ -2187,28 +2187,28 @@
       "verified": true
     },
     "CA-GOVERNOR": {
-      "asOf": "2026-11-07T07:12:45.192000Z",
+      "asOf": "2026-11-07T08:56:54.159000Z",
       "candidates": [
         {
           "name": "Xavier Becerra",
           "party": "D",
-          "votes": 6482136
+          "votes": 6483228
         },
         {
           "name": "Steve Hilton",
           "party": "R",
-          "votes": 3449711
+          "votes": 3451000
         }
       ],
       "election": "2026-11-03",
       "office": "governor",
       "precinctsReporting": 73.6,
       "raceId": "86952",
-      "retrievedAt": "2026-11-07T07:15:00.094484Z",
+      "retrievedAt": "2026-11-07T09:11:32.369508Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/86952",
       "timestampBasis": "provider_last_updated",
-      "total": 9931847,
+      "total": 9934228,
       "verified": true
     },
     "CO-01": {
@@ -14572,48 +14572,48 @@
       "verified": true
     },
     "UT-03": {
-      "asOf": "2026-11-07T07:00:31.275000Z",
+      "asOf": "2026-11-07T08:49:00.060000Z",
       "candidates": [
         {
           "name": "Celeste Maloy",
           "party": "R",
-          "votes": 141914
+          "votes": 143151
         },
         {
           "name": "Kent Udell",
           "party": "D",
-          "votes": 86263
+          "votes": 87765
         },
         {
           "name": "Cassie Easley",
           "party": "O",
-          "votes": 7741
+          "votes": 7832
         },
         {
           "name": "Michael R. Stoddard",
           "party": "O",
-          "votes": 5526
+          "votes": 5577
         },
         {
           "name": "Ayden Scott",
           "party": "O",
-          "votes": 4069
+          "votes": 4096
         },
         {
           "name": "Adonis Hooslyn",
           "party": "O",
-          "votes": 1707
+          "votes": 1717
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 94.9,
+      "precinctsReporting": 96.1,
       "raceId": "87459",
-      "retrievedAt": "2026-11-07T07:15:00.094484Z",
+      "retrievedAt": "2026-11-07T09:11:32.369508Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87459",
       "timestampBasis": "provider_last_updated",
-      "total": 247220,
+      "total": 250138,
       "verified": true
     },
     "UT-04": {
