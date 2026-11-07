@@ -1,0 +1,40 @@
+{
+  "status": "EDITORIAL DRAFT — NOT PUBLISHED",
+  "prepared_at": "2026-11-06T20:04:36-05:00",
+  "article_url": "https://thestatedesk.github.io/analysis/arizona-democratic-trifecta-2026/",
+  "sources": [
+    {
+      "publisher_and_timestamp": "Associated Press — Nov. 6, 2026 (time not independently established)",
+      "url": "https://apnews.com/article/7b702479591f51c8b8a1d67597c6e05e"
+    },
+    {
+      "publisher_and_timestamp": "PBS NewsHour/AP — Nov. 6, 2026, 4:16 p.m. EST (watcher timestamp; not original publish time)",
+      "url": "https://www.pbs.org/newshour/politics/democrats-win-the-arizona-house-senate-and-governors-office-for-the-first-time-since-1966"
+    },
+    {
+      "publisher_and_timestamp": "Arizona Secretary of State — official election information (live figures not independently checked)",
+      "url": "https://azsos.gov/elections"
+    }
+  ],
+  "claims": [
+    {
+      "claim": "First Democratic trifecta since 1966; both chambers called",
+      "original_publisher": "AP election calls",
+      "source_url": "https://apnews.com/article/7b702479591f51c8b8a1d67597c6e05e"
+    },
+    {
+      "claim": "Hobbs policy priorities and broader state control",
+      "original_publisher": "AP",
+      "source_url": "https://apnews.com/article/7b702479591f51c8b8a1d67597c6e05e"
+    },
+    {
+      "claim": "Certification caveat",
+      "original_publisher": "Arizona Secretary of State (process reference only)",
+      "source_url": "https://azsos.gov/elections"
+    }
+  ],
+  "images": [],
+  "original_interviews": false,
+  "ai_assisted": true,
+  "validation_notes": "Source URLs identified by web search; not all fetched successfully. Exact timestamps absent where not independently established. Official election certification not independently verified."
+}

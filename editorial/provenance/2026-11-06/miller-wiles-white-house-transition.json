@@ -1,0 +1,44 @@
+{
+  "status": "EDITORIAL DRAFT — NOT PUBLISHED",
+  "prepared_at": "2026-11-06T20:04:36-05:00",
+  "article_url": "https://thestatedesk.github.io/analysis/miller-wiles-white-house-transition/",
+  "sources": [
+    {
+      "publisher_and_timestamp": "CBS News — Nov. 6, 2026, 2:00 p.m. EST",
+      "url": "https://www.cbsnews.com/news/stephen-miller-trump-chief-of-staff-susie-wiles/"
+    },
+    {
+      "publisher_and_timestamp": "Reuters — Nov. 6, 2026 (time not independently established)",
+      "url": "https://www.reuters.com/world/us/trump-says-stephen-miller-become-chief-staff-2026-11-06/"
+    },
+    {
+      "publisher_and_timestamp": "Associated Press — Nov. 6, 2026 (time not independently established)",
+      "url": "https://apnews.com/article/95690fe076f6bb8cfe2bf77435a1910d"
+    },
+    {
+      "publisher_and_timestamp": "NPR — updated Nov. 6, 2026, 3:24 p.m. EST",
+      "url": "https://www.npr.org/2026/11/06/nx-s1-6032795/stephen-miller-replace-susie-wiles-trumps-chief-of-staff"
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Miller to start November 9; Wiles to political operation",
+      "original_publisher": "CBS News",
+      "source_url": "https://www.cbsnews.com/news/stephen-miller-trump-chief-of-staff-susie-wiles/"
+    },
+    {
+      "claim": "Both chambers flipped; Miller's current role",
+      "original_publisher": "Reuters and AP",
+      "source_url": "https://www.reuters.com/world/us/trump-says-stephen-miller-become-chief-staff-2026-11-06/"
+    },
+    {
+      "claim": "NPR update time",
+      "original_publisher": "NPR syndication at KNPR",
+      "source_url": "https://www.npr.org/2026/11/06/nx-s1-6032795/stephen-miller-replace-susie-wiles-trumps-chief-of-staff"
+    }
+  ],
+  "images": [],
+  "original_interviews": false,
+  "ai_assisted": true,
+  "validation_notes": "Source URLs identified by web search; not all fetched successfully. Exact timestamps absent where not independently established. Official election certification not independently verified."
+}
