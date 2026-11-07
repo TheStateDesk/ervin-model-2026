@@ -14982,38 +14982,38 @@
       "verified": true
     },
     "VA-10": {
-      "asOf": "2026-11-07T07:03:27.415000Z",
+      "asOf": "2026-11-07T14:07:34.405000Z",
       "candidates": [
         {
           "name": "Suhas Subramanyam",
           "party": "D",
-          "votes": 202609
+          "votes": 204213
         },
         {
           "name": "Dave Beckwith",
           "party": "R",
-          "votes": 120712
+          "votes": 121110
         },
         {
           "name": "Ahsen Mujeeb Malik",
           "party": "O",
-          "votes": 5926
+          "votes": 5997
         },
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 638
+          "votes": 645
         }
       ],
       "election": "2026-11-03",
       "office": "house",
-      "precinctsReporting": 97.9,
+      "precinctsReporting": 98.5,
       "raceId": "87470",
-      "retrievedAt": "2026-11-07T07:15:00.094484Z",
+      "retrievedAt": "2026-11-07T14:09:37.593529Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87470",
       "timestampBasis": "provider_last_updated",
-      "total": 329885,
+      "total": 331965,
       "verified": true
     },
     "VA-11": {
@@ -15052,33 +15052,33 @@
       "verified": true
     },
     "VA-SENATE": {
-      "asOf": "2026-11-07T07:03:27.732000Z",
+      "asOf": "2026-11-07T14:07:36.176000Z",
       "candidates": [
         {
           "name": "Mark Warner",
           "party": "D",
-          "votes": 2198062
+          "votes": 2199745
         },
         {
           "name": "Bert Mizusawa",
           "party": "R",
-          "votes": 1380078
+          "votes": 1380462
         },
         {
           "name": "Write-in",
           "party": "O",
-          "votes": 9518
+          "votes": 9530
         }
       ],
       "election": "2026-11-03",
       "office": "senate",
-      "precinctsReporting": 96.7,
+      "precinctsReporting": 96.8,
       "raceId": "87472",
-      "retrievedAt": "2026-11-07T07:15:00.094484Z",
+      "retrievedAt": "2026-11-07T14:09:37.593529Z",
       "source": "civicAPI",
       "sourceUrl": "https://civicapi.org/api/v2/race/87472",
       "timestampBasis": "provider_last_updated",
-      "total": 3587658,
+      "total": 3589737,
       "verified": true
     },
     "VT-GOVERNOR": {
