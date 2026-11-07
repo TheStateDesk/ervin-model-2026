@@ -2,7 +2,7 @@
 body.td-news:not(.story-body) main.td-layout article,body.td-news:not(.story-body) main.td-layout>.td-article,body.td-news:not(.story-body) main.story-shell article{max-width:790px;margin:0 auto}
 body.td-news:not(.story-body) .td-article h1,body.td-news:not(.story-body) main.td-layout article h1{font:700 clamp(2.3rem,5.7vw,4rem)/1.08 Georgia,serif;letter-spacing:-.025em;color:#1d2630;margin:18px 0 22px}
 body.td-news:not(.story-body) .td-article p,body.td-news:not(.story-body) main.td-layout article p{font:clamp(1.07rem,2.2vw,1.24rem)/1.72 Georgia,serif;color:#26313b}
-body.td-news:not(.story-body) .td-article>p:first-child,body.td-news:not(.story-body) main.td-layout article>p:first-child{font:700 .85rem/1.4 Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#a06c45}
+body.td-news:not(.story-body) .td-article>p.label,body.td-news:not(.story-body) main.td-layout article>p.label{font:700 .85rem/1.4 Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#a06c45}
 body.td-news:not(.story-body) .td-article figure,body.td-news:not(.story-body) main.td-layout article figure{margin:30px 0 34px}
 body.td-news:not(.story-body) .td-article figure img,body.td-news:not(.story-body) main.td-layout article figure img{display:block;width:100%;height:auto;max-height:550px;object-fit:cover;border-radius:3px}
 body.td-news:not(.story-body) .td-article figcaption,body.td-news:not(.story-body) main.td-layout article figcaption{font:13px/1.5 Arial,sans-serif;color:#65727e;margin-top:9px}

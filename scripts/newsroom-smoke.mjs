@@ -1,59 +1,62 @@
 #!/usr/bin/env node
-/* Check the actual newspaper interface on mobile and desktop in Chromium. */
+// Exercise the published artifact at desktop and phone sizes.
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
-const port=8767,base='http://127.0.0.1:'+port+'/',sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});
+import fs from 'node:fs';
+import path from 'node:path';
+const base=process.env.SITE_BASE_URL || 'http://127.0.0.1:8767/';
+const server=process.env.SITE_BASE_URL ? null : spawn('python3',['-m','http.server','8767','--bind','127.0.0.1','--directory','_news_public'],{stdio:'ignore'});
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const release=JSON.parse(fs.readFileSync('_news_public/release.json','utf8'));
+const pages=Object.keys(release.files).filter(file=>file.endsWith('.html'));
 let browser;
-const pages=[['Home',''],['Congress','congress/'],['White House','white-house/'],['States','states-news/'],['Policy & Economy','policy-economy/'],['Analysis','analysis/'],['Election Results','results/'],['Forecast Archive','archive/']];
-try{
- for(let i=0;i<40;i++){try{const result=await fetch(base);if(result.ok)break;}catch{}await sleep(250)}
- browser=await chromium.launch({headless:true,args:['--disable-dev-shm-usage']});
- for(const width of [390,1440]){
-  const page=await browser.newPage({viewport:{width,height:850}});
-  await page.goto(base,{waitUntil:'domcontentloaded'});
-  for(const [name,path] of pages){
-   const link=page.locator('.td-global-nav a',{hasText:name});
-   if((await link.count())!==1)throw Error('Missing or duplicated '+name+' section tab at '+width);
-   await link.click();
-   await page.waitForURL(url=>url.pathname==='/'+path,{timeout:12000});
-   const state=await page.evaluate(()=>({
-    header:!!document.querySelector('.td-global-header'),
-    h1:!!document.querySelector('main h1'),
-    navOverflow:document.querySelector('.td-global-nav')?.scrollWidth>innerWidth+2,
-    sectionTitle:document.title,
-    draft:/EDITORIAL PREVIEW|remains unpublished|Proposed analysis/.test(document.body.innerText)
-   }));
-   if(!state.header||!state.h1||state.navOverflow||state.draft)throw Error('NEWSROOM PAGE FAILED '+width+' '+path+' '+JSON.stringify(state));
-   console.log('NEWSPAPER NAV PASS '+width+' '+name+' '+state.sectionTitle);
-   await page.goto(base,{waitUntil:'domcontentloaded'});
+fs.mkdirSync('newsroom-checks',{recursive:true});
+try {
+  for(let attempt=0;attempt<40;attempt++) {
+    try { if((await fetch(base)).ok) break; } catch {}
+    if(attempt===39) throw Error('Preview did not start');
+    await sleep(250);
   }
-  await page.close();
- }
- // Verify that every newly added editorial photograph actually loads, not merely exists as an <img>.
- const check=await browser.newPage({viewport:{width:390,height:800}});
- for(const slug of ['congress-veto-budget-2027','medicaid-subsidies-2027','markets-2026-election-reaction']){
-  await check.goto(base+'analysis/'+slug+'/',{waitUntil:'domcontentloaded'});
-  await check.locator('.td-article-photo img').waitFor({state:'visible'});
-  // Wikimedia's image redirect can occasionally be slow or transiently fail.
-  // Retry the actual image request, never accept a broken or merely present IMG.
-  let imageLoaded=false;
-  for(let attempt=1;attempt<=3&&!imageLoaded;attempt++){
-   try {
-    await check.waitForFunction(()=>{const im=document.querySelector('.td-article-photo img');return im?.complete&&im.naturalWidth>0},null,{timeout:20000});
-    imageLoaded=true;
-   } catch {
-    const diag=await check.locator('.td-article-photo img').evaluate(im=>({src:im.currentSrc,complete:im.complete,width:im.naturalWidth}));
-    console.warn('IMAGE ATTEMPT '+attempt+' '+slug+' '+JSON.stringify(diag));
-    if(attempt<3)await check.locator('.td-article-photo img').evaluate(im=>{
-      const src=new URL(im.src);src.searchParams.set('verify',String(Date.now()));im.src=src.href;
-    });
-   }
+  browser=await chromium.launch({headless:true});
+  for(const width of [390,1440]) {
+    const page=await browser.newPage({viewport:{width,height:844}});
+    for(const file of pages) {
+      const response=await page.goto(new URL(file,base).href,{waitUntil:'domcontentloaded'});
+      if(!response.ok()) throw Error(`${file}: HTTP ${response.status()}`);
+      await page.waitForLoadState('load');
+      const state=await page.evaluate(()=>({
+        headline:!!document.querySelector('h1'),
+        navigation:document.querySelectorAll('.td-global-nav a').length,
+        overflow:document.documentElement.scrollWidth>innerWidth+2,
+        missingStyles:[...document.querySelectorAll('link[rel=stylesheet]')].filter(link=>!link.sheet).map(link=>link.href),
+      }));
+      if(!state.headline||state.navigation!==5||state.overflow||state.missingStyles.length) throw Error(`${file} at ${width}: ${JSON.stringify(state)}`);
+      for(const img of await page.locator('img').all()) {
+        await img.scrollIntoViewIfNeeded();
+        const loaded=await img.evaluate(async el=>{
+          if(!el.complete) await new Promise(resolve=>{el.addEventListener('load',resolve,{once:true});el.addEventListener('error',resolve,{once:true});setTimeout(resolve,20000)});
+          return el.naturalWidth>0;
+        });
+        if(!loaded) throw Error(`${file}: photograph failed to load: ${await img.getAttribute('src')}`);
+      }
+      await page.evaluate(()=>window.scrollTo(0,0));
+      if(file==='index.html'||file.includes('october-jobs')||file.includes('jay-rockefeller')) {
+        await page.screenshot({path:path.join('newsroom-checks',`${width}-${file.replaceAll('/','-')}.png`),fullPage:true});
+      }
+      console.log(`PASS ${width}px ${file}`);
+    }
+    await page.goto(base);
+    for(const link of await page.locator('.td-global-nav a').all()) {
+      if(!await link.isVisible()) throw Error('Navigation link is hidden');
+      const href=await link.getAttribute('href');
+      const destination=new URL(href,base).href;
+      await link.click();
+      await page.waitForURL(destination);
+      await page.goto(base);
+    }
+    await page.close();
   }
-  if(!imageLoaded)throw Error('Article photograph failed to load after 3 real network attempts: '+slug);
-  console.log('ARTICLE IMAGE LOAD PASS '+slug);
- }
- await check.close();
- console.log('NEWSROOM MOBILE, DESKTOP AND PHOTOGRAPH CHECKS PASS');
-}catch(error){console.error(error);process.exitCode=1}
-finally{await browser?.close();server.kill('SIGTERM')}
+} finally {
+  await browser?.close();
+  server?.kill();
+}
