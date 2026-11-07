@@ -16,37 +16,39 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - name: Build news-only publication
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build and audit the exact public artifact
         run: |
-          python3 -m py_compile scripts/build-news-public.py
           python3 scripts/build-news-public.py
-          test -f _news_public/index.html
-          test ! -d _news_public/archive
-          test ! -d _news_public/results
-          test ! -d _news_public/elections
+          python3 tests/newsroom_publication_audit.py
+      - name: Install browser verification
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Check desktop and mobile pages before publication
+        run: node scripts/newsroom-smoke.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _news_public
       - id: deployment
         uses: actions/deploy-pages@v4
-      - name: Check public homepage and news sections
-        run: |
-          python3 - <<'PY'
-          import urllib.request,time
-          base='https://thestatedesk.github.io/'
-          for path in ['', 'congress/', 'white-house/', 'states-news/', 'policy-economy/', 'analysis/']:
-              url=base+path
-              for attempt in range(6):
-                  try:
-                      with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'TheStateDesk-PublicationAudit/1.0'}),timeout=20) as r:
-                          page=r.read().decode('utf-8','replace')
-                          assert r.status==200 and 'The State Desk' in page,(url,r.status)
-                          print('LIVE OK',url)
-                          break
-                  except Exception:
-                      if attempt==5: raise
-                      time.sleep(15)
-          PY
+      - name: Verify the exact live revision and every published file
+        env:
+          EXPECTED_REVISION: ${{ github.sha }}
+        run: python3 tests/newsroom_publication_audit.py --live
+      - name: Check live desktop and mobile rendering
+        env:
+          SITE_BASE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node scripts/newsroom-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: newsroom-browser-checks
+          path: newsroom-checks
+          if-no-files-found: ignore

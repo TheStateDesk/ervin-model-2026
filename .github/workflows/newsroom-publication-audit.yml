@@ -1,12 +1,5 @@
 name: Newsroom publication and live-page audit
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'analysis/**'
-      - 'scripts/td-article-standards.css'
-      - 'tests/newsroom_publication_audit.py'
-      - '.github/workflows/newsroom-publication-audit.yml'
   workflow_dispatch:
   schedule:
     - cron: '15 */6 * * *'
@@ -17,9 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check article presentation and distinct images
-        run: python3 tests/newsroom_publication_audit.py
-      - name: Allow GitHub Pages to deploy
-        run: sleep 75
-      - name: Check published pages respond and include photographs
-        run: python3 tests/newsroom_publication_audit.py --live
+      - name: Audit current publication and deployed files
+        run: |
+          python3 scripts/build-news-public.py
+          python3 tests/newsroom_publication_audit.py --live

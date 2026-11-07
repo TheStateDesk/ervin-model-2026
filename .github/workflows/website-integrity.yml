@@ -10,31 +10,7 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - name: Validate news-only publication
+      - name: Build and validate public pages, links, assets and feeds
         run: |
           python3 scripts/build-news-public.py
-          python3 - <<'PY'
-          from pathlib import Path
-          root=Path('_news_public')
-          for section in ('congress','white-house','states-news','policy-economy','analysis'):
-              p=root/section/'index.html'
-              assert p.is_file(),p
-              assert 'The State Desk' in p.read_text(),p
-          for retired in ('archive','results','elections','election-night','governors','house','states','michigan','stats-for-nerds'):
-              assert not (root/retired).exists(),retired
-          home=(root/'index.html').read_text()
-          assert 'td-global-header' in home
-          from html.parser import HTMLParser
-          class CardAudit(HTMLParser):
-              def __init__(self): super().__init__(); self.depth=0; self.nested=0
-              def handle_starttag(self,tag,attrs):
-                  if tag=='a':
-                      if self.depth: self.nested+=1
-                      self.depth+=1
-              def handle_endtag(self,tag):
-                  if tag=='a': self.depth=max(0,self.depth-1)
-          for page in root.rglob('*.html'):
-              audit=CardAudit(); audit.feed(page.read_text())
-              assert not audit.nested,(str(page),audit.nested,'nested links break mobile layouts')
-          print('PASS: News-only publication integrity and mobile-safe links')
-          PY
+          python3 tests/newsroom_publication_audit.py

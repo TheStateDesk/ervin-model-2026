@@ -1,6 +1,8 @@
 /* The State Desk — shared public masthead, responsive newsroom and image system.
    Data tools retain their interactive contents beneath the common masthead. */
 :root{--td-ink:#202932;--td-muted:#59646b;--td-rule:#d9d9d4;--td-paper:#fbfaf7;--td-accent:#923d31;--td-width:1170px}
+/* Include padding in responsive widths on every article template. */
+.td-surface,.td-surface *{box-sizing:border-box}
 body.td-surface{background:var(--td-paper);color:var(--td-ink)}
 .td-skip{position:absolute;left:-9999px;top:6px;background:#fff;padding:12px;z-index:99999}
 .td-skip:focus{left:12px}
@@ -13,7 +15,8 @@ body.td-surface{background:var(--td-paper);color:var(--td-ink)}
 .td-wordmark{display:inline-block;font:700 clamp(38px,6.3vw,65px)/1 Georgia,'Times New Roman',serif;color:var(--td-ink)!important;letter-spacing:-.055em;text-decoration:none!important}
 .td-motto{font:700 10px/1.65 Arial,sans-serif;letter-spacing:.18em;margin-top:8px;color:var(--td-muted)}
 .td-global-nav{border-top:2px solid var(--td-ink);padding:0;font:700 12px/1.3 Arial,sans-serif}
-.td-global-nav .td-layout{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch;gap:0}
+.td-global-nav .td-layout{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:0}
+.td-global-nav a{flex:1 1 120px}
 .td-global-nav a{color:var(--td-ink)!important;display:flex;justify-content:center;align-items:center;min-width:0;padding:15px 5px;text-align:center;text-decoration:none!important;border-bottom:3px solid transparent;transition:color .15s,background .15s}
 .td-global-nav a:hover{background:#f0efea;color:#872f27!important}
 .td-global-nav a[aria-current="page"]{color:var(--td-accent)!important;border-bottom-color:var(--td-accent)}
@@ -99,3 +102,11 @@ a:hover .td-photo img{transform:scale(1.018)}
 .td-surface .td-article-end a,.td-surface .story-more a{color:var(--td-ink)!important;text-decoration:underline;text-underline-offset:3px}
 .td-surface .story-heading h1{max-width:100%}
 @media(max-width:600px){.td-global-header .td-ribbon{display:none!important}.td-global-nav .td-layout{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;white-space:nowrap;justify-content:flex-start;scroll-snap-type:x proximity}.td-global-nav a{flex:0 0 auto!important;min-height:43px;padding:13px 12px!important;scroll-snap-align:start}.td-section-rule>span:last-child{display:none}.td-topic-grid[style]{grid-template-columns:1fr!important}.td-wordmark{font-size:clamp(34px,10vw,43px)}}
+/* Keep every section visible on narrow screens without horizontal scrolling. */
+@media(max-width:600px){
+  .td-global-nav .td-layout{flex-wrap:wrap!important;overflow:visible;white-space:normal;justify-content:center}
+  .td-global-nav a{flex:1 1 30%!important;min-height:44px;padding:12px 8px!important}
+}
+.td-surface .td-reference-photo img{height:auto;aspect-ratio:auto;object-fit:contain;max-height:550px}
+.td-article article p{font:18px/1.75 Georgia,serif;color:var(--td-ink)}
+@media(max-width:600px){.td-article article p{font-size:17px}}
