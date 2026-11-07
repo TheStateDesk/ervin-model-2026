@@ -1,13 +1,13 @@
 {
   "version": 1,
   "election": "2026-11-03",
-  "checkedAt": "2026-11-06T21:35:37.245957+00:00",
+  "checkedAt": "2026-11-07T06:08:50.015270+00:00",
   "scope": "All 50 locally bundled county-equivalent geographies, with independently sourced county election office URLs where available. No actual 2026 results asserted.",
   "summary": {
     "states": 50,
     "countyEquivalents": 3143,
     "countySourcesIndependentlyLinked": 104,
-    "countySourcePagesResponding": 70,
+    "countySourcePagesResponding": 89,
     "countiesWithoutDirectVerifiedSource": 3039,
     "machineReadableCountyFeedsConfirmed": 0,
     "verified2026CountyReturnsBeforePollClose": 0
@@ -282,8 +282,8 @@
         "26007": {
           "county": "Alpena",
           "sourceUrl": "https://alpenacounty.org",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -354,8 +354,8 @@
         "26023": {
           "county": "Branch",
           "sourceUrl": "https://www.countyofbranch.com",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -372,8 +372,8 @@
         "26027": {
           "county": "Cass",
           "sourceUrl": "https://www.casscountymi.org",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -417,8 +417,8 @@
         "26037": {
           "county": "Clinton",
           "sourceUrl": "https://www.clinton-county.org",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -453,8 +453,8 @@
         "26045": {
           "county": "Eaton",
           "sourceUrl": "https://www.eatoncounty.org",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -480,8 +480,8 @@
         "26051": {
           "county": "Gladwin",
           "sourceUrl": "https://gladwincounty-mi.gov",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -498,8 +498,8 @@
         "26055": {
           "county": "Grand Traverse",
           "sourceUrl": "https://www.gtcountymi.gov",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -507,8 +507,8 @@
         "26057": {
           "county": "Gratiot",
           "sourceUrl": "https://www.gratiotmi.com",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -561,8 +561,8 @@
         "26069": {
           "county": "Iosco",
           "sourceUrl": "https://iosco.net",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -588,8 +588,8 @@
         "26075": {
           "county": "Jackson",
           "sourceUrl": "https://www.co.jackson.mi.us",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -669,8 +669,8 @@
         "26093": {
           "county": "Livingston",
           "sourceUrl": "https://milivcounty.gov/elections/election-results/",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -705,8 +705,8 @@
         "26101": {
           "county": "Manistee",
           "sourceUrl": "https://www.manisteecountymi.gov",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -768,8 +768,8 @@
         "26115": {
           "county": "Monroe",
           "sourceUrl": "https://www.co.monroe.mi.us",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -777,8 +777,8 @@
         "26117": {
           "county": "Montcalm",
           "sourceUrl": "https://www.montcalm.us",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -795,8 +795,8 @@
         "26121": {
           "county": "Muskegon",
           "sourceUrl": "https://co.muskegon.mi.us",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -876,8 +876,8 @@
         "26139": {
           "county": "Ottawa",
           "sourceUrl": "https://miottawa.org",
-          "connectivity": "indeterminate",
-          "note": "HTTP 202",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -894,8 +894,8 @@
         "26143": {
           "county": "Roscommon",
           "sourceUrl": "https://www.roscommoncounty.net",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -1109,8 +1109,8 @@
         "34005": {
           "county": "Burlington",
           "sourceUrl": "https://www.burlingtoncountynj.gov/598/Election-Results",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
@@ -1172,8 +1172,8 @@
         "34019": {
           "county": "Hunterdon",
           "sourceUrl": "https://www.co.hunterdon.nj.us/236/County-Clerk",
-          "connectivity": "indeterminate",
-          "note": "Connection timeout or automated access blocked",
+          "connectivity": "reachable",
+          "note": "Webpage or portal reachable; actual vote feed and 2026 results NOT verified",
           "authorityListed": true,
           "machineReadable": false,
           "resultsVerified": false
