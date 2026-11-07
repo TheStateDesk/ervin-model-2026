@@ -81,7 +81,7 @@ def local_checks():
                 if key in photos:
                     errors.append(f'{name}: photograph duplicates {photos[key]}')
                 photos[key] = name
-        for marker in ('EDITORIAL DRAFT', 'NOT PUBLISHED', '__ERVIN_BUILD__', 'Proposed Nov.'):
+        for marker in ('EDITORIAL DRAFT', 'NOT PUBLISHED', '__ERVIN_BUILD__', 'Proposed Nov.', '${cards}', 'Editorial proposals', 'Not published'):
             if marker in source:
                 errors.append(f'{name}: unresolved publication marker {marker}')
     for filename, tag in [('sitemap.xml', '{*}loc'), ('feed.xml', 'channel/item/link')]:

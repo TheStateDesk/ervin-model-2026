@@ -66,6 +66,9 @@ for p in OUT.rglob('*.html'):
  # Remove AI notices from public page copy as requested by the publisher.
  h=re.sub(r'<p\b[^>]*>(?:(?!</p>).)*(?:AI-assistance disclosure|AI assistance|AI-assisted)(?:(?!</p>).)*</p>','',h,flags=re.I|re.S)
  p.write_text(h,encoding='utf-8')
+# Generate section layouts from actual published article content.
+import runpy
+runpy.run_path(str(ROOT/'scripts/build-news-previews.py'))
 # Filter complete XML records. A cross-record regex could erase valid entries
 # before a retired URL and could not remove RSS items at all.
 ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
