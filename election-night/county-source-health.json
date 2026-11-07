@@ -1,7 +1,7 @@
 {
   "version": 1,
   "election": "2026-11-03",
-  "checkedAt": "2026-11-07T06:08:50.015270+00:00",
+  "checkedAt": "2026-11-07T14:56:14.794636+00:00",
   "scope": "All 50 locally bundled county-equivalent geographies, with independently sourced county election office URLs where available. No actual 2026 results asserted.",
   "summary": {
     "states": 50,
